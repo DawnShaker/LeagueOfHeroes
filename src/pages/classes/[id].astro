@@ -1,0 +1,526 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ClassTable from '../../components/classes/ClassTable.astro';
+import { classes } from '../../data/classes';
+
+export function getStaticPaths() {
+return classes.map(classData => ({
+params: { id: classData.id },
+props: { classData }
+}));
+}
+
+const { classData } = Astro.props;
+
+// Функция для преобразования текстовой таблицы в структурированные данные
+function parseTableData(text: string) {
+const rows = text.split('\n').filter(row => row.trim());
+return rows.map(row => {
+const [level, spells] = row.split('\t');
+return { level, spells };
+});
+}
+---
+
+<Layout title={`D&D 5E Guide - ${classData.name}`}>
+  <div class="content">
+    <a href="/classes" class="back-link">← Назад к классам</a>
+
+    <div class="class-header">
+      <h1>{classData.name} <span class="name-en">[{classData.nameEn}]</span></h1>
+      <div class="source">{classData.sourceBook}</div>
+    </div>
+
+    <div class="class-description">
+      <div class="subclass-selector">
+        <select id="subclass-select">
+          <option value="">Выберите подкласс</option>
+          {classData.subclasses.map(subclass => (
+          <option value={subclass.id}>{subclass.name} [{subclass.nameEn}]</option>
+          ))}
+        </select>
+      </div>
+
+      <div id="class-lore" class="lore-content">
+        <p>{classData.description}</p>
+      </div>
+
+      <details id="base-lore" class="base-lore" style="display: none;">
+        <summary>Основное описание класса</summary>
+        <p>{classData.description}</p>
+      </details>
+    </div>
+
+    <div class="class-basics">
+      <div class="basic-info">
+        <h2>Основные характеристики</h2>
+        <dl>
+          <dt>Основная характеристика</dt>
+          <dd>{classData.primaryAbility}</dd>
+
+          <dt>Кость хитов</dt>
+          <dd>к{classData.hitDice}</dd>
+
+          <dt>Хиты на 1 уровне</dt>
+          <dd>{classData.hitPoints.level1}</dd>
+
+          <dt>Хиты на следующих уровнях</dt>
+          <dd>{classData.hitPoints.higherLevels}</dd>
+        </dl>
+      </div>
+
+      <div class="proficiencies">
+        <h2>Владения</h2>
+        <dl>
+          <dt>Доспехи</dt>
+          <dd>{classData.proficiencies?.armor?.join(', ') || 'Нет'}</dd>
+
+          <dt>Оружие</dt>
+          <dd>{classData.proficiencies?.weapons?.join(', ') || 'Нет'}</dd>
+
+          <dt>Спасброски</dt>
+          <dd>{classData.proficiencies?.savingThrows?.join(', ') || 'Нет'}</dd>
+
+          <dt>Навыки</dt>
+          <dd>Выберите {classData.proficiencies.skills.count} из: {classData.proficiencies?.skills?.list?.join(', ') || 'Нет'}</dd>
+
+          <dt>Инструменты</dt>
+          <dd>{classData.proficiencies?.tools?.join(', ') || 'Нет'}</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="equipment">
+      <h2>Стартовое снаряжение</h2>
+      <p>Выберите один из следующих наборов:</p>
+
+      {classData.equipment.default.map(choice => (
+      <div class="equipment-choice">
+        <h3>Вариант {choice.choice}</h3>
+        <ul>
+          {choice.items.map(item => (
+          <li>{item}</li>
+          ))}
+        </ul>
+      </div>
+      ))}
+    </div>
+
+    <div class="class-progression">
+      <h2>Развитие класса</h2>
+      <ClassTable levels={classData.levels} />
+    </div>
+
+    <div id="features-container" class="class-features">
+      <h2>Умения класса</h2>
+      {classData.features.map(feature => (
+      <div class="feature">
+        <div class="feature-header">
+          <h3>{feature.name}</h3>
+          <span class="feature-level">{feature.level} уровень</span>
+        </div>
+        <div class="feature-description">
+          {feature.description.split('\n').map(paragraph => (
+            <p>{paragraph}</p>
+          ))}
+          
+          {feature.collapsible && (
+            <div class="collapsible-content">
+              {feature.collapsible.map(item => (
+                <details class="collapsible-item">
+                  <summary>{item.title}</summary>
+                  <div class="collapsible-description">
+                    {item.description.split('\n').map(paragraph => (
+                      <p>{paragraph}</p>
+                    ))}
+                  </div>
+                </details>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+      ))}
+    </div>
+
+    <!-- Template для создания элементов способностей -->
+    <template id="feature-template">
+      <div class="feature">
+        <div class="feature-header">
+          <h3></h3>
+          <span class="feature-level"></span>
+        </div>
+        <div class="feature-description"></div>
+      </div>
+    </template>
+  </div>
+</Layout>
+
+<script define:vars={{ classData }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const subclassSelect = document.getElementById('subclass-select');
+    const classLore = document.getElementById('class-lore');
+    const baseLore = document.getElementById('base-lore');
+    const featuresContainer = document.getElementById('features-container');
+    const featureTemplate = document.getElementById('feature-template');
+
+    function createTableElement(tableText) {
+      const rows = tableText.split('\n').filter(row => row.trim());
+      const table = document.createElement('table');
+      table.className = 'spell-table';
+
+      rows.forEach(row => {
+        const [level, spells] = row.split('\t');
+        const tr = document.createElement('tr');
+
+        const tdLevel = document.createElement('td');
+        tdLevel.textContent = level;
+
+        const tdSpells = document.createElement('td');
+        tdSpells.textContent = spells;
+
+        tr.appendChild(tdLevel);
+        tr.appendChild(tdSpells);
+        table.appendChild(tr);
+      });
+
+      return table;
+    }
+
+    function createFeatureElement(feature) {
+      const template = featureTemplate.content.cloneNode(true);
+      const featureElement = template.querySelector('.feature');
+      
+      featureElement.querySelector('h3').textContent = feature.name;
+      featureElement.querySelector('.feature-level').textContent = `${feature.level} уровень`;
+      
+      const descriptionContainer = featureElement.querySelector('.feature-description');
+      
+      if (feature.name.toLowerCase().includes('таблица') && !feature.collapsible) {
+        const table = createTableElement(feature.description);
+        descriptionContainer.appendChild(table);
+      } else {
+        feature.description.split('\n').forEach(paragraph => {
+          const p = document.createElement('p');
+          p.textContent = paragraph;
+          descriptionContainer.appendChild(p);
+        });
+      }
+      
+      // Add collapsible content if present
+      if (feature.collapsible) {
+        const collapsibleContent = document.createElement('div');
+        collapsibleContent.className = 'collapsible-content';
+        
+        feature.collapsible.forEach(item => {
+          const details = document.createElement('details');
+          details.className = 'collapsible-item';
+          
+          const summary = document.createElement('summary');
+          summary.textContent = item.title;
+          details.appendChild(summary);
+          
+          const description = document.createElement('div');
+          description.className = 'collapsible-description';
+          
+          item.description.split('\n').forEach(paragraph => {
+            const p = document.createElement('p');
+            p.textContent = paragraph;
+            description.appendChild(p);
+          });
+          
+          details.appendChild(description);
+          collapsibleContent.appendChild(details);
+        });
+        
+        descriptionContainer.appendChild(collapsibleContent);
+      }
+
+      return featureElement;
+    }
+
+    function updateFeatures(subclassId) {
+      if (!featuresContainer || !featureTemplate) return;
+
+      let features = [...classData.features];
+      if (subclassId) {
+        const subclass = classData.subclasses.find(s => s.id === subclassId);
+        if (subclass) {
+          features = features.filter(f => f.level !== 3);
+          features = [...features, ...subclass.features];
+        }
+      }
+
+      features.sort((a, b) => a.level - b.level);
+
+      const title = featuresContainer.querySelector('h2');
+      featuresContainer.innerHTML = '';
+      featuresContainer.appendChild(title);
+
+      features.forEach(feature => {
+        const featureElement = createFeatureElement(feature);
+        featuresContainer.appendChild(featureElement);
+      });
+    }
+
+    subclassSelect?.addEventListener('change', (e) => {
+      const subclassId = e.target.value;
+      const subclass = classData.subclasses.find(s => s.id === subclassId);
+
+      if (classLore && baseLore) {
+        if (subclass) {
+          classLore.innerHTML = subclass.description.split('\n').map(paragraph =>
+            `<p>${paragraph}</p>`
+          ).join('');
+          baseLore.style.display = 'block';
+        } else {
+          classLore.innerHTML = classData.description.split('\n').map(paragraph =>
+            `<p>${paragraph}</p>`
+          ).join('');
+          baseLore.style.display = 'none';
+        }
+      }
+
+      updateFeatures(subclassId);
+    });
+  });
+</script>
+
+<style>
+  .content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
+  .class-header {
+    margin-bottom: 2rem;
+  }
+
+  .name-en {
+    color: var(--text);
+    opacity: 0.7;
+    font-size: 0.8em;
+  }
+
+  .source {
+    color: var(--text);
+    opacity: 0.8;
+  }
+
+  .class-description {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+  }
+
+  .subclass-selector {
+    margin-bottom: 1.5rem;
+  }
+
+  .subclass-selector select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--card-border);
+    border-radius: 0.25rem;
+    background: var(--background);
+    color: var(--text);
+    font-size: 1rem;
+  }
+
+  .lore-content {
+    line-height: 1.6;
+    margin: 1rem 0;
+  }
+
+  .lore-content p {
+    margin-bottom: 1rem;
+  }
+
+  .lore-content p:last-child {
+    margin-bottom: 0;
+  }
+
+  .base-lore {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: var(--background);
+    border-radius: 0.25rem;
+  }
+
+  .base-lore summary {
+    cursor: pointer;
+    color: var(--primary);
+  }
+
+  .class-basics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .basic-info,
+  .proficiencies {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+  }
+
+  .equipment {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+  }
+
+  .equipment-choice {
+    margin-top: 1.5rem;
+  }
+
+  .equipment-choice h3 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .equipment-choice ul {
+    list-style-type: disc;
+    margin-left: 1.5rem;
+  }
+
+  .equipment-choice li {
+    margin-bottom: 0.5rem;
+  }
+
+  dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem 1rem;
+    margin-top: 1rem;
+  }
+
+  dt {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .feature {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+  }
+
+  .feature-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .feature-header h3 {
+    color: var(--primary);
+    margin: 0;
+    font-size: 1.25rem;
+  }
+
+  .feature-level {
+    font-size: 0.875rem;
+    color: var(--text);
+    opacity: 0.8;
+    padding: 0.25rem 0.5rem;
+    background: var(--background);
+    border-radius: 0.25rem;
+  }
+
+  .feature-description p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .feature-description p:last-child {
+    margin-bottom: 0;
+  }
+
+  .collapsible-content {
+    margin-top: 1rem;
+    border-top: 1px solid var(--card-border);
+    padding-top: 1rem;
+  }
+
+  .collapsible-item {
+    background: var(--background);
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+  }
+
+  .collapsible-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .collapsible-item summary {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    user-select: none;
+  }
+
+  .collapsible-item summary:hover {
+    background: var(--nav-hover-bg);
+  }
+
+  .collapsible-description {
+    padding: 1rem;
+    border-top: 1px solid var(--card-border);
+    background: var(--card-bg);
+  }
+
+  .collapsible-description p {
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+  }
+
+  .collapsible-description p:last-child {
+    margin-bottom: 0;
+  }
+
+  .spell-table {
+    width: 100%;
+    margin: 1rem 0;
+    border-collapse: collapse;
+  }
+
+  .spell-table td {
+    padding: 0.5rem;
+    border: 1px solid var(--card-border);
+  }
+
+  .spell-table tr:nth-child(1) {
+    background: var(--background);
+    font-weight: 600;
+  }
+
+  .spell-table tr:not(:first-child):hover {
+    background: var(--background);
+  }
+</style>

@@ -1,0 +1,38 @@
+---
+import RankProgression from './fame/RankProgression.astro';
+import RankBonuses from './fame/RankBonuses.astro';
+import RankVisuals from './fame/RankVisuals.astro';
+
+interface Props {}
+---
+
+<section class="rules-section">
+  <h2>Слава и ранги</h2>
+  <div class="content">
+    <div class="intro">
+      <p>Слава отражает известность и репутацию вашего персонажа, приобретенные за время приключений. Ваш ранг определяет доступные бонусы и привилегии.</p>
+    </div>
+
+    <RankProgression />
+    <RankBonuses />
+    <RankVisuals />
+  </div>
+</section>
+
+<style>
+  .rules-section {
+    margin-bottom: 2rem;
+  }
+
+  .content {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+  }
+
+  .intro {
+    margin-bottom: 2rem;
+  }
+</style>

@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+import WeaponRestrictions from '../components/rules/errata/WeaponRestrictions.astro';
+import RaceAttributes from '../components/rules/errata/RaceAttributes.astro';
+import IllegalGoods from '../components/rules/errata/IllegalGoods.astro';
+import IllegalGoodsPrices from '../components/rules/errata/IllegalGoodsPrices.astro';
+import Tattoos from '../components/rules/errata/Tattoos.astro';
+import Containers from '../components/rules/errata/Containers.astro';
+import OversizedWeapons from '../components/rules/errata/OversizedWeapons.astro';
+import Reincarnation from '../components/rules/errata/Reincarnation.astro';
+import LegendaryItems from '../components/rules/errata/LegendaryItems.astro';
+import Injuries from '../components/rules/errata/Injuries.astro';
+---
+
+<Layout title="D&D 5E Guide - Эррата Лиги Героев">
+  <div class="content">
+    <h1>Эррата Лиги Героев</h1>
+    
+    <div class="errata-container">
+      <WeaponRestrictions />
+      <RaceAttributes />
+      <IllegalGoods />
+      <IllegalGoodsPrices />
+      <Tattoos />
+      <Containers />
+      <OversizedWeapons />
+      <Reincarnation />
+      <LegendaryItems />
+      <Injuries />
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .errata-container {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+  }
+</style>

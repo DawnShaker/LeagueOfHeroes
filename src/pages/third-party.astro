@@ -1,0 +1,104 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="D&D 5E Guide - Сторонний материал">
+  <div class="content">
+    <h1>Сторонний материал</h1>
+    
+    <div class="materials-section">
+      <section class="material-category">
+        <h2>Одобренные источники</h2>
+        <div class="material-list">
+          <div class="material-card">
+            <h3>Critical Role</h3>
+            <p>Материалы из Explorer's Guide to Wildemount и Tal'Dorei Campaign Setting.</p>
+            <div class="links">
+              <a href="/third-party/blood-hunter" class="content-link">Кровавый охотник</a>
+            </div>
+            <div class="status approved">Одобрено</div>
+          </div>
+          
+          <div class="material-card">
+            <h3>Kobold Press</h3>
+            <p>Tome of Beasts, Deep Magic.</p>
+            <div class="status approved">Одобрено</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="material-category">
+        <h2>На рассмотрении</h2>
+        <div class="material-list">
+          <div class="material-card">
+            <h3>Ghostfire Gaming</h3>
+            <p>Grim Hollow Campaign Guide.</p>
+            <div class="status pending">На рассмотрении</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .materials-section {
+    margin-top: 2rem;
+  }
+
+  .material-category {
+    margin-bottom: 3rem;
+  }
+
+  .material-list {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .material-card {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+  }
+
+  .links {
+    margin: 1rem 0;
+  }
+
+  .content-link {
+    color: var(--primary);
+    text-decoration: none;
+    display: inline-block;
+    margin-right: 1rem;
+  }
+
+  .content-link:hover {
+    text-decoration: underline;
+  }
+
+  .status {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    margin-top: 1rem;
+  }
+
+  .status.approved {
+    background: #10B981;
+    color: white;
+  }
+
+  .status.pending {
+    background: #F59E0B;
+    color: white;
+  }
+</style>

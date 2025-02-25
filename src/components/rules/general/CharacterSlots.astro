@@ -1,0 +1,79 @@
+---
+interface Props {}
+---
+
+<section class="rules-section">
+  <h2>Слоты персонажей</h2>
+  <div class="content">
+    <div class="slots-info">
+      <h3>Базовые слоты</h3>
+      <ul>
+        <li>1 персонаж на старте</li>
+        <li>2 персонажа при достижении второго этапа</li>
+        <li>3 персонажа при достижении третьего этапа</li>
+        <li>4 персонажа при достижении четвертого этапа</li>
+        <li>5 персонажей при достижении 20-го уровня</li>
+        <li>+1 слот за каждого следующего персонажа 20-го уровня</li>
+      </ul>
+    </div>
+
+    <div class="bonus-slots">
+      <h3>Дополнительные слоты</h3>
+      <p>Во втором сезоне доступны дополнительные слоты:</p>
+      <ul>
+        <li>@Благодетель Лиги: +1 слот за бусты серверу</li>
+        <li>@Герой Лиги: +1 слот за подписку Авантюрист на Бусти</li>
+      </ul>
+      <p class="note">Максимум 2 дополнительных слота.</p>
+    </div>
+
+    <div class="important-note">
+      <h3>Важное примечание</h3>
+      <p>При смерти персонажа, дающего дополнительные слоты, происходит перерасчёт по следующему персонажу высшего уровня. При нехватке места игрок выбирает персонажа для временной "заморозки".</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .rules-section {
+    margin-bottom: 2rem;
+  }
+
+  .content {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+  }
+
+  h3 {
+    color: var(--primary);
+    margin: 1.5rem 0 0.5rem;
+  }
+
+  h3:first-child {
+    margin-top: 0;
+  }
+
+  ul {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+
+  .note {
+    font-style: italic;
+    margin-top: 0.5rem;
+  }
+
+  .important-note {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--card-border);
+  }
+</style>

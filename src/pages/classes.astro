@@ -1,0 +1,43 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ClassCard from '../components/classes/ClassCard.astro';
+import { classes } from '../data/classes';
+
+// Sort classes by Russian name
+const sortedClasses = [...classes].sort((a, b) => 
+  a.name.localeCompare(b.name, 'ru')
+);
+
+---
+
+<Layout title="D&D 5E Guide - Классы">
+  <div class="content">
+    <h1>Классы</h1>
+    
+    <div class="classes-grid">
+      {sortedClasses.map(classData => (
+        <ClassCard
+          name={classData.name}
+          nameEn={classData.nameEn}
+          portrait={classData.portrait}
+          sourceBook={classData.sourceBook}
+          id={classData.id}
+        />
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .classes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+</style>

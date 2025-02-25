@@ -1,0 +1,49 @@
+---
+interface Props {}
+---
+
+<div class="epic-progression">
+  <h3>Эпическая прогрессия</h3>
+  
+  <div class="progression-rules">
+    <p>После достижения 20-го уровня (228 ОП) за каждые накопленные 20 ОП персонаж получает:</p>
+    <ul>
+      <li>Эпический дар (определяется броском д26)</li>
+      <li>Черту (при соблюдении требований)</li>
+      <li>Повышение одной характеристики на 2 (до максимума 30)</li>
+    </ul>
+  </div>
+
+  <div class="epic-notes">
+    <h4>Примечания:</h4>
+    <ul>
+      <li>При достижении максимума характеристики дальнейшее улучшение невозможно</li>
+      <li>Если выпадает недоступный или повторяющийся дар, бросок повторяется</li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .epic-progression {
+    margin-bottom: 2rem;
+  }
+
+  .progression-rules, .epic-notes {
+    margin-bottom: 1.5rem;
+  }
+
+  h4 {
+    color: var(--primary);
+    margin: 1rem 0 0.5rem;
+  }
+
+  ul {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+</style>

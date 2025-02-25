@@ -1,0 +1,182 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { featsData } from '../../data/feats';
+
+export function getStaticPaths() {
+  return featsData.map(feat => ({
+    params: { id: feat.id },
+    props: { feat }
+  }));
+}
+
+const { feat } = Astro.props;
+
+function formatTableContent(text: string): string {
+  if (!text.includes('\t')) return text;
+
+  const lines = text.split('\n');
+  const tableHtml = `
+    <div class="table-container">
+      <table>
+        <tbody>
+          ${lines.map(line => {
+            const cells = line.split('\t');
+            return `
+              <tr>
+                ${cells.map(cell => `<td>${cell}</td>`).join('')}
+              </tr>
+            `;
+          }).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+  return tableHtml;
+}
+
+function formatDescription(text: string): string {
+  if (!text) return '';
+  return text.split('\n').map(line => {
+    if (line.includes('\t')) {
+      return formatTableContent(line);
+    }
+    return `<p>${line}</p>`;
+  }).join('');
+}
+const featTypes = {
+  'origin': 'Черта происхождения',
+  'general': 'Общая черта',
+  'fighting-style': 'Черта боевого стиля',
+  'epic': 'Эпическая черта'
+};
+---
+
+<Layout title={`D&D 5E Guide - ${feat.name}`}>
+  <div class="content">
+    <a href="/feats" class="back-link">← Назад к чертам</a>
+
+    <div class="feat-header">
+      <h1>{feat.name} <span class="name-en">[{feat.nameEn}]</span></h1>
+      <div class="feat-type">{featTypes[feat.type]}</div>
+    </div>
+
+    <div class="feat-content">
+      {feat.requirements && (
+        <div class="requirements">
+          <h2>Необходимые условия</h2>
+          <ul>
+            {feat.requirements.map(req => (
+              <li>{req}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {feat.description && (
+        <div class="description">
+          <Fragment set:html={formatDescription(feat.description)} />
+        </div>
+      )}
+
+      <div class="effects">
+        {feat.effects.map(effect => (
+          <Fragment set:html={formatDescription(effect)} />
+        ))}
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
+  .feat-header {
+    margin-bottom: 2rem;
+  }
+
+  .name-en {
+    color: var(--text);
+    opacity: 0.7;
+    font-size: 0.8em;
+  }
+
+  .feat-type {
+    color: var(--text);
+    opacity: 0.8;
+    font-size: 1.1rem;
+  }
+
+  .feat-content {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+  }
+
+  .requirements {
+    margin-bottom: 2rem;
+  }
+
+  .requirements h2 {
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .requirements ul {
+    list-style: disc;
+    margin-left: 1.5rem;
+  }
+
+  .requirements li {
+    margin-bottom: 0.5rem;
+  }
+
+  .description {
+    margin-bottom: 2rem;
+  }
+
+  .effects p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .table-container {
+    margin: 1rem 0;
+    overflow-x: auto;
+  }
+
+  .table-container table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .table-container td {
+    padding: 0.5rem;
+    border: 1px solid var(--card-border);
+  }
+
+  .table-container tr:first-child {
+    background: var(--background);
+    font-weight: 600;
+  }
+
+  .effects p:last-child {
+    margin-bottom: 0;
+  }
+</style>

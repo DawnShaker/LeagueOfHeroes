@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="D&D 5E Guide - Для ординаторов">
+  <div class="content">
+    <h1>Для ординаторов</h1>
+    <div class="guide-section">
+      <h2>Руководство для ординаторов</h2>
+      <p>Здесь вы найдете всю необходимую информацию для ведения игр и управления группой.</p>
+      
+      <section class="info-block">
+        <h3>Основные обязанности</h3>
+        <ul>
+          <li>Подготовка и проведение игровых сессий</li>
+          <li>Создание и поддержание атмосферы</li>
+          <li>Управление игровым балансом</li>
+          <li>Разрешение конфликтных ситуаций</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .guide-section {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+  }
+
+  .info-block {
+    margin-top: 2rem;
+  }
+
+  ul {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+</style>

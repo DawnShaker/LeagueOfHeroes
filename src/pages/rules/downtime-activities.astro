@@ -1,0 +1,94 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ActivityCategory from '../../components/rules/downtime/ActivityCategory.astro';
+import ActivityCard from '../../components/rules/downtime/ActivityCard.astro';
+import MagicItemSearch from '../../components/rules/downtime/MagicItemSearch.astro';
+import CraftingRules from '../../components/rules/downtime/CraftingRules.astro';
+import {
+  craftingActivities,
+  tradingActivities,
+  entertainmentActivities,
+  trainingActivities,
+  adventuringActivities
+} from '../../data/downtime/activities';
+---
+
+<Layout title="D&D 5E Guide - Активности простоя">
+  <div class="content">
+    <h1>Активности простоя</h1>
+    
+    <div class="intro">
+      <p>
+        Во время простоя между приключениями персонажи могут заниматься различными
+        делами, от создания предметов до обучения новым навыкам.
+      </p>
+    </div>
+
+    <ActivityCategory
+      title="Ремесло и создание"
+      description="Деятельность, связанная с созданием предметов и поиском рецептов."
+    >
+      <CraftingRules />
+      {craftingActivities.map(activity => (
+        <ActivityCard {...activity} />
+      ))}
+    </ActivityCategory>
+
+    <ActivityCategory
+      title="Торговля магическими предметами"
+      description="Поиск и продажа магических предметов."
+    >
+      <MagicItemSearch />
+      {tradingActivities.filter(activity => activity.title !== "Поиск магических предметов").map(activity => (
+        <ActivityCard {...activity} />
+      ))}
+    </ActivityCategory>
+
+    <ActivityCategory
+      title="Развлечения"
+      description="Деятельность для отдыха и заработка."
+    >
+      {entertainmentActivities.map(activity => (
+        <ActivityCard {...activity} />
+      ))}
+    </ActivityCategory>
+
+    <ActivityCategory
+      title="Обучение"
+      description="Изучение новых навыков и способностей."
+    >
+      {trainingActivities.map(activity => (
+        <ActivityCard {...activity} />
+      ))}
+    </ActivityCategory>
+
+    <ActivityCategory
+      title="Приключения"
+      description="Поиск возможностей для небольших приключений."
+    >
+      {adventuringActivities.map(activity => (
+        <ActivityCard {...activity} />
+      ))}
+    </ActivityCategory>
+  </div>
+</Layout>
+
+<style>
+  .content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .intro {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+    margin-bottom: 3rem;
+  }
+
+  h1 {
+    margin-bottom: 2rem;
+  }
+</style>

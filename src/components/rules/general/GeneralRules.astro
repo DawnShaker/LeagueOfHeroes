@@ -1,0 +1,34 @@
+---
+import CoreRules from './core/CoreRules.astro';
+import MagicRules from './mechanics/MagicRules.astro';
+import TradeRules from './mechanics/TradeRules.astro';
+import LegacyRoles from './legacy/LegacyRoles.astro';
+import EpicProgression from './epic/EpicProgression.astro';
+import Fame from './Fame.astro';
+import Introduction from './Introduction.astro';
+import CharacterSlots from './CharacterSlots.astro';
+import GameStages from './GameStages.astro';
+import Progress from './Progress.astro';
+
+interface Props {}
+---
+
+<div class="general-rules">
+  <Introduction />
+  <CoreRules />
+  <CharacterSlots />
+  <GameStages />
+  <Progress />
+  <Fame />
+  <MagicRules />
+  <TradeRules />
+  <LegacyRoles />
+  <EpicProgression />
+</div>
+
+<style>
+  .general-rules {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+</style>

@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="D&D 5E Guide - House Rules">
+	<div class="content">
+		<h1>House Rules</h1>
+
+		<section class="rule-section">
+			<h2>Critical Hits</h2>
+			<p>When you score a critical hit, instead of rolling the damage dice twice, maximize the first set of dice and roll the second set normally. This ensures critical hits feel more impactful.</p>
+		</section>
+
+		<section class="rule-section">
+			<h2>Death Saves</h2>
+			<p>Death saving throw results remain hidden from other players unless a character uses their action to check on the dying character with a DC 10 Medicine check.</p>
+		</section>
+
+		<section class="rule-section">
+			<h2>Inspiration</h2>
+			<p>Players can earn inspiration for:</p>
+			<ul>
+				<li>Exceptional roleplay</li>
+				<li>Creative problem-solving</li>
+				<li>Advancing personal character arcs</li>
+				<li>Taking notes and maintaining session summaries</li>
+			</ul>
+		</section>
+
+		<section class="rule-section">
+			<h2>Short Rests</h2>
+			<p>Short rests take 30 minutes instead of 1 hour to encourage their use and maintain game pacing.</p>
+		</section>
+	</div>
+</Layout>
+
+<style>
+	.content {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.rule-section {
+		background: var(--card-bg);
+		padding: 1.5rem;
+		border-radius: 0.5rem;
+		margin-bottom: 1.5rem;
+		box-shadow: var(--card-shadow);
+		border: 1px solid var(--card-border);
+	}
+
+	h2 {
+		color: var(--primary);
+		font-size: 1.5rem;
+		margin-bottom: 1rem;
+	}
+
+	ul {
+		margin-left: 1.5rem;
+		margin-bottom: 1rem;
+	}
+
+	li {
+		margin-bottom: 0.5rem;
+	}
+</style>

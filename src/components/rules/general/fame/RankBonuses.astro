@@ -1,0 +1,88 @@
+---
+interface Props {}
+---
+
+<div class="rank-bonuses">
+  <h3>Бонусы рангов</h3>
+  <p>При начале приключения вы можете выбрать бонусы славы, доступные на вашем или более низком ранге:</p>
+
+  <div class="bonuses-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Требуемый уровень</th>
+          <th>Ранг</th>
+          <th>Бонус</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Медный</td>
+          <td>Зелье лечения или Вдохновение</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Железный</td>
+          <td>Зелье большого лечения или Бусина насыщения</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Серебряный</td>
+          <td>Дыхательный пузырь или Медаль мясного пирога</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td>Золотой</td>
+          <td>Зелье отличного лечения или Эликсир здоровья</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td>Платиновый</td>
+          <td>Медаль небосклона или Жемчужина силы</td>
+        </tr>
+        <tr>
+          <td>17</td>
+          <td>Мифриловый</td>
+          <td>Зелье превосходного лечения или Зелье живучести</td>
+        </tr>
+        <tr>
+          <td>19</td>
+          <td>Адамантовый</td>
+          <td>Зелье максимальной мощи или Монета спуска</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  .rank-bonuses {
+    margin-bottom: 2rem;
+  }
+
+  .bonuses-table {
+    margin-top: 1rem;
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 0.5rem;
+    border: 1px solid var(--card-border);
+    text-align: left;
+  }
+
+  th {
+    background: var(--background);
+    font-weight: 600;
+  }
+
+  tr:nth-child(even) {
+    background: var(--background);
+  }
+</style>

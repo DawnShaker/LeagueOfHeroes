@@ -1,0 +1,163 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { speciesData } from '../../data/species/index';
+import SpeciesHeader from '../../components/species/SpeciesHeader.astro';
+import SpeciesStats from '../../components/species/SpeciesStats.astro';
+import SpeciesAbility from '../../components/species/SpeciesAbility.astro';
+import VariantSelector from '../../components/species/VariantSelector.astro';
+
+export function getStaticPaths() {
+  return speciesData.map(species => ({
+    params: { id: species.id },
+    props: { species },
+  }));
+}
+
+const { species } = Astro.props;
+---
+
+<Layout title={`D&D 5E Guide - ${species.name}`}>
+  <div class="species-page">
+    <a href="/races" class="back-link">← Назад к списку видов</a>
+    
+    <SpeciesHeader 
+      name={species.name}
+      nameEn={species.nameEn}
+      sourceBook={species.sourceBook}
+    />
+    
+    <div class="content">
+      {species.variants && species.variants.length > 0 && (
+        <VariantSelector variants={species.variants} />
+      )}
+
+      <div class="lore">
+        <div class="lore-content">
+          {species.lore.split('\n').map(line => {
+            if (line.startsWith('- ')) {
+              return <li>{line.substring(2)}</li>
+            } else if (line.trim()) {
+              return <p>{line}</p>
+            }
+            return null;
+          })}
+        </div>
+      </div>
+
+      <SpeciesStats
+        type={species.type}
+        size={species.size}
+        speed={species.speed}
+      />
+
+      <div class="abilities">
+        {species.abilities.map(ability => (
+          <SpeciesAbility
+            title={ability.title}
+            description={ability.description}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <script define:vars={{ variants: species.variants }}>
+    // Make variants data available to client-side JavaScript
+    window.speciesVariants = variants?.reduce((acc, variant) => {
+      acc[variant.name] = variant;
+      return acc;
+    }, {});
+  </script>
+</Layout>
+
+<style>
+  .species-page {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+  }
+
+  .back-link {
+    display: inline-block;
+    padding: 1rem;
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
+  .content {
+    padding: 1rem;
+  }
+
+  .lore {
+    margin-bottom: 2rem;
+  }
+
+  .lore-content {
+    line-height: 1.6;
+  }
+
+  .lore-content p {
+    margin-bottom: 0.75rem;
+  }
+
+  .lore-content p:last-child {
+    margin-bottom: 0;
+  }
+
+  .lore-content li {
+    margin-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    list-style-type: disc;
+  }
+
+  .lore-content li:last-child {
+    margin-bottom: 0;
+  }
+
+  .abilities {
+    border-top: 1px solid var(--card-border);
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const subclassSelect = document.getElementById('subclass-select');
+    const classLore = document.getElementById('class-lore');
+    const baseLore = document.getElementById('base-lore');
+    
+    subclassSelect?.addEventListener('change', (e) => {
+      const subclassId = e.target.value;
+      const subclass = variants?.find(v => v.name === subclassId);
+
+      if (classLore && baseLore) {
+        if (subclass) {
+          classLore.innerHTML = subclass.lore.split('\n').map(line => {
+            if (line.startsWith('- ')) {
+              return `<li>${line.substring(2)}</li>`;
+            } else if (line.trim()) {
+              return `<p>${line}</p>`;
+            }
+            return '';
+          }).join('');
+          baseLore.style.display = 'block';
+        } else {
+          classLore.innerHTML = species.lore.split('\n').map(line => {
+            if (line.startsWith('- ')) {
+              return `<li>${line.substring(2)}</li>`;
+            } else if (line.trim()) {
+              return `<p>${line}</p>`;
+            }
+            return '';
+          }).join('');
+          baseLore.style.display = 'none';
+        }
+      }
+    });
+  });
+</script>

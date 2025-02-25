@@ -1,0 +1,169 @@
+---
+interface Props {}
+---
+
+<div class="activity-card">
+  <div class="activity-header">
+    <h3>Поиск магических предметов</h3>
+    <div class="basic-info">
+      <div class="info-item">
+        <span class="label">Продолжительность:</span>
+        <span>5 дней простоя</span>
+      </div>
+      <div class="info-item">
+        <span class="label">Базовая стоимость:</span>
+        <span>50 зм + проживание</span>
+      </div>
+    </div>
+  </div>
+
+  <details class="activity-details">
+    <summary>Подробная информация</summary>
+    <div class="details-content">
+      <section class="search-process">
+        <h4>Процесс поиска</h4>
+        <p>Персонаж тратит 5 дней простоя с учётом трат на проживание и 50 зм на расходы, после чего совершает проверку поиска торговца броском навыка: Интеллект (Расследование), Мудрость (Восприятие) или Харизма (Убеждение).</p>
+        
+        <div class="search-rules">
+          <h5>Правила поиска:</h5>
+          <ul>
+            <li>При покупке нескольких одинаковых расходных предметов достаточно одного поиска торговца</li>
+            <li>Для разных видов предметов требуется отдельный бросок поиска</li>
+            <li>После определения цены есть 20% шанс на осложнение (бросок d100, 1-20)</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="complications">
+        <h4>Осложнения (d12)</h4>
+        <div class="complications-table">
+          <table>
+            <tbody>
+            <tr><td>1</td><td>Предмет — подделка (проверка d100, 75-100 подтверждает)</td></tr>
+            <tr><td>2</td><td>Предмет украден (проверка d100, 50-100 подтверждает)</td></tr>
+            <tr><td>3</td><td>Предмет проклят богом*</td></tr>
+            <tr><td>4</td><td>Первоначальный владелец готов убить за возврат</td></tr>
+            <tr><td>5</td><td>Предмет связан с тёмным пророчеством</td></tr>
+            <tr><td>6</td><td>Продавец убит, сделка аннулирована</td></tr>
+            <tr><td>7</td><td>Продавец — дьявол с особой сделкой*</td></tr>
+            <tr><td>8</td><td>Предмет — ключ к злой сущности</td></tr>
+            <tr><td>9</td><td>Перекупщик (d100, 66-100 предмет перекуплен)</td></tr>
+            <tr><td>10</td><td>Предмет — порабощённое существо</td></tr>
+            <tr><td>11</td><td>Предмет связан с культом</td></tr>
+            <tr><td>12</td><td>Слухи о связи с злыми силами</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">* Осложнения 3 и 7 требуют уведомления Мастеров Лиги для ролевого отыгрыша</p>
+      </section>
+
+      <section class="additional-rules">
+        <h4>Дополнительные правила</h4>
+        <ul>
+          <li>При отказе от сделки — штраф 200 зм за неустойку</li>
+          <li>Цены определяются по Занатару (XGE)</li>
+          <li>Предметы с зарядами не считаются расходными</li>
+        </ul>
+      </section>
+    </div>
+  </details>
+</div>
+
+<style>
+  .activity-card {
+    background: var(--card-bg);
+    border-radius: 0.5rem;
+    border: 1px solid var(--card-border);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
+
+  .activity-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .basic-info {
+    display: grid;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .info-item {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .label {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .activity-details {
+    border-top: 1px solid var(--card-border);
+  }
+
+  summary {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  summary:hover {
+    background: var(--nav-hover-bg);
+  }
+
+  .details-content {
+    padding: 1.5rem;
+    border-top: 1px solid var(--card-border);
+  }
+
+  h4 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+  }
+
+  h5 {
+    margin: 1rem 0 0.5rem;
+  }
+
+  section {
+    margin-bottom: 2rem;
+  }
+
+  section:last-child {
+    margin-bottom: 0;
+  }
+
+  .complications-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .complications-table td {
+    padding: 0.5rem;
+    border: 1px solid var(--card-border);
+  }
+
+  .complications-table td:first-child {
+    width: 2.5rem;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .note {
+    margin-top: 1rem;
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+
+  ul {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+</style>

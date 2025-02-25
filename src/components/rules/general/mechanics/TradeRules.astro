@@ -1,0 +1,52 @@
+---
+interface Props {}
+---
+
+<div class="trade-rules">
+  <h3>Правила торговли</h3>
+  
+  <div class="rules-section">
+    <h4>Немагические предметы</h4>
+    <ul>
+      <li>Покупка по стандартной цене</li>
+      <li>Продажа за половину стоимости</li>
+      <li>Торговля возможна в таверне без ограничений</li>
+      <li>Торговля невозможна во время участия в партии</li>
+      <li>Продажа предметов ценностью выше 1000зм приравнивается к продаже магических предметов (СЛ 15)</li>
+    </ul>
+  </div>
+
+  <div class="rules-section">
+    <h4>Магические предметы</h4>
+    <p>Обычные магические предметы из PHB и DMG можно покупать как обычные предметы по максимальной цене (цена на расходники делится на 2).</p>
+  </div>
+</div>
+
+<style>
+  .trade-rules {
+    margin-bottom: 2rem;
+  }
+
+  .rules-section {
+    margin-bottom: 1.5rem;
+  }
+
+  h4 {
+    color: var(--primary);
+    margin: 1rem 0 0.5rem;
+  }
+
+  ul {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+
+  p {
+    line-height: 1.6;
+  }
+</style>

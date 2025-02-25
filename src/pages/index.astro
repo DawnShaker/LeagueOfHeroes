@@ -1,0 +1,86 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="D&D 5E Guide - Home">
+	<div class="content">
+		<h1>Welcome to Our D&D 5E Guide</h1>
+		
+		<p class="intro">
+			This guide contains our local rules, clarifications, and interpretations of D&D 5th Edition.
+			Use this as your reference for our campaign's specific rulings and modifications.
+		</p>
+
+		<div class="quick-links">
+			<h2>Quick Links</h2>
+			<div class="grid">
+				<a href="/character-creation" class="card">
+					<h3>Character Creation</h3>
+					<p>Guidelines for creating your character, including allowed sources and ability score generation.</p>
+				</a>
+				<a href="/house-rules" class="card">
+					<h3>House Rules</h3>
+					<p>Our local modifications and clarifications to the standard rules.</p>
+				</a>
+				<a href="/combat" class="card">
+					<h3>Combat Rules</h3>
+					<p>Combat mechanics, initiative, and action economy clarifications.</p>
+				</a>
+				<a href="/magic" class="card">
+					<h3>Magic & Spells</h3>
+					<p>Spell modifications, magic item rules, and arcane guidelines.</p>
+				</a>
+			</div>
+		</div>
+	</div>
+</Layout>
+
+<style>
+	.content {
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.intro {
+		font-size: 1.2rem;
+		color: var(--text);
+		max-width: 800px;
+	}
+
+	.quick-links {
+		margin-top: 3rem;
+	}
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 1.5rem;
+		margin-top: 1rem;
+	}
+
+	.card {
+		background: var(--card-bg);
+		padding: 1.5rem;
+		border-radius: 0.5rem;
+		box-shadow: var(--card-shadow);
+		text-decoration: none;
+		color: inherit;
+		transition: transform 0.2s, box-shadow 0.2s;
+		border: 1px solid var(--card-border);
+	}
+
+	.card:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+	}
+
+	.card h3 {
+		color: var(--primary);
+		margin-bottom: 0.5rem;
+	}
+
+	.card p {
+		color: var(--text);
+		margin: 0;
+	}
+</style>

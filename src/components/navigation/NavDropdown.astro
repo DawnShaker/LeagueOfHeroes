@@ -1,0 +1,76 @@
+---
+interface Props {
+  label: string;
+  links: Array<{ href: string; label: string; }>;
+}
+
+const { label, links } = Astro.props;
+---
+
+<div class="dropdown">
+  <button class="dropdown-trigger">{label}</button>
+  <div class="dropdown-content">
+    {links.map(link => (
+      <a href={link.href} class="dropdown-item">{link.label}</a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-trigger {
+    background: none;
+    border: none;
+    color: var(--text);
+    padding: 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: color 0.2s;
+  }
+
+  .dropdown-trigger:hover {
+    color: var(--primary);
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    min-width: 200px;
+    z-index: 1000;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown-item {
+    color: var(--text);
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+    display: block;
+    transition: all 0.2s;
+  }
+
+  .dropdown-item:hover {
+    background: var(--nav-hover-bg);
+    color: var(--primary);
+  }
+
+  .dropdown-item:first-child {
+    border-radius: 0.5rem 0.5rem 0 0;
+  }
+
+  .dropdown-item:last-child {
+    border-radius: 0 0 0.5rem 0.5rem;
+  }
+</style>

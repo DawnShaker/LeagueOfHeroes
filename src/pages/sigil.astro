@@ -1,0 +1,65 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SigilMap from '../components/handbook/SigilMap.astro';
+---
+
+<Layout title="D&D 5E Guide - Сигил: город дверей">
+  <div class="content">
+    <h1>Сигил - город дверей</h1>
+    
+    <section class="intro-section">
+      <p>Сигил, известный как Город Дверей, является уникальным местом в мультивселенной D&D. Расположенный на вершине Спайра в центре Внешних Планов, этот город является домом для бесчисленных порталов, соединяющих различные миры и измерения.</p>
+    </section>
+
+    <SigilMap 
+      imageUrl="/images/sigil-map.jpg"
+      caption="Карта Сигила с основными районами и порталами"
+    />
+
+    <section class="districts">
+      <h2>Районы Сигила</h2>
+      <div class="district-grid">
+        <div class="district-card">
+          <h3>Леди</h3>
+          <p>Административный район, где располагаются важнейшие учреждения города.</p>
+        </div>
+        <div class="district-card">
+          <h3>Нижний район</h3>
+          <p>Торговый район, известный своими рынками и лавками.</p>
+        </div>
+        <!-- Add more districts as needed -->
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .intro-section {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+    margin-bottom: 2rem;
+  }
+
+  .district-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .district-card {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+  }
+</style>

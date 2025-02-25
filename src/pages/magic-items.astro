@@ -1,0 +1,61 @@
+---
+import Layout from '../layouts/Layout.astro';
+import MagicItemCard from '../components/handbook/MagicItemCard.astro';
+---
+
+<Layout title="D&D 5E Guide - Магические предметы">
+  <div class="content">
+    <h1>Магические предметы</h1>
+    
+    <div class="filters">
+      <select class="filter-select" id="rarityFilter">
+        <option value="all">Все редкости</option>
+        <option value="common">Обычный</option>
+        <option value="uncommon">Необычный</option>
+        <option value="rare">Редкий</option>
+        <option value="veryrare">Очень редкий</option>
+        <option value="legendary">Легендарный</option>
+      </select>
+    </div>
+
+    <div class="items-grid">
+      <MagicItemCard
+        name="Кольцо защиты"
+        rarity="Rare"
+        type="Кольцо"
+        description="Вы получаете +1 бонус к КД и спасброскам, пока носите это кольцо."
+      />
+      <MagicItemCard
+        name="Плащ защиты"
+        rarity="Uncommon"
+        type="Чудесный предмет"
+        description="Вы получаете +1 бонус к КД и спасброскам, пока носите этот плащ."
+      />
+      <!-- Add more items as needed -->
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .filters {
+    margin: 2rem 0;
+  }
+
+  .filter-select {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    color: var(--text);
+  }
+
+  .items-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+</style>

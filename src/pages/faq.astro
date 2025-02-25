@@ -1,0 +1,192 @@
+---
+import Layout from '../layouts/Layout.astro';
+import WeaponsTable from '../components/rules/weapons/WeaponsTable.astro';
+import CrafterTools from '../components/rules/tools/CrafterTools.astro';
+---
+
+<Layout title="D&D 5E Guide - FAQ">
+  <div class="content">
+    <h1>FAQ</h1>
+    
+    <div class="faq-container">
+      <details class="faq-item">
+        <summary>Какие инструменты доступны для ремесла?</summary>
+        <div class="faq-content">
+          <p>Подробные правила использования инструментов описаны в разделе <a href="/rules/downtime-activities#crafting">Создание снаряжения</a>.</p>
+          <CrafterTools />
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Какое оружие доступно в игре?</summary>
+        <div class="faq-content">
+          <WeaponsTable />
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Какие виды доступны для игры?</summary>
+        <div class="faq-content">
+          <p>Полный список доступных видов и их описания можно найти в разделе <a href="/races">Виды</a>.</p>
+          <div class="species-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Вид/Происхождение</th>
+                  <th>Размер</th>
+                  <th>Источник</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Ааракокра</td><td>Средний</td><td>MPMM</td></tr>
+                <tr><td>Аасимар</td><td>Маленький/Средний</td><td>PHB '24</td></tr>
+                <tr><td>Автогном</td><td>Маленький</td><td>AAG</td></tr>
+                <tr><td>Багбир</td><td>Средний</td><td>MPMM</td></tr>
+                <tr><td>Кентавр</td><td>Средний</td><td>MPMM</td></tr>
+                <tr><td>Изменяющийся</td><td>Маленький/Средний</td><td>MPMM</td></tr>
+                <tr><td>Своё происхождение</td><td>Маленький/Средний</td><td>TCE</td></tr>
+                <tr><td>Дампир</td><td>Маленький/Средний</td><td>VRGR</td></tr>
+                <tr><td>Драконорождённый</td><td>Средний</td><td>PHB '24</td></tr>
+                <tr><td>Дварф</td><td>Средний</td><td>PHB '24</td></tr>
+                <tr><td>Эладрин</td><td>Средний</td><td>MPMM</td></tr>
+                <tr><td>Эльф</td><td>Средний</td><td>PHB '24</td></tr>
+                <tr><td>Фея</td><td>Маленький</td><td>MPMM</td></tr>
+                <tr><td>Фирболг</td><td>Средний</td><td>MPMM</td></tr>
+                <tr><td>Генази</td><td>Маленький/Средний</td><td>MPMM</td></tr>
+                <tr><td>Гифф</td><td>Средний</td><td>AAG</td></tr>
+                <tr><td>Гитьянки</td><td>Средний</td><td>MPMM</td></tr>
+                <tr><td>Гитьзерай</td><td>Средний</td><td>MPMM</td></tr>
+                <tr><td>Гном</td><td>Маленький</td><td>PHB '24</td></tr>
+                <tr><td>Гоблин</td><td>Маленький</td><td>MPMM</td></tr>
+                <tr><td>Голиаф</td><td>Средний</td><td>PHB '24</td></tr>
+                <tr><td>Грунг</td><td>Маленький</td><td>OGA</td></tr>
+                <tr><td>Хадози</td><td>Маленький/Средний</td><td>AAG</td></tr>
+                <tr><td>Полуэльф</td><td>Средний</td><td>PHB '14</td></tr>
+                <tr><td>Полуорк</td><td>Средний</td><td>PHB '14</td></tr>
+                <tr><td>Полурослик</td><td>Маленький</td><td>PHB '24</td></tr>
+                <tr><td>Харенгон</td><td>Маленький/Средний</td><td>MPMM</td></tr>
+                <tr><td>Порчекровный</td><td>Маленький/Средний</td><td>VRGR</td></tr>
+                <tr><td>Хобгоблин</td><td>Средний</td><td>MPMM</td></tr>
+                <tr><td>Человек</td><td>Маленький/Средний</td><td>PHB '24</td></tr>
+                <tr><td>Калаштар</td><td>Средний</td><td>ERLW</td></tr>
+                <tr><td>Кендер</td><td>Маленький</td><td>DSotDQ</td></tr>
+                <tr><td>Кенку</td><td>Маленький/Средний</td><td>MPMM</td></tr>
+                <tr><td>Кобольд</td><td>Маленький</td><td>MPMM</td></tr>
+                <tr><td>Леонин</td><td>Средний</td><td>MOT</td></tr>
+                <tr><td>Ящеролюд</td><td>Средний</td><td>MPMM</td></tr>
+                <tr><td>Локата</td><td>Средний</td><td>LR</td></tr>
+                <tr><td>Локсодон</td><td>Средний</td><td>GGR</td></tr>
+                <tr><td>Минотавр</td><td>Средний</td><td>MPMM</td></tr>
+                <tr><td>Орк</td><td>Средний</td><td>PHB '24</td></tr>
+                <tr><td>Совлин</td><td>Маленький/Средний</td><td>SCC</td></tr>
+                <tr><td>Плазмоид</td><td>Маленький/Средний</td><td>AAG</td></tr>
+                <tr><td>Возрождённый</td><td>Маленький/Средний</td><td>VRGR</td></tr>
+                <tr><td>Сатир</td><td>Средний</td><td>MPMM</td></tr>
+                <tr><td>Шадар-Кай</td><td>Средний</td><td>MPMM</td></tr>
+                <tr><td>Шифтер</td><td>Средний</td><td>MPMM</td></tr>
+                <tr><td>Гибрид симиков</td><td>Средний</td><td>GGR</td></tr>
+                <tr><td>Табакси</td><td>Маленький/Средний</td><td>MPMM</td></tr>
+                <tr><td>Три-крин</td><td>Маленький/Средний</td><td>AAG</td></tr>
+                <tr><td>Тифлинг</td><td>Маленький/Средний</td><td>PHB '24</td></tr>
+                <tr><td>Тортл</td><td>Маленький/Средний</td><td>MPMM</td></tr>
+                <tr><td>Тритон</td><td>Средний</td><td>MPMM</td></tr>
+                <tr><td>Ведалкен</td><td>Средний</td><td>GGR</td></tr>
+                <tr><td>Вердан</td><td>Варьируется</td><td>AI</td></tr>
+                <tr><td>Кованый</td><td>Средний</td><td>ERLW</td></tr>
+                <tr><td>Юань-Ти</td><td>Маленький/Средний</td><td>MPMM</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Как создать персонажа?</summary>
+        <div class="faq-content">
+          <p>Процесс создания персонажа включает следующие шаги:</p>
+          <ol>
+            <li>Выберите расу</li>
+            <li>Выберите класс</li>
+            <li>Определите характеристики</li>
+            <li>Выберите предысторию</li>
+            <li>Выберите снаряжение</li>
+          </ol>
+          <p>Подробную информацию можно найти в разделе "Создание персонажа".</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .faq-container {
+    margin-top: 2rem;
+  }
+
+  .faq-item {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .faq-item summary {
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .faq-content {
+    padding: 1rem;
+    border-top: 1px solid var(--card-border);
+  }
+
+  .faq-content ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .faq-content li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .faq-content a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  .faq-content a:hover {
+    text-decoration: underline;
+  }
+
+  .species-table {
+    margin-top: 1rem;
+    overflow-x: auto;
+  }
+
+  .species-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .species-table th,
+  .species-table td {
+    padding: 0.5rem;
+    border: 1px solid var(--card-border);
+    text-align: left;
+  }
+
+  .species-table th {
+    background: var(--background);
+    font-weight: 600;
+  }
+
+  .species-table tr:nth-child(even) {
+    background: var(--background);
+  }
+</style>

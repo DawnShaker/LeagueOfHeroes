@@ -1,0 +1,43 @@
+/* Light theme variables */
+:root {
+  --primary: #7c3aed;
+  --primary-dark: #5b21b6;
+  --background: #f8fafc;
+  --text: #1e293b;
+  
+  /* Card and UI elements */
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0;
+  --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  /* Navigation specific */
+  --nav-hover-bg: #f1f5f9;
+  
+  /* Theme toggle specific */
+  --theme-toggle-bg: #ffffff;
+  --theme-toggle-border: #e2e8f0;
+  --theme-toggle-color: #1e293b;
+  --theme-toggle-hover-bg: #f8fafc;
+}
+
+/* Dark theme variables */
+:root.dark {
+  --primary: #a78bfa;
+  --primary-dark: #8b5cf6;
+  --background: #0f172a;
+  --text: #e2e8f0;
+  
+  /* Card and UI elements */
+  --card-bg: #1e293b;
+  --card-border: #334155;
+  --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  
+  /* Navigation specific */
+  --nav-hover-bg: #334155;
+  
+  /* Theme toggle specific */
+  --theme-toggle-bg: #1e293b;
+  --theme-toggle-border: #334155;
+  --theme-toggle-color: #e2e8f0;
+  --theme-toggle-hover-bg: #334155;
+}

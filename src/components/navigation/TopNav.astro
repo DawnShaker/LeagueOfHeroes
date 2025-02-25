@@ -1,0 +1,51 @@
+---
+import NavDropdown from './NavDropdown.astro';
+import { rulesLinks, characterLinks, toolsLinks, guideLinks, handbookLinks } from './config/navigationLinks';
+---
+
+<nav class="top-nav">
+  <div class="nav-content">
+    <a href="/" class="site-title">D&D 5E Guide</a>
+    <div class="nav-items">
+      <NavDropdown label="Rules" links={rulesLinks} />
+      <NavDropdown label="Characters" links={characterLinks} />
+      <NavDropdown label="Tools" links={toolsLinks} />
+      <NavDropdown label="Guides" links={guideLinks} />
+      <NavDropdown label="Справочник" links={handbookLinks} />
+    </div>
+  </div>
+</nav>
+
+<style>
+  .top-nav {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--card-border);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 0 2rem;
+  }
+
+  .nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+  }
+
+  .site-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  .nav-items {
+    display: flex;
+    gap: 1rem;
+  }
+</style>
