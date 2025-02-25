@@ -4,7 +4,6 @@ import { sailor } from './sailor';
 import { sage } from './sage';
 //import { hermit } from './hermit';
 import { acolyte } from './acolyte';
-import { acolyte } from './acolyte';
 import { criminal } from './criminal';
 import { artisan } from './artisan';
 import { soldier } from './soldier';
