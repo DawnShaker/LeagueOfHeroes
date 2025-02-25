@@ -159,7 +159,7 @@ export const featsData: Feat[] = [
   },
   {
     id: 'lucky',
-    name: 'Бдительный',
+    name: 'Везунчик',
     nameEn: 'Lucky',
     type: 'origin',
     effects: [
