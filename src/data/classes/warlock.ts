@@ -95,11 +95,11 @@ export const warlock: Class = {
       level: 5,
       profBonus: '+3',
       features: ['-'],
-      invocations: 1,
-      cantrips: 5,
-      preparedSpells: 1,
+      invocations: 5,
+      cantrips: 3,
+      preparedSpells: 6,
       numOfSpellSlots: 2,
-      spellSlotsLvl: 1
+      spellSlotsLvl: 3
     },
     {
       level: 6,
