@@ -89,7 +89,7 @@ export const warlock: Class = {
       cantrips: 3,
       preparedSpells: 5,
       numOfSpellSlots: 2,
-      spellSlotsLvl: 5
+      spellSlotsLvl: 2
     },
     {
       level: 5,

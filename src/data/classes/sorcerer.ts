@@ -54,7 +54,7 @@ export const sorcerer: Class = {
       features: ['Использование заклинаний', 'Врождённое чародейство'],
       sorceryPoints: 0,
       cantrips: 4,
-      preparedSpells: 4,
+      preparedSpells: 2,
       spellSlots: {
         1: 2,
         2: 0,
@@ -73,7 +73,7 @@ export const sorcerer: Class = {
       features: ['Источник магии', 'Метамагия'],
       sorceryPoints: 2,
       cantrips: 4,
-      preparedSpells: 5,
+      preparedSpells: 4,
       spellSlots: {
         1: 3,
         2: 0,
