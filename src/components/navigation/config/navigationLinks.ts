@@ -11,7 +11,7 @@ export const rulesLinks = [
 export const characterLinks = [
   { href: '/character-guide', label: 'Создание персонажа' },
   { href: '/classes', label: 'Классы' },
-  { href: '/races', label: 'Виды' },
+  { href: '/races', label: 'Виды (расы)' },
   { href: '/backgrounds', label: 'Предыстории' },
   { href: '/feats', label: 'Черты' }
 ];
@@ -20,7 +20,7 @@ export const toolsLinks = [
   { href: '/tools/point-buy', label: 'Point Buy калькулятор' },
   //{ href: '/tools/dice-roller', label: 'Бросок костей' },
   //{ href: '/tools/name-generator', label: 'Генератор имён' },
-  { href: '/tools/encounter-builder', label: 'Генератор столкновений' }
+  { href: '/tools/encounter-builder', label: 'Калькулятор столкновений' }
 ];
 
 export const guideLinks = [

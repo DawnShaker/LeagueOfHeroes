@@ -20,8 +20,8 @@ interface Props {
     favoredEnemy?: number;
     sorceryPoints?: number;
     invocations?: number;
-	  bloodMagicDie?: string;
-	  knownMaledicts?: number;
+    bloodMagicDie?: string;
+    knownMaledicts?: number;
     numOfSpellSlots?: number;
     spellSlotsLvl: number;
     spellSlots?: {
@@ -37,7 +37,6 @@ interface Props {
     };
   }[];
 }
-
 const { levels } = Astro.props;
 const hasSpellcasting = levels[0].spellSlots !== undefined;
 const hasBardicInspiration= levels[0].bardicInspiration !== undefined;
@@ -64,7 +63,6 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
     level.spellSlots?.[parseInt(slot)] ? Math.max(max, parseInt(slot)) : max, 0)
 )) : 0;
 ---
-
 <div class="table-container">
   <table class="class-table">
     <thead>
@@ -86,8 +84,8 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
         {hasFavoredEnemy && <th class="favored-enemy">Избранный враг</th>}
         {hasSorceryPoints && <th class="sorcery-points">Очки чародейства</th>}
         {hasInvocations && <th class="invocations">Воззвания</th>}
-		    {hasBloodMagicDie && <th class="blood-magic-die">Кость магии крови</th>}
-		    {hasKnownMaledicts && <th class="known-maledicts">Известные проклятья крови</th>}
+        {hasBloodMagicDie && <th class="blood-magic-die">Кость магии крови</th>}
+        {hasKnownMaledicts && <th class="known-maledicts">Известные проклятья крови</th>}
         {hasNumOfSpellSlots && <th class="num-of-spell-slots">Кол-во ячеек</th>}
         {hasSpellSlotsLvl && <th class="spell-slots-lvl">Уровень ячеек</th>}
         {hasSpellcasting && (
@@ -100,7 +98,32 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
       </tr>
       {hasSpellcasting && (
         <tr>
-          <th colspan={hasCantrips ? 5 : 4}></th>
+          <th colspan={
+            // Базовые колонки: Уровень, БМ, Умения класса
+            3 +
+            // Добавляем 1 для каждой дополнительной колонки в зависимости от класса
+            (hasBardicInspiration ? 1 : 0) +
+            (hasWildShape ? 1 : 0) +
+            (hasChanelDivinity ? 1 : 0) +
+            (hasRage ? 1 : 0) +
+            (hasRageDamage ? 1 : 0) +
+            (hasSecondWind ? 1 : 0) +
+            (hasManeuvers ? 1 : 0) +
+            (hasSneakAttack ? 1 : 0) +
+            (hasMartialArts ? 1 : 0) +
+            (hasSpiritPoints ? 1 : 0) +
+            (hasUnarmedMovement ? 1 : 0) +
+            (hasFavoredEnemy ? 1 : 0) +
+            (hasSorceryPoints ? 1 : 0) +
+            (hasInvocations ? 1 : 0) +
+            (hasBloodMagicDie ? 1 : 0) +
+            (hasKnownMaledicts ? 1 : 0) +
+            (hasNumOfSpellSlots ? 1 : 0) +
+            (hasSpellSlotsLvl ? 1 : 0) +
+            // Колонки, специфичные для заклинаний
+            (hasCantrips ? 1 : 0) +
+            1 // Колонка "Подг. закл."
+          }></th>
           {Array.from({length: maxSpellLevel}, (_, i) => (
             <th>{i + 1}</th>
           ))}
@@ -127,8 +150,8 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
           {hasFavoredEnemy && <td class="favored-enemy">{level.favoredEnemy}</td>}
           {hasSorceryPoints && <td class="sorcery-points">{level.sorceryPoints}</td>}
           {hasInvocations && <td class="invocations">{level.invocations}</td>}
-		      {hasBloodMagicDie && <td class="blood-magic-die">{level.bloodMagicDie}</td>}
-		      {hasKnownMaledicts && <td class="known-maledicts">{level.knownMaledicts}</td>}
+          {hasBloodMagicDie && <td class="blood-magic-die">{level.bloodMagicDie}</td>}
+          {hasKnownMaledicts && <td class="known-maledicts">{level.knownMaledicts}</td>}
           {hasNumOfSpellSlots && <td class="num-of-spell-slots">{level.numOfSpellSlots}</td>}
           {hasSpellSlotsLvl && <td class="spell-slots-lvl">{level.spellSlotsLvl}</td>}
           {hasSpellcasting && (
@@ -168,7 +191,7 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
   }
   
   .rage, .rage-damage, .second-wind, .maneuvers, .sneak-attack, .bardic-inspiration, .wild-shape, .chanel-divinity, .martial-arts, .spirit-points, .unarmed-movement, .favored-enemy, .sorcery-points, .invocations, .num-of-spell-slots, .spell-slots-lvl, .blood-magic-die, .known-maledicts {
-    width: 80px;
+    min-width: 40px;
     text-align: center;
   }
 
