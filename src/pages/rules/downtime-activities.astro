@@ -5,6 +5,8 @@ import ActivityCard from '../../components/rules/downtime/ActivityCard.astro';
 import MagicItemSearch from '../../components/rules/downtime/MagicItemSearch.astro';
 import MagicItemSell from '../../components/rules/downtime/MagicItemSell.astro';
 import CraftingRules from '../../components/rules/downtime/CraftingRules.astro';
+import FightingPit from '../../components/rules/downtime/FightingPit.astro';
+import Gambling from '../../components/rules/downtime/Gambling.astro';
 import {
   craftingActivities,
   tradingActivities,
@@ -50,9 +52,8 @@ import {
     <ActivityCategory
       title="Развлечения"
       description="Деятельность для отдыха и заработка.">
-      {entertainmentActivities.map(activity => (
-        <ActivityCard {...activity} />
-      ))}
+      <FightingPit />
+      <Gambling />
     </ActivityCategory>
 
     <ActivityCategory
