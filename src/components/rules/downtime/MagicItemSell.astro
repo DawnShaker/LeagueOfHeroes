@@ -1,0 +1,230 @@
+---
+interface Props {}
+---
+
+<div class="activity-card">
+  <div class="activity-header">
+    <h3>Продажа магических предметов</h3>
+    <div class="basic-info">
+      <div class="info-item">
+        <span class="label">Продолжительность:</span>
+        <span>5 дней простоя</span>
+      </div>
+      <div class="info-item">
+        <span class="label">Базовая стоимость:</span>
+        <span>50 зм + проживание</span>
+      </div>
+    </div>
+  </div>
+
+  <details class="activity-details">
+    <summary>Подробная информация</summary>
+    <div class="details-content">
+      <section class="search-process">
+        <h4>Процесс продажи</h4>
+        <p>Персонаж тратит 5 дней простоя с учётом трат на проживание и 50 зм на расходы, после чего совершает проверку поиска покупателя броском: Интеллект (Расследование) или Харизма (Убеждение).</p>
+        <div class="search-rules">
+          <h5>Правила продажи:</h5>
+          <ul>
+            <li>Для разных типов предметов требуется отдельный бросок поиска</li>
+            <li>После покупки есть 15% шанс на осложнение (бросок d100, 1-15)</li>
+          </ul>
+        </div>
+        <div class="rules-section">
+          <h4>Сл продажи</h4>
+          <div class="activity-search">
+          <table>
+            <thead>
+              <tr>
+                <th>Редкость</th>
+                <th>Сл броска</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Обычный</td><td>10 зм</td></tr>
+              <tr><td>Необычный</td><td>15</td></tr>
+              <tr><td>Редкий</td><td>20 зм</td></tr>
+              <tr><td>Очень редкий</td><td>25</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><p>После нахождения покупателя совершается проверка на определение цены продажи броском Харизма (Убеждение):</p></p>
+        <div class="rules-section">
+          <h4>Цена продажи</h4>
+          <div class="activity-search">
+          <table>
+            <thead>
+              <tr>
+                <th>Редкость</th>
+                <th>Значение броска</th>
+                <th>Цена продажи</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td rowspan="3">Обычный</td><td>1-10</td><td>35 зм</td></tr>
+              <tr><td>11-24</td><td>70 зм</td></tr>
+              <tr><td>25+</td><td>105 зм</td></tr>
+              <tr><td rowspan="3">Необычный</td><td>1-10</td><td>300 зм</td></tr>
+              <tr><td>11-24</td><td>600 зм</td></tr>
+              <tr><td>25+</td><td>900 зм</td></tr>
+              <tr><td rowspan="3">Редкий</td><td>1-10</td><td>10000 зм</td></tr>
+              <tr><td>11-24</td><td>20000 зм</td></tr>
+              <tr><td>25+</td><td>30000 зм</td></tr>
+              <tr><td rowspan="3">Очень редкий</td><td>1-10</td><td>25000 зм</td></tr>
+              <tr><td>11-24</td><td>50000 зм</td></tr>
+              <tr><td>25+</td><td>75000 зм</td></tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
+      </section>
+      <section class="complications">
+        <h4>Осложнения (d6)</h4>
+        <div class="complications-table">
+          <table>
+            <tbody>
+            <tr><td>1</td><td>Ваш противник тайно организует покупку предмета, чтобы использовать его против вас.</td></tr>
+            <tr><td>2</td><td>Воровская гильдия, предупреждённая о сделке, пытается украсть ваш предмет. Требуется совершить вторую проверку д100, где при результатах 51-100 предмет воруется у владельца.</td></tr>
+            <tr><td>3</td><td>Недоброжелатель распускает слухи о том, что предмет — подделка. Требуется совершить вторую проверку д100, где при результатах 76-100 сделка расторгается.</td></tr>
+            <tr><td>4</td><td>Чародей заявляет, что предмет принадлежит ему по праву рождения, и требует его отдать. Персонаж может согласится и отдать предмет, или же отказаться и нажить себе могущественного врага.</td></tr>
+            <tr><td>5</td><td>Предыдущий владелец предмета или его выжившие союзники клянутся вернуть предмет силой. Персонаж наживает себе группу сильных врагов.</td></tr>
+            <tr><td>6</td><td>Перед сделкой покупатель был убит. Сделка расторгается.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">При участии двух и более персонажей во время одной и той же активности продажи требование на трату и <strong>ДП</strong> и оплаты проживания распространяется на всех.</p>
+      </section>
+
+      <section class="additional-rules">
+        <h4>Дополнительные правила</h4>
+        <ul>
+          <li>При отказе от сделки после броска на цену — штраф 100 зм за неустойку</li>
+        </ul>
+      </section>
+    </div>
+  </details>
+</div>
+
+<style>
+  .activity-card {
+    background: var(--card-bg);
+    border-radius: 0.5rem;
+    border: 1px solid var(--card-border);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
+
+  .activity-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .basic-info {
+    display: grid;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .activity-search {
+    margin-top: 1rem;
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 0.5rem;
+    border: 1px solid var(--card-border);
+    text-align: center;
+  }
+
+  th {
+    background: var(--background);
+    font-weight: 600;
+  }
+
+  tr:nth-child(even) {
+    background: var(--background);
+  }
+
+  .info-item {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .label {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .activity-details {
+    border-top: 1px solid var(--card-border);
+  }
+
+  summary {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  summary:hover {
+    background: var(--nav-hover-bg);
+  }
+
+  .details-content {
+    padding: 1.5rem;
+    border-top: 1px solid var(--card-border);
+  }
+
+  h4 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+  }
+
+  h5 {
+    margin: 1rem 0 0.5rem;
+  }
+
+  section {
+    margin-bottom: 2rem;
+  }
+
+  section:last-child {
+    margin-bottom: 0;
+  }
+
+  .complications-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .complications-table td {
+    padding: 0.5rem;
+    border: 1px solid var(--card-border);
+  }
+
+  .complications-table td:first-child {
+    width: 2.5rem;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .note {
+    margin-top: 1rem;
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+
+  ul {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+</style>

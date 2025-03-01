@@ -22,7 +22,7 @@ interface Props {}
     <div class="details-content">
       <section class="search-process">
         <h4>Процесс поиска</h4>
-        <p>Персонаж тратит 5 дней простоя с учётом трат на проживание и 50 зм на расходы, после чего совершает проверку поиска торговца броском навыка: Интеллект (Расследование) или Харизма (Убеждение).</p>
+        <p>Персонаж тратит 5 дней простоя с учётом трат на проживание и 50 зм на расходы, после чего совершает проверку поиска торговца броском: Интеллект (Расследование) или Харизма (Убеждение).</p>
         <div class="search-rules">
           <h5>Правила поиска:</h5>
           <ul>
@@ -36,28 +36,17 @@ interface Props {}
           <div class="activity-search">
           <table>
             <thead>
-              <tr><th>Редкость</th><th>Сл броска</th></tr>
+              <tr>
+                <th>Редкость</th>
+                <th>Сл броска</th>
+                <th>Цена</th>
+              </tr>
             </thead>
             <tbody>
-              <tr><td>Обычный</td><td>10</td></tr>
-              <tr><td>Необычный</td><td>15</td></tr>
-              <tr><td>Редкий</td><td>20</td></tr>
-              <tr><td>Очень редкий</td><td>25</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="rules-section">
-          <h4>Цена по редкости</h4>
-          <div class="activity-search">
-          <table>
-            <thead>
-              <tr><th>Редкость</th><th>Бросок цены</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Обычный</td><td>(1d6+1) * 10 зм</td></tr>
-              <tr><td>Необычный</td><td>(1d6) * 100 зм</td></tr>
-              <tr><td>Редкий</td><td>(2d10) * 1000 зм</td></tr>
-              <tr><td>Очень редкий</td><td>(1d4+1) * 10000 зм</td></tr>
+              <tr><td>Обычный</td><td>10</td><td>70 зм</td></tr>
+              <tr><td>Необычный</td><td>15</td><td>600 зм</td></tr>
+              <tr><td>Редкий</td><td>20</td><td>20000 зм</td></tr>
+              <tr><td>Очень редкий</td><td>25</td><td>50000 зм</td></tr>
             </tbody>
           </table>
         </div>
