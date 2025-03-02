@@ -16,15 +16,15 @@ export const merchant: Background = {
       description: '2 любых навыка'
     },
     tools: {
-      description: '1 инструмент, набор или владение транспортом на ваш выбор'
+      description: '1 владение: ремесленный инструмент, набор, транспорт, музыкальный инструмент, игровой набор'
     },
     equipment: '50 зм'
-},
+  },
   variants: {
     title: 'Разновидность торговца',
     table: [
       { roll: 1, result: 'Неудавшийся торговец' },
-  ]
+    ]
   },
   characteristics: {
     personalityTraits: [
