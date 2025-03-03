@@ -4,9 +4,11 @@ import ActivityCategory from '../../components/rules/downtime/ActivityCategory.a
 import ActivityCard from '../../components/rules/downtime/ActivityCard.astro';
 import MagicItemSearch from '../../components/rules/downtime/MagicItemSearch.astro';
 import MagicItemSell from '../../components/rules/downtime/MagicItemSell.astro';
+import Gatehouse from '../../components/rules/downtime/Gatehouse.astro';
 import CraftingRules from '../../components/rules/downtime/CraftingRules.astro';
 import FightingPit from '../../components/rules/downtime/FightingPit.astro';
 import Gambling from '../../components/rules/downtime/Gambling.astro';
+import Training from '../../components/rules/downtime/Training.astro';
 import {
   craftingActivities,
   tradingActivities,
@@ -47,6 +49,7 @@ import {
       description="Поиск и продажа магических предметов.">
       <MagicItemSearch />
       <MagicItemSell />
+      <Gatehouse />
     </ActivityCategory>
 
     <ActivityCategory
@@ -59,18 +62,14 @@ import {
     <ActivityCategory
       title="Обучение"
       description="Изучение новых навыков и способностей.">
-      {trainingActivities.map(activity => (
-        <ActivityCard {...activity} />
-      ))}
+      <Training />
     </ActivityCategory>
 
-    <ActivityCategory
+    <!--<ActivityCategory
       title="Приключения"
       description="Поиск возможностей для небольших приключений.">
-      {adventuringActivities.map(activity => (
-        <ActivityCard {...activity} />
-      ))}
-    </ActivityCategory>
+    </ActivityCategory>-->
+
   </div>
 </Layout>
 

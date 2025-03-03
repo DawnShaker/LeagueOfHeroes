@@ -1,0 +1,204 @@
+---
+interface Props {}
+---
+
+<div class="activity-card">
+  <div class="activity-header">
+    <h3>Гейтхаус и очки сокровищ</h3>
+    <p class="intro">Вместе с получением Очков Прогресса (<strong>ОП</strong>) персонажу также выдаются в том же количестве Очки Сокровищ (<strong>ОС</strong>).</p>
+    <div class="basic-info">
+      <div class="info-item">
+        <span class="label">Продолжительность:</span>
+        <span>Разнится</span>
+      </div>
+      <div class="info-item">
+        <span class="label">Базовая стоимость:</span>
+        <span>Проживание + немагический аналог предмета</span>
+      </div>
+    </div>
+  </div>
+
+  <details class="activity-details">
+    <summary>Подробная информация</summary>
+    <div class="details-content">
+      <section class="search-process">
+        <h4>Обучение</h4>
+        <p>Снаряжение, обмениваемое на ОС, получается вне игры. Предметы,  полученные за ОС невозможно продать во время активности Продажа магических предметов или торговцам во время игр, но возможны передача между персонажами или обратный обмен предмета для возвращения половины стоимости ОС (с округлением вниз).</p>
+        <p>При обмене ОС на предметы, персонажу требуется или иметь при себе немагический вариант снаряжения (немагические броня, оружие), или оплатить стоимость немагического варианта. Для предметов, что не имеют немагического варианта требуется доплата 50 зм.</p>
+      <div>
+      </div>
+      <div class="rules-section">
+          <h4>Сокровища</h4>
+          <div class="activity-search">
+          <table>
+            <thead>
+              <tr>
+                <th>Этап</th>
+                <th>Предмет</th>
+                <th>Стоимость</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td rowspan="12">Первый (1-4 уровень)</td><td>Жезл хранителя договора +1</td><td rowspan="12">10 ОС</td></tr>
+              <tr><td>Оружие +1</td</tr>
+              <tr><td>Обмотки безоружной мощи +1</td</tr>
+              <tr><td>Щит +1</td</tr>
+              <tr><td>Волшебная палочка боевого мага +1</td</tr>
+              <tr><td>Камни послания</td</tr>
+              <tr><td>Колчан Элонны</td</tr>
+              <tr><td>Медальон здоровья</td</tr>
+              <tr><td>Ночные очки</td</tr>
+              <tr><td>Сумка хранения</td</tr>
+              <tr><td>Шлем понимания языков</td</tr>
+              <tr><td>Боеприпасы +1</td</tr>
+              <tr><td rowspan="11">Второй этап (5-10 уровень)</td><td>Жезл хранителя договора +2</td><td rowspan="11">50 ОС</td></tr>
+              <tr><td>Оружие +2</td</tr>
+              <tr><td>Обмотки безоружной мощи +2</td</tr>
+              <tr><td>Щит +2</td</tr>
+              <tr><td>Волшебная палочка боевого мага +2</td</tr>
+              <tr><td>Броня +1</td</tr>
+              <tr><td>Переносная дыра</td</tr>
+              <tr><td>Плащ шарлатана</td</tr>
+              <tr><td>Удобный рюкзак Хеварда</td</tr>
+              <tr><td>Боеприпасы +2</td</tr>
+              <tr><td>Доспех сопротивления</td</tr>
+              <tr><td rowspan="9">Третий (11-16 уровень)</td><td>Жезл хранителя договора +3</td><td rowspan="9">100 ОС</td></tr>
+              <tr><td>Оружие +3</td</tr>
+              <tr><td>Обмотки безоружной мощи +3</td</tr>
+              <tr><td>Волшебная палочка боевого мага +3</td</tr>
+              <tr><td>Щит +3</td</tr>
+              <tr><td>Броня +2</td</tr>
+              <tr><td>Бутылка с ифритом</td</tr>
+              <tr><td>Ковёр-самолёт (бросок д100 на тип предмета)</td</tr>
+              <tr><td>Боеприпасы +3</td</tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+    </div>
+  </details>
+</div>
+
+<style>
+  .activity-card {
+    background: var(--card-bg);
+    border-radius: 0.5rem;
+    border: 1px solid var(--card-border);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
+
+  .activity-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .basic-info {
+    display: grid;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .activity-search {
+    margin-top: 1rem;
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 0.5rem;
+    border: 1px solid var(--card-border);
+    text-align: center;
+  }
+
+  th {
+    background: var(--background);
+    font-weight: 600;
+  }
+
+  tr:nth-child(even) {
+    background: var(--background);
+  }
+
+  .info-item {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .label {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .activity-details {
+    border-top: 1px solid var(--card-border);
+  }
+
+  summary {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  summary:hover {
+    background: var(--nav-hover-bg);
+  }
+
+  .details-content {
+    padding: 1.5rem;
+    border-top: 1px solid var(--card-border);
+  }
+
+  h4 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+  }
+
+  h5 {
+    margin: 1rem 0 0.5rem;
+  }
+
+  section {
+    margin-bottom: 2rem;
+  }
+
+  section:last-child {
+    margin-bottom: 0;
+  }
+
+  .complications-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .complications-table td {
+    padding: 0.5rem;
+    border: 1px solid var(--card-border);
+  }
+
+  .complications-table td:first-child {
+    width: 2.5rem;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .note {
+    margin-top: 1rem;
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+
+  ul {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+</style>
