@@ -24,30 +24,30 @@ export const wildspacer: Background = {
     title: 'Близкий контакт.',
     description: 'У вас была душераздирающая встреча с одним из многочисленных ужасов Дикого космоса. Вы спаслись бегством, но встреча оставила шрам или два, или, возможно, повторяющийся кошмар. Сделайте бросок по таблице «Близкие контакты», чтобы определить, какое существо едва не взяло над вами верх. Существа, отмеченные звёздочкой, появляются в «Астральном зверинце Бу»; остальные описаны в «Бестиарии».',
     table: [
-      { roll: 1, result: 'Бехолдер [beholder]' },
-      { roll: 2, result: 'Космический ужас [cosmic Horror]' },
-      { roll: 3, result: 'Йспуг [feyr]' },
-      { roll: 4, result: 'Лунный дракон [young Lunar Dragon]' },
-      { roll: 5, result: 'Свежеватель разума [mind flayer]' },
-      { roll: 6, result: 'Нье-тальггу [neh-thalggu]' },
-      { roll: 7, result: 'Неоги [neogi]' },
-      { roll: 8, result: 'Космический клоун [space Clown]' },
-      { roll: 9, result: 'Вампират [vampirate]' },
-      { roll: 10, result: 'Пустотный поглотитель [void Scavver]' },
+      { roll: 1, result: 'Бехолдер [beholder]'},
+      { roll: 2, result: 'Космический ужас [cosmic Horror]'},
+      { roll: 3, result: 'Йспуг [feyr]'},
+      { roll: 4, result: 'Лунный дракон [young Lunar Dragon]'},
+      { roll: 5, result: 'Свежеватель разума [mind flayer]'},
+      { roll: 6, result: 'Нье-тальггу [neh-thalggu]'},
+      { roll: 7, result: 'Неоги [neogi]'},
+      { roll: 8, result: 'Космический клоун [space Clown]'},
+      { roll: 9, result: 'Вампират [vampirate]'},
+      { roll: 10, result: 'Пустотный поглотитель [void Scavver]'},
     ],
 },
 characteristics: {
     personalityTraits: [
-    { roll: 1, trait: '-' },
+    { roll: 1, trait: '-'},
     ],
     ideals: [
-    { roll: 1, trait: '-' },
+    { roll: 1, trait: '-'},
     ],
     bonds: [
-    { roll: 1, trait: '-' },
+    { roll: 1, trait: '-'},
     ],
     flaws: [
-    { roll: 1, trait: '-' },
+    { roll: 1, trait: '-'},
     ],
 }
 };

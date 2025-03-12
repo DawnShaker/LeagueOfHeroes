@@ -46,6 +46,39 @@ const { background } = Astro.props;
         </dl>
       </section>
 
+      {background.spellTable && (
+        <section class="spell-table">
+          <h2>{background.spellTable.name}</h2>
+          {background.spellTable.prerequisite && (
+            <p class="prerequisite"><strong>Требование:</strong> {background.spellTable.prerequisite}</p>
+          )}
+          <p class="description">{background.spellTable.description}</p>
+          
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Уровень заклинаний</th>
+                  <th>Заклинания</th>
+                </tr>
+              </thead>
+              <tbody>
+                {background.spellTable.spells.map(level => (
+                  <tr>
+                    <td>{level.level}</td>
+                    <td>{level.spells.join(', ')}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          
+          {background.spellTable.note && (
+            <p class="note">{background.spellTable.note}</p>
+          )}
+        </section>
+      )}
+
       {background.variants && (
         <section class="variants">
           <h2>{background.variants.title}</h2>
@@ -78,7 +111,7 @@ const { background } = Astro.props;
             <table>
               <thead>
                 <tr>
-                  <th>к8</th>
+                  <th>к{background.characteristics.personalityTraits.length}</th>
                   <th>Черта</th>
                 </tr>
               </thead>
@@ -98,7 +131,7 @@ const { background } = Astro.props;
             <table>
               <thead>
                 <tr>
-                  <th>к6</th>
+                  <th>к{background.characteristics.ideals.length}</th>
                   <th>Идеал</th>
                 </tr>
               </thead>
@@ -118,7 +151,7 @@ const { background } = Astro.props;
             <table>
               <thead>
                 <tr>
-                  <th>к6</th>
+                  <th>к{background.characteristics.bonds.length}</th>
                   <th>Привязанность</th>
                 </tr>
               </thead>
@@ -138,7 +171,7 @@ const { background } = Astro.props;
             <table>
               <thead>
                 <tr>
-                  <th>к6</th>
+                  <th>к{background.characteristics.flaws.length}</th>
                   <th>Слабость</th>
                 </tr>
               </thead>
@@ -236,6 +269,36 @@ const { background } = Astro.props;
   th {
     background: var(--background);
     font-weight: 600;
+  }
+
+  .spell-table {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+    margin-bottom: 2rem;
+  }
+
+  .prerequisite {
+    color: var(--primary);
+    margin: 1rem 0;
+  }
+
+  .description {
+    margin-bottom: 1.5rem;
+  }
+
+  .table-container {
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .note {
+    margin-top: 1rem;
+    font-style: italic;
+    color: var(--text);
+    opacity: 0.8;
   }
 
   .characteristic-tables {

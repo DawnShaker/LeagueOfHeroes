@@ -1,9 +1,20 @@
-export interface CharacteristicEntry {
+interface CharacteristicEntry {
   roll: number;
   trait?: string;
   ideal?: string;
   bond?: string;
   flaw?: string;
+}
+
+interface SpellTable {
+  name: string;
+  prerequisite?: string;
+  description: string;
+  spells: {
+    level: string;
+    spells: string[];
+  }[];
+  note?: string;
 }
 
 export interface Background {
@@ -26,6 +37,7 @@ export interface Background {
     };
     equipment: string;
   };
+  spellTable?: SpellTable;
   variants?: {
     title: string;
     description: string;

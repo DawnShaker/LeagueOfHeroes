@@ -22,16 +22,16 @@ export const farmer: Background = {
   },
   characteristics: {
     personalityTraits: [
-      { roll: 1, trait: '-' },
+      { roll: 1, trait: '-'},
     ],
     ideals: [
-      { roll: 1, trait: '-' },
+      { roll: 1, trait: '-'},
     ],
     bonds: [
-      { roll: 1, trait: '-' },
+      { roll: 1, trait: '-'},
     ],
     flaws: [
-      { roll: 1, trait: '-' },
+      { roll: 1, trait: '-'},
     ],
   }
 };
