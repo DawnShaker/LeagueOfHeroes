@@ -29,7 +29,21 @@ const { label, links } = Astro.props;
     padding: 1rem;
     cursor: pointer;
     font-size: 1rem;
-    transition: color 0.2s;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .dropdown-trigger::after {
+    content: '▼';
+    font-size: 0.8em;
+    margin-left: 0.5rem;
+    transition: transform 0.2s;
+  }
+
+  .dropdown.active .dropdown-trigger::after {
+    transform: rotate(180deg);
   }
 
   .dropdown-trigger:hover {
@@ -51,6 +65,46 @@ const { label, links } = Astro.props;
 
   .dropdown:hover .dropdown-content {
     display: block;
+  }
+
+  @media (max-width: 768px) {
+    .dropdown {
+      width: 100%;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .dropdown:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-trigger {
+      width: 100%;
+      text-align: left;
+      padding: 1rem;
+    }
+
+    .dropdown-content {
+      position: static;
+      border: none;
+      box-shadow: none;
+      display: none;
+      width: 100%;
+      background: var(--background);
+      padding: 0.5rem 0;
+    }
+
+    .dropdown.active .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-item {
+      padding: 0.75rem 1.5rem;
+    }
+
+    .dropdown-item:first-child,
+    .dropdown-item:last-child {
+      border-radius: 0;
+    }
   }
 
   .dropdown-item {
