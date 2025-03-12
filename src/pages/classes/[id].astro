@@ -1,24 +1,25 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ClassTable from '../../components/classes/ClassTable.astro';
+//import SpellTable from '../../components/classes/SpellTable.astro';
 import { classes } from '../../data/classes';
 
 export function getStaticPaths() {
-  return classes.map(classData => ({
-    params: { id: classData.id },
-    props: { classData }
-  }));
+return classes.map(classData => ({
+params: { id: classData.id },
+props: { classData }
+}));
 }
 
 const { classData } = Astro.props;
 
 // Функция для преобразования текстовой таблицы в структурированные данные
 function parseTableData(text: string) {
-  const rows = text.split('\n').filter(row => row.trim());
-  return rows.map(row => {
-    const [level, spells] = row.split('\t');
-    return { level, spells };
-  });
+const rows = text.split('\n').filter(row => row.trim());
+return rows.map(row => {
+const [level, spells] = row.split('\t');
+return { level, spells };
+});
 }
 ---
 
@@ -36,7 +37,7 @@ function parseTableData(text: string) {
         <select id="subclass-select">
           <option value="">Выберите подкласс</option>
           {classData.subclasses.map(subclass => (
-            <option value={subclass.id}>{subclass.name} [{subclass.nameEn}]</option>
+          <option value={subclass.id}>{subclass.name} [{subclass.nameEn}]</option>
           ))}
         </select>
       </div>
@@ -95,14 +96,14 @@ function parseTableData(text: string) {
       <p>Выберите один из следующих наборов:</p>
 
       {classData.equipment.default.map(choice => (
-        <div class="equipment-choice">
-          <h3>Вариант {choice.choice}</h3>
-          <ul>
-            {choice.items.map(item => (
-              <li>{item}</li>
-            ))}
-          </ul>
-        </div>
+      <div class="equipment-choice">
+        <h3>Вариант {choice.choice}</h3>
+        <ul>
+          {choice.items.map(item => (
+          <li>{item}</li>
+          ))}
+        </ul>
+      </div>
       ))}
     </div>
 
@@ -114,32 +115,45 @@ function parseTableData(text: string) {
     <div id="features-container" class="class-features">
       <h2>Умения класса</h2>
       {classData.features.map(feature => (
-        <div class="feature">
-          <div class="feature-header">
-            <h3>{feature.name}</h3>
-            <span class="feature-level">{feature.level} уровень</span>
-          </div>
-          <div class="feature-description">
-            {feature.description.split('\n').map(paragraph => (
-              <p>{paragraph}</p>
-            ))}
-            
-            {feature.collapsible && (
-              <div class="collapsible-content">
-                {feature.collapsible.map(item => (
-                  <details class="collapsible-item">
-                    <summary>{item.title}</summary>
-                    <div class="collapsible-description">
-                      {item.description.split('\n').map(paragraph => (
-                        <p>{paragraph}</p>
-                      ))}
-                    </div>
-                  </details>
-                ))}
-              </div>
-            )}
-          </div>
+      <div class="feature">
+        <div class="feature-header">
+          <h3>{feature.name}</h3>
+          <span class="feature-level">{feature.level} уровень</span>
         </div>
+        <div class="feature-description">
+          {feature.name.includes('Заклинания Домена') ? (
+            <>
+              <details class="domain-spells">
+                <summary>Показать список заклинаний домена</summary>
+                <div class="spells-content">
+                  <SpellTable content={feature.description} />
+                </div>
+              </details>
+            </>
+          ) : (
+            feature.description.split('\n').map(paragraph => (
+              paragraph.includes('\t') 
+                ? <SpellTable content={paragraph} />
+                : <p>{paragraph}</p>
+            ))
+          )}
+          
+          {feature.collapsible && (
+            <div class="collapsible-content">
+              {feature.collapsible.map(item => (
+                <details class="collapsible-item">
+                  <summary>{item.title}</summary>
+                  <div class="collapsible-description">
+                    {item.description.split('\n').map(paragraph => (
+                      <p>{paragraph}</p>
+                    ))}
+                  </div>
+                </details>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
       ))}
     </div>
 
@@ -164,7 +178,6 @@ function parseTableData(text: string) {
     const featuresContainer = document.getElementById('features-container');
     const featureTemplate = document.getElementById('feature-template');
 
-    // Функция для создания таблицы
     function createTableElement(tableText) {
       const rows = tableText.split('\n').filter(row => row.trim());
       const table = document.createElement('table');
@@ -188,7 +201,6 @@ function parseTableData(text: string) {
       return table;
     }
 
-    // Функция для создания элементов способностей
     function createFeatureElement(feature) {
       const template = featureTemplate.content.cloneNode(true);
       const featureElement = template.querySelector('.feature');
@@ -198,18 +210,18 @@ function parseTableData(text: string) {
       
       const descriptionContainer = featureElement.querySelector('.feature-description');
       
-      if (feature.name.toLowerCase().includes('таблица') && !feature.collapsible) {
-        const table = createTableElement(feature.description);
-        descriptionContainer.appendChild(table);
-      } else {
-        feature.description.split('\n').forEach(paragraph => {
+      feature.description.split('\n').forEach(paragraph => {
+        if (paragraph.includes('\t')) {
+          const table = createTableElement(paragraph);
+          descriptionContainer.appendChild(table);
+        } else {
           const p = document.createElement('p');
           p.textContent = paragraph;
           descriptionContainer.appendChild(p);
-        });
-      }
+        }
+      });
       
-      // Добавляем collapsible элементы, если они присутствуют
+      // Add collapsible content if present
       if (feature.collapsible) {
         const collapsibleContent = document.createElement('div');
         collapsibleContent.className = 'collapsible-content';
@@ -241,7 +253,6 @@ function parseTableData(text: string) {
       return featureElement;
     }
 
-    // Функция обновления списка особенностей в зависимости от выбранного подкласса
     function updateFeatures(subclassId) {
       if (!featuresContainer || !featureTemplate) return;
 
@@ -249,8 +260,8 @@ function parseTableData(text: string) {
       if (subclassId) {
         const subclass = classData.subclasses.find(s => s.id === subclassId);
         if (subclass) {
-          features = features.filter(f => f.level !== 3); // исключаем какие-то особенности
-          features = [...features, ...subclass.features]; // добавляем особенности подкласса
+          features = features.filter(f => f.level !== 3);
+          features = [...features, ...subclass.features];
         }
       }
 
@@ -266,7 +277,6 @@ function parseTableData(text: string) {
       });
     }
 
-    // Слушатель для обновления контента при изменении подкласса
     subclassSelect?.addEventListener('change', (e) => {
       const subclassId = e.target.value;
       const subclass = classData.subclasses.find(s => s.id === subclassId);
@@ -287,24 +297,6 @@ function parseTableData(text: string) {
 
       updateFeatures(subclassId);
     });
-
-    // Функция для обновления раскрывающихся элементов
-    function updateCollapsibles() {
-      const collapsibleItems = document.querySelectorAll('.collapsible-item');
-      collapsibleItems.forEach(item => {
-        const details = item.querySelector('details');
-        if (details) {
-          if (details.hasAttribute('open')) {
-            details.removeAttribute('open'); // Принудительно скрываем
-            details.offsetHeight; // Принудительное обновление
-            details.setAttribute('open', ''); // Включаем раскрытие снова
-          }
-        }
-      });
-    }
-
-    // Обновляем состояние раскрывающихся элементов после загрузки страницы
-    updateCollapsibles();
   });
 </script>
 
@@ -544,5 +536,28 @@ function parseTableData(text: string) {
 
   .spell-table tr:not(:first-child):hover {
     background: var(--background);
+  }
+
+  .domain-spells {
+    background: var(--background);
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  .domain-spells summary {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    user-select: none;
+  }
+
+  .domain-spells summary:hover {
+    background: var(--nav-hover-bg);
+  }
+
+  .spells-content {
+    padding: 1rem;
+    border-top: 1px solid var(--card-border);
+    background: var(--card-bg);
   }
 </style>
