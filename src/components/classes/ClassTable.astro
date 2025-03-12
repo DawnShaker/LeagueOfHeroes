@@ -42,7 +42,6 @@ const hasSpellcasting = levels[0].spellSlots !== undefined;
 const hasBardicInspiration= levels[0].bardicInspiration !== undefined;
 const hasChanelDivinity= levels[0].chanelDivinity !== undefined;
 const hasWildShape= levels[0].wildShape !== undefined;
-const hasCantrips = levels[0].cantrips !== undefined;
 const hasRage = levels[0].rage !== undefined;
 const hasRageDamage = levels[0].rageDamage !== undefined;
 const hasSecondWind = levels[0].secondWind !== undefined;
@@ -54,6 +53,8 @@ const hasUnarmedMovement = levels[0].unarmedMovement !== undefined;
 const hasFavoredEnemy = levels[0].favoredEnemy !== undefined;
 const hasSorceryPoints = levels[0].sorceryPoints !== undefined;
 const hasInvocations = levels[0].invocations !== undefined;
+const hasPreparedSpells = levels[0].preparedSpells !== undefined;
+const hasCantrips = levels[0].cantrips !== undefined;
 const hasBloodMagicDie = levels[0].bloodMagicDie !== undefined;
 const hasKnownMaledicts = levels[0].knownMaledicts !== undefined;
 const hasNumOfSpellSlots = levels[0].numOfSpellSlots !== undefined;
@@ -84,6 +85,8 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
         {hasFavoredEnemy && <th class="favored-enemy">Избранный враг</th>}
         {hasSorceryPoints && <th class="sorcery-points">Очки чародейства</th>}
         {hasInvocations && <th class="invocations">Воззвания</th>}
+        {hasCantrips && <th class="cantrips">Заговоры</th>}
+        {hasPreparedSpells && <th class="prepared">Подг. закл.</th>}
         {hasBloodMagicDie && <th class="blood-magic-die">Кость магии крови</th>}
         {hasKnownMaledicts && <th class="known-maledicts">Известные проклятья крови</th>}
         {hasNumOfSpellSlots && <th class="num-of-spell-slots">Кол-во ячеек</th>}
@@ -150,6 +153,8 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
           {hasFavoredEnemy && <td class="favored-enemy">{level.favoredEnemy}</td>}
           {hasSorceryPoints && <td class="sorcery-points">{level.sorceryPoints}</td>}
           {hasInvocations && <td class="invocations">{level.invocations}</td>}
+          {hasCantrips && <td class="cantrips">{level.cantrips}</td>}
+          {hasPreparedSpells && <td class="prepared">{level.preparedSpells}</td>}
           {hasBloodMagicDie && <td class="blood-magic-die">{level.bloodMagicDie}</td>}
           {hasKnownMaledicts && <td class="known-maledicts">{level.knownMaledicts}</td>}
           {hasNumOfSpellSlots && <td class="num-of-spell-slots">{level.numOfSpellSlots}</td>}
