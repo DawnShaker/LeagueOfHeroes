@@ -7,7 +7,7 @@ const sortedItems = [...items].sort((a, b) =>
 );
 ---
 
-<Layout title="D&D 5E Guide - Предметы">
+<Layout title="Предметы">
   <div class="content">
     <h1>Предметы</h1>
     
@@ -223,7 +223,7 @@ const sortedItems = [...items].sort((a, b) =>
 
   .items-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     gap: 2rem;
     margin-top: 2rem;
   }
@@ -247,18 +247,47 @@ const sortedItems = [...items].sort((a, b) =>
     border-radius: 0.5rem;
     box-shadow: var(--card-shadow);
     border: 1px solid var(--card-border);
-    overflow-x: auto;
   }
 
   table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
   }
 
   th, td {
     padding: 0.75rem;
     border: 1px solid var(--card-border);
     text-align: left;
+    height: 48px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  th:nth-child(1),
+  td:nth-child(1) {
+    width: 40%;
+  }
+
+  th:nth-child(2),
+  td:nth-child(2) {
+    width: 20%;
+  }
+
+  th:nth-child(3),
+  td:nth-child(3) {
+    width: 15%;
+  }
+
+  th:nth-child(4),
+  td:nth-child(4) {
+    width: 10%;
+  }
+
+  th:nth-child(5),
+  td:nth-child(5) {
+    width: 15%;
   }
 
   th {
@@ -298,6 +327,7 @@ const sortedItems = [...items].sort((a, b) =>
     opacity: 0.7;
     font-size: 0.8em;
     margin-left: 0.5rem;
+    white-space: nowrap;
   }
 
   .item-details {
