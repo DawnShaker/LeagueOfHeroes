@@ -59,13 +59,15 @@
 <script>
   const themeToggle = document.getElementById('theme-toggle');
   
-  // Initialize theme from localStorage or system preference
-  const initializeTheme = () => {
-    if (localStorage.getItem('theme') === 'dark' || 
-        (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    }
-  };
+  // Add script to head to prevent theme flash
+  const script = document.createElement('script');
+  script.innerHTML = `
+    (function() {
+      const theme = localStorage.getItem('theme') ?? 'dark';
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+    })();
+  `;
+  document.head.appendChild(script);
 
   // Toggle theme
   const toggleTheme = () => {
@@ -75,7 +77,4 @@
 
   // Add event listeners
   themeToggle?.addEventListener('click', toggleTheme);
-  
-  // Initialize theme on page load
-  initializeTheme();
 </script>
