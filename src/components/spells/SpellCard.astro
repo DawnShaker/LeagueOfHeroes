@@ -1,0 +1,65 @@
+---
+interface Props {
+  spell: {
+    id: string;
+    name: string;
+    nameEn: string;
+    level: string;
+    school: string;
+  };
+}
+
+const { spell } = Astro.props;
+---
+
+<div class="spell-card" data-spell-id={spell.id}>
+  <h3>{spell.name}</h3>
+  <span class="name-en">[{spell.nameEn}]</span>
+  <div class="spell-meta">
+    <span class="level">{spell.level === 'cantrip' ? 'Заговор' : `${spell.level} уровень`}</span>
+    <span class="school">{spell.school}</span>
+  </div>
+</div>
+
+<style>
+  .spell-card {
+    padding: 1rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .spell-card:hover {
+    background: var(--nav-hover-bg);
+  }
+
+  .spell-card.active {
+    background: var(--nav-hover-bg);
+    border-color: var(--primary);
+  }
+
+  h3 {
+    margin: 0;
+    color: var(--primary);
+  }
+
+  .name-en {
+    color: var(--text);
+    opacity: 0.7;
+    font-size: 0.8em;
+  }
+
+  .spell-meta {
+    margin-top: 0.5rem;
+    font-size: 0.9em;
+    color: var(--text);
+    opacity: 0.8;
+  }
+
+  .spell-meta span:not(:last-child)::after {
+    content: "•";
+    margin: 0 0.5rem;
+  }
+</style>

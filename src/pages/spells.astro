@@ -1,0 +1,365 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SpellCard from '../components/spells/SpellCard.astro';
+import SpellDetails from '../components/spells/SpellDetails.astro';
+import { spells } from '../data/spells';
+
+const spellLevels = ['cantrip', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+const spellSchools = [
+  'abjuration',
+  'alteration',
+  'conjuration',
+  'divination',
+  'enchantment',
+  'illusion',
+  'invocation',
+  'necromancy'
+];
+---
+
+<Layout title="D&D 5E Guide - Заклинания">
+  <div class="content">
+    <h1>Заклинания</h1>
+    <div id="spells-data" data-spells={JSON.stringify(spells)} style="display: none;"></div>
+
+    <div class="spells-container">
+      <div class="spells-list">
+        <div class="search-controls">
+          <input 
+            type="text" 
+            id="spell-search" 
+            placeholder="Поиск заклинаний..."
+            class="search-input"
+          />
+          <button id="filter-button" class="filter-button">
+            <span class="filter-icon">⚙</span>
+            Фильтры
+          </button>
+        </div>
+
+        <div id="filter-popup" class="filter-popup">
+          <div class="filter-content">
+            <div class="filter-header">
+              <h3>Фильтры</h3>
+              <button class="close-button">×</button>
+            </div>
+
+            <div class="filter-section">
+              <h4>Уровень</h4>
+              <div class="checkbox-group">
+                {spellLevels.map(level => (
+                  <label class="checkbox-label">
+                    <input 
+                      type="checkbox" 
+                      name="spell-level" 
+                      value={level}
+                    />
+                    {level === 'cantrip' ? 'Заговор' : `${level} уровень`}
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div class="filter-section">
+              <h4>Школа магии</h4>
+              <div class="checkbox-group">
+                {spellSchools.map(school => (
+                  <label class="checkbox-label">
+                    <input 
+                      type="checkbox" 
+                      name="spell-school" 
+                      value={school}
+                    />
+                    {school}
+                  </label>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spells-grid">
+          {spells.map(spell => (
+            <SpellCard spell={spell} />
+          ))}
+        </div>
+      </div>
+
+      <div id="spell-details" class="spell-details">
+        <div class="details-content">
+          <h2>Выберите заклинание для просмотра</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  function initializeSpells() {
+    const searchInput = document.getElementById('spell-search') as HTMLInputElement;
+    const filterButton = document.getElementById('filter-button');
+    const filterPopup = document.getElementById('filter-popup');
+    const closeButton = document.querySelector('.close-button');
+    const spellCards = document.querySelectorAll('.spell-card');
+    const levelCheckboxes = document.querySelectorAll('input[name="spell-level"]');
+    const schoolCheckboxes = document.querySelectorAll('input[name="spell-school"]');
+    const spellDetails = document.getElementById('spell-details');
+    const spells = JSON.parse(document.getElementById('spells-data')?.getAttribute('data-spells') || '[]');
+
+    function togglePopup() {
+      if (filterPopup) {
+        filterPopup.classList.toggle('show');
+      }
+    }
+
+    function closePopup(e: MouseEvent) {
+      if (filterPopup && e.target === filterPopup) {
+        filterPopup.classList.remove('show');
+      }
+    }
+
+    function filterSpells() {
+      const searchTerm = searchInput?.value.toLowerCase() || '';
+      const selectedLevels = Array.from(levelCheckboxes)
+        .filter((cb: Element) => (cb as HTMLInputElement).checked)
+        .map((cb: Element) => (cb as HTMLInputElement).value);
+      
+      const selectedSchools = Array.from(schoolCheckboxes)
+        .filter((cb: Element) => (cb as HTMLInputElement).checked)
+        .map((cb: Element) => (cb as HTMLInputElement).value);
+
+      spellCards.forEach(card => {
+        const spellId = (card as HTMLElement).dataset.spellId;
+        const spell = spells.find(s => s.id === spellId);
+        
+        if (!spell) return;
+
+        const matchesSearch = spell.name.toLowerCase().includes(searchTerm) || 
+                            spell.nameEn.toLowerCase().includes(searchTerm);
+        const matchesLevel = selectedLevels.length === 0 || selectedLevels.includes(spell.level);
+        const matchesSchool = selectedSchools.length === 0 || selectedSchools.includes(spell.school);
+
+        (card as HTMLElement).style.display = 
+          matchesSearch && matchesLevel && matchesSchool ? 'block' : 'none';
+      });
+    }
+
+    function showSpellDetails(spellId: string) {
+      if (!spellDetails) return;
+
+      const spell = spells.find(s => s.id === spellId);
+      if (!spell) return;
+
+      // Create spell details HTML
+      spellDetails.innerHTML = `
+        <div class="spell-details">
+          <div class="spell-header">
+            <h2>${spell.name} <span class="name-en">[${spell.nameEn}]</span></h2>
+            <div class="source">${spell.source.book}, стр. ${spell.source.page}</div>
+          </div>
+
+          <div class="spell-info">
+            <p class="level-school">
+              ${spell.level === 'cantrip' ? 'Заговор' : `${spell.level} уровень`}, ${spell.school}
+            </p>
+            
+            <div class="info-grid">
+              <div class="info-row">
+                <strong>Время накладывания:</strong>
+                <span>${spell.castingTime}</span>
+              </div>
+              <div class="info-row">
+                <strong>Дистанция:</strong>
+                <span>${spell.range}</span>
+              </div>
+              <div class="info-row">
+                <strong>Компоненты:</strong>
+                <span>${formatComponents(spell.components)}</span>
+              </div>
+              <div class="info-row">
+                <strong>Длительность:</strong>
+                <span>${spell.duration}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="spell-description">${spell.description}</div>
+
+          <div class="spell-sources">
+            ${formatSources(spell.sources)}
+          </div>
+        </div>
+      `;
+
+      // Add active class to selected card
+      spellCards.forEach(card => card.classList.remove('active'));
+      document.querySelector(`[data-spell-id="${spellId}"]`)?.classList.add('active');
+    }
+
+    function formatComponents(components) {
+      const parts = [];
+      if (components.verbal) parts.push('V');
+      if (components.somatic) parts.push('S');
+      if (components.material) parts.push(`M (${components.material})`);
+      return parts.join(', ');
+    }
+
+    function formatSources(sources) {
+      const grouped = sources.reduce((acc, source) => {
+        if (!acc[source.type]) acc[source.type] = [];
+        acc[source.type].push(source.name);
+        return acc;
+      }, {});
+
+      const sections = [];
+      if (grouped.class) sections.push(`<p>Классы: ${grouped.class.join(', ')}</p>`);
+      if (grouped.subclass) sections.push(`<p>Подклассы: ${grouped.subclass.join(', ')}</p>`);
+      if (grouped.species) sections.push(`<p>Виды: ${grouped.species.join(', ')}</p>`);
+      if (grouped.background) sections.push(`<p>Предыстории: ${grouped.background.join(', ')}</p>`);
+      if (grouped.feat) sections.push(`<p>Черты: ${grouped.feat.join(', ')}</p>`);
+      if (grouped.other) sections.push(`<p>Другие источники: ${grouped.other.join(', ')}</p>`);
+
+      return sections.join('');
+    }
+
+    filterButton?.addEventListener('click', togglePopup);
+    closeButton?.addEventListener('click', togglePopup);
+    filterPopup?.addEventListener('click', closePopup);
+    searchInput?.addEventListener('input', filterSpells);
+    levelCheckboxes?.forEach(cb => cb.addEventListener('change', filterSpells));
+    schoolCheckboxes?.forEach(cb => cb.addEventListener('change', filterSpells));
+
+    spellCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const spellId = (card as HTMLElement).dataset.spellId;
+        if (spellId) showSpellDetails(spellId);
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initializeSpells);
+</script>
+
+<style>
+  .content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .spells-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .search-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .search-input {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid var(--card-border);
+    border-radius: 0.5rem;
+    background: var(--card-bg);
+    color: var(--text);
+  }
+
+  .filter-button {
+    padding: 0.75rem 1rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 0.5rem;
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .filter-icon {
+    font-size: 1.2rem;
+  }
+
+  .filter-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+
+  .filter-popup.show {
+    display: block;
+  }
+
+  .filter-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    min-width: 300px;
+    max-width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text);
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .filter-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .filter-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+  }
+
+  .spells-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .spell-details {
+    position: sticky;
+    top: 5rem;
+    max-height: calc(100vh - 7rem);
+    overflow-y: auto;
+  }
+</style>
