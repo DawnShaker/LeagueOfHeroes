@@ -13,22 +13,23 @@ const { spell } = Astro.props;
 ---
 
 <div class="spell-card" data-spell-id={spell.id}>
-  <h3>{spell.name}</h3>
-  <span class="name-en">[{spell.nameEn}]</span>
-  <div class="spell-meta">
-    <span class="level">{spell.level === 'cantrip' ? 'Заговор' : `${spell.level} уровень`}</span>
-    <span class="school">{spell.school}</span>
-  </div>
+  <h3>{spell.name} <span class="name-en">[{spell.nameEn}]</span></h3>
+  <span class="spell-meta">
+    {spell.level === 'cantrip' ? 'Заговор' : `${spell.level} уровень`} • {spell.school}
+  </span>
 </div>
 
 <style>
   .spell-card {
-    padding: 1rem;
+    padding: 0.5rem 0.75rem;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 0.5rem;
     cursor: pointer;
     transition: background-color 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .spell-card:hover {
@@ -43,6 +44,7 @@ const { spell } = Astro.props;
   h3 {
     margin: 0;
     color: var(--primary);
+    font-size: 1rem;
   }
 
   .name-en {
@@ -52,14 +54,11 @@ const { spell } = Astro.props;
   }
 
   .spell-meta {
-    margin-top: 0.5rem;
     font-size: 0.9em;
     color: var(--text);
     opacity: 0.8;
+    white-space: nowrap;
+    margin-left: 1rem;
   }
 
-  .spell-meta span:not(:last-child)::after {
-    content: "•";
-    margin: 0 0.5rem;
-  }
 </style>

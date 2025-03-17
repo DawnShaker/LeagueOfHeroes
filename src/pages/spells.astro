@@ -6,18 +6,18 @@ import { spells } from '../data/spells';
 
 const spellLevels = ['cantrip', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 const spellSchools = [
-  'abjuration',
-  'alteration',
-  'conjuration',
-  'divination',
-  'enchantment',
-  'illusion',
-  'invocation',
-  'necromancy'
+  'Ограждение',
+  'Вызов',
+  'Прорицание',
+  'Очарование',
+  'Воплощение',
+  'Иллюзия',
+  'Некромантия',
+  'Преобразование'
 ];
 ---
 
-<Layout title="D&D 5E Guide - Заклинания">
+<Layout title="Заклинания">
   <div class="content">
     <h1>Заклинания</h1>
     <div id="spells-data" data-spells={JSON.stringify(spells)} style="display: none;"></div>
@@ -183,7 +183,9 @@ const spellSchools = [
             </div>
           </div>
 
-          <div class="spell-description">${spell.description}</div>
+          <div class="spell-description-container">
+            <div class="spell-description">${spell.description}</div>
+          </div>
 
           <div class="spell-sources">
             ${formatSources(spell.sources)}
@@ -198,9 +200,9 @@ const spellSchools = [
 
     function formatComponents(components) {
       const parts = [];
-      if (components.verbal) parts.push('V');
-      if (components.somatic) parts.push('S');
-      if (components.material) parts.push(`M (${components.material})`);
+      if (components.verbal) parts.push('В');
+      if (components.somatic) parts.push('С');
+      if (components.material) parts.push(`М (${components.material})`);
       return parts.join(', ');
     }
 
@@ -248,7 +250,7 @@ const spellSchools = [
 
   .spells-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 3fr;
     gap: 2rem;
     margin-top: 2rem;
   }
@@ -354,6 +356,7 @@ const spellSchools = [
   .spells-grid {
     display: grid;
     gap: 1rem;
+    max-width: 500px;
   }
 
   .spell-details {
@@ -361,5 +364,56 @@ const spellSchools = [
     top: 5rem;
     max-height: calc(100vh - 7rem);
     overflow-y: auto;
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--card-border);
+  }
+
+  .spell-description-container {
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    background: var(--background);
+    border-radius: 0.5rem;
+    border: 1px solid var(--card-border);
+  }
+
+  .spell-description {
+    line-height: 1.6;
+  }
+
+  .spell-description :global(p) {
+    margin-bottom: 1rem;
+  }
+
+  .spell-description :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .spell-description :global(ul),
+  .spell-description :global(ol) {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .spell-description :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .spell-description :global(table) {
+    width: 100%;
+    margin: 1rem 0;
+    border-collapse: collapse;
+  }
+
+  .spell-description :global(th),
+  .spell-description :global(td) {
+    padding: 0.5rem;
+    border: 1px solid var(--card-border);
+    text-align: left;
+  }
+
+  .spell-description :global(th) {
+    background: var(--card-bg);
   }
 </style>

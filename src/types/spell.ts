@@ -1,5 +1,5 @@
 export type SpellLevel = 'cantrip' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
-export type SpellSchool = 'ограждение' | 'вызов' | 'прорицание' | 'Очарование' | 'воплощение' | 'иллюзия' | 'некромантия' | 'рреобразование';
+export type SpellSchool = 'ограждение' | 'вызов' | 'прорицание' | 'очарование' | 'воплощение' | 'иллюзия' | 'некромантия' | 'преобразование';
 
 export interface SpellSource {
   type: 'class' | 'subclass' | 'species' | 'background' | 'feat' | 'other';
@@ -15,8 +15,8 @@ export interface Spell {
   castingTime: string;
   range: string;
   components: {
-    verbal: boolean;
-    somatic: boolean;
+    verbal?: boolean;
+    somatic?: boolean;
     material?: string;
   };
   duration: string;
