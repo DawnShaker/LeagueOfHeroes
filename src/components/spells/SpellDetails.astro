@@ -68,9 +68,12 @@ function formatSources(sources: Spell['sources']): string {
   <div class="spell-description" set:html={spell.description} />
 
   <div class="spell-sources">
-    {formatSources(spell.sources).split('\n').map(section => (
-      <p>{section}</p>
-    ))}
+    <h3>Источники</h3>
+    <div class="sources-content">
+      {formatSources(spell.sources).split('\n').map(section => (
+        <p>{section}</p>
+      ))}
+    </div>
   </div>
 </div>
 
@@ -119,11 +122,15 @@ function formatSources(sources: Spell['sources']): string {
     display: grid;
     grid-template-columns: 200px 1fr;
     gap: 1rem;
+    padding: 0.5rem;
   }
 
   .spell-description {
-    margin: 1.5rem 0;
+    margin: 2.5rem 0;
     line-height: 1.6;
+    padding: 1rem;
+    background: var(--background);
+    border-radius: 0.5rem;
   }
 
   .spell-description :global(p) {
@@ -158,12 +165,32 @@ function formatSources(sources: Spell['sources']): string {
   }
 
   .spell-sources {
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--card-border);
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    background: var(--background);
+    border-radius: 0.5rem;
+    border: 1px solid var(--card-border);
   }
 
-  .spell-sources p {
+  .spell-sources h3 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .sources-content {
+    padding: 0.5rem;
+  }
+
+  .sources-content p {
     margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    border-left: 3px solid var(--primary);
+  }
+
+  .sources-content p:last-child {
+    margin-bottom: 0;
   }
 </style>
