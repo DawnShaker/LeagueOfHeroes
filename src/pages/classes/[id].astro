@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ClassTable from '../../components/classes/ClassTable.astro';
-import SpellTable from '../../components/classes/SpellTable.astro';
 import { classes } from '../../data/classes';
 
 export function getStaticPaths() {
@@ -23,7 +22,7 @@ return { level, spells };
 }
 ---
 
-<Layout title={`${classData.name}`}>
+<Layout title={`D&D 5E Guide - ${classData.name}`}>
   <div class="content">
     <a href="/classes" class="back-link">← Назад к классам</a>
 
@@ -54,7 +53,7 @@ return { level, spells };
 
     <div class="class-basics">
       <div class="basic-info">
-        <h2>Особенности</h2>
+        <h2>Основные характеристики</h2>
         <dl>
           <dt>Основная характеристика</dt>
           <dd>{classData.primaryAbility}</dd>
@@ -121,22 +120,9 @@ return { level, spells };
           <span class="feature-level">{feature.level} уровень</span>
         </div>
         <div class="feature-description">
-          {feature.name.includes('Заклинания Домена') ? (
-            <>
-              <details class="domain-spells">
-                <summary>Показать список заклинаний домена</summary>
-                <div class="spells-content">
-                  <SpellTable content={feature.description} />
-                </div>
-              </details>
-            </>
-          ) : (
-            feature.description.split('\n').map(paragraph => (
-              paragraph.includes('\t') 
-                ? <SpellTable content={paragraph} />
-                : <p>{paragraph}</p>
-            ))
-          )}
+          {feature.description.split('\n').map(paragraph => (
+            <p>{paragraph}</p>
+          ))}
           
           {feature.collapsible && (
             <div class="collapsible-content">
@@ -177,6 +163,7 @@ return { level, spells };
     const baseLore = document.getElementById('base-lore');
     const featuresContainer = document.getElementById('features-container');
     const featureTemplate = document.getElementById('feature-template');
+    let currentSubclass = null;
 
     function createTableElement(tableText) {
       const rows = tableText.split('\n').filter(row => row.trim());
@@ -201,27 +188,30 @@ return { level, spells };
       return table;
     }
 
-    function createFeatureElement(feature) {
+    function createFeatureElement(feature, isSubclassFeature = false) {
       const template = featureTemplate.content.cloneNode(true);
       const featureElement = template.querySelector('.feature');
+      
+      if (isSubclassFeature) {
+        featureElement.classList.add('subclass-feature');
+      }
       
       featureElement.querySelector('h3').textContent = feature.name;
       featureElement.querySelector('.feature-level').textContent = `${feature.level} уровень`;
       
       const descriptionContainer = featureElement.querySelector('.feature-description');
       
-      feature.description.split('\n').forEach(paragraph => {
-        if (paragraph.includes('\t')) {
-          const table = createTableElement(paragraph);
-          descriptionContainer.appendChild(table);
-        } else {
+      if (feature.name.toLowerCase().includes('таблица') && !feature.collapsible) {
+        const table = createTableElement(feature.description);
+        descriptionContainer.appendChild(table);
+      } else {
+        feature.description.split('\n').forEach(paragraph => {
           const p = document.createElement('p');
           p.textContent = paragraph;
           descriptionContainer.appendChild(p);
-        }
-      });
+        });
+      }
       
-      // Add collapsible content if present
       if (feature.collapsible) {
         const collapsibleContent = document.createElement('div');
         collapsibleContent.className = 'collapsible-content';
@@ -272,7 +262,10 @@ return { level, spells };
       featuresContainer.appendChild(title);
 
       features.forEach(feature => {
-        const featureElement = createFeatureElement(feature);
+        const isSubclassFeature = subclassId && classData.subclasses
+          .find(s => s.id === subclassId)?.features
+          .some(f => f.name === feature.name);
+        const featureElement = createFeatureElement(feature, isSubclassFeature);
         featuresContainer.appendChild(featureElement);
       });
     }
@@ -538,26 +531,25 @@ return { level, spells };
     background: var(--background);
   }
 
-  .domain-spells {
-    background: var(--background);
-    border-radius: 0.5rem;
-    overflow: hidden;
+  .subclass-feature {
+    background: var(--subclass-feature-bg);
+    border-color: var(--subclass-feature-border);
   }
 
-  .domain-spells summary {
-    padding: 0.75rem 1rem;
-    cursor: pointer;
-    font-weight: 500;
-    user-select: none;
+  .subclass-feature .feature-header h3 {
+    color: var(--subclass-feature-title);
   }
 
-  .domain-spells summary:hover {
-    background: var(--nav-hover-bg);
+  .subclass-feature .feature-level {
+    background: var(--subclass-feature-border);
+    color: white;
   }
 
-  .spells-content {
-    padding: 1rem;
-    border-top: 1px solid var(--card-border);
-    background: var(--card-bg);
+  .subclass-feature .collapsible-item {
+    background: var(--subclass-feature-border);
+  }
+
+  .subclass-feature .collapsible-description {
+    background: var(--subclass-feature-bg);
   }
 </style>

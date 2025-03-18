@@ -40,6 +40,8 @@ interface Props {
 const { levels } = Astro.props;
 const hasSpellcasting = levels[0].spellSlots !== undefined;
 const hasBardicInspiration= levels[0].bardicInspiration !== undefined;
+const hasPreparedSpells = levels[0].preparedSpells !== undefined;
+const hasCantrips = levels[0].cantrips !== undefined;
 const hasChanelDivinity= levels[0].chanelDivinity !== undefined;
 const hasWildShape= levels[0].wildShape !== undefined;
 const hasRage = levels[0].rage !== undefined;
@@ -53,8 +55,6 @@ const hasUnarmedMovement = levels[0].unarmedMovement !== undefined;
 const hasFavoredEnemy = levels[0].favoredEnemy !== undefined;
 const hasSorceryPoints = levels[0].sorceryPoints !== undefined;
 const hasInvocations = levels[0].invocations !== undefined;
-const hasPreparedSpells = levels[0].preparedSpells !== undefined;
-const hasCantrips = levels[0].cantrips !== undefined;
 const hasBloodMagicDie = levels[0].bloodMagicDie !== undefined;
 const hasKnownMaledicts = levels[0].knownMaledicts !== undefined;
 const hasNumOfSpellSlots = levels[0].numOfSpellSlots !== undefined;
@@ -74,6 +74,8 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
         {hasBardicInspiration && <th class="bardic-inspiration">Бардовское вдохновение</th>}
         {hasWildShape && <th class="wild-shape">Дикая форма</th>}
         {hasChanelDivinity && <th class="chanel-divinity">Божественный канал</th>}
+        {hasCantrips && <th class="cantrips">Заговоры</th>}
+        {hasPreparedSpells && <th class="prepared">Подг. закл.</th>}
         {hasRage && <th class="rage">Ярость</th>}
         {hasRageDamage && <th class="rage-damage">Урон ярости</th>}
         {hasSecondWind && <th class="second-wind">Второе дыхание</th>}
@@ -85,16 +87,12 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
         {hasFavoredEnemy && <th class="favored-enemy">Избранный враг</th>}
         {hasSorceryPoints && <th class="sorcery-points">Очки чародейства</th>}
         {hasInvocations && <th class="invocations">Воззвания</th>}
-        {hasCantrips && <th class="cantrips">Заговоры</th>}
-        {hasPreparedSpells && <th class="prepared">Подг. закл.</th>}
         {hasBloodMagicDie && <th class="blood-magic-die">Кость магии крови</th>}
         {hasKnownMaledicts && <th class="known-maledicts">Известные проклятья крови</th>}
         {hasNumOfSpellSlots && <th class="num-of-spell-slots">Кол-во ячеек</th>}
         {hasSpellSlotsLvl && <th class="spell-slots-lvl">Уровень ячеек</th>}
         {hasSpellcasting && (
           <>
-            {hasCantrips && <th class="cantrips">Заговоры</th>}
-            <th class="prepared">Подг. закл.</th>
             <th colspan={maxSpellLevel}>Ячейки заклинаний</th>
           </>
         )}
@@ -142,6 +140,8 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
           {hasBardicInspiration && <td class="bardic-inspiration">{level.bardicInspiration}</td>}
           {hasWildShape && <td class="wild-shape">{level.wildShape}</td>}
           {hasChanelDivinity && <td class="chanel-divinity">{level.chanelDivinity}</td>}
+          {hasCantrips && <td class="cantrips">{level.cantrips}</td>}
+          {hasPreparedSpells && <td class="prepared">{level.preparedSpells}</td>}
           {hasRage && <td class="rage">{level.rage}</td>}
           {hasRageDamage && <td class="rage-damage">{level.rageDamage}</td>}
           {hasSecondWind && <td class="second-wind">{level.secondWind}</td>}
@@ -153,16 +153,12 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
           {hasFavoredEnemy && <td class="favored-enemy">{level.favoredEnemy}</td>}
           {hasSorceryPoints && <td class="sorcery-points">{level.sorceryPoints}</td>}
           {hasInvocations && <td class="invocations">{level.invocations}</td>}
-          {hasCantrips && <td class="cantrips">{level.cantrips}</td>}
-          {hasPreparedSpells && <td class="prepared">{level.preparedSpells}</td>}
           {hasBloodMagicDie && <td class="blood-magic-die">{level.bloodMagicDie}</td>}
           {hasKnownMaledicts && <td class="known-maledicts">{level.knownMaledicts}</td>}
           {hasNumOfSpellSlots && <td class="num-of-spell-slots">{level.numOfSpellSlots}</td>}
           {hasSpellSlotsLvl && <td class="spell-slots-lvl">{level.spellSlotsLvl}</td>}
           {hasSpellcasting && (
             <>
-              {hasCantrips && <td class="cantrips">{level.cantrips}</td>}
-              <td class="prepared">{level.preparedSpells}</td>
               {Array.from({length: maxSpellLevel}, (_, i) => (
                 <td>{level.spellSlots?.[i + 1] || '—'}</td>
               ))}

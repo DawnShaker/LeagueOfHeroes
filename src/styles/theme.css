@@ -18,6 +18,11 @@
   --theme-toggle-border: #e2e8f0;
   --theme-toggle-color: #1e293b;
   --theme-toggle-hover-bg: #f8fafc;
+
+  /* Subclass feature colors */
+  --subclass-feature-bg: #f3e8ff;
+  --subclass-feature-border: #e2e8f0;
+  --subclass-feature-title: #6d28d9;
 }
 
 /* Dark theme variables */
@@ -40,4 +45,9 @@
   --theme-toggle-border: #334155;
   --theme-toggle-color: #e2e8f0;
   --theme-toggle-hover-bg: #334155;
+
+  /* Subclass feature colors */
+  --subclass-feature-bg: #2e1065;
+  --subclass-feature-border: #4c1d95;
+  --subclass-feature-title: #a78bfa;
 }
