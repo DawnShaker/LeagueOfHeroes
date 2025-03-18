@@ -22,7 +22,7 @@ return { level, spells };
 }
 ---
 
-<Layout title={`${classData.name}`}>
+<Layout title={`D&D 5E Guide - ${classData.name}`}>
   <div class="content">
     <a href="/classes" class="back-link">← Назад к классам</a>
 
@@ -250,7 +250,24 @@ return { level, spells };
       if (subclassId) {
         const subclass = classData.subclasses.find(s => s.id === subclassId);
         if (subclass) {
-          features = features.filter(f => f.level !== 3);
+          // Get all levels where subclass has features
+          const subclassLevels = new Set(subclass.features.map(f => f.level));
+          
+          // Filter out base class features that are replaced by subclass features
+          features = features.filter(f => {
+            // Keep feature if level doesn't have subclass features
+            if (!subclassLevels.has(f.level)) return true;
+            
+            // Remove the subclass selection feature
+            if (f.name.includes('Подкласс') || f.name.includes('Круг') || 
+                f.name.includes('Домен') || f.name.includes('Путь')) {
+              return false;
+            }
+            
+            return true;
+          });
+          
+          // Add subclass features
           features = [...features, ...subclass.features];
         }
       }
