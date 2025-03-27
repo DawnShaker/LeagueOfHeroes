@@ -201,17 +201,6 @@ return { level, spells };
       
       const descriptionContainer = featureElement.querySelector('.feature-description');
       
-      if (feature.name.toLowerCase().includes('таблица') && !feature.collapsible) {
-        const table = createTableElement(feature.description);
-        descriptionContainer.appendChild(table);
-      } else {
-        feature.description.split('\n').forEach(paragraph => {
-          const p = document.createElement('p');
-          p.textContent = paragraph;
-          descriptionContainer.appendChild(p);
-        });
-      }
-      
       if (feature.collapsible) {
         const collapsibleContent = document.createElement('div');
         collapsibleContent.className = 'collapsible-content';
@@ -238,6 +227,15 @@ return { level, spells };
         });
         
         descriptionContainer.appendChild(collapsibleContent);
+      } else if (feature.name.toLowerCase().includes('таблица')) {
+        const table = createTableElement(feature.description);
+        descriptionContainer.appendChild(table);
+      } else {
+        feature.description.split('\n').forEach(paragraph => {
+          const p = document.createElement('p');
+          p.textContent = paragraph;
+          descriptionContainer.appendChild(p);
+        });
       }
 
       return featureElement;
@@ -494,7 +492,7 @@ return { level, spells };
   .collapsible-item {
     background: var(--background);
     border-radius: 0.5rem;
-    margin-bottom: 0.5rem;
+    margin: 0.5rem 0;
     overflow: hidden;
   }
 
