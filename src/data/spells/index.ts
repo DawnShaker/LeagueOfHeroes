@@ -745,7 +745,6 @@ export const spells: Spell[] = [
     { type: 'subclass', name: 'Коллегия Знаний' },
     { type: 'subclass', name: 'Мистический рыцарь' },
     { type: 'subclass', name: 'Мастер Стихий' },
-    { type: 'species', name: 'Эльф' },
     { type: 'species', name: 'Эльф Высший' },
     { type: 'species', name: 'Лунный/Солнечный полуэльф' },
     { type: 'species', name: 'Кобольд' },
@@ -810,7 +809,6 @@ export const spells: Spell[] = [
     { type: 'subclass', name: 'Коллегия Знаний' },
     { type: 'subclass', name: 'Мистический рыцарь' },
     { type: 'subclass', name: 'Школа Воплощения' },
-    { type: 'species', name: 'Эльф' },
     { type: 'species', name: 'Эльф Высший' },
     { type: 'species', name: 'Лунный/Солнечный полуэльф' },
     { type: 'species', name: 'Кобольд' },
@@ -853,7 +851,6 @@ export const spells: Spell[] = [
     { type: 'subclass', name: 'Круг Земли' },
     { type: 'subclass', name: 'Коллегия Знаний' },
     { type: 'subclass', name: 'Мистический рыцарь' },
-    { type: 'species', name: 'Эльф' },
     { type: 'species', name: 'Эльф Высший' },
     { type: 'species', name: 'Лунный/Солнечный полуэльф' },
     { type: 'species', name: 'Кобольд' },
@@ -898,7 +895,6 @@ export const spells: Spell[] = [
     { type: 'subclass', name: 'Мистический рыцарь' },
     { type: 'subclass', name: 'Школа Воплощения' },
     { type: 'subclass', name: 'Домен Природы' },
-    { type: 'species', name: 'Эльф' },
     { type: 'species', name: 'Эльф Высший' },
     { type: 'species', name: 'Лунный/Солнечный полуэльф' },
     { type: 'species', name: 'Кобольд' },
@@ -940,7 +936,6 @@ export const spells: Spell[] = [
     { type: 'subclass', name: 'Коллегия Знаний' },
     { type: 'subclass', name: 'Мистический рыцарь' },
     { type: 'subclass', name: 'Школа Воплощения' },
-    { type: 'species', name: 'Эльф' },
     { type: 'species', name: 'Эльф Высший' },
     { type: 'species', name: 'Лунный/Солнечный полуэльф' },
     { type: 'species', name: 'Кобольд' },
@@ -1019,7 +1014,6 @@ export const spells: Spell[] = [
     { type: 'subclass', name: 'Мистический рыцарь ' },
     { type: 'subclass', name: 'Коллегия Знаний' },
     { type: 'subclass', name: 'Домен Природы' },
-    { type: 'species', name: 'Эльф' },
     { type: 'species', name: 'Эльф Высший' },
     { type: 'species', name: 'Лунный/Солнечный полуэльф' },
     { type: 'species', name: 'Знак Шторма полуэльф' },
@@ -1065,7 +1059,6 @@ export const spells: Spell[] = [
     { type: 'subclass', name: 'Мистический рыцарь ' },
     { type: 'subclass', name: 'Коллегия Знаний' },
     { type: 'subclass', name: 'Домен Природы' },
-    { type: 'species', name: 'Эльф' },
     { type: 'species', name: 'Эльф Высший' },
     { type: 'species', name: 'Лунный/Солнечный полуэльф' },
     { type: 'species', name: 'Кобольд' },
@@ -1113,7 +1106,6 @@ export const spells: Spell[] = [
     { type: 'species', name: 'Аасимар Защитник' },
     { type: 'species', name: 'Аасимар Каратель' },
     { type: 'species', name: 'Астральный Эльф' },
-    { type: 'species', name: 'Эльф' },
     { type: 'species', name: 'Эльф Бледный' },
     { type: 'species', name: 'Эльф Высший' },
     { type: 'species', name: 'Лунный/Солнечный полуэльф' },
@@ -1154,7 +1146,6 @@ export const spells: Spell[] = [
     { type: 'subclass', name: 'Мистический рыцарь' },
     { type: 'subclass', name: 'Коллегия Знаний' },
     { type: 'subclass', name: 'Воплотитель' },
-    { type: 'species', name: 'Эльф' },
     { type: 'species', name: 'Эльф Высший' },
     { type: 'species', name: 'Лунный/Солнечный полуэльф' },
     { type: 'species', name: 'Кобольд' },
@@ -1228,7 +1219,6 @@ export const spells: Spell[] = [
     { type: 'subclass', name: 'Божественной Души' },
     { type: 'subclass', name: 'Мистический рыцарь' },
     { type: 'subclass', name: 'Домен Природы' },
-    { type: 'species', name: 'Эльф' },
     { type: 'species', name: 'Эльф Высший' },
     { type: 'species', name: 'Лунный/Солнечный полуэльф' },
     { type: 'species', name: 'Кобольд' },
@@ -1274,7 +1264,6 @@ export const spells: Spell[] = [
     { type: 'subclass', name: 'Божественной Души' },
     { type: 'subclass', name: 'Мистический рыцарь' },
     { type: 'subclass', name: 'Домен Природы' },
-    { type: 'species', name: 'Эльф' },
     { type: 'species', name: 'Эльф Высший' },
     { type: 'species', name: 'Лунный/Солнечный полуэльф' },
     { type: 'species', name: 'Кобольд' },
@@ -1317,7 +1306,6 @@ export const spells: Spell[] = [
     { type: 'subclass', name: 'Коллегия Знаний' },
     { type: 'subclass', name: 'Божественной Души' },
     { type: 'subclass', name: 'Мистический рыцарь' },
-    { type: 'species', name: 'Эльф' },
     { type: 'species', name: 'Эльф Высший' },
     { type: 'species', name: 'Лунный/Солнечный полуэльф' },
     { type: 'species', name: 'Кобольд' },
@@ -1359,7 +1347,6 @@ export const spells: Spell[] = [
     { type: 'subclass', name: 'Мистический рыцарь' },
     { type: 'subclass', name: 'Иллюзионист' },
     { type: 'subclass', name: 'Мастер Тени' },
-    { type: 'species', name: 'Эльф' },
     { type: 'species', name: 'Эльф Высший' },
     { type: 'species', name: 'Эльф Метка Тени' },
     { type: 'species', name: 'Гном Лесной' },
@@ -1403,7 +1390,6 @@ export const spells: Spell[] = [
     { type: 'subclass', name: 'Мистический ловкач' },
     { type: 'subclass', name: 'Коллегия Знаний' },
     { type: 'subclass', name: 'Мистический рыцарь' },
-    { type: 'species', name: 'Эльф' },
     { type: 'species', name: 'Эльф Высший' },
     { type: 'species', name: 'Лунный/Солнечный полуэльф' },
     { type: 'species', name: 'Кобольд' },
@@ -1446,7 +1432,6 @@ export const spells: Spell[] = [
     { type: 'subclass', name: 'Мистический ловкач' },
     { type: 'subclass', name: 'Коллегия Знаний' },
     { type: 'subclass', name: 'Мистический рыцарь' },
-    { type: 'species', name: 'Эльф' },
     { type: 'species', name: 'Эльф Высший' },
     { type: 'species', name: 'Лунный/Солнечный полуэльф' },
     { type: 'species', name: 'Кобольд' },
@@ -1495,7 +1480,6 @@ export const spells: Spell[] = [
     { type: 'subclass', name: 'Мистический ловкач' },
     { type: 'subclass', name: 'Коллегия Знаний' },
     { type: 'subclass', name: 'Мистический рыцарь' },
-    { type: 'species', name: 'Эльф' },
     { type: 'species', name: 'Эльф Высший' },
     { type: 'species', name: 'Лунный/Солнечный полуэльф' },
     { type: 'species', name: 'Кобольд' },
@@ -1674,7 +1658,6 @@ export const spells: Spell[] = [
     { type: 'subclass', name: 'Коллегия Знаний' },
     { type: 'subclass', name: 'Круг Земли' },
     { type: 'subclass', name: 'Мистический рыцарь' },
-    { type: 'species', name: 'Эльф' },
     { type: 'species', name: 'Эльф Высший' },
     { type: 'species', name: 'Лунный/Солнечный полуэльф' },
     { type: 'species', name: 'Кобольд' },
@@ -1717,5 +1700,143 @@ export const spells: Spell[] = [
     { type: 'feat', name: 'Магия лесных эльфов' },
     { type: 'other', name: 'Договор гримуара' }
   ]
-}
+},
+{
+  id: 'shocking-grasp',
+  name: 'Электрошок',
+  nameEn: 'Shocking Grasp',
+  level: 'cantrip',
+  school: 'воплощение',
+  castingTime: '1 Действие',
+  range: 'Касание',
+  components: {
+  somatic: true,
+  verbal: true
+  },
+  duration: 'Мгновенная',
+  description: `<p>Из вас вырывается молния к существу, которого вы пытаетесь коснуться. Совершите рукопашную атаку заклинанием против цели. При попадании цель получает 1к8 урона электричеством и не может совершать провоцированные атаки до начала своего следующего хода.</p>
+<p>Улучшение заговора. Урон увеличивается на 1к8, когда вы достигаете 5 уровня (2к8), 11 уровня (3к8) и 17 уровня (4к8).</p>`,
+  source: {
+    book: 'PHB\'24',
+    page: 316
+  },
+  sources: [
+    { type: 'class', name: 'Волшебник' },
+    { type: 'class', name: 'Чародей' },
+    { type: 'subclass', name: 'Домен Магии' },
+    { type: 'subclass', name: 'Мистический ловкач' },
+    { type: 'subclass', name: 'Коллегия Знаний' },
+    { type: 'subclass', name: 'Круг Земли (Умеренная земля)' },
+    { type: 'subclass', name: 'Мистический рыцарь' },
+    { type: 'subclass', name: 'Воплотитель' },
+    { type: 'species', name: 'Эльф Высший' },
+    { type: 'species', name: 'Дженази возжуха' },
+    { type: 'species', name: 'Лунный/Солнечный полуэльф' },
+    { type: 'species', name: 'Кобольд' },
+    { type: 'species', name: 'Дженази воды' },
+    { type: 'background', name: 'Инженер Иззетов' },
+    { type: 'feat', name: 'Искажённая метка дракона' },
+    { type: 'feat', name: 'Посвящённый в магию' },
+    { type: 'feat', name: 'Посвящённый в Высшее волшебство' },
+    { type: 'other', name: 'Договор гримуара' }
+  ]
+},
+{
+  id: 'spare-the-dying',
+  name: 'Уход за умирающим',
+  nameEn: 'Spare the Dying',
+  level: 'cantrip',
+  school: 'некромантия',
+  castingTime: '1 Действие',
+  range: '15 футов',
+  components: {
+  somatic: true,
+  verbal: true
+  },
+  duration: 'Мгновенная',
+  description: `<p>Выберите существо в пределах досягаемости, у которого 0 хитов и которое не мертво. Существо стабилизи руется.</p>
+<p>Улучшение заговора. Дистанция увеличивается вдвое, когда вы достигаете 5 (30 футов), 11 (60 футов) и 17 (120 футов) уровней.</p>`,
+  source: {
+    book: 'PHB\'24',
+    page: 316
+  },
+  sources: [
+    { type: 'class', name: 'Жрец' },
+    { type: 'class', name: 'Друид' },
+    { type: 'subclass', name: 'Домен Смерти' },
+    { type: 'subclass', name: 'Домен Природы' },
+    { type: 'subclass', name: 'Божественная душа' },
+    { type: 'subclass', name: 'Коллегия Знаний' },
+    { type: 'subclass', name: 'Покровитель Бессмертный' },
+    { type: 'subclass', name: 'Круг Земли' },
+    { type: 'background', name: 'Агент Голгари' },
+    { type: 'feat', name: 'Благословлённый воин' },
+    { type: 'feat', name: 'Посвящённый в магию' },
+    { type: 'feat', name: 'Любимец богов' },
+    { type: 'feat', name: 'Воин-друид' },
+    { type: 'feat', name: 'Поступивший в Стриксхейвен' },
+    { type: 'feat', name: 'Магия лесных эльфов' },
+    { type: 'other', name: 'Договор гримуара' }
+  ]
+},
+{
+  id: 'sorcerous-burst',
+  name: 'Чародейская вспышка',
+  nameEn: 'Sorcerous Burst',
+  level: 'cantrip',
+  school: 'воплощение',
+  castingTime: '1 Действие',
+  range: '120 футов',
+  components: {
+  somatic: true,
+  verbal: true
+  },
+  duration: 'Мгновенная',
+  description: `<p>Вы выпускаете чародейскую энергию в 1 существо или объект в пределах дистанции. Совершите дальнобойную атаку против цели. При попадании цель получает 1к8 урона выбранного вами типа: кислотный, холодный, огненный, электрический, ядовитый, психической энергией или звуковой.</p>
+  <p>Если вы выбросите 8 на к8 для этого заклинания, то вы можете бросить ещё один к8 и добавить его к урону. Когда вы накладываете это заклинание, то максимальное количество этих к8, которые вы можете добавить к урону заклинания, равно вашему модификатору заклинательной характеристики.</p>
+  <p>Улучшение заговора. Урон увеличивается на 1к8, когда вы достигаете 5 уровня (2к8), 11 уровня (3к8) и 17 уровня (4к8).</p>`,
+  source: {
+    book: 'PHB\'24',
+    page: 318
+  },
+  sources: [
+    { type: 'class', name: 'Чародей' },
+    { type: 'species', name: 'Кобольд' },
+    { type: 'feat', name: 'Искажённая метка дракона' },
+    { type: 'feat', name: 'Посвящённый в магию' },
+    { type: 'other', name: 'Договор гримуара' }
+  ]
+},
+{
+  id: 'absorb-elements',
+  name: 'Поглощение стихий',
+  nameEn: 'Absorb elements',
+  level: '1',
+  school: 'ограждение',
+  castingTime: '1 реакция, совершаемая вами, когда вы получаете урон звуком, кислотой, огнём, холодом или электричеством',
+  range: 'На себя',
+  components: {
+    somatic: true
+  },
+  duration: '1 раунд',
+  description: `<p>Заклинание поглощает часть энергии, направленной на вас, ослабляя эффект и запасая эту энергию для использования во время следующей рукопашной атаки. До начала своего следующего хода вы получаете сопротивление тому виду урона, который спровоцировал данное заклинание. Кроме того, когда вы впервые попадаете рукопашной атакой в своём следующем ходу, цель получает дополнительно 1к6 урона этого вида, после чего заклинание заканчивается.</p>
+<p>На больших уровнях. Если вы накладываете это заклинание, используя ячейку 2-го уровня или выше, то дополнительный урон увеличивается на 1к6 за каждый уровень ячейки выше 1-го.</p>`,
+  source: {
+    book: 'PHB\'24',
+    page: 239
+  },
+  sources: [
+    { type: 'class', name: 'Чародей' },
+    { type: 'class', name: 'Волшебник' },
+    { type: 'class', name: 'Друид' },
+    { type: 'class', name: 'Следопыт' },
+    { type: 'subclass', name: 'Оградитель' },
+    { type: 'subclass', name: 'Мистический ловкач' },
+    { type: 'subclass', name: 'Коллегия Знания' },
+    { type: 'subclass', name: 'Мистический Рыцарь' },
+    { type: 'feat', name: 'Искажённая метка дракона' },
+    { type: 'feat', name: 'Любимец богов' },
+    { type: 'feat', name: 'Посвящённый в магию' },
+  ]
+},
 ];
