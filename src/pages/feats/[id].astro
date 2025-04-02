@@ -11,15 +11,20 @@ export function getStaticPaths() {
 
 const { feat } = Astro.props;
 
-function formatTableContent(text: string): string {
-  if (!text.includes('\t')) return text;
+function formatTableContent(text) {
+  if (!text.includes('\t')) return `<p>${text}</p>`;
 
   const lines = text.split('\n');
-  const tableHtml = `
+  return `
     <div class="table-container">
       <table>
+        <thead>
+          <tr>
+            ${lines[0].split('\t').map(header => `<th>${header}</th>`).join('')}
+          </tr>
+        </thead>
         <tbody>
-          ${lines.map(line => {
+          ${lines.slice(1).map(line => {
             const cells = line.split('\t');
             return `
               <tr>
@@ -31,24 +36,20 @@ function formatTableContent(text: string): string {
       </table>
     </div>
   `;
-  return tableHtml;
 }
 
-function formatDescription(text: string): string {
+function formatDescription(text) {
   if (!text) return '';
-  return text.split('\n').map(line => {
-    if (line.includes('\t')) {
-      return formatTableContent(line);
-    }
-    return `<p>${line}</p>`;
-  }).join('');
+  return text.split('\n').map(line => line.includes('\t') ? formatTableContent(line) : `<p>${line}</p>`).join('');
 }
+
 const featTypes = {
   'origin': 'Черта происхождения',
   'general': 'Общая черта',
   'fighting-style': 'Черта боевого стиля',
   'epic': 'Эпическая черта'
 };
+
 ---
 
 <Layout title={`${feat.name}`}>
@@ -159,6 +160,11 @@ const featTypes = {
   .table-container {
     margin: 1rem 0;
     overflow-x: auto;
+    background: var(--card-bg);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
   }
 
   .table-container table {
@@ -166,9 +172,11 @@ const featTypes = {
     border-collapse: collapse;
   }
 
+  .table-container th,
   .table-container td {
-    padding: 0.5rem;
+    padding: 0.75rem;
     border: 1px solid var(--card-border);
+    text-align: left;
   }
 
   .table-container tr:first-child {
@@ -176,7 +184,7 @@ const featTypes = {
     font-weight: 600;
   }
 
-  .effects p:last-child {
-    margin-bottom: 0;
+  .table-container tr:nth-child(even) {
+    background: var(--background);
   }
 </style>
