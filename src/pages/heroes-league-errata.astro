@@ -1,7 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ErrataCategory from '../components/rules/errata/ErrataCategory.astro';
 import WeaponRestrictions from '../components/rules/errata/WeaponRestrictions.astro';
 import RaceAttributes from '../components/rules/errata/RaceAttributes.astro';
+import RaceLineages from '../components/rules/errata/RaceLineages.astro';
 import IllegalGoods from '../components/rules/errata/IllegalGoods.astro';
 import IllegalGoodsPrices from '../components/rules/errata/IllegalGoodsPrices.astro';
 import Tattoos from '../components/rules/errata/Tattoos.astro';
@@ -19,9 +21,10 @@ import Injuries from '../components/rules/errata/Injuries.astro';
     <div class="errata-container">
       <WeaponRestrictions />
       <RaceAttributes />
-      <IllegalGoods />
+      <RaceLineages />
+      <!--<IllegalGoods />
       <IllegalGoodsPrices />
-      <Tattoos />
+      <Tattoos />-->
       <Containers />
       <OversizedWeapons />
       <Reincarnation />
@@ -37,11 +40,5 @@ import Injuries from '../components/rules/errata/Injuries.astro';
     margin: 0 auto;
   }
 
-  .errata-container {
-    background: var(--card-bg);
-    padding: 2rem;
-    border-radius: 0.5rem;
-    box-shadow: var(--card-shadow);
-    border: 1px solid var(--card-border);
-  }
+
 </style>
