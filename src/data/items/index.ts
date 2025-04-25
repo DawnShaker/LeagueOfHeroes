@@ -955,8 +955,8 @@ interface Item {
       name: 'Ручной топор',
       nameEn: 'Handaxe',
       type: 'Простое рукопашное оружие',
-      cost: '2 см',
-      weight: '10 фнт.',
+      cost: '5 зм',
+      weight: '2 фнт.',
       sourceBook: 'PHB\'24',
       description: '1к6 рубящий, лёгкое, метательное (дистанция 20/60), Подавление'
     },
