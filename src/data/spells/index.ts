@@ -706,7 +706,6 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: 'Колдун' },
-    { type: 'feat', name: 'Посвящённый в магию' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
