@@ -1481,9 +1481,9 @@ interface Item {
       description: 'Характеристика: Мудрость, Использование: Составление карты небольшой области (Сл. 15), Создание: Карта'
     },
     {
-      id: 'cartographers-tools',
+      id: 'leatherworkers-tools',
       name: 'Инструменты кожевника',
-      nameEn: 'Cartographer’s Tools',
+      nameEn: 'Leatherworker’s Tools',
       type: 'Инструменты',
       cost: '5 зм',
       weight: '5 фнт.',
