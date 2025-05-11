@@ -12,6 +12,10 @@ export const leonin: Species = {
   speed: 35,
   abilities: [
     {
+      title: 'Возраст',
+      description: 'Леонины взрослеют и стареют примерно с той же скоростью, что и люди.'
+    },
+    {
       title: 'Тёмное зрение',
       description: 'У вас есть тёмное зрение в пределах 60 футов.'
     },

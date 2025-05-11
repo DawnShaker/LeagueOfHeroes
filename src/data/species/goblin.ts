@@ -12,6 +12,10 @@ export const goblin: Species = {
   speed: 30,
   abilities: [
     {
+      title: 'Возраст',
+      description: 'Гоблины достигают зрелости к 8 годам, и живут до 60 лет.'
+    },
+    {
       title: 'Тёмное зрение',
       description: 'У вас есть тёмное зрение в пределах 60 футов.'
     },

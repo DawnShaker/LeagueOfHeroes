@@ -12,6 +12,10 @@ export const tabaxi: Species = {
   speed: 30,
   abilities: [
     {
+      title: 'Возраст',
+      description: 'Табакси имеют такую же продолжительность жизни, что и люди.'
+    },
+    {
       title: 'Тёмное зрение',
       description: 'У вас есть тёмное зрение в пределах 60 футов.'
     },

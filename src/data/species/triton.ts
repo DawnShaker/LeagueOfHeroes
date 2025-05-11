@@ -12,6 +12,10 @@ export const triton: Species = {
   speed: 30,
   abilities: [
     {
+      title: 'Возраст',
+      description: 'Тритоны достигают зрелости к 15 годам, и могут дожить до 200 лет.'
+    },
+    {
       title: 'Тёмное зрение',
       description: 'У вас есть тёмное зрение в пределах 60 футов.'
     },

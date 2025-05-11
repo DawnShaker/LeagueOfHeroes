@@ -12,6 +12,10 @@ export const plasmoid: Species = {
   speed: 30,
   abilities: [
     {
+      title: 'Возраст',
+      description: 'Обычная продолжительность жизни - около ста лет.'
+    },
+    {
       title: 'Тёмное зрение',
       description: 'У вас есть тёмное зрение в пределах 120 футов.'
     },
