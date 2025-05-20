@@ -9,6 +9,7 @@ import CraftingRules from '../../components/rules/downtime/CraftingRules.astro';
 import FightingPit from '../../components/rules/downtime/FightingPit.astro';
 import Gambling from '../../components/rules/downtime/Gambling.astro';
 import Training from '../../components/rules/downtime/Training.astro';
+import Resting from '../../components/rules/downtime/Resting.astro';
 import {
   craftingActivities,
   tradingActivities,
@@ -72,6 +73,12 @@ import {
       title="Обучение"
       description="Изучение новых навыков и способностей.">
       <Training />
+    </ActivityCategory>
+
+    <ActivityCategory
+      title="Прочее"
+      description="Активности не подпадающие под предыдущие категории.">
+      <Resting />
     </ActivityCategory>
 
     <!--<ActivityCategory
