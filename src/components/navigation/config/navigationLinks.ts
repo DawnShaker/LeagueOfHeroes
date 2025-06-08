@@ -26,7 +26,7 @@ export const toolsLinks = [
 export const guideLinks = [
   { href: '/discord', label: 'Наш Discord' },
   //{ href: '/character-guide', label: 'Создание персонажа' },
-  { href: '/ordinator', label: 'Для ординаторов' }
+  { href: '/ordinator', label: 'Проверка персонажа' }
 ];
 
 export const handbookLinks = [
