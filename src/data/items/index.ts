@@ -63,7 +63,7 @@ interface Item {
     {
       id: 'firearm-bullet',
       name: 'Пули, огнестрельное оружие (10)',
-      nameEn: 'Firearm Bullet (20)',
+      nameEn: 'Firearm Bullet (10)',
       type: 'Боеприпасы',
       cost: '3 зм',
       weight: '2 фнт.',
