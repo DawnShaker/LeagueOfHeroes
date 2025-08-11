@@ -1,61 +1,944 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import MagicItemCard from '../components/handbook/MagicItemCard.astro';
+import { magicItems } from '../data/magicItems';
+
+const sortedItems = [...magicItems].sort((a, b) => 
+  a.name.localeCompare(b.name, 'ru')
+);
+
+const rarities = ['Common', 'Uncommon', 'Rare', 'Very Rare', 'Legendary', 'Artifact'];
+const rarityLabels = {
+  'Common': 'Обычный',
+  'Uncommon': 'Необычный', 
+  'Rare': 'Редкий',
+  'Very Rare': 'Очень редкий',
+  'Legendary': 'Легендарный',
+  'Artifact': 'Артефакт'
+};
 ---
 
-<Layout title="Магические предметы">
+<Layout title="D&D 5E Guide - Магические предметы">
   <div class="content">
     <h1>Магические предметы</h1>
     
-    <div class="filters">
-      <select class="filter-select" id="rarityFilter">
-        <option value="all">Все редкости</option>
-        <option value="common">Обычный</option>
-        <option value="uncommon">Необычный</option>
-        <option value="rare">Редкий</option>
-        <option value="veryrare">Очень редкий</option>
-        <option value="legendary">Легендарный</option>
-      </select>
-    </div>
+    <div class="magic-items-container">
+      <div id="items-data" data-items={JSON.stringify(magicItems)} style="display: none;"></div>
+      
+      <div class="items-list">
+        <div class="search-container">
+          <input 
+            type="text" 
+            id="item-search" 
+            placeholder="Поиск магических предметов..."
+            class="search-input"
+          />
+        </div>
 
-    <div class="items-grid">
-      <MagicItemCard
-        name="Кольцо защиты"
-        rarity="Rare"
-        type="Кольцо"
-        description="Вы получаете +1 бонус к КД и спасброскам, пока носите это кольцо."
-      />
-      <MagicItemCard
-        name="Плащ защиты"
-        rarity="Uncommon"
-        type="Чудесный предмет"
-        description="Вы получаете +1 бонус к КД и спасброскам, пока носите этот плащ."
-      />
-      <!-- Add more items as needed -->
+        <div class="items-table">
+          <table>
+            <thead>
+              <tr>
+                <th class="sortable" data-sort="name">
+                  Название
+                  <span class="sort-icon">↕</span>
+                </th>
+                <th class="sortable" data-sort="type">
+                  Тип
+                  <span class="sort-icon">↕</span>
+                </th>
+                <th class="sortable" data-sort="weight">
+                  Вес
+                  <span class="sort-icon">↕</span>
+                </th>
+                <th class="sortable" data-sort="attunement">
+                  Настройка
+                  <span class="sort-icon">↕</span>
+                </th>
+                <th class="sortable" data-sort="rarity">
+                  Редкость
+                  <span class="sort-icon">↕</span>
+                </th>
+                <th class="sortable" data-sort="source">
+                  Источник
+                  <span class="sort-icon">↕</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {sortedItems.map(item => (
+                <tr class="item-row" data-item-id={item.id}>
+                  <td>
+                    <div class="name-container">
+                      <div class="name-main">{item.name}</div>
+                      <div class="name-en">{item.nameEn}</div>
+                    </div>
+                  </td>
+                  <td>{item.type.split(',')[0]}</td>
+                  <td>{item.weight}</td>
+                  <td>{item.attunement ? 'Да' : 'Нет'}</td>
+                  <td>
+                    <span class={`rarity ${item.rarity.toLowerCase().replace(' ', '-')}`}>
+                      {rarityLabels[item.rarity]}
+                    </span>
+                  </td>
+                  <td>{item.source.book}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="item-details" class="item-details">
+        <div class="details-content">
+          <h2>Выберите предмет для просмотра</h2>
+        </div>
+      </div>
     </div>
   </div>
 </Layout>
 
+<script>
+  function initializeMagicItems() {
+    const searchInput = document.getElementById('item-search') as HTMLInputElement;
+    const itemRows = document.querySelectorAll('.item-row');
+    const sortableHeaders = document.querySelectorAll('.sortable');
+    const itemDetails = document.getElementById('item-details');
+    const items = JSON.parse(document.getElementById('items-data')?.getAttribute('data-items') || '[]');
+    let currentSort = { column: 'name', direction: 'asc' };
+
+    function filterItems() {
+      const searchTerm = searchInput?.value.toLowerCase() || '';
+      
+      itemRows.forEach(row => {
+        const name = row.querySelector('td')?.textContent?.toLowerCase() || '';
+        const isVisible = name.includes(searchTerm);
+        (row as HTMLElement).style.display = isVisible ? '' : 'none';
+      });
+    }
+
+    function sortItems(column: string) {
+      const tbody = document.querySelector('tbody');
+      const rows = Array.from(document.querySelectorAll('.item-row'));
+      
+      if (!tbody) return;
+      
+      // Update sort direction
+      if (currentSort.column === column) {
+        currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+      } else {
+        currentSort = { column, direction: 'asc' };
+      }
+      
+      // Update sort icons
+      sortableHeaders.forEach(header => {
+        const icon = header.querySelector('.sort-icon');
+        if (!icon) return;
+        
+        if (header.getAttribute('data-sort') === column) {
+          icon.textContent = currentSort.direction === 'asc' ? '↓' : '↑';
+        } else {
+          icon.textContent = '↕';
+        }
+      });
+      
+      // Sort rows
+      rows.sort((a, b) => {
+        let aValue = '';
+        let bValue = '';
+        
+        switch(column) {
+          case 'name':
+            aValue = a.querySelector('td')?.textContent?.toLowerCase() || '';
+            bValue = b.querySelector('td')?.textContent?.toLowerCase() || '';
+            break;
+          case 'type':
+            aValue = a.querySelectorAll('td')[1]?.textContent?.toLowerCase() || '';
+            bValue = b.querySelectorAll('td')[1]?.textContent?.toLowerCase() || '';
+            break;
+          case 'weight':
+            aValue = a.querySelectorAll('td')[2]?.textContent || '';
+            bValue = b.querySelectorAll('td')[2]?.textContent || '';
+            break;
+          case 'attunement':
+            aValue = a.querySelectorAll('td')[3]?.textContent || '';
+            bValue = b.querySelectorAll('td')[3]?.textContent || '';
+            break;
+          case 'rarity':
+            aValue = a.querySelectorAll('td')[4]?.textContent || '';
+            bValue = b.querySelectorAll('td')[4]?.textContent || '';
+            break;
+          case 'source':
+            aValue = a.querySelectorAll('td')[5]?.textContent || '';
+            bValue = b.querySelectorAll('td')[5]?.textContent || '';
+            break;
+        }
+        
+        return currentSort.direction === 'asc' 
+          ? aValue.localeCompare(bValue, 'ru')
+          : bValue.localeCompare(aValue, 'ru');
+      });
+      
+      // Reorder DOM
+      rows.forEach(row => tbody.appendChild(row));
+    }
+
+    function showItemDetails(itemId: string) {
+      if (!itemDetails) return;
+
+      const item = items.find(i => i.id === itemId);
+      if (!item) return;
+
+      const attunementText = item.attunement 
+        ? ` (требует настройки${item.attunementRequirement ? ` ${item.attunementRequirement}` : ''})`
+        : '';
+      const craftingToolsText = formatCraftingTools(item.craftingTools || []);
+      
+      itemDetails.innerHTML = `
+        <div class="details-content">
+          <div class="item-header">
+            <h2>${item.name}</h2>
+            <div class="source">${item.source.book}, ${item.source.page}</div>
+          </div>
+          
+          <div class="item-meta">
+            <p>${item.type}, ${rarityLabels[item.rarity]}${attunementText}</p>
+            <p><strong>Вес:</strong> ${item.weight}</p>
+            ${item.baseAnalog ? `
+              <p><strong>Базовый аналог:</strong> ${item.baseAnalog}</p>
+            ` : ''}
+            ${craftingToolsText ? `
+              <p><strong>Инструмент для изготовления:</strong><br>${craftingToolsText}</p>
+            ` : ''}
+          </div>
+          
+          <hr class="divider">
+          
+          <div class="item-description">
+            ${item.description}
+          </div>
+        </div>
+      `;
+
+      // Add active class to selected row
+      itemRows.forEach(row => row.classList.remove('active'));
+      document.querySelector(`[data-item-id="${itemId}"]`)?.classList.add('active');
+      
+      // Update URL without page reload
+      const newUrl = `/magic-items/${itemId}`;
+      window.history.pushState({ itemId }, '', newUrl);
+    }
+
+    function formatCraftingTools(toolIndices: number[]): string {
+      const toolNames = [
+        '', // 0 - placeholder
+        'Инструменты алхимика',
+        'Инструменты гончара', 
+        'Инструменты каллиграфа',
+        'Инструменты каменщика',
+        'Инструменты картографа',
+        'Инструменты кожевника',
+        'Инструменты кузнеца',
+        'Инструменты пивовара',
+        'Инструменты плотника',
+        'Инструменты повара',
+        'Инструменты резчика по дереву',
+        'Инструменты ремонтника',
+        'Инструменты сапожника',
+        'Инструменты стеклодува',
+        'Инструменты ткача',
+        'Инструменты художника',
+        'Инструменты ювелира',
+        'Набор отравителя',
+        'Набор травника',
+        'Набор для маскировки'
+      ];
+
+      if (!toolIndices || toolIndices.length === 0) return '';
+
+      const tools = [];
+      const kits = [];
+
+      toolIndices.forEach(index => {
+        if (index >= 1 && index <= toolNames.length - 1) {
+          const toolName = toolNames[index];
+          if (toolName.startsWith('Набор')) {
+            kits.push(toolName.replace('Набор ', ''));
+          } else {
+            tools.push(toolName.replace('Инструменты ', ''));
+          }
+        }
+      });
+
+      const result = [];
+      
+      if (tools.length > 0) {
+        if (tools.length === 1) {
+          result.push(`Инструменты ${tools[0]}`);
+        } else {
+          result.push(`Инструменты: ${tools.join(', ')}`);
+        }
+      }
+      
+      if (kits.length > 0) {
+        if (kits.length === 1) {
+          result.push(`Набор ${kits[0]}`);
+        } else {
+          result.push(`Наборы: ${kits.join(', ')}`);
+        }
+      }
+
+      return result.join(';<br>');
+    }
+
+    // Tooltip functionality for base analog links
+    function initTooltips() {
+      let tooltip = null;
+      let regularItems = null;
+
+      // Load regular items data
+      async function loadRegularItems() {
+        if (!regularItems) {
+          try {
+            const response = await fetch('/api/items');
+            if (response.ok) {
+              regularItems = await response.json();
+            }
+          } catch (error) {
+            console.warn('Could not load regular items data');
+            regularItems = [];
+          }
+        }
+        return regularItems;
+      }
+
+      function createTooltip() {
+        const tooltipEl = document.createElement('div');
+        tooltipEl.className = 'item-tooltip';
+        tooltipEl.style.cssText = `
+          position: absolute;
+          background: var(--card-bg);
+          border: 1px solid var(--card-border);
+          border-radius: 0.5rem;
+          padding: 1rem;
+          box-shadow: var(--card-shadow);
+          z-index: 1000;
+          max-width: 300px;
+          max-height: 200px;
+          overflow-y: auto;
+          display: none;
+          pointer-events: none;
+          color: var(--text);
+        `;
+        document.body.appendChild(tooltipEl);
+        return tooltipEl;
+      }
+
+      async function showTooltip(e, itemId) {
+        const items = await loadRegularItems();
+        const item = items.find(i => i.id === itemId);
+        if (!item) return;
+
+        if (!tooltip) {
+          tooltip = createTooltip();
+        }
+
+        tooltip.innerHTML = `
+          <div class="tooltip-header">
+            <h4>${item.name}</h4>
+            <div class="tooltip-source">${item.sourceBook}</div>
+          </div>
+          <div class="tooltip-meta">
+            <p><strong>Тип:</strong> ${item.type}</p>
+            <p><strong>Цена:</strong> ${item.cost}</p>
+            <p><strong>Вес:</strong> ${item.weight}</p>
+          </div>
+          <div class="tooltip-description">
+            ${item.description}
+          </div>
+        `;
+
+        const rect = e.target.getBoundingClientRect();
+        tooltip.style.left = `${rect.right + 10}px`;
+        tooltip.style.top = `${rect.top}px`;
+        tooltip.style.display = 'block';
+
+        // Adjust position if tooltip goes off screen
+        const tooltipRect = tooltip.getBoundingClientRect();
+        if (tooltipRect.right > window.innerWidth) {
+          tooltip.style.left = `${rect.left - tooltipRect.width - 10}px`;
+        }
+        if (tooltipRect.bottom > window.innerHeight) {
+          tooltip.style.top = `${rect.bottom - tooltipRect.height}px`;
+        }
+      }
+
+      function hideTooltip() {
+        if (tooltip) {
+          tooltip.style.display = 'none';
+        }
+      }
+
+      function handleScroll(e) {
+        if (e.shiftKey && tooltip && tooltip.style.display === 'block') {
+          e.preventDefault();
+          tooltip.scrollTop += e.deltaY > 0 ? 20 : -20;
+        }
+      }
+
+      // Event delegation for dynamically created links
+      document.addEventListener('mouseover', (e) => {
+        const target = e.target;
+        if (target.matches('a[href^="/items/"]')) {
+          const itemId = target.getAttribute('href').split('/').pop();
+          if (itemId) {
+            showTooltip(e, itemId);
+          }
+        }
+      });
+
+      document.addEventListener('mouseout', (e) => {
+        const target = e.target;
+        if (target.matches('a[href^="/items/"]')) {
+          hideTooltip();
+        }
+      });
+
+      document.addEventListener('wheel', handleScroll, { passive: false });
+    }
+
+    // Tooltip functionality for base analog links
+    function initTooltips() {
+      let tooltip = null;
+      let isScrolling = false;
+
+      function createTooltip() {
+        const tooltipEl = document.createElement('div');
+        tooltipEl.className = 'item-tooltip';
+        tooltipEl.style.cssText = `
+          position: absolute;
+          background: var(--card-bg);
+          border: 1px solid var(--card-border);
+          border-radius: 0.5rem;
+          padding: 1rem;
+          box-shadow: var(--card-shadow);
+          z-index: 1000;
+          max-width: 300px;
+          max-height: 200px;
+          overflow-y: auto;
+          display: none;
+          pointer-events: none;
+        `;
+        document.body.appendChild(tooltipEl);
+        return tooltipEl;
+      }
+
+      function showTooltip(e, itemId) {
+        const item = items.find(i => i.id === itemId);
+        if (!item) return;
+
+        if (!tooltip) {
+          tooltip = createTooltip();
+        }
+
+        tooltip.innerHTML = `
+          <div class="tooltip-header">
+            <h4>${item.name}</h4>
+            <div class="tooltip-source">${item.source.book}, ${item.source.page}</div>
+          </div>
+          <div class="tooltip-meta">
+            <p>${item.type}, ${rarityLabels[item.rarity]}${item.attunement ? ` (требует настройки${item.attunementRequirement ? ` ${item.attunementRequirement}` : ''})` : ''}</p>
+            <p><strong>Вес:</strong> ${item.weight}</p>
+          </div>
+          <div class="tooltip-description">
+            ${item.description}
+          </div>
+        `;
+
+        const rect = e.target.getBoundingClientRect();
+        tooltip.style.left = `${rect.right + 10}px`;
+        tooltip.style.top = `${rect.top}px`;
+        tooltip.style.display = 'block';
+
+        // Adjust position if tooltip goes off screen
+        const tooltipRect = tooltip.getBoundingClientRect();
+        if (tooltipRect.right > window.innerWidth) {
+          tooltip.style.left = `${rect.left - tooltipRect.width - 10}px`;
+        }
+        if (tooltipRect.bottom > window.innerHeight) {
+          tooltip.style.top = `${rect.bottom - tooltipRect.height}px`;
+        }
+      }
+
+      function hideTooltip() {
+        if (tooltip) {
+          tooltip.style.display = 'none';
+        }
+      }
+
+      function handleScroll(e) {
+        if (e.shiftKey && tooltip && tooltip.style.display === 'block') {
+          e.preventDefault();
+          tooltip.scrollTop += e.deltaY > 0 ? 20 : -20;
+        }
+      }
+
+      // Event delegation for dynamically created links
+      document.addEventListener('mouseover', (e) => {
+        const target = e.target;
+        if (target.matches('a[href^="/items/"]')) {
+          const itemId = target.getAttribute('href').split('/').pop();
+          if (itemId) {
+            showTooltip(e, itemId);
+          }
+        }
+      });
+
+      document.addEventListener('mouseout', (e) => {
+        const target = e.target;
+        if (target.matches('a[href^="/items/"]')) {
+          hideTooltip();
+        }
+      });
+
+      document.addEventListener('wheel', handleScroll, { passive: false });
+    }
+
+    // Add sort event listeners
+    sortableHeaders.forEach(header => {
+      header.addEventListener('click', () => {
+        const column = header.getAttribute('data-sort');
+        if (column) sortItems(column);
+      });
+    });
+
+    searchInput?.addEventListener('input', filterItems);
+    
+    itemRows.forEach(row => {
+      row.addEventListener('click', () => {
+        const itemId = (row as HTMLElement).dataset.itemId;
+        if (itemId) showItemDetails(itemId);
+      });
+    });
+
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', (event) => {
+      if (event.state?.itemId) {
+        showItemDetails(event.state.itemId);
+      } else {
+        // Clear selection
+        itemRows.forEach(row => row.classList.remove('active'));
+        if (itemDetails) {
+          itemDetails.innerHTML = `
+            <div class="details-content">
+              <h2>Выберите предмет для просмотра</h2>
+            </div>
+          `;
+        }
+      }
+    });
+
+    // Check if URL contains item ID on page load
+    const pathParts = window.location.pathname.split('/');
+    if (pathParts[1] === 'magic-items' && pathParts[2]) {
+      showItemDetails(pathParts[2]);
+    }
+
+    // Initialize tooltips
+    initTooltips();
+  }
+
+  const rarityLabels = {
+    'Common': 'Обычный',
+    'Uncommon': 'Необычный', 
+    'Rare': 'Редкий',
+    'Very Rare': 'Очень редкий',
+    'Legendary': 'Легендарный',
+    'Artifact': 'Артефакт'
+  };
+
+  document.addEventListener('DOMContentLoaded', initializeMagicItems);
+</script>
+
 <style>
   .content {
-    max-width: 800px;
+    max-width: 1400px;
     margin: 0 auto;
   }
 
-  .filters {
-    margin: 2rem 0;
+  .magic-items-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
   }
 
-  .filter-select {
-    padding: 0.5rem;
-    border-radius: 0.25rem;
+  .search-container {
+    margin-bottom: 1rem;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 0.75rem;
     border: 1px solid var(--card-border);
+    border-radius: 0.5rem;
     background: var(--card-bg);
     color: var(--text);
   }
 
-  .items-grid {
-    display: grid;
-    gap: 1.5rem;
+  .items-table {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+    overflow-x: auto;
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+
+  th, td {
+    padding: 0.75rem;
+    border: 1px solid var(--card-border);
+    text-align: left;
+    height: 48px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  th:nth-child(1),
+  td:nth-child(1) {
+    width: 34%;
+  }
+
+  th:nth-child(2),
+  td:nth-child(2) {
+    width: 20%;
+  }
+
+  th:nth-child(3),
+  td:nth-child(3) {
+    width: 10%;
+  }
+
+  th:nth-child(4),
+  td:nth-child(4) {
+    width: 12%;
+  }
+
+  th:nth-child(5),
+  td:nth-child(5) {
+    width: 15%;
+  }
+
+  th:nth-child(6),
+  td:nth-child(6) {
+    width: 10%;
+  }
+
+  th {
+    background: var(--background);
+    font-weight: 600;
+  }
+
+  .sortable {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .sortable:hover {
+    background: var(--nav-hover-bg);
+  }
+
+  .sort-icon {
+    margin-left: 0.25rem;
+    opacity: 0.5;
+    font-size: 0.8em;
+  }
+
+  .item-row {
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .item-row:hover {
+    background: var(--nav-hover-bg);
+  }
+
+  .item-row.active {
+    background: var(--nav-hover-bg);
+    border-left: 3px solid var(--primary);
+  }
+
+  .name-en {
+    color: var(--text);
+    opacity: 0.7;
+    margin-left: 0.5rem;
+    font-size: 0.8em;
+    margin-top: 0.25rem;
+  }
+
+  .name-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .name-main {
+    font-weight: 500;
+  }
+
+  .rarity {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.8em;
+  }
+
+  .rarity.common { 
+    background: #6b7280; 
+    color: white; 
+  }
+  .rarity.uncommon { 
+    background: #10b981; 
+    color: white; 
+  }
+  .rarity.rare { 
+    background: #3b82f6; 
+    color: white; 
+  }
+  .rarity.very-rare { 
+    background: #8b5cf6; 
+    color: white; 
+  }
+  .rarity.legendary { 
+    background: #f59e0b; 
+    color: white; 
+  }
+  .rarity.artifact { 
+    background: #ef4444; 
+    color: white; 
+  }
+
+  .item-details {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+    position: sticky;
+    top: 5rem;
+    max-height: calc(100vh - 7rem);
+    overflow-y: auto;
+  }
+
+  .item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+
+  .item-header h2 {
+    margin: 0;
+    flex: 1;
+  }
+
+  .item-header .source {
+    color: var(--text);
+    opacity: 0.8;
+    font-size: 0.9em;
+    margin-left: 1rem;
+  }
+
+  .item-meta {
+    margin-bottom: 1rem;
+  }
+
+  .item-meta p {
+    margin-bottom: 0.5rem;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--card-border);
+    margin: 1.5rem 0;
+  }
+
+  .item-description {
+    line-height: 1.6;
+  }
+
+  .item-description :global(p) {
+    margin-bottom: 1rem;
+  }
+
+  .item-description :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .item-description :global(table) {
+    width: 100%;
+    margin: 1rem 0;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  .item-description :global(th),
+  .item-description :global(td) {
+    padding: 0.5rem;
+    border: 1px solid var(--card-border);
+    text-align: left;
+  }
+
+  .item-description :global(th) {
+    background: var(--background);
+    font-weight: 600;
+  }
+
+  .item-description :global(tr:nth-child(even)) {
+    background: var(--background);
+  }
+
+  .item-description :global(tr:first-child th:first-child) {
+    border-top-left-radius: 0.5rem;
+  }
+
+  .item-description :global(tr:first-child th:last-child) {
+    border-top-right-radius: 0.5rem;
+  }
+
+  /* Direct styles for dynamically generated tables */
+  #item-details table {
+    width: 100%;
+    margin: 1rem 0;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  #item-details th,
+  #item-details td {
+    padding: 0.5rem;
+    border: 1px solid var(--card-border);
+    text-align: left;
+  }
+
+  #item-details th {
+    background: var(--background);
+    font-weight: 600;
+  }
+
+  #item-details tr:nth-child(even) {
+    background: var(--background);
+  }
+
+  #item-details tr:first-child th:first-child {
+    border-top-left-radius: 0.5rem;
+  }
+
+  #item-details tr:first-child th:last-child {
+    border-top-right-radius: 0.5rem;
+  }
+
+  .base-analog {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--card-border);
+  }
+
+  .base-analog p {
+    margin: 0;
+    font-style: italic;
+    color: var(--text);
+    opacity: 0.8;
+  }
+
+  /* Tooltip styles */
+  :global(.item-tooltip) {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  :global(.item-tooltip .tooltip-header) {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  :global(.item-tooltip .tooltip-header h4) {
+    margin: 0;
+    color: var(--primary);
+    font-size: 1rem;
+    flex: 1;
+  }
+
+  :global(.item-tooltip .tooltip-source) {
+    font-size: 0.8rem;
+    color: var(--text);
+    opacity: 0.8;
+    margin-left: 0.5rem;
+  }
+
+  :global(.item-tooltip .tooltip-meta) {
+    margin-bottom: 0.75rem;
+  }
+
+  :global(.item-tooltip .tooltip-meta p) {
+    margin: 0.25rem 0;
+    font-size: 0.85rem;
+  }
+
+  :global(.item-tooltip .tooltip-description) {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  :global(.item-tooltip .tooltip-description p) {
+    margin-bottom: 0.5rem;
+  }
+
+  :global(.item-tooltip .tooltip-description p:last-child) {
+    margin-bottom: 0;
+  }
+
+  :global(.item-tooltip::-webkit-scrollbar) {
+    width: 6px;
+  }
+
+  :global(.item-tooltip::-webkit-scrollbar-track) {
+    background: var(--background);
+    border-radius: 3px;
+  }
+
+  :global(.item-tooltip::-webkit-scrollbar-thumb) {
+    background: var(--card-border);
+    border-radius: 3px;
+  }
+
+  :global(.item-tooltip::-webkit-scrollbar-thumb:hover) {
+    background: var(--primary);
+  }
+
+  @media (max-width: 768px) {
+    .magic-items-container {
+      grid-template-columns: 1fr;
+    }
+    
+    .item-details {
+      position: static;
+      max-height: none;
+    }
   }
 </style>

@@ -32,6 +32,7 @@ export const guideLinks = [
 export const handbookLinks = [
   { href: '/sigil', label: 'Сигил - город дверей' },
   { href: '/items', label: 'Предметы' },
+  { href: '/magic-items', label: 'Магические предметы' },
   { href: '/spells', label: 'Заклинания' },
   //{ href: '/magic-items', label: 'Магические предметы' },
   { href: '/faq', label: 'FAQ' },
