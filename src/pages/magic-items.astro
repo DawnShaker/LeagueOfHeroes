@@ -165,8 +165,14 @@ const rarityLabels = {
             bValue = b.querySelectorAll('td')[3]?.textContent || '';
             break;
           case 'rarity':
-            aValue = a.querySelectorAll('td')[4]?.textContent || '';
-            bValue = b.querySelectorAll('td')[4]?.textContent || '';
+            const rarityOrder = ['Обычный', 'Необычный', 'Редкий', 'Очень редкий', 'Легендарный', 'Артефакт'];
+            const aRarity = a.querySelectorAll('td')[4]?.textContent?.trim() || '';
+            const bRarity = b.querySelectorAll('td')[4]?.textContent?.trim() || '';
+            const aIndex = rarityOrder.indexOf(aRarity);
+            const bIndex = rarityOrder.indexOf(bRarity);
+            return currentSort.direction === 'asc' 
+              ? aIndex - bIndex
+              : bIndex - aIndex;
             break;
           case 'source':
             aValue = a.querySelectorAll('td')[5]?.textContent || '';
