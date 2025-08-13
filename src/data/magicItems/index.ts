@@ -1018,7 +1018,7 @@ export const magicItems: MagicItem[] = [
     craftingTools: [6]
   },
   {
-    id: 'brooch-of-shielding',
+    id: 'headband-of-intellect',
     name: 'Повязка интеллекта',
     nameEn: 'Headband of Intellect',
     type: 'Чудесный предмет',
@@ -1360,7 +1360,7 @@ export const magicItems: MagicItem[] = [
     id: 'sentinel-shield',
     name: 'Щит часового',
     nameEn: 'Sentinel Shield',
-    type: 'Чудесный предмет',
+    type: 'Доспех, щит',
     weight: '—',
     attunement: false,
     rarity: 'Uncommon',
