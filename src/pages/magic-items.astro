@@ -26,12 +26,15 @@ const rarityLabels = {
       
       <div class="items-list">
         <div class="search-container">
-          <input 
-            type="text" 
-            id="item-search" 
-            placeholder="Поиск магических предметов..."
-            class="search-input"
-          />
+          <div class="search-input-container">
+            <input 
+              type="text" 
+              id="item-search" 
+              placeholder="Поиск магических предметов..."
+              class="search-input"
+            />
+            <button id="clear-search" class="clear-search-button" style="display: none;">×</button>
+          </div>
           <button id="filter-button" class="filter-button">
             <span class="filter-icon">⚙</span>
             Фильтры
@@ -176,6 +179,7 @@ const rarityLabels = {
     const closeButton = document.querySelector('.close-button');
     const resetButton = document.getElementById('reset-filters');
     const filterCount = document.getElementById('filter-count');
+    const clearSearchButton = document.getElementById('clear-search');
     const itemRows = document.querySelectorAll('.item-row');
     const sortableHeaders = document.querySelectorAll('.sortable');
     const itemDetails = document.getElementById('item-details');
@@ -809,13 +813,44 @@ const rarityLabels = {
     align-items: center;
   }
 
-  .search-input {
+  .search-input-container {
+    position: relative;
     flex: 1;
+  }
+
+  .search-input {
+    width: 100%;
     padding: 0.75rem;
+    padding-right: 2.5rem;
     border: 1px solid var(--card-border);
     border-radius: 0.5rem;
     background: var(--card-bg);
     color: var(--text);
+  }
+
+  .clear-search-button {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    font-size: 1.2rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    opacity: 0.6;
+    transition: all 0.2s;
+  }
+
+  .clear-search-button:hover {
+    background: var(--nav-hover-bg);
+    opacity: 1;
   }
 
   .filter-button {
@@ -885,7 +920,7 @@ const rarityLabels = {
     background: var(--card-bg);
     padding: 2rem;
     border-radius: 0.5rem;
-    min-width: 400px;
+    min-width: 600px;
     max-width: 90%;
     max-height: 90vh;
     overflow-y: auto;
@@ -939,7 +974,7 @@ const rarityLabels = {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    max-height: 200px;
+    max-height: auto;
     overflow-y: auto;
     padding: 0.5rem;
     background: var(--background);
