@@ -32,6 +32,11 @@ const rarityLabels = {
             placeholder="Поиск магических предметов..."
             class="search-input"
           />
+          <button id="filter-button" class="filter-button">
+            <span class="filter-icon">⚙</span>
+            Фильтры
+            <span id="filter-count" class="filter-count">0</span>
+          </button>
         </div>
 
         <div class="items-table">
@@ -89,6 +94,71 @@ const rarityLabels = {
         </div>
       </div>
 
+      <div id="filter-popup" class="filter-popup">
+        <div class="filter-content">
+          <div class="filter-header">
+            <h3>Фильтры</h3>
+            <button class="close-button">×</button>
+          </div>
+          
+          <div class="filter-section">
+            <h4>Редкость</h4>
+            <div class="checkbox-group">
+              {rarities.map(rarity => (
+                <label class="checkbox-label">
+                  <input 
+                    type="checkbox" 
+                    name="rarity" 
+                    value={rarity} 
+                  />
+                  {rarityLabels[rarity]}
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div class="filter-section">
+            <h4>Тип предмета</h4>
+            <div class="checkbox-group" id="type-filters">
+              <!-- Types will be populated by JavaScript -->
+            </div>
+          </div>
+
+          <div class="filter-section">
+            <h4>Источник</h4>
+            <div class="checkbox-group" id="source-filters">
+              <!-- Sources will be populated by JavaScript -->
+            </div>
+          </div>
+
+          <div class="filter-section">
+            <h4>Настройка</h4>
+            <div class="checkbox-group">
+              <label class="checkbox-label">
+                <input 
+                  type="checkbox" 
+                  name="attunement" 
+                  value="true" 
+                />
+                Требует настройки
+              </label>
+              <label class="checkbox-label">
+                <input 
+                  type="checkbox" 
+                  name="attunement" 
+                  value="false" 
+                />
+                Не требует настройки
+              </label>
+            </div>
+          </div>
+
+          <div class="filter-actions">
+            <button id="reset-filters" class="reset-button">Сбросить фильтры</button>
+          </div>
+        </div>
+      </div>
+
       <div id="item-details" class="item-details">
         <div class="details-content">
           <h2>Выберите предмет для просмотра</h2>
@@ -101,21 +171,151 @@ const rarityLabels = {
 <script>
   function initializeMagicItems() {
     const searchInput = document.getElementById('item-search') as HTMLInputElement;
+    const filterButton = document.getElementById('filter-button');
+    const filterPopup = document.getElementById('filter-popup');
+    const closeButton = document.querySelector('.close-button');
+    const resetButton = document.getElementById('reset-filters');
+    const filterCount = document.getElementById('filter-count');
     const itemRows = document.querySelectorAll('.item-row');
     const sortableHeaders = document.querySelectorAll('.sortable');
     const itemDetails = document.getElementById('item-details');
     const items = JSON.parse(document.getElementById('items-data')?.getAttribute('data-items') || '[]');
     let currentSort = { column: 'name', direction: 'asc' };
 
+    // Initialize filter options
+    function initializeFilterOptions() {
+      // Get unique types
+      const types = [...new Set(items.map(item => item.type.split(',')[0].trim()))].sort();
+      const typeFilters = document.getElementById('type-filters');
+      if (typeFilters) {
+        typeFilters.innerHTML = types.map(type => `
+          <label class="checkbox-label">
+            <input type="checkbox" name="type" value="${type}" />
+            ${type}
+          </label>
+        `).join('');
+      }
+
+      // Get unique sources
+      const sources = [...new Set(items.map(item => item.source.book))].sort();
+      const sourceFilters = document.getElementById('source-filters');
+      if (sourceFilters) {
+        sourceFilters.innerHTML = sources.map(source => `
+          <label class="checkbox-label">
+            <input type="checkbox" name="source" value="${source}" />
+            ${source}
+          </label>
+        `).join('');
+      }
+    }
+
+    // Load filters from localStorage
+    function loadFilters() {
+      const savedFilters = localStorage.getItem('magicItemFilters');
+      if (savedFilters) {
+        const filters = JSON.parse(savedFilters);
+        
+        // Apply saved filters
+        Object.entries(filters).forEach(([filterType, values]) => {
+          if (Array.isArray(values)) {
+            values.forEach(value => {
+              const checkbox = document.querySelector(`input[name="${filterType}"][value="${value}"]`) as HTMLInputElement;
+              if (checkbox) checkbox.checked = true;
+            });
+          }
+        });
+        
+        updateFilterCount();
+        filterItems();
+      }
+    }
+
+    // Save filters to localStorage
+    function saveFilters() {
+      const filters = {
+        rarity: Array.from(document.querySelectorAll('input[name="rarity"]:checked')).map(cb => (cb as HTMLInputElement).value),
+        type: Array.from(document.querySelectorAll('input[name="type"]:checked')).map(cb => (cb as HTMLInputElement).value),
+        source: Array.from(document.querySelectorAll('input[name="source"]:checked')).map(cb => (cb as HTMLInputElement).value),
+        attunement: Array.from(document.querySelectorAll('input[name="attunement"]:checked')).map(cb => (cb as HTMLInputElement).value)
+      };
+      
+      localStorage.setItem('magicItemFilters', JSON.stringify(filters));
+    }
+
+    // Update filter count display
+    function updateFilterCount() {
+      const activeFilters = 
+        document.querySelectorAll('input[name="rarity"]:checked').length +
+        document.querySelectorAll('input[name="type"]:checked').length +
+        document.querySelectorAll('input[name="source"]:checked').length +
+        document.querySelectorAll('input[name="attunement"]:checked').length;
+      
+      if (filterCount) {
+        filterCount.textContent = activeFilters.toString();
+        filterCount.style.display = activeFilters > 0 ? 'flex' : 'none';
+      }
+      
+      if (filterButton) {
+        filterButton.classList.toggle('has-filters', activeFilters > 0);
+      }
+    }
+
+    // Filter items based on selected criteria
     function filterItems() {
       const searchTerm = searchInput?.value.toLowerCase() || '';
+      const selectedRarities = Array.from(document.querySelectorAll('input[name="rarity"]:checked')).map(cb => (cb as HTMLInputElement).value);
+      const selectedTypes = Array.from(document.querySelectorAll('input[name="type"]:checked')).map(cb => (cb as HTMLInputElement).value);
+      const selectedSources = Array.from(document.querySelectorAll('input[name="source"]:checked')).map(cb => (cb as HTMLInputElement).value);
+      const selectedAttunement = Array.from(document.querySelectorAll('input[name="attunement"]:checked')).map(cb => (cb as HTMLInputElement).value);
       
       itemRows.forEach(row => {
-        const name = row.querySelector('td')?.textContent?.toLowerCase() || '';
-        const isVisible = name.includes(searchTerm);
+        const itemId = (row as HTMLElement).dataset.itemId;
+        const item = items.find(i => i.id === itemId);
+        if (!item) return;
+
+        const name = item.name.toLowerCase() + ' ' + item.nameEn.toLowerCase();
+        const type = item.type.split(',')[0].trim();
+        const source = item.source.book;
+        const attunement = item.attunement.toString();
+        const rarity = item.rarity;
+        
+        const matchesSearch = name.includes(searchTerm);
+        const matchesRarity = selectedRarities.length === 0 || selectedRarities.includes(rarity);
+        const matchesType = selectedTypes.length === 0 || selectedTypes.includes(type);
+        const matchesSource = selectedSources.length === 0 || selectedSources.includes(source);
+        const matchesAttunement = selectedAttunement.length === 0 || selectedAttunement.includes(attunement);
+        
+        const isVisible = matchesSearch && matchesRarity && matchesType && matchesSource && matchesAttunement;
         (row as HTMLElement).style.display = isVisible ? '' : 'none';
       });
+      
+      saveFilters();
+      updateFilterCount();
     }
+
+    // Toggle filter popup
+    function togglePopup() {
+      if (filterPopup) {
+        filterPopup.classList.toggle('show');
+      }
+    }
+
+    // Close popup when clicking outside
+    function closePopup(e: MouseEvent) {
+      if (filterPopup && e.target === filterPopup) {
+        filterPopup.classList.remove('show');
+      }
+    }
+
+    // Reset all filters
+    function resetFilters() {
+      document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        (cb as HTMLInputElement).checked = false;
+      });
+      localStorage.removeItem('magicItemFilters');
+      filterItems();
+    }
+
 
     function sortItems(column: string) {
       const tbody = document.querySelector('tbody');
@@ -552,6 +752,26 @@ const rarityLabels = {
 
     // Initialize tooltips
     initTooltips();
+    
+    // Initialize filter system
+    initializeFilterOptions();
+    loadFilters();
+    
+    // Event listeners for filter system
+    filterButton?.addEventListener('click', togglePopup);
+    closeButton?.addEventListener('click', togglePopup);
+    filterPopup?.addEventListener('click', closePopup);
+    resetButton?.addEventListener('click', resetFilters);
+    
+    // Add event listeners for all filter checkboxes using event delegation
+    filterPopup?.addEventListener('change', (e) => {
+      const target = e.target as HTMLInputElement;
+      if (target.type === 'checkbox') {
+        filterItems();
+      }
+    });
+    
+    searchInput?.addEventListener('input', filterItems);
   }
 
   const rarityLabels = {
@@ -583,13 +803,181 @@ const rarityLabels = {
     margin-bottom: 1rem;
   }
 
+  .search-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
   .search-input {
-    width: 100%;
+    flex: 1;
     padding: 0.75rem;
     border: 1px solid var(--card-border);
     border-radius: 0.5rem;
     background: var(--card-bg);
     color: var(--text);
+  }
+
+  .filter-button {
+    position: relative;
+    padding: 0.75rem 1rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 0.5rem;
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+  }
+
+  .filter-button:hover {
+    background: var(--nav-hover-bg);
+  }
+
+  .filter-button.has-filters {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .filter-icon {
+    font-size: 1.2rem;
+  }
+
+  .filter-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ef4444;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .filter-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+
+  .filter-popup.show {
+    display: block;
+  }
+
+  .filter-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    min-width: 400px;
+    max-width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    border: 1px solid var(--card-border);
+    box-shadow: var(--card-shadow);
+  }
+
+  .filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .filter-header h3 {
+    margin: 0;
+    color: var(--primary);
+  }
+
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+  }
+
+  .close-button:hover {
+    background: var(--nav-hover-bg);
+  }
+
+  .filter-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .filter-section:last-of-type {
+    margin-bottom: 2rem;
+  }
+
+  .filter-section h4 {
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+  }
+
+  .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 0.5rem;
+    background: var(--background);
+    border-radius: 0.25rem;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+  }
+
+  .checkbox-label:hover {
+    background: var(--nav-hover-bg);
+  }
+
+  .filter-actions {
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--card-border);
+  }
+
+  .reset-button {
+    padding: 0.75rem 1.5rem;
+    background: var(--background);
+    border: 1px solid var(--card-border);
+    border-radius: 0.5rem;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .reset-button:hover {
+    background: var(--nav-hover-bg);
   }
 
   .items-table {
