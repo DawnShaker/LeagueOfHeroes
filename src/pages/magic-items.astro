@@ -33,6 +33,7 @@ const rarityLabels = {
               placeholder="Поиск магических предметов..."
               class="search-input"
             />
+            <div id="items-counter" class="items-counter">0/0</div>
             <button id="clear-search" class="clear-search-button" style="display: none;">×</button>
           </div>
           <button id="filter-button" class="filter-button">
@@ -156,6 +157,12 @@ const rarityLabels = {
             </div>
           </div>
 
+          <div class="filter-section">
+            <h4>Инструменты для создания</h4>
+            <div class="checkbox-group" id="crafting-tools-filters">
+              <!-- Crafting tools will be populated by JavaScript -->
+            </div>
+          </div>
           <div class="filter-actions">
             <button id="reset-filters" class="reset-button">Сбросить фильтры</button>
           </div>
@@ -180,12 +187,36 @@ const rarityLabels = {
     const resetButton = document.getElementById('reset-filters');
     const filterCount = document.getElementById('filter-count');
     const clearSearchButton = document.getElementById('clear-search');
+    const itemsCounter = document.getElementById('items-counter');
     const itemRows = document.querySelectorAll('.item-row');
     const sortableHeaders = document.querySelectorAll('.sortable');
     const itemDetails = document.getElementById('item-details');
     const items = JSON.parse(document.getElementById('items-data')?.getAttribute('data-items') || '[]');
     let currentSort = { column: 'name', direction: 'asc' };
 
+    // Crafting tools mapping
+    const craftingToolsMap = {
+      1: 'Инструменты алхимика',
+      2: 'Инструменты гончара',
+      3: 'Инструменты каллиграфа',
+      4: 'Инструменты каменщика',
+      5: 'Инструменты картографа',
+      6: 'Инструменты кожевника',
+      7: 'Инструменты кузнеца',
+      8: 'Инструменты пивовара',
+      9: 'Инструменты плотника',
+      10: 'Инструменты повара',
+      11: 'Инструменты резчика по дереву',
+      12: 'Инструменты ремонтника',
+      13: 'Инструменты сапожника',
+      14: 'Инструменты стеклодува',
+      15: 'Инструменты ткача',
+      16: 'Инструменты художника',
+      17: 'Инструменты ювелира',
+      18: 'Набор отравителя',
+      19: 'Набор травника',
+      20: 'Набор для маскировки'
+    };
     // Initialize filter options
     function initializeFilterOptions() {
       // Get unique types
@@ -208,6 +239,29 @@ const rarityLabels = {
           <label class="checkbox-label">
             <input type="checkbox" name="source" value="${source}" />
             ${source}
+          </label>
+        `).join('');
+      }
+
+      // Get unique crafting tools
+      const craftingToolsSet = new Set();
+      items.forEach(item => {
+        if (item.craftingTools && Array.isArray(item.craftingTools)) {
+          item.craftingTools.forEach(toolIndex => {
+            if (craftingToolsMap[toolIndex]) {
+              craftingToolsSet.add(toolIndex);
+            }
+          });
+        }
+      });
+      
+      const craftingTools = Array.from(craftingToolsSet).sort((a, b) => a - b);
+      const craftingToolsFilters = document.getElementById('crafting-tools-filters');
+      if (craftingToolsFilters) {
+        craftingToolsFilters.innerHTML = craftingTools.map(toolIndex => `
+          <label class="checkbox-label">
+            <input type="checkbox" name="crafting-tools" value="${toolIndex}" />
+            ${craftingToolsMap[toolIndex]}
           </label>
         `).join('');
       }
@@ -240,7 +294,8 @@ const rarityLabels = {
         rarity: Array.from(document.querySelectorAll('input[name="rarity"]:checked')).map(cb => (cb as HTMLInputElement).value),
         type: Array.from(document.querySelectorAll('input[name="type"]:checked')).map(cb => (cb as HTMLInputElement).value),
         source: Array.from(document.querySelectorAll('input[name="source"]:checked')).map(cb => (cb as HTMLInputElement).value),
-        attunement: Array.from(document.querySelectorAll('input[name="attunement"]:checked')).map(cb => (cb as HTMLInputElement).value)
+        attunement: Array.from(document.querySelectorAll('input[name="attunement"]:checked')).map(cb => (cb as HTMLInputElement).value),
+        craftingTools: Array.from(document.querySelectorAll('input[name="crafting-tools"]:checked')).map(cb => (cb as HTMLInputElement).value)
       };
       
       localStorage.setItem('magicItemFilters', JSON.stringify(filters));
@@ -252,7 +307,8 @@ const rarityLabels = {
         document.querySelectorAll('input[name="rarity"]:checked').length +
         document.querySelectorAll('input[name="type"]:checked').length +
         document.querySelectorAll('input[name="source"]:checked').length +
-        document.querySelectorAll('input[name="attunement"]:checked').length;
+        document.querySelectorAll('input[name="attunement"]:checked').length +
+        document.querySelectorAll('input[name="crafting-tools"]:checked').length;
       
       if (filterCount) {
         filterCount.textContent = activeFilters.toString();
@@ -271,6 +327,18 @@ const rarityLabels = {
       const selectedTypes = Array.from(document.querySelectorAll('input[name="type"]:checked')).map(cb => (cb as HTMLInputElement).value);
       const selectedSources = Array.from(document.querySelectorAll('input[name="source"]:checked')).map(cb => (cb as HTMLInputElement).value);
       const selectedAttunement = Array.from(document.querySelectorAll('input[name="attunement"]:checked')).map(cb => (cb as HTMLInputElement).value);
+      const selectedCraftingTools = Array.from(document.querySelectorAll('input[name="crafting-tools"]:checked')).map(cb => parseInt((cb as HTMLInputElement).value));
+      
+      let visibleCount = 0;
+      let totalInSources = 0;
+      
+      // Calculate total items from selected sources (or all if no source filter)
+      items.forEach(item => {
+        const matchesSource = selectedSources.length === 0 || selectedSources.includes(item.source.book);
+        if (matchesSource) {
+          totalInSources++;
+        }
+      });
       
       itemRows.forEach(row => {
         const itemId = (row as HTMLElement).dataset.itemId;
@@ -282,16 +350,28 @@ const rarityLabels = {
         const source = item.source.book;
         const attunement = item.attunement.toString();
         const rarity = item.rarity;
+        const itemCraftingTools = item.craftingTools || [];
         
         const matchesSearch = name.includes(searchTerm);
         const matchesRarity = selectedRarities.length === 0 || selectedRarities.includes(rarity);
         const matchesType = selectedTypes.length === 0 || selectedTypes.includes(type);
         const matchesSource = selectedSources.length === 0 || selectedSources.includes(source);
         const matchesAttunement = selectedAttunement.length === 0 || selectedAttunement.includes(attunement);
+        const matchesCraftingTools = selectedCraftingTools.length === 0 || 
+          (itemCraftingTools.length > 0 && itemCraftingTools.some(tool => selectedCraftingTools.includes(tool)));
         
-        const isVisible = matchesSearch && matchesRarity && matchesType && matchesSource && matchesAttunement;
+        const isVisible = matchesSearch && matchesRarity && matchesType && matchesSource && matchesAttunement && matchesCraftingTools;
         (row as HTMLElement).style.display = isVisible ? '' : 'none';
+        
+        if (isVisible) {
+          visibleCount++;
+        }
       });
+      
+      // Update counter
+      if (itemsCounter) {
+        itemsCounter.textContent = `${visibleCount}/${totalInSources}`;
+      }
       
       saveFilters();
       updateFilterCount();
@@ -761,6 +841,9 @@ const rarityLabels = {
     initializeFilterOptions();
     loadFilters();
     
+    // Initialize counter
+    filterItems();
+    
     // Event listeners for filter system
     filterButton?.addEventListener('click', togglePopup);
     closeButton?.addEventListener('click', togglePopup);
@@ -851,6 +934,20 @@ const rarityLabels = {
   .clear-search-button:hover {
     background: var(--nav-hover-bg);
     opacity: 1;
+  }
+
+  .items-counter {
+    position: absolute;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text);
+    opacity: 0.6;
+    font-size: 0.9rem;
+    pointer-events: none;
+    background: var(--card-bg);
+    padding: 0 0.25rem;
+    z-index: 1;
   }
 
   .filter-button {
