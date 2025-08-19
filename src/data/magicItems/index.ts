@@ -135,7 +135,7 @@ export const magicItems: MagicItem[] = [
     nameEn: 'Eversmoking Bottle',
     type: 'Чудесный предмет',
     weight: '—',
-    attunement: true,
+    attunement: false,
     rarity: 'Uncommon',
     source: {
       book: 'DMG',
