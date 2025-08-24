@@ -972,7 +972,7 @@ interface Item {
     },
     {
       id: 'javelin',
-      name: 'метательное копьё',
+      name: 'Метательное копьё',
       nameEn: 'Javelin',
       type: 'Простое рукопашное оружие',
       cost: '5 см',

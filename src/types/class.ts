@@ -1,14 +1,18 @@
-export interface ClassFeature {
+interface ClassFeature {
   name: string;
   level: number;
   description: string;
   collapsible?: {
     title: string;
     description: string;
+    tableData?: {
+      headers: string[];
+      rows: string[][];
+    };
   }[];
 }
 
-export interface Subclass {
+interface Subclass {
   id: string;
   name: string;
   nameEn: string;
@@ -16,7 +20,7 @@ export interface Subclass {
   features: ClassFeature[];
 }
 
-export interface ClassLevel {
+interface ClassLevel {
   level: number;
   profBonus: string;
   features: string[];
@@ -35,7 +39,7 @@ export interface ClassLevel {
   };
 }
 
-export interface Equipment {
+interface Equipment {
   choice: string;
   items: string[];
 }

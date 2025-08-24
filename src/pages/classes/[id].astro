@@ -153,6 +153,13 @@ return { level, spells };
         <div class="feature-description"></div>
       </div>
     </template>
+
+    <!-- Scroll to top button -->
+    <button id="scroll-to-top" class="scroll-to-top" aria-label="Прокрутить наверх">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="m18 15-6-6-6 6"/>
+      </svg>
+    </button>
   </div>
 </Layout>
 
@@ -170,20 +177,66 @@ return { level, spells };
       const table = document.createElement('table');
       table.className = 'spell-table';
 
-      rows.forEach(row => {
-        const [level, spells] = row.split('\t');
-        const tr = document.createElement('tr');
+      // Check if this is a header-data table format
+      const hasHeaders = rows.length > 1 && (
+        rows[0].includes('\t') || 
+        rows[0].split(/\s{2,}/).length > 1
+      );
 
-        const tdLevel = document.createElement('td');
-        tdLevel.textContent = level;
-
-        const tdSpells = document.createElement('td');
-        tdSpells.textContent = spells;
-
-        tr.appendChild(tdLevel);
-        tr.appendChild(tdSpells);
-        table.appendChild(tr);
-      });
+      if (hasHeaders) {
+        // Create table header
+        const thead = document.createElement('thead');
+        const headerRow = document.createElement('tr');
+        
+        const headers = rows[0].includes('\t') 
+          ? rows[0].split('\t') 
+          : rows[0].split(/\s{2,}/);
+        
+        headers.forEach(header => {
+          const th = document.createElement('th');
+          th.textContent = header.trim();
+          headerRow.appendChild(th);
+        });
+        
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+        
+        // Create table body
+        const tbody = document.createElement('tbody');
+        rows.slice(1).forEach(row => {
+          const tr = document.createElement('tr');
+          const cells = row.includes('\t') 
+            ? row.split('\t') 
+            : row.split(/\s{2,}/);
+          
+          cells.forEach(cell => {
+            const td = document.createElement('td');
+            td.textContent = cell.trim();
+            tr.appendChild(td);
+          });
+          
+          tbody.appendChild(tr);
+        });
+        table.appendChild(tbody);
+      } else {
+        // Fallback for simple row-based tables
+        const tbody = document.createElement('tbody');
+        rows.forEach(row => {
+          const tr = document.createElement('tr');
+          const cells = row.includes('\t') 
+            ? row.split('\t') 
+            : row.split(/\s{2,}/);
+          
+          cells.forEach(cell => {
+            const td = document.createElement('td');
+            td.textContent = cell.trim();
+            tr.appendChild(td);
+          });
+          
+          tbody.appendChild(tr);
+        });
+        table.appendChild(tbody);
+      }
 
       return table;
     }
@@ -216,11 +269,44 @@ return { level, spells };
           const description = document.createElement('div');
           description.className = 'collapsible-description';
           
-          item.description.split('\n').forEach(paragraph => {
-            const p = document.createElement('p');
-            p.textContent = paragraph;
-            description.appendChild(p);
-          });
+          if (item.tableData) {
+            // Create table from structured data
+            const table = document.createElement('table');
+            table.className = 'spell-table';
+            
+            // Create header
+            const thead = document.createElement('thead');
+            const headerRow = document.createElement('tr');
+            item.tableData.headers.forEach(header => {
+              const th = document.createElement('th');
+              th.textContent = header;
+              headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+            
+            // Create body
+            const tbody = document.createElement('tbody');
+            item.tableData.rows.forEach(row => {
+              const tr = document.createElement('tr');
+              row.forEach(cell => {
+                const td = document.createElement('td');
+                td.textContent = cell;
+                tr.appendChild(td);
+              });
+              tbody.appendChild(tr);
+            });
+            table.appendChild(tbody);
+            
+            description.appendChild(table);
+          } else {
+            // Regular text content
+            item.description.split('\n').forEach(paragraph => {
+              const p = document.createElement('p');
+              p.textContent = paragraph;
+              description.appendChild(p);
+            });
+          }
           
           details.appendChild(description);
           collapsibleContent.appendChild(details);
@@ -288,7 +374,19 @@ return { level, spells };
     subclassSelect?.addEventListener('change', (e) => {
       const subclassId = e.target.value;
       const subclass = classData.subclasses.find(s => s.id === subclassId);
+      
+      // Save subclass selection to localStorage
+      if (subclassId) {
+        localStorage.setItem(`class-${classData.id}-subclass`, subclassId);
+      } else {
+        localStorage.removeItem(`class-${classData.id}-subclass`);
+      }
 
+      // Update URL with subclass selection
+      const newUrl = subclassId 
+        ? `/classes/${classData.id}?subclass=${subclassId}`
+        : `/classes/${classData.id}`;
+      window.history.pushState({ subclassId }, '', newUrl);
       if (classLore && baseLore) {
         if (subclass) {
           classLore.innerHTML = subclass.description.split('\n').map(paragraph =>
@@ -305,6 +403,91 @@ return { level, spells };
 
       updateFeatures(subclassId);
     });
+    
+    // Load saved subclass selection on page load
+    function loadSavedSubclass() {
+      // Check URL parameters first, then localStorage
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlSubclass = urlParams.get('subclass');
+      const savedSubclass = urlSubclass || localStorage.getItem(`class-${classData.id}-subclass`);
+      
+      if (savedSubclass && subclassSelect) {
+        subclassSelect.value = savedSubclass;
+        // Trigger change event to update the display
+        subclassSelect.dispatchEvent(new Event('change'));
+      }
+    }
+    
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', (event) => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const subclassId = urlParams.get('subclass') || '';
+      
+      if (subclassSelect) {
+        subclassSelect.value = subclassId;
+        // Trigger change event to update the display
+        subclassSelect.dispatchEvent(new Event('change'));
+      }
+    });
+    
+    // Save scroll position periodically and on page unload
+    function saveScrollPosition() {
+      localStorage.setItem(`class-${classData.id}-scroll`, window.scrollY.toString());
+    }
+    
+    // Load saved scroll position
+    function loadScrollPosition() {
+      const savedScroll = localStorage.getItem(`class-${classData.id}-scroll`);
+      if (savedScroll) {
+        // Use setTimeout to ensure DOM is fully rendered
+        setTimeout(() => {
+          window.scrollTo(0, parseInt(savedScroll));
+        }, 100);
+      }
+    }
+    
+    // Save scroll position on scroll (throttled)
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(saveScrollPosition, 150);
+    });
+    
+    // Save scroll position before page unload
+    window.addEventListener('beforeunload', saveScrollPosition);
+    
+    // Initialize saved states
+    loadSavedSubclass();
+    loadScrollPosition();
+    
+    // Scroll to top button functionality
+    const scrollToTopButton = document.getElementById('scroll-to-top');
+    
+    function toggleScrollButton() {
+      if (scrollToTopButton) {
+        if (window.scrollY > 300) {
+          scrollToTopButton.classList.add('visible');
+        } else {
+          scrollToTopButton.classList.remove('visible');
+        }
+      }
+    }
+    
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+    
+    // Show/hide button based on scroll position
+    window.addEventListener('scroll', toggleScrollButton);
+    
+    // Scroll to top when button is clicked
+    scrollToTopButton?.addEventListener('click', scrollToTop);
+    
+    // Initial check for button visibility
+    toggleScrollButton();
   });
 </script>
 
@@ -530,20 +713,47 @@ return { level, spells };
     width: 100%;
     margin: 1rem 0;
     border-collapse: collapse;
+    background: var(--card-bg);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
   }
 
+  .spell-table th,
   .spell-table td {
     padding: 0.5rem;
     border: 1px solid var(--card-border);
+    text-align: left;
   }
 
-  .spell-table tr:nth-child(1) {
+  .spell-table th {
     background: var(--background);
     font-weight: 600;
+    color: var(--primary);
   }
 
-  .spell-table tr:not(:first-child):hover {
+  .spell-table tbody tr:nth-child(even) {
     background: var(--background);
+  }
+
+  .spell-table tbody tr:hover {
+    background: var(--nav-hover-bg);
+  }
+
+  .spell-table th:first-child {
+    border-top-left-radius: 0.5rem;
+  }
+
+  .spell-table th:last-child {
+    border-top-right-radius: 0.5rem;
+  }
+
+  .spell-table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 0.5rem;
+  }
+
+  .spell-table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 0.5rem;
   }
 
   .subclass-feature {
@@ -566,5 +776,144 @@ return { level, spells };
 
   .subclass-feature .collapsible-description {
     background: var(--subclass-feature-bg);
+  }
+
+  /* Table styling for class abilities */
+  .feature-description table,
+  .collapsible-description table {
+    width: 100%;
+    margin: 1rem 0;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--card-border);
+  }
+
+  .feature-description table th,
+  .feature-description table td,
+  .collapsible-description table th,
+  .collapsible-description table td {
+    padding: 0.75rem;
+    border: 1px solid var(--card-border);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .feature-description table th,
+  .collapsible-description table th {
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .feature-description table tbody tr,
+  .collapsible-description table tbody tr {
+    transition: background-color 0.2s ease;
+  }
+
+  .feature-description table tbody tr:nth-child(even),
+  .collapsible-description table tbody tr:nth-child(even) {
+    background: var(--background);
+  }
+
+  .feature-description table tbody tr:hover,
+  .collapsible-description table tbody tr:hover {
+    background: var(--nav-hover-bg);
+  }
+
+  .feature-description table th:first-child,
+  .collapsible-description table th:first-child {
+    border-top-left-radius: 0.5rem;
+  }
+
+  .feature-description table th:last-child,
+  .collapsible-description table th:last-child {
+    border-top-right-radius: 0.5rem;
+  }
+
+  .feature-description table tbody tr:last-child td:first-child,
+  .collapsible-description table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 0.5rem;
+  }
+
+  .feature-description table tbody tr:last-child td:last-child,
+  .collapsible-description table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 0.5rem;
+  }
+
+  /* Special styling for subclass feature tables */
+  .subclass-feature .feature-description table th,
+  .subclass-feature .collapsible-description table th {
+    background: var(--subclass-feature-title);
+    color: white;
+  }
+
+  .subclass-feature .feature-description table,
+  .subclass-feature .collapsible-description table {
+    background: var(--subclass-feature-bg);
+    border-color: var(--subclass-feature-border);
+  }
+
+  .subclass-feature .feature-description table tbody tr:nth-child(even),
+  .subclass-feature .collapsible-description table tbody tr:nth-child(even) {
+    background: var(--subclass-feature-border);
+    opacity: 0.3;
+  }
+
+  /* Scroll to top button */
+  .scroll-to-top {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 3rem;
+    height: 3rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    z-index: 100;
+  }
+
+  .scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .scroll-to-top:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .scroll-to-top:active {
+    transform: translateY(0);
+  }
+
+  /* Responsive table design */
+  @media (max-width: 768px) {
+    .feature-description table,
+    .collapsible-description table {
+      font-size: 0.9rem;
+    }
+    
+    .feature-description table th,
+    .feature-description table td,
+    .collapsible-description table th,
+    .collapsible-description table td {
+      padding: 0.5rem;
+    }
   }
 </style>

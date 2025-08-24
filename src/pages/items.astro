@@ -5,6 +5,9 @@ import { items } from '../data/items';
 const sortedItems = [...items].sort((a, b) => 
   a.name.localeCompare(b.name, 'ru')
 );
+
+const sourceBooks = [...new Set(items.map(item => item.sourceBook))].sort();
+const itemTypes = [...new Set(items.map(item => item.type))].sort();
 ---
 
 <Layout title="Предметы">
@@ -15,12 +18,23 @@ const sortedItems = [...items].sort((a, b) =>
       <div id="items-data" data-items={JSON.stringify(items)} style="display: none;"></div>
       <div class="items-table">
         <div class="search-container">
-          <input 
-            type="text" 
-            id="item-search" 
-            placeholder="Поиск предметов..."
-            class="search-input"
-          />
+          <div class="search-controls">
+            <div class="search-input-container">
+              <input 
+                type="text" 
+                id="item-search" 
+                placeholder="Поиск предметов..."
+                class="search-input"
+              />
+              <div id="items-counter" class="items-counter">0/0</div>
+              <button id="clear-search" class="clear-search-button" title="Очистить поиск">×</button>
+            </div>
+            <button id="filter-button" class="filter-button">
+              <span class="filter-icon">⚙</span>
+              Фильтры
+              <div id="filter-count" class="filter-count">0</div>
+            </button>
+          </div>
         </div>
 
         <table>
@@ -65,6 +79,33 @@ const sortedItems = [...items].sort((a, b) =>
         </table>
       </div>
 
+      <div id="filter-popup" class="filter-popup">
+        <div class="filter-content">
+          <div class="filter-header">
+            <h3>Фильтры</h3>
+            <button id="close-filter" class="close-button">×</button>
+          </div>
+          
+          <div class="filter-section">
+            <h4>Тип предмета</h4>
+            <div id="type-filters" class="checkbox-group">
+              <!-- Populated by JavaScript -->
+            </div>
+          </div>
+          
+          <div class="filter-section">
+            <h4>Источник</h4>
+            <div id="source-filters" class="checkbox-group">
+              <!-- Populated by JavaScript -->
+            </div>
+          </div>
+          
+          <div class="filter-actions">
+            <button id="reset-filters" class="reset-button">Сбросить все фильтры</button>
+          </div>
+        </div>
+      </div>
+
       <div id="item-details" class="item-details">
         <div class="details-content">
           <h2>Выберите предмет для просмотра</h2>
@@ -82,17 +123,64 @@ const sortedItems = [...items].sort((a, b) =>
     const itemRows = document.querySelectorAll('.item-row');
     const sortableHeaders = document.querySelectorAll('.sortable');
     const itemDetails = document.getElementById('item-details');
+    const filterButton = document.getElementById('filter-button');
+    const filterPopup = document.getElementById('filter-popup');
+    const closeButton = document.getElementById('close-filter');
+    const resetButton = document.getElementById('reset-filters');
+    const clearSearchButton = document.getElementById('clear-search');
+    const itemsCounter = document.getElementById('items-counter');
     const items = JSON.parse(document.getElementById('items-data')?.getAttribute('data-items') || '[]');
     let currentSort = { column: 'name', direction: 'asc' };
 
     function filterItems() {
       const searchTerm = searchInput?.value.toLowerCase() || '';
+      const selectedTypes = Array.from(document.querySelectorAll('input[name="type"]:checked')).map(cb => (cb as HTMLInputElement).value);
+      const selectedSources = Array.from(document.querySelectorAll('input[name="source"]:checked')).map(cb => (cb as HTMLInputElement).value);
+      
+      let visibleCount = 0;
+      let totalInSources = 0;
+      
+      // Calculate total items from selected sources (or all if no source filter)
+      items.forEach(item => {
+        const matchesSource = selectedSources.length === 0 || selectedSources.includes(item.sourceBook);
+        if (matchesSource) {
+          totalInSources++;
+        }
+      });
       
       itemRows.forEach(row => {
-        const name = row.querySelector('td')?.textContent?.toLowerCase() || '';
-        const isVisible = name.includes(searchTerm);
+        const itemId = (row as HTMLElement).dataset.itemId;
+        const item = items.find(i => i.id === itemId);
+        if (!item) return;
+
+        const name = item.name.toLowerCase() + ' ' + item.nameEn.toLowerCase();
+        const type = item.type;
+        const source = item.sourceBook;
+        
+        const matchesSearch = name.includes(searchTerm);
+        const matchesType = selectedTypes.length === 0 || selectedTypes.includes(type);
+        const matchesSource = selectedSources.length === 0 || selectedSources.includes(source);
+        
+        const isVisible = matchesSearch && matchesType && matchesSource;
         (row as HTMLElement).style.display = isVisible ? '' : 'none';
+        
+        if (isVisible) {
+          visibleCount++;
+        }
       });
+      
+      // Update counter
+      if (itemsCounter) {
+        itemsCounter.textContent = `${visibleCount}/${totalInSources}`;
+      }
+      
+      // Update clear button visibility
+      if (clearSearchButton) {
+        clearSearchButton.style.display = searchTerm ? 'flex' : 'none';
+      }
+      
+      saveFilters();
+      updateFilterCount();
     }
 
     function sortItems(column: string) {
@@ -192,6 +280,10 @@ const sortedItems = [...items].sort((a, b) =>
       // Add active class to selected row
       itemRows.forEach(row => row.classList.remove('active'));
       document.querySelector(`[data-item-id="${itemId}"]`)?.classList.add('active');
+      
+      // Update URL without page reload
+      const newUrl = `/items/${itemId}`;
+      window.history.pushState({ itemId }, '', newUrl);
     }
 
     // Add sort event listeners
@@ -204,13 +296,176 @@ const sortedItems = [...items].sort((a, b) =>
 
     searchInput?.addEventListener('input', filterItems);
     
+    // Clear search functionality
+    clearSearchButton?.addEventListener('click', () => {
+      if (searchInput) {
+        searchInput.value = '';
+        filterItems();
+      }
+    });
+    
+    // Filter system event listeners
+    filterButton?.addEventListener('click', togglePopup);
+    closeButton?.addEventListener('click', togglePopup);
+    filterPopup?.addEventListener('click', closePopup);
+    resetButton?.addEventListener('click', resetFilters);
+    
+    // Add event listeners for filter checkboxes using event delegation
+    filterPopup?.addEventListener('change', (e) => {
+      const target = e.target as HTMLInputElement;
+      if (target.type === 'checkbox') {
+        filterItems();
+      }
+    });
+    
     itemRows.forEach(row => {
       row.addEventListener('click', () => {
         const itemId = (row as HTMLElement).dataset.itemId;
         if (itemId) showItemDetails(itemId);
       });
     });
+
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', (event) => {
+      if (event.state?.itemId) {
+        showItemDetails(event.state.itemId);
+      } else {
+        // Clear selection
+        itemRows.forEach(row => row.classList.remove('active'));
+        if (itemDetails) {
+          itemDetails.innerHTML = `
+            <div class="details-content">
+              <h2>Выберите предмет для просмотра</h2>
+            </div>
+          `;
+        }
+      }
+    });
+
+    // Check if URL contains item ID on page load
+    const pathParts = window.location.pathname.split('/');
+    if (pathParts[1] === 'items' && pathParts[2]) {
+      showItemDetails(pathParts[2]);
+    }
+    
+    // Initialize filter system
+    initializeFilterOptions();
+    loadFilters();
+    
+    // Initialize counter
+    filterItems();
+    
+    // Initialize filter system
+    loadFilters();
+    
+    // Initialize counter
+    filterItems();
+
+
+    
+    // Initialize filter system functions
+    function initializeFilterOptions() {
+      // Get unique types
+      const types = [...new Set(items.map(item => item.type))].sort();
+      const typeFilters = document.getElementById('type-filters');
+      if (typeFilters) {
+        typeFilters.innerHTML = types.map(type => `
+          <label class="checkbox-label">
+            <input type="checkbox" name="type" value="${type}" />
+            ${type}
+          </label>
+        `).join('');
+      }
+
+      // Get unique sources
+      const sources = [...new Set(items.map(item => item.sourceBook))].sort();
+      const sourceFilters = document.getElementById('source-filters');
+      if (sourceFilters) {
+        sourceFilters.innerHTML = sources.map(source => `
+          <label class="checkbox-label">
+            <input type="checkbox" name="source" value="${source}" />
+            ${source}
+          </label>
+        `).join('');
+      }
+    }
+
+    // Load filters from localStorage
+    function loadFilters() {
+      const savedFilters = localStorage.getItem('itemFilters');
+      if (savedFilters) {
+        const filters = JSON.parse(savedFilters);
+        
+        // Apply saved filters
+        Object.entries(filters).forEach(([filterType, values]) => {
+          if (Array.isArray(values)) {
+            values.forEach(value => {
+              const checkbox = document.querySelector(`input[name="${filterType}"][value="${value}"]`) as HTMLInputElement;
+              if (checkbox) checkbox.checked = true;
+            });
+          }
+        });
+        
+        updateFilterCount();
+        filterItems();
+      }
+    }
+
+    // Save filters to localStorage
+    function saveFilters() {
+      const filters = {
+        type: Array.from(document.querySelectorAll('input[name="type"]:checked')).map(cb => (cb as HTMLInputElement).value),
+        source: Array.from(document.querySelectorAll('input[name="source"]:checked')).map(cb => (cb as HTMLInputElement).value)
+      };
+      
+      localStorage.setItem('itemFilters', JSON.stringify(filters));
+    }
+      
+    // Update filter count display
+    function updateFilterCount() {
+      const activeFilters = 
+        document.querySelectorAll('input[name="type"]:checked').length +
+        document.querySelectorAll('input[name="source"]:checked').length;
+      
+      const filterCount = document.getElementById('filter-count');
+      if (filterCount) {
+        filterCount.textContent = activeFilters.toString();
+        filterCount.style.display = activeFilters > 0 ? 'flex' : 'none';
+      }
+      
+      const filterButton = document.getElementById('filter-button');
+      if (filterButton) {
+        filterButton.classList.toggle('has-filters', activeFilters > 0);
+      }
+    }
+
+
+    // Toggle filter popup
+    function togglePopup() {
+      const filterPopup = document.getElementById('filter-popup');
+      if (filterPopup) {
+        filterPopup.classList.toggle('show');
+      }
+    }
+
+    // Close popup when clicking outside
+    function closePopup(e: MouseEvent) {
+      const filterPopup = document.getElementById('filter-popup');
+      if (filterPopup && e.target === filterPopup) {
+        filterPopup.classList.remove('show');
+      }
+    }
+
+    // Reset all filters
+    function resetFilters() {
+      document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        (cb as HTMLInputElement).checked = false;
+      });
+      localStorage.removeItem('itemFilters');
+      filterItems();
+    }
   }
+
 
   document.addEventListener('DOMContentLoaded', initializeItems);
 </script>
@@ -232,13 +487,227 @@ const sortedItems = [...items].sort((a, b) =>
     margin-bottom: 1rem;
   }
 
+  .search-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .search-input-container {
+    position: relative;
+    flex: 1;
+    max-width: 400px;
+  }
+
   .search-input {
     width: 100%;
     padding: 0.75rem;
+    padding-right: 5rem;
     border: 1px solid var(--card-border);
     border-radius: 0.5rem;
     background: var(--card-bg);
     color: var(--text);
+  }
+
+  .items-counter {
+    position: absolute;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text);
+    opacity: 0.6;
+    font-size: 0.9rem;
+    pointer-events: none;
+    background: var(--card-bg);
+    padding: 0 0.25rem;
+    z-index: 1;
+  }
+
+  .clear-search-button {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    font-size: 1.2rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    opacity: 0.6;
+    transition: all 0.2s;
+  }
+
+  .clear-search-button:hover {
+    background: var(--nav-hover-bg);
+    opacity: 1;
+  }
+
+  .filter-button {
+    position: relative;
+    padding: 0.75rem 1rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 0.5rem;
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+  }
+
+  .filter-button:hover {
+    background: var(--nav-hover-bg);
+  }
+
+  .filter-button.has-filters {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .filter-icon {
+    font-size: 1.2rem;
+  }
+
+  .filter-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ef4444;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .filter-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+
+  .filter-popup.show {
+    display: block;
+  }
+
+  .filter-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    min-width: 400px;
+    max-width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    border: 1px solid var(--card-border);
+    box-shadow: var(--card-shadow);
+  }
+
+  .filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .filter-header h3 {
+    margin: 0;
+    color: var(--primary);
+  }
+
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+  }
+
+  .close-button:hover {
+    background: var(--nav-hover-bg);
+  }
+
+  .filter-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .filter-section:last-of-type {
+    margin-bottom: 2rem;
+  }
+
+  .filter-section h4 {
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+  }
+
+  .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 0.5rem;
+    background: var(--background);
+    border-radius: 0.25rem;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+  }
+
+  .checkbox-label:hover {
+    background: var(--nav-hover-bg);
+  }
+
+  .filter-actions {
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--card-border);
+  }
+
+  .reset-button {
+    padding: 0.75rem 1.5rem;
+    background: var(--background);
+    border: 1px solid var(--card-border);
+    border-radius: 0.5rem;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .reset-button:hover {
+    background: var(--nav-hover-bg);
   }
 
   .items-table {
@@ -272,12 +741,12 @@ const sortedItems = [...items].sort((a, b) =>
 
   th:nth-child(2),
   td:nth-child(2) {
-    width: 20%;
+    width: 23%;
   }
 
   th:nth-child(3),
   td:nth-child(3) {
-    width: 15%;
+    width: 12%;
   }
 
   th:nth-child(4),

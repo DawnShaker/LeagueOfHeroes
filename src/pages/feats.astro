@@ -29,15 +29,20 @@ const abilities = {
     
     <div class="search-container">
       <div class="search-controls">
-        <input 
-          type="text" 
-          id="feat-search" 
-          placeholder="Поиск черт..."
-          class="search-input"
-        />
+        <div class="search-input-container">
+          <input 
+            type="text" 
+            id="feat-search" 
+            placeholder="Поиск черт..."
+            class="search-input"
+          />
+          <div id="feats-counter" class="feats-counter">0/0</div>
+          <button id="clear-search" class="clear-search-button" style="display: none;">×</button>
+        </div>
         <button id="filter-button" class="filter-button">
           <span class="filter-icon">⚙</span>
           Фильтры
+          <span id="filter-count" class="filter-count">0</span>
         </button>
       </div>
 
@@ -80,6 +85,10 @@ const abilities = {
             </div>
           </div>
         </div>
+        
+        <div class="filter-actions">
+          <button id="reset-filters" class="reset-button">Сбросить фильтры</button>
+        </div>
       </div>
     </div>
 
@@ -100,9 +109,63 @@ const abilities = {
     const filterPopup = document.getElementById('filter-popup');
     const closeButton = document.querySelector('.close-button');
     const searchInput = document.getElementById('feat-search') as HTMLInputElement;
+    const clearSearchButton = document.getElementById('clear-search');
+    const featsCounter = document.getElementById('feats-counter');
     const featCards = document.querySelectorAll('.feat-card');
     const typeCheckboxes = document.querySelectorAll('input[name="feat-type"]');
     const abilityCheckboxes = document.querySelectorAll('input[name="ability-score"]');
+
+    // Load filters from localStorage
+    function loadFilters() {
+      const savedFilters = localStorage.getItem('featFilters');
+      if (savedFilters) {
+        const filters = JSON.parse(savedFilters);
+        
+        // Apply saved filters
+        Object.entries(filters).forEach(([filterType, values]) => {
+          if (Array.isArray(values)) {
+            values.forEach(value => {
+              const checkbox = document.querySelector(`input[name="${filterType}"][value="${value}"]`) as HTMLInputElement;
+              if (checkbox) checkbox.checked = true;
+            });
+          }
+        });
+        
+        updateFilterCount();
+        filterFeats();
+      }
+    }
+
+    // Save filters to localStorage
+    function saveFilters() {
+      const filters = {
+        'feat-type': Array.from(typeCheckboxes)
+          .filter((cb: Element) => (cb as HTMLInputElement).checked)
+          .map((cb: Element) => (cb as HTMLInputElement).value),
+        'ability-score': Array.from(abilityCheckboxes)
+          .filter((cb: Element) => (cb as HTMLInputElement).checked)
+          .map((cb: Element) => (cb as HTMLInputElement).value)
+      };
+      
+      localStorage.setItem('featFilters', JSON.stringify(filters));
+    }
+
+    // Update filter count display
+    function updateFilterCount() {
+      const activeFilters = 
+        document.querySelectorAll('input[name="feat-type"]:checked').length +
+        document.querySelectorAll('input[name="ability-score"]:checked').length;
+      
+      const filterCount = document.getElementById('filter-count');
+      if (filterCount) {
+        filterCount.textContent = activeFilters.toString();
+        filterCount.style.display = activeFilters > 0 ? 'flex' : 'none';
+      }
+      
+      if (filterButton) {
+        filterButton.classList.toggle('has-filters', activeFilters > 0);
+      }
+    }
 
     function togglePopup() {
       if (filterPopup) {
@@ -126,6 +189,9 @@ const abilities = {
         .filter((cb: Element) => (cb as HTMLInputElement).checked)
         .map((cb: Element) => (cb as HTMLInputElement).value);
 
+      let visibleCount = 0;
+      const totalCount = featCards.length;
+
       featCards.forEach(card => {
         const name = card.querySelector('h3')?.textContent?.toLowerCase() || '';
         const nameEn = card.querySelector('.name-en')?.textContent?.toLowerCase() || '';
@@ -137,17 +203,65 @@ const abilities = {
         const matchesAbilities = selectedAbilities.length === 0 || 
           (abilities.length > 0 && abilities.some(ability => selectedAbilities.includes(ability)));
 
-        (card as HTMLElement).style.display = 
-          matchesSearch && matchesType && matchesAbilities ? 'block' : 'none';
+        const isVisible = matchesSearch && matchesType && matchesAbilities;
+        (card as HTMLElement).style.display = isVisible ? 'block' : 'none';
+        
+        if (isVisible) {
+          visibleCount++;
+        }
       });
+      
+      // Update counter
+      if (featsCounter) {
+        featsCounter.textContent = `${visibleCount}/${totalCount}`;
+      }
+      
+      // Update clear button visibility
+      if (clearSearchButton) {
+        clearSearchButton.style.display = searchTerm ? 'flex' : 'none';
+      }
+      
+      saveFilters();
+      updateFilterCount();
+    }
+
+    // Reset all filters
+    function resetFilters() {
+      document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        (cb as HTMLInputElement).checked = false;
+      });
+      localStorage.removeItem('featFilters');
+      filterFeats();
     }
 
     filterButton?.addEventListener('click', togglePopup);
     closeButton?.addEventListener('click', togglePopup);
     filterPopup?.addEventListener('click', closePopup);
     searchInput?.addEventListener('input', filterFeats);
-    typeCheckboxes?.forEach(cb => cb.addEventListener('change', filterFeats));
-    abilityCheckboxes?.forEach(cb => cb.addEventListener('change', filterFeats));
+    
+    // Clear search functionality
+    clearSearchButton?.addEventListener('click', () => {
+      if (searchInput) {
+        searchInput.value = '';
+        filterFeats();
+      }
+    });
+    
+    // Add event listeners for filter checkboxes using event delegation
+    filterPopup?.addEventListener('change', (e) => {
+      const target = e.target as HTMLInputElement;
+      if (target.type === 'checkbox') {
+        filterFeats();
+      }
+    });
+    
+    // Reset filters button
+    const resetButton = document.getElementById('reset-filters');
+    resetButton?.addEventListener('click', resetFilters);
+    
+    // Initialize
+    loadFilters();
+    filterFeats(); // Initial count
   }
 
   document.addEventListener('DOMContentLoaded', initializeFilters);
@@ -170,10 +284,16 @@ const abilities = {
     align-items: center;
   }
 
-  .search-input {
+  .search-input-container {
+    position: relative;
     flex: 1;
     max-width: 400px;
+  }
+
+  .search-input {
+    width: 100%;
     padding: 0.75rem 1rem;
+    padding-right: 5rem;
     border: 1px solid var(--card-border);
     border-radius: 0.5rem;
     background: var(--card-bg);
@@ -181,7 +301,47 @@ const abilities = {
     font-size: 1rem;
   }
 
+  .feats-counter {
+    position: absolute;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text);
+    opacity: 0.6;
+    font-size: 0.9rem;
+    pointer-events: none;
+    background: var(--card-bg);
+    padding: 0 0.25rem;
+    z-index: 1;
+  }
+
+  .clear-search-button {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    font-size: 1.2rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    opacity: 0.6;
+    transition: all 0.2s;
+  }
+
+  .clear-search-button:hover {
+    background: var(--nav-hover-bg);
+    opacity: 1;
+  }
+
   .filter-button {
+    position: relative;
     padding: 0.75rem 1rem;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -191,10 +351,37 @@ const abilities = {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    transition: all 0.2s;
+  }
+
+  .filter-button:hover {
+    background: var(--nav-hover-bg);
+  }
+
+  .filter-button.has-filters {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
   }
 
   .filter-icon {
     font-size: 1.2rem;
+  }
+
+  .filter-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ef4444;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
   }
 
   .filter-popup {
@@ -220,10 +407,12 @@ const abilities = {
     background: var(--card-bg);
     padding: 2rem;
     border-radius: 0.5rem;
-    min-width: 300px;
+    min-width: 400px;
     max-width: 90%;
     max-height: 90vh;
     overflow-y: auto;
+    border: 1px solid var(--card-border);
+    box-shadow: var(--card-shadow);
   }
 
   .filter-header {
@@ -231,6 +420,13 @@ const abilities = {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .filter-header h3 {
+    margin: 0;
+    color: var(--primary);
   }
 
   .close-button {
@@ -240,6 +436,11 @@ const abilities = {
     color: var(--text);
     cursor: pointer;
     padding: 0.5rem;
+    border-radius: 0.25rem;
+  }
+
+  .close-button:hover {
+    background: var(--nav-hover-bg);
   }
 
   .filter-section {
@@ -247,13 +448,24 @@ const abilities = {
   }
 
   .filter-section:last-child {
-    margin-bottom: 0;
+    margin-bottom: 2rem;
+  }
+
+  .filter-section h4 {
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
   }
 
   .checkbox-group {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    max-height: auto;
+    overflow-y: auto;
+    padding: 0.5rem;
+    background: var(--background);
+    border-radius: 0.25rem;
     margin-top: 0.5rem;
   }
 
@@ -262,6 +474,33 @@ const abilities = {
     align-items: center;
     gap: 0.5rem;
     cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+  }
+
+  .checkbox-label:hover {
+    background: var(--nav-hover-bg);
+  }
+
+  .filter-actions {
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--card-border);
+  }
+
+  .reset-button {
+    padding: 0.75rem 1.5rem;
+    background: var(--background);
+    border: 1px solid var(--card-border);
+    border-radius: 0.5rem;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .reset-button:hover {
+    background: var(--nav-hover-bg);
   }
 
   .feats-grid {
