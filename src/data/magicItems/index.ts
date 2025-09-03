@@ -5784,7 +5784,7 @@ export const magicItems: MagicItem[] = [
     nameEn: 'Flame Tongue',
     type: 'Оружие, любое рукопашное',
     weight: '—',
-    attunement: false,
+    attunement: true,
     rarity: 'Rare',
     source: {
       book: 'DMG',
