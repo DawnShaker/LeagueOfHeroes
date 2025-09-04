@@ -507,6 +507,12 @@ const rarityLabels = {
           <div class="item-description">
             ${item.description}
           </div>
+          ${item.developerComment ? `
+            <div class="developer-comment">
+              <h4>Комментарий к предмету</h4>
+              <p>${item.developerComment}</p>
+            </div>
+          ` : ''}
         </div>
       `;
 
@@ -1339,6 +1345,26 @@ const rarityLabels = {
 
   .item-description :global(tr:first-child th:last-child) {
     border-top-right-radius: 0.5rem;
+  }
+
+  .developer-comment {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: var(--background);
+    border-radius: 0.5rem;
+    border-left: 4px solid var(--primary);
+  }
+
+  .developer-comment h4 {
+    color: var(--primary);
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+  }
+
+  .developer-comment p {
+    margin: 0;
+    font-style: italic;
+    line-height: 1.6;
   }
 
   /* Direct styles for dynamically generated tables */

@@ -14,6 +14,7 @@ interface MagicItem {
   description: string;
   baseAnalog?: string;
   craftingTools?: number[];
+  developerComment?: string;
 }
 
 export const magicItems: MagicItem[] = [
@@ -4957,7 +4958,7 @@ export const magicItems: MagicItem[] = [
       book: 'DMG',
       page: 294
     },
-    description: `<p>Вы получаете сопротивление к одному типу урона, пока носите это кольцо. Драгоценный камень в кольце указывает на тип, который Мастер выбирает или определяет случайным образом, бросая кость по следующей таблице.
+    description: `<p>Держа кольцо, действием Магия вы надеваете или снимаете его. Вы получаете сопротивление к одному типу урона, пока носите это кольцо. Драгоценный камень в кольце указывает на тип, который Мастер выбирает или определяет случайным образом, бросая кость по следующей таблице.
 <table><thead><tr><th>1д10</th><th>Тип урона</th><th>Камень</th></tr></thead><tbody>
 <tr><td>1</td><td>Кислотный</td><td>Жемчужина</td></tr>
 <tr><td>2</td><td>Холодный</td><td>Турмалин</td></tr>
@@ -4971,7 +4972,8 @@ export const magicItems: MagicItem[] = [
 <tr><td>10</td><td>Звуковой</td><td>Шпинель</td></tr>
 </tbody></table>`,
     baseAnalog: '—',
-    craftingTools: [17]
+    craftingTools: [17],
+    developerComment: 'Одновременно применяется эффект только одного кольца.'
   },
   {
     id: 'ring-of-the-ram',
