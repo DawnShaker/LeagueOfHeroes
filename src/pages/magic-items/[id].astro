@@ -110,8 +110,8 @@ function formatCraftingTools(toolIndices: number[]): string {
       
       {item.developerComment && (
         <div class="developer-comment">
-          <h4>Комментарий к предмету</h4>
-          <p>{item.developerComment}</p>
+          <h4>Комментарий разработчика</h4>
+          <div set:html={item.developerComment} />
         </div>
       )}
     </div>
