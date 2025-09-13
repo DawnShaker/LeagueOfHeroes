@@ -201,8 +201,7 @@ export const magicItems: MagicItem[] = [
     nameEn: 'Wand of Magic Missiles',
     type: 'Волшебная палочка',
     weight: '1 фнт.',
-    attunement: true,
-    attunementRequirement: 'заклинателем',
+    attunement: false,
     rarity: 'Uncommon',
     source: {
       book: 'DMG',
