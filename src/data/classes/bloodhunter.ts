@@ -106,7 +106,7 @@ export const bloodhunter: Class = {
     {
       level: 8,
       profBonus: '+3',
-      features: ['Дополнительная атака'],
+      features: ['Увеличение характеристик'],
       bloodMagicDie: '1к6',
       knownMaledicts: 2
     },
