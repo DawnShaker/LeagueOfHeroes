@@ -1,0 +1,165 @@
+---
+interface Props {
+  events: {
+    title: string;
+    table: Array<{
+      roll: string;
+      event: string;
+    }>;
+  };
+}
+
+const { events } = Astro.props;
+---
+
+<section class="rules-section">
+  <h2>События</h2>
+  <div class="content">
+    <div class="events-intro">
+      <p>Периодически в бастионе происходят различные события, которые могут повлиять на его функционирование и принести как возможности, так и вызовы.</p>
+    </div>
+
+    <div class="events-mechanics">
+      <h3>Механика событий</h3>
+      <ul>
+        <li>События проверяются в начале каждого месяца игрового времени</li>
+        <li>Мастер совершает бросок к100 для определения события</li>
+        <li>Некоторые события требуют немедленной реакции владельца</li>
+        <li>Игнорирование событий может привести к негативным последствиям</li>
+      </ul>
+    </div>
+
+    <div class="events-table-section">
+      <h3>{events.title}</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>к100</th>
+              <th>Событие</th>
+            </tr>
+          </thead>
+          <tbody>
+            {events.table.map(entry => (
+              <tr>
+                <td class="roll-column">{entry.roll}</td>
+                <td>{entry.event}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="events-handling">
+      <h3>Обработка событий</h3>
+      <ul>
+        <li>Положительные события обычно предоставляют бонусы или ресурсы</li>
+        <li>Негативные события требуют вмешательства или приводят к потерям</li>
+        <li>Нейтральные события могут предложить выбор действий</li>
+        <li>Некоторые события могут запускать побочные квесты</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .rules-section {
+    margin-bottom: 2rem;
+  }
+
+  .content {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+  }
+
+  .events-intro {
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .events-mechanics,
+  .events-table-section,
+  .events-handling {
+    margin-bottom: 1.5rem;
+  }
+
+  .events-table-section:last-child,
+  .events-handling:last-child {
+    margin-bottom: 0;
+  }
+
+  h3 {
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+  }
+
+  ul {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+
+  .table-container {
+    margin-top: 1rem;
+    overflow-x: auto;
+    background: var(--card-bg);
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 0.75rem;
+    border: 1px solid var(--card-border);
+    text-align: left;
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+  }
+
+  .roll-column {
+    width: 80px;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  tbody tr:nth-child(even) {
+    background: var(--background);
+  }
+
+  tbody tr:hover {
+    background: var(--nav-hover-bg);
+  }
+
+  th:first-child {
+    border-top-left-radius: 0.5rem;
+  }
+
+  th:last-child {
+    border-top-right-radius: 0.5rem;
+  }
+
+  tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 0.5rem;
+  }
+
+  tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 0.5rem;
+  }
+</style>

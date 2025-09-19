@@ -1,0 +1,93 @@
+---
+interface Props {}
+---
+
+<section class="rules-section">
+  <h2>Использование</h2>
+  <div class="content">
+    <div class="usage-overview">
+      <p>Бастионы функционируют через систему приказов, которые выполняют наемники. Каждый тип постройки поддерживает определенные виды деятельности и требует соответствующих ресурсов.</p>
+    </div>
+
+    <div class="usage-subsection">
+      <h3>Система приказов</h3>
+      <p>Наемники могут выполнять следующие типы приказов:</p>
+      <ul>
+        <li><strong>Изготовить:</strong> Создание предметов и снаряжения</li>
+        <li><strong>Усилить:</strong> Улучшение существующих построек</li>
+        <li><strong>Собрать:</strong> Сбор ресурсов и материалов</li>
+        <li><strong>Обслуживать:</strong> Поддержание функций бастиона</li>
+        <li><strong>Завербовать:</strong> Привлечение новых наемников</li>
+        <li><strong>Изучать:</strong> Исследование и получение знаний</li>
+        <li><strong>Торговать:</strong> Коммерческая деятельность</li>
+      </ul>
+    </div>
+
+    <div class="usage-subsection">
+      <h3>Управление ресурсами</h3>
+      <ul>
+        <li>Каждая постройка требует определенного количества наемников</li>
+        <li>Наемники нуждаются в регулярной оплате</li>
+        <li>Пространство бастиона ограничено и должно планироваться</li>
+        <li>Некоторые постройки имеют особые требования</li>
+      </ul>
+    </div>
+
+    <div class="usage-subsection">
+      <h3>Временные рамки</h3>
+      <ul>
+        <li>Большинство приказов выполняются в течение дней простоя</li>
+        <li>Сложные проекты могут требовать недель или месяцев</li>
+        <li>События могут прерывать выполнение приказов</li>
+        <li>Эффективность зависит от квалификации наемников</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .rules-section {
+    margin-bottom: 2rem;
+  }
+
+  .content {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+  }
+
+  .usage-overview {
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .usage-subsection {
+    margin-bottom: 1.5rem;
+  }
+
+  .usage-subsection:last-child {
+    margin-bottom: 0;
+  }
+
+  h3 {
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+  }
+
+  ul {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+
+  strong {
+    color: var(--primary);
+  }
+</style>

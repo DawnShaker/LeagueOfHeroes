@@ -5,7 +5,8 @@ export const rulesLinks = [
   //{ href: '/social-injustice', label: 'Социальная НЕ-справедливость' },
   //{ href: '/house-rules', label: 'House Rules' },
   //{ href: '/combat', label: 'Combat Rules' },
-  { href: '/rules/downtime-activities', label: 'Активности простоя' }
+  { href: '/rules/downtime-activities', label: 'Активности простоя' },
+  //{ href: '/bastions', label: 'Бастионы' }
 ];
 
 export const characterLinks = [
@@ -34,7 +35,6 @@ export const handbookLinks = [
   { href: '/items', label: 'Предметы' },
   { href: '/magic-items', label: 'Магические предметы' },
   { href: '/spells', label: 'Заклинания' },
-  //{ href: '/magic-items', label: 'Магические предметы' },
   { href: '/faq', label: 'FAQ' },
   //{ href: '/third-party', label: 'Сторонний материал' },
   //{ href: '/magic', label: 'Magic & Spells' },

@@ -1,0 +1,158 @@
+---
+interface Props {
+  name: string;
+  nameEn: string;
+  requirements: string;
+  space: number; // 1=Тесное(4кв), 2=Вместительное(16кв), 3=Просторное(36кв), 4=Вместительное(16кв), просторное(36кв)
+  hirelings: number;
+  order: number; // 1=Изготовить, 2=Усилить, 3=Собрать, 4=Обслуживать, 5=Завербовать, 6=Изучать, 7=Торговать
+  description: string;
+  abilities: Array<{
+    name: string;
+    description: string;
+  }>;
+}
+
+const { name, nameEn, requirements, space, hirelings, order, description, abilities } = Astro.props;
+
+const spaceLabels = {
+  1: 'Тесное (4 квадрата)',
+  2: 'Вместительное (16 квадратов)',
+  3: 'Просторное (36 квадратов)',
+  4: 'Вместительное (16 кв), просторное (36 кв)'
+};
+
+const orderLabels = {
+  1: 'Изготовить',
+  2: 'Усилить',
+  3: 'Собрать',
+  4: 'Обслуживать',
+  5: 'Завербовать',
+  6: 'Изучать',
+  7: 'Торговать'
+};
+---
+
+<div class="building-card">
+  <div class="building-header">
+    <h3>{name} <span class="name-en">[{nameEn}]</span></h3>
+    <div class="building-type">Уровень 13, сооружение бастиона</div>
+  </div>
+
+  <div class="building-meta">
+    <div class="meta-row">
+      <span class="meta-label">Требования:</span>
+      <span class="meta-value">{requirements}</span>
+    </div>
+    <div class="meta-row">
+      <span class="meta-label">Пространство:</span>
+      <span class="meta-value">{spaceLabels[space]}</span>
+    </div>
+    <div class="meta-row">
+      <span class="meta-label">Наёмники:</span>
+      <span class="meta-value">{hirelings}</span>
+    </div>
+    <div class="meta-row">
+      <span class="meta-label">Приказ:</span>
+      <span class="meta-value">{orderLabels[order]}</span>
+    </div>
+  </div>
+
+  <div class="building-description">
+    <p>{description}</p>
+  </div>
+
+  <div class="building-abilities">
+    {abilities.map(ability => (
+      <div class="ability">
+        <p><strong>{ability.name}.</strong> {ability.description}</p>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .building-card {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+  }
+
+  .building-header {
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .building-header h3 {
+    margin: 0;
+    color: var(--primary);
+    font-size: 1.25rem;
+  }
+
+  .name-en {
+    color: var(--text);
+    opacity: 0.7;
+    font-size: 0.8em;
+  }
+
+  .building-type {
+    margin-top: 0.25rem;
+    color: var(--text);
+    opacity: 0.8;
+    font-style: italic;
+  }
+
+  .building-meta {
+    margin-bottom: 1rem;
+  }
+
+  .meta-row {
+    display: flex;
+    margin-bottom: 0.5rem;
+  }
+
+  .meta-label {
+    font-weight: 600;
+    color: var(--primary);
+    min-width: 120px;
+    flex-shrink: 0;
+  }
+
+  .meta-value {
+    flex: 1;
+  }
+
+  .building-description {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .building-description p {
+    margin: 0;
+  }
+
+  .building-abilities {
+    border-top: 1px solid var(--card-border);
+    padding-top: 1rem;
+  }
+
+  .ability {
+    margin-bottom: 1rem;
+  }
+
+  .ability:last-child {
+    margin-bottom: 0;
+  }
+
+  .ability p {
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .ability strong {
+    color: var(--primary);
+  }
+</style>

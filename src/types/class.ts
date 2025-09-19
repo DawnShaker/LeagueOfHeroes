@@ -62,6 +62,7 @@ export interface Class {
     armor: string[];
     weapons: string[];
     savingThrows: string[];
+    tools: string[];
     skills: {
       count: number;
       list: string[];

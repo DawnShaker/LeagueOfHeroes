@@ -1,0 +1,115 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BastionBuilding from '../components/rules/bastions/BastionBuilding.astro';
+import BastionEvents from '../components/rules/bastions/BastionEvents.astro';
+import BastionRules from '../components/rules/bastions/BastionRules.astro';
+import BastionUsage from '../components/rules/bastions/BastionUsage.astro';
+
+const buildings = [
+  {
+    name: 'Реликварий',
+    nameEn: 'Reliquary',
+    requirements: 'Умение использовать священный символ или фокусировку друида в качестве заклинательной фокусировки',
+    space: 1, // 1 = Тесное (4кв)
+    hirelings: 1,
+    order: 3, // 3 = Собирать
+    description: 'В этом хранилище хранятся священные предметы.',
+    abilities: [
+      {
+        name: 'Чары реликвария',
+        description: 'Проведя продолжительный отдых в своем бастионе, вы получаете магические чары (см. Сверхъестественные дары), которые действуют в течение 7 дней или пока вы их не используете. Чары позволяют вам один раз наложить заклинание Высшее восстановление без траты ячейки заклинания и/или материального компонента. Вы не можете получить эти чары снова, пока они у вас есть.'
+      }
+    ]
+  },
+  {
+    name: 'Кузница',
+    nameEn: 'Smithy',
+    requirements: 'Владение инструментами кузнеца',
+    space: 2, // 2 = Вместительное (16кв)
+    hirelings: 2,
+    order: 1, // 1 = Изготовить
+    description: 'Мастерская для создания и ремонта металлических изделий.',
+    abilities: [
+      {
+        name: 'Мастерская работа',
+        description: 'Время создания металлических предметов сокращается на 25%. Качество изготовленных предметов повышается.'
+      },
+      {
+        name: 'Ремонт снаряжения',
+        description: 'Можно бесплатно ремонтировать поврежденное металлическое снаряжение во время продолжительного отдыха.'
+      }
+    ]
+  }
+];
+
+const events = {
+  title: 'События бастиона',
+  table: [
+    { roll: '01-50', event: 'Всё хорошо' },
+    { roll: '51-55', event: 'Атака' },
+    { roll: '56-58', event: 'Наёмник оказался преступником' },
+    { roll: '59-63', event: 'Удачный случай' },
+    { roll: '64-72', event: 'Дружелюбные посетители' },
+    { roll: '73-76', event: 'Гость' },
+    { roll: '77-79', event: 'Пропавшие наёмники' },
+    { roll: '80-83', event: 'Волшебное открытие' },
+    { roll: '84-91', event: 'Беженцы' },
+    { roll: '92-98', event: 'Просьба о помощи' },
+    { roll: '99-00', event: 'Сокровище' }
+  ]
+};
+---
+
+<Layout title="D&D 5E Guide - Бастионы">
+  <div class="content">
+    <h1>Бастионы</h1>
+    
+    <div class="bastions-container">
+      <BastionRules />
+      <BastionUsage />
+      
+      <section class="buildings-section">
+        <h2>Постройки</h2>
+        <div class="buildings-grid">
+          {buildings.map(building => (
+            <BastionBuilding {...building} />
+          ))}
+        </div>
+      </section>
+
+      <BastionEvents events={events} />
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .bastions-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .buildings-section {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+  }
+
+  .buildings-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  h2 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+  }
+</style>
