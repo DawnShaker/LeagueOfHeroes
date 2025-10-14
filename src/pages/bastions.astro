@@ -9,10 +9,11 @@ const buildings = [
   {
     name: 'Реликварий',
     nameEn: 'Reliquary',
+    level: 13,
     requirements: 'Умение использовать священный символ или фокусировку друида в качестве заклинательной фокусировки',
-    space: 1, // 1 = Тесное (4кв)
+    space: 1,
     hirelings: 1,
-    order: 3, // 3 = Собирать
+    order: 3,
     description: 'В этом хранилище хранятся священные предметы.',
     abilities: [
       {
@@ -24,10 +25,11 @@ const buildings = [
   {
     name: 'Кузница',
     nameEn: 'Smithy',
+    level: 9,
     requirements: 'Владение инструментами кузнеца',
-    space: 2, // 2 = Вместительное (16кв)
+    space: 2,
     hirelings: 2,
-    order: 1, // 1 = Изготовить
+    order: 1,
     description: 'Мастерская для создания и ремонта металлических изделий.',
     abilities: [
       {
@@ -60,19 +62,132 @@ const events = {
 };
 ---
 
-<Layout title="D&D 5E Guide - Бастионы">
+<Layout title="Бастионы">
   <div class="content">
     <h1>Бастионы</h1>
     
+      <div id="filter-panel" class="filter-panel">
+        <div class="filter-content">
+          <div class="filter-group">
+            <h4>Требуемый уровень</h4>
+            <div class="checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" name="level" value="5" />
+                5 уровень
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="level" value="9" />
+                9 уровень
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="level" value="13" />
+                13 уровень
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="level" value="17" />
+                17 уровень
+              </label>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <h4>Требования</h4>
+            <div class="checkbox-group" id="requirements-filters">
+              <label class="checkbox-label">
+                <input type="checkbox" name="requirement" value="none" />
+                Нет требований
+              </label>
+            </div>
+          </div>
+
+          <div class="filter-actions">
+            <button id="reset-filters" class="reset-button">Сбросить фильтры</button>
+          </div>
+        </div>
+      </div>
+
     <div class="bastions-container">
       <BastionRules />
       <BastionUsage />
       
       <section class="buildings-section">
-        <h2>Постройки</h2>
-        <div class="buildings-grid">
+      <h2>Постройки</h2>
+      
+      <div class="filter-controls">
+        <button id="filter-toggle" class="filter-button">
+          <span class="filter-icon">⚙</span>
+          Фильтры
+          <span id="active-filters" class="filter-count">0</span>
+        </button>
+      </div>
+        <div class="buildings-grid" id="buildings-grid">
           {buildings.map(building => (
-            <BastionBuilding {...building} />
+            <div class="building-tile" 
+                 data-level={building.level || 13} 
+                 data-requirements={building.requirements}>
+              <div class="building-header">
+                <div class="building-info">
+                  <h3 class="building-name">{building.name}</h3>
+                  <div class="building-name-en">[{building.nameEn}]</div>
+                </div>
+                <div class="building-level">{building.level || 13}</div>
+              </div>
+              <button class="expand-button" data-building={building.name}>+</button>
+              
+              <div class="building-details-overlay">
+                <div class="details-content">
+                  <div class="details-header">
+                    <h3>{building.name} <span class="name-en">[{building.nameEn}]</span></h3>
+                    <button class="collapse-button">-</button>
+                  </div>
+                  <div class="building-type">Уровень {building.level || 13}, сооружение бастиона</div>
+                  
+                  <div class="building-meta">
+                    <div class="meta-row">
+                      <span class="meta-label">Требования:</span>
+                      <span class="meta-value">{building.requirements}</span>
+                    </div>
+                    <div class="meta-row">
+                      <span class="meta-label">Пространство:</span>
+                      <span class="meta-value">{
+                        building.space === 1 ? 'Тесное (4 квадрата)' :
+                        building.space === 2 ? 'Вместительное (16 квадратов)' :
+                        building.space === 3 ? 'Просторное (36 квадратов)' :
+                        'Вместительное (16 кв), просторное (36 кв)'
+                      }</span>
+                    </div>
+                    <div class="meta-row">
+                      <span class="meta-label">Наёмники:</span>
+                      <span class="meta-value">{building.hirelings}</span>
+                    </div>
+                    <div class="meta-row">
+                      <span class="meta-label">Приказ:</span>
+                      <span class="meta-value">{
+                        building.order === 1 ? 'Изготовить' :
+                        building.order === 2 ? 'Усилить' :
+                        building.order === 3 ? 'Собрать' :
+                        building.order === 4 ? 'Обслуживать' :
+                        building.order === 5 ? 'Завербовать' :
+                        building.order === 6 ? 'Изучать' :
+                        'Торговать'
+                      }</span>
+                    </div>
+                  </div>
+
+                  <div class="building-description">
+                    <p>{building.description}</p>
+                  </div>
+
+                  <div class="building-abilities">
+                    {building.abilities.map(ability => (
+                      <div class="ability">
+                        <p><strong>{ability.name}.</strong> {ability.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </section>
@@ -81,6 +196,104 @@ const events = {
     </div>
   </div>
 </Layout>
+
+<script define:vars={{ buildings }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterToggle = document.getElementById('filter-toggle');
+    const filterPanel = document.getElementById('filter-panel');
+    const resetFilters = document.getElementById('reset-filters');
+    const activeFiltersCount = document.getElementById('active-filters');
+    const buildingTiles = document.querySelectorAll('.building-tile');
+
+    function initializeRequirementsFilter() {
+      const requirementsSet = new Set();
+      buildings.forEach(building => {
+        if (building.requirements && building.requirements !== 'Нет') {
+          requirementsSet.add(building.requirements);
+        }
+      });
+      const requirementsFilter = document.getElementById('requirements-filters');
+      Array.from(requirementsSet).forEach(requirement => {
+        const label = document.createElement('label');
+        label.className = 'checkbox-label';
+        label.innerHTML = `
+          <input type="checkbox" name="requirement" value="${requirement}" />
+          ${requirement}
+        `;
+        requirementsFilter.appendChild(label);
+      });
+    }
+
+    function applyFilters() {
+      const selectedLevels = Array.from(document.querySelectorAll('input[name="level"]:checked'))
+        .map(cb => parseInt(cb.value));
+      const selectedRequirements = Array.from(document.querySelectorAll('input[name="requirement"]:checked'))
+        .map(cb => cb.value);
+
+      buildingTiles.forEach(tile => {
+        const level = parseInt(tile.dataset.level);
+        const requirements = tile.dataset.requirements;
+        
+        const matchesLevel = selectedLevels.length === 0 || selectedLevels.includes(level);
+        const matchesRequirements = selectedRequirements.length === 0 || 
+          (selectedRequirements.includes('none') && (!requirements || requirements === 'Нет')) ||
+          selectedRequirements.includes(requirements);
+
+        const isVisible = matchesLevel && matchesRequirements;
+        tile.style.display = isVisible ? 'block' : 'none';
+      });
+
+      updateFilterCount();
+    }
+
+    function updateFilterCount() {
+      const activeFilters = document.querySelectorAll('input[type="checkbox"]:checked').length;
+      activeFiltersCount.textContent = activeFilters.toString();
+      activeFiltersCount.style.display = activeFilters > 0 ? 'flex' : 'none';
+      filterToggle.classList.toggle('has-filters', activeFilters > 0);
+    }
+
+    filterToggle?.addEventListener('click', () => {
+      filterPanel.classList.toggle('show');
+    });
+
+    resetFilters?.addEventListener('click', () => {
+      document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+      applyFilters();
+    });
+
+    document.addEventListener('change', (e) => {
+      if (e.target.type === 'checkbox') applyFilters();
+    });
+
+    // модальное окно
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('expand-button')) {
+        const tile = e.target.closest('.building-tile');
+        const overlay = tile.querySelector('.building-details-overlay');
+        overlay.classList.add('show');
+      }
+
+      if (e.target.classList.contains('collapse-button')) {
+        const overlay = e.target.closest('.building-details-overlay');
+        overlay.classList.remove('show');
+      }
+
+      if (e.target.classList.contains('building-details-overlay')) {
+        e.target.classList.remove('show');
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!filterPanel.contains(e.target) && !filterToggle.contains(e.target)) {
+        filterPanel.classList.remove('show');
+      }
+    });
+
+    initializeRequirementsFilter();
+    applyFilters();
+  });
+</script>
 
 <style>
   .content {
@@ -102,14 +315,217 @@ const events = {
     border: 1px solid var(--card-border);
   }
 
+  .filter-controls {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .filter-button {
+    position: relative;
+    padding: 0.75rem 1rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 0.5rem;
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+  }
+
+  .filter-button:hover {
+    background: var(--nav-hover-bg);
+  }
+
+  .filter-button.has-filters {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .filter-icon {
+    font-size: 1.2rem;
+  }
+
+  .filter-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ef4444;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .filter-panel {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    min-width: 300px;
+    z-index: 100;
+    margin-top: 0.5rem;
+  }
+
+  .filter-panel.show {
+    display: block;
+  }
+
+  .filter-content { padding: 1.5rem; }
+  .filter-group { margin-bottom: 1.5rem; }
+  .filter-group:last-of-type { margin-bottom: 2rem; }
+  .filter-group h4 { color: var(--primary); margin-bottom: 0.75rem; font-size: 1rem; }
+  .checkbox-group { display: flex; flex-direction: column; gap: 0.5rem; }
+  .checkbox-label { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.25rem; border-radius: 0.25rem; }
+  .checkbox-label:hover { background: var(--nav-hover-bg); }
+  .filter-actions { display: flex; justify-content: center; padding-top: 1rem; border-top: 1px solid var(--card-border); }
+  .reset-button { padding: 0.75rem 1.5rem; background: var(--background); border: 1px solid var(--card-border); border-radius: 0.5rem; color: var(--text); cursor: pointer; transition: all 0.2s; }
+  .reset-button:hover { background: var(--nav-hover-bg); }
+
   .buildings-grid {
     display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
     margin-top: 1rem;
   }
 
-  h2 {
-    color: var(--primary);
+  .building-tile {
+    position: relative;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+    min-height: 120px;
+  }
+
+  .building-tile:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .building-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     margin-bottom: 1rem;
   }
+
+  .building-info { flex: 1; }
+  .building-name { margin: 0; color: var(--primary); font-size: 1.25rem; line-height: 1.2; }
+  .building-name-en { color: var(--text); opacity: 0.7; font-size: 0.9em; margin-top: 0.25rem; }
+  .building-level { background: var(--primary); color: white; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.875rem; font-weight: 600; }
+
+  .expand-button {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    right: auto;
+    width: 2rem;
+    height: 2rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: all 0.2s;
+    z-index: 10;
+  }
+
+  .expand-button:hover { background: var(--primary-dark); transform: scale(1.1); }
+
+  .building-details-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+  }
+
+  .building-details-overlay.show { display: flex; animation: fadeIn 0.3s ease; }
+
+  .details-content {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 2rem;
+    animation: scaleIn 0.3s ease;
+  }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+
+  .collapse-button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: all 0.2s;
+    margin-left: 1rem;
+  }
+  .collapse-button:hover { background: var(--primary-dark); transform: scale(1.1); }
+
+  .details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .name-en { color: var(--text); opacity: 0.7; font-size: 0.8em; }
+  .building-type { margin-bottom: 1rem; color: var(--text); opacity: 0.8; font-style: italic; }
+  .building-meta { margin-bottom: 1rem; }
+  .meta-row { display: flex; margin-bottom: 0.5rem; }
+  .meta-label { font-weight: 600; color: var(--primary); min-width: 120px; flex-shrink: 0; }
+  .meta-value { flex: 1; }
+  .building-description { margin-bottom: 1rem; line-height: 1.6; }
+  .building-description p { margin: 0; }
+  .building-abilities { border-top: 1px solid var(--card-border); padding-top: 1rem; }
+  .ability { margin-bottom: 1rem; }
+  .ability:last-child { margin-bottom: 0; }
+  .ability p { margin: 0; line-height: 1.6; }
+  .ability strong { color: var(--primary); }
+
+  @media (max-width: 1024px) {
+    .buildings-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .buildings-grid { grid-template-columns: 1fr; }
+    .details-content { max-width: 90vw; max-height: 90vh; padding: 1.5rem; }
+    .filter-panel { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); right: auto; min-width: 90vw; }
+  }
+
+  h2 { color: var(--primary); margin-bottom: 1rem; }
 </style>

@@ -1838,4 +1838,42 @@ export const spells: Spell[] = [
     { type: 'feat', name: 'Посвящённый в магию' },
   ]
 },
+{
+  id: 'speak-with-animals',
+  name: 'Разговор с животными',
+  nameEn: 'Speak with Animals',
+  level: '1',
+  school: 'прорицание',
+  castingTime: '1 действие или ритуал',
+  range: 'На себя',
+  components: {
+    verbal: true,
+    somatic: true
+  },
+  duration: '10 минут',
+  description: `<p>На время действия заклинания вы можете понимать и вербально общаться со зверьми, а также использовать любые варианты навыков действия влияние с ними.</p>
+  <p>Большинство зверей могут сказать немногое о темах, не связанных с выживанием или общением, но как минимум, зверь может предоставить вам информацию о близлежащих местах и монстрах, включая всё, что он воспринимал в течение последнего дня.</p>`,
+  source: {
+    book: 'PHB\'24',
+    page: 318
+  },
+  sources: [
+    { type: 'class', name: 'Бард' },
+    { type: 'class', name: 'Друид' },
+    { type: 'class', name: 'Следопыт' },
+    { type: 'class', name: 'Колдун' },
+    { type: 'subclass', name: 'Домен Природы' },
+    { type: 'subclass', name: 'Коллегия Знаний' },
+    { type: 'subclass', name: 'Клятва Древних' },
+    { type: 'subclass', name: 'Путь Дикого Сердца' },
+    { type: 'background', name: 'Анарх Груулов' },
+    { type: 'feat', name: 'Любимец богов' },
+    { type: 'feat', name: 'Затронутый феями' },
+    { type: 'feat', name: 'Посвящённый в магию' },
+    { type: 'feat', name: 'Ритуальный заклинатель' },
+    { type: 'feat', name: 'Ваятель рун' },
+    { type: 'feat', name: 'Поступивший в Стриксхейвен' },
+    { type: 'other', name: 'Договор гримуара' }
+  ]
+}
 ];
