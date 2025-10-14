@@ -4,9 +4,9 @@ interface Props {
   nameEn: string;
   requirements: string;
   space: number; // 1=Тесное(4кв), 2=Вместительное(16кв), 3=Просторное(36кв), 4=Вместительное(16кв), просторное(36кв)
-  hirelings: number;
+  hirelings: string;
   order: number; // 1=Изготовить, 2=Усилить, 3=Собрать, 4=Обслуживать, 5=Завербовать, 6=Изучать, 7=Торговать
-  description: string;
+  description?: string;
   abilities: Array<{
     name: string;
     description: string;
