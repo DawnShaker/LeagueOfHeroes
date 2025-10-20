@@ -1011,7 +1011,7 @@ const events = {
 
 <style>
   .content {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
   }
 
@@ -1081,14 +1081,13 @@ const events = {
 
   .filter-panel {
     display: none;
-    position: absolute;
-    top: 100%;
-    right: 0;
+    position: fixed;
+    right: 0.5rem;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 0.5rem;
     box-shadow: var(--card-shadow);
-    min-width: 300px;
+    max-width: 600px;
     z-index: 100;
     margin-top: 0.5rem;
   }
@@ -1098,11 +1097,11 @@ const events = {
   }
 
   .filter-content {
-    padding: 1.5rem;
+    padding: 1rem;
   }
 
   .filter-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .filter-group:last-of-type {
@@ -1119,15 +1118,6 @@ const events = {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-  }
-
-  .checkbox-label {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-    padding: 0.25rem;
-    border-radius: 0.25rem;
   }
 
   .checkbox-label:hover {
@@ -1242,16 +1232,17 @@ const events = {
 
   .building-details {
     position: absolute; /*absolute*/
-    top: 30%;
+    top: 15%;
+    left: -5%;
     transform: translate(-50%, -50%);
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 0.5rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    min-width: 400px;
-    max-height: 600px;
+    min-width: 440px;
+    max-height: 400px;
     overflow-y: auto;
-    z-index: 1000;
+    z-index: 100;
     padding: 1.5rem;
   }
 
@@ -1345,22 +1336,13 @@ const events = {
     .buildings-grid {
       grid-template-columns: 1fr;
     }
+  }
     
     .building-details {
       max-width: 90vw;
       max-height: 90vh;
       padding: 1.5rem;
     }
-    
-    .filter-panel {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      right: auto;
-      min-width: 90vw;
-    }
-  }
 
   h2 {
     color: var(--primary);
