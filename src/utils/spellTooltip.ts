@@ -13,104 +13,139 @@ export class SpellTooltip {
   private hideTimeout: number | null = null;
   private showTimeout: number | null = null;
   private config: Required<TooltipConfig>;
+  private spells: Spell[] = [];
+  private isHoveringTooltip: boolean = false;
 
   constructor(config: TooltipConfig = {}) {
     this.config = {
-      offsetX: config.offsetX ?? 0,
-      offsetY: config.offsetY ?? 8,
-      fadeInDelay: config.fadeInDelay ?? 200,
-      fadeOutDelay: config.fadeOutDelay ?? 100
+      offsetX: config.offsetX ?? 16,
+      offsetY: config.offsetY ?? 16,
+      fadeInDelay: config.fadeInDelay ?? 300,
+      fadeOutDelay: config.fadeOutDelay ?? 150
     };
   }
 
   init(tooltipElement: HTMLElement, spells: Spell[]) {
     this.tooltip = tooltipElement;
-    const links = document.querySelectorAll('a[data-spell-id]');
+    this.spells = spells;
 
-    links.forEach(link => {
-      const htmlLink = link as HTMLElement;
+    if (this.tooltip) {
+      this.tooltip.addEventListener('mouseenter', () => {
+        this.isHoveringTooltip = true;
+        if (this.hideTimeout) {
+          clearTimeout(this.hideTimeout);
+          this.hideTimeout = null;
+        }
+      });
 
-      htmlLink.addEventListener('mouseenter', (event) => this.handleMouseEnter(event, spells));
-      htmlLink.addEventListener('mouseleave', () => this.handleMouseLeave());
-      htmlLink.addEventListener('mousemove', (event) => this.handleMouseMove(event));
-    });
+      this.tooltip.addEventListener('mouseleave', () => {
+        this.isHoveringTooltip = false;
+        this.scheduleHide();
+      });
+    }
+
+    document.addEventListener('mouseover', (e) => this.handleMouseOver(e));
+    document.addEventListener('mouseout', (e) => this.handleMouseOut(e));
+    document.addEventListener('mousemove', (e) => this.handleMouseMove(e));
   }
 
-  private handleMouseEnter(event: Event, spells: Spell[]) {
-    if (this.hideTimeout) {
-      clearTimeout(this.hideTimeout);
-      this.hideTimeout = null;
+  private handleMouseOver(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const link = target.closest('.spell-link') as HTMLElement;
+
+    if (link && link.dataset.spellId) {
+      if (this.hideTimeout) {
+        clearTimeout(this.hideTimeout);
+        this.hideTimeout = null;
+      }
+
+      this.currentLink = link;
+      const spellId = link.dataset.spellId;
+
+      this.showTimeout = window.setTimeout(() => {
+        const spell = this.spells.find(s => s.id === spellId);
+        if (spell) {
+          this.showTooltip(spell, event);
+        }
+      }, this.config.fadeInDelay);
     }
+  }
+
+  private handleMouseOut(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const link = target.closest('.spell-link');
+
+    if (link) {
+      if (this.showTimeout) {
+        clearTimeout(this.showTimeout);
+        this.showTimeout = null;
+      }
+
+      const relatedTarget = event.relatedTarget as HTMLElement;
+      if (relatedTarget && (relatedTarget === this.tooltip || this.tooltip?.contains(relatedTarget))) {
+        return;
+      }
+
+      this.scheduleHide();
+    }
+  }
+
+  private handleMouseMove(event: MouseEvent) {
+    if (!this.tooltip || !this.tooltip.style.display || this.tooltip.style.display === 'none') return;
 
     const target = event.target as HTMLElement;
-    this.currentLink = target;
-    const spellId = target.dataset.spellId;
+    const link = target.closest('.spell-link');
 
-    if (!spellId || !this.tooltip) return;
-
-    const spell = spells.find(s => s.id === spellId);
-    if (!spell) return;
-
-    this.showTimeout = window.setTimeout(() => {
-      this.showTooltip(spell, event as MouseEvent);
-    }, this.config.fadeInDelay);
-  }
-
-  private handleMouseLeave() {
-    if (this.showTimeout) {
-      clearTimeout(this.showTimeout);
-      this.showTimeout = null;
+    if (link === this.currentLink) {
+      this.positionTooltip(event);
     }
-
-    this.hideTimeout = window.setTimeout(() => {
-      this.hideTooltip();
-    }, this.config.fadeOutDelay);
   }
 
-  private handleMouseMove(event: Event) {
-    if (!this.tooltip || this.tooltip.classList.contains('hidden')) return;
-    this.positionTooltip(event as MouseEvent);
+  private scheduleHide() {
+    this.hideTimeout = window.setTimeout(() => {
+      if (!this.isHoveringTooltip) {
+        this.hideTooltip();
+      }
+    }, this.config.fadeOutDelay);
   }
 
   private showTooltip(spell: Spell, event: MouseEvent) {
     if (!this.tooltip) return;
 
     this.tooltip.innerHTML = this.renderTooltipContent(spell);
-    this.tooltip.classList.remove('hidden');
+    this.tooltip.style.display = 'block';
+    this.tooltip.setAttribute('aria-hidden', 'false');
     this.positionTooltip(event);
   }
 
   private hideTooltip() {
     if (!this.tooltip) return;
-    this.tooltip.classList.add('hidden');
+    this.tooltip.style.display = 'none';
+    this.tooltip.setAttribute('aria-hidden', 'true');
+    this.tooltip.innerHTML = '';
     this.currentLink = null;
   }
 
   private positionTooltip(event: MouseEvent) {
     if (!this.tooltip) return;
 
-    const tooltipRect = this.tooltip.getBoundingClientRect();
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
+    const rect = this.tooltip.getBoundingClientRect();
+    const vpW = window.innerWidth;
+    const vpH = window.innerHeight;
 
-    let left = event.pageX + this.config.offsetX;
-    let top = event.pageY + this.config.offsetY;
+    let left = event.clientX + this.config.offsetX;
+    let top = event.clientY + this.config.offsetY;
 
-    if (left + tooltipRect.width > viewportWidth + window.scrollX) {
-      left = event.pageX - tooltipRect.width - this.config.offsetX;
+    if (left + rect.width + 12 > vpW) {
+      left = vpW - rect.width - 12;
     }
 
-    if (top + tooltipRect.height > viewportHeight + window.scrollY) {
-      top = event.pageY - tooltipRect.height - this.config.offsetY;
+    if (top + rect.height + 12 > vpH) {
+      top = Math.max(12, vpH - rect.height - 12);
     }
 
-    if (left < window.scrollX) {
-      left = window.scrollX + 10;
-    }
-
-    if (top < window.scrollY) {
-      top = window.scrollY + 10;
-    }
+    left = Math.max(8, left);
+    top = Math.max(8, top);
 
     this.tooltip.style.left = `${left}px`;
     this.tooltip.style.top = `${top}px`;
@@ -121,37 +156,22 @@ export class SpellTooltip {
     const components = this.formatComponents(spell.components);
 
     return `
-      <div class="spell-tooltip-header">
-        <h3 class="spell-tooltip-name">${spell.name}</h3>
-        <span class="spell-tooltip-name-en">${spell.nameEn}</span>
-      </div>
-      <div class="spell-tooltip-meta">
-        <span class="spell-level">${levelText}</span>
-        <span class="spell-school">${spell.school}</span>
-      </div>
-      <div class="spell-tooltip-stats">
-        <div class="spell-stat">
-          <span class="spell-stat-label">Время накладывания:</span>
-          <span class="spell-stat-value">${spell.castingTime}</span>
+      <div class="tooltip-card">
+        <div class="tooltip-header">
+          <div class="tooltip-title">${spell.name} <span class="name-en">[${spell.nameEn}]</span></div>
+          <div class="tooltip-source">${spell.source.book}, стр. ${spell.source.page}</div>
         </div>
-        <div class="spell-stat">
-          <span class="spell-stat-label">Дистанция:</span>
-          <span class="spell-stat-value">${spell.range}</span>
+        <div class="tooltip-meta">
+          <span class="tooltip-level">${levelText}</span>
+          <span class="tooltip-school">${spell.school}</span>
         </div>
-        <div class="spell-stat">
-          <span class="spell-stat-label">Компоненты:</span>
-          <span class="spell-stat-value">${components}</span>
+        <div class="tooltip-attrs">
+          <div><strong>Время:</strong> ${spell.castingTime}</div>
+          <div><strong>Дистанция:</strong> ${spell.range}</div>
+          <div><strong>Компоненты:</strong> ${components}</div>
+          <div><strong>Длительность:</strong> ${spell.duration}</div>
         </div>
-        <div class="spell-stat">
-          <span class="spell-stat-label">Длительность:</span>
-          <span class="spell-stat-value">${spell.duration}</span>
-        </div>
-      </div>
-      <div class="spell-tooltip-description">
-        ${spell.description}
-      </div>
-      <div class="spell-tooltip-footer">
-        <span class="spell-source">${spell.source.book}, стр. ${spell.source.page}</span>
+        <div class="tooltip-desc">${spell.description}</div>
       </div>
     `;
   }

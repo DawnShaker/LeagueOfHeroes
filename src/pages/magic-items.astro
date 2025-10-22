@@ -267,14 +267,74 @@ const rarityLabels = {
       }
     }
 
-    // Load filters from localStorage
+    // Get filters from URL
+    function getFiltersFromURL(): Record<string, string[]> {
+      const params = new URLSearchParams(window.location.search);
+      const filters: Record<string, string[]> = {};
+
+      const rarity = params.get('rarity');
+      if (rarity) filters.rarity = rarity.split(',');
+
+      const type = params.get('type');
+      if (type) filters.type = type.split(',');
+
+      const source = params.get('source');
+      if (source) filters.source = source.split(',');
+
+      const attunement = params.get('attunement');
+      if (attunement) filters.attunement = attunement.split(',');
+
+      const craftingTools = params.get('craftingTools');
+      if (craftingTools) filters.craftingTools = craftingTools.split(',');
+
+      const search = params.get('search');
+      if (search && searchInput) {
+        searchInput.value = search;
+      }
+
+      return filters;
+    }
+
+    // Update URL with current filters
+    function updateURL() {
+      const params = new URLSearchParams();
+
+      const rarities = Array.from(document.querySelectorAll('input[name="rarity"]:checked')).map(cb => (cb as HTMLInputElement).value);
+      if (rarities.length > 0) params.set('rarity', rarities.join(','));
+
+      const types = Array.from(document.querySelectorAll('input[name="type"]:checked')).map(cb => (cb as HTMLInputElement).value);
+      if (types.length > 0) params.set('type', types.join(','));
+
+      const sources = Array.from(document.querySelectorAll('input[name="source"]:checked')).map(cb => (cb as HTMLInputElement).value);
+      if (sources.length > 0) params.set('source', sources.join(','));
+
+      const attunement = Array.from(document.querySelectorAll('input[name="attunement"]:checked')).map(cb => (cb as HTMLInputElement).value);
+      if (attunement.length > 0) params.set('attunement', attunement.join(','));
+
+      const craftingTools = Array.from(document.querySelectorAll('input[name="crafting-tools"]:checked')).map(cb => (cb as HTMLInputElement).value);
+      if (craftingTools.length > 0) params.set('craftingTools', craftingTools.join(','));
+
+      const searchTerm = searchInput?.value.trim();
+      if (searchTerm) params.set('search', searchTerm);
+
+      // Get current item ID from path
+      const pathParts = window.location.pathname.split('/');
+      const itemId = pathParts[1] === 'magic-items' && pathParts[2] ? pathParts[2] : null;
+
+      const queryString = params.toString();
+      const basePath = itemId ? `/magic-items/${itemId}` : '/magic-items';
+      const newUrl = queryString ? `${basePath}?${queryString}` : basePath;
+
+      window.history.replaceState({ itemId }, '', newUrl);
+    }
+
+    // Load filters from URL or localStorage
     function loadFilters() {
-      const savedFilters = localStorage.getItem('magicItemFilters');
-      if (savedFilters) {
-        const filters = JSON.parse(savedFilters);
-        
-        // Apply saved filters
-        Object.entries(filters).forEach(([filterType, values]) => {
+      const urlFilters = getFiltersFromURL();
+
+      // If URL has filters, use them and save to localStorage
+      if (Object.keys(urlFilters).length > 0) {
+        Object.entries(urlFilters).forEach(([filterType, values]) => {
           if (Array.isArray(values)) {
             values.forEach(value => {
               const checkbox = document.querySelector(`input[name="${filterType}"][value="${value}"]`) as HTMLInputElement;
@@ -282,10 +342,26 @@ const rarityLabels = {
             });
           }
         });
-        
-        updateFilterCount();
-        filterItems();
+        saveFilters();
+      } else {
+        // Otherwise, try to load from localStorage
+        const savedFilters = localStorage.getItem('magicItemFilters');
+        if (savedFilters) {
+          const filters = JSON.parse(savedFilters);
+
+          Object.entries(filters).forEach(([filterType, values]) => {
+            if (Array.isArray(values)) {
+              values.forEach(value => {
+                const checkbox = document.querySelector(`input[name="${filterType}"][value="${value}"]`) as HTMLInputElement;
+                if (checkbox) checkbox.checked = true;
+              });
+            }
+          });
+        }
       }
+
+      updateFilterCount();
+      filterItems();
     }
 
     // Save filters to localStorage
@@ -299,6 +375,7 @@ const rarityLabels = {
       };
       
       localStorage.setItem('magicItemFilters', JSON.stringify(filters));
+      updateURL();
     }
 
     // Update filter count display
@@ -396,7 +473,9 @@ const rarityLabels = {
       document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
         (cb as HTMLInputElement).checked = false;
       });
+      if (searchInput) searchInput.value = '';
       localStorage.removeItem('magicItemFilters');
+      updateURL();
       filterItems();
     }
 
@@ -520,8 +599,10 @@ const rarityLabels = {
       itemRows.forEach(row => row.classList.remove('active'));
       document.querySelector(`[data-item-id="${itemId}"]`)?.classList.add('active');
       
-      // Update URL without page reload
-      const newUrl = `/magic-items/${itemId}`;
+      // Update URL without page reload, preserving filters
+      const params = new URLSearchParams(window.location.search);
+      const queryString = params.toString();
+      const newUrl = queryString ? `/magic-items/${itemId}?${queryString}` : `/magic-items/${itemId}`;
       window.history.pushState({ itemId }, '', newUrl);
     }
 
@@ -808,7 +889,9 @@ const rarityLabels = {
       });
     });
 
-    searchInput?.addEventListener('input', filterItems);
+    searchInput?.addEventListener('input', () => {
+      filterItems();
+    });
     
     itemRows.forEach(row => {
       row.addEventListener('click', () => {
@@ -819,6 +902,14 @@ const rarityLabels = {
 
     // Handle browser back/forward buttons
     window.addEventListener('popstate', (event) => {
+      // Reload filters from URL
+      document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        (cb as HTMLInputElement).checked = false;
+      });
+      if (searchInput) searchInput.value = '';
+
+      loadFilters();
+
       if (event.state?.itemId) {
         showItemDetails(event.state.itemId);
       } else {
@@ -863,8 +954,6 @@ const rarityLabels = {
         filterItems();
       }
     });
-    
-    searchInput?.addEventListener('input', filterItems);
   }
 
   const rarityLabels = {
