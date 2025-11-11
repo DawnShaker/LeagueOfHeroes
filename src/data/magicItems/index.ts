@@ -719,7 +719,6 @@ export const magicItems: MagicItem[] = [
     weight: '—',
     attunement: true,
     rarity: 'Uncommon',
-    attunementRequirement: 'заклинателем',
     source: {
       book: 'DMG',
       page: 275
