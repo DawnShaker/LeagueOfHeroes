@@ -35,12 +35,12 @@ export const warlock: Class = {
       {
         choice: 'A',
         items: [
-          'Кожаный доспех',
-          'Серп',
-          '2 кинжала',
-          'Магическая фокусировка (сфера)',
-          'Книга (оккультные знания)',
-          'Набор учёного',
+          '<a href="/items/leather-armor">Кожаный доспех</a>',
+          '<a href="/items/sickle">Серп</a>',
+          '2 <a href="/items/dagger">кинжала</a>',
+          '<a href="/items/orb">Магическая фокусировка (сфера)</a>',
+          '<a href="/items/book">Книга (оккультные знания)</a>',
+          '<a href="/items/scholars-pack">Набор учёного</a>',
           '15 зм'
         ]
       },

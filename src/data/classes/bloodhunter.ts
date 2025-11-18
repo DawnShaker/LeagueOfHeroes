@@ -37,13 +37,13 @@ export const bloodhunter: Class = {
       {
         choice: 'A',
         items: [
-          'Чешуйчатый доспех',
-          'Длинный меч',
-          '2 кинжала',
-          'Легкий арбалет',
-          '20 болтов',
-          'Набор исследователя подземелий',
-          'Инструменты алхимика',
+          '<a href="/items/scale-mail">Чешуйчатый доспех</a>',
+          '<a href="/items/lngsword">Длинный меч</a>',
+          '2 <a href="/items/dagger">кинжала</a>',
+          '<a href="/items/light-crossbow">Легкий арбалет</a>',
+          '20 <a href="/items/bolt">болтов</a>',
+          '<a href="/items/dungeoneers-pack">Набор исследователя подземелий</a>',
+          '<a href="/items/alchemists-supplies">Инструменты алхимика</a>',
           '4 зм'
         ]
       },

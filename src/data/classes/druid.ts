@@ -37,12 +37,12 @@ export const druid: Class = {
       {
         choice: 'А',
         items: [
-          'Кожаный доспех',
-          'Щит',
-          'Серп',
-          'Боевой посох (фокусировка друидов)',
-          'Набор травника',
-          'Набор путешественника',
+          '<a href="/items/leather-armor">Кожаный доспех</a>',
+          '<a href="/items/shield">Щит</a>',
+          '<a href="/items/sickle">Серп</a>',
+          '<a href="/items/quarterstaff">Боевой посох (фокусировка друидов)</a>',
+          '<a href="/items/herbalism-kit">Набор травника</a>',
+          '<a href="/items/explorers-pack">Набор путешественника</a>',
           '9 зм'
         ]
       },

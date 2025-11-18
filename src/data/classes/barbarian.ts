@@ -34,9 +34,9 @@ export const barbarian: Class = {
       {
         choice: 'А',
         items: [
-          'Секира',
-          '4 ручных топора',
-          'Набор путешественника',
+          '<a href="/items/greataxe">Секира</a>',
+          '4 <a href="/items/handaxe">ручных топора</a>',
+          '<a href="/items/explorers-pack">Набор путешественника</a>',
           '15 зм'
         ]
       },

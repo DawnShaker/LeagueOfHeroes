@@ -37,11 +37,11 @@ export const fighter: Class = {
       {
         choice: 'A',
         items: [
-          'Кольчуга',
-          'Двуручный меч',
-          'Цеп',
-          '8 метательных копий',
-          'Набор исследователя подземелий',
+          '<a href="/items/chainmail">Кольчуга</a>',
+          '<a href="/items/greatsword">Двуручный меч</a>',
+          '<a href="/items/flail">Цеп</a>',
+          '8 <a href="/items/javelin">метательных копий</a>',
+          '<a href="/items/dungeoneers-pack">Набор исследователя подземелий</a>',
           '4 зм'
         ]
       },

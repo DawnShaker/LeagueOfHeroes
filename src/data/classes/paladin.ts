@@ -34,12 +34,12 @@ export const paladin: Class = {
       {
         choice: 'А',
         items: [
-          'Кольчуга',
-          'Щит',
-          'Длинный меч',
-          '6 метательных копий',
+          '<a href="/items/chainmail">Кольчуга</a>',
+          '<a href="/items/shield">Щит</a>',
+          '<a href="/items/greatsword">Длинный меч</a>',
+          '6 <a href="/items/javelin">метательных копий</a>',
           'Священный символ',
-          'Набор священника',
+          '<a href="/items/priests-pack">Набор священника</a>',
           '9 зм'
         ]
       },

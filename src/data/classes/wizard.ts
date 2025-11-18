@@ -35,10 +35,10 @@ export const wizard: Class = {
       {
         choice: 'А',
         items: [
-          '2 кинжала',
-          'Магическая фокусировка (боевой посох)',
-          'Книга заклинаний',
-          'Набор учёного',
+          '2 <a href="/items/dagger">кинжала</a>',
+          '<a href="/items/quarterstaff">Магическая фокусировка (боевой посох)</a>',
+          '<a href="/items/book">Книга заклинаний</a>',
+          '<a href="/items/scholars-pack">Набор учёного</a>',
           '5 зм'
         ]
       },

@@ -39,14 +39,14 @@ export const rogue: Class = {
       {
         choice: 'A',
         items: [
-          'Кожаный доспех',
-          '2 кинжала',
-          'Короткий меч',
-          'Короткий лук',
-          '20 стрел',
-          'Колчан',
-          'Воровские инструменты',
-          'Набор взломщика',
+          '<a href="/items/leather-armor">Кожаный доспех</a>',
+          '2 <a href="/items/dagger">кинжала</a>',
+          '<a href="/items/shortsword">Короткий меч</a>',
+          '<a href="/items/shortbow">Короткий лук</a>',
+          '20 <a href="/items/arrow">стрел</a>',
+          '<a href="/items/quiver">Колчан</a>',
+          '<a href="/items/thieves-tools">Воровские инструменты</a>',
+          '<a href="/items/quiver">Колчан</a>Набор взломщика',
           '8 зм'
         ]
       },

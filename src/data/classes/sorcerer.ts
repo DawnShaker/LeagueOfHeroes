@@ -34,10 +34,10 @@ export const sorcerer: Class = {
       {
         choice: 'А',
         items: [
-          'Копьё',
-          '2 кинжала',
-          'Магическая фокусировка (кристалл)',
-          'Набор исследователя подземелий',
+          '<a href="/items/spear">Копьё</a>',
+          '2 <a href="/items/dagger">кинжала</a>',
+          '<a href="/items/crystal">Магическая фокусировка (кристалл)</a>',
+          '<a href="/items/dungeoneers-pack">Набор исследователя подземелий</a>',
           '28 зм'
         ]
       },

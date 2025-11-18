@@ -30,10 +30,10 @@ export const bard: Class = {
       {
         choice: 'А',
         items: [
-          'Кожаный доспех',
-          '2 кинжала',
+          '<a href="/items/leather-armor">Кожаный доспех</a>',
+          '2 <a href="/items/dagger">кинжала</a>',
           'Любой музыкальный инструмент',
-          'Набор артиста',
+          '<a href="/items/entertainers-pack">Набор артиста</a>',
           '19 зм'
         ]
       },

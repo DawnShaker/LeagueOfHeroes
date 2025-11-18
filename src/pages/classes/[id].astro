@@ -4,10 +4,10 @@ import ClassTable from '../../components/classes/ClassTable.astro';
 import { classes } from '../../data/classes';
 
 export function getStaticPaths() {
-return classes.map(classData => ({
-params: { id: classData.id },
-props: { classData }
-}));
+  return classes.map(classData => ({
+    params: { id: classData.id },
+    props: { classData }
+  }));
 }
 
 const { classData } = Astro.props;
@@ -95,14 +95,14 @@ return { level, spells };
       <p>Выберите один из следующих наборов:</p>
 
       {classData.equipment.default.map(choice => (
-      <div class="equipment-choice">
-        <h3>Вариант {choice.choice}</h3>
-        <ul>
-          {choice.items.map(item => (
-          <li>{item}</li>
-          ))}
-        </ul>
-      </div>
+        <div class="equipment-choice">
+          <h3>Вариант {choice.choice}</h3>
+          <ul>
+            {choice.items.map(item => (
+              <li set:html={item}></li>
+            ))}
+          </ul>
+        </div>
       ))}
     </div>
 
@@ -123,7 +123,6 @@ return { level, spells };
           {feature.description.split('\n').map(paragraph => (
             <p>{paragraph}</p>
           ))}
-          
           {feature.collapsible && (
             <div class="collapsible-content">
               {feature.collapsible.map(item => (

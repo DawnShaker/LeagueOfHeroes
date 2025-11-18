@@ -36,14 +36,14 @@ export const ranger: Class = {
       {
         choice: 'А',
         items: [
-          'Проклёпанная кожа',
-          'Скимитар',
-          'Короткий меч',
-          'Длинный лук',
-          '20 стрел',
-          'Колчан',
-          'Веточка омелы',
-          'Набор путешественника',
+          '<a href="/items/studded-leather-armor">Проклёпанная кожа</a>',
+          '<a href="/items/scimitar">Скимитар</a>',
+          '<a href="/items/shortsword">Короткий меч</a>',
+          '<a href="/items/longbow">Длинный лук</a>',
+          '20 <a href="/items/arrow">стрел</a>',
+          '<a href="/items/quiver">Колчан</a>',
+          '<a href="/items/sprig-of-mistletoe">Веточка омелы</a>',
+          '<a href="/items/explorers-pack">Набор путешественника</a>',
           '7 зм'
         ]
       },

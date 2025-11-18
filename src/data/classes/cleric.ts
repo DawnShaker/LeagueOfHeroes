@@ -33,11 +33,11 @@ export const cleric: Class = {
       {
         choice: 'А',
         items: [
-          'Кольчужная рубаха',
-          'Щит',
-          'Булава',
+          '<a href="/items/chain-shirt">Кольчужная рубаха</a>',
+          '<a href="/items/shield">Щит</a>',
+          '<a href="/items/mace">Булава</a>',
           'Священный символ',
-          'Набор священника',
+          '<a href="/items/priests-pack">Набор священника</a>',
           '7 зм'
         ]
       },
