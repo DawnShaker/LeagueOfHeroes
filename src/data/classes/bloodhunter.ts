@@ -38,7 +38,7 @@ export const bloodhunter: Class = {
         choice: 'A',
         items: [
           '<a href="/items/scale-mail">Чешуйчатый доспех</a>',
-          '<a href="/items/lngsword">Длинный меч</a>',
+          '<a href="/items/longsword">Длинный меч</a>',
           '2 <a href="/items/dagger">кинжала</a>',
           '<a href="/items/light-crossbow">Легкий арбалет</a>',
           '20 <a href="/items/bolt">болтов</a>',

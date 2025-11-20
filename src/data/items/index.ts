@@ -1401,9 +1401,9 @@ interface Item {
       description: '10 минут на надевание и 5 минут на снятие, КД: 14, Скрытность: Помеха'
     },
     {
-      id: 'сhain-mail',
+      id: 'chain-mail',
       name: 'Кольчуга',
-      nameEn: 'Сhain Mail',
+      nameEn: 'Chain Mail',
       type: 'Тяжёлый доспех',
       cost: '75 зм',
       weight: '55 фнт.',

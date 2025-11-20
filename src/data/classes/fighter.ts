@@ -37,7 +37,7 @@ export const fighter: Class = {
       {
         choice: 'A',
         items: [
-          '<a href="/items/chainmail">Кольчуга</a>',
+          '<a href="/items/chain-mail">Кольчуга</a>',
           '<a href="/items/greatsword">Двуручный меч</a>',
           '<a href="/items/flail">Цеп</a>',
           '8 <a href="/items/javelin">метательных копий</a>',

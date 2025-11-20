@@ -34,7 +34,7 @@ export const paladin: Class = {
       {
         choice: 'А',
         items: [
-          '<a href="/items/chainmail">Кольчуга</a>',
+          '<a href="/items/chain-mail">Кольчуга</a>',
           '<a href="/items/shield">Щит</a>',
           '<a href="/items/longsword">Длинный меч</a>',
           '6 <a href="/items/javelin">метательных копий</a>',
