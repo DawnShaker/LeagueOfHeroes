@@ -24,12 +24,12 @@ export const spells: Spell[] = [
     sources: [
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-      { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a>' },
-      { type: 'subclass', name: '<a href="classes/cleric?subclass=knowledge">Домен Знаний</a>' },
-      { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-      { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-      { type: 'subclass', name: '<a href="classes/wizard?subclass=evoker">Воплотитель</a>' },
+      { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=knowledge">Домен Знаний</a>' },
+      { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+      { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
       { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
       { type: 'species', name: '<a href="races/genasi/">Дженази Воды</a>' },
       { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
@@ -63,16 +63,16 @@ export const spells: Spell[] = [
       page: 293
     },
     sources: [
-      { type: 'class', name: '<a href="classes/bard">Бард</a>' },
+      { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-      { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-      { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-      { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-      { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-      { type: 'subclass', name: '<a href="classes/ranger?subclass=swarmkeeper">Хранитель Роя</a>' },
-      { type: 'subclass', name: '<a href="classes/wizard?subclass=conjurer">Вызыватель</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+      { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'subclass', name: '<a href="/classes/ranger?subclass=swarmkeeper">Хранитель Роя</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' },
       { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
       { type: 'species', name: '<a href="races/gith/">Гит</a>' },
       { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
@@ -108,15 +108,15 @@ export const spells: Spell[] = [
       page: 247
     },
     sources: [
-      { type: 'class', name: '<a href="classes/bard">Бард</a>' },
+      { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-      { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-      { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-      { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-      { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-      { type: 'subclass', name: '<a href="classes/wizard?subclass=abjurer">Оградитель</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+      { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=abjurer">Оградитель</a>' },
       { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
       { type: 'species', name: '<a href="races/genasi/">Дженази Земли</a>' },
       { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
@@ -150,13 +150,13 @@ export const spells: Spell[] = [
     },
     sources: [
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-      { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-      { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-      { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-      { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-      { type: 'subclass', name: '<a href="classes/wizard?subclass=evoker">Воплотитель</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+      { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
       { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
       { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
       { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
@@ -187,15 +187,15 @@ export const spells: Spell[] = [
     },
     sources: [
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-      { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-      { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-      { type: 'subclass', name: '<a href="classes/cleric?subclass=death">Домен Смерти</a>' },
-      { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-      { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="classes/druid?subclass=spore">Круг Спор</a>' },
-      { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-      { type: 'subclass', name: '<a href="classes/wizard?subclass=necromancer">Некромант</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=death">Домен Смерти</a>' },
+      { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+      { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+      { type: 'subclass', name: '<a href="/classes/druid?subclass=spore">Круг Спор</a>' },
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' },
       { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
       { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
       { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
@@ -231,15 +231,15 @@ export const spells: Spell[] = [
     },
     sources: [
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-      { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-      { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-      { type: 'subclass', name: '<a href="classes/cleric?subclass=death">Домен Смерти</a>' },
-      { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-      { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="classes/druid?subclass=spore">Круг Спор</a>' },
-      { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-      { type: 'subclass', name: '<a href="classes/wizard?subclass=transmuter">Преобразователь</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=death">Домен Смерти</a>' },
+      { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+      { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+      { type: 'subclass', name: '<a href="/classes/druid?subclass=spore">Круг Спор</a>' },
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
       { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
       { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
       { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
@@ -273,15 +273,15 @@ export const spells: Spell[] = [
     sources: [
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-      { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-      { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-      { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
-      { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-      { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a>' },
-      { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-      { type: 'subclass', name: '<a href="classes/wizard?subclass=conjurer">Вызыватель</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
+      { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+      { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+      { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' },
       { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
       { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
       { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
@@ -314,14 +314,14 @@ export const spells: Spell[] = [
       page: 259
     },
     sources: [
-      { type: 'class', name: '<a href="classes/bard">Бард</a>' },
+      { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-      { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-      { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-      { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-      { type: 'subclass', name: '<a href="classes/wizard?subclass=illusionist">Иллюзионист</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+      { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=illusionist">Иллюзионист</a>' },
       { type: 'species', name: '<a href="races/elf/">Эльф Астральный</a>' },
       { type: 'species', name: '<a href="races/elf/">Эльф Дроу</a>' },
       { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
@@ -356,9 +356,9 @@ export const spells: Spell[] = [
       page: 343
     },
     sources: [
-      { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
-      { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
+      { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+      { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+      { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
       { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
       { type: 'feat', name: '<a href="feats/blessed-warrior/">Благословлённый воин</a>' },
       { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
@@ -386,15 +386,15 @@ export const spells: Spell[] = [
       page: 336
     },
     sources: [
-      { type: 'class', name: '<a href="classes/bard">Бард</a>' },
+      { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-      { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-      { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-      { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-      { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-      { type: 'subclass', name: '<a href="classes/wizard?subclass=diviner">Прорицатель</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+      { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=diviner">Прорицатель</a>' },
       { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
       { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
       { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
@@ -423,7 +423,7 @@ export const spells: Spell[] = [
       page: 337
     },
     sources: [
-      { type: 'class', name: '<a href="classes/bard">Бард</a>' },
+      { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'background', name: '<a href="backgrounds/rakdos%20cultist/">Культист Ракдосов</a>' },
       { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
       { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
@@ -450,16 +450,16 @@ export const spells: Spell[] = [
       page: 334
     },
     sources: [
-      { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
-      { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+      { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-      { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-      { type: 'subclass', name: '<a href="classes/cleric?subclass=death">Домен Смерти</a>' },
-      { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
-      { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-      { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-      { type: 'subclass', name: '<a href="classes/wizard?subclass=necromancer">Некромант</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=death">Домен Смерти</a>' },
+      { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
+      { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+      { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' },
       { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
       { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
       { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
@@ -488,18 +488,18 @@ export const spells: Spell[] = [
       page: 333
     },
     sources: [
-      { type: 'class', name: '<a href="classes/bard">Бард</a>' },
+      { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-      { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-      { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-      { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
-      { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a>' },
-      { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-      { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-      { type: 'subclass', name: '<a href="classes/wizard?subclass=evoker">Воплотитель</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
+      { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
+      { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+      { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
       { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
       { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
       { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
@@ -533,9 +533,9 @@ export const spells: Spell[] = [
     },
     sources: [
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-      { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
-      { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a>' },
-      { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
+      { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
+      { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
       { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
       { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
@@ -566,11 +566,11 @@ export const spells: Spell[] = [
       page: 333
     },
     sources: [
-      { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
-      { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
-      { type: 'subclass', name: '<a href="classes/ranger?subclass=drakewarden">Наезник на дрейке</a>' },
-      { type: 'subclass', name: '<a href="classes/barbarian?subclass=giant">Путь Великанов</a>' },
+      { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+      { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+      { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
+      { type: 'subclass', name: '<a href="/classes/ranger?subclass=drakewarden">Наезник на дрейке</a>' },
+      { type: 'subclass', name: '<a href="/classes/barbarian?subclass=giant">Путь Великанов</a>' },
       { type: 'species', name: '<a href="races/tiefling/">Тифлинг</a>' },
       { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
       { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
@@ -601,13 +601,13 @@ export const spells: Spell[] = [
     },
     sources: [
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-      { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-      { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-      { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-      { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-      { type: 'subclass', name: '<a href="classes/wizard?subclass=conjurer">Вызыватель</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+      { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' },
       { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
       { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
       { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
@@ -637,12 +637,12 @@ export const spells: Spell[] = [
       page: 320
     },
     sources: [
-      { type: 'class', name: '<a href="classes/bard">Бард</a>' },
+      { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-      { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a>' },
-      { type: 'subclass', name: '<a href="classes/druid?subclass=moon">Круг Луны</a>' },
-      { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
+      { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
+      { type: 'subclass', name: '<a href="/classes/druid?subclass=moon">Круг Луны</a>' },
+      { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
       { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
       { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
       { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
@@ -672,10 +672,10 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
-    { type: 'subclass', name: '<a href="classes/barbarian?subclass=giant">Путь Великанов</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=arcane-archer">Мистический лучник</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
+    { type: 'subclass', name: '<a href="/classes/barbarian?subclass=giant">Путь Великанов</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=arcane-archer">Мистический лучник</a>' },
     { type: 'species', name: '<a href="races/elf/">Эльф Лесной</a>' },
     { type: 'species', name: '<a href="races/fairy/">Фэйри</a>' },
     { type: 'background', name: '<a href="backgrounds/selesnya%20initiate/">Посвящённый Селезнии</a>' },
@@ -707,7 +707,7 @@ export const spells: Spell[] = [
     page: 267
   },
   sources: [
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -739,13 +739,13 @@ export const spells: Spell[] = [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/monk?subclass=elements">Мастер Стихий</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/monk?subclass=elements">Мастер Стихий</a>' },
     { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
     { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
     { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
@@ -804,12 +804,12 @@ export const spells: Spell[] = [
   sources: [
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=evoker">Воплотитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
     { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
     { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
     { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
@@ -843,16 +843,16 @@ export const spells: Spell[] = [
     page: 277
   },
   sources: [
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=enchanter">Очарователь</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=enchanter">Очарователь</a>' },
     { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
     { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
     { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
@@ -887,16 +887,16 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=evoker">Воплотитель</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
     { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
     { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
     { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
@@ -930,15 +930,15 @@ export const spells: Spell[] = [
     page: 107
   },
   sources: [
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=evoker">Воплотитель</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=evoker">Воплотитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
     { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
     { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
     { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
@@ -967,14 +967,14 @@ export const spells: Spell[] = [
     page: 282
   },
   sources: [
-    { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=stars">Круг Звёзд</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=spirits">Коллегия Духов</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная Душа</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=stars">Круг Звёзд</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=spirits">Коллегия Духов</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная Душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
     { type: 'background', name: '<a href="backgrounds/orzhov%20representative//">Представитель Орзовов</a>' },
     { type: 'feat', name: '<a href="feats/blessed-warrior/">Благословлённый воин</a>' },
     { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
@@ -1011,13 +1011,13 @@ export const spells: Spell[] = [
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a> ' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=transmuter">Преобразователь</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a> ' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
     { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
     { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
     { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
@@ -1055,14 +1055,14 @@ export const spells: Spell[] = [
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a> ' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=conjurer">Вызыватель</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a> ' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' },
     { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
     { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
     { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
@@ -1096,15 +1096,15 @@ export const spells: Spell[] = [
   sources: [
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
-    { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=celestial">Покровитель Небожитель</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная Душа</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a> ' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=evoker">Воплотитель</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=celestial">Покровитель Небожитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная Душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a> ' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
     { type: 'species', name: '<a href="races/aasimar/">Аасимар</a>' },
     { type: 'species', name: '<a href="races/elf/">Эльф Астральный</a>' },
     { type: 'species', name: '<a href="races/elf/">Эльф Бледный</a>' },
@@ -1141,12 +1141,12 @@ export const spells: Spell[] = [
   sources: [
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=evoker">Воплотитель</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
     { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
     { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
     { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
@@ -1179,9 +1179,9 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
     { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
     { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
@@ -1208,19 +1208,19 @@ export const spells: Spell[] = [
     page: 297
   },
   sources: [
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
-    { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная Душа</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=transmuter">Преобразователь</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная Душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
     { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
     { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
     { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
@@ -1254,18 +1254,18 @@ export const spells: Spell[] = [
     page: 298
   },
   sources: [
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная Душа</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=transmuter">Преобразователь</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная Душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
     { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
     { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
     { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
@@ -1300,14 +1300,14 @@ export const spells: Spell[] = [
   sources: [
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=aberrant">Аберрантный Разум</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная Душа</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=enchanter">Очарователь</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=aberrant">Аберрантный Разум</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная Душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=enchanter">Очарователь</a>' },
     { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
     { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
     { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
@@ -1339,16 +1339,16 @@ export const spells: Spell[] = [
     page: 298
   },
   sources: [
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=illusionist">Иллюзионист</a>' },
-    { type: 'subclass', name: '<a href="classes/monk?subclass=shadow">Мастер Тени</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=illusionist">Иллюзионист</a>' },
+    { type: 'subclass', name: '<a href="/classes/monk?subclass=shadow">Мастер Тени</a>' },
     { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
     { type: 'species', name: '<a href="races/gnome/">Гном Лесной</a>' },
     { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
@@ -1385,13 +1385,13 @@ export const spells: Spell[] = [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=transmuter">Преобразователь</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
     { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
     { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
     { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
@@ -1426,15 +1426,15 @@ export const spells: Spell[] = [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=death">Домен Смерти</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=necromancer">Некромант</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=death">Домен Смерти</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' },
     { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
     { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
     { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
@@ -1473,16 +1473,16 @@ export const spells: Spell[] = [
     page: 307
   },
   sources: [
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=arcane-archer">Мистический лучник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=transmuter">Преобразователь</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=arcane-archer">Мистический лучник</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
     { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
     { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
@@ -1515,9 +1515,9 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
     { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
     { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="feats/spell-sniper/">Меткий заклинатель</a>' },
@@ -1547,10 +1547,10 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Колегия Знаний</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Колегия Знаний</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
     { type: 'background', name: '<a href="backgrounds/gruul%20anarch/">Анарх Груулов</a>' },
     { type: 'background', name: '<a href="backgrounds/izzet%20engineer/">Инженер Иззетов</a>' },
     { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
@@ -1579,12 +1579,12 @@ export const spells: Spell[] = [
     page: 312
   },
   sources: [
-    { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Колегия Знаний</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная Душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Колегия Знаний</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная Душа</a>' },
     { type: 'feat', name: '<a href="feats/blessed-warrior/">Благословлённый воин</a>' },
     { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
     { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
@@ -1613,10 +1613,10 @@ export const spells: Spell[] = [
     page: 312
   },
   sources: [
-    { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=celestial">Покровитель Небожитель</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Колегия Знаний</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная Душа</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=celestial">Покровитель Небожитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Колегия Знаний</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная Душа</a>' },
     { type: 'species', name: '<a href="races/elf/">Эльф Астральный</a>' },
     { type: 'background', name: '<a href="backgrounds/boros%20legionnaire/">Легионер Боросов</a>' },
     { type: 'feat', name: '<a href="feats/blessed-warrior/">Благословлённый воин</a>' },
@@ -1654,13 +1654,13 @@ export const spells: Spell[] = [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=transmuter">Преобразователь</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
     { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
     { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
     { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
@@ -1695,9 +1695,9 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
     { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
     { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
@@ -1726,12 +1726,12 @@ export const spells: Spell[] = [
   sources: [
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a> (Умеренная земля)' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=evoker">Воплотитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a> (Умеренная земля)' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
     { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
     { type: 'species', name: '<a href="races/genasi/">Дженази Воздуха</a>' },
     { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
@@ -1764,14 +1764,14 @@ export const spells: Spell[] = [
     page: 316
   },
   sources: [
-    { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=death">Домен Смерти</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=death">Домен Смерти</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="warlock?subclass=undying">Покровитель Бессмертный</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
     { type: 'background', name: '<a href="backgrounds/golgari%20agent/">Агент Голгари</a>' },
     { type: 'feat', name: '<a href="feats/blessed-warrior/">Благословлённый воин</a>' },
     { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
@@ -1832,11 +1832,11 @@ export const spells: Spell[] = [
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'class', name: '<a href="classes/ranger">Следопыт</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=abjurer">Оградитель</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=abjurer">Оградитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
     { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
     { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
@@ -1862,13 +1862,13 @@ export const spells: Spell[] = [
     page: 318
   },
   sources: [
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'class', name: '<a href="classes/ranger">Следопыт</a>' },
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/paladin?subclass=ancients">Клятва Древних</a>' },
+    { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/paladin?subclass=ancients">Клятва Древних</a>' },
     { type: 'subclass', name: '<a href="barbarian?subclass=wild-heart">Путь Дикого Сердца</a>' },
     { type: 'background', name: '<a href="backgrounds/gruul%20anarch/">Анарх Груулов</a>' },
     { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
@@ -1902,13 +1902,13 @@ export const spells: Spell[] = [
     page: 239
   },
   sources: [
-    { type: 'class', name: '<a href="classes/ranger">Следопыт</a>' },
+    { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=abjurer">Оградитель</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=сlockwork">Заводная душа</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=abjurer">Оградитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=сlockwork">Заводная душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="feats/ritual%20caster/">Ритуальный заклинатель</a>' },
     { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
@@ -1936,11 +1936,11 @@ export const spells: Spell[] = [
     page: 239
   },
   sources: [
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'class', name: '<a href="classes/ranger">Следопыт</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
+    { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
     { type: 'species', name: '<a href="races/yuan-ti/">Юань-ти</a>' },
     { type: 'background', name: '<a href="backgrounds/selesnya%20initiate/">Посвящённый Селезнии</a>' },
     { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
@@ -1970,8 +1970,8 @@ export const spells: Spell[] = [
     page: 243
   },
   sources: [
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
-    { type: 'subclass', name: '<a href="classes/paladin?subclass=conquest">Клятва Завоевания</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'subclass', name: '<a href="/classes/paladin?subclass=conquest">Клятва Завоевания</a>' },
     { type: 'species', name: '<a href="races/tiefling/"><a href="races/tiefling/">Тифлинг</a> Левистуса' },
     { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
     { type: 'feat', name: '<a href="feats/rune-shaper/">Ваятель рун</a>' }
@@ -1997,8 +1997,8 @@ export const spells: Spell[] = [
     page: 243
   },
   sources: [
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=aberrant">Аберрантный Разум</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=aberrant">Аберрантный Разум</a>' },
     { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' }
   ]
 },
@@ -2023,14 +2023,14 @@ export const spells: Spell[] = [
     page: 245
   },
   sources: [
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
-    { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=grave">Домен Упокоения</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=vengeance">Клятва Мести</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=undead">Покровитель Нежить</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=grave">Домен Упокоения</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=vengeance">Клятва Мести</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=undead">Покровитель Нежить</a>' },
     { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
     { type: 'feat', name: '<a href="feats/fey-touched/">Затронутый феями</a>' },
     { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
@@ -2058,8 +2058,8 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'class', name: '<a href="classes/ranger">Следопыт</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
     { type: 'feat', name: '<a href="feats/fey-touched/">Затронутый феями</a>' },
     { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
@@ -2087,11 +2087,11 @@ export const spells: Spell[] = [
     page: 247
   },
   sources: [
-    { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
-    { type: 'class', name: '<a href="classes/paladin">Паладин</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=life">Домен Жизни</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+    { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=life">Домен Жизни</a>' },
     { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
     { type: 'feat', name: '<a href="feats/fey-touched/">Затронутый феями</a>' },
     { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
@@ -2121,15 +2121,15 @@ export const spells: Spell[] = [
   sources: [
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=wildfire">Круг Дикого Огня</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a> (Засушливая земля)' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=evoker">Воплотитель</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=fiend">Покровитель Исчадие</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=genie">Покровитель Гений (Ифрит)</a>' },
-    { type: 'subclass', name: '<a href="classes/monk?subclass=sun-soul">Мастер Солнечной Души</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=wildfire">Круг Дикого Огня</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a> (Засушливая земля)' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=fiend">Покровитель Исчадие</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=genie">Покровитель Гений (Ифрит)</a>' },
+    { type: 'subclass', name: '<a href="/classes/monk?subclass=sun-soul">Мастер Солнечной Души</a>' },
     { type: 'species', name: '<a href="races/genasi/">Дженази Огня</a>' },
     { type: 'species', name: '<a href="races/tiefling/">Тифлинг</a> Мефестофеля' },
     { type: 'species', name: '<a href="races/tiefling/">Тифлинг</a> (Инфернальное Происхождение)' },
@@ -2161,10 +2161,10 @@ export const spells: Spell[] = [
   sources: [
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=transmuter">Преобразователь</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
     { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
     { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
@@ -2190,11 +2190,11 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=necromancer">Некромант</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' },
     { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
     { type: 'feat', name: '<a href="feats/shadow-touched/">Затронутый тенью</a>' },
     { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
@@ -2227,10 +2227,10 @@ export const spells: Spell[] = [
     page: 151
   },
   sources: [
-    { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
-    { type: 'class', name: '<a href="classes/paladin">Паладин</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+    { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
     { type: 'feat', name: '<a href="feats/ritual%20caster/">Ритуальный заклинатель</a>' },
     { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
@@ -2258,18 +2258,18 @@ export const spells: Spell[] = [
     page: 249
   },
   sources: [
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=glamour">Коллегия Очарования</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=trickery">Домен Обмана</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=enchanter">Очарователь</a>' },
-    { type: 'subclass', name: '<a href="classes/ranger?subclass=fey-wanderer">Фейский странник</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=glamour">Коллегия Очарования</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=trickery">Домен Обмана</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=enchanter">Очарователь</a>' },
+    { type: 'subclass', name: '<a href="/classes/ranger?subclass=fey-wanderer">Фейский странник</a>' },
     { type: 'species', name: '<a href="races/tiefling/">Тифлинг</a> Фьерна' },
     { type: 'species', name: '<a href="races/tiefling/">Тифлинг</a> Дьявольский язык' },
     { type: 'background', name: '<a href="backgrounds/selesnya%20initiate/">Посвящённый Селезнии</a>' },
@@ -2304,11 +2304,11 @@ export const spells: Spell[] = [
   sources: [
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=evoker">Воплотитель</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=draconic">Драконья Кровь</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=draconic">Драконья Кровь</a>' },
     { type: 'background', name: '<a href="backgrounds/prismari%20student/">Студент Призмари</a>' },
     { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
     { type: 'feat', name: '<a href="feats/rune-shaper/">Ваятель рун</a>' },
@@ -2336,14 +2336,14 @@ export const spells: Spell[] = [
     page: 251
   },
   sources: [
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=illusionist">Иллюзионист</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=lunar">Лунное Чародейство</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=illusionist">Иллюзионист</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=lunar">Лунное Чародейство</a>' },
     { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
     { type: 'feat', name: '<a href="feats/shadow-touched/">Затронутый тенью</a>' },
     { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
@@ -2375,18 +2375,18 @@ export const spells: Spell[] = [
     page: 251
   },
   sources: [
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
-    { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
-    { type: 'class', name: '<a href="classes/paladin">Паладин</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=glamour">Коллегия Очарования</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=draconic">Драконья Кровь</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=fiend">Покровитель Исчадие</a>' },
-    { type: 'subclass', name: '<a href="classes/paladin?subclass=conquest">Клятва Завоевания</a>' },
-    { type: 'subclass', name: '<a href="classes/paladin?subclass=crown">Клятва Короны</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=knowledge">Домен Знаний</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=order">Домен Порядка</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+    { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=glamour">Коллегия Очарования</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=draconic">Драконья Кровь</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=fiend">Покровитель Исчадие</a>' },
+    { type: 'subclass', name: '<a href="/classes/paladin?subclass=conquest">Клятва Завоевания</a>' },
+    { type: 'subclass', name: '<a href="/classes/paladin?subclass=crown">Клятва Короны</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=knowledge">Домен Знаний</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=order">Домен Порядка</a>' },
     { type: 'background', name: '<a href="backgrounds/azorius%20functionary/">Функционер Азориусов</a>' },
     { type: 'background', name: '<a href="backgrounds/orzhov%20representative//">Представитель Орзовов</a>' },
     { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
@@ -2415,8 +2415,8 @@ export const spells: Spell[] = [
     page: 252
   },
   sources: [
-    { type: 'class', name: '<a href="classes/paladin">Паладин</a>' },
-    { type: 'subclass', name: '<a href="classes/paladin?subclass=crown">Клятва Короны</a>' },
+    { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
+    { type: 'subclass', name: '<a href="/classes/paladin?subclass=crown">Клятва Короны</a>' },
     { type: 'background', name: '<a href="backgrounds/gruul%20anarch/">Анарх Груулов</a>' },
     { type: 'feat', name: '<a href="feats/fey-touched/">Затронутый феями</a>' },
   ]
@@ -2441,15 +2441,15 @@ export const spells: Spell[] = [
     page: 252
   },
   sources: [
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=diviner">Прорицатель</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=knowledge">Домен Знаний</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=diviner">Прорицатель</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=knowledge">Домен Знаний</a>' },
     { type: 'background', name: '<a href="backgrounds/lorehold%20student/">Студент Лорхолда</a>' },    
     { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
     { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
@@ -2485,11 +2485,11 @@ export const spells: Spell[] = [
     page: 258
   },
   sources: [
-    { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=fathomless">Покровитель Бездонный</a>' },  
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=fathomless">Покровитель Бездонный</a>' },  
     { type: 'species', name: '<a href="races/genasi/">Дженази Воды</a>' }, 
     { type: 'background', name: '<a href="backgrounds/izzet%20engineer/">Инженер Иззетов</a>' },
     { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
@@ -2518,17 +2518,17 @@ export const spells: Spell[] = [
     page: 259
   },
   sources: [
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
-    { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'class', name: '<a href="classes/paladin">Паладин</a>' },
-    { type: 'class', name: '<a href="classes/ranger">Следопыт</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=celestial">Покровитель Небожитель</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=wildfire">Круг Дикого Огня</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=moon">Круг Луны</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=life">Домен Жизни</a>' },
+    { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
+    { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=celestial">Покровитель Небожитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=wildfire">Круг Дикого Огня</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=moon">Круг Луны</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=life">Домен Жизни</a>' },
     { type: 'background', name: '<a href="backgrounds/witherbloom%20student/">Студент Визерблума</a>' },
     { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
     { type: 'feat', name: '<a href="feats/gift-of-metallic-dragon//">Дар металлического дракона</a>' },
@@ -2555,12 +2555,12 @@ export const spells: Spell[] = [
     page: 244
   },
   sources: [
-    { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
-    { type: 'class', name: '<a href="classes/paladin">Паладин</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+    { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
     { type: 'subclass', name: '<a href="warlock?subclass=undying">Покровитель Бессмертный</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=wildfire">Круг Дикого Огня</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=twilight">Домен Сумерек</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=wildfire">Круг Дикого Огня</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=twilight">Домен Сумерек</a>' },
     { type: 'background', name: '<a href="backgrounds/selesnya%20initiate/">Посвящённый Селезнии</a>' }
   ]
 },
@@ -2583,12 +2583,12 @@ export const spells: Spell[] = [
     page: 244
   },
   sources: [
-    { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
-    { type: 'class', name: '<a href="classes/paladin">Паладин</a>' },
-    { type: 'subclass', name: '<a href="classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
-    { type: 'subclass', name: '<a href="classes/paladin?subclass=watchers">Клятва Смотрителей</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=peace">Домен Мира</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+    { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/paladin?subclass=watchers">Клятва Смотрителей</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=peace">Домен Мира</a>' },
   ]
 },
 {
@@ -2616,9 +2616,9 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=conjurer">Вызыватель</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' },
   ]
 },
 {
@@ -2646,16 +2646,16 @@ export const spells: Spell[] = [
     page: 256
   },
   sources: [
-    { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=sea">Круг Моря</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=transmuter">Преобразователь</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=tempest">Домен Бури</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=fathomless">Покровитель Бездонный</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=sea">Круг Моря</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=tempest">Домен Бури</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=fathomless">Покровитель Бездонный</a>' },
     { type: 'subclass', name: '<a href="warlock?subclass=genie">Покровитель Гений (Марид)</a>' },
     { type: 'background', name: '<a href="backgrounds/quandrix%20student/">Студент Квандрикс</a>' },
   ]
@@ -2682,13 +2682,13 @@ export const spells: Spell[] = [
     page: 304
   },
   sources: [
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=illusionist">Иллюзионист</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=genie">Покровитель Гений</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=hexblade">Покровитель Ведьмовского клинка</a>' }
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=illusionist">Иллюзионист</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=genie">Покровитель Гений</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=hexblade">Покровитель Ведьмовского клинка</a>' }
   ]
 },
 {
@@ -2714,7 +2714,7 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'class', name: '<a href="classes/ranger">Следопыт</a>' }
+    { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' }
   ]
 },
 {
@@ -2740,9 +2740,9 @@ export const spells: Spell[] = [
   sources: [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=conjurer">Вызыватель</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' },
     { type: 'background', name: '<a href="backgrounds/selesnya%20initiate/">Посвящённый Селезнии</a>' },
     { type: 'background', name: '<a href="backgrounds/izzet%20engineer/">Инженер Иззетов</a>' }
   ]
@@ -2767,17 +2767,17 @@ export const spells: Spell[] = [
     page: 304
   },
   sources: [
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=archfey">Покровитель Архифея</a>' },
-    { type: 'subclass', name: '<a href="classes/ranger?subclass=gloom-stalker">Сумрачных охотник</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=illusionist">Иллюзионист</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=genie">Покровитель Гений (Джин)</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=undead">Покровитель Нежить</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=twilight">Домен Сумерек</a>' }
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=archfey">Покровитель Архифея</a>' },
+    { type: 'subclass', name: '<a href="/classes/ranger?subclass=gloom-stalker">Сумрачных охотник</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=illusionist">Иллюзионист</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=genie">Покровитель Гений (Джин)</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=undead">Покровитель Нежить</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=twilight">Домен Сумерек</a>' }
   ]
 },
 {
@@ -2829,16 +2829,16 @@ export const spells: Spell[] = [
     page: 289
   },
   sources: [
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a> (Арктическая земля)' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=sea">Круг Моря</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=evoker">Воплотитель</a>' },
-    { type: 'subclass', name: '<a href="classes/paladin?subclass=ancients">Клятва Древних</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=tempest">Домен Бури</a>' }
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a> (Арктическая земля)' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=sea">Круг Моря</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/paladin?subclass=ancients">Клятва Древних</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=tempest">Домен Бури</a>' }
   ]
 },
 {
@@ -2865,9 +2865,9 @@ export const spells: Spell[] = [
   sources: [
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=evoker">Воплотитель</a>' }
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' }
   ]
 },
 {
@@ -2890,15 +2890,15 @@ export const spells: Spell[] = [
     page: 261
   },
   sources: [
-    { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
-    { type: 'class', name: '<a href="classes/paladin">Паладин</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=death">Домен Смерти</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=grave">Домен Упокоения</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=life">Домен Жизни</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=lunar">Лунное Чародейство</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+    { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=death">Домен Смерти</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=grave">Домен Упокоения</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=life">Домен Жизни</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=lunar">Лунное Чародейство</a>' },
     { type: 'subclass', name: '<a href="warlock?subclass=undying">Покровитель Бессмертный</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=undead">Покровитель Нежить</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=undead">Покровитель Нежить</a>' },
     { type: 'background', name: '<a href="backgrounds/boros%20legionnaire/">Легионер Боросов</a>' },
     { type: 'background', name: '<a href="backgrounds/orzhov%20representative//">Представитель Орзовов</a>' },
     { type: 'background', name: '<a href="backgrounds/witherbloom%20student/">Студент Визерблума</a>' }
@@ -2928,21 +2928,21 @@ export const spells: Spell[] = [
     page: 245
   },
   sources: [
-    { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
-    { type: 'class', name: '<a href="classes/paladin">Паладин</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+    { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=abjurer">Оградитель</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
-    { type: 'subclass', name: '<a href="classes/ranger?subclass=horizon-walker">Странник Горизонта</a>' },
-    { type: 'subclass', name: '<a href="classes/ranger?subclass=monster-slayer">Убийца Чудовищ</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=knowledge">Домен Знаний</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=vengeance">Клятва Мести</a>' },
-    { type: 'subclass', name: '<a href="classes/paladin?subclass=crown">Клятва Короны</a>' },
-    { type: 'subclass', name: '<a href="classes/paladin?subclass=watchers">Клятва Смотрителей</a>' }
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=abjurer">Оградитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/ranger?subclass=horizon-walker">Странник Горизонта</a>' },
+    { type: 'subclass', name: '<a href="/classes/ranger?subclass=monster-slayer">Убийца Чудовищ</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=knowledge">Домен Знаний</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=vengeance">Клятва Мести</a>' },
+    { type: 'subclass', name: '<a href="/classes/paladin?subclass=crown">Клятва Короны</a>' },
+    { type: 'subclass', name: '<a href="/classes/paladin?subclass=watchers">Клятва Смотрителей</a>' }
   ]
 },
 {
@@ -2966,14 +2966,14 @@ export const spells: Spell[] = [
     page: 321
   },
   sources: [
-    { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=genie">Покровитель Гений (Дао)</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=transmuter">Преобразователь</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=genie">Покровитель Гений (Дао)</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
     { type: 'background', name: '<a href="backgrounds/lorehold%20student/">Студент Лорхолда</a>' }
   ]
 },
@@ -2999,9 +2999,9 @@ export const spells: Spell[] = [
     page: 277
   },
   sources: [
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=moon">Круг Луны</a>' }
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=moon">Круг Луны</a>' }
   ]
 },
 {
@@ -3038,9 +3038,9 @@ export const spells: Spell[] = [
   sources: [
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=abjurer">Оградитель</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' }
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=abjurer">Оградитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' }
   ]
 },
 {
@@ -3066,14 +3066,14 @@ export const spells: Spell[] = [
   sources: [
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'class', name: '<a href="classes/ranger">Следопыт</a>' },
+    { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-    { type: 'subclass', name: '<a href="classes/paladin?subclass=conquest">Клятва Завоевания</a>' },
-    { type: 'subclass', name: '<a href="classes/paladin?subclass=redemption">Клятва Искупления</a>' },
-    { type: 'subclass', name: '<a href="classes/paladin?subclass=ancients">Клятва Древних</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=transmuter">Преобразователь</a>' },
+    { type: 'subclass', name: '<a href="/classes/paladin?subclass=conquest">Клятва Завоевания</a>' },
+    { type: 'subclass', name: '<a href="/classes/paladin?subclass=redemption">Клятва Искупления</a>' },
+    { type: 'subclass', name: '<a href="/classes/paladin?subclass=ancients">Клятва Древних</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
     { type: 'background', name: '<a href="backgrounds/gruul%20anarch/">Анарх Груулов</a>' }
   ]
 },
@@ -3101,10 +3101,10 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=conjurer">Вызыватель</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' },
     { type: 'background', name: '<a href="backgrounds/orzhov%20representative//">Представитель Орзовов</a>' }
   ]
 },
@@ -3131,14 +3131,14 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=magic">Домен Магии</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=knowledge">Домен Знаний</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=light">Домен Света</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=diviner">Прорицатель</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=draconic">Драконья Кровь</a>' },
-    { type: 'subclass', name: '<a href="classes/ranger?subclass=swarmkeeper">Хранитель Роя</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=knowledge">Домен Знаний</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=light">Домен Света</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=diviner">Прорицатель</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=draconic">Драконья Кровь</a>' },
+    { type: 'subclass', name: '<a href="/classes/ranger?subclass=swarmkeeper">Хранитель Роя</a>' },
     { type: 'background', name: '<a href="backgrounds/orzhov%20representative//">Представитель Орзовов</a>' },
     { type: 'other', name: 'Видения далёких королевств' }
   ]
@@ -3165,14 +3165,14 @@ export const spells: Spell[] = [
     page: 283
   },
   sources: [
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=illusionist">Иллюзионист</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=lunar">Лунное Чародейство</a>' }
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=illusionist">Иллюзионист</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=lunar">Лунное Чародейство</a>' }
   ]
 },
 {
@@ -3195,8 +3195,8 @@ export const spells: Spell[] = [
     page: 283
   },
   sources: [
-    { type: 'class', name: '<a href="classes/paladin">Паладин</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=hexblade">Покровитель Ведьмовского клинка</a>' }
+    { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=hexblade">Покровитель Ведьмовского клинка</a>' }
   ]
 },
 {
@@ -3225,13 +3225,13 @@ export const spells: Spell[] = [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=wildfire">Круг Дикого Огня</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=evoker">Воплотитель</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=fiend">Покровитель Исчадие</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=genie">Покровитель Гений (Ифрит)</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=war">Домен Войны</a>' }
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=wildfire">Круг Дикого Огня</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=fiend">Покровитель Исчадие</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=genie">Покровитель Гений (Ифрит)</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=war">Домен Войны</a>' }
   ]
 },
 {
@@ -3259,11 +3259,11 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=abjurer">Оградитель</a>' },
-    { type: 'subclass', name: '<a href="classes/paladin?subclass=redemption">Клятва Искупления</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=peace">Домен Мира</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=abjurer">Оградитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/paladin?subclass=redemption">Клятва Искупления</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=peace">Домен Мира</a>' },
     { type: 'background', name: '<a href="backgrounds/izzet%20engineer/">Инженер Иззетов</a>' }
   ]
 },
@@ -3288,15 +3288,15 @@ export const spells: Spell[] = [
     page: 249
   },
   sources: [
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=draconic">Драконья Кровь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=enchanter">Очарователь</a>' }
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=draconic">Драконья Кровь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=enchanter">Очарователь</a>' }
   ]
 },
 {
@@ -3320,16 +3320,16 @@ export const spells: Spell[] = [
     page: 262
   },
   sources: [
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/ranger?subclass=fey-wanderer">Фейский странник</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=vengeance">Клятва Мести</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=trickery">Домен Обмана</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=conjurer">Вызыватель</a>' }
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/ranger?subclass=fey-wanderer">Фейский странник</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=vengeance">Клятва Мести</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=trickery">Домен Обмана</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' }
   ]
 },
 {
@@ -3356,11 +3356,11 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'class', name: '<a href="classes/ranger">Следопыт</a>' },
+    { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=archfey">Покровитель Архифея</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
-    { type: 'subclass', name: '<a href="classes/paladin?subclass=conquest">Клятва Завоевания</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=archfey">Покровитель Архифея</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
+    { type: 'subclass', name: '<a href="/classes/paladin?subclass=conquest">Клятва Завоевания</a>' },
     { type: 'background', name: '<a href="backgrounds/gruul%20anarch/">Анарх Груулов</a>' }
   ]
 },
@@ -3388,17 +3388,17 @@ export const spells: Spell[] = [
     page: 292
   },
   sources: [
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
-    { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'class', name: '<a href="classes/paladin">Паладин</a>' },
-    { type: 'class', name: '<a href="classes/ranger">Следопыт</a>' },
+    { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
+    { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=diviner">Прорицатель</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=order">Домен Порядка</a>' }
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=diviner">Прорицатель</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=order">Домен Порядка</a>' }
   ]
 },
 {
@@ -3425,14 +3425,14 @@ export const spells: Spell[] = [
     page: 306
   },
   sources: [
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=transmuter">Преобразователь</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=trickery">Домен Обмана</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=trickery">Домен Обмана</a>' },
     { type: 'background', name: '<a href="backgrounds/simic%20scientist/">Учёный Симиков</a>' }
   ]
 },
@@ -3458,14 +3458,14 @@ export const spells: Spell[] = [
     page: 264
   },
   sources: [
-    { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=diviner">Прорицатель</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=trickery">Домен Обмана</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=diviner">Прорицатель</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=trickery">Домен Обмана</a>' },
     { type: 'background', name: '<a href="backgrounds/azorius%20functionary/">Функционер Азориусов</a>' },
     { type: 'background', name: '<a href="backgrounds/izzet%20engineer/">Инженер Иззетов</a>' }
   ]
@@ -3493,13 +3493,13 @@ export const spells: Spell[] = [
     page: 322
   },
   sources: [
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=conjurer">Вызыватель</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=aberrant">Аберрантный Разум</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=great-old-one">Покровитель Великий Древний</a>' }
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=aberrant">Аберрантный Разум</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=great-old-one">Покровитель Великий Древний</a>' }
   ]
 },
 {
@@ -3526,10 +3526,10 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=conjurer">Вызыватель</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=сlockwork">Заводная душа</a>' }
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=сlockwork">Заводная душа</a>' }
   ]
 },
 {
@@ -3556,11 +3556,11 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'class', name: '<a href="classes/ranger">Следопыт</a>' },
+    { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=conjurer">Вызыватель</a>' }
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' }
   ]
 },
 {
@@ -3584,9 +3584,9 @@ export const spells: Spell[] = [
     page: 252
   },
   sources: [
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
-    { type: 'subclass', name: '<a href="classes/paladin?subclass=glory">Клятва Славы</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=order">Домен Порядка</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
+    { type: 'subclass', name: '<a href="/classes/paladin?subclass=glory">Клятва Славы</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=order">Домен Порядка</a>' },
     { type: 'background', name: '<a href="backgrounds/azorius%20functionary/">Функционер Азориусов</a>' },
     { type: 'background', name: '<a href="backgrounds/silverquill%20student/">Студент Сильверквилла</a>' }
   ]
@@ -3614,16 +3614,16 @@ export const spells: Spell[] = [
     page: 277
   },
   sources: [
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
-    { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'class', name: '<a href="classes/ranger">Следопыт</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a> (Умеренная земля)' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=сlockwork">Заводная душа</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
-    { type: 'subclass', name: '<a href="classes/paladin?subclass=devotion">Клятва Преданности</a>' },
-    { type: 'subclass', name: '<a href="classes/paladin?subclass=glory">Клятва Славы</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=war">Домен Войны</a>' },
+    { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a> (Умеренная земля)' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=сlockwork">Заводная душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/paladin?subclass=devotion">Клятва Преданности</a>' },
+    { type: 'subclass', name: '<a href="/classes/paladin?subclass=glory">Клятва Славы</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=war">Домен Войны</a>' },
     { type: 'background', name: '<a href="backgrounds/dimir%20operative/">Оперативник Димиров</a>' },
     { type: 'background', name: '<a href="backgrounds/simic%20scientist/">Учёный Симиков</a>' },
     { type: 'background', name: '<a href="backgrounds/prismari%20student/">Студент Призмари</a>' },
@@ -3657,13 +3657,13 @@ export const spells: Spell[] = [
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=celestial">Покровитель Небожитель</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=fiend">Покровитель Исчадие</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=forge">Домен Кузни</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=light">Домен Света</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=evoker">Воплотитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=celestial">Покровитель Небожитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=fiend">Покровитель Исчадие</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=forge">Домен Кузни</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=light">Домен Света</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
     { type: 'background', name: '<a href="backgrounds/boros%20legionnaire/">Легионер Боросов</a>' },
     { type: 'background', name: '<a href="backgrounds/rakdos%20cultist/">Культист Ракдосов</a>' },
     { type: 'background', name: '<a href="backgrounds/prismari%20student/">Студент Призмари</a>' }
@@ -3689,12 +3689,12 @@ export const spells: Spell[] = [
     page: 281
   },
   sources: [
-    { type: 'class', name: '<a href="classes/cleric">Жрец</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=celestial">Покровитель Небожитель</a>' },
-    { type: 'subclass', name: '<a href="classes/paladin?subclass=devotion">Клятва Преданности</a>' },
-    { type: 'subclass', name: '<a href="classes/paladin?subclass=crown">Клятва Короны</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=light">Домен Света</a>' }
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=celestial">Покровитель Небожитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/paladin?subclass=devotion">Клятва Преданности</a>' },
+    { type: 'subclass', name: '<a href="/classes/paladin?subclass=crown">Клятва Короны</a>' },
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=light">Домен Света</a>' }
   ]
 },
 {
@@ -3721,16 +3721,16 @@ export const spells: Spell[] = [
   sources: [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=spore">Круг Спор</a>' },
-    { type: 'subclass', name: '<a href="classes/druid?subclass=land">Круг Земли</a> (Засушливая земля)' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=death">Домен Смерти</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=grave">Домен Упокоения</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=spore">Круг Спор</a>' },
+    { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a> (Засушливая земля)' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=death">Домен Смерти</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=grave">Домен Упокоения</a>' },
     { type: 'subclass', name: '<a href="paladin?subclass=oathbreaker">Клятвопреступник</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=necromancer">Некромант</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' },
     { type: 'background', name: '<a href="backgrounds/orzhov%20representative//">Представитель Орзовов</a>' },
     { type: 'background', name: '<a href="backgrounds/witherbloom%20student/">Студент Визерблума</a>' }
   ]
@@ -3759,8 +3759,8 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'class', name: '<a href="classes/ranger">Следопыт</a>' },
-    { type: 'subclass', name: '<a href="classes/cleric?subclass=nature">Домен Природы</a>' },
+    { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
     { type: 'background', name: '<a href="backgrounds/golgari%20agent/">Агент Голгари</a>' }
   ]
 },
@@ -3788,12 +3788,12 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/sorcerer?subclass=aberrant">Аберрантный Разум</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=fathomless">Покровитель Бездонный</a>' },
-    { type: 'subclass', name: '<a href="classes/warlock?subclass=great-old-one">Покровитель Великий Древний</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=conjurer">Вызыватель</a>' }
+    { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=aberrant">Аберрантный Разум</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=fathomless">Покровитель Бездонный</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=great-old-one">Покровитель Великий Древний</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' }
   ]
 },
 {
@@ -3817,11 +3817,11 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=transmuter">Преобразователь</a>' }
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' }
   ]
 },
 {
@@ -3848,7 +3848,7 @@ export const spells: Spell[] = [
     page: 156
   },
   sources: [
-    { type: 'class', name: '<a href="classes/paladin">Паладин</a>' }
+    { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' }
   ]
 },
 {
@@ -3881,7 +3881,7 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'class', name: '<a href="classes/ranger">Следопыт</a>' }
+    { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' }
   ]
 },
 {
@@ -3905,12 +3905,12 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'class', name: '<a href="classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=enchanter">Очарователь</a>' }
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=enchanter">Очарователь</a>' }
   ]
 },
 {
@@ -3934,7 +3934,7 @@ export const spells: Spell[] = [
     page: 164
   },
   sources: [
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' }
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' }
   ]
 },
 {
@@ -3957,12 +3957,12 @@ export const spells: Spell[] = [
     page: 164
   },
   sources: [
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=evoker">Воплотитель</a>' }
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' }
   ]
 },
 {
@@ -3987,12 +3987,12 @@ export const spells: Spell[] = [
     page: 50
   },
   sources: [
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=necromancer">Некромант</a>' }
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' }
   ]
 },
 {
@@ -4019,9 +4019,9 @@ export const spells: Spell[] = [
   sources: [
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=evoker">Воплотитель</a>' }
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' }
   ]
 },
 {
@@ -4049,11 +4049,11 @@ export const spells: Spell[] = [
     page: 166
   },
   sources: [
-    { type: 'class', name: '<a href="classes/warlock">Колдун</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=conjurer">Вызыватель</a>' }
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' }
   ]
 },
 {
@@ -4083,9 +4083,9 @@ export const spells: Spell[] = [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-    { type: 'subclass', name: '<a href="classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-    { type: 'subclass', name: '<a href="classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'subclass', name: '<a href="classes/wizard?subclass=conjurer">Вызыватель</a>' }
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' }
   ]
 }
 ];
