@@ -30,14 +30,14 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
-      { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-      { type: 'species', name: '<a href="races/genasi/">Дженази Воды</a>' },
-      { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-      { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-      { type: 'background', name: '<a href="backgrounds/simic%20scientist/">Учёный Симиков</a>' },
-      { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-      { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-      { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
+      { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+      { type: 'species', name: '<a href="/races/genasi/">Дженази Воды</a>' },
+      { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+      { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+      { type: 'background', name: '<a href="/backgrounds/simic%20scientist/">Учёный Симиков</a>' },
+      { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+      { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+      { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'other', name: 'Договор гримуара' }
     ]
   },
@@ -73,19 +73,19 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/ranger?subclass=swarmkeeper">Хранитель Роя</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' },
-      { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-      { type: 'species', name: '<a href="races/gith/">Гит</a>' },
-      { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-      { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-      { type: 'species', name: '<a href="races/tiefling/">Тифлинг</a> Маммона' },
-      { type: 'species', name: '<a href="races/tiefling/">Тифлинг</a> Мефистофеля' },
-      { type: 'background', name: '<a href="backgrounds/dimir%20operative/">Оперативник Димиров</a>' },
-      { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-      { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-      { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'feat', name: '<a href="feats/scion-of-the-outer-planes/">Наследник внешних планов</a>' },
-      { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
-      { type: 'feat', name: '<a href="feats/telekinetic/">Телекинетик</a>' },
+      { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+      { type: 'species', name: '<a href="/races/gith/">Гит</a>' },
+      { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+      { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+      { type: 'species', name: '<a href="/races/tiefling/">Тифлинг</a> Маммона' },
+      { type: 'species', name: '<a href="/races/tiefling/">Тифлинг</a> Мефистофеля' },
+      { type: 'background', name: '<a href="/backgrounds/dimir%20operative/">Оперативник Димиров</a>' },
+      { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+      { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+      { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+      { type: 'feat', name: '<a href="/feats/scion-of-the-outer-planes/">Наследник внешних планов</a>' },
+      { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
+      { type: 'feat', name: '<a href="/feats/telekinetic/">Телекинетик</a>' },
       { type: 'other', name: 'Договор гримуара' }
     ]
   },
@@ -117,15 +117,15 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=abjurer">Оградитель</a>' },
-      { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-      { type: 'species', name: '<a href="races/genasi/">Дженази Земли</a>' },
-      { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-      { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-      { type: 'species', name: '<a href="races/tiefling/">Тифлинг</a> Маммона' },
-      { type: 'species', name: '<a href="races/tiefling/">Тифлинг</a> Мефистофеля' },
-      { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-      { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-      { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
+      { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+      { type: 'species', name: '<a href="/races/genasi/">Дженази Земли</a>' },
+      { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+      { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+      { type: 'species', name: '<a href="/races/tiefling/">Тифлинг</a> Маммона' },
+      { type: 'species', name: '<a href="/races/tiefling/">Тифлинг</a> Мефистофеля' },
+      { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+      { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+      { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'other', name: 'Договор гримуара' }
     ]
   },
@@ -157,12 +157,12 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
-      { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-      { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-      { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-      { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-      { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-      { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
+      { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+      { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+      { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+      { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+      { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+      { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'other', name: 'Договор гримуара' }
     ]
   },
@@ -196,14 +196,14 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/druid?subclass=spore">Круг Спор</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' },
-      { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-      { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-      { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-      { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-      { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-      { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'feat', name: '<a href="feats/scion-of-the-outer-planes/">Наследник внешних планов</a>' },
-      { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
+      { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+      { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+      { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+      { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+      { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+      { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+      { type: 'feat', name: '<a href="/feats/scion-of-the-outer-planes/">Наследник внешних планов</a>' },
+      { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
       { type: 'other', name: 'Договор гримуара' }
     ]
   },
@@ -240,14 +240,14 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/druid?subclass=spore">Круг Спор</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
-      { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-      { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-      { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-      { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-      { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-      { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'feat', name: '<a href="feats/scion-of-the-outer-planes/">Наследник внешних планов</a>' },
-      { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
+      { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+      { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+      { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+      { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+      { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+      { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+      { type: 'feat', name: '<a href="/feats/scion-of-the-outer-planes/">Наследник внешних планов</a>' },
+      { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
       { type: 'other', name: 'Договор гримуара' }
     ]
   },
@@ -282,14 +282,14 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' },
-      { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-      { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-      { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-      { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-      { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-      { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
-      { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
+      { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+      { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+      { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+      { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+      { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+      { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+      { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
+      { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
       { type: 'other', name: 'Договор гримуара' }
     ]
   },
@@ -322,16 +322,16 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=illusionist">Иллюзионист</a>' },
-      { type: 'species', name: '<a href="races/elf/">Эльф Астральный</a>' },
-      { type: 'species', name: '<a href="races/elf/">Эльф Дроу</a>' },
-      { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-      { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-      { type: 'species', name: '<a href="races/halfelf/">Полуэльф Дроу</a>' },
-      { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-      { type: 'background', name: '<a href="backgrounds/golgari%20agent/">Агент Голгари</a>' },
-      { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-      { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-      { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
+      { type: 'species', name: '<a href="/races/elf/">Эльф Астральный</a>' },
+      { type: 'species', name: '<a href="/races/elf/">Эльф Дроу</a>' },
+      { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+      { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+      { type: 'species', name: '<a href="/races/halfelf/">Полуэльф Дроу</a>' },
+      { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+      { type: 'background', name: '<a href="/backgrounds/golgari%20agent/">Агент Голгари</a>' },
+      { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+      { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+      { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'other', name: 'Договор гримуара' }
     ]
   },
@@ -359,9 +359,9 @@ export const spells: Spell[] = [
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
-      { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
-      { type: 'feat', name: '<a href="feats/blessed-warrior/">Благословлённый воин</a>' },
-      { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
+      { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+      { type: 'feat', name: '<a href="/feats/blessed-warrior/">Благословлённый воин</a>' },
+      { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'other', name: 'Договор гримуара' }
     ]
   },
@@ -395,12 +395,12 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=diviner">Прорицатель</a>' },
-      { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-      { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-      { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-      { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-      { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-      { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
+      { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+      { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+      { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+      { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+      { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+      { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'other', name: 'Договор гримуара' }
     ]
   },
@@ -424,9 +424,9 @@ export const spells: Spell[] = [
     },
     sources: [
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
-      { type: 'background', name: '<a href="backgrounds/rakdos%20cultist/">Культист Ракдосов</a>' },
-      { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
-      { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
+      { type: 'background', name: '<a href="/backgrounds/rakdos%20cultist/">Культист Ракдосов</a>' },
+      { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
+      { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'other', name: 'Договор гримуара' }
     ]
   },
@@ -460,12 +460,12 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' },
-      { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-      { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-      { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
-      { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-      { type: 'feat', name: '<a href="feats/blessed-warrior/">Благословлённый воин</a>' },
-      { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
+      { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+      { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+      { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+      { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+      { type: 'feat', name: '<a href="/feats/blessed-warrior/">Благословлённый воин</a>' },
+      { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'other', name: 'Договор гримуара' }
     ]
   },
@@ -500,14 +500,14 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
-      { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-      { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-      { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-      { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-      { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-      { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
-      { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
-      { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
+      { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+      { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+      { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+      { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+      { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+      { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+      { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
+      { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'other', name: 'Договор гримуара' }
     ]
   },
@@ -536,9 +536,9 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
       { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
-      { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
-      { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
+      { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+      { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
+      { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'other', name: 'Договор гримуара' }
     ]
   },
@@ -571,13 +571,13 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
       { type: 'subclass', name: '<a href="/classes/ranger?subclass=drakewarden">Наезник на дрейке</a>' },
       { type: 'subclass', name: '<a href="/classes/barbarian?subclass=giant">Путь Великанов</a>' },
-      { type: 'species', name: '<a href="races/tiefling/">Тифлинг</a>' },
-      { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-      { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-      { type: 'feat', name: '<a href="feats/blessed-warrior/">Благословлённый воин</a>' },
-      { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
-      { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
-      { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
+      { type: 'species', name: '<a href="/races/tiefling/">Тифлинг</a>' },
+      { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+      { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+      { type: 'feat', name: '<a href="/feats/blessed-warrior/">Благословлённый воин</a>' },
+      { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+      { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
+      { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'other', name: 'Договор гримуара' }
     ]
   },
@@ -608,12 +608,12 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' },
-      { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-      { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-      { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-      { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-      { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-      { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
+      { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+      { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+      { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+      { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+      { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+      { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'other', name: 'Договор гримуара' }
     ]
   },
@@ -643,9 +643,9 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/druid?subclass=moon">Круг Луны</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
-      { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
-      { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
-      { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
+      { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+      { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
+      { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'other', name: 'Договор гримуара' }
     ]
   },
@@ -676,14 +676,14 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/barbarian?subclass=giant">Путь Великанов</a>' },
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=arcane-archer">Мистический лучник</a>' },
-    { type: 'species', name: '<a href="races/elf/">Эльф Лесной</a>' },
-    { type: 'species', name: '<a href="races/fairy/">Фэйри</a>' },
-    { type: 'background', name: '<a href="backgrounds/selesnya%20initiate/">Посвящённый Селезнии</a>' },
-    { type: 'background', name: '<a href="backgrounds/simic%20scientist/">Учёный Симиков</a>' },
-    { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Посвящённый Стриксхейвен</a>' },
-    { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
+    { type: 'species', name: '<a href="/races/elf/">Эльф Лесной</a>' },
+    { type: 'species', name: '<a href="/races/fairy/">Фэйри</a>' },
+    { type: 'background', name: '<a href="/backgrounds/selesnya%20initiate/">Посвящённый Селезнии</a>' },
+    { type: 'background', name: '<a href="/backgrounds/simic%20scientist/">Учёный Симиков</a>' },
+    { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Посвящённый Стриксхейвен</a>' },
+    { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -746,14 +746,14 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/monk?subclass=elements">Мастер Стихий</a>' },
-    { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-    { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-    { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
-    { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-    { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
+    { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+    { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+    { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+    { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+    { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -777,7 +777,7 @@ export const spells: Spell[] = [
     page: 47
   },
   sources: [
-    { type: 'background', name: '<a href="backgrounds/dimir%20operative/">Оперативник Димиров</a>' },
+    { type: 'background', name: '<a href="/backgrounds/dimir%20operative/">Оперативник Димиров</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -810,16 +810,16 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
-    { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-    { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-    { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-    { type: 'background', name: '<a href="backgrounds/boros%20legionnaire/">Легионер Боросов</a>' },
-    { type: 'background', name: '<a href="backgrounds/gruul%20anarch/">Анарх Груулов</a>' },
-    { type: 'background', name: '<a href="backgrounds/rakdos%20cultist/">Культист Ракдосов</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-    { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Посвящённый Стриксхейвен</a>' },
+    { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+    { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+    { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+    { type: 'background', name: '<a href="/backgrounds/boros%20legionnaire/">Легионер Боросов</a>' },
+    { type: 'background', name: '<a href="/backgrounds/gruul%20anarch/">Анарх Груулов</a>' },
+    { type: 'background', name: '<a href="/backgrounds/rakdos%20cultist/">Культист Ракдосов</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Посвящённый Стриксхейвен</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -853,15 +853,15 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=enchanter">Очарователь</a>' },
-    { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-    { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-    { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-    { type: 'background', name: '<a href="backgrounds/azorius%20functionary/">Функционер Азориусов</a>' },
-    { type: 'background', name: '<a href="backgrounds/orzhov%20representative//">Представитель Орзовов</a>' },
-    { type: 'background', name: '<a href="backgrounds/selesnya%20initiate/">Посвящённый Селезнии</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+    { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+    { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+    { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+    { type: 'background', name: '<a href="/backgrounds/azorius%20functionary/">Функционер Азориусов</a>' },
+    { type: 'background', name: '<a href="/backgrounds/orzhov%20representative//">Представитель Орзовов</a>' },
+    { type: 'background', name: '<a href="/backgrounds/selesnya%20initiate/">Посвящённый Селезнии</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -897,15 +897,15 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
-    { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-    { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-    { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-    { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
-    { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
-    { type: 'other', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
+    { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+    { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+    { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+    { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+    { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
+    { type: 'other', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -939,12 +939,12 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
-    { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-    { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-    { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+    { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+    { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+    { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -975,14 +975,14 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная Душа</a>' },
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
-    { type: 'background', name: '<a href="backgrounds/orzhov%20representative//">Представитель Орзовов</a>' },
-    { type: 'feat', name: '<a href="feats/blessed-warrior/">Благословлённый воин</a>' },
-    { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
-    { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/scion-of-the-outer-planes/">Наследник внешних планов</a>' },
-    { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Посвящённый Стриксхейвен</a>' },
-    { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
+    { type: 'background', name: '<a href="/backgrounds/orzhov%20representative//">Представитель Орзовов</a>' },
+    { type: 'feat', name: '<a href="/feats/blessed-warrior/">Благословлённый воин</a>' },
+    { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+    { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/scion-of-the-outer-planes/">Наследник внешних планов</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Посвящённый Стриксхейвен</a>' },
+    { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1018,14 +1018,14 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
-    { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-    { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-    { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-    { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
+    { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+    { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+    { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+    { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1063,14 +1063,14 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' },
-    { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-    { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-    { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-    { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
+    { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+    { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+    { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+    { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1105,18 +1105,18 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a> ' },
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
-    { type: 'species', name: '<a href="races/aasimar/">Аасимар</a>' },
-    { type: 'species', name: '<a href="races/elf/">Эльф Астральный</a>' },
-    { type: 'species', name: '<a href="races/elf/">Эльф Бледный</a>' },
-    { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-    { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-    { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/blessed-warrior/">Благословлённый воин</a>' },
-    { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
-    { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Посвящённый Стриксхейвен</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+    { type: 'species', name: '<a href="/races/aasimar/">Аасимар</a>' },
+    { type: 'species', name: '<a href="/races/elf/">Эльф Астральный</a>' },
+    { type: 'species', name: '<a href="/races/elf/">Эльф Бледный</a>' },
+    { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+    { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+    { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/blessed-warrior/">Благословлённый воин</a>' },
+    { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Посвящённый Стриксхейвен</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1147,12 +1147,12 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
-    { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-    { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-    { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+    { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+    { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+    { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1182,8 +1182,8 @@ export const spells: Spell[] = [
     { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
-    { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
-    { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
+    { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+    { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1221,16 +1221,16 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
-    { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-    { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-    { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/blessed-warrior/">Благословлённый воин</a>' },
-    { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
-    { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-    { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
-    { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
+    { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+    { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+    { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/blessed-warrior/">Благословлённый воин</a>' },
+    { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+    { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+    { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+    { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1266,16 +1266,16 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
-    { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-    { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-    { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/blessed-warrior/">Благословлённый воин</a>' },
-    { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
-    { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-    { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
-    { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
+    { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+    { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+    { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/blessed-warrior/">Благословлённый воин</a>' },
+    { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+    { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+    { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+    { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1308,12 +1308,12 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная Душа</a>' },
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=enchanter">Очарователь</a>' },
-    { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-    { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-    { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+    { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+    { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+    { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1349,14 +1349,14 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=illusionist">Иллюзионист</a>' },
     { type: 'subclass', name: '<a href="/classes/monk?subclass=shadow">Мастер Тени</a>' },
-    { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-    { type: 'species', name: '<a href="races/gnome/">Гном Лесной</a>' },
-    { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-    { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-    { type: 'feat', name: '<a href="feats/scion-of-the-outer-planes/">Наследник внешних планов</a>' },
+    { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+    { type: 'species', name: '<a href="/races/gnome/">Гном Лесной</a>' },
+    { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+    { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+    { type: 'feat', name: '<a href="/feats/scion-of-the-outer-planes/">Наследник внешних планов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1392,14 +1392,14 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
-    { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-    { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-    { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-    { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
+    { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+    { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+    { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+    { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1435,16 +1435,16 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' },
-    { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-    { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-    { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-    { type: 'species', name: '<a href="races/yuan-ti/">Юань-ти</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-    { type: 'feat', name: '<a href="feats/spell-sniper/">Меткий заклинатель</a>' },
-    { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
+    { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+    { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+    { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+    { type: 'species', name: '<a href="/races/yuan-ti/">Юань-ти</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+    { type: 'feat', name: '<a href="/feats/spell-sniper/">Меткий заклинатель</a>' },
+    { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1483,14 +1483,14 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-    { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-    { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/сartomancer/">Картомант</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-    { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
+    { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+    { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+    { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/сartomancer/">Картомант</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1518,10 +1518,10 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
-    { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/spell-sniper/">Меткий заклинатель</a>' },
-    { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
+    { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/spell-sniper/">Меткий заклинатель</a>' },
+    { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1551,12 +1551,12 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Колегия Знаний</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
-    { type: 'background', name: '<a href="backgrounds/gruul%20anarch/">Анарх Груулов</a>' },
-    { type: 'background', name: '<a href="backgrounds/izzet%20engineer/">Инженер Иззетов</a>' },
-    { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/spell-sniper/">Меткий заклинатель</a>' },
-    { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
+    { type: 'background', name: '<a href="/backgrounds/gruul%20anarch/">Анарх Груулов</a>' },
+    { type: 'background', name: '<a href="/backgrounds/izzet%20engineer/">Инженер Иззетов</a>' },
+    { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/spell-sniper/">Меткий заклинатель</a>' },
+    { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1585,11 +1585,11 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Колегия Знаний</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
     { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная Душа</a>' },
-    { type: 'feat', name: '<a href="feats/blessed-warrior/">Благословлённый воин</a>' },
-    { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
-    { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
+    { type: 'feat', name: '<a href="/feats/blessed-warrior/">Благословлённый воин</a>' },
+    { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+    { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1617,13 +1617,13 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/warlock?subclass=celestial">Покровитель Небожитель</a>' },
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Колегия Знаний</a>' },
     { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная Душа</a>' },
-    { type: 'species', name: '<a href="races/elf/">Эльф Астральный</a>' },
-    { type: 'background', name: '<a href="backgrounds/boros%20legionnaire/">Легионер Боросов</a>' },
-    { type: 'feat', name: '<a href="feats/blessed-warrior/">Благословлённый воин</a>' },
-    { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/scion-of-the-outer-planes/">Наследник внешних планов</a>' },
-    { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
+    { type: 'species', name: '<a href="/races/elf/">Эльф Астральный</a>' },
+    { type: 'background', name: '<a href="/backgrounds/boros%20legionnaire/">Легионер Боросов</a>' },
+    { type: 'feat', name: '<a href="/feats/blessed-warrior/">Благословлённый воин</a>' },
+    { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/scion-of-the-outer-planes/">Наследник внешних планов</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1661,15 +1661,15 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
-    { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-    { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-    { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-    { type: 'species', name: '<a href="races/genasi/">Дженази Воды</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-    { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
+    { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+    { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+    { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+    { type: 'species', name: '<a href="/races/genasi/">Дженази Воды</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+    { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1698,9 +1698,9 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
-    { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
+    { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1732,15 +1732,15 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a> (Умеренная земля)' },
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
-    { type: 'species', name: '<a href="races/elf/">Эльф Высший</a>' },
-    { type: 'species', name: '<a href="races/genasi/">Дженази Воздуха</a>' },
-    { type: 'species', name: '<a href="races/halfelf/">Лунный/Солнечный полуэльф</a>' },
-    { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-    { type: 'species', name: '<a href="races/genasi/">Дженази Воды</a>' },
-    { type: 'background', name: '<a href="backgrounds/izzet%20engineer/">Инженер Иззетов</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+    { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+    { type: 'species', name: '<a href="/races/genasi/">Дженази Воздуха</a>' },
+    { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+    { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+    { type: 'species', name: '<a href="/races/genasi/">Дженази Воды</a>' },
+    { type: 'background', name: '<a href="/backgrounds/izzet%20engineer/">Инженер Иззетов</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1772,13 +1772,13 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="warlock?subclass=undying">Покровитель Бессмертный</a>' },
     { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
-    { type: 'background', name: '<a href="backgrounds/golgari%20agent/">Агент Голгари</a>' },
-    { type: 'feat', name: '<a href="feats/blessed-warrior/">Благословлённый воин</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
-    { type: 'feat', name: '<a href="feats/druidic-warrior/">Воин-друид</a>' },
-    { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
-    { type: 'feat', name: '<a href="feats/wood-elf-magic/">Магия лесных эльфов</a>' },
+    { type: 'background', name: '<a href="/backgrounds/golgari%20agent/">Агент Голгари</a>' },
+    { type: 'feat', name: '<a href="/feats/blessed-warrior/">Благословлённый воин</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+    { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
+    { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1804,9 +1804,9 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-    { type: 'species', name: '<a href="races/kobold/">Кобольд</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1837,9 +1837,9 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
   ]
 },
 {
@@ -1870,13 +1870,13 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="/classes/paladin?subclass=ancients">Клятва Древних</a>' },
     { type: 'subclass', name: '<a href="barbarian?subclass=wild-heart">Путь Дикого Сердца</a>' },
-    { type: 'background', name: '<a href="backgrounds/gruul%20anarch/">Анарх Груулов</a>' },
-    { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
-    { type: 'feat', name: '<a href="feats/fey-touched/">Затронутый феями</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/ritual%20caster/">Ритуальный заклинатель</a>' },
-    { type: 'feat', name: '<a href="feats/rune-shaper/">Ваятель рун</a>' },
-    { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
+    { type: 'background', name: '<a href="/backgrounds/gruul%20anarch/">Анарх Груулов</a>' },
+    { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+    { type: 'feat', name: '<a href="/feats/fey-touched/">Затронутый феями</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/ritual%20caster/">Ритуальный заклинатель</a>' },
+    { type: 'feat', name: '<a href="/feats/rune-shaper/">Ваятель рун</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1909,9 +1909,9 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=сlockwork">Заводная душа</a>' },
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/ritual%20caster/">Ритуальный заклинатель</a>' },
-    { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/ritual%20caster/">Ритуальный заклинатель</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1941,12 +1941,12 @@ export const spells: Spell[] = [
     { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
-    { type: 'species', name: '<a href="races/yuan-ti/">Юань-ти</a>' },
-    { type: 'background', name: '<a href="backgrounds/selesnya%20initiate/">Посвящённый Селезнии</a>' },
-    { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
-    { type: 'feat', name: '<a href="feats/fey-touched/">Затронутый феями</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
+    { type: 'species', name: '<a href="/races/yuan-ti/">Юань-ти</a>' },
+    { type: 'background', name: '<a href="/backgrounds/selesnya%20initiate/">Посвящённый Селезнии</a>' },
+    { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+    { type: 'feat', name: '<a href="/feats/fey-touched/">Затронутый феями</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
   ]
 },
 {
@@ -1972,9 +1972,9 @@ export const spells: Spell[] = [
   sources: [
     { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'subclass', name: '<a href="/classes/paladin?subclass=conquest">Клятва Завоевания</a>' },
-    { type: 'species', name: '<a href="races/tiefling/"><a href="races/tiefling/">Тифлинг</a> Левистуса' },
-    { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
-    { type: 'feat', name: '<a href="feats/rune-shaper/">Ваятель рун</a>' }
+    { type: 'species', name: '<a href="/races/tiefling/"><a href="/races/tiefling/">Тифлинг</a> Левистуса' },
+    { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+    { type: 'feat', name: '<a href="/feats/rune-shaper/">Ваятель рун</a>' }
   ]
 },
 {
@@ -1999,7 +1999,7 @@ export const spells: Spell[] = [
   sources: [
     { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=aberrant">Аберрантный Разум</a>' },
-    { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' }
+    { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' }
   ]
 },
 {
@@ -2031,10 +2031,10 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=grave">Домен Упокоения</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=vengeance">Клятва Мести</a>' },
     { type: 'subclass', name: '<a href="/classes/warlock?subclass=undead">Покровитель Нежить</a>' },
-    { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
-    { type: 'feat', name: '<a href="feats/fey-touched/">Затронутый феями</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
+    { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+    { type: 'feat', name: '<a href="/feats/fey-touched/">Затронутый феями</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
   ]
 },
 {
@@ -2060,10 +2060,10 @@ export const spells: Spell[] = [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
-    { type: 'feat', name: '<a href="feats/fey-touched/">Затронутый феями</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
+    { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+    { type: 'feat', name: '<a href="/feats/fey-touched/">Затронутый феями</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
   ]
 },
 {
@@ -2092,10 +2092,10 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=life">Домен Жизни</a>' },
-    { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
-    { type: 'feat', name: '<a href="feats/fey-touched/">Затронутый феями</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
+    { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+    { type: 'feat', name: '<a href="/feats/fey-touched/">Затронутый феями</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
   ]
 },
 {
@@ -2130,14 +2130,14 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/warlock?subclass=fiend">Покровитель Исчадие</a>' },
     { type: 'subclass', name: '<a href="/classes/warlock?subclass=genie">Покровитель Гений (Ифрит)</a>' },
     { type: 'subclass', name: '<a href="/classes/monk?subclass=sun-soul">Мастер Солнечной Души</a>' },
-    { type: 'species', name: '<a href="races/genasi/">Дженази Огня</a>' },
-    { type: 'species', name: '<a href="races/tiefling/">Тифлинг</a> Мефестофеля' },
-    { type: 'species', name: '<a href="races/tiefling/">Тифлинг</a> (Инфернальное Происхождение)' },
-    { type: 'background', name: '<a href="backgrounds/rakdos%20cultist/">Культист Ракдосов</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/rune-shaper/">Ваятель рун</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
+    { type: 'species', name: '<a href="/races/genasi/">Дженази Огня</a>' },
+    { type: 'species', name: '<a href="/races/tiefling/">Тифлинг</a> Мефестофеля' },
+    { type: 'species', name: '<a href="/races/tiefling/">Тифлинг</a> (Инфернальное Происхождение)' },
+    { type: 'background', name: '<a href="/backgrounds/rakdos%20cultist/">Культист Ракдосов</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/rune-shaper/">Ваятель рун</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
   ]
 },
 {
@@ -2165,9 +2165,9 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
   ]
 },
 {
@@ -2195,10 +2195,10 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' },
-    { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
-    { type: 'feat', name: '<a href="feats/shadow-touched/">Затронутый тенью</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
+    { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+    { type: 'feat', name: '<a href="/feats/shadow-touched/">Затронутый тенью</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
   ]
 },
 {
@@ -2231,10 +2231,10 @@ export const spells: Spell[] = [
     { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
     { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
-    { type: 'feat', name: '<a href="feats/ritual%20caster/">Ритуальный заклинатель</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
+    { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+    { type: 'feat', name: '<a href="/feats/ritual%20caster/">Ритуальный заклинатель</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -2270,14 +2270,14 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=trickery">Домен Обмана</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=enchanter">Очарователь</a>' },
     { type: 'subclass', name: '<a href="/classes/ranger?subclass=fey-wanderer">Фейский странник</a>' },
-    { type: 'species', name: '<a href="races/tiefling/">Тифлинг</a> Фьерна' },
-    { type: 'species', name: '<a href="races/tiefling/">Тифлинг</a> Дьявольский язык' },
-    { type: 'background', name: '<a href="backgrounds/selesnya%20initiate/">Посвящённый Селезнии</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
-    { type: 'feat', name: '<a href="feats/fey-touched/">Затронутый феями</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
+    { type: 'species', name: '<a href="/races/tiefling/">Тифлинг</a> Фьерна' },
+    { type: 'species', name: '<a href="/races/tiefling/">Тифлинг</a> Дьявольский язык' },
+    { type: 'background', name: '<a href="/backgrounds/selesnya%20initiate/">Посвящённый Селезнии</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+    { type: 'feat', name: '<a href="/feats/fey-touched/">Затронутый феями</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
   ]
 },
 {
@@ -2309,11 +2309,11 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
     { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=draconic">Драконья Кровь</a>' },
-    { type: 'background', name: '<a href="backgrounds/prismari%20student/">Студент Призмари</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/rune-shaper/">Ваятель рун</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
+    { type: 'background', name: '<a href="/backgrounds/prismari%20student/">Студент Призмари</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/rune-shaper/">Ваятель рун</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
   ]
 },
 {
@@ -2344,11 +2344,11 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=illusionist">Иллюзионист</a>' },
     { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=lunar">Лунное Чародейство</a>' },
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/shadow-touched/">Затронутый тенью</a>' },
-    { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/shadow-touched/">Затронутый тенью</a>' },
+    { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
   ]
 },
 {
@@ -2387,13 +2387,13 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/paladin?subclass=crown">Клятва Короны</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=knowledge">Домен Знаний</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=order">Домен Порядка</a>' },
-    { type: 'background', name: '<a href="backgrounds/azorius%20functionary/">Функционер Азориусов</a>' },
-    { type: 'background', name: '<a href="backgrounds/orzhov%20representative//">Представитель Орзовов</a>' },
-    { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
-    { type: 'feat', name: '<a href="feats/fey-touched/">Затронутый феями</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/rune-shaper/">Ваятель рун</a>' },
-    { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
+    { type: 'background', name: '<a href="/backgrounds/azorius%20functionary/">Функционер Азориусов</a>' },
+    { type: 'background', name: '<a href="/backgrounds/orzhov%20representative//">Представитель Орзовов</a>' },
+    { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+    { type: 'feat', name: '<a href="/feats/fey-touched/">Затронутый феями</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/rune-shaper/">Ваятель рун</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
   ]
 },
 {
@@ -2417,8 +2417,8 @@ export const spells: Spell[] = [
   sources: [
     { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
     { type: 'subclass', name: '<a href="/classes/paladin?subclass=crown">Клятва Короны</a>' },
-    { type: 'background', name: '<a href="backgrounds/gruul%20anarch/">Анарх Груулов</a>' },
-    { type: 'feat', name: '<a href="feats/fey-touched/">Затронутый феями</a>' },
+    { type: 'background', name: '<a href="/backgrounds/gruul%20anarch/">Анарх Груулов</a>' },
+    { type: 'feat', name: '<a href="/feats/fey-touched/">Затронутый феями</a>' },
   ]
 },
 {
@@ -2450,15 +2450,15 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=diviner">Прорицатель</a>' },
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=knowledge">Домен Знаний</a>' },
-    { type: 'background', name: '<a href="backgrounds/lorehold%20student/">Студент Лорхолда</a>' },    
-    { type: 'feat', name: '<a href="feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-    { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
-    { type: 'feat', name: '<a href="feats/fey-touched/">Затронутый феями</a>' },
-    { type: 'feat', name: '<a href="feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/ritual%20caster/">Ритуальный заклинатель</a>' },
-    { type: 'feat', name: '<a href="feats/rune-shaper/">Ваятель рун</a>' },
-    { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
+    { type: 'background', name: '<a href="/backgrounds/lorehold%20student/">Студент Лорхолда</a>' },    
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+    { type: 'feat', name: '<a href="/feats/fey-touched/">Затронутый феями</a>' },
+    { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/ritual%20caster/">Ритуальный заклинатель</a>' },
+    { type: 'feat', name: '<a href="/feats/rune-shaper/">Ваятель рун</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -2490,11 +2490,11 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
     { type: 'subclass', name: '<a href="/classes/warlock?subclass=fathomless">Покровитель Бездонный</a>' },  
-    { type: 'species', name: '<a href="races/genasi/">Дженази Воды</a>' }, 
-    { type: 'background', name: '<a href="backgrounds/izzet%20engineer/">Инженер Иззетов</a>' },
-    { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
+    { type: 'species', name: '<a href="/races/genasi/">Дженази Воды</a>' }, 
+    { type: 'background', name: '<a href="/backgrounds/izzet%20engineer/">Инженер Иззетов</a>' },
+    { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
   ]
 },
 {
@@ -2529,11 +2529,11 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=life">Домен Жизни</a>' },
-    { type: 'background', name: '<a href="backgrounds/witherbloom%20student/">Студент Визерблума</a>' },
-    { type: 'feat', name: '<a href="feats/divinely-favored/">Любимец богов</a>' },
-    { type: 'feat', name: '<a href="feats/gift-of-metallic-dragon//">Дар металлического дракона</a>' },
-    { type: 'feat', name: '<a href="feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
+    { type: 'background', name: '<a href="/backgrounds/witherbloom%20student/">Студент Визерблума</a>' },
+    { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+    { type: 'feat', name: '<a href="/feats/gift-of-metallic-dragon//">Дар металлического дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
   ]
 },
 {
@@ -2561,7 +2561,7 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/druid?subclass=wildfire">Круг Дикого Огня</a>' },
     { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=twilight">Домен Сумерек</a>' },
-    { type: 'background', name: '<a href="backgrounds/selesnya%20initiate/">Посвящённый Селезнии</a>' }
+    { type: 'background', name: '<a href="/backgrounds/selesnya%20initiate/">Посвящённый Селезнии</a>' }
   ]
 },
 {
@@ -2657,7 +2657,7 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=tempest">Домен Бури</a>' },
     { type: 'subclass', name: '<a href="/classes/warlock?subclass=fathomless">Покровитель Бездонный</a>' },
     { type: 'subclass', name: '<a href="warlock?subclass=genie">Покровитель Гений (Марид)</a>' },
-    { type: 'background', name: '<a href="backgrounds/quandrix%20student/">Студент Квандрикс</a>' },
+    { type: 'background', name: '<a href="/backgrounds/quandrix%20student/">Студент Квандрикс</a>' },
   ]
 },
 {
@@ -2743,8 +2743,8 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' },
-    { type: 'background', name: '<a href="backgrounds/selesnya%20initiate/">Посвящённый Селезнии</a>' },
-    { type: 'background', name: '<a href="backgrounds/izzet%20engineer/">Инженер Иззетов</a>' }
+    { type: 'background', name: '<a href="/backgrounds/selesnya%20initiate/">Посвящённый Селезнии</a>' },
+    { type: 'background', name: '<a href="/backgrounds/izzet%20engineer/">Инженер Иззетов</a>' }
   ]
 },
 {
@@ -2803,7 +2803,7 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
-    { type: 'background', name: '<a href="backgrounds/golgari%20agent/">Агент Голгари</a>' }
+    { type: 'background', name: '<a href="/backgrounds/golgari%20agent/">Агент Голгари</a>' }
   ]
 },
 {
@@ -2899,9 +2899,9 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=lunar">Лунное Чародейство</a>' },
     { type: 'subclass', name: '<a href="warlock?subclass=undying">Покровитель Бессмертный</a>' },
     { type: 'subclass', name: '<a href="/classes/warlock?subclass=undead">Покровитель Нежить</a>' },
-    { type: 'background', name: '<a href="backgrounds/boros%20legionnaire/">Легионер Боросов</a>' },
-    { type: 'background', name: '<a href="backgrounds/orzhov%20representative//">Представитель Орзовов</a>' },
-    { type: 'background', name: '<a href="backgrounds/witherbloom%20student/">Студент Визерблума</a>' }
+    { type: 'background', name: '<a href="/backgrounds/boros%20legionnaire/">Легионер Боросов</a>' },
+    { type: 'background', name: '<a href="/backgrounds/orzhov%20representative//">Представитель Орзовов</a>' },
+    { type: 'background', name: '<a href="/backgrounds/witherbloom%20student/">Студент Визерблума</a>' }
   ]
 },
 {
@@ -2974,7 +2974,7 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
     { type: 'subclass', name: '<a href="/classes/warlock?subclass=genie">Покровитель Гений (Дао)</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
-    { type: 'background', name: '<a href="backgrounds/lorehold%20student/">Студент Лорхолда</a>' }
+    { type: 'background', name: '<a href="/backgrounds/lorehold%20student/">Студент Лорхолда</a>' }
   ]
 },
 {
@@ -3074,7 +3074,7 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
-    { type: 'background', name: '<a href="backgrounds/gruul%20anarch/">Анарх Груулов</a>' }
+    { type: 'background', name: '<a href="/backgrounds/gruul%20anarch/">Анарх Груулов</a>' }
   ]
 },
 {
@@ -3105,7 +3105,7 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' },
-    { type: 'background', name: '<a href="backgrounds/orzhov%20representative//">Представитель Орзовов</a>' }
+    { type: 'background', name: '<a href="/backgrounds/orzhov%20representative//">Представитель Орзовов</a>' }
   ]
 },
 {
@@ -3139,7 +3139,7 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=diviner">Прорицатель</a>' },
     { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=draconic">Драконья Кровь</a>' },
     { type: 'subclass', name: '<a href="/classes/ranger?subclass=swarmkeeper">Хранитель Роя</a>' },
-    { type: 'background', name: '<a href="backgrounds/orzhov%20representative//">Представитель Орзовов</a>' },
+    { type: 'background', name: '<a href="/backgrounds/orzhov%20representative//">Представитель Орзовов</a>' },
     { type: 'other', name: 'Видения далёких королевств' }
   ]
 },
@@ -3264,7 +3264,7 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=abjurer">Оградитель</a>' },
     { type: 'subclass', name: '<a href="/classes/paladin?subclass=redemption">Клятва Искупления</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=peace">Домен Мира</a>' },
-    { type: 'background', name: '<a href="backgrounds/izzet%20engineer/">Инженер Иззетов</a>' }
+    { type: 'background', name: '<a href="/backgrounds/izzet%20engineer/">Инженер Иззетов</a>' }
   ]
 },
 {
@@ -3361,7 +3361,7 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/warlock?subclass=archfey">Покровитель Архифея</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
     { type: 'subclass', name: '<a href="/classes/paladin?subclass=conquest">Клятва Завоевания</a>' },
-    { type: 'background', name: '<a href="backgrounds/gruul%20anarch/">Анарх Груулов</a>' }
+    { type: 'background', name: '<a href="/backgrounds/gruul%20anarch/">Анарх Груулов</a>' }
   ]
 },
 {
@@ -3433,7 +3433,7 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=trickery">Домен Обмана</a>' },
-    { type: 'background', name: '<a href="backgrounds/simic%20scientist/">Учёный Симиков</a>' }
+    { type: 'background', name: '<a href="/backgrounds/simic%20scientist/">Учёный Симиков</a>' }
   ]
 },
 {
@@ -3466,8 +3466,8 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=diviner">Прорицатель</a>' },
     { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=trickery">Домен Обмана</a>' },
-    { type: 'background', name: '<a href="backgrounds/azorius%20functionary/">Функционер Азориусов</a>' },
-    { type: 'background', name: '<a href="backgrounds/izzet%20engineer/">Инженер Иззетов</a>' }
+    { type: 'background', name: '<a href="/backgrounds/azorius%20functionary/">Функционер Азориусов</a>' },
+    { type: 'background', name: '<a href="/backgrounds/izzet%20engineer/">Инженер Иззетов</a>' }
   ]
 },
 {
@@ -3587,8 +3587,8 @@ export const spells: Spell[] = [
     { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'subclass', name: '<a href="/classes/paladin?subclass=glory">Клятва Славы</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=order">Домен Порядка</a>' },
-    { type: 'background', name: '<a href="backgrounds/azorius%20functionary/">Функционер Азориусов</a>' },
-    { type: 'background', name: '<a href="backgrounds/silverquill%20student/">Студент Сильверквилла</a>' }
+    { type: 'background', name: '<a href="/backgrounds/azorius%20functionary/">Функционер Азориусов</a>' },
+    { type: 'background', name: '<a href="/backgrounds/silverquill%20student/">Студент Сильверквилла</a>' }
   ]
 },
 {
@@ -3624,10 +3624,10 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/paladin?subclass=devotion">Клятва Преданности</a>' },
     { type: 'subclass', name: '<a href="/classes/paladin?subclass=glory">Клятва Славы</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=war">Домен Войны</a>' },
-    { type: 'background', name: '<a href="backgrounds/dimir%20operative/">Оперативник Димиров</a>' },
-    { type: 'background', name: '<a href="backgrounds/simic%20scientist/">Учёный Симиков</a>' },
-    { type: 'background', name: '<a href="backgrounds/prismari%20student/">Студент Призмари</a>' },
-    { type: 'background', name: '<a href="backgrounds/quandrix%20student/">Студент Квандрикса</a>' }
+    { type: 'background', name: '<a href="/backgrounds/dimir%20operative/">Оперативник Димиров</a>' },
+    { type: 'background', name: '<a href="/backgrounds/simic%20scientist/">Учёный Симиков</a>' },
+    { type: 'background', name: '<a href="/backgrounds/prismari%20student/">Студент Призмари</a>' },
+    { type: 'background', name: '<a href="/backgrounds/quandrix%20student/">Студент Квандрикса</a>' }
   ]
 },
 {
@@ -3664,9 +3664,9 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=forge">Домен Кузни</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=light">Домен Света</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
-    { type: 'background', name: '<a href="backgrounds/boros%20legionnaire/">Легионер Боросов</a>' },
-    { type: 'background', name: '<a href="backgrounds/rakdos%20cultist/">Культист Ракдосов</a>' },
-    { type: 'background', name: '<a href="backgrounds/prismari%20student/">Студент Призмари</a>' }
+    { type: 'background', name: '<a href="/backgrounds/boros%20legionnaire/">Легионер Боросов</a>' },
+    { type: 'background', name: '<a href="/backgrounds/rakdos%20cultist/">Культист Ракдосов</a>' },
+    { type: 'background', name: '<a href="/backgrounds/prismari%20student/">Студент Призмари</a>' }
   ]
 },
 {
@@ -3731,8 +3731,8 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=grave">Домен Упокоения</a>' },
     { type: 'subclass', name: '<a href="paladin?subclass=oathbreaker">Клятвопреступник</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' },
-    { type: 'background', name: '<a href="backgrounds/orzhov%20representative//">Представитель Орзовов</a>' },
-    { type: 'background', name: '<a href="backgrounds/witherbloom%20student/">Студент Визерблума</a>' }
+    { type: 'background', name: '<a href="/backgrounds/orzhov%20representative//">Представитель Орзовов</a>' },
+    { type: 'background', name: '<a href="/backgrounds/witherbloom%20student/">Студент Визерблума</a>' }
   ]
 },
 {
@@ -3761,7 +3761,7 @@ export const spells: Spell[] = [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
-    { type: 'background', name: '<a href="backgrounds/golgari%20agent/">Агент Голгари</a>' }
+    { type: 'background', name: '<a href="/backgrounds/golgari%20agent/">Агент Голгари</a>' }
   ]
 },
 {
