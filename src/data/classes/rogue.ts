@@ -46,7 +46,7 @@ export const rogue: Class = {
           '20 <a href="/items/arrow">стрел</a>',
           '<a href="/items/quiver">Колчан</a>',
           '<a href="/items/thieves-tools">Воровские инструменты</a>',
-          '<a href="/items/quiver">Колчан</a>Набор взломщика',
+          '<a href="/items/burglars-pack">Набор взломщика</a>',
           '8 зм'
         ]
       },
