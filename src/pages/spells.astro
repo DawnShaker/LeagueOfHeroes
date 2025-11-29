@@ -157,6 +157,32 @@ const spellSchools = [
       });
     }
 
+    function getIdFromUrl() {
+      // Try path /spells/:id or query ?id=...
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const qid = params.get('id');
+        if (qid) return qid;
+
+        const parts = location.pathname.split('/').filter(Boolean);
+        const idx = parts.indexOf('spells');
+        if (idx >= 0 && parts.length > idx + 1) {
+          return parts[idx + 1];
+        }
+      } catch (e) {}
+      return null;
+    }
+
+    function clearDetails() {
+      if (!spellDetails) return;
+      spellDetails.innerHTML = `
+        <div class="details-content">
+          <h2>Выберите заклинание для просмотра</h2>
+        </div>
+      `;
+      spellCards.forEach(card => card.classList.remove('active'));
+    }
+
     function showSpellDetails(spellId: string) {
       if (!spellDetails) return;
 
@@ -240,6 +266,7 @@ const spellSchools = [
       return sections.join('');
     }
 
+    // Open/close filters, search and filter bindings
     filterButton?.addEventListener('click', togglePopup);
     closeButton?.addEventListener('click', togglePopup);
     filterPopup?.addEventListener('click', closePopup);
@@ -247,12 +274,33 @@ const spellSchools = [
     levelCheckboxes?.forEach(cb => cb.addEventListener('change', filterSpells));
     schoolCheckboxes?.forEach(cb => cb.addEventListener('change', filterSpells));
 
+    // Click on card: show details + update URL
     spellCards.forEach(card => {
       card.addEventListener('click', () => {
         const spellId = (card as HTMLElement).dataset.spellId;
-        if (spellId) showSpellDetails(spellId);
+        if (!spellId) return;
+        // push new URL: /spells/:id (or you can use ?id=)
+        const newUrl = `/spells/${encodeURIComponent(spellId)}`;
+        history.pushState({ spellId }, '', newUrl);
+        showSpellDetails(spellId);
       });
     });
+
+    // Handle back/forward navigation
+    window.addEventListener('popstate', () => {
+      const id = getIdFromUrl();
+      if (id) {
+        showSpellDetails(id);
+      } else {
+        clearDetails();
+      }
+    });
+
+    // On initial load: if URL contains id -> open it
+    const initialId = getIdFromUrl();
+    if (initialId) {
+      showSpellDetails(initialId);
+    }
   }
 
   document.addEventListener('DOMContentLoaded', initializeSpells);
