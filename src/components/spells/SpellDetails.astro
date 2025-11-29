@@ -70,8 +70,8 @@ function formatSources(sources: Spell['sources']): string {
   <div class="spell-sources">
     <h3>Источники</h3>
     <div class="sources-content">
-      set:html={formatSources(spell.sources).split('\n').map(section => (
-        <p>{section}</p>
+      {formatSources(spell.sources).split('\n').map(section => (
+        <p set:html={section}></p>
       ))}
     </div>
   </div>
