@@ -447,7 +447,7 @@ export const sorcerer: Class = {
     },
     {
       name: 'Создание ячеек заклинаний',
-      level: 3,
+      level: 2,
       description: '—',
       collapsible: [
         {

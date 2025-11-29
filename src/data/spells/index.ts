@@ -2499,7 +2499,7 @@ export const spells: Spell[] = [
 },
 {
   id: 'сure-wounds',
-  name: 'Лечение Ран',
+  name: 'Лечение ран',
   nameEn: 'Comprehend Languages',
   level: '1',
   school: 'ограждение',
