@@ -162,7 +162,10 @@ return { level, spells };
   </div>
 </Layout>
 
-<script define:vars={{ classData }}>
+<script type="module" define:vars={{ classData }}>
+  import { SpellTooltip } from '../../utils/spellTooltip';
+  import { spells as allSpells } from '../../data/spells';
+
   document.addEventListener('DOMContentLoaded', () => {
     const subclassSelect = document.getElementById('subclass-select');
     const classLore = document.getElementById('class-lore');
@@ -170,6 +173,105 @@ return { level, spells };
     const featuresContainer = document.getElementById('features-container');
     const featureTemplate = document.getElementById('feature-template');
     let currentSubclass = null;
+
+    // Create tooltip element and initialize SpellTooltip
+    const tooltipEl = document.createElement('div');
+    tooltipEl.id = 'spell-tooltip';
+    tooltipEl.style.display = 'none';
+    tooltipEl.style.position = 'fixed';
+    tooltipEl.style.zIndex = '10000';
+    document.body.appendChild(tooltipEl);
+
+    const spellTooltip = new SpellTooltip({ offsetX: 12, offsetY: 12, fadeInDelay: 220, fadeOutDelay: 120 });
+    spellTooltip.init(tooltipEl, allSpells);
+
+    // Linkify any server-rendered content immediately so markers like
+    // [spell:speak-with-animals] are turned into links and get tooltip hooks.
+    try {
+      linkifySpellsInNode(featuresContainer, allSpells);
+      linkifySpellsInNode(classLore, allSpells);
+    } catch (e) {
+      console.error('initial linkify failed', e);
+    }
+
+    // Replace plain text occurrences inside text nodes with anchor links to spells
+    function replaceTextNodeWithLink(textNode, name, id) {
+      const idx = textNode.nodeValue.indexOf(name);
+      if (idx === -1) return false;
+
+      const parent = textNode.parentNode;
+      if (!parent) return false;
+
+      const before = document.createTextNode(textNode.nodeValue.slice(0, idx));
+      const link = document.createElement('a');
+      link.href = `/spells/${encodeURIComponent(id)}`;
+      link.className = 'spell-link';
+      link.dataset.spellId = id;
+      link.textContent = name;
+      const after = document.createTextNode(textNode.nodeValue.slice(idx + name.length));
+
+      parent.insertBefore(before, textNode);
+      parent.insertBefore(link, textNode);
+      parent.insertBefore(after, textNode);
+      parent.removeChild(textNode);
+      return true;
+    }
+
+    function linkifySpellsInNode(container, spellsList) {
+      if (!container) return;
+
+      // First, add class/dataset to existing anchors with /spells/ in href
+      const anchors = container.querySelectorAll('a[href*="/spells/"]');
+      anchors.forEach(a => {
+        if (!a.classList.contains('spell-link')) {
+          const href = a.getAttribute('href') || '';
+          const m = href.match(/\/spells\/(.+?)(?:[\/\?#]|$)/);
+          if (m) {
+            a.classList.add('spell-link');
+            a.dataset.spellId = decodeURIComponent(m[1]);
+          }
+        }
+      });
+
+      // Then walk text nodes and replace exact spell name occurrences with anchors
+      const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
+      const textNodes = [];
+      let node;
+      while (node = walker.nextNode()) { // eslint-disable-line no-cond-assign
+        textNodes.push(node);
+      }
+
+      const markerRe = /\[spell:([^\]|]+)(?:\|([^\]]+))?\]/;
+      for (const tNode of textNodes) {
+        // skip whitespace-only
+        if (!tNode.nodeValue || !tNode.nodeValue.trim()) continue;
+        // don't touch if parent is an anchor
+        if (tNode.parentElement && tNode.parentElement.closest('a')) continue;
+        // First handle explicit markers like [spell:speak-with-animals|Label]
+        const m = tNode.nodeValue.match(markerRe);
+        if (m) {
+          const id = m[1];
+          const label = m[2] || (spellsList.find(s => s.id === id)?.name || id);
+          const replaced = replaceTextNodeWithLink(tNode, m[0], id);
+          // replaceTextNodeWithLink expects the exact substring to replace; we passed the whole marker
+          // but we want the visible label. If replacement occurred, replace the produced link's text.
+          if (replaced) {
+            const anchors = container.querySelectorAll(`a.spell-link[data-spell-id="${id}"]`);
+            if (anchors.length) anchors[anchors.length - 1].textContent = label;
+            continue;
+          }
+        }
+
+        for (const sp of spellsList) {
+          const name = sp.name;
+          if (tNode.nodeValue.includes(name)) {
+            // perform single replacement per node per spell to avoid infinite loops
+            const replaced = replaceTextNodeWithLink(tNode, name, sp.id);
+            if (replaced) break;
+          }
+        }
+      }
+    }
 
     function createTableElement(tableText) {
       const rows = tableText.split('\n').filter(row => row.trim());
@@ -320,6 +422,13 @@ return { level, spells };
           const p = document.createElement('p');
           p.textContent = paragraph;
           descriptionContainer.appendChild(p);
+            // After building description, linkify spell anchors and plain names safely
+            try {
+              linkifySpellsInNode(descriptionContainer, allSpells);
+            } catch (e) {
+              // non-fatal
+              console.error('linkify error', e);
+            }
         });
       }
 
@@ -368,6 +477,12 @@ return { level, spells };
         const featureElement = createFeatureElement(feature, isSubclassFeature);
         featuresContainer.appendChild(featureElement);
       });
+      // Ensure spell links and tooltip hooks are set after rendering
+      try {
+        linkifySpellsInNode(featuresContainer, allSpells);
+      } catch (e) {
+        console.error('linkify after updateFeatures failed', e);
+      }
     }
 
     subclassSelect?.addEventListener('change', (e) => {
