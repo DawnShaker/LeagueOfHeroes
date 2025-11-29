@@ -94,7 +94,7 @@ export const warlock: Class = {
     {
       level: 5,
       profBonus: '+3',
-      features: ['-'],
+      features: ['—'],
       invocations: 5,
       cantrips: 3,
       preparedSpells: 6,
@@ -114,7 +114,7 @@ export const warlock: Class = {
     {
       level: 7,
       profBonus: '+3',
-      features: ['-'],
+      features: ['—'],
       invocations: 6,
       cantrips: 3,
       preparedSpells: 8,
@@ -224,7 +224,7 @@ export const warlock: Class = {
     {
       level: 18,
       profBonus: '+5',
-      features: ['-'],
+      features: ['—'],
       invocations: 10,
       cantrips: 4,
       preparedSpells: 14,
@@ -485,7 +485,7 @@ export const warlock: Class = {
         {
           name: 'Заклинания Архифеи',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Архифеи',
@@ -538,7 +538,7 @@ export const warlock: Class = {
         {
           name: 'Заклинания Небожителя',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Небожителя',
@@ -596,7 +596,7 @@ export const warlock: Class = {
         {
           name: 'Заклинания Исчадия',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Исчадия',
@@ -649,7 +649,7 @@ export const warlock: Class = {
         {
           name: 'Заклинания Великого Древнего',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Великого Древнего',
@@ -707,7 +707,7 @@ export const warlock: Class = {
         {
           name: 'Заклинания Бессмертного',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Бессмертного',
@@ -760,7 +760,7 @@ export const warlock: Class = {
         {
           name: 'Заклинания Ведьмовского клинка',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Ведьмовского клинка',
@@ -818,7 +818,7 @@ export const warlock: Class = {
         {
           name: 'Заклинания Бездонного',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Бездонного',
@@ -881,7 +881,7 @@ export const warlock: Class = {
         {
           name: 'Заклинания Гения',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Гения',
@@ -893,7 +893,7 @@ export const warlock: Class = {
                   ['5', 'Сотворение пищи и воды', 'Слияние с камнем', 'Стена ветров', 'Огненный шар', 'Метель'],
                   ['7', 'Воображаемый убийца', 'Изменение формы камня', 'Высшая невидимость', 'Огненный щит', 'Власть над водами'],
                   ['9', 'Сотворение', 'Каменная стена', 'Притворство', 'Небесный огонь', 'Конус холода'],
-                  ['17', 'Исполнение желаний', '-', '-', '-', '-']
+                  ['17', 'Исполнение желаний', '—', '—', '—', '—']
                 ]
               }
             }
@@ -907,7 +907,7 @@ export const warlock: Class = {
         {
           name: 'Сосуд гения',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Сосуд гения',
@@ -957,7 +957,7 @@ export const warlock: Class = {
         {
           name: 'Заклинания Нежити',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Нежити',

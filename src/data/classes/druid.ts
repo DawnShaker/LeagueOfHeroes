@@ -208,7 +208,7 @@ export const druid: Class = {
     {
       level: 9,
       profBonus: '+4',
-      features: ['-'],
+      features: ['—'],
       wildShape: 3,
       cantrips: 3,
       preparedSpells: 14,
@@ -458,7 +458,7 @@ export const druid: Class = {
     {
       name: 'Формы зверей',
       level: 2,
-      description: '-',
+      description: '—',
       collapsible: [
         {
           title: 'Формы зверей',
@@ -535,7 +535,7 @@ export const druid: Class = {
         {
           name: 'Засушливая земля',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Засушливая земля',
@@ -555,7 +555,7 @@ export const druid: Class = {
         {
           name: 'Арктическая земля',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Арктическая земля',
@@ -575,7 +575,7 @@ export const druid: Class = {
         {
           name: 'Умеренная земля',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Умеренная земля',
@@ -595,7 +595,7 @@ export const druid: Class = {
         {
           name: 'Тропическая земля',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Тропическая земля',
@@ -673,7 +673,7 @@ export const druid: Class = {
         {
           name: 'Заклинания Круга Луны',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Круга Луны',
@@ -721,7 +721,7 @@ export const druid: Class = {
         {
           name: 'Заклинания Круга моря',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Круга моря',
@@ -774,7 +774,7 @@ export const druid: Class = {
         {
           name: 'Звездная карта',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Звездная карта',
@@ -890,7 +890,7 @@ export const druid: Class = {
         {
           name: 'Заклинания круга Дикого Огня',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания круга Дикого Огня',
@@ -943,7 +943,7 @@ export const druid: Class = {
         {
           name: 'Заклинания круга Спор',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания круга Спор',

@@ -387,7 +387,7 @@ export const bloodhunter: Class = {
         {
           name: 'Магия договора',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Осквернённых душ',

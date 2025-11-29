@@ -448,7 +448,7 @@ export const sorcerer: Class = {
     {
       name: 'Создание ячеек заклинаний',
       level: 3,
-      description: '-',
+      description: '—',
       collapsible: [
         {
           title: 'Создание ячеек заклинаний',
@@ -564,7 +564,7 @@ export const sorcerer: Class = {
         {
           name: 'Псионические заклинания',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Псионические заклинания',
@@ -622,7 +622,7 @@ export const sorcerer: Class = {
         {
           name: 'Заводная магия',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Заводной души',
@@ -642,7 +642,7 @@ export const sorcerer: Class = {
         {
           name: 'Проявления порядка',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Проявления порядка',
@@ -702,7 +702,7 @@ export const sorcerer: Class = {
         {
           name: 'Драконьи заклинания',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Драконьи заклинания',
@@ -750,7 +750,7 @@ export const sorcerer: Class = {
         {
           name: 'Волна дикой магии',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Волна дикой магии',
@@ -824,7 +824,7 @@ export const sorcerer: Class = {
         {
           name: 'Божественная магия',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Божественная магия',
@@ -949,7 +949,7 @@ export const sorcerer: Class = {
         {
           name: 'Лунные заклинания',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Лунные заклинания',

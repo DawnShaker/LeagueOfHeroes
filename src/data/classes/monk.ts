@@ -14,7 +14,7 @@ export const monk: Class = {
     higherLevels: '1к8 (или 5) + модификатор Телосложения за каждый уровень после первого'
   },
   proficiencies: {
-    armor: ['-'],
+    armor: ['—'],
     weapons: ['Простое оружие', 'Воинское оружие, обладающее свойством лёгкое'],
     savingThrows: ['Сила', 'Ловкость'],
     tools: ['1 инструмент ремесленника или музыкальный инструмент'],
@@ -54,8 +54,8 @@ export const monk: Class = {
       profBonus: '+2',
       features: ['Боевые искуства', 'Защита без доспехов'],
       martialArts: '1к6',
-      spiritPoints: '-',
-      unarmedMovement: '-'
+      spiritPoints: '—',
+      unarmedMovement: '—'
     },
     {
       level: 2,

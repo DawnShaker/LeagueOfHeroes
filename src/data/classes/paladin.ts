@@ -438,7 +438,7 @@ export const paladin: Class = {
         {
           name: 'Заклинания Клятвы Преданности',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Клятвы Преданности',
@@ -492,7 +492,7 @@ export const paladin: Class = {
         {
           name: 'Заклинания Клятвы Славы',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Клятвы Славы',
@@ -551,7 +551,7 @@ export const paladin: Class = {
         {
           name: 'Заклинания Клятвы Древних',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Клятвы Древних',
@@ -605,7 +605,7 @@ export const paladin: Class = {
         {
           name: 'Заклинания Клятвы Мести',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Клятвы Мести',
@@ -659,7 +659,7 @@ export const paladin: Class = {
         {
           name: 'Заклинания Клятвы Короны',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Клятвы Короны',
@@ -718,7 +718,7 @@ export const paladin: Class = {
         {
           name: 'Заклинания Клятвы Искупления',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Клятвы Искупления',
@@ -777,7 +777,7 @@ export const paladin: Class = {
         {
           name: 'Заклинания Клятвы Завоевания',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Клятвы Завоевания',
@@ -836,7 +836,7 @@ export const paladin: Class = {
         {
           name: 'Заклинания Клятвы Смотрителей',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Клятвы Смотрителей',
@@ -895,7 +895,7 @@ export const paladin: Class = {
         {
           name: 'Заклинания Клятвоприступника',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Клятвоприступника',

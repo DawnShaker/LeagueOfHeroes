@@ -470,7 +470,7 @@ export const ranger: Class = {
         {
           name: 'Заклинания Фейского странника',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Фейского странника',
@@ -496,7 +496,7 @@ export const ranger: Class = {
         {
           name: 'Дары фей',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Дары фей',
@@ -556,7 +556,7 @@ export const ranger: Class = {
         {
           name: 'Заклинания Сумрачного охотника',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Сумрачного охотника',
@@ -643,7 +643,7 @@ export const ranger: Class = {
         {
           name: 'Заклинания Странника горизонта',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Странника горизонта',
@@ -702,7 +702,7 @@ export const ranger: Class = {
         {
           name: 'Заклинания Убийцы чудовищ',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Убийцы чудовищ',
@@ -766,7 +766,7 @@ export const ranger: Class = {
         {
           name: 'Заклинания Хранителя роя',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Заклинания Хранителя роя',

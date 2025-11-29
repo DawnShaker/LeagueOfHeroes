@@ -203,7 +203,7 @@ export const cleric: Class = {
     {
       level: 9,
       profBonus: '+4',
-      features: ['-'],
+      features: ['—'],
       chanelDivinity: 3,
       cantrips: 4,
       preparedSpells: 14,
@@ -317,7 +317,7 @@ export const cleric: Class = {
     {
       level: 15,
       profBonus: '+5',
-      features: ['-'],
+      features: ['—'],
       chanelDivinity: 3,
       cantrips: 5,
       preparedSpells: 18,
@@ -374,7 +374,7 @@ export const cleric: Class = {
     {
       level: 18,
       profBonus: '+6',
-      features: ['-'],
+      features: ['—'],
       chanelDivinity: 4,
       cantrips: 5,
       preparedSpells: 20,

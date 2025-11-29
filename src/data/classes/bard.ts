@@ -746,7 +746,7 @@ export const bard: Class = {
         {
           name: 'Истории духов',
           level: 3,
-          description: '-',
+          description: '—',
           collapsible: [
             {
               title: 'Истории духов',
