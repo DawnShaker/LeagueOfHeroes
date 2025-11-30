@@ -455,7 +455,28 @@ return { level, spells };
         // comma-separated list or contains recommendation words (e.g. "Рекомендуются").
         const nodeText = tNode.nodeValue;
         const lowerText = nodeText.toLowerCase();
-        const looksLikeList = nodeText.includes(',') || /рекоменду/.test(lowerText);
+        // Detect lists: comma-separated, recommendation phrases, or simple
+        // conjunction lists using 'и' (e.g. "A и B" or "A, B и C"). We look
+        // for capitalized words around 'и' to reduce false positives in prose.
+        const hasComma = nodeText.includes(',');
+        const hasRecommend = /рекоменду/i.test(lowerText);
+        const hasConjunctionList = /[A-ZА-ЯЁ][^\n]{0,40}\s+и\s+[A-ZА-ЯЁ]/.test(nodeText);
+        const hasKnowPhrase = /вы знаете/i.test(lowerText);
+        // If the text node is inside a table, treat it as list-like (tables often contain spell lists)
+        let isInTable = false;
+        let hasLevelHeader = false;
+        try {
+          const tbl = tNode.parentElement && tNode.parentElement.closest ? tNode.parentElement.closest('table') : null;
+          if (tbl) {
+            isInTable = true;
+            const ths = Array.from(tbl.querySelectorAll('th'));
+            hasLevelHeader = ths.some(th => /Уровень\s*\d+/i.test((th.textContent||'').trim()));
+          }
+        } catch (e) {
+          // ignore DOM errors
+        }
+
+        const looksLikeList = hasComma || hasRecommend || hasConjunctionList || hasKnowPhrase || isInTable || hasLevelHeader;
 
         if (!looksLikeList) continue;
 
@@ -486,16 +507,27 @@ return { level, spells };
 
         if (matches.length === 0) continue;
 
-        matches.sort((a, b) => a.index - b.index);
-        // Remove overlapping matches by keeping the earliest non-overlapping ones
-        const chosen = [];
-        let lastEnd = -1;
-        for (const m of matches) {
-          if (m.index >= lastEnd) {
-            chosen.push(m);
-            lastEnd = m.index + m.length;
+          // Prefer longer spell names when overlaps occur (e.g. "Дружба" vs "Дружба с животными").
+          // Select non-overlapping matches by accepting longer matches first,
+          // then sort chosen matches by index for assembly.
+          matches.sort((a, b) => {
+            if (b.length !== a.length) return b.length - a.length; // longer first
+            return a.index - b.index;
+          });
+          const occupied = new Array(nodeText.length).fill(false);
+          const chosen = [];
+          for (const m2 of matches) {
+            let conflict = false;
+            for (let p = m2.index; p < m2.index + m2.length; p++) {
+              if (occupied[p]) { conflict = true; break; }
+            }
+            if (!conflict) {
+              chosen.push(m2);
+              for (let p = m2.index; p < m2.index + m2.length; p++) occupied[p] = true;
+            }
           }
-        }
+          // sort chosen by index ascending for correct reconstruction
+          chosen.sort((a, b) => a.index - b.index);
 
         // Rebuild node content
         const parent = tNode.parentNode;
