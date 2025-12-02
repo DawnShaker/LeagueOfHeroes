@@ -150,6 +150,8 @@ const { variants, currentVariant } = Astro.props;
         if (!variant || !variantData?.abilities) {
           // Restore original abilities
           abilitiesContainer.innerHTML = originalAbilities;
+          // Notify listeners that abilities content changed
+          document.dispatchEvent(new CustomEvent('abilities-updated', { detail: { container: abilitiesContainer } }));
         } else {
           // Start with original abilities
           abilitiesContainer.innerHTML = originalAbilities;
@@ -209,6 +211,8 @@ const { variants, currentVariant } = Astro.props;
             tempContainer.innerHTML = abilityContent;
             abilitiesContainer.appendChild(tempContainer.firstElementChild);
           });
+          // Notify listeners that abilities content changed
+          document.dispatchEvent(new CustomEvent('abilities-updated', { detail: { container: abilitiesContainer } }));
         }
       }
     });

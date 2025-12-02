@@ -4,6 +4,11 @@
   --primary-dark: #5b21b6;
   --background: #f8fafc;
   --text: #1e293b;
+  /* Link colors (light theme defaults) */
+  --link: #6d28d9;
+  --link-visited: #5b21b6;
+  --link-hover: #4c1d95;
+  --link-focus-box: 0 0 0 3px rgba(124,58,237,0.12);
   
   /* Card and UI elements */
   --card-bg: #ffffff;
@@ -31,6 +36,11 @@
   --primary-dark: #8b5cf6;
   --background: #0f172a;
   --text: #e2e8f0;
+  /* Link colors for dark theme */
+  --link: #c7b6ff;
+  --link-visited: #9a7ae6;
+  --link-hover: #ffffff;
+  --link-focus-box: 0 0 0 4px rgba(167,139,250,0.14);
   
   /* Card and UI elements */
   --card-bg: #1e293b;
@@ -149,16 +159,23 @@
 
 /* Spell link styling */
 .spell-link {
-  color: var(--primary);
+  color: var(--link);
   text-decoration: underline;
   cursor: pointer;
   text-decoration-style: dotted;
   text-underline-offset: 2px;
 }
 
-.spell-link:hover {
-  text-decoration-style: solid;
-}
+.spell-link:visited { color: var(--link-visited); }
+
+.spell-link:hover { color: var(--link-hover); text-decoration-style: solid; }
+.spell-link:focus { outline: none; box-shadow: var(--link-focus-box); border-radius: 4px; }
+
+/* Global link defaults (uses theme variables) */
+a, a:link { color: var(--link); }
+a:visited { color: var(--link-visited); }
+a:hover, a:active { color: var(--link-hover); text-decoration-style: solid; }
+a:focus { outline: none; box-shadow: var(--link-focus-box); border-radius: 4px; }
 
 /* Responsive tooltip */
 @media (max-width: 768px) {

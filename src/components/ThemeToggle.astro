@@ -1,4 +1,5 @@
 ---
+import PaletteEditor from './PaletteEditor.astro';
 ---
 
 <button id="theme-toggle" aria-label="Toggle dark mode" class="theme-toggle">
@@ -17,6 +18,8 @@
     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
   </svg>
 </button>
+
+<PaletteEditor />
 
 <style>
   .theme-toggle {
@@ -65,6 +68,15 @@
     (function() {
       const theme = localStorage.getItem('theme') ?? 'dark'; 
       document.documentElement.classList.toggle('dark', theme === 'dark');
+      try {
+        const raw = localStorage.getItem('lh_user_palette_v1');
+        if (raw) {
+          const pal = JSON.parse(raw);
+          if (pal && typeof pal === 'object') {
+            Object.keys(pal).forEach(k => document.documentElement.style.setProperty(k, pal[k]));
+          }
+        }
+      } catch (e) { /* ignore */ }
     })();
   `;
   document.head.appendChild(script);

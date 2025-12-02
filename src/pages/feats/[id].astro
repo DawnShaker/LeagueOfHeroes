@@ -12,26 +12,39 @@ export function getStaticPaths() {
 const { feat } = Astro.props;
 
 function formatTableContent(text) {
-  if (!text.includes('\t')) return `<p>${text}</p>`;
+  // Support both tab-separated and pipe-separated tables. Detect delimiter per-line
+  const lines = text.split('\n').map(l => l.replace(/\r$/, ''));
 
-  const lines = text.split('\n');
+  // Decide delimiter for the block: prefer tab if present anywhere, otherwise pipe if present.
+  let delim = '\t';
+  if (!lines.some(l => l.includes('\t')) && lines.some(l => l.includes('|'))) delim = '|';
+
+  const splitLine = (line) => {
+    if (delim === '\t') return line.split('\t').map(c => c.trim());
+    // split on pipe with optional surrounding whitespace
+    return line.split(/\s*\|\s*/).map(c => c.trim());
+  };
+
+  const headers = splitLine(lines[0] || '');
+  const rows = lines.slice(1).filter(l => l.trim() !== '').map(l => splitLine(l));
+
+  const thead = headers.map(h => `<th>${h}</th>`).join('');
+  const tbody = rows.map(cells => `
+              <tr>
+                ${cells.map(cell => `<td>${cell}</td>`).join('')}
+              </tr>
+            `).join('');
+
   return `
     <div class="table-container">
       <table>
         <thead>
           <tr>
-            ${lines[0].split('\t').map(header => `<th>${header}</th>`).join('')}
+            ${thead}
           </tr>
         </thead>
         <tbody>
-          ${lines.slice(1).map(line => {
-            const cells = line.split('\t');
-            return `
-              <tr>
-                ${cells.map(cell => `<td>${cell}</td>`).join('')}
-              </tr>
-            `;
-          }).join('')}
+          ${tbody}
         </tbody>
       </table>
     </div>
@@ -40,7 +53,32 @@ function formatTableContent(text) {
 
 function formatDescription(text) {
   if (!text) return '';
-  return text.split('\n').map(line => line.includes('\t') ? formatTableContent(line) : `<p>${line}</p>`).join('');
+  const lines = text.split('\n');
+  let out = '';
+  let tableLines = [];
+
+  function flushTable() {
+    if (tableLines.length) {
+      out += formatTableContent(tableLines.join('\n'));
+      tableLines = [];
+    }
+  }
+
+  for (const line of lines) {
+    // Treat a line as a table row if it contains a tab or a pipe with multiple columns
+    const isPipeRow = line.includes('|') && line.split('|').length > 1;
+    if (line.includes('\t') || isPipeRow) {
+      tableLines.push(line);
+    } else {
+      // if we were collecting a table, flush it before adding a paragraph
+      flushTable();
+      if (line.trim()) out += `<p>${line}</p>`;
+    }
+  }
+
+  // flush any trailing table
+  flushTable();
+  return out;
 }
 
 const featTypes = {
@@ -159,9 +197,9 @@ const featTypes = {
 
   .table-container {
     margin: 1rem 0;
-    overflow-x: auto;
-    background: var(--card-bg);
-    padding: 1rem;
+    overflow: auto;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+    padding: 0.5rem;
     border-radius: 0.5rem;
     box-shadow: var(--card-shadow);
     border: 1px solid var(--card-border);
@@ -169,22 +207,52 @@ const featTypes = {
 
   .table-container table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
+    min-width: 560px;
+    background: transparent;
+    border-radius: 0.375rem;
+    overflow: hidden;
   }
 
-  .table-container th,
-  .table-container td {
-    padding: 0.75rem;
-    border: 1px solid var(--card-border);
+  .table-container thead th {
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    padding: 0.75rem 1rem;
     text-align: left;
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+    position: sticky;
+    top: 0;
+    z-index: 2;
   }
 
-  .table-container tr:first-child {
-    background: var(--background);
-    font-weight: 600;
+  .table-container tbody td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    vertical-align: middle;
+    color: var(--text);
+    background: transparent;
   }
 
-  .table-container tr:nth-child(even) {
-    background: var(--background);
+  .table-container tbody tr:nth-child(even) {
+    background: rgba(0,0,0,0.02);
+  }
+
+  .table-container tbody tr:hover {
+    background: rgba(0,0,0,0.04);
+  }
+
+  .table-container th:first-child { border-top-left-radius: 0.375rem; }
+  .table-container th:last-child { border-top-right-radius: 0.375rem; }
+
+  /* Small screens: allow horizontal scrolling but keep nicer spacing */
+  @media (max-width: 640px) {
+    .table-container {
+      padding: 0.5rem;
+    }
+    .table-container table { min-width: 480px; }
+    .table-container thead th,
+    .table-container tbody td { padding: 0.6rem 0.75rem; }
   }
 </style>

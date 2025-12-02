@@ -1,0 +1,105 @@
+---
+---
+
+<div id="palette-editor" class="palette-editor">
+    <button id="palette-open" class="theme-toggle palette-open" aria-label="Open palette editor">🎨</button>
+  
+    <div id="palette-modal" class="palette-modal" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="palette-panel">
+        <header>
+          <h3>Настройка палитры</h3>
+          <button id="palette-close" class="close">✕</button>
+        </header>
+  
+        <div class="palette-body">
+          <label for="accent-color">Акцентный цвет</label>
+          <input id="accent-color" type="color" value="#7c3aed">
+          <div class="presets">
+            <button class="preset" data-color="#7c3aed" style="background:#7c3aed"></button>
+            <button class="preset" data-color="#ea580c" style="background:#ea580c"></button>
+            <button class="preset" data-color="#059669" style="background:#059669"></button>
+            <button class="preset" data-color="#0ea5e9" style="background:#0ea5e9"></button>
+          </div>
+  
+          <div class="actions">
+            <button id="apply-palette">Применить</button>
+            <button id="save-palette">Сохранить</button>
+            <button id="reset-palette">Сброс</button>
+          </div>
+  
+          <div id="palette-feedback" class="feedback" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <style>
+    .palette-open {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 4.5rem;
+    }
+  
+    .palette-modal { display:none; position:fixed; inset:0; background: rgba(0,0,0,0.4); align-items:center; justify-content:center; z-index:1600; }
+    .palette-modal[aria-hidden="false"] { display:flex; }
+    .palette-panel { background: var(--card-bg); color: var(--text); padding: 1rem; width: 320px; border-radius:8px; box-shadow: var(--card-shadow); border:1px solid var(--card-border); }
+    .palette-panel header { display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; }
+    .palette-panel .preset { width:28px; height:28px; border-radius:6px; border:1px solid rgba(0,0,0,0.08); margin-right:0.4rem; cursor:pointer; }
+    .palette-body label { display:block; margin-bottom:0.25rem; }
+    .palette-body input[type="color"] { width:56px; height:36px; border: none; padding:0; background:transparent; cursor:pointer; }
+    .actions { display:flex; gap:0.5rem; margin-top:0.6rem; }
+    .actions button { padding:0.45rem 0.6rem; border-radius:6px; border:1px solid var(--card-border); background:transparent; cursor:pointer; }
+    .feedback { margin-top:0.6rem; font-size:0.85rem; color:var(--text); opacity:0.8 }
+  </style>
+  
+  <script type="module">
+    import { applyPalette, savePalette, loadPalette, generateFromAccent } from '../utils/palette.js';
+  
+    document.addEventListener('DOMContentLoaded', () => {
+      const openBtn = document.getElementById('palette-open');
+      const modal = document.getElementById('palette-modal');
+      const closeBtn = document.getElementById('palette-close');
+      const accentInput = document.getElementById('accent-color');
+      const presets = Array.from(document.querySelectorAll('.preset'));
+      const applyBtn = document.getElementById('apply-palette');
+      const saveBtn = document.getElementById('save-palette');
+      const resetBtn = document.getElementById('reset-palette');
+      const feedback = document.getElementById('palette-feedback');
+  
+      function open() { if (modal) modal.setAttribute('aria-hidden', 'false'); }
+      function close() { if (modal) modal.setAttribute('aria-hidden', 'true'); if (feedback) feedback.textContent = ''; }
+  
+      openBtn?.addEventListener('click', open);
+      closeBtn?.addEventListener('click', close);
+      modal?.addEventListener('click', (e) => { if (e.target === modal) close(); });
+  
+      presets.forEach(p => p.addEventListener('click', () => { if (accentInput) { accentInput.value = p.dataset.color; applyAccent(); } }));
+  
+      function applyAccent() {
+        const accent = accentInput?.value || '#7c3aed';
+        const pal = generateFromAccent(accent) || { '--primary': accent, '--link': accent };
+        applyPalette(pal);
+        if (feedback) feedback.textContent = 'Применено временно. Нажмите Сохранить, чтобы сохранить.';
+        return pal;
+      }
+  
+      applyBtn?.addEventListener('click', () => { applyAccent(); });
+      saveBtn?.addEventListener('click', () => {
+        const pal = applyAccent();
+        savePalette(pal);
+        if (feedback) feedback.textContent = 'Палитра сохранена.';
+      });
+      resetBtn?.addEventListener('click', () => {
+        try { localStorage.removeItem('lh_user_palette_v1'); location.reload(); } catch (e) { console.error(e); }
+      });
+  
+      // Load saved palette into UI
+      const saved = loadPalette();
+      if (saved) {
+        if (saved['--primary'] && /^#([0-9a-fA-F]{6})$/.test(saved['--primary'])) {
+          if (accentInput) accentInput.value = saved['--primary'];
+        }
+      }
+    });
+  </script>
+  
