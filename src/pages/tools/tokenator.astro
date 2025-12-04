@@ -1,0 +1,18 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TokenEditor from '../../components/TokenEditor.astro';
+---
+
+<Layout title="Токенатор">
+  <div class="page">
+    <h1>Токенатор</h1>
+    <p>Создавайте токены из изображений — всё происходит в браузере.</p>
+    <TokenEditor />
+  </div>
+</Layout>
+
+<style>
+  .page { max-width:1000px; margin:0 auto; padding:1rem; }
+  h1 { margin-bottom: 0.25rem; }
+  p { margin-top:0; margin-bottom:1rem; color:var(--text); }
+</style>

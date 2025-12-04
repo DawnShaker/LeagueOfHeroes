@@ -21,7 +21,8 @@ export const toolsLinks = [
   { href: '/tools/point-buy', label: 'Point Buy калькулятор' },
   //{ href: '/tools/dice-roller', label: 'Бросок костей' },
   //{ href: '/tools/name-generator', label: 'Генератор имён' },
-  { href: '/tools/encounter-builder', label: 'Калькулятор столкновений' }
+  { href: '/tools/encounter-builder', label: 'Калькулятор столкновений' },
+  { href: '/tools/tokenator', label: 'Генератор токенов (Tokenator)' }
 ];
 
 export const guideLinks = [
