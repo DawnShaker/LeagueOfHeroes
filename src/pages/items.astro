@@ -415,20 +415,20 @@ const itemTypes = [...new Set(items.map(item => item.type))].sort();
     (function ensureItemTooltipAndInit() {
       function ensureItemTooltip() {
         return new Promise((resolve, reject) => {
-          if ((window as any).ItemTooltip) return resolve((window as any).ItemTooltip);
-          if (document.querySelector('script[data-item-tooltip]')) {
-            // wait for loader to set window.ItemTooltip
-            const check = setInterval(() => {
-              if ((window as any).ItemTooltip) { clearInterval(check); resolve((window as any).ItemTooltip); }
-            }, 50);
-            setTimeout(() => { clearInterval(check); reject(new Error('timeout loading itemTooltip')); }, 5000);
-            return;
-          }
+              if (window.ItemTooltip) return resolve(window.ItemTooltip);
+              if (document.querySelector('script[data-item-tooltip]')) {
+                // wait for loader to set window.ItemTooltip
+                const check = setInterval(() => {
+                  if (window.ItemTooltip) { clearInterval(check); resolve(window.ItemTooltip); }
+                }, 50);
+                setTimeout(() => { clearInterval(check); reject(new Error('timeout loading itemTooltip')); }, 5000);
+                return;
+              }
           const s = document.createElement('script');
           s.src = '/js/itemTooltip.js';
           s.async = true;
           s.setAttribute('data-item-tooltip', '1');
-          s.onload = () => { resolve((window as any).ItemTooltip); };
+          s.onload = () => { resolve(window.ItemTooltip); };
           s.onerror = (e) => { reject(e); };
           document.head.appendChild(s);
         });
@@ -444,7 +444,7 @@ const itemTypes = [...new Set(items.map(item => item.type))].sort();
           itemTooltipEl.style.zIndex = '10000';
           document.body.appendChild(itemTooltipEl);
 
-          const ItemCtor = ItemTooltip as any;
+          const ItemCtor = ItemTooltip;
           const itemTooltip = new ItemCtor();
           itemTooltip.init(itemTooltipEl, itemData);
         } catch (e) {

@@ -76,10 +76,10 @@ const sourceBooks = [...new Set(speciesData.map(species => species.sourceBook))]
   (function ensureItemTooltipAndInit() {
     function ensureItemTooltip() {
       return new Promise((resolve, reject) => {
-        if ((window as any).ItemTooltip) return resolve((window as any).ItemTooltip);
+        if (window.ItemTooltip) return resolve(window.ItemTooltip);
         if (document.querySelector('script[data-item-tooltip]')) {
           const check = setInterval(() => {
-            if ((window as any).ItemTooltip) { clearInterval(check); resolve((window as any).ItemTooltip); }
+            if (window.ItemTooltip) { clearInterval(check); resolve(window.ItemTooltip); }
           }, 50);
           setTimeout(() => { clearInterval(check); reject(new Error('timeout loading itemTooltip')); }, 5000);
           return;
@@ -88,7 +88,7 @@ const sourceBooks = [...new Set(speciesData.map(species => species.sourceBook))]
         s.src = '/js/itemTooltip.js';
         s.async = true;
         s.setAttribute('data-item-tooltip', '1');
-        s.onload = () => { resolve((window as any).ItemTooltip); };
+        s.onload = () => { resolve(window.ItemTooltip); };
         s.onerror = (e) => { reject(e); };
         document.head.appendChild(s);
       });
@@ -96,7 +96,7 @@ const sourceBooks = [...new Set(speciesData.map(species => species.sourceBook))]
 
     ensureItemTooltip().then(ItemTooltip => {
       try {
-        const ItemCtor = ItemTooltip as any;
+        const ItemCtor = ItemTooltip;
         const itemTooltipEl = document.createElement('div');
         itemTooltipEl.id = 'item-tooltip';
         itemTooltipEl.style.display = 'none';

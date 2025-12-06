@@ -79,8 +79,8 @@ import { STAT_NAMES } from '../../utils/pointBuy';
     });
 
     document.getElementById('stats-table')?.addEventListener('click', (e) => {
-      const target = e.target as HTMLElement;
-      if (!target.classList.contains('stat-btn')) return;
+      const target = e.target;
+      if (!(target instanceof HTMLElement) || !target.classList.contains('stat-btn')) return;
 
       const stat = target.dataset.stat;
       const action = target.dataset.action;
