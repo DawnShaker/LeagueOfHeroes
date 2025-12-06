@@ -42,6 +42,8 @@ const sourceBooks = [...new Set(speciesData.map(species => species.sourceBook))]
 </Layout>
 
 <script>
+  import { ItemTooltip } from '../utils/itemTooltip';
+
   function initSearch() {
     const searchInput = document.getElementById('species-search') as HTMLInputElement;
     const sourceFilter = document.getElementById('source-filter') as HTMLSelectElement;
@@ -68,6 +70,21 @@ const sourceBooks = [...new Set(speciesData.map(species => species.sourceBook))]
   }
 
   document.addEventListener('DOMContentLoaded', initSearch);
+
+  // Init item tooltip across races page
+  try {
+    const itemTooltipEl = document.createElement('div');
+    itemTooltipEl.id = 'item-tooltip';
+    itemTooltipEl.style.display = 'none';
+    itemTooltipEl.style.position = 'fixed';
+    itemTooltipEl.style.zIndex = '10000';
+    document.body.appendChild(itemTooltipEl);
+
+    const itemTooltip = new ItemTooltip();
+    itemTooltip.init(itemTooltipEl);
+  } catch (e) {
+    console.error('item tooltip init failed on races page', e);
+  }
 </script>
 
 <style>

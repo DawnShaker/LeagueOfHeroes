@@ -187,3 +187,84 @@ a:focus { outline: none; box-shadow: var(--link-focus-box); border-radius: 4px; 
     bottom: 16px !important;
   }
 }
+
+/* Item tooltip (matches spell tooltip styles) */
+#item-tooltip, .item-tooltip {
+  position: fixed;
+  display: none;
+  z-index: 1500;
+  max-width: 520px;
+  width: auto;
+  background: var(--card-bg);
+  color: var(--text);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  pointer-events: auto;
+}
+
+#item-tooltip .tooltip-header,
+.item-tooltip .tooltip-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--card-border);
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+#item-tooltip .tooltip-title,
+.item-tooltip .tooltip-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--primary);
+}
+
+#item-tooltip .tooltip-title .name-en,
+.item-tooltip .tooltip-title .name-en {
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: var(--text);
+  opacity: 0.7;
+}
+
+#item-tooltip .tooltip-source,
+.item-tooltip .tooltip-source {
+  font-size: 0.8rem;
+  color: var(--text);
+  opacity: 0.7;
+}
+
+#item-tooltip .tooltip-meta,
+.item-tooltip .tooltip-meta {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text);
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+}
+
+#item-tooltip .tooltip-desc,
+.item-tooltip .tooltip-desc {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--card-border);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  #item-tooltip, .item-tooltip {
+    max-width: calc(100vw - 32px);
+    left: 16px !important;
+    right: 16px !important;
+    top: auto !important;
+    bottom: 16px !important;
+  }
+}

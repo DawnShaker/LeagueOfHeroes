@@ -107,6 +107,8 @@ const spellSchools = [
 </Layout>
 
 <script>
+  import { ItemTooltip } from '../utils/itemTooltip';
+  import { items as allItems } from '../data/items';
   function initializeSpells() {
     const searchInput = document.getElementById('spell-search') as HTMLInputElement;
     const filterButton = document.getElementById('filter-button');
@@ -304,6 +306,21 @@ const spellSchools = [
   }
 
   document.addEventListener('DOMContentLoaded', initializeSpells);
+
+  // Init item tooltip across spells page
+  try {
+    const itemTooltipEl = document.createElement('div');
+    itemTooltipEl.id = 'item-tooltip';
+    itemTooltipEl.style.display = 'none';
+    itemTooltipEl.style.position = 'fixed';
+    itemTooltipEl.style.zIndex = '10000';
+    document.body.appendChild(itemTooltipEl);
+
+    const itemTooltip = new ItemTooltip();
+    itemTooltip.init(itemTooltipEl, allItems);
+  } catch (e) {
+    console.error('item tooltip init failed on spells page', e);
+  }
 </script>
 
 <style>
