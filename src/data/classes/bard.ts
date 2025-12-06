@@ -32,7 +32,7 @@ export const bard: Class = {
         items: [
           '<a href="/items/leather-armor">Кожаный доспех</a>',
           '2 <a href="/items/dagger">кинжала</a>',
-          'Любой музыкальный инструмент',
+          '<a href="/items/musical-instrument">Любой музыкальный инструмент</a>',
           '<a href="/items/entertainers-pack">Набор артиста</a>',
           '19 зм'
         ]
