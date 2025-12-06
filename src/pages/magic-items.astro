@@ -181,7 +181,8 @@ const rarityLabels = {
 
 <script>
   function initializeMagicItems() {
-    const searchInput = document.getElementById('item-search') as HTMLInputElement;
+    /** @type {HTMLInputElement|null} */
+    const searchInput = document.getElementById('item-search');
     const filterButton = document.getElementById('filter-button');
     const filterPopup = document.getElementById('filter-popup');
     const closeButton = document.querySelector('.close-button');
@@ -300,19 +301,19 @@ const rarityLabels = {
     function updateURL() {
       const params = new URLSearchParams();
 
-      const rarities = Array.from(document.querySelectorAll('input[name="rarity"]:checked')).map(cb => (cb as HTMLInputElement).value);
+      const rarities = Array.from(document.querySelectorAll('input[name="rarity"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value);
       if (rarities.length > 0) params.set('rarity', rarities.join(','));
 
-      const types = Array.from(document.querySelectorAll('input[name="type"]:checked')).map(cb => (cb as HTMLInputElement).value);
+      const types = Array.from(document.querySelectorAll('input[name="type"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value);
       if (types.length > 0) params.set('type', types.join(','));
 
-      const sources = Array.from(document.querySelectorAll('input[name="source"]:checked')).map(cb => (cb as HTMLInputElement).value);
+      const sources = Array.from(document.querySelectorAll('input[name="source"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value);
       if (sources.length > 0) params.set('source', sources.join(','));
 
-      const attunement = Array.from(document.querySelectorAll('input[name="attunement"]:checked')).map(cb => (cb as HTMLInputElement).value);
+      const attunement = Array.from(document.querySelectorAll('input[name="attunement"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value);
       if (attunement.length > 0) params.set('attunement', attunement.join(','));
 
-      const craftingTools = Array.from(document.querySelectorAll('input[name="crafting-tools"]:checked')).map(cb => (cb as HTMLInputElement).value);
+      const craftingTools = Array.from(document.querySelectorAll('input[name="crafting-tools"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value);
       if (craftingTools.length > 0) params.set('craftingTools', craftingTools.join(','));
 
       const searchTerm = searchInput?.value.trim();
@@ -337,9 +338,9 @@ const rarityLabels = {
       if (Object.keys(urlFilters).length > 0) {
         Object.entries(urlFilters).forEach(([filterType, values]) => {
           if (Array.isArray(values)) {
-            values.forEach(value => {
-              const checkbox = document.querySelector(`input[name="${filterType}"][value="${value}"]`) as HTMLInputElement;
-              if (checkbox) checkbox.checked = true;
+              values.forEach(value => {
+              const checkbox = document.querySelector(`input[name="${filterType}"][value="${value}"]`);
+              if (checkbox instanceof HTMLInputElement) checkbox.checked = true;
             });
           }
         });
@@ -353,8 +354,8 @@ const rarityLabels = {
           Object.entries(filters).forEach(([filterType, values]) => {
             if (Array.isArray(values)) {
               values.forEach(value => {
-                const checkbox = document.querySelector(`input[name="${filterType}"][value="${value}"]`) as HTMLInputElement;
-                if (checkbox) checkbox.checked = true;
+                const checkbox = document.querySelector(`input[name="${filterType}"][value="${value}"]`);
+                if (checkbox instanceof HTMLInputElement) checkbox.checked = true;
               });
             }
           });
@@ -368,11 +369,11 @@ const rarityLabels = {
     // Save filters to localStorage
     function saveFilters() {
       const filters = {
-        rarity: Array.from(document.querySelectorAll('input[name="rarity"]:checked')).map(cb => (cb as HTMLInputElement).value),
-        type: Array.from(document.querySelectorAll('input[name="type"]:checked')).map(cb => (cb as HTMLInputElement).value),
-        source: Array.from(document.querySelectorAll('input[name="source"]:checked')).map(cb => (cb as HTMLInputElement).value),
-        attunement: Array.from(document.querySelectorAll('input[name="attunement"]:checked')).map(cb => (cb as HTMLInputElement).value),
-        craftingTools: Array.from(document.querySelectorAll('input[name="crafting-tools"]:checked')).map(cb => (cb as HTMLInputElement).value)
+        rarity: Array.from(document.querySelectorAll('input[name="rarity"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value),
+        type: Array.from(document.querySelectorAll('input[name="type"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value),
+        source: Array.from(document.querySelectorAll('input[name="source"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value),
+        attunement: Array.from(document.querySelectorAll('input[name="attunement"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value),
+        craftingTools: Array.from(document.querySelectorAll('input[name="crafting-tools"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value)
       };
       
       localStorage.setItem('magicItemFilters', JSON.stringify(filters));
@@ -401,11 +402,11 @@ const rarityLabels = {
     // Filter items based on selected criteria
     function filterItems() {
       const searchTerm = searchInput?.value.toLowerCase() || '';
-      const selectedRarities = Array.from(document.querySelectorAll('input[name="rarity"]:checked')).map(cb => (cb as HTMLInputElement).value);
-      const selectedTypes = Array.from(document.querySelectorAll('input[name="type"]:checked')).map(cb => (cb as HTMLInputElement).value);
-      const selectedSources = Array.from(document.querySelectorAll('input[name="source"]:checked')).map(cb => (cb as HTMLInputElement).value);
-      const selectedAttunement = Array.from(document.querySelectorAll('input[name="attunement"]:checked')).map(cb => (cb as HTMLInputElement).value);
-      const selectedCraftingTools = Array.from(document.querySelectorAll('input[name="crafting-tools"]:checked')).map(cb => parseInt((cb as HTMLInputElement).value));
+      const selectedRarities = Array.from(document.querySelectorAll('input[name="rarity"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value);
+      const selectedTypes = Array.from(document.querySelectorAll('input[name="type"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value);
+      const selectedSources = Array.from(document.querySelectorAll('input[name="source"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value);
+      const selectedAttunement = Array.from(document.querySelectorAll('input[name="attunement"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value);
+      const selectedCraftingTools = Array.from(document.querySelectorAll('input[name="crafting-tools"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => parseInt(cb.value));
       
       let visibleCount = 0;
       let totalInSources = 0;
@@ -419,8 +420,8 @@ const rarityLabels = {
       });
       
       itemRows.forEach(row => {
-        const itemId = (row as HTMLElement).dataset.itemId;
-        const item = items.find(i => i.id === itemId);
+        const itemId = row instanceof HTMLElement ? row.dataset.itemId : undefined;
+        const item = itemId ? items.find(i => i.id === itemId) : undefined;
         if (!item) return;
 
         const name = item.name.toLowerCase() + ' ' + item.nameEn.toLowerCase();
@@ -439,7 +440,7 @@ const rarityLabels = {
           (itemCraftingTools.length > 0 && itemCraftingTools.some(tool => selectedCraftingTools.includes(tool)));
         
         const isVisible = matchesSearch && matchesRarity && matchesType && matchesSource && matchesAttunement && matchesCraftingTools;
-        (row as HTMLElement).style.display = isVisible ? '' : 'none';
+        if (row instanceof HTMLElement) row.style.display = isVisible ? '' : 'none';
         
         if (isVisible) {
           visibleCount++;
@@ -472,7 +473,7 @@ const rarityLabels = {
     // Reset all filters
     function resetFilters() {
       document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-        (cb as HTMLInputElement).checked = false;
+        if (cb instanceof HTMLInputElement) cb.checked = false;
       });
       if (searchInput) searchInput.value = '';
       localStorage.removeItem('magicItemFilters');
@@ -896,7 +897,7 @@ const rarityLabels = {
     
     itemRows.forEach(row => {
       row.addEventListener('click', () => {
-        const itemId = (row as HTMLElement).dataset.itemId;
+        const itemId = row instanceof HTMLElement ? row.dataset.itemId : undefined;
         if (itemId) showItemDetails(itemId);
       });
     });
@@ -905,7 +906,7 @@ const rarityLabels = {
     window.addEventListener('popstate', (event) => {
       // Reload filters from URL
       document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-        (cb as HTMLInputElement).checked = false;
+        if (cb instanceof HTMLInputElement) cb.checked = false;
       });
       if (searchInput) searchInput.value = '';
 
@@ -933,21 +934,42 @@ const rarityLabels = {
     }
 
     // Initialize tooltips (use shared ItemTooltip util)
-    try {
-      const { ItemTooltip } = await import('../utils/itemTooltip');
-      const itemTooltipEl = document.createElement('div');
-      itemTooltipEl.id = 'item-tooltip';
-      itemTooltipEl.style.display = 'none';
-      itemTooltipEl.style.position = 'fixed';
-      itemTooltipEl.style.zIndex = '10000';
-      document.body.appendChild(itemTooltipEl);
+    (function ensureItemTooltipAndInit(){
+      function ensureItemTooltip(){
+        return new Promise((resolve,reject)=>{
+          if ((window as any).ItemTooltip) return resolve((window as any).ItemTooltip);
+          if (document.querySelector('script[data-item-tooltip]')){
+            const check = setInterval(()=>{ if ((window as any).ItemTooltip){ clearInterval(check); resolve((window as any).ItemTooltip); } },50);
+            setTimeout(()=>{ clearInterval(check); reject(new Error('timeout loading itemTooltip')); },5000);
+            return;
+          }
+          const s = document.createElement('script');
+          s.src = '/js/itemTooltip.js';
+          s.async = true;
+          s.setAttribute('data-item-tooltip','1');
+          s.onload = ()=> resolve((window as any).ItemTooltip);
+          s.onerror = (e) => reject(e);
+          document.head.appendChild(s);
+        });
+      }
 
-      const itemTooltip = new ItemTooltip();
-      itemTooltip.init(itemTooltipEl);
-    } catch (e) {
-      // fall back to existing initTooltips if dynamic import fails
-      try { initTooltips(); } catch (err) { console.warn('tooltips init failed', err); }
-    }
+      ensureItemTooltip().then(ItemTooltip=>{
+        try{
+          const ItemCtor = ItemTooltip as any;
+          const itemTooltipEl = document.createElement('div');
+          itemTooltipEl.id = 'item-tooltip';
+          itemTooltipEl.style.display = 'none';
+          itemTooltipEl.style.position = 'fixed';
+          itemTooltipEl.style.zIndex = '10000';
+          document.body.appendChild(itemTooltipEl);
+
+          const itemTooltip = new ItemCtor();
+          itemTooltip.init(itemTooltipEl);
+        }catch(e){
+          try { initTooltips(); } catch (err) { console.warn('tooltips init failed', err); }
+        }
+      }).catch(err=>{ try { initTooltips(); } catch (err2) { console.warn('tooltips init failed', err2); } });
+    })();
     
     // Initialize filter system
     initializeFilterOptions();
@@ -964,8 +986,8 @@ const rarityLabels = {
     
     // Add event listeners for all filter checkboxes using event delegation
     filterPopup?.addEventListener('change', (e) => {
-      const target = e.target as HTMLInputElement;
-      if (target.type === 'checkbox') {
+      const target = e.target;
+      if (target instanceof HTMLInputElement && target.type === 'checkbox') {
         filterItems();
       }
     });

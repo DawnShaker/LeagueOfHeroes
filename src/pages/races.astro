@@ -42,11 +42,12 @@ const sourceBooks = [...new Set(speciesData.map(species => species.sourceBook))]
 </Layout>
 
 <script>
-  import { ItemTooltip } from '../utils/itemTooltip';
 
   function initSearch() {
-    const searchInput = document.getElementById('species-search') as HTMLInputElement;
-    const sourceFilter = document.getElementById('source-filter') as HTMLSelectElement;
+    /** @type {HTMLInputElement|null} */
+    const searchInput = document.getElementById('species-search');
+    /** @type {HTMLSelectElement|null} */
+    const sourceFilter = document.getElementById('source-filter');
     const cards = document.querySelectorAll('.species-card');
     
     function filterCards() {
@@ -61,7 +62,7 @@ const sourceBooks = [...new Set(speciesData.map(species => species.sourceBook))]
         const matchesSource = !selectedSource || source.includes(selectedSource);
         
         const isVisible = matchesSearch && matchesSource;
-        (card as HTMLElement).style.display = isVisible ? 'block' : 'none';
+        if (card instanceof HTMLElement) card.style.display = isVisible ? 'block' : 'none';
       });
     }
 
@@ -72,19 +73,46 @@ const sourceBooks = [...new Set(speciesData.map(species => species.sourceBook))]
   document.addEventListener('DOMContentLoaded', initSearch);
 
   // Init item tooltip across races page
-  try {
-    const itemTooltipEl = document.createElement('div');
-    itemTooltipEl.id = 'item-tooltip';
-    itemTooltipEl.style.display = 'none';
-    itemTooltipEl.style.position = 'fixed';
-    itemTooltipEl.style.zIndex = '10000';
-    document.body.appendChild(itemTooltipEl);
+  (function ensureItemTooltipAndInit() {
+    function ensureItemTooltip() {
+      return new Promise((resolve, reject) => {
+        if ((window as any).ItemTooltip) return resolve((window as any).ItemTooltip);
+        if (document.querySelector('script[data-item-tooltip]')) {
+          const check = setInterval(() => {
+            if ((window as any).ItemTooltip) { clearInterval(check); resolve((window as any).ItemTooltip); }
+          }, 50);
+          setTimeout(() => { clearInterval(check); reject(new Error('timeout loading itemTooltip')); }, 5000);
+          return;
+        }
+        const s = document.createElement('script');
+        s.src = '/js/itemTooltip.js';
+        s.async = true;
+        s.setAttribute('data-item-tooltip', '1');
+        s.onload = () => { resolve((window as any).ItemTooltip); };
+        s.onerror = (e) => { reject(e); };
+        document.head.appendChild(s);
+      });
+    }
 
-    const itemTooltip = new ItemTooltip();
-    itemTooltip.init(itemTooltipEl);
-  } catch (e) {
-    console.error('item tooltip init failed on races page', e);
-  }
+    ensureItemTooltip().then(ItemTooltip => {
+      try {
+        const ItemCtor = ItemTooltip as any;
+        const itemTooltipEl = document.createElement('div');
+        itemTooltipEl.id = 'item-tooltip';
+        itemTooltipEl.style.display = 'none';
+        itemTooltipEl.style.position = 'fixed';
+        itemTooltipEl.style.zIndex = '10000';
+        document.body.appendChild(itemTooltipEl);
+
+        const itemTooltip = new ItemCtor();
+        itemTooltip.init(itemTooltipEl);
+      } catch (e) {
+        console.error('item tooltip init failed on races page', e);
+      }
+    }).catch(e => {
+      console.error('item tooltip init failed on races page', e);
+    });
+  })();
 </script>
 
 <style>

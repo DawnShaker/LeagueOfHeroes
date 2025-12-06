@@ -117,10 +117,9 @@ const itemTypes = [...new Set(items.map(item => item.type))].sort();
 
 <script>
   import { parseCurrencyString, convertToGold } from '../utils/currency';
-  import { ItemTooltip } from '../utils/itemTooltip';
 
   function initializeItems() {
-    const searchInput = document.getElementById('item-search') as HTMLInputElement;
+    const searchInput = document.getElementById('item-search');
     const itemRows = document.querySelectorAll('.item-row');
     const sortableHeaders = document.querySelectorAll('.sortable');
     const itemDetails = document.getElementById('item-details');
@@ -135,8 +134,8 @@ const itemTypes = [...new Set(items.map(item => item.type))].sort();
 
     function filterItems() {
       const searchTerm = searchInput?.value.toLowerCase() || '';
-      const selectedTypes = Array.from(document.querySelectorAll('input[name="type"]:checked')).map(cb => (cb as HTMLInputElement).value);
-      const selectedSources = Array.from(document.querySelectorAll('input[name="source"]:checked')).map(cb => (cb as HTMLInputElement).value);
+      const selectedTypes = Array.from(document.querySelectorAll('input[name="type"]:checked')).map(cb => (cb).value);
+      const selectedSources = Array.from(document.querySelectorAll('input[name="source"]:checked')).map(cb => (cb).value);
       
       let visibleCount = 0;
       let totalInSources = 0;
@@ -150,8 +149,8 @@ const itemTypes = [...new Set(items.map(item => item.type))].sort();
       });
       
       itemRows.forEach(row => {
-        const itemId = (row as HTMLElement).dataset.itemId;
-        const item = items.find(i => i.id === itemId);
+        const itemId = row instanceof HTMLElement ? row.dataset.itemId : undefined;
+        const item = itemId ? items.find(i => i.id === itemId) : undefined;
         if (!item) return;
 
         const name = item.name.toLowerCase() + ' ' + item.nameEn.toLowerCase();
@@ -163,7 +162,7 @@ const itemTypes = [...new Set(items.map(item => item.type))].sort();
         const matchesSource = selectedSources.length === 0 || selectedSources.includes(source);
         
         const isVisible = matchesSearch && matchesType && matchesSource;
-        (row as HTMLElement).style.display = isVisible ? '' : 'none';
+        if (row instanceof HTMLElement) row.style.display = isVisible ? '' : 'none';
         
         if (isVisible) {
           visibleCount++;
@@ -313,7 +312,7 @@ const itemTypes = [...new Set(items.map(item => item.type))].sort();
     
     // Add event listeners for filter checkboxes using event delegation
     filterPopup?.addEventListener('change', (e) => {
-      const target = e.target as HTMLInputElement;
+      const target = e.target;
       if (target.type === 'checkbox') {
         filterItems();
       }
@@ -321,7 +320,7 @@ const itemTypes = [...new Set(items.map(item => item.type))].sort();
     
     itemRows.forEach(row => {
       row.addEventListener('click', () => {
-        const itemId = (row as HTMLElement).dataset.itemId;
+        const itemId = row instanceof HTMLElement ? row.dataset.itemId : undefined;
         if (itemId) showItemDetails(itemId);
       });
     });
@@ -401,7 +400,7 @@ const itemTypes = [...new Set(items.map(item => item.type))].sort();
         Object.entries(filters).forEach(([filterType, values]) => {
           if (Array.isArray(values)) {
             values.forEach(value => {
-              const checkbox = document.querySelector(`input[name="${filterType}"][value="${value}"]`) as HTMLInputElement;
+              const checkbox = document.querySelector(`input[name="${filterType}"][value="${value}"]`);
               if (checkbox) checkbox.checked = true;
             });
           }
@@ -412,28 +411,53 @@ const itemTypes = [...new Set(items.map(item => item.type))].sort();
       }
     }
 
-    // Initialize item tooltip for item links
-    try {
-      const itemData = JSON.parse(document.getElementById('items-data')?.getAttribute('data-items') || '[]');
-      const itemTooltipEl = document.createElement('div');
-      itemTooltipEl.id = 'item-tooltip';
-      itemTooltipEl.style.display = 'none';
-      itemTooltipEl.style.position = 'fixed';
-      itemTooltipEl.style.zIndex = '10000';
-      document.body.appendChild(itemTooltipEl);
+    // Initialize item tooltip for item links (load script and use window.ItemTooltip)
+    (function ensureItemTooltipAndInit() {
+      function ensureItemTooltip() {
+        return new Promise((resolve, reject) => {
+          if ((window as any).ItemTooltip) return resolve((window as any).ItemTooltip);
+          if (document.querySelector('script[data-item-tooltip]')) {
+            // wait for loader to set window.ItemTooltip
+            const check = setInterval(() => {
+              if ((window as any).ItemTooltip) { clearInterval(check); resolve((window as any).ItemTooltip); }
+            }, 50);
+            setTimeout(() => { clearInterval(check); reject(new Error('timeout loading itemTooltip')); }, 5000);
+            return;
+          }
+          const s = document.createElement('script');
+          s.src = '/js/itemTooltip.js';
+          s.async = true;
+          s.setAttribute('data-item-tooltip', '1');
+          s.onload = () => { resolve((window as any).ItemTooltip); };
+          s.onerror = (e) => { reject(e); };
+          document.head.appendChild(s);
+        });
+      }
 
-      const itemTooltip = new ItemTooltip();
-      itemTooltip.init(itemTooltipEl, itemData);
-    } catch (e) {
-      // non-fatal
-      console.error('item tooltip init failed', e);
-    }
+      ensureItemTooltip().then(ItemTooltip => {
+        try {
+          const itemData = JSON.parse(document.getElementById('items-data')?.getAttribute('data-items') || '[]');
+          const itemTooltipEl = document.createElement('div');
+          itemTooltipEl.id = 'item-tooltip';
+          itemTooltipEl.style.display = 'none';
+          itemTooltipEl.style.position = 'fixed';
+          itemTooltipEl.style.zIndex = '10000';
+          document.body.appendChild(itemTooltipEl);
+
+          const ItemCtor = ItemTooltip as any;
+          const itemTooltip = new ItemCtor();
+          itemTooltip.init(itemTooltipEl, itemData);
+        } catch (e) {
+          console.error('item tooltip init failed', e);
+        }
+      }).catch(err => console.error('failed loading itemTooltip script', err));
+    })();
 
     // Save filters to localStorage
     function saveFilters() {
       const filters = {
-        type: Array.from(document.querySelectorAll('input[name="type"]:checked')).map(cb => (cb as HTMLInputElement).value),
-        source: Array.from(document.querySelectorAll('input[name="source"]:checked')).map(cb => (cb as HTMLInputElement).value)
+        type: Array.from(document.querySelectorAll('input[name="type"]:checked')).map(cb => (cb).value),
+        source: Array.from(document.querySelectorAll('input[name="source"]:checked')).map(cb => (cb).value)
       };
       
       localStorage.setItem('itemFilters', JSON.stringify(filters));
@@ -477,7 +501,7 @@ const itemTypes = [...new Set(items.map(item => item.type))].sort();
     // Reset all filters
     function resetFilters() {
       document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-        (cb as HTMLInputElement).checked = false;
+        (cb).checked = false;
       });
       localStorage.removeItem('itemFilters');
       filterItems();

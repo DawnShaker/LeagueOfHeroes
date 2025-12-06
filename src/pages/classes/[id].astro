@@ -3,7 +3,6 @@ import Layout from '../../layouts/Layout.astro';
 import ClassTable from '../../components/classes/ClassTable.astro';
 import { classes } from '../../data/classes';
 import { spells as allSpells } from '../../data/spells';
-import { items as allItems } from '../../data/items';
 
 export function getStaticPaths() {
   return classes.map(classData => ({
@@ -164,8 +163,7 @@ return { level, spells };
   </div>
 </Layout>
 
-<script type="module" define:vars={{ classData, allSpells, allItems }}>
-  import { ItemTooltip } from '../../utils/itemTooltip';
+<script type="module" define:vars={{ classData, allSpells }}>
 
   document.addEventListener('DOMContentLoaded', () => {
     const subclassSelect = document.getElementById('subclass-select');
@@ -884,21 +882,48 @@ return { level, spells };
     // Initial check for button visibility
     toggleScrollButton();
 
-    // Initialize shared item tooltip using utility
-    const itemTooltipEl = document.createElement('div');
-    itemTooltipEl.id = 'item-tooltip';
-    itemTooltipEl.style.display = 'none';
-    itemTooltipEl.style.position = 'fixed';
-    itemTooltipEl.style.zIndex = '10000';
-    document.body.appendChild(itemTooltipEl);
+    // Initialize shared item tooltip using utility (load script and use window.ItemTooltip)
+    (function ensureItemTooltipAndInit(){
+      function ensureItemTooltip(){
+        return new Promise((resolve,reject)=>{
+          if ((window as any).ItemTooltip) return resolve((window as any).ItemTooltip);
+          if (document.querySelector('script[data-item-tooltip]')){
+            const check = setInterval(()=>{ if ((window as any).ItemTooltip){ clearInterval(check); resolve((window as any).ItemTooltip); } },50);
+            setTimeout(()=>{ clearInterval(check); reject(new Error('timeout loading itemTooltip')); },5000);
+            return;
+          }
+          const s = document.createElement('script');
+          s.src = '/js/itemTooltip.js';
+          s.async = true;
+          s.setAttribute('data-item-tooltip','1');
+          s.onload = ()=> resolve((window as any).ItemTooltip);
+          s.onerror = (e)=> reject(e);
+          document.head.appendChild(s);
+        });
+      }
 
-    const itemTooltip = new ItemTooltip({
-      offsetX: tooltipConfig.offsetX,
-      offsetY: tooltipConfig.offsetY,
-      fadeInDelay: tooltipConfig.fadeInDelay,
-      fadeOutDelay: tooltipConfig.fadeOutDelay
-    });
-    itemTooltip.init(itemTooltipEl, allItems);
+      ensureItemTooltip().then(ItemTooltip => {
+        try {
+          const itemTooltipEl = document.createElement('div');
+          itemTooltipEl.id = 'item-tooltip';
+          itemTooltipEl.style.display = 'none';
+          itemTooltipEl.style.position = 'fixed';
+          itemTooltipEl.style.zIndex = '10000';
+          document.body.appendChild(itemTooltipEl);
+
+          const ItemCtor = ItemTooltip as any;
+          const itemTooltip = new ItemCtor({
+            offsetX: tooltipConfig.offsetX,
+            offsetY: tooltipConfig.offsetY,
+            fadeInDelay: tooltipConfig.fadeInDelay,
+            fadeOutDelay: tooltipConfig.fadeOutDelay
+          });
+          itemTooltip.init(itemTooltipEl);
+        } catch (e) {
+          console.error('item tooltip init failed', e);
+        }
+      }).catch(err => console.error('failed loading itemTooltip script', err));
+    })();
   });
 </script>
 

@@ -107,10 +107,9 @@ const spellSchools = [
 </Layout>
 
 <script>
-  import { ItemTooltip } from '../utils/itemTooltip';
-  import { items as allItems } from '../data/items';
   function initializeSpells() {
-    const searchInput = document.getElementById('spell-search') as HTMLInputElement;
+    /** @type {HTMLInputElement|null} */
+    const searchInput = document.getElementById('spell-search');
     const filterButton = document.getElementById('filter-button');
     const filterPopup = document.getElementById('filter-popup');
     const closeButton = document.querySelector('.close-button');
@@ -136,16 +135,16 @@ const spellSchools = [
     function filterSpells() {
       const searchTerm = searchInput?.value.toLowerCase() || '';
       const selectedLevels = Array.from(levelCheckboxes)
-        .filter((cb: Element) => (cb as HTMLInputElement).checked)
-        .map((cb: Element) => (cb as HTMLInputElement).value);
+        .filter(cb => cb instanceof HTMLInputElement && cb.checked)
+        .map(cb => cb.value);
       
       const selectedSchools = Array.from(schoolCheckboxes)
-        .filter((cb: Element) => (cb as HTMLInputElement).checked)
-        .map((cb: Element) => (cb as HTMLInputElement).value);
+        .filter(cb => cb instanceof HTMLInputElement && cb.checked)
+        .map(cb => cb.value);
 
       spellCards.forEach(card => {
-        const spellId = (card as HTMLElement).dataset.spellId;
-        const spell = spells.find(s => s.id === spellId);
+        const spellId = card instanceof HTMLElement ? card.dataset.spellId : undefined;
+        const spell = spellId ? spells.find(s => s.id === spellId) : undefined;
         
         if (!spell) return;
 
@@ -154,7 +153,7 @@ const spellSchools = [
         const matchesLevel = selectedLevels.length === 0 || selectedLevels.includes(spell.level);
         const matchesSchool = selectedSchools.length === 0 || selectedSchools.includes(spell.school);
 
-        (card as HTMLElement).style.display = 
+        if (card instanceof HTMLElement) card.style.display = 
           matchesSearch && matchesLevel && matchesSchool ? 'block' : 'none';
       });
     }
@@ -279,7 +278,7 @@ const spellSchools = [
     // Click on card: show details + update URL
     spellCards.forEach(card => {
       card.addEventListener('click', () => {
-        const spellId = (card as HTMLElement).dataset.spellId;
+        const spellId = card instanceof HTMLElement ? card.dataset.spellId : undefined;
         if (!spellId) return;
         // push new URL: /spells/:id (or you can use ?id=)
         const newUrl = `/spells/${encodeURIComponent(spellId)}`;
@@ -307,20 +306,46 @@ const spellSchools = [
 
   document.addEventListener('DOMContentLoaded', initializeSpells);
 
-  // Init item tooltip across spells page
-  try {
-    const itemTooltipEl = document.createElement('div');
-    itemTooltipEl.id = 'item-tooltip';
-    itemTooltipEl.style.display = 'none';
-    itemTooltipEl.style.position = 'fixed';
-    itemTooltipEl.style.zIndex = '10000';
-    document.body.appendChild(itemTooltipEl);
+  // Init item tooltip across spells page (load client module dynamically)
+  // Init item tooltip across spells page (load script and use window.ItemTooltip)
+  (function ensureItemTooltipAndInit() {
+    function ensureItemTooltip() {
+      return new Promise((resolve, reject) => {
+        if (window.ItemTooltip) return resolve(window.ItemTooltip);
+        if (document.querySelector('script[data-item-tooltip]')) {
+          const check = setInterval(() => {
+            if ((window as any).ItemTooltip) { clearInterval(check); resolve((window as any).ItemTooltip); }
+          }, 50);
+          setTimeout(() => { clearInterval(check); reject(new Error('timeout loading itemTooltip')); }, 5000);
+          return;
+        }
+        const s = document.createElement('script');
+        s.src = '/js/itemTooltip.js';
+        s.async = true;
+        s.setAttribute('data-item-tooltip', '1');
+        s.onload = () => { resolve((window as any).ItemTooltip); };
+        s.onerror = (e) => { reject(e); };
+        document.head.appendChild(s);
+      });
+    }
 
-    const itemTooltip = new ItemTooltip();
-    itemTooltip.init(itemTooltipEl, allItems);
-  } catch (e) {
-    console.error('item tooltip init failed on spells page', e);
-  }
+    ensureItemTooltip().then(ItemTooltip => {
+      try {
+        const itemTooltipEl = document.createElement('div');
+        itemTooltipEl.id = 'item-tooltip';
+        itemTooltipEl.style.display = 'none';
+        itemTooltipEl.style.position = 'fixed';
+        itemTooltipEl.style.zIndex = '10000';
+        document.body.appendChild(itemTooltipEl);
+
+        const ItemCtor = ItemTooltip as any;
+        const itemTooltip = new ItemCtor();
+        itemTooltip.init(itemTooltipEl);
+      } catch (e) {
+        console.error('item tooltip init failed on spells page', e);
+      }
+    }).catch(err => console.error('failed loading itemTooltip script', err));
+  })();
 </script>
 
 <style>

@@ -34,20 +34,21 @@ const backgrounds = backgroundsData;
 
 <script>
   function initSearch() {
-    const searchInput = document.getElementById('background-search') as HTMLInputElement;
+    /** @type {HTMLInputElement|null} */
+    const searchInput = document.getElementById('background-search');
     const cards = document.querySelectorAll('.background-card');
     
     function filterCards() {
-      const searchTerm = searchInput?.value.toLowerCase() || '';
+      const searchTerm = (searchInput instanceof HTMLInputElement) ? searchInput.value.toLowerCase() : '';
       
       cards.forEach(card => {
         const name = card.querySelector('h2')?.textContent?.toLowerCase() || '';
         const isVisible = name.includes(searchTerm);
-        (card as HTMLElement).style.display = isVisible ? 'block' : 'none';
+        if (card instanceof HTMLElement) card.style.display = isVisible ? 'block' : 'none';
       });
     }
 
-    searchInput?.addEventListener('input', filterCards);
+    if (searchInput instanceof HTMLInputElement) searchInput.addEventListener('input', filterCards);
   }
 
   document.addEventListener('DOMContentLoaded', initSearch);
