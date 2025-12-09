@@ -20,7 +20,7 @@ export const warlock: Class = {
     skills: {
       count: 2,
       list: [
-        'Аркана',
+        'Магия',
         'Обман',
         'История',
         'Запугивание',

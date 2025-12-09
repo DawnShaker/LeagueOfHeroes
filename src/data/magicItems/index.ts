@@ -1209,7 +1209,7 @@ export const magicItems: MagicItem[] = [
     </p>Серая сумка фокусов<p><table><thead><tr><th>1д8</th><th>Существо</th></tr></thead><tbody><tr><td>1</td><td>Куница</td></tr><tr><td>2</td><td>Гигантская крыса</td></tr><tr><td>3</td><td>Барсук</td></tr><tr><td>4</td><td>Кабан</td></tr><tr><td>5</td><td>Пантера</td></tr><tr><td>6</td><td>Гигантский барсук</td></tr><tr><td>7</td><td>Лютый волк</td></tr><tr><td>8</td><td>Гигантский лось</td></tr></tbody></table>
     </p>Рыжая сумка фокусов<p><table><thead><tr><th>1д8</th><th>Существо</th></tr></thead><tbody><tr><td>1</td><td>Крыса</td></tr><tr><td>2</td><td>Сова</td></tr><tr><td>3</td><td>Мастиф</td></tr><tr><td>4</td><td>Коза</td></tr><tr><td>5</td><td>Гигантская коза</td></tr><tr><td>6</td><td>Гигантский кабан</td></tr><tr><td>7</td><td>Лев</td></tr><tr><td>8</td><td>Бурый медведь</td></tr></tbody></table>
     </p>Коричневая сумка фокусов<p><table><thead><tr><th>1д8</th><th>Существо</th></tr></thead><tbody><tr><td>1</td><td>Шакал</td></tr><tr><td>2</td><td>Обезьяна</td></tr><tr><td>3</td><td>Бабуин</td></tr><tr><td>4</td><td>Топороклюв</td></tr><tr><td>5</td><td>Черный медведь</td></tr><tr><td>6</td><td>Гигантская куница</td></tr><tr><td>7</td><td>Гигантская гиена</td></tr><tr><td>8</td><td>Тигр</td></tr></tbody></table>`,
-    baseAnalog: 'a href="/items/pouch">Сумка</a>',
+    baseAnalog: '<a href="/items/pouch">Сумка</a>',
     craftingTools: [15]
   },
   {

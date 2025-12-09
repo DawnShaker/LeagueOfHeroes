@@ -20,7 +20,7 @@ export const sorcerer: Class = {
     skills: {
       count: 2,
       list: [
-        'Аркана',
+        'Магия',
         'Обман',
         'Проницательность',
         'Запугивание',
