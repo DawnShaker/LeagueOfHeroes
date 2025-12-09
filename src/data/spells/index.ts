@@ -1116,6 +1116,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
     { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Посвящённый Стриксхейвен</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/light-bringer/">Несущий свет</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
@@ -1945,6 +1946,7 @@ export const spells: Spell[] = [
     { type: 'background', name: '<a href="/backgrounds/selesnya%20initiate/">Посвящённый Селезнии</a>' },
     { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
     { type: 'feat', name: '<a href="/feats/fey-touched/">Затронутый феями</a>' },
+    { type: 'feat', name: '<a href="/feats/vampire-touched/">Затронутый вампиром</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
   ]
@@ -2033,6 +2035,7 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/warlock?subclass=undead">Покровитель Нежить</a>' },
     { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
     { type: 'feat', name: '<a href="/feats/fey-touched/">Затронутый феями</a>' },
+    { type: 'feat', name: '<a href="/feats/vampire-touched/">Затронутый вампиром</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
   ]
@@ -2095,6 +2098,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
     { type: 'feat', name: '<a href="/feats/fey-touched/">Затронутый феями</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/vampire-touched/">Затронутый вампиром</a>' },
     { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
   ]
 },
@@ -2276,6 +2280,8 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
     { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
     { type: 'feat', name: '<a href="/feats/fey-touched/">Затронутый феями</a>' },
+    { type: 'feat', name: '<a href="/feats/treacherous-allure/">Обманчивая привлекательность</a>' },
+    { type: 'feat', name: '<a href="/feats/vampire-touched/">Затронутый вампиром</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
   ]
@@ -2346,6 +2352,7 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=lunar">Лунное Чародейство</a>' },
     { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
     { type: 'feat', name: '<a href="/feats/shadow-touched/">Затронутый тенью</a>' },
+    { type: 'feat', name: '<a href="/feats/vampire-touched/">Затронутый вампиром</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
@@ -2391,6 +2398,7 @@ export const spells: Spell[] = [
     { type: 'background', name: '<a href="/backgrounds/orzhov%20representative//">Представитель Орзовов</a>' },
     { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
     { type: 'feat', name: '<a href="/feats/fey-touched/">Затронутый феями</a>' },
+    { type: 'feat', name: '<a href="/feats/vampire-touched/">Затронутый вампиром</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/rune-shaper/">Ваятель рун</a>' },
     { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
@@ -2419,6 +2427,7 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/paladin?subclass=crown">Клятва Короны</a>' },
     { type: 'background', name: '<a href="/backgrounds/gruul%20anarch/">Анарх Груулов</a>' },
     { type: 'feat', name: '<a href="/feats/fey-touched/">Затронутый феями</a>' },
+    { type: 'feat', name: '<a href="/feats/vampire-touched/">Затронутый вампиром</a>' }
   ]
 },
 {
@@ -5084,7 +5093,6 @@ export const spells: Spell[] = [
       { type: 'subclass', name: 'Божественная душа' },
       { type: 'subclass', name: 'Домен света' },
       { type: 'background', name: 'Студент Сильверквилла' }
-
     ]
   },
   {
@@ -5114,7 +5122,6 @@ export const spells: Spell[] = [
       { type: 'subclass', name: 'Мистический ловкач' },
       { type: 'subclass', name: 'Коллегия Знания' },
       { type: 'subclass', name: 'Мистический рыцарь' }
-
     ]
   },
   {
@@ -5299,7 +5306,6 @@ export const spells: Spell[] = [
     duration: 'Концентрация, до 10 минут',
     description: `<p>На время действия заклинания вы ощущаете местоположение любой аберрации, небожителя, элементаля, феи, исчадия или нежити в радиусе 30 футов от себя. Вы также ощущаете, действует ли в этом месте заклинание Святилище, и если да, то где именно.</p>
   <p>Заклинание блокируется 1 футом камня, земли или дерева; 1 дюймом металла или тонким листом свинца.</p>`,
-    
     source: {
       book: 'PHB\'24',
       page: 261
@@ -5332,7 +5338,6 @@ export const spells: Spell[] = [
     duration: 'Концентрация, до 10 минут',
     description: `<p>На протяжении действия заклинания вы чувствуете присутствие магических эффектов в пределах 30 футов от вас. Если вы ощущаете такие эффекты, то вы можете выполнить действие магия, чтобы увидеть слабое свечение вокруг любого видимого существа или предмета в этой области, на которые наложена магия, и если эффект был создан заклинанием, то вы узнаёте школу магии этого заклинания.</p>
 <p>Заклинание блокируется 1 футом камня, земли или дерева; 1 дюймом металла или тонким листом свинца.</p>`,
-    
     source: {
       book: 'PHB\'24',
       page: 262
@@ -5380,7 +5385,6 @@ export const spells: Spell[] = [
     },
     duration: 'Концентрация, до 10 минут',
     description: `<p>На время длительности заклинания вы ощущаете местонахождение ядов, ядовитых существ и магических заражений в пределах 30 футов от вас. Вы определяете вид яда, существа или заражения в каждом случае. Заклинание блокируется 1 футом камня, земли или дерева; 1 дюймом металла или тонким листом свинца.</p>`,
-    
     source: {
       book: 'PHB\'24',
       page: 262
@@ -5441,6 +5445,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: 'Искажённая метка дракона' },
       { type: 'feat', name: 'Посвящённый в Высшее волшебство' },
       { type: 'feat', name: 'Затронутый тенью' },
+      { type: 'feat', name: '<a href="/feats/vampire-touched/">Затронутый вампиром</a>' },
       { type: 'feat', name: 'Магия свирфнеблинов' },
       { type: 'feat', name: 'Ваятель рун' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
@@ -5475,6 +5480,7 @@ export const spells: Spell[] = [
       { type: 'background', name: 'Студент Сильверквилла' },
       { type: 'feat', name: 'Посвящённый в Высшее волшебство' },
       { type: 'feat', name: 'Затронутый феями' },
+      { type: 'feat', name: '<a href="/feats/vampire-touched/">Затронутый вампиром</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
     ]
@@ -5794,6 +5800,7 @@ export const spells: Spell[] = [
       { type: 'species', name: 'Тритон' },
       { type: 'feat', name: 'Искажённая метка дракона' },
       { type: 'feat', name: 'Любимец богов' },
+      { type: 'feat', name: 'Ползучий туман' },
       { type: 'feat', name: 'Ваятель рун' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
@@ -6002,6 +6009,7 @@ export const spells: Spell[] = [
       { type: 'species', name: 'Тифлинг Асмодея' },
       { type: 'background', name: 'Легионер Боросов' },
       { type: 'feat', name: 'Затронутый феями' },
+      { type: 'feat', name: '<a href="/feats/vampire-touched/">Затронутый вампиром</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'feat', name: 'Поступивший в Стриксхейвен' }
     ]
@@ -6033,6 +6041,7 @@ export const spells: Spell[] = [
       { type: 'species', name: 'Ведьмовская кровь' },
       { type: 'background', name: 'Легионер Боросов' },
       { type: 'feat', name: 'Затронутый феями' },
+      { type: 'feat', name: '<a href="/feats/vampire-touched/">Затронутый вампиром</a>' },
       { type: 'feat', name: 'Любимец богов' },
       { type: 'feat', name: 'Посвящённый в Высшее волшебство' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' }
@@ -6158,6 +6167,7 @@ export const spells: Spell[] = [
       { type: 'subclass', name: 'Коллегия Знания' },
       { type: 'subclass', name: 'Иллюзионист' },
       { type: 'feat', name: 'Затронутый тенью' },
+      { type: 'feat', name: '<a href="/feats/vampire-touched/">Затронутый вампиром</a>' },
       { type: 'feat', name: 'Любимец богов' },
       { type: 'feat', name: 'Ритуальный заклинатель' },
       { type: 'feat', name: 'Поступивший в Стриксхейвен' },
@@ -6569,6 +6579,7 @@ export const spells: Spell[] = [
       { type: 'subclass', name: 'Иллюзионист' },
       { type: 'feat', name: 'Искажённая метка дракона' },
       { type: 'feat', name: 'Затронутый тенью' },
+      { type: 'feat', name: '<a href="/feats/vampire-touched/">Затронутый вампиром</a>' },
       { type: 'feat', name: 'Поступивший в Стриксхейвен' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'other', name: 'Туманные видения' }
@@ -6609,6 +6620,7 @@ export const spells: Spell[] = [
       { type: 'background', name: 'Оперативник Димиров' },
       { type: 'feat', name: 'Искажённая метка дракона' },
       { type: 'feat', name: 'Затронутый феями' },
+      { type: 'feat', name: '<a href="/feats/vampire-touched/">Затронутый вампиром</a>' },
       { type: 'feat', name: 'Поступивший в Стриксхейвен' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' }
     ]
@@ -6684,6 +6696,7 @@ export const spells: Spell[] = [
       { type: 'subclass', name: 'Мистический рыцарь' },
       { type: 'feat', name: 'Любимец богов' },
       { type: 'feat', name: 'Затронутый феями' },
+      { type: 'feat', name: '<a href="/feats/vampire-touched/">Затронутый вампиром</a>' },
       { type: 'feat', name: 'Поступивший в Стриксхейвен' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' }
     ]
@@ -7008,6 +7021,7 @@ export const spells: Spell[] = [
       { type: 'subclass', name: 'Очарователь' },
       { type: 'feat', name: 'Искажённая метка дракона' },
       { type: 'feat', name: 'Затронутый феями' },
+      { type: 'feat', name: '<a href="/feats/vampire-touched/">Затронутый вампиром</a>' },
       { type: 'feat', name: 'Посвящённый в магию' },
       { type: 'feat', name: 'Поступивший в Стриксхейвен' }
     ]

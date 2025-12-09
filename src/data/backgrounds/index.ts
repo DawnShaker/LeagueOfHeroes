@@ -55,9 +55,11 @@ import { quandrix } from './quandrix';
 import { prismari } from './prismari';
 import { lorehold } from './lorehold';
 import { silverquill } from './silverquill';
+import { vampiresurvivor } from './vampiresurvivor';
+import { vampiredevotee } from './vampiredevotee';
 
 
-export const allBackgrounds = [silverquill,lorehold,prismari,quandrix,witherbloom,fartraveler,knightofsolamnia,mageofhighsorcery,hauntedone,investigator,guildartisan,selesnyainitiate,golgariagent,courtier,orzhovrepresentative,urbanbountyhunter,waterdhaviannoble,mercenaryveteran,wildspacer,astraldrifter,gatewarden,planarphilosopher,athlete,rakdoscultist,izzetengineer,azoriusfunctionary,dimiroperative,gruulanarch,simicscientist,boroslegionnaire,grinner,volstruckeragent,ruined,rewarded,houseagent,artist,noble,sailor,sage,acolyte,criminal,artisan,soldier,merchant,charlatan,urchin,folkhero,outlander,gambler,plaintiff,scion,rivalintern,giantfoundling,runecarver,hermit, wayfarer,farmer];
+export const allBackgrounds = [vampiredevotee,vampiresurvivor,silverquill,lorehold,prismari,quandrix,witherbloom,fartraveler,knightofsolamnia,mageofhighsorcery,hauntedone,investigator,guildartisan,selesnyainitiate,golgariagent,courtier,orzhovrepresentative,urbanbountyhunter,waterdhaviannoble,mercenaryveteran,wildspacer,astraldrifter,gatewarden,planarphilosopher,athlete,rakdoscultist,izzetengineer,azoriusfunctionary,dimiroperative,gruulanarch,simicscientist,boroslegionnaire,grinner,volstruckeragent,ruined,rewarded,houseagent,artist,noble,sailor,sage,acolyte,criminal,artisan,soldier,merchant,charlatan,urchin,folkhero,outlander,gambler,plaintiff,scion,rivalintern,giantfoundling,runecarver,hermit, wayfarer,farmer];
 
 export const backgroundsData = allBackgrounds.sort((a, b) => 
   a.name.localeCompare(b.name, 'ru')

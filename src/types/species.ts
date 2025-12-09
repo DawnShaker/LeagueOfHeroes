@@ -22,15 +22,11 @@ export interface Species {
   sourceBook: string;
   lore: string;
   portrait: string;
+  type: string;
+  size: string;
+  speed: number;
   variants?: SpeciesVariant[];
   traits: {
-    creatureType: string;
-    size: {
-      category: 'Small' | 'Medium';
-      heightRange: string;
-      weightRange: string;
-    };
-    speed: number;
     abilities: string[];
   };
 }
