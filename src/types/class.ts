@@ -73,4 +73,8 @@ export interface Class {
   };
   levels: ClassLevel[];
   features: ClassFeature[];
+  multiclass?: {
+    /** Список пунктов (bullets) описывающих особенности при мультиклассе в этот класс */
+    bullets: string[];
+  };
 }

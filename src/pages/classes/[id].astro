@@ -70,6 +70,19 @@ return { level, spells };
         </dl>
       </div>
 
+      {classData.multiclass && (
+        <div class="multiclass-info">
+          <h2>Мультикласс</h2>
+          <div class="multiclass-description">
+            <ul>
+              {classData.multiclass.bullets.map(b => (
+                <li>{b}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+
       <div class="proficiencies">
         <h2>Владения</h2>
         <dl>
@@ -89,6 +102,8 @@ return { level, spells };
           <dd>{classData.proficiencies?.tools?.join(', ') || 'Нет'}</dd>
         </dl>
       </div>
+
+      
     </div>
 
     <div class="equipment">
@@ -1038,7 +1053,8 @@ return { level, spells };
   }
 
   .basic-info,
-  .proficiencies {
+  .proficiencies,
+  .multiclass-info {
     background: var(--card-bg);
     padding: 1.5rem;
     border-radius: 0.5rem;
