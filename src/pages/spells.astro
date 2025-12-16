@@ -835,4 +835,48 @@ const spellSchools = [
     opacity: 1;
     transform: none;
   }
+
+  /* Mobile / responsive tweaks */
+  @media (max-width: 1024px) {
+    .spells-container {
+      grid-template-columns: 1fr;
+    }
+    .spell-details {
+      position: static;
+      top: auto;
+      align-self: stretch;
+      max-height: none;
+      margin-top: 1rem;
+    }
+    .spells-container { gap: 1rem; }
+  }
+
+  @media (max-width: 768px) {
+    .search-controls { flex-direction: column; align-items: stretch; }
+    .filter-button { width: 100%; justify-content: center; }
+    .filter-content { min-width: 92%; max-width: 96%; padding: 1rem; }
+
+    .spells-table th,
+    .spells-table td { padding: 0.45rem 0.5rem; font-size: 0.92rem; }
+    .spells-table .name-en { display: none; }
+
+    /* Hide less-critical columns on small screens to reduce horizontal width */
+    .spells-table th[data-sort="source"], .spells-table td.col-source,
+    .spells-table th[data-sort="range"], .spells-table td.col-range {
+      display: none;
+    }
+
+    .spells-grid { overflow-x: auto; }
+
+    .checkbox-group { gap: 0.5rem; }
+    .checkbox-label { min-width: 0; padding: 0.4rem 0.6rem; font-size: 0.9rem; }
+  }
+
+  @media (max-width: 480px) {
+    .content { padding: 0 0.75rem; }
+    .spells-table th, .spells-table td { padding: 0.35rem 0.45rem; font-size: 0.88rem; }
+    .filter-content { padding: 0.75rem; }
+    .filter-header h3 { font-size: 1rem; }
+    .spell-details { padding: 1rem; }
+  }
 </style>

@@ -292,6 +292,9 @@ const { background } = Astro.props;
   .table-container {
     margin: 1.5rem 0;
     overflow-x: auto;
+    background: var(--background);
+    padding: 1rem;
+    border-radius: 0.5rem;
   }
 
   .note {
@@ -304,12 +307,6 @@ const { background } = Astro.props;
   .characteristic-tables {
     display: grid;
     gap: 2rem;
-  }
-
-  .table-container {
-    background: var(--background);
-    padding: 1rem;
-    border-radius: 0.5rem;
   }
 
   h2 {
