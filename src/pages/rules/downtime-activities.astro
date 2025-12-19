@@ -10,13 +10,10 @@ import FightingPit from '../../components/rules/downtime/FightingPit.astro';
 import Gambling from '../../components/rules/downtime/Gambling.astro';
 import Training from '../../components/rules/downtime/Training.astro';
 import Resting from '../../components/rules/downtime/Resting.astro';
-import {
-  craftingActivities,
-  tradingActivities,
-  entertainmentActivities,
-  trainingActivities,
-  adventuringActivities
-} from '../../data/downtime/activities';
+import Thievery from '../../components/rules/downtime/Thievery.astro';
+import Research from '../../components/rules/downtime/Research.astro';
+import Labor from '../../components/rules/downtime/Labor.astro';
+import {craftingActivities} from '../../data/downtime/activities';
 ---
 
 <Layout title="Активности простоя">
@@ -63,10 +60,12 @@ import {
     </ActivityCategory>
 
     <ActivityCategory
-      title="Развлечения"
-      description="Деятельность для отдыха и заработка.">
+      title="Заработок"
+      description="Деятельность для заработка и возможно развлечения.">
       <FightingPit />
       <Gambling />
+      <!--<Thievery />-->
+      <!--<Labor />-->
     </ActivityCategory>
 
     <ActivityCategory
@@ -79,6 +78,7 @@ import {
       title="Прочее"
       description="Активности не подпадающие под предыдущие категории.">
       <Resting />
+      <!--<Research />-->
     </ActivityCategory>
 
     <!--<ActivityCategory
