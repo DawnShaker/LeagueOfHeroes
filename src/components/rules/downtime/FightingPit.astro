@@ -54,8 +54,9 @@ interface Props {}
       <div>
       <p>После турнира есть 20% шанс на осложнение (бросок d100, 1-20)</p>
       </div>
+      <details class="activity-details">
+        <summary class="dets">Осложнения (d6)</summary>
       <section class="complications">
-        <h4>Осложнения (d6)</h4>
         <div class="complications-table">
           <table>
             <tbody>
@@ -80,6 +81,46 @@ interface Props {}
           <p class="note">* - во всех активностях простоя, где есть требуется или специальное задание, требуется содействие Мастера Лиги, на следующей игре которого играет персонаж.</p> -->
         </div>
       </section>
+      <!--</details>
+      <details class="activity-details">
+        <summary class="dets">Влияние стилей проживания</summary>
+        <table>
+          <thead>
+            <tr>
+              <th>Стиль</th>
+              <th>Стоимость/день</th>
+              <th>Эффект</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr>
+              <td>Никудышное</td>
+              <td>-</td>
+              <td>-1 к броскам. При осложнении, персонаж начинает следующую игру с половиной костей хитов, с округлением вниз</td>
+          </tr>
+          <tr>
+              <td>Бедное</td>
+              <td>1 см</td>
+              <td>-1 к броскам</td>
+          </tr>
+          <tr>
+              <td>Скромное</td>
+              <td>1 зм</td>
+              <td>Без эффектов</td>
+          </tr>
+          <tr>
+              <td>Богатое</td>
+              <td>5 зм</td>
+              <td>+ 1 к броскам</td>
+          </tr>
+          <tr>
+              <td>Аристократическое</td>
+              <td>10+ зм</td>
+              <td>+ 3 к броскам. Вы можете совершить один бросок с преимуществом</td>
+          </tr>
+          </tbody>
+        </table>
+      </details>-->
     </div>
   </details>
 </div>
@@ -96,6 +137,10 @@ interface Props {}
   .activity-header {
     padding: 1.5rem;
     border-bottom: 1px solid var(--card-border);
+  }
+  
+  .dets{
+    color: var(--primary)
   }
 
   .basic-info {
