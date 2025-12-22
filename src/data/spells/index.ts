@@ -1563,7 +1563,7 @@ export const spells: Spell[] = [
 },
 {
   id: 'resistance',
-  name: 'Сопротивление',
+  name: 'Сопротивляемость',
   nameEn: 'Resistance',
   level: 'cantrip',
   school: 'ограждение',
@@ -5688,7 +5688,7 @@ export const spells: Spell[] = [
     nameEn: 'Faerie Fire',
     level: '1',
     school: 'воплощение',
-    castingTime: 'Бонусное действие',
+    castingTime: '1 действие',
     range: 'На себя',
     components: {
       verbal: true,
