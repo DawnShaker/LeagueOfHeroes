@@ -988,7 +988,7 @@ export const spells: Spell[] = [
 },
 {
   id: 'gust',
-  name: 'Шквал',
+  name: 'Порыв',
   nameEn: 'Gust',
   level: 'cantrip',
   school: 'преобразование',

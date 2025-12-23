@@ -23,6 +23,8 @@ interface Props {
     bloodMagicDie?: string;
     knownMaledicts?: number;
     numOfSpellSlots?: number;
+    plansKnown?: number;
+    magicItems?: number;
     spellSlotsLvl?: number;
     spellSlots?: {
       1: number;
@@ -59,6 +61,8 @@ const hasBloodMagicDie = levels[0].bloodMagicDie !== undefined;
 const hasKnownMaledicts = levels[0].knownMaledicts !== undefined;
 const hasNumOfSpellSlots = levels[0].numOfSpellSlots !== undefined;
 const hasSpellSlotsLvl = levels[0].spellSlotsLvl !== undefined;
+const hasPlansKnown = levels[0].plansKnown !== undefined;
+const hasMagicItems = levels[0].magicItems !== undefined;
 const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level => 
   Object.keys(level.spellSlots || {}).reduce((max, slot) => 
     level.spellSlots?.[parseInt(slot)] ? Math.max(max, parseInt(slot)) : max, 0)
@@ -91,6 +95,8 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
         {hasKnownMaledicts && <th class="known-maledicts">Известные проклятья крови</th>}
         {hasNumOfSpellSlots && <th class="num-of-spell-slots">Кол-во ячеек</th>}
         {hasSpellSlotsLvl && <th class="spell-slots-lvl">Уровень ячеек</th>}
+        {hasPlansKnown && <th class="plans-known-lvl">Известные схемы</th>}
+        {hasMagicItems && <th class="magic-items-lvl">Магические предметы</th>}
         {hasSpellcasting && (
           <>
             <th colspan={maxSpellLevel}>Ячейки заклинаний</th>
@@ -120,6 +126,8 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
             (hasBloodMagicDie ? 1 : 0) +
             (hasKnownMaledicts ? 1 : 0) +
             (hasNumOfSpellSlots ? 1 : 0) +
+            (hasMagicItems ? 1 : 0) +
+            (hasPlansKnown ? 1 : 0) +
             (hasSpellSlotsLvl ? 1 : 0) +
             // Колонки, специфичные для заклинаний
             (hasCantrips ? 1 : 0) +
@@ -157,6 +165,8 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
           {hasKnownMaledicts && <td class="known-maledicts">{level.knownMaledicts}</td>}
           {hasNumOfSpellSlots && <td class="num-of-spell-slots">{level.numOfSpellSlots}</td>}
           {hasSpellSlotsLvl && <td class="spell-slots-lvl">{level.spellSlotsLvl}</td>}
+          {hasMagicItems && <td class="magic-items-lvl">{level.magicItems}</td>}
+          {hasPlansKnown && <td class="plans-known-lvl">{level.plansKnown}</td>}
           {hasSpellcasting && (
             <>
               {Array.from({length: maxSpellLevel}, (_, i) => (
