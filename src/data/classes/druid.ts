@@ -468,7 +468,7 @@ export const druid: Class = {
       collapsible: [
         {
           title: 'Формы зверей',
-          description: 'Формы зверей',
+          description: '',
           tableData: {
             headers: ['Уровень друида', 'Известно форм', 'Макс. ПО', 'Скорость полёта'],
             rows: [

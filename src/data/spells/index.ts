@@ -13052,7 +13052,7 @@ export const spells: Spell[] = [
   },
   {
     id: 'vortex-warp',
-    name: 'Психическая плеть Таши',
+    name: 'Вихрь искривленя',
     nameEn: 'Vortex Warp',
     level: '2',
     school: 'вызов',

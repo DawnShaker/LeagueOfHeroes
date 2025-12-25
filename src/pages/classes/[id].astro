@@ -132,13 +132,14 @@ return { level, spells };
       {classData.features.map(feature => (
       <div class="feature">
         <div class="feature-header">
-          <h3>{feature.name}</h3>
+            <h3>{feature.name}</h3>
+            <button type="button" class="copy-feature-btn" aria-label="Скопировать описание">Скопировать описание</button>
           <span class="feature-level">{feature.level} уровень</span>
         </div>
         <div class="feature-description">
-          {feature.description.split('\n').map(paragraph => (
-            <p>{paragraph}</p>
-          ))}
+            {feature.description.split('\n').map(paragraph => (
+              <p>{paragraph}</p>
+            ))}
           {feature.collapsible && (
             <div class="collapsible-content">
               {feature.collapsible.map(item => (
@@ -645,6 +646,26 @@ return { level, spells };
       }
       
       featureElement.querySelector('h3').textContent = feature.name;
+      // Inject copy button for dynamically created features so subclass features
+      // also get the copy control just like server-rendered ones.
+      const headerEl = featureElement.querySelector('.feature-header');
+      const levelEl = headerEl.querySelector('.feature-level');
+      const copyBtn = document.createElement('button');
+      copyBtn.type = 'button';
+      copyBtn.className = 'copy-feature-btn';
+      copyBtn.setAttribute('aria-label', 'Скопировать описание');
+      copyBtn.textContent = 'Скопировать описание';
+      // Ensure dynamically created button has expected visual styling
+      copyBtn.style.background = 'var(--background)';
+      copyBtn.style.border = '1px solid var(--card-border)';
+      copyBtn.style.color = 'var(--text)';
+      copyBtn.style.padding = '0.25rem 0.5rem';
+      copyBtn.style.borderRadius = '0.25rem';
+      copyBtn.style.cursor = 'pointer';
+      copyBtn.style.fontSize = '0.875rem';
+      copyBtn.style.lineHeight = '1';
+      copyBtn.style.marginRight = '2rem';
+      headerEl.insertBefore(copyBtn, levelEl);
       featureElement.querySelector('.feature-level').textContent = `${feature.level} уровень`;
       
       const descriptionContainer = featureElement.querySelector('.feature-description');
@@ -965,7 +986,134 @@ return { level, spells };
   });
 </script>
 
+<script type="module" define:vars={{ classData }}>
+  // Copy feature description handler (delegated)
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest ? e.target.closest('.copy-feature-btn') : null;
+    if (!btn) return;
+
+    const featureEl = btn.closest('.feature');
+    if (!featureEl) return;
+
+    const name = (featureEl.querySelector('h3')?.innerText || '').trim();
+    const levelText = (featureEl.querySelector('.feature-level')?.innerText || '').trim();
+    const desc = (featureEl.querySelector('.feature-description')?.innerText || '').trim();
+    const className = (classData && classData.name) ? classData.name : '';
+
+    const textToCopy = `${name}\n${className} ${levelText}\n${desc}`;
+
+    // Show a small tooltip above the button when copied.
+    const restoreLabel = () => { /* no-op: we keep button label */ };
+
+    const showCopyTooltip = (btnEl) => {
+      let tip = document.querySelector('.copy-tooltip');
+      if (!tip) {
+        tip = document.createElement('div');
+        tip.className = 'copy-tooltip';
+        tip.setAttribute('role', 'status');
+        tip.setAttribute('aria-live', 'polite');
+        document.body.appendChild(tip);
+      }
+      tip.textContent = 'Скопировано!';
+      tip.style.opacity = '0';
+      tip.style.display = 'block';
+
+      // position above button
+      const btnRect = btnEl.getBoundingClientRect();
+      // allow render to compute size
+      requestAnimationFrame(() => {
+        const tipRect = tip.getBoundingClientRect();
+        let left = btnRect.left + (btnRect.width / 2) - (tipRect.width / 2);
+        let top = btnRect.top - tipRect.height - 8;
+        // if not enough space above, show below
+        if (top < 8) top = btnRect.bottom + 8;
+        // clamp horizontally
+        left = Math.max(8, Math.min(left, window.innerWidth - tipRect.width - 8));
+        tip.style.left = left + 'px';
+        tip.style.top = top + 'px';
+        tip.style.opacity = '1';
+      });
+
+      clearTimeout(tip._hideTimeout);
+      tip._hideTimeout = setTimeout(() => {
+        tip.style.opacity = '0';
+        setTimeout(() => { tip.style.display = 'none'; }, 250);
+      }, 900);
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        showCopyTooltip(btn);
+      }).catch(() => {
+        fallbackCopy(textToCopy, btn, () => { showCopyTooltip(btn); });
+      });
+    } else {
+      fallbackCopy(textToCopy, btn, () => { showCopyTooltip(btn); });
+    }
+  });
+
+  function fallbackCopy(text, btn, restore) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand('copy');
+      if (typeof restore === 'function') restore();
+      // ensure tooltip shows if provided as restore
+      try { showCopyTooltip(btn); } catch (e) { /* ignore */ }
+    } catch (err) {
+      // last resort: prompt
+      window.prompt('Скопируйте текст вручную:', text);
+    }
+    ta.remove();
+  }
+</script>
+
 <style>
+  .feature-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .feature-header h3 {
+    flex: 1 1 auto;
+  }
+
+  .copy-feature-btn {
+    position: relative;
+    padding: 0.75rem 1rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 0.5rem;
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  .copy-feature-btn:active {
+    transform: translateY(1px);
+  }
+
+  .copy-tooltip {
+    position: fixed;
+    background: var(--primary);
+    color: white;
+    padding: 0.35rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    transition: opacity 180ms ease;
+    z-index: 20000;
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+  }
+  
   .content {
     max-width: 1200px;
     margin: 0 auto;
