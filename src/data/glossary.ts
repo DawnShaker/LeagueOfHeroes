@@ -1072,7 +1072,7 @@ export const glossary = [
         </p>`
     },
     {
-        id: 'breaking-objects   ',
+        id: 'breaking-objects',
         name: 'Уничтожение объектов',
         nameEn: 'Breaking Objects',
         category: 'Урон и атака',
