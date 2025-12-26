@@ -168,6 +168,17 @@ const categories = Array.from(new Set(glossary.map((g) => g.category))).sort();
             .querySelectorAll(".rule-card")
             .forEach((c) => c.classList.toggle("active", c.dataset.id === id));
 
+        // Ensure the selected rule's tile is visible in the list
+        try {
+            const cardEl = document.querySelector(`.rule-card[data-id="${id}"]`);
+            if (cardEl) {
+                // If called during initial load (pushState===false) avoid smooth scrolling
+                cardEl.scrollIntoView({ block: 'center', behavior: pushState ? 'smooth' : 'auto' });
+            }
+        } catch (err) {
+            // ignore
+        }
+
         if (pushState) {
             // Use hash-based navigation to avoid server 404s for /glossary/:id on reload
             const url = `/glossary#${encodeURIComponent(id)}`;
@@ -287,6 +298,16 @@ const categories = Array.from(new Set(glossary.map((g) => g.category))).sort();
     } else if (pathParts[0] === "glossary" && pathParts[1]) {
         setTimeout(() => showRule(pathParts[1], false), 20);
     }
+
+    // If we opened an id via hash/path, attempt to highlight/scroll the tile again
+    window.addEventListener('load', () => {
+        const finalHash = decodeURIComponent((window.location.hash || '').replace(/^#/, '')) || null;
+        const targetId = finalHash || (pathParts[0] === 'glossary' ? pathParts[1] : null);
+        if (targetId) {
+            const el = document.querySelector(`.rule-card[data-id="${targetId}"]`);
+            if (el) el.scrollIntoView({ block: 'center', behavior: 'auto' });
+        }
+    });
 
     renderList();
 </script>
