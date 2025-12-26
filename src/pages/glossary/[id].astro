@@ -1,0 +1,21 @@
+---
+const { id } = Astro.params;
+---
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content={`0;url=/glossary#${encodeURIComponent(id)}`} />
+    <meta name="robots" content="noindex" />
+    <title>Redirecting…</title>
+    <script>
+      // In case meta-refresh is blocked, use JS redirect
+      (function(){
+        try { window.location.replace('/glossary#' + encodeURIComponent("%s")); } catch(e){}
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Перенаправление… Если вас не перенаправило автоматически, <a href="/glossary">нажмите сюда</a>.</p>
+  </body>
+</html>
