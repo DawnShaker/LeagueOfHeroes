@@ -5565,8 +5565,7 @@ export const spells: Spell[] = [
       page: 265
     },
     sources: [
-      { type: 'class', name: 'Паладин' },
-      { type: 'subclass', name: 'Домен Войны' }
+      { type: 'class', name: 'Паладин' }
     ]
   },
   {
@@ -11133,38 +11132,6 @@ export const spells: Spell[] = [
     ]
   },
   {
-    id: 'darkvision',
-    name: 'Тёмное зрение',
-    nameEn: 'Darkvision',
-    level: '2',
-    school: 'преобразование',
-    castingTime: '1 действие',
-    range: 'Касание',
-    components: {
-      verbal: true,
-      somatic: true,
-      material: 'сушёная морковка'
-    },
-    duration: '8 часов',
-    description: `
-    <p>Вы касаетесь согласного существа, пока заклинание действует, это существо обладает Тёмным зрением дальностью 150 футов.</p>
-    `,
-    source: {
-      book: 'PHB\'24',
-      page: 260
-    },
-    sources: [
-      { type: 'class', name: 'Друид' },
-      { type: 'class', name: 'Следопыт' },
-      { type: 'class', name: 'Чародей' },
-      { type: 'class', name: 'Волшебник' },
-      { type: 'subclass', name: 'Мистический ловкач' },
-      { type: 'subclass', name: 'Коллегия Знания' },
-      { type: 'subclass', name: 'Мистический рыцарь' },
-      { type: 'feat', name: 'Адепт Красных одежд' }
-    ]
-  },
-  {
     id: 'detect-thoughts',
     name: 'Обнаружение мыслей',
     nameEn: 'Detect Thoughts',
@@ -12347,7 +12314,7 @@ export const spells: Spell[] = [
   },
   {
     id: 'prayer-of-healing',
-    name: 'Воображаемая сила',
+    name: 'Молебен лечения',
     nameEn: 'Prayer of Healing',
     level: '2',
     school: 'ограждение',

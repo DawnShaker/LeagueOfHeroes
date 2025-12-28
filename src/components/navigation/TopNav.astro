@@ -6,6 +6,10 @@ import { rulesLinks, characterLinks, toolsLinks, guideLinks, handbookLinks } fro
 <nav class="top-nav">
   <div class="nav-content">
     <a href="/" class="site-title">League of Heroes 5.5E</a>
+    <div class="donate-buttons" aria-hidden="false">
+      <a class="donate-btn boosty" href="https://boosty.to/league_of_hero" target="_blank" rel="noopener noreferrer" aria-label="Поддержать на Boosty">Boosty</a>
+      <a class="donate-btn patreon" href="https://www.patreon.com/c/LeagueOfHeroes_official" target="_blank" rel="noopener noreferrer" aria-label="Поддержать на Patreon">Patreon</a>
+    </div>
     <button class="menu-toggle" aria-label="Toggle menu">
       <span class="bar"></span>
       <span class="bar"></span>
@@ -127,6 +131,42 @@ import { rulesLinks, characterLinks, toolsLinks, guideLinks, handbookLinks } fro
   .nav-items {
     display: flex;
     gap: 1rem;
+  }
+
+  .donate-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-left: 1rem;
+    align-items: center;
+  }
+
+  .donate-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: 0.35rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--card-bg);
+    border: 1px solid transparent;
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+
+  .donate-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  }
+
+  .donate-btn.boosty {
+    background: linear-gradient(180deg,#ff66b2,#ff4b99);
+    border-color: rgba(255,75,153,0.15);
+  }
+
+  .donate-btn.patreon {
+    background: linear-gradient(180deg,#ffb86b,#ff8f2a);
+    border-color: rgba(255,143,42,0.12);
   }
 
   .menu-toggle {
