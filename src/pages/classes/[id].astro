@@ -146,9 +146,30 @@ return { level, spells };
                 <details class="collapsible-item">
                   <summary>{item.title}</summary>
                   <div class="collapsible-description">
-                    {item.description.split('\n').map(paragraph => (
-                      <p>{paragraph}</p>
-                    ))}
+                    {item.tableData ? (
+                      <table class="spell-table">
+                        <thead>
+                          <tr>
+                            {item.tableData.headers.map(header => (
+                              <th>{header}</th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {item.tableData.rows.map(row => (
+                            <tr>
+                              {row.map(cell => (
+                                <td>{cell}</td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    ) : (
+                      item.description.split('\n').map(paragraph => (
+                        <p>{paragraph}</p>
+                      ))
+                    )}
                   </div>
                 </details>
               ))}
@@ -671,9 +692,18 @@ return { level, spells };
       const descriptionContainer = featureElement.querySelector('.feature-description');
       
       if (feature.collapsible) {
+        // Render any textual description first (server renders this too)
+        if (feature.description) {
+          feature.description.split('\n').forEach(paragraph => {
+            const p = document.createElement('p');
+            p.textContent = paragraph;
+            descriptionContainer.appendChild(p);
+          });
+        }
+
         const collapsibleContent = document.createElement('div');
         collapsibleContent.className = 'collapsible-content';
-        
+
         feature.collapsible.forEach(item => {
           const details = document.createElement('details');
           details.className = 'collapsible-item';
@@ -1072,7 +1102,7 @@ return { level, spells };
   }
 </script>
 
-<style>
+<style is:global>
   .feature-header {
     display: flex;
     align-items: center;
@@ -1356,7 +1386,11 @@ return { level, spells };
   }
 
   .spell-table tbody tr:nth-child(even) {
-    background: var(--background);
+    background: transparent;
+  }
+
+  .spell-table tbody tr {
+    background: transparent !important;
   }
 
   .spell-table tbody tr:hover {
@@ -1437,9 +1471,14 @@ return { level, spells };
     transition: background-color 0.2s ease;
   }
 
+  .feature-description table tbody tr,
+  .collapsible-description table tbody tr {
+    background: transparent !important;
+  }
+
   .feature-description table tbody tr:nth-child(even),
   .collapsible-description table tbody tr:nth-child(even) {
-    background: var(--background);
+    background: transparent;
   }
 
   .feature-description table tbody tr:hover,
@@ -1482,8 +1521,14 @@ return { level, spells };
 
   .subclass-feature .feature-description table tbody tr:nth-child(even),
   .subclass-feature .collapsible-description table tbody tr:nth-child(even) {
-    background: var(--subclass-feature-border);
-    opacity: 0.3;
+    background: transparent;
+    opacity: 1;
+  }
+
+  .subclass-feature .feature-description table tbody tr,
+  .subclass-feature .collapsible-description table tbody tr {
+    background: transparent !important;
+    opacity: 1;
   }
 
   /* Scroll to top button */

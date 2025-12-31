@@ -6,7 +6,7 @@
   --text: #1e293b;
   /* Link colors (light theme defaults) */
   --link: #6d28d9;
-  --link-visited: #5b21b6;
+  --link-visited: #7c3aed;
   --link-hover: #4c1d95;
   --link-focus-box: 0 0 0 3px rgba(124,58,237,0.12);
   
@@ -38,7 +38,7 @@
   --text: #e2e8f0;
   /* Link colors for dark theme */
   --link: #c7b6ff;
-  --link-visited: #9a7ae6;
+  --link-visited: #a78bfa;
   --link-hover: #ffffff;
   --link-focus-box: 0 0 0 4px rgba(167,139,250,0.14);
   

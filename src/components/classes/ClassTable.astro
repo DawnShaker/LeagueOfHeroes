@@ -126,9 +126,9 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
             (hasBloodMagicDie ? 1 : 0) +
             (hasKnownMaledicts ? 1 : 0) +
             (hasNumOfSpellSlots ? 1 : 0) +
-            (hasMagicItems ? 1 : 0) +
-            (hasPlansKnown ? 1 : 0) +
             (hasSpellSlotsLvl ? 1 : 0) +
+            (hasPlansKnown ? 1 : 0) +
+            (hasMagicItems ? 1 : 0) +
             // Колонки, специфичные для заклинаний
             (hasCantrips ? 1 : 0) +
             1 // Колонка "Подг. закл."
@@ -165,8 +165,8 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
           {hasKnownMaledicts && <td class="known-maledicts">{level.knownMaledicts}</td>}
           {hasNumOfSpellSlots && <td class="num-of-spell-slots">{level.numOfSpellSlots}</td>}
           {hasSpellSlotsLvl && <td class="spell-slots-lvl">{level.spellSlotsLvl}</td>}
-          {hasMagicItems && <td class="magic-items-lvl">{level.magicItems}</td>}
           {hasPlansKnown && <td class="plans-known-lvl">{level.plansKnown}</td>}
+          {hasMagicItems && <td class="magic-items-lvl">{level.magicItems}</td>}
           {hasSpellcasting && (
             <>
               {Array.from({length: maxSpellLevel}, (_, i) => (
@@ -201,8 +201,8 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
     text-align: center;
   }
   
-  .rage, .rage-damage, .second-wind, .maneuvers, .sneak-attack, .bardic-inspiration, .wild-shape, .chanel-divinity, .martial-arts, .spirit-points, .unarmed-movement, .favored-enemy, .sorcery-points, .invocations, .num-of-spell-slots, .spell-slots-lvl, .blood-magic-die, .known-maledicts {
-    min-width: 40px;
+  .rage, .rage-damage, .second-wind, .maneuvers, .sneak-attack, .bardic-inspiration, .wild-shape, .chanel-divinity, .martial-arts, .spirit-points, .unarmed-movement, .favored-enemy, .sorcery-points, .invocations, .num-of-spell-slots, .spell-slots-lvl, .blood-magic-die, .known-maledicts, .magic-items-lvl, .plans-known-lvl {
+    min-width: 30px;
     text-align: center;
   }
 
