@@ -91,7 +91,7 @@ const spellSchools = [
             <div class="filter-section">
               <h4>Класс</h4>
               <div class="checkbox-group">
-                {Array.from(new Set(spells.flatMap(spell => spell.sources.filter(src => src.type === 'class').map(src => src.name.replace(/<[^>]+>/g, ''))))).sort((a, b) => a.localeCompare(b, 'ru')).map(cls => (
+                {Array.from(new Set(spells.flatMap(spell => (Array.isArray(spell.sources) ? spell.sources : []).filter(src => src && src.type === 'class').map(src => (src.name || '').replace(/<[^>]+>/g, ''))))).sort((a, b) => a.localeCompare(b, 'ru')).map(cls => (
                   <label class="checkbox-label">
                     <input 
                       type="checkbox" 
@@ -120,8 +120,8 @@ const spellSchools = [
               </tr>
             </thead>
             <tbody>
-              {sortedSpells.map(spell => {
-                const classes = (spell.sources || []).filter(s => s.type === 'class').map(s => s.name.replace(/<[^>]+>/g, '')).join(', ');
+                {sortedSpells.map(spell => {
+                const classes = (spell.sources || []).filter(s => s && s.type === 'class').map(s => (s.name || '').replace(/<[^>]+>/g, '')).join(', ');
                 const concentration = typeof spell.duration === 'string' && spell.duration.toLowerCase().includes('концентрация') ? 'X' : '';
                 const page = spell.source && spell.source.page ? String(spell.source.page) : '';
                 const schoolTitle = spell.school ? (spell.school.charAt(0).toUpperCase() + spell.school.slice(1)) : '';
@@ -228,7 +228,7 @@ const spellSchools = [
                             spell.nameEn.toLowerCase().includes(searchTerm);
         const matchesLevel = selectedLevels.length === 0 || selectedLevels.includes(spell.level);
         const matchesSchool = selectedSchools.length === 0 || selectedSchools.includes(spell.school);
-        const matchesClass = selectedClasses.length === 0 || spell.sources.some(src => src.type === 'class' && selectedClasses.includes(src.name.replace(/<[^>]+>/g, '')));
+        const matchesClass = selectedClasses.length === 0 || (Array.isArray(spell.sources) && spell.sources.some(src => src && src.type === 'class' && selectedClasses.includes((src.name || '').replace(/<[^>]+>/g, ''))));
 
         if (card instanceof HTMLElement) card.style.display = 
           matchesSearch && matchesLevel && matchesSchool && matchesClass ? '' : 'none';
@@ -268,13 +268,15 @@ const spellSchools = [
       if (!spell) return;
 
       const formattedSources = formatSources(spell.sources);
+      const sourceBook = spell.source?.book || '';
+      const sourcePage = spell.source?.page || '';
 
       // Create spell details HTML
       spellDetails.innerHTML = `
         <div class="spell-details">
           <div class="spell-header">
             <h2>${spell.name} <span class="name-en">[${spell.nameEn}]</span></h2>
-            <div class="source">${spell.source.book}, стр. ${spell.source.page}</div>
+            <div class="source">${sourceBook}${sourcePage ? ', стр. ' + sourcePage : ''}</div>
           </div>
 
           <div class="spell-info">
@@ -327,9 +329,11 @@ const spellSchools = [
     }
 
     function formatSources(sources) {
+      sources = Array.isArray(sources) ? sources : [];
       const grouped = sources.reduce((acc, source) => {
+        if (!source || !source.type) return acc;
         if (!acc[source.type]) acc[source.type] = [];
-        acc[source.type].push(source.name);
+        acc[source.type].push(source.name || '');
         return acc;
       }, {});
 

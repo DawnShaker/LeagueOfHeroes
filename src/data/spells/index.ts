@@ -12433,42 +12433,8 @@ export const spells: Spell[] = [
     ]
   },
   {
-    id: 'ray-of-enfeeblement',
-    name: 'Луч слабости',
-    nameEn: 'Ray of Enfeeblement',
-    level: '2',
-    school: 'некромантия',
-    castingTime: '1 действие',
-    range: '60 футов',
-    components: {
-      verbal: true,
-      somatic: true
-    },
-    duration: 'Концентрация, вплоть до 1 минуты',
-    description: `
-    <p>Луч изнуряющей энергии летит от вас к существу в пределах дистанции, цель должна совершить спасбросок Телосложения. При успехе цель совершает следующий бросок атаки с Помехой, если он совершается до начала вашего следующего хода.</p>
-    <p>При провале цель совершает с Помехой все использующие Силу Тесты к20, пока действует заклинание. В течение этого времени она также вычитает 1к8 из всех своих бросков урона. Цель повторяет спасбросок в конце каждого своего хода, при успехе оканчивая на себе этот эффект.</p>
-    `,
-    source: {
-      book: 'PHB\'24',
-      page: 311
-    },
-    sources: [
-      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
-      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-      { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-      { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="/classes/cleric?subclass=death">Домен Смерти</a>' },
-      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-      { type: 'subclass', name: '<a href="/classes/cleric?subclass=grave">Домен Упокоения</a>' },
-      { type: 'background', name: '<a href="/backgrounds/golgari%20agent/">Агент Голгари</a>' },
-      { type: 'background', name: '<a href="/backgrounds/orzhov%20representative/">Представитель Орзовов</a>' },
-      { type: 'feat', name: '<a href="/feats/adept-of-the-black-robes/">Адепт Чёрных одежд</a>' }
-    ]
-  },
-  {
     id: 'rimes-binding-ice',
-    name: 'Луч слабости',
+    name: 'Сковывающий лёд Райма',
     nameEn: 'Rime’s Binding Ice',
     level: '2',
     school: 'воплощение',
@@ -13672,31 +13638,6 @@ export const spells: Spell[] = [
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' }
-    ]
-  },
-  {
-    id: 'create-spelljamming-helm',
-    name: 'Создание спеллджаммингового шлема',
-    nameEn: 'Create Spelljamming Helm',
-    level: '5',
-    school: 'преобразование',
-    castingTime: '1 действие',
-    range: 'Касание',
-    components: {
-      verbal: true,
-      somatic: true,
-      material: 'Кристальный жезл стоимостью не менее 5000 ЗМ, расходуемый заклинанием.'
-    },
-    duration: 'Мгновенная',
-    description: `
-    <p>Держа жезл, используемый при сотворении заклинания, вы касаетесь незанятого кресла размера Большого или меньше. Жезл исчезает, а кресло превращается в спеллджамминговый шлем.</p>
-    `,
-    source: {
-      book: 'AAG\'14',
-      page: 22
-    },
-    sources: [
-      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' }
     ]
   },
   {
@@ -16886,7 +16827,7 @@ export const spells: Spell[] = [
     id: 'tensers-transformation',
     name: 'Трансформация Тензера',
     nameEn: 'Tenser’s Transformation',
-    level: '2',
+    level: '6',
     school: 'преобразование',
     castingTime: '1 действие',
     range: 'На себя',
