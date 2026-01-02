@@ -47,6 +47,7 @@ const spellSchools = [
             <span class="filter-icon">⚙</span>
             Фильтры
           </button>
+              <div id="spell-count" class="filter-count" style="display:none">0</div>
         </div>
 
         <div id="filter-popup" class="filter-popup">
@@ -101,6 +102,13 @@ const spellSchools = [
                     {cls}
                   </label>
                 ))}
+              </div>
+            </div>
+
+            <div class="filter-section">
+              <h4>Подклассы</h4>
+              <div id="subclass-filters" class="checkbox-group">
+                <!-- populated client-side -->
               </div>
             </div>
           </div>
@@ -165,6 +173,7 @@ const spellSchools = [
   function initializeSpells() {
     // filterButton уже объявлен выше
     const filterCount = document.getElementById('filter-count');
+      const spellCountEl = document.getElementById('spell-count');
     /** @type {HTMLInputElement|null} */
     /** @type {HTMLInputElement|null} */
     const searchInput = document.getElementById('spell-search');
@@ -189,6 +198,60 @@ const spellSchools = [
       }
     }
 
+    // helper: parse anchor HTML like <a href="/classes/cleric?subclass=knowledge">Домен Знаний</a>
+    function parseAnchorLink(html) {
+      if (!html) return null;
+      const div = document.createElement('div');
+      div.innerHTML = html;
+      const a = div.querySelector('a');
+      if (!a) return null;
+      try {
+        const url = new URL(a.getAttribute('href'), location.origin);
+        const parts = url.pathname.split('/').filter(Boolean);
+        const classId = parts.length >= 2 ? parts[1] : (parts[0] || '');
+        const subclassId = url.searchParams.get('subclass') || '';
+        return { classId, subclassId, name: a.textContent.trim() };
+      } catch (e) {
+        return null;
+      }
+    }
+
+    // Build subclass map from spells.sources[type==='subclass']
+    const subclassMap = {};
+    spells.forEach(sp => {
+      (Array.isArray(sp.sources) ? sp.sources : []).forEach(src => {
+        if (!src || src.type !== 'subclass') return;
+        const parsed = parseAnchorLink(src.name);
+        if (!parsed || !parsed.classId || !parsed.subclassId) return;
+        if (!subclassMap[parsed.classId]) subclassMap[parsed.classId] = [];
+        if (!subclassMap[parsed.classId].some(x => x.subclassId === parsed.subclassId)) subclassMap[parsed.classId].push(parsed);
+      });
+    });
+
+    function renderSubclassFilters() {
+      const container = document.getElementById('subclass-filters');
+      if (!container) return;
+      container.innerHTML = '';
+      Object.keys(subclassMap).sort((a,b) => a.localeCompare(b,'ru')).forEach(classId => {
+        const list = subclassMap[classId];
+        const wrapper = document.createElement('div');
+        wrapper.className = 'subclass-class';
+        const toggle = document.createElement('button');
+        toggle.type = 'button';
+        toggle.className = 'subclass-toggle';
+        toggle.textContent = classId + ' ▾';
+        toggle.dataset.class = classId;
+        const inner = document.createElement('div');
+        inner.className = 'subclass-list';
+        inner.style.display = 'none';
+        inner.innerHTML = list.map(it => `<label class="checkbox-label"><input type="checkbox" name="spell-subclass" value="${classId}|${it.subclassId}">${it.name}</label>`).join('');
+        wrapper.appendChild(toggle);
+        wrapper.appendChild(inner);
+        container.appendChild(wrapper);
+      });
+    }
+
+
     function closePopup(e: MouseEvent) {
       if (filterPopup && e.target === filterPopup) {
         filterPopup.classList.remove('show');
@@ -207,6 +270,7 @@ const spellSchools = [
       const selectedClasses = Array.from(classCheckboxes)
         .filter(cb => cb instanceof HTMLInputElement && cb.checked)
         .map(cb => cb instanceof HTMLInputElement ? cb.value : '');
+      const selectedSubclasses = Array.from(document.querySelectorAll('input[name="spell-subclass"]')).filter(cb=>cb instanceof HTMLInputElement && cb.checked).map(cb=>cb.value);
       // Count active filters
       let activeFilters = 0;
       if (selectedLevels.length > 0) activeFilters += selectedLevels.length;
@@ -218,6 +282,7 @@ const spellSchools = [
       }
       if (filterButton) filterButton.classList.toggle('has-filters', activeFilters > 0);
 
+      let visibleCount = 0;
       spellRows.forEach(card => {
         const spellId = card instanceof HTMLElement ? card.dataset.spellId : undefined;
         const spell = spellId ? spells.find(s => s.id === spellId) : undefined;
@@ -229,10 +294,22 @@ const spellSchools = [
         const matchesLevel = selectedLevels.length === 0 || selectedLevels.includes(spell.level);
         const matchesSchool = selectedSchools.length === 0 || selectedSchools.includes(spell.school);
         const matchesClass = selectedClasses.length === 0 || (Array.isArray(spell.sources) && spell.sources.some(src => src && src.type === 'class' && selectedClasses.includes((src.name || '').replace(/<[^>]+>/g, ''))));
+        const matchesSubclass = selectedSubclasses.length === 0 || (Array.isArray(spell.sources) && spell.sources.some(src => {
+          if (!src || src.type !== 'subclass') return false;
+          const parsed = parseAnchorLink(src.name);
+          if (!parsed) return false;
+          return selectedSubclasses.includes(parsed.classId + '|' + parsed.subclassId);
+        }));
 
-        if (card instanceof HTMLElement) card.style.display = 
-          matchesSearch && matchesLevel && matchesSchool && matchesClass ? '' : 'none';
+        const isVisible = matchesSearch && matchesLevel && matchesSchool && matchesClass && matchesSubclass;
+        if (card instanceof HTMLElement) card.style.display = isVisible ? '' : 'none';
+        if (isVisible) visibleCount++;
       });
+
+      if (spellCountEl) {
+        spellCountEl.textContent = String(visibleCount);
+        spellCountEl.style.display = visibleCount > 0 ? 'flex' : 'none';
+      }
     }
 
     function getIdFromUrl() {
@@ -356,6 +433,36 @@ const spellSchools = [
     levelCheckboxes?.forEach(cb => cb.addEventListener('change', filterSpells));
     schoolCheckboxes?.forEach(cb => cb.addEventListener('change', filterSpells));
     classCheckboxes?.forEach(cb => cb.addEventListener('change', filterSpells));
+    
+    // Ensure label fills when checkbox is checked (tile fill)
+    filterPopup?.addEventListener('change', (e) => {
+      const target = e.target;
+      if (target instanceof HTMLInputElement && target.type === 'checkbox') {
+        const lbl = target.closest('label');
+        if (lbl && lbl.classList) lbl.classList.toggle('checked', target.checked);
+        // also re-run filter
+        filterSpells();
+      }
+    });
+
+    // initialize label checked state
+    document.querySelectorAll('.checkbox-label input[type="checkbox"]').forEach(cb => {
+      if (cb instanceof HTMLInputElement) {
+        const lbl = cb.closest('label');
+        if (lbl && lbl.classList) lbl.classList.toggle('checked', cb.checked);
+      }
+    });
+
+    // render subclass filters and attach toggles
+    renderSubclassFilters();
+    document.getElementById('subclass-filters')?.addEventListener('click', (e) => {
+      const t = e.target;
+      if (t instanceof HTMLElement && t.classList.contains('subclass-toggle')) {
+        const parent = t.parentElement;
+        const list = parent?.querySelector('.subclass-list');
+        if (list) list.style.display = list.style.display === 'none' ? 'block' : 'none';
+      }
+    });
 
     // Row click -> show details
     spellRows.forEach(row => {
@@ -367,6 +474,111 @@ const spellSchools = [
         showSpellDetails(spellId);
       });
     });
+
+    // Random spell widget (append to body)
+    (function createRandomWidget(){
+      const widget = document.createElement('div');
+      widget.id = 'random-spell-widget';
+      widget.style.position = 'fixed';
+      widget.style.right = '1rem';
+      widget.style.bottom = '1rem';
+      widget.style.zIndex = '10010';
+
+      // Container with vertical flow: button on top, history list below
+      const container = document.createElement('div');
+      container.className = 'spell-history';
+
+      const btn = document.createElement('button');
+      btn.id = 'random-btn';
+      btn.type = 'button';
+      btn.className = 'filter-button';
+      btn.innerHTML = '<span class="filter-icon">🎲</span>Случайное заклинание';
+
+      const ul = document.createElement('ul');
+      ul.id = 'random-history';
+      ul.setAttribute('role', 'list');
+
+      container.appendChild(btn);
+      container.appendChild(ul);
+      widget.appendChild(container);
+      document.body.appendChild(widget);
+
+      const randomHistory = [];
+
+      function escapeHtml(str) {
+        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+
+      function makeListItem(item) {
+        const li = document.createElement('li');
+        li.className = 'history-item enter';
+        const a = document.createElement('a');
+        a.href = `/spells/${item.id}`;
+        a.dataset.spellId = item.id;
+        a.textContent = item.name;
+        li.appendChild(a);
+
+        // click handler: navigate to spell details and scroll row into view
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          const id = a.dataset.spellId;
+          if (!id) return;
+          const row = document.querySelector(`[data-spell-id="${id}"]`);
+          if (row instanceof HTMLElement) row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          showSpellDetails(id);
+          history.pushState({ spellId: id }, '', `/spells/${encodeURIComponent(id)}`);
+        });
+
+        // remove temporary 'enter' class after animation
+        li.addEventListener('animationend', (ev) => {
+          if (li.classList.contains('enter')) li.classList.remove('enter');
+          if (li.classList.contains('exit')) li.remove();
+        });
+
+        return li;
+      }
+
+      function renderHistory() {
+        // keep DOM in sync with array (we only prepend/limit so a minimal approach)
+        ul.innerHTML = '';
+        randomHistory.forEach(item => {
+          const li = makeListItem(item);
+          ul.appendChild(li);
+        });
+      }
+
+      btn.addEventListener('click', ()=>{
+        const visible = Array.from(spellRows).filter(r => (r instanceof HTMLElement) && r.style.display !== 'none');
+        if (!visible || visible.length === 0) return;
+        const pick = visible[Math.floor(Math.random()*visible.length)];
+        const id = pick.dataset.spellId;
+        let name = '';
+        const nameEl = pick.querySelector('.col-name');
+        if (nameEl) {
+          const raw = (nameEl.textContent || '').trim();
+          name = raw.replace(/\s*\[[^\]]+\]$/, '').trim();
+        }
+        if (!id) return;
+
+        // add to start of array
+        randomHistory.unshift({ id, name });
+        // limit to 5
+        if (randomHistory.length > 5) {
+          // trim array to 5
+          randomHistory.splice(5);
+        }
+
+        // render and animate
+        renderHistory();
+
+        // if more than 5 in DOM (shouldn't be), ensure trimming with exit class
+        const items = ul.querySelectorAll('li');
+        if (items.length > 5) {
+          const last = items[items.length - 1];
+          last.classList.add('exit');
+        }
+      });
+    })();
 
     // Sorting for table headers
     const table = document.querySelector('.spells-table');
@@ -458,6 +670,9 @@ const spellSchools = [
     });
 
     // On initial load: if URL contains id -> open it
+    // update filters/count on first load
+    filterSpells();
+
     const initialId = getIdFromUrl();
     if (initialId) {
       showSpellDetails(initialId);
@@ -523,6 +738,155 @@ const spellSchools = [
 </script>
 
 <style>
+  .filter-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0;
+  }
+
+  .checkbox-label.checked {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  /* Random spell widget */
+  #random-spell-widget {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    width: 260px;
+    z-index: 10010;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+  }
+
+  #random-spell-widget .spell-history {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: stretch;
+    max-height: 260px;
+  }
+
+  /* Специфичный стиль для кнопки случайного заклинания */
+  #random-btn {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.6rem;
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 0.5rem;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+    text-align: left;
+    font-family: inherit;
+    font-size: 1rem;
+  }
+
+  #random-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(0,0,0,0.16);
+    filter: brightness(1.1);
+  }
+
+  #random-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+  }
+
+  #random-btn .filter-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.6rem;
+    height: 1.6rem;
+    font-size: 1.1rem;
+    background: rgba(255,255,255,0.2);
+    border-radius: 0.35rem;
+  }
+
+  #random-spell-widget #random-history {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    overflow-y: auto;
+    max-height: 220px;
+    width: 100%;
+  }
+
+  #random-spell-widget #random-history li {
+    width: 100%;
+  }
+
+  #random-spell-widget #random-history a {
+    display: block;
+    padding: 0.4rem 0.6rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 6px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.95rem;
+    width: 100%;
+    text-align: left;
+    transition: background 0.2s ease;
+  }
+
+  #random-spell-widget #random-history a:hover {
+    background: var(--nav-hover-bg);
+    border-color: var(--primary);
+  }
+
+  /* history item animations */
+  .history-item {
+    opacity: 0;
+    transform: translateY(-8px);
+    will-change: transform, opacity;
+  }
+
+  .history-item.enter {
+    animation: fadeIn 0.28s ease-out forwards;
+  }
+
+  .history-item.exit {
+    animation: fadeOut 0.28s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(-10px); }
+  }
   .content {
     max-width: 1400px;
     margin: 0 auto;
