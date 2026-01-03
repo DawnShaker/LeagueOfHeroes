@@ -13870,7 +13870,7 @@ export const spells: Spell[] = [
   },
   {
     id: 'danse-macabre',
-    name: 'Заражение',
+    name: 'Пляска смерти',
     nameEn: 'Danse Macabre',
     level: '5',
     school: 'некромантия',
