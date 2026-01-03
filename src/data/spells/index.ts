@@ -2050,7 +2050,6 @@ export const spells: Spell[] = [
     page: 245
   },
   sources: [
-    { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
     { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
     { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
