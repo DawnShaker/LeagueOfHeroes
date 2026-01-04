@@ -2248,7 +2248,7 @@ export const spells: Spell[] = [
   description: `<p>Вы совершаете особую религиозную церемонию, наполненную магией. Когда вы накладываете заклинание, выберите один из следующих обрядов, цель которого должна находиться в пределах 10 футов от вас во время накладывания.</p>
   <p><strong>Благословение воды.</strong> Вы прикасаетесь к одной фляге воды и делаете её святой водой.</p>
   <p><strong>Венчание.</strong> Вы касаетесь взрослых Гуманоидов, желающих связать себя узами брака. В течение следующих 7 дней каждая цель получает бонус +2 к КД пока они находятся в пределах 30 футов друг от друга. Существо может получить преимущества от этого обряда снова, только если оно овдовело.</p>
-  <p><strong>Заупокойный обряд.</strong> Вы касаетесь одного трупа, и в течение следующих 7 дней цель не может стать Нежитью, кроме как с помощью заклинания исполнения желаний [wish].</p>
+  <p><strong>Заупокойный обряд.</strong> Вы касаетесь одного трупа, и в течение следующих 7 дней цель не может стать Нежитью, кроме как с помощью заклинания Желание.</p>
   <p><strong>Искупление.</strong> Вы касаетесь одного согласного существа, чьё мировоззрение было изменено, и совершаете проверку Мудрости (Проницательность) Сл 20. При успехе вы возвращаете цели её изначальное мировоззрение.</p>
   <p><strong>Посвящение.</strong> Вы касаетесь одного Гуманоида, который хочет посвятить себя служению вашему богу. На следующие 24 часа, каждый раз, когда цель совершает спасбросок, она может бросить к4 и добавить выпавшее число к результату. Существо может получить преимущества от этого обряда только единожды.</p>
   <p><strong>Становление.</strong> Вы касаетесь одного взрослого Гуманоида, который достиг совершеннолетия. На следующие 24 часа, каждый раз, когда цель совершает проверку характеристики, она может бросить к4 и добавить выпавшее число к результату. Существо может получить преимущества от этого обряда только единожды.</p>`,
@@ -2535,7 +2535,7 @@ export const spells: Spell[] = [
 {
   id: 'сure-wounds',
   name: 'Лечение ран',
-  nameEn: 'Cure wounds',
+  nameEn: 'Cure Wounds',
   level: '1',
   school: 'ограждение',
   castingTime: '1 действие',
@@ -4823,6 +4823,7 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=death">Домен Смерти</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/paladin?subclass=oathbreaker">Клятвопреступник</a>' },
+      { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
       { type: 'background', name: '<a href="/backgrounds/golgari%20agent/">Агент Голгари</a>' }
     ]
   },
@@ -6408,7 +6409,7 @@ export const spells: Spell[] = [
     ]
   },
   {
-    id: 'Mage Armor',
+    id: 'mage-armor',
     name: 'Доспехи мага',
     nameEn: 'Mage Armor',
     level: '1',
@@ -8435,6 +8436,7 @@ export const spells: Spell[] = [
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=abjurer">Оградитель</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
@@ -9937,6 +9939,7 @@ export const spells: Spell[] = [
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+      { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' }
     ]
   },
@@ -12973,6 +12976,7 @@ export const spells: Spell[] = [
     },
     sources: [
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+      { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
       { type: 'subclass', name: '<a href="/classes/warlock?subclass=genie">Покровитель Гений</a> (Дао)' },
@@ -14008,6 +14012,7 @@ export const spells: Spell[] = [
     sources: [
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
+      { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
       { type: 'subclass', name: '<a href="/classes/warlock?subclass=archfey">Покровитель Архифея</a>' },
       { type: 'subclass', name: '<a href="/classes/paladin?subclass=conquest">Клятва Завоевания</a>' },
       { type: 'subclass', name: '<a href="/classes/paladin?subclass=oathbreaker">Клятвопреступник</a>' },
@@ -15967,10 +15972,10 @@ export const spells: Spell[] = [
       page: 330
     },
     sources: [
-      { type: 'class', name: 'Волшебник' },
-      { type: 'class', name: 'Колдун' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Вызыватель' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' },
     ]
   },
   {
@@ -15994,8 +15999,8 @@ export const spells: Spell[] = [
       page: 294
     },
     sources: [
-      { type: 'class', name: 'Волшебник' },
-      { type: 'subclass', name: 'Домен Магии' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
     ]
   },
   {
@@ -16019,10 +16024,10 @@ export const spells: Spell[] = [
       page: 302
     },
     sources: [
-      { type: 'class', name: 'Волшебник' },
-      { type: 'class', name: 'Колдун' },
-      { type: 'class', name: 'Друид' },
-      { type: 'subclass', name: 'Домен Магии' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+      { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
     ]
   },
   {
@@ -16046,7 +16051,7 @@ export const spells: Spell[] = [
       page: 255
     },
     sources: [
-      { type: 'class', name: 'Друид' },
+      { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     ]
   },
   {
@@ -16070,9 +16075,9 @@ export const spells: Spell[] = [
       page: 266
     },
     sources: [
-      { type: 'class', name: 'Волшебник' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Вызыватель' }
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' }
     ]
   },
   {
@@ -16096,10 +16101,10 @@ export const spells: Spell[] = [
       page: 309
     },
     sources: [
-      { type: 'class', name: 'Бард' },
-      { type: 'class', name: 'Волшебник' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Иллюзионист' },
+      { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=illusionist">Иллюзионист</a>' },
     ]
   },
   {
@@ -16123,8 +16128,8 @@ export const spells: Spell[] = [
       page: 276
     },
     sources: [
-      { type: 'class', name: 'Жрец' },
-      { type: 'subclass', name: 'Божественная душа' },
+      { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+      { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
     ]
   },
   {
@@ -16148,14 +16153,14 @@ export const spells: Spell[] = [
       page: 276
     },
     sources: [
-      { type: 'class', name: 'Жрец' },
-      { type: 'class', name: 'Бард' },
-      { type: 'class', name: 'Чародей' },
-      { type: 'class', name: 'Волшебник' },
-      { type: 'class', name: 'Колдун' },
-      { type: 'subclass', name: 'Божественная душа' },
-      { type: 'subclass', name: 'Прорицатель' },
-      { type: 'subclass', name: 'Домен Магии' },
+      { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+      { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
+      { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+      { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=diviner">Прорицатель</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
     ]
   },
   {
@@ -16180,9 +16185,9 @@ export const spells: Spell[] = [
       page: 284
     },
     sources: [
-      { type: 'class', name: 'Жрец' },
-      { type: 'class', name: 'Друид' },
-      { type: 'subclass', name: 'Божественная душа' },
+      { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+      { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+      { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
     ]
   },
   {
@@ -16207,11 +16212,11 @@ export const spells: Spell[] = [
       page: 250
     },
     sources: [
-      { type: 'class', name: 'Чародей' },
-      { type: 'class', name: 'Волшебник' },
-      { type: 'class', name: 'Колдун' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Некромант' }
+      { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' }
     ]
   },
   {
@@ -16234,11 +16239,11 @@ export const spells: Spell[] = [
       page: 242
     },
     sources: [
-      { type: 'class', name: 'Чародей' },
-      { type: 'class', name: 'Волшебник' },
-      { type: 'class', name: 'Колдун' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Вызыватель' }
+      { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' }
     ]
   },
   {
@@ -16260,10 +16265,10 @@ export const spells: Spell[] = [
       page: 250
     },
     sources: [
-      { type: 'class', name: 'Бард' },
-      { type: 'class', name: 'Волшебник' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Очарователь' }
+      { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/bard?subclass=glamour">Очарователь</a>' }
     ]
   },
   {
@@ -16287,11 +16292,11 @@ export const spells: Spell[] = [
       page: 296
     },
     sources: [
-      { type: 'class', name: 'Чародей' },
-      { type: 'class', name: 'Волшебник' },
-      { type: 'class', name: 'Бард' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Очарователь' }
+      { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/bard?subclass=glamour">Очарователь</a>' }
     ]
   },
   {
@@ -16315,11 +16320,11 @@ export const spells: Spell[] = [
       page: 275
     },
     sources: [
-      { type: 'class', name: 'Чародей' },
-      { type: 'class', name: 'Волшебник' },
-      { type: 'class', name: 'Друид' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Преобразователь' }
+      { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' }
     ]
   },
   {
@@ -16343,11 +16348,11 @@ export const spells: Spell[] = [
       page: 250
     },
     sources: [
-      { type: 'class', name: 'Жрец' },
-      { type: 'class', name: 'Друид' },
-      { type: 'class', name: 'Бард' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Некромант' }
+      { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+      { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+      { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' }
     ]
   },
   {
@@ -16372,10 +16377,10 @@ export const spells: Spell[] = [
       page: 302
     },
     sources: [
-      { type: 'class', name: 'Чародей' },
-      { type: 'class', name: 'Волшебник' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Воплотитель' },
+      { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
     ]
   },
   {
@@ -16398,8 +16403,8 @@ export const spells: Spell[] = [
       page: 304
     },
     sources: [
-      { type: 'class', name: 'Жрец' },
-      { type: 'subclass', name: 'Божественная душа' },
+      { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+      { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
     ]
   },
   {
@@ -16424,10 +16429,10 @@ export const spells: Spell[] = [
       page: 326
     },
     sources: [
-      { type: 'class', name: 'Колдун' },
-      { type: 'class', name: 'Волшебник' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Вызыватель' }
+      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' }
     ]
   },
   {
@@ -16451,10 +16456,10 @@ export const spells: Spell[] = [
       page: 273
     },
     sources: [
-      { type: 'class', name: 'Бард' },
-      { type: 'class', name: 'Жрец' },
-      { type: 'class', name: 'Друид' },
-      { type: 'subclass', name: 'Божественная душа' },
+      { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
+      { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+      { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+      { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
     ]
   },
   {
@@ -16477,8 +16482,8 @@ export const spells: Spell[] = [
       page: 283
     },
     sources: [
-      { type: 'class', name: 'Жрец' },
-      { type: 'subclass', name: 'Божественная душа' },
+      { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+      { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
     ]
   },
   {
@@ -16502,9 +16507,9 @@ export const spells: Spell[] = [
       page: 256
     },
     sources: [
-      { type: 'class', name: 'Волшебник' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Оградитель' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=abjurer">Оградитель</a>' },
     ]
   },
   {
@@ -16527,7 +16532,7 @@ export const spells: Spell[] = [
       page: 334
     },
     sources: [
-      { type: 'class', name: 'Друид' },
+      { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     ]
   },
   {
@@ -16552,10 +16557,10 @@ export const spells: Spell[] = [
       page: 263
     },
     sources: [
-      { type: 'class', name: 'Чародей' },
-      { type: 'class', name: 'Волшебник' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Преобразователь' }
+      { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' }
     ]
   },
   {
@@ -16577,8 +16582,8 @@ export const spells: Spell[] = [
       page: 343
     },
     sources: [
-      { type: 'class', name: 'Жрец' },
-      { type: 'subclass', name: 'Божественная душа' },
+      { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+      { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
     ]
   },
   {
@@ -16602,13 +16607,13 @@ export const spells: Spell[] = [
       page: 329
     },
     sources: [
-      { type: 'class', name: 'Чародей' },
-      { type: 'class', name: 'Волшебник' },
-      { type: 'class', name: 'Жрец' },
-      { type: 'class', name: 'Друид' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Божественная душа' },
-      { type: 'subclass', name: 'Воплотитель' },
+      { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+      { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
     ]
   },
   {
@@ -16633,10 +16638,10 @@ export const spells: Spell[] = [
       page: 258
     },
     sources: [
-      { type: 'class', name: 'Чародей' },
-      { type: 'class', name: 'Волшебник' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Некромант' }
+      { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' }
     ]
   },
   {
@@ -16661,9 +16666,9 @@ export const spells: Spell[] = [
       page: 339
     },
     sources: [
-      { type: 'class', name: 'Волшебник' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Воплотитель' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
     ]
   },
   {
@@ -16686,8 +16691,8 @@ export const spells: Spell[] = [
       page: 247
     },
     sources: [
-      { type: 'class', name: 'Жрец' },
-      { type: 'subclass', name: 'Божественная душа' },
+      { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+      { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
     ]
   },
   {
@@ -16712,7 +16717,7 @@ export const spells: Spell[] = [
       page: 339
     },
     sources: [
-      { type: 'class', name: 'Друид' },
+      { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     ]
   },
   {
@@ -16737,10 +16742,10 @@ export const spells: Spell[] = [
       page: 279
     },
     sources: [
-      { type: 'class', name: 'Чародей' },
-      { type: 'class', name: 'Волшебник' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Оградитель' }
+      { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=abjurer">Оградитель</a>' }
     ]
   },
   {
@@ -16764,7 +16769,7 @@ export const spells: Spell[] = [
       page: 341
     },
     sources: [
-      { type: 'class', name: 'Друид' },
+      { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     ]
   },
   {
@@ -16789,10 +16794,10 @@ export const spells: Spell[] = [
       page: 249
     },
     sources: [
-      { type: 'class', name: 'Чародей' },
-      { type: 'class', name: 'Волшебник' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Воплотитель' },
+      { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
     ]
   },
   {
@@ -16816,10 +16821,10 @@ export const spells: Spell[] = [
       page: 165
     },
     sources: [
-      { type: 'class', name: 'Колдун' },
-      { type: 'class', name: 'Волшебник' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Некромант' }
+      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' }
     ]
   },
   {
@@ -16843,7 +16848,7 @@ export const spells: Spell[] = [
       page: 150
     },
     sources: [
-      { type: 'class', name: 'Друид' },
+      { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     ]
   },
   {
@@ -16865,11 +16870,11 @@ export const spells: Spell[] = [
       page: 161
     },
     sources: [
-      { type: 'class', name: 'Колдун' },
-      { type: 'class', name: 'Чародей' },
-      { type: 'class', name: 'Волшебник' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Иллюзионист' },
+      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+      { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=illusionist">Иллюзионист</a>' },
     ]
   },
   {
@@ -16892,7 +16897,7 @@ export const spells: Spell[] = [
       page: 169
     },
     sources: [
-      { type: 'class', name: 'Друид' },
+      { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     ]
   },
   {
@@ -16914,11 +16919,11 @@ export const spells: Spell[] = [
       page: 164
     },
     sources: [
-      { type: 'class', name: 'Колдун' },
-      { type: 'class', name: 'Чародей' },
-      { type: 'class', name: 'Волшебник' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Вызыватель' }
+      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+      { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' }
     ]
   },
   {
@@ -16943,9 +16948,9 @@ export const spells: Spell[] = [
     },
     sources: [
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
-      { type: 'class', name: 'Волшебник' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Преобразователь' }
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' }
     ]
   },
   {
@@ -16969,10 +16974,10 @@ export const spells: Spell[] = [
       page: 20
     },
     sources: [
-      { type: 'class', name: 'Чародей' },
-      { type: 'class', name: 'Волшебник' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Оградитель' }
+      { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=abjurer">Оградитель</a>' }
     ]
   },
   {
@@ -17006,9 +17011,9 @@ export const spells: Spell[] = [
       page: 168
     },
     sources: [
-      { type: 'class', name: 'Волшебник' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Преобразователь' }
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' }
     ]
   },
   {
@@ -17037,12 +17042,12 @@ export const spells: Spell[] = [
       page: 160
     },
     sources: [
-      { type: 'class', name: 'Друид' },
-      { type: 'class', name: 'Чародей' },
-      { type: 'class', name: 'Колдун' },
-      { type: 'class', name: 'Волшебник' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Преобразователь' }
+      { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+      { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' }
     ]
   },
   {
@@ -17071,12 +17076,12 @@ export const spells: Spell[] = [
       page: 159
     },
     sources: [
-      { type: 'class', name: 'Друид' },
-      { type: 'class', name: 'Чародей' },
-      { type: 'class', name: 'Колдун' },
-      { type: 'class', name: 'Волшебник' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Преобразователь' }
+      { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+      { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' }
     ]
   },
   {
@@ -17106,12 +17111,12 @@ export const spells: Spell[] = [
       page: 159
     },
     sources: [
-      { type: 'class', name: 'Друид' },
-      { type: 'class', name: 'Чародей' },
-      { type: 'class', name: 'Колдун' },
-      { type: 'class', name: 'Волшебник' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Преобразователь' }
+      { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+      { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' }
     ]
   },
   {
@@ -17140,12 +17145,12 @@ export const spells: Spell[] = [
       page: 159
     },
     sources: [
-      { type: 'class', name: 'Друид' },
-      { type: 'class', name: 'Чародей' },
-      { type: 'class', name: 'Колдун' },
-      { type: 'class', name: 'Волшебник' },
-      { type: 'subclass', name: 'Домен Магии' },
-      { type: 'subclass', name: 'Преобразователь' }
+      { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+      { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' }
     ]
   },
   {
@@ -17167,7 +17172,7 @@ export const spells: Spell[] = [
     <p>Заклинание создает следующие эффекты в пределах области. Когда вы накладываете это заклинание, вы можете указать существ как друзей, которые будут невосприимчивы к эффектам заклинания. Вы также можете указать кодовое слово, которое, при произношении, делает говорящего невосприимчивым к этим эффектам.</p>
     <p>Вся защищённая область источает магию. Рассеивание магии [Dispel magic], наложенное на область, при успехе удаляет только один из нижеследующих эффектов, а не всю область. Заклинатель выбирает, какой эффект окончить. Только когда все эффекты окончены, заклинание рассеивается.</p>
     <p><strong>Непроглядный туман.</strong>Вы можете заполнить любое количество квадратов с длиной ребра 5 футов на земле густым туманом, делая их сильно заслонённой областью. Туман достигает 10 футов в высоту. Кроме того, каждый фут движения через туман стоит 2 дополнительных фута. Для существа, невосприимчивого к данному эффекту, туман ничего не скрывает и выглядит как лёгкая дымка с песчинками зеленого света, плавающими в воздухе.</p>
-    <p><strong>Цепкий подлесок.</strong>Вы можете заполнить любое количество квадратов с длиной ребра 5 футов на земле, которые не заполнены туманом, цепкими сорняками и лозой, как если бы они были созданы заклинанием опутывание [entangle]. Для существа, невосприимчивого к данному эффекту, сорняки и лоза ощущаются мягкими и меняют свою форму, чтобы служить временными сидениями или постелями.</p>
+    <p><strong>Цепкий подлесок.</strong>Вы можете заполнить любое количество квадратов с длиной ребра 5 футов на земле, которые не заполнены туманом, цепкими сорняками и лозой, как если бы они были созданы заклинанием Опутывание. Для существа, невосприимчивого к данному эффекту, сорняки и лоза ощущаются мягкими и меняют свою форму, чтобы служить временными сидениями или постелями.</p>
     <p><strong>Хранители рощи.</strong>Вы можете оживить до четырех деревьев в этой области, заставляя их выкорчевать себя из земли. Эти деревья имеют блок статистики пробуждённого дерева [awakened tree], за исключением того, что они не могут говорить, и их кора покрыта друидическими символами. Если любое существо, не иммунное к этому эффекту, заходит в защищаемую область, хранители рощи сражаются, пока не прогонят или не убьют вторженцев. Хранители рощи также подчиняются устным командам (действие не требуется), которые вы произносите в этой области. Если вы не даёте им команд, и в области нет незваных гостей, хранители рощи бездействуют. Хранители рощи не могут покинуть охраняемую область. Когда заклинание оканчивается, магия, оживляющая их, исчезает, и деревья снова укореняются, если это возможно.</p>
     <p><strong>Дополнительный эффект от заклинания.</strong>Вы можете выбрать один из следующих магических эффектов в защищенной области:</p>
     <p><ul>
@@ -17182,7 +17187,7 @@ export const spells: Spell[] = [
       page: 154
     },
     sources: [
-      { type: 'class', name: 'Друид' }
+      { type: 'class', name: '<a href="/classes/druid">Друид</a>' }
     ]
   },
   {

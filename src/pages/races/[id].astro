@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { speciesData } from '../../data/species/index';
 import { spells as allSpells } from '../../data/spells';
+import { getRaceData, raceData } from '../../data/raceSizeData.js';
 import SpeciesHeader from '../../components/species/SpeciesHeader.astro';
 import SpeciesStats from '../../components/species/SpeciesStats.astro';
 import SpeciesAbility from '../../components/species/SpeciesAbility.astro';
@@ -15,6 +16,8 @@ export function getStaticPaths() {
 }
 
 const { species } = Astro.props;
+const raceSizeDataEntry = raceData[species.id] || null;
+const raceSizeEntry = getRaceData(species.id) || null;
 ---
 
 <Layout title={`${species.name}`}>
@@ -50,6 +53,36 @@ const { species } = Astro.props;
         size={species.size}
         speed={species.speed}
       />
+
+      <div class="size-calculator" aria-label="Калькулятор роста и веса">
+        <h3>Калькулятор роста и веса</h3>
+        <div class="calculator-body">
+          {raceSizeDataEntry && raceSizeDataEntry.sizeOptions && (
+            <label class="calc-row">Размер: 
+              <select id="size-select">
+                {raceSizeDataEntry.sizeOptions.map(opt => (
+                  <option value={opt} selected={raceSizeEntry && raceSizeEntry.size === opt}>{opt}</option>
+                ))}
+              </select>
+            </label>
+          )}
+
+          <label class="calc-row">Рост: <span id="height-display"></span></label>
+          <input id="height-slider" type="range" />
+
+          <label class="calc-row">Множитель веса: <span id="weight-display"></span></label>
+          <input id="weight-slider" type="range" />
+
+          <div class="calculator-results">
+            <div>Итоговый рост: <strong id="final-height"></strong></div>
+            <div>Итоговый вес: <strong id="final-weight"></strong></div>
+          </div>
+
+          <div class="calc-actions">
+            <button id="randomize-size" type="button">Случайные значения</button>
+          </div>
+        </div>
+      </div>
 
       <div class="abilities">
         {species.abilities.map(ability => (
@@ -439,7 +472,95 @@ const { species } = Astro.props;
         }
       });
     });
-  </script>
+    </script>
+
+    <script type="module" define:vars={{ raceSizeEntry, raceSizeDataEntry }}>
+      document.addEventListener('DOMContentLoaded', () => {
+        const calc = document.querySelector('.size-calculator');
+        if (!calc) return;
+        const baseEntry = raceSizeEntry || {};
+        const dataEntry = raceSizeDataEntry || {};
+
+        const bh = baseEntry.baseHeight || { 'футов': 4, 'дюймов': 8 };
+        const bw = baseEntry.baseWeight || 0;
+        const hr = baseEntry.heightRange || [0, 0];
+        const wr = baseEntry.weightRange || [0, 0];
+
+        const heightSlider = document.getElementById('height-slider');
+        const weightSlider = document.getElementById('weight-slider');
+        const heightDisplay = document.getElementById('height-display');
+        const weightDisplay = document.getElementById('weight-display');
+        const finalHeight = document.getElementById('final-height');
+        const finalWeight = document.getElementById('final-weight');
+        const sizeSelect = document.getElementById('size-select');
+
+        function toFeetInches(totalInches) {
+          const ft = Math.floor(totalInches / 12);
+          const inch = totalInches % 12;
+          return { ft, inch };
+        }
+
+        function updateBaseFromSelected(sizeKey) {
+          let entry = baseEntry;
+          if (dataEntry && dataEntry.sizeOptions && sizeKey && dataEntry[sizeKey]) entry = dataEntry[sizeKey];
+          return entry;
+        }
+
+        function render() {
+          const entry = updateBaseFromSelected(sizeSelect?.value);
+          const bh2 = entry.baseHeight || bh;
+          const bw2 = entry.baseWeight || bw;
+          const hr2 = entry.heightRange || hr;
+          const wr2 = entry.weightRange || wr;
+
+          heightSlider.min = hr2[0] || 0;
+          heightSlider.max = hr2[1] || 0;
+          if (Number(heightSlider.value) < heightSlider.min) heightSlider.value = heightSlider.min;
+          if (Number(heightSlider.value) > heightSlider.max) heightSlider.value = heightSlider.max;
+
+          weightSlider.min = wr2[0] || 0;
+          weightSlider.max = wr2[1] || 0;
+          if (Number(weightSlider.value) < weightSlider.min) weightSlider.value = weightSlider.min;
+          if (Number(weightSlider.value) > weightSlider.max) weightSlider.value = weightSlider.max;
+
+          const extraInches = Number(heightSlider.value) || 0; // height modifier in inches (from dice)
+          const weightMultiplier = Number(weightSlider.value) || 0; // multiplier (from dice)
+          heightDisplay.textContent = `+${extraInches} дюймов`;
+          weightDisplay.textContent = `×${weightMultiplier}`;
+
+          const baseTotalInches = (Number(bh2['футов'] || bh['футов']) * 12) + Number(bh2['дюймов'] || bh['дюймов']);
+          const totalInches = baseTotalInches + extraInches;
+          const hi = toFeetInches(totalInches);
+          finalHeight.textContent = `${hi.ft} фут. ${hi.inch} дюйм. (${totalInches} дюймов)`;
+
+          // Final weight: baseWeight + (weightMultiplier * heightModifier)
+          const finalW = (Number(bw2) + (weightMultiplier * extraInches));
+          finalWeight.textContent = `${finalW} фун.`;
+        }
+
+        heightSlider.addEventListener('input', render);
+        weightSlider.addEventListener('input', render);
+        if (sizeSelect) sizeSelect.addEventListener('change', () => { render(); });
+
+        const rndBtn = document.getElementById('randomize-size');
+        if (rndBtn) rndBtn.addEventListener('click', () => {
+          const entry = updateBaseFromSelected(sizeSelect?.value);
+          const hr2 = entry.heightRange || hr;
+          const wr2 = entry.weightRange || wr;
+          const rH = Math.floor(Math.random() * ((hr2[1] || 0) - (hr2[0] || 0) + 1)) + (hr2[0] || 0);
+          const rW = Math.floor(Math.random() * ((wr2[1] || 0) - (wr2[0] || 0) + 1)) + (wr2[0] || 0);
+          heightSlider.value = rH;
+          weightSlider.value = rW;
+          render();
+        });
+
+        // initial render
+        if (!heightSlider.value) heightSlider.value = Math.round(((heightSlider.min || 0) + (heightSlider.max || 0)) / 2);
+        if (!weightSlider.value) weightSlider.value = Math.round(((weightSlider.min || 0) + (weightSlider.max || 0)) / 2);
+        render();
+      });
+    </script>
+
 </Layout>
 
 <style>
@@ -495,5 +616,28 @@ const { species } = Astro.props;
   .abilities {
     border-top: 1px solid var(--card-border);
   }
+
+  /* Size calculator styles */
+  .size-calculator {
+    margin: 1rem 0 1.5rem;
+    padding: 1rem;
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  }
+
+  .size-calculator h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.05rem;
+  }
+
+  .calculator-body { display: grid; gap: 0.5rem; }
+  .calc-row { display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; }
+  .calculator-body input[type="range"] { width: 100%; }
+  .calculator-results { display:flex; gap:1rem; flex-wrap:wrap; margin-top:0.5rem; }
+  .calculator-results div { background: var(--card-bg); padding:0.4rem 0.6rem; border-radius:6px; border:1px solid var(--card-border); }
+  .calc-actions { margin-top:0.5rem; }
+  #randomize-size { padding: 0.4rem 0.8rem; border-radius:6px; border:0; background:var(--primary); color:var(--on-primary); cursor:pointer; }
+  #randomize-size:hover { opacity:0.95; }
 </style>
  
