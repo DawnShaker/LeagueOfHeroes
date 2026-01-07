@@ -18,6 +18,8 @@ export function getStaticPaths() {
 const { species } = Astro.props;
 const raceSizeDataEntry = raceData[species.id] || null;
 const raceSizeEntry = getRaceData(species.id) || null;
+const _excludeCalc = ['customOrigin','reborn','dhampir','hexblood'];
+const showCalculator = !!raceSizeEntry && !_excludeCalc.includes(species.id);
 ---
 
 <Layout title={`${species.name}`}>
@@ -54,7 +56,8 @@ const raceSizeEntry = getRaceData(species.id) || null;
         speed={species.speed}
       />
 
-      <div class="size-calculator" aria-label="Калькулятор роста и веса">
+      { showCalculator && (
+        <div class="size-calculator" aria-label="Калькулятор роста и веса">
         <h3>Калькулятор роста и веса</h3>
         <div class="calculator-body">
           {raceSizeDataEntry && raceSizeDataEntry.sizeOptions && (
@@ -78,11 +81,18 @@ const raceSizeEntry = getRaceData(species.id) || null;
             <div>Итоговый вес: <strong id="final-weight"></strong></div>
           </div>
 
+          { (raceSizeEntry && (raceSizeEntry.heightDice || raceSizeEntry.weightDice)) && (
+            <div class="calc-dice">
+              Исходные броски: {raceSizeEntry.heightDice ? `Рост: ${raceSizeEntry.heightDice}` : ''} {raceSizeEntry.weightDice ? `Вес: ${raceSizeEntry.weightDice}` : ''}
+            </div>
+          ) }
+
           <div class="calc-actions">
             <button id="randomize-size" type="button">Случайные значения</button>
           </div>
         </div>
-      </div>
+        </div>
+      ) }
 
       <div class="abilities">
         {species.abilities.map(ability => (
@@ -639,5 +649,6 @@ const raceSizeEntry = getRaceData(species.id) || null;
   .calc-actions { margin-top:0.5rem; }
   #randomize-size { padding: 0.4rem 0.8rem; border-radius:6px; border:0; background:var(--primary); color:var(--on-primary); cursor:pointer; }
   #randomize-size:hover { opacity:0.95; }
+  .calc-dice { margin-top:0.5rem; font-size:0.95rem; color:var(--muted); }
 </style>
  
