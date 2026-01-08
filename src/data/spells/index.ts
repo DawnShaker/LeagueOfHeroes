@@ -14908,7 +14908,7 @@ export const spells: Spell[] = [
   },
   {
     id: 'summon-celestial',
-    name: 'Вызов небожителя',
+    name: 'Призыв небожителя',
     nameEn: 'Summon Celestial',
     level: '5',
     school: 'вызов',
