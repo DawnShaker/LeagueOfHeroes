@@ -7159,39 +7159,6 @@ export const spells: Spell[] = [
     ]
   },
   {
-    id: 'snare',
-    name: 'Едкое варево Таши',
-    nameEn: 'Tasha’s Caustic Brew',
-    level: '1',
-    school: 'воплощение',
-    castingTime: '1 действие',
-    range: 'На себя',
-    components: {
-      verbal: true,
-      somatic: true,
-      material: 'немного тухлой пищи'
-    },
-    duration: 'Концентрация, до 1 минуты',
-    description: `<p>Вы испускаете струю кислоты вдоль линии длиной 30 футов и шириной 5 футов в выбранном вами направлении. Каждое существо, находящееся на этой линии должно преуспеть в спасброске Ловкости, иначе станет покрыто кислотой на время действия заклинания или до тех пор, пока кто-то действием не соскребёт или смоет кислоту с себя или другого существа. Существо, покрытое кислотой, получает 2к4 урона кислотой в начале каждого своего хода.</p>
-<p><strong>Накладывание более высокой ячейкой.</strong> Когда вы накладываете это заклинание, используя ячейку 2-го уровня или выше, урон увеличивается на 2к4 за каждый уровень ячейки выше первого.</p>`,
-    source: {
-      book: 'TCE\'14',
-      page: 115
-    },
-    sources: [
-      { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
-      { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
-      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-      { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
-      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-      { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="/classes/wizard?subclass=abjurer">Оградитель</a>' },
-      { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
-      { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' }
-    ]
-  },
-  {
     id: 'zephyr-strike',
     name: 'Удар Зефира',
     nameEn: 'Zephyr Strike',
