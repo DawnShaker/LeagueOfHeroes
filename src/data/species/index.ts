@@ -10,7 +10,7 @@ import { tiefling } from './tiefling';
 import { orc } from './orc';
 import { halfling } from './halfling';
 import { genasi } from './genasi';
-import { aarakokra } from './aarakokra';
+import { aarakocra } from './aarakocra';
 import { autognome } from './autognome';
 import { bugbear } from './bugbear';
 import { giff } from './giff';
@@ -54,7 +54,7 @@ import { thrikreen } from './thrikreen';
 import { warforged } from './warforged';
 
 
-const allSpecies = [aasimar,human,tortle,gnome,dwarf,goliath,dragonborn,elf,tiefling,orc,halfling,genasi,aarakokra,autognome,bugbear,giff,goblin,vedalken,verdan,simichybrid,shifter,centaur,changeling,customlineage,fairy,firbolg,harengon,gith,hobgoblin,kenku,kobold,lizardfolk,minotaur,triton,tabaxi,satyr,yuanti,halfelf,grung,dhampir,hadozee,halforc,hexblood,kalashtar,kender,leonin,locathah,loxodon,owlin,plasmoid,reborn,thrikreen,warforged];
+const allSpecies = [aasimar,human,tortle,gnome,dwarf,goliath,dragonborn,elf,tiefling,orc,halfling,genasi,aarakocra,autognome,bugbear,giff,goblin,vedalken,verdan,simichybrid,shifter,centaur,changeling,customlineage,fairy,firbolg,harengon,gith,hobgoblin,kenku,kobold,lizardfolk,minotaur,triton,tabaxi,satyr,yuanti,halfelf,grung,dhampir,hadozee,halforc,hexblood,kalashtar,kender,leonin,locathah,loxodon,owlin,plasmoid,reborn,thrikreen,warforged];
 
 export const speciesData = allSpecies.sort((a, b) => 
   a.name.localeCompare(b.name, 'ru')

@@ -2102,7 +2102,7 @@ interface Item {
     },
     {
       id: 'flying-snake',
-      name: 'Летяющая змея',
+      name: 'Летающая змея',
       nameEn: 'Flying Snake',
       type: 'Верховые и прочие животные',
       cost: '25 зм',
@@ -2162,7 +2162,7 @@ interface Item {
     },
     {
       id: 'Covered Wagon',
-      name: 'Крытый повозка',
+      name: 'Крытая повозка',
       nameEn: 'Covered Wagon',
       type: 'Транспортные средства',
       cost: '250 зм',
@@ -2199,5 +2199,15 @@ interface Item {
       weight: '300 фнт.',
       sourceBook: 'IDRotF\'14',
       description: 'В пустых санях сзади есть место на одного.'
+    },
+    {
+      id: 'double-bladed-scimitar',
+      name: 'Двуклинковый скимитар',
+      nameEn: 'Double-Bladed Scimitar',
+      type: 'Воинское рукопашное оружие',
+      cost: '100 зм',
+      weight: '6 фнт.',
+      sourceBook: 'ERLW\'14',
+      description: '2к4 рубящий, особое, Изнурение. Если в свой ход вы совершаете действие Атака двухклинковым скимитаром, бонусным действием вы можете немедленно совершить атаку противоположным клинком. Такая атака наносит 1к4 рубящего урона, а не 2к4.'
     }
   ];

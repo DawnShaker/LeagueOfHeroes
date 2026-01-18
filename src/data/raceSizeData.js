@@ -64,7 +64,7 @@ export const raceData = {
   centaur: {
     baseHeight: { футов: 6, дюймов: 0 },
     baseWeight: 600,
-    heightRange: [1, 11],
+    heightRange: [1, 12],
     weightRange: [2, 24],
     size: 'средний'
   },
@@ -429,11 +429,21 @@ export const raceData = {
     size: 'средний'
   },
   shifter: {
-    baseHeight: { футов: 4, дюймов: 6 },
-    baseWeight: 90,
-    heightRange: [1, 16],
-    weightRange: [2, 8],
-    size: 'средний'
+    sizeOptions: ['маленький', 'средний'],
+    маленький: {
+      baseHeight: { футов: 2, дюймов: 5 },
+      baseWeight: 35,
+      heightRange: [1, 19],
+      weightRange: [1, 2],
+      size: 'маленький'
+    },
+    средний: {
+      baseHeight: { футов: 4, дюймов: 5 },
+      baseWeight: 90,
+      heightRange: [2, 28],
+      weightRange: [2, 8],
+      size: 'средний'
+    }
   },
   simichybrid: {
     size: 'средний',
@@ -532,11 +542,21 @@ export const raceData = {
     size: 'маленький'
   },
   warforged: {
-    baseHeight: { футов: 5, дюймов: 10 },
-    baseWeight: 270,
-    heightRange: [1, 13],
-    weightRange: [4, 4],
-    size: 'средний'
+    sizeOptions: ['маленький', 'средний'],
+      средний: {
+      baseHeight: { футов: 5, дюймов: 10 },
+      baseWeight: 270,
+      heightRange: [1, 26],
+      weightRange: [4, 4],
+      size: 'средний'
+      },
+      маленький: {
+        baseHeight: { футов: 2, дюймов: 11 },
+        baseWeight: 35,
+        heightRange: [1, 13],
+        weightRange: [2, 3],
+        size: 'маленький'
+      },
   },
   yuanti: {
     baseHeight: { футов: 4, дюймов: 8 },
