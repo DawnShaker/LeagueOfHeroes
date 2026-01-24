@@ -130,6 +130,16 @@ const rarityLabels = {
           </div>
 
           <div class="filter-section">
+            <h4>Таблица</h4>
+            <div class="checkbox-group" id="table-filters">
+              <label class="checkbox-label"><input type="checkbox" name="table" value="A" /> Магия</label>
+              <label class="checkbox-label"><input type="checkbox" name="table" value="Ar" /> Вооружения</label>
+              <label class="checkbox-label"><input type="checkbox" name="table" value="I" /> Инструменты</label>
+              <label class="checkbox-label"><input type="checkbox" name="table" value="R" /> Реликвии</label>
+            </div>
+          </div>
+
+          <div class="filter-section">
             <h4>Источник</h4>
             <div class="checkbox-group" id="source-filters">
               <!-- Sources will be populated by JavaScript -->
@@ -286,6 +296,9 @@ const rarityLabels = {
       const attunement = params.get('attunement');
       if (attunement) filters.attunement = attunement.split(',');
 
+      const table = params.get('table');
+      if (table) filters.table = table.split(',');
+
       const craftingTools = params.get('craftingTools');
       if (craftingTools) filters.craftingTools = craftingTools.split(',');
 
@@ -315,6 +328,9 @@ const rarityLabels = {
 
       const craftingTools = Array.from(document.querySelectorAll('input[name="crafting-tools"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value);
       if (craftingTools.length > 0) params.set('craftingTools', craftingTools.join(','));
+
+      const tables = Array.from(document.querySelectorAll('input[name="table"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value);
+      if (tables.length > 0) params.set('table', tables.join(','));
 
       const searchTerm = searchInput?.value.trim();
       if (searchTerm) params.set('search', searchTerm);
@@ -373,7 +389,8 @@ const rarityLabels = {
         type: Array.from(document.querySelectorAll('input[name="type"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value),
         source: Array.from(document.querySelectorAll('input[name="source"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value),
         attunement: Array.from(document.querySelectorAll('input[name="attunement"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value),
-        craftingTools: Array.from(document.querySelectorAll('input[name="crafting-tools"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value)
+        craftingTools: Array.from(document.querySelectorAll('input[name="crafting-tools"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value),
+        table: Array.from(document.querySelectorAll('input[name="table"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value)
       };
       
       localStorage.setItem('magicItemFilters', JSON.stringify(filters));
@@ -387,7 +404,8 @@ const rarityLabels = {
         document.querySelectorAll('input[name="type"]:checked').length +
         document.querySelectorAll('input[name="source"]:checked').length +
         document.querySelectorAll('input[name="attunement"]:checked').length +
-        document.querySelectorAll('input[name="crafting-tools"]:checked').length;
+        document.querySelectorAll('input[name="crafting-tools"]:checked').length +
+        document.querySelectorAll('input[name="table"]:checked').length;
       
       if (filterCount) {
         filterCount.textContent = activeFilters.toString();
@@ -407,6 +425,7 @@ const rarityLabels = {
       const selectedSources = Array.from(document.querySelectorAll('input[name="source"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value);
       const selectedAttunement = Array.from(document.querySelectorAll('input[name="attunement"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value);
       const selectedCraftingTools = Array.from(document.querySelectorAll('input[name="crafting-tools"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => parseInt(cb.value));
+      const selectedTables = Array.from(document.querySelectorAll('input[name="table"]:checked')).filter(cb => cb instanceof HTMLInputElement).map(cb => cb.value);
       
       let visibleCount = 0;
       let totalInSources = 0;
@@ -438,8 +457,10 @@ const rarityLabels = {
         const matchesAttunement = selectedAttunement.length === 0 || selectedAttunement.includes(attunement);
         const matchesCraftingTools = selectedCraftingTools.length === 0 || 
           (itemCraftingTools.length > 0 && itemCraftingTools.some(tool => selectedCraftingTools.includes(tool)));
-        
-        const isVisible = matchesSearch && matchesRarity && matchesType && matchesSource && matchesAttunement && matchesCraftingTools;
+        const itemTables = item.table ? (Array.isArray(item.table) ? item.table : [item.table]) : [];
+        const matchesTable = selectedTables.length === 0 || itemTables.some(t => selectedTables.includes(t));
+
+        const isVisible = matchesSearch && matchesRarity && matchesType && matchesSource && matchesAttunement && matchesCraftingTools && matchesTable;
         if (row instanceof HTMLElement) row.style.display = isVisible ? '' : 'none';
         
         if (isVisible) {
@@ -554,6 +575,21 @@ const rarityLabels = {
       rows.forEach(row => tbody.appendChild(row));
     }
 
+    function getTableLabel(codeOrArray) {
+      if (!codeOrArray) return '';
+      const codes = Array.isArray(codeOrArray) ? codeOrArray : [codeOrArray];
+      const labels = codes.map(code => {
+        switch(code) {
+          case 'A': return 'Магия';
+          case 'Ar': return 'Вооружения';
+          case 'I': return 'Инструменты';
+          case 'R': return 'Реликвии';
+          default: return code;
+        }
+      });
+      return labels.join(', ');
+    }
+
     function showItemDetails(itemId: string) {
       if (!itemDetails) return;
 
@@ -574,6 +610,7 @@ const rarityLabels = {
           
           <div class="item-meta">
             <p>${item.type}, ${rarityLabels[item.rarity]}${attunementText}</p>
+            ${item.table ? `<p><strong>Таблица:</strong> ${getTableLabel(item.table)}</p>` : ''}
             <p><strong>Вес:</strong> ${item.weight}</p>
             ${item.baseAnalog ? `
               <p><strong>Базовый аналог:</strong> ${item.baseAnalog}</p>
@@ -971,6 +1008,129 @@ const rarityLabels = {
       }).catch(err=>{ try { initTooltips(); } catch (err2) { console.warn('tooltips init failed', err2); } });
     })();
     
+    // Random item slider widget (append to body). Collapsed by default; handle sticks out from the right.
+    (function createRandomItemWidget(){
+      const slider = document.createElement('div');
+      slider.id = 'random-item-slider';
+      slider.className = 'random-slider';
+
+      // panel (hidden when collapsed)
+      const panel = document.createElement('div');
+      panel.className = 'random-panel';
+
+      const ul = document.createElement('ul');
+      ul.id = 'random-item-history';
+      ul.setAttribute('role', 'list');
+
+      const btn = document.createElement('button');
+      btn.id = 'random-item-btn';
+      btn.type = 'button';
+      btn.className = 'filter-button';
+      btn.innerHTML = '<span class="filter-icon">🎲</span>Случайный предмет';
+
+      // place list above the button so button stays fixed at bottom
+      panel.appendChild(ul);
+      panel.appendChild(btn);
+
+      // handle that sticks out when collapsed
+      const handle = document.createElement('button');
+      handle.id = 'random-item-toggle';
+      handle.className = 'random-toggle';
+      handle.type = 'button';
+      handle.setAttribute('aria-expanded', 'false');
+      handle.innerHTML = '<span class="toggle-arrow">◀</span>';
+
+      slider.appendChild(panel);
+      slider.appendChild(handle);
+      document.body.appendChild(slider);
+
+      const randomHistory = [];
+
+      function makeListItem(item) {
+        const li = document.createElement('li');
+        li.className = 'history-item enter';
+        const a = document.createElement('a');
+        a.href = `/magic-items/${item.id}`;
+        a.dataset.itemId = item.id;
+        a.textContent = item.name;
+        li.appendChild(a);
+
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          const id = a.dataset.itemId;
+          if (!id) return;
+          history.pushState({ itemId: id }, '', `/magic-items/${encodeURIComponent(id)}`);
+          try { showItemDetails(id); } catch (err) { console.warn(err); }
+        });
+
+        li.addEventListener('animationend', () => {
+          li.classList.remove('enter');
+          if (li.classList.contains('exit')) li.remove();
+        });
+
+        return li;
+      }
+
+      function renderHistory() {
+        const list = document.getElementById('random-item-history');
+        if (!list) return;
+        list.innerHTML = '';
+        randomHistory.forEach(it => list.appendChild(makeListItem(it)));
+        // show newest items at top and ensure list scrolls to top to reveal the latest
+        list.scrollTop = 0;
+      }
+
+      function pickRandomVisible() {
+        const visibleRows = Array.from(document.querySelectorAll('.item-row')).filter(r => r instanceof HTMLElement && r.style.display !== 'none');
+        if (visibleRows.length > 0) {
+          const pick = visibleRows[Math.floor(Math.random() * visibleRows.length)];
+          return pick.dataset.itemId;
+        }
+        return null;
+      }
+
+      btn.addEventListener('click', ()=>{
+        let choiceId = pickRandomVisible();
+        if (!choiceId) {
+          const all = Array.from(items || []);
+          if (all.length === 0) return;
+          const pick = all[Math.floor(Math.random() * all.length)];
+          choiceId = pick.id;
+        }
+        const item = items.find(i => i.id === choiceId);
+        if (!item) return;
+
+        // prepend to history
+        randomHistory.unshift(item);
+        if (randomHistory.length > 6) randomHistory.pop();
+        renderHistory();
+
+        history.pushState({ itemId: item.id }, '', `/magic-items/${encodeURIComponent(item.id)}`);
+        try { showItemDetails(item.id); } catch (err) { console.warn(err); }
+      });
+
+      // Toggle open/close
+      function setOpen(open) {
+        slider.classList.toggle('open', open);
+        handle.setAttribute('aria-expanded', String(!!open));
+        const arrow = handle.querySelector('.toggle-arrow');
+        if (arrow) arrow.textContent = open ? '▶' : '◀';
+        // accessibility: mark panel hidden when collapsed
+        panel.setAttribute('aria-hidden', String(!open));
+        if (open) {
+          // move keyboard focus into the panel's button for immediate action
+          btn.focus();
+        } else {
+          handle.focus();
+        }
+      }
+
+      handle.addEventListener('click', () => setOpen(!slider.classList.contains('open')));
+
+      // Start collapsed
+      setOpen(false);
+    })();
+    
     // Initialize filter system
     initializeFilterOptions();
     loadFilters();
@@ -1016,6 +1176,184 @@ const rarityLabels = {
     grid-template-columns: 2fr 1fr;
     gap: 2rem;
     margin-top: 2rem;
+  }
+
+  /* Random item slider */
+  .random-slider {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10010;
+    display: flex;
+    align-items: center;
+    pointer-events: auto;
+    user-select: none;
+  }
+
+  /* handle width is used to hide the panel fully off-screen when collapsed */
+  .random-slider { --handle-width: 40px; }
+
+  .random-slider .random-panel {
+    width: 300px;
+    max-height: 420px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px 0 0 8px;
+    padding: 0;
+    box-shadow: var(--card-shadow);
+    transform: translateX(calc(100% + var(--handle-width)));
+    transition: transform 220ms ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    pointer-events: auto;
+    overflow: hidden;
+  }
+
+  .random-slider.open .random-panel {
+    transform: translateX(0);
+  }
+
+  .random-toggle {
+    width: var(--handle-width);
+    height: 56px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px 0 0 8px;
+    margin-right: -1px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: all 160ms ease;
+    box-shadow: var(--card-shadow);
+    flex-shrink: 0;
+  }
+
+  .random-toggle:hover {
+    background: var(--nav-hover-bg);
+  }
+
+  .random-toggle .toggle-arrow {
+    font-size: 1.05rem;
+    color: var(--text);
+  }
+
+  .random-slider.open .random-toggle {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .random-slider.open .random-toggle .toggle-arrow {
+    color: white;
+  }
+
+  #random-item-history { 
+    list-style: none; 
+    margin: 0; 
+    padding: 0.6rem; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.5rem; 
+    overflow-y: auto; 
+    max-height: 340px;
+    flex: 1;
+    border-bottom: 1px solid var(--card-border);
+  }
+  #random-item-history li { 
+    width: 100%; 
+    list-style: none;
+  }
+  #random-item-history a { 
+    display: block; 
+    padding: 0.5rem 0.7rem; 
+    background: var(--background);
+    border: 1px solid var(--card-border); 
+    border-radius: 0.375rem; 
+    color: var(--text); 
+    text-decoration: none; 
+    font-size: 0.9rem; 
+    width: 100%; 
+    text-align: left; 
+    transition: all 0.15s ease;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  #random-item-history a:hover { 
+    background: var(--nav-hover-bg); 
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  #random-item-btn {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.7rem 0.8rem;
+    background: var(--primary) !important;
+    color: white !important;
+    border: none;
+    border-radius: 0.375rem;
+    box-shadow: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-align: center;
+    font-family: inherit;
+    flex-shrink: 0;
+    margin: 0.6rem;
+    margin-top: auto;
+  }
+
+  #random-item-btn:hover { 
+    background: color-mix(in srgb, var(--primary) 85%, #000 15%) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  #random-item-btn:active { 
+    transform: translateY(0.5px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .history-item { 
+    opacity: 0; 
+    transform: translateY(-8px); 
+    will-change: transform, opacity;
+    list-style: none; 
+  }
+  .history-item.enter { animation: slideInUp 0.3s ease-out forwards; }
+  .history-item.exit { animation: slideOutUp 0.3s ease-out forwards; }
+  
+  @keyframes slideInUp { 
+    from { 
+      opacity: 0; 
+      transform: translateY(-12px); 
+    } 
+    to { 
+      opacity: 1; 
+      transform: translateY(0); 
+    } 
+  }
+  
+  @keyframes slideOutUp { 
+    from { 
+      opacity: 1; 
+      transform: translateY(0); 
+    } 
+    to { 
+      opacity: 0; 
+      transform: translateY(-12px); 
+    } 
   }
 
   .search-container {

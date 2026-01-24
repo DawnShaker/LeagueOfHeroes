@@ -1231,9 +1231,9 @@ interface Item {
       description: '1к8 дробящий, универсальное (1к10), Толкание'
     },
     {
-      id: 'war-pic',
+      id: 'war-pick',
       name: 'Боевая кирка',
-      nameEn: 'War Pic',
+      nameEn: 'War Pick',
       type: 'Воинское рукопашное оружие',
       cost: '5 зм',
       weight: '2 фнт.',
