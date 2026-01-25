@@ -6,7 +6,7 @@ export const rulesLinks = [
   //{ href: '/house-rules', label: 'House Rules' },
   //{ href: '/combat', label: 'Combat Rules' },
   { href: '/rules/downtime-activities', label: 'Активности простоя' },
-  //{ href: '/bastions', label: 'Бастионы' }
+  { href: '/bastions', label: 'Бастионы' }
 ];
 
 export const characterLinks = [

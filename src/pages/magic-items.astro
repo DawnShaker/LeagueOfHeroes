@@ -1044,6 +1044,13 @@ const rarityLabels = {
       slider.appendChild(handle);
       document.body.appendChild(slider);
 
+      // гарантируем фиксированное положение внизу справа и приоритет по z-index
+      slider.style.position = 'fixed';
+      slider.style.right = '2rem';
+      slider.style.bottom = '2rem';
+      slider.style.top = 'auto';
+      slider.style.zIndex = '2147483647';
+
       const randomHistory = [];
 
       function makeListItem(item) {
@@ -1102,7 +1109,8 @@ const rarityLabels = {
 
         // prepend to history
         randomHistory.unshift(item);
-        if (randomHistory.length > 6) randomHistory.pop();
+        // держим максимум 5 последних записей
+        if (randomHistory.length > 5) randomHistory.pop();
         renderHistory();
 
         history.pushState({ itemId: item.id }, '', `/magic-items/${encodeURIComponent(item.id)}`);
@@ -1178,32 +1186,36 @@ const rarityLabels = {
     margin-top: 2rem;
   }
 
-  /* Random item slider */
+  /* Random item slider — модифицированный для закрепления внизу справа */
   .random-slider {
-    position: fixed;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10010;
+    position: fixed !important;
+    right: 2rem !important;
+    bottom: 2rem !important;
+    top: auto !important;
+    z-index: 2147483647 !important;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     pointer-events: auto;
     user-select: none;
+    --handle-width: 44px;
+    gap: 0;
+    transform: none !important;
   }
 
-  /* handle width is used to hide the panel fully off-screen when collapsed */
-  .random-slider { --handle-width: 40px; }
-
+  /* панель выезжает влево относительно ручки (скрыта по-умолчанию) */
   .random-slider .random-panel {
-    width: 300px;
+    position: absolute;
+    right: calc(var(--handle-width) + 0px);
+    bottom: 0;
+    width: 320px;
     max-height: 420px;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 8px 0 0 8px;
+    background: var(--card-bg, #ffffff);
+    border: 1px solid var(--card-border, #e6e6e6);
+    border-radius: 8px;
     padding: 0;
-    box-shadow: var(--card-shadow);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
     transform: translateX(calc(100% + var(--handle-width)));
-    transition: transform 220ms ease;
+    transition: transform 220ms ease, opacity 180ms ease;
     display: flex;
     flex-direction: column;
     gap: 0;
@@ -1211,29 +1223,31 @@ const rarityLabels = {
     overflow: hidden;
   }
 
+  /* открытое состояние */
   .random-slider.open .random-panel {
     transform: translateX(0);
   }
 
+  /* ручка (toggle) */
   .random-toggle {
     width: var(--handle-width);
     height: 56px;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 8px 0 0 8px;
-    margin-right: -1px;
+    background: var(--card-bg, #ffffff);
+    border: 1px solid var(--card-border, #e6e6e6);
+    border-radius: 8px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     pointer-events: auto;
-    transition: all 160ms ease;
-    box-shadow: var(--card-shadow);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    margin-left: 8px;
     flex-shrink: 0;
   }
 
-  .random-toggle:hover {
-    background: var(--nav-hover-bg);
+  /* состояние при ховере */
+  .random-toggle:hover { 
+    background: var(--nav-hover-bg, #f5f5f7); 
   }
 
   .random-toggle .toggle-arrow {
@@ -1251,6 +1265,7 @@ const rarityLabels = {
     color: white;
   }
 
+  /* стиль списка и кнопки — явно привязаны к слайдеру (приоритет) */
   #random-item-history { 
     list-style: none; 
     margin: 0; 
@@ -1261,7 +1276,7 @@ const rarityLabels = {
     overflow-y: auto; 
     max-height: 340px;
     flex: 1;
-    border-bottom: 1px solid var(--card-border);
+    border-bottom: 1px solid var(--card-border, #e6e6e6);
   }
   #random-item-history li { 
     width: 100%; 
@@ -1270,10 +1285,10 @@ const rarityLabels = {
   #random-item-history a { 
     display: block; 
     padding: 0.5rem 0.7rem; 
-    background: var(--background);
-    border: 1px solid var(--card-border); 
+    background: var(--background, #fafafa);
+    border: 1px solid var(--card-border, #e6e6e6); 
     border-radius: 0.375rem; 
-    color: var(--text); 
+    color: var(--text, #111); 
     text-decoration: none; 
     font-size: 0.9rem; 
     width: 100%; 
@@ -1284,14 +1299,15 @@ const rarityLabels = {
     white-space: nowrap;
   }
   #random-item-history a:hover { 
-    background: var(--nav-hover-bg); 
-    border-color: var(--primary);
-    color: var(--primary);
+    background: var(--nav-hover-bg, #f3f4f6); 
+    border-color: var(--primary, #3b82f6);
+    color: var(--primary, #3b82f6);
   }
 
-  #random-item-btn {
+  /* кнопка — конкретный селектор, чтобы гарантировать применение */
+  #random-item-slider #random-item-btn,
+  #random-item-slider #random-item-btn.filter-button {
     -webkit-appearance: none;
-    -moz-appearance: none;
     appearance: none;
     display: flex !important;
     align-items: center;
@@ -1299,32 +1315,22 @@ const rarityLabels = {
     gap: 0.5rem;
     width: 100%;
     padding: 0.7rem 0.8rem;
-    background: var(--primary) !important;
-    color: white !important;
+    background: var(--primary, #2563eb) !important;
+    color: #fff !important;
     border: none;
     border-radius: 0.375rem;
-    box-shadow: none;
     font-weight: 600;
     font-size: 0.95rem;
     cursor: pointer;
-    transition: all 0.15s ease;
-    text-align: center;
-    font-family: inherit;
-    flex-shrink: 0;
     margin: 0.6rem;
     margin-top: auto;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  }
+  #random-item-slider #random-item-btn:hover {
+    filter: brightness(0.95);
   }
 
-  #random-item-btn:hover { 
-    background: color-mix(in srgb, var(--primary) 85%, #000 15%) !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-
-  #random-item-btn:active { 
-    transform: translateY(0.5px);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  }
-
+  /* анимации списка оставляем те же */
   .history-item { 
     opacity: 0; 
     transform: translateY(-8px); 
