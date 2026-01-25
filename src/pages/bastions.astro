@@ -1026,13 +1026,13 @@ const treasure = {
                 </div>
 
                 <div class="building-description">
-                  <p>{building.description}</p>
+                  <p set:html={building.description}></p>
                 </div>
 
                 <div class="building-abilities">
                   {building.abilities.map(ability => (
                     <div class="ability">
-                      <p><strong>{ability.name}.</strong> {ability.description}</p>
+                      <p><strong>{ability.name}.</strong> <span set:html={ability.description}></span></p>
                     </div>
                   ))}
                 </div>
