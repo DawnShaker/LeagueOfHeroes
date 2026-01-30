@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import WeaponsTable from '../components/rules/weapons/WeaponsTable.astro';
+import WeaponsTable from '../components/rules/equipment/WeaponsTable.astro';
+import ArmorTable from '../components/rules/equipment/ArmorTable.astro';
 import CrafterTools from '../components/rules/tools/CrafterTools.astro';
 ---
 
@@ -21,6 +22,13 @@ import CrafterTools from '../components/rules/tools/CrafterTools.astro';
         <summary>Какое оружие доступно в игре?</summary>
         <div class="faq-content">
           <WeaponsTable />
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Какая броня доступна в игре?</summary>
+        <div class="faq-content">
+          <ArmorTable />
         </div>
       </details>
 
