@@ -1438,7 +1438,7 @@ interface Item {
       cost: '10 зм',
       weight: '6 фнт.',
       sourceBook: 'PHB\'24',
-      description: 'КД: +2'
+      description: 'Пока щит закреплён на руке, вы получаете бонус к КД: +2'
     },
     {
       id: 'alchemists-supplies',
@@ -1552,7 +1552,7 @@ interface Item {
     },
     {
       id: 'tinkers-tools',
-      name: 'Инструменты ремонтника',
+      name: 'Инструменты ремонтника (жестянщика)',
       nameEn: 'Tinker’s Tools',
       type: 'Инструменты',
       cost: '50 зм',
@@ -2218,6 +2218,6 @@ interface Item {
       cost: '75 зм',
       weight: '45 фнт.',
       sourceBook: 'SCAG\'14',
-      description: '5 минут на надевание и 1 минута на снятие, КД: 14 + модификатор Лов (макс. 2)'
+      description: '5 минут на надевание и 1 минута на снятие, КД: 14 + модификатор Лов (макс. 2), Скрытность: Помеха'
     }
   ];
