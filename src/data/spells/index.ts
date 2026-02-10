@@ -15431,7 +15431,8 @@ export const spells: Spell[] = [
     range: 'На себя',
     components: {
       verbal: true,
-      somatic: true
+      somatic: true,
+      material: 'толчёные самоцветы стоимостью не менее 100 ЗМ, расходуемые заклинанием, а также один набор Ремесленных инструментов, которыми вы владеете'
     },
     duration: '8 часов',
     description: `
