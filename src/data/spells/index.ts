@@ -2462,7 +2462,7 @@ export const spells: Spell[] = [
   nameEn: 'Comprehend Languages',
   level: '1',
   school: 'прорицание',
-  castingTime: '1 действие или Ритуал',
+  castingTime: '1 действие или ритуал',
   range: 'На себя',
   components: {
     verbal: true,
@@ -7285,7 +7285,7 @@ export const spells: Spell[] = [
     nameEn: 'Leomund’s Tiny Hut',
     level: '3',
     school: 'воплощение',
-    castingTime: '1 минута или Ритуал',
+    castingTime: '1 минута или ритуал',
     range: 'На себя',
     components: {
       verbal: true,
@@ -7525,7 +7525,7 @@ export const spells: Spell[] = [
     nameEn: 'Meld into Stone',
     level: '3',
     school: 'преобразование',
-    castingTime: '1 действие или Ритуал',
+    castingTime: '1 действие или ритуал',
     range: 'Касание',
     components: {
       verbal: true,
@@ -7616,7 +7616,7 @@ export const spells: Spell[] = [
     nameEn: 'Phantom Steed',
     level: '3',
     school: 'иллюзия',
-    castingTime: '1 минута или Ритуал',
+    castingTime: '1 минута или ритуал',
     range: '30 футов',
     components: {
       verbal: true,
@@ -10716,7 +10716,7 @@ export const spells: Spell[] = [
     nameEn: 'Augury',
     level: '2',
     school: 'прорицание',
-    castingTime: '1 минута или Ритуал',
+    castingTime: '1 минута или ритуал',
     range: 'На себя',
     components: {
       verbal: true,
@@ -17169,7 +17169,7 @@ export const spells: Spell[] = [
     nameEn: 'Homunculus Servant',
     level: '2',
     school: 'вызов',
-    castingTime: '1 час или Ритуал',
+    castingTime: '1 час или ритуал',
     range: '10 футов',
     components: {
       verbal: true,
