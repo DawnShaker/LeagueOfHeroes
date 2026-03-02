@@ -17,7 +17,7 @@ export const plasmoid: Species = {
     },
     {
       title: 'Тёмное зрение',
-      description: 'У вас есть тёмное зрение в пределах 120 футов.'
+      description: 'У вас есть тёмное зрение в пределах 60 футов.'
     },
     {
       title: 'Аморфный',

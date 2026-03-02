@@ -135,7 +135,21 @@ const spellSchools = [
                 const schoolTitle = spell.school ? (spell.school.charAt(0).toUpperCase() + spell.school.slice(1)) : '';
                 const schoolClass = 'school-' + (spell.school || '').toLowerCase().replace(/[^a-z0-9а-яё]+/gi, '-');
                 const ct = String(spell.castingTime || '').toLowerCase();
-                const castingShort = ct.includes('реакц') ? 'Реакция' : (ct.includes('бонус') ? 'Бонусное действие' : (ct.includes('действ') ? 'Действие' : spell.castingTime || ''));
+                let castingShort = '';
+                if (!ct) {
+                  castingShort = '';
+                } else if (ct.includes('реакц')) {
+                  castingShort = 'Реакция';
+                } else if (ct.includes('бонус')) {
+                  castingShort = 'Бонусное действие';
+                } else if (ct.includes('ритуал') || ct.includes('или')) {
+                  // preserve full text for cases like "1 действие или ритуал"
+                  castingShort = spell.castingTime || '';
+                } else if (ct.includes('действ')) {
+                  castingShort = 'Действие';
+                } else {
+                  castingShort = spell.castingTime || '';
+                }
                 return (
                   <tr class="spell-row" data-spell-id={spell.id} data-level={spell.level} data-school={schoolTitle} data-casting-time={spell.castingTime} data-range={spell.range} data-classes={classes} data-concentration={concentration} data-source-book={spell.source?.book || ''} data-source-page={page}>
                     <td class="col-name">{spell.name}<div class="name-en">[{spell.nameEn}]</div></td>
