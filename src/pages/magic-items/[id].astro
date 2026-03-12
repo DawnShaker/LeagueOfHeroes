@@ -21,8 +21,14 @@ const rarityLabels = {
 };
 
 function formatCraftingTools(toolIndices: number[]): string {
+  const specialMap = {
+    0: 'См. изготовляющие инструменты для немаг. аналога',
+    98: 'Требуется доплата за немаг. аналог',
+    99: 'Невозможно создать'
+  };
+
   const toolNames = [
-    '', // 0 - placeholder
+    '', // placeholder for index 0 (handled via specialMap)
     'Инструменты алхимика',
     'Инструменты гончара', 
     'Инструменты каллиграфа',
@@ -49,8 +55,13 @@ function formatCraftingTools(toolIndices: number[]): string {
 
   const tools = [];
   const kits = [];
+  const specials = [];
 
   toolIndices.forEach(index => {
+    if (specialMap[index]) {
+      specials.push(specialMap[index]);
+      return;
+    }
     if (index >= 1 && index <= toolNames.length - 1) {
       const toolName = toolNames[index];
       if (toolName.startsWith('Набор')) {
@@ -62,7 +73,7 @@ function formatCraftingTools(toolIndices: number[]): string {
   });
 
   const result = [];
-  
+
   if (tools.length > 0) {
     if (tools.length === 1) {
       result.push(`Инструменты ${tools[0]}`);
@@ -70,7 +81,7 @@ function formatCraftingTools(toolIndices: number[]): string {
       result.push(`Инструменты: ${tools.join(', ')}`);
     }
   }
-  
+
   if (kits.length > 0) {
     if (kits.length === 1) {
       result.push(`Набор ${kits[0]}`);
@@ -78,6 +89,8 @@ function formatCraftingTools(toolIndices: number[]): string {
       result.push(`Наборы: ${kits.join(', ')}`);
     }
   }
+
+  specials.forEach(s => result.push(s));
 
   return result.join(';<br>');
 }
