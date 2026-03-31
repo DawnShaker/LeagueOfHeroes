@@ -631,7 +631,7 @@ const rarityLabels = {
           ${item.developerComment ? `
             <div class="developer-comment">
               <h4>Комментарий разработчика</h4>
-             <div set:html="${item.developerComment}" />
+             <div>${item.developerComment}</div>
             </div>
           ` : ''}
         </div>
@@ -1793,11 +1793,12 @@ const rarityLabels = {
     line-height: 1.6;
   }
 
-  .item-description :global(p) {
+  /* Ensure dynamically inserted HTML inside item details inherits these global rules */
+  #item-details .item-description p {
     margin-bottom: 1rem;
   }
 
-  .item-description :global(p:last-child) {
+  #item-details .item-description p:last-child {
     margin-bottom: 0;
   }
 
@@ -1848,7 +1849,8 @@ const rarityLabels = {
     font-size: 1rem;
   }
 
-  .developer-comment p {
+  /* Developer comment paragraphs inside dynamic content */
+  #item-details .developer-comment p {
     margin: 0;
     font-style: italic;
     line-height: 1.6;
@@ -1869,6 +1871,12 @@ const rarityLabels = {
     padding: 0.5rem;
     border: 1px solid var(--card-border);
     text-align: left;
+  }
+
+  /* Центрирование текста внутри таблиц, вставляемых в поле description */
+  #item-details .item-description table th,
+  #item-details .item-description table td {
+    text-align: center;
   }
 
   #item-details th {
