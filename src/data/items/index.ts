@@ -1755,8 +1755,8 @@ interface Item {
       name: 'Сани',
       nameEn: 'Sled',
       type: 'Транспортные средства',
-      cost: '300 зм',
-      weight: '20 фнт.',
+      cost: '20 зм',
+      weight: '300 фнт.',
       sourceBook: 'PHB\'24',
       description: '-'
     },

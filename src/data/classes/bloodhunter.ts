@@ -174,14 +174,14 @@ export const bloodhunter: Class = {
     },
     {
       level: 17,
-      profBonus: '+5',
+      profBonus: '+6',
       features: ['Проклятая кровь (4/отдых)'],
       bloodMagicDie: '1к10',
       knownMaledicts: 4
     },
     {
       level: 18,
-      profBonus: '+5',
+      profBonus: '+6',
       features: ['Умение ордена'],
       bloodMagicDie: '1к10',
       knownMaledicts: 5

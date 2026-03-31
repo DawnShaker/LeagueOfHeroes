@@ -162,13 +162,13 @@ export const rogue: Class = {
     },
     {
       level: 17,
-      profBonus: '+5',
+      profBonus: '+6',
       features: ['Умение подкласса'],
       sneakAttack: '9к6'
     },
     {
       level: 18,
-      profBonus: '+5',
+      profBonus: '+6',
       features: ['Неуловимый'],
       sneakAttack: '9к6'
     },

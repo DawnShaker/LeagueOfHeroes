@@ -185,7 +185,7 @@ export const monk: Class = {
     },
     {
       level: 17,
-      profBonus: '+5',
+      profBonus: '+6',
       features: ['Умение подкласса'],
       martialArts: '1к12',
       spiritPoints: '17',
@@ -193,7 +193,7 @@ export const monk: Class = {
     },
     {
       level: 18,
-      profBonus: '+5',
+      profBonus: '+6',
       features: ['Превосходная защита'],
       martialArts: '1к12',
       spiritPoints: '18',

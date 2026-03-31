@@ -204,7 +204,7 @@ export const apothecary: Class = {
     },
     {
       level: 17,
-      profBonus: '+5',
+      profBonus: '+6',
       features: ['Большая формула (9 уровень)'],
       knownTheories: 9,
       cantrips: 5,
@@ -213,7 +213,7 @@ export const apothecary: Class = {
     },
     {
       level: 18,
-      profBonus: '+5',
+      profBonus: '+6',
       features: ['Умения подкласса'],
       knownTheories: 10,
       cantrips: 5,

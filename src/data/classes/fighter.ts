@@ -185,14 +185,14 @@ export const fighter: Class = {
     },
     {
       level: 17,
-      profBonus: '+5',
+      profBonus: '+6',
       features: ['Всплеск действий (2 использования)', 'Упорный (3 использования)'],
       secondWind: '4',
       maneuvers: '6'
     },
     {
       level: 18,
-      profBonus: '+5',
+      profBonus: '+6',
       features: ['Умение подкласса'],
       secondWind: '4',
       maneuvers: '6'
