@@ -6368,7 +6368,7 @@ export const magicItems: MagicItem[] = [
     nameEn: 'Rod of Absorption',
     type: 'Жезл',
     weight: '2 фнт.',
-    attunement: false,
+    attunement: true,
     rarity: 'Very Rare',
     source: {
       book: 'DMG',

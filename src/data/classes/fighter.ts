@@ -136,7 +136,7 @@ export const fighter: Class = {
     },
     {
       level: 10,
-      profBonus: '+3',
+      profBonus: '+4',
       features: ['Умение подкласса'],
       secondWind: '4',
       maneuvers: '5'
