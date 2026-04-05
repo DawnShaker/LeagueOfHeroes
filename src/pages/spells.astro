@@ -111,6 +111,26 @@ const spellSchools = [
                 <!-- populated client-side -->
               </div>
             </div>
+
+            <div class="filter-section">
+              <h4>Доп. фильтры</h4>
+              <div class="checkbox-group">
+                <label class="checkbox-label"><input type="checkbox" name="spell-component" value="verbal"> Вербальный (В)</label>
+                <label class="checkbox-label"><input type="checkbox" name="spell-component" value="somatic"> Соматический (С)</label>
+                <label class="checkbox-label"><input type="checkbox" name="spell-component" value="material"> Материальный (М)</label>
+                <label class="checkbox-label"><input type="checkbox" name="spell-concentration" value="1"> Концентрация</label>
+              </div>
+            </div>
+
+            <div class="filter-section">
+              <h4>Время накладывания</h4>
+              <div class="checkbox-group">
+                <label class="checkbox-label"><input type="checkbox" name="casting-type" value="action"> Действие</label>
+                <label class="checkbox-label"><input type="checkbox" name="casting-type" value="bonus"> Бонусное действие</label>
+                <label class="checkbox-label"><input type="checkbox" name="casting-type" value="reaction"> Реакция</label>
+                <label class="checkbox-label"><input type="checkbox" name="spell-has-table" value="1"> Имеет таблицы</label>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -201,6 +221,12 @@ const spellSchools = [
     const schoolCheckboxes = document.querySelectorAll('input[name="spell-school"]');
     /** @type {NodeListOf<HTMLInputElement>} */
     const classCheckboxes = document.querySelectorAll('input[name="spell-class"]');
+    /** @type {NodeListOf<HTMLInputElement>} */
+    const componentCheckboxes = document.querySelectorAll('input[name="spell-component"]');
+    const concentrationCheckbox = document.querySelector('input[name="spell-concentration"]');
+    /** @type {NodeListOf<HTMLInputElement>} */
+    const castingTypeCheckboxes = document.querySelectorAll('input[name="casting-type"]');
+    const hasTableCheckbox = document.querySelector('input[name="spell-has-table"]');
     const spellDetails = document.getElementById('spell-details');
     const spells = JSON.parse(document.getElementById('spells-data')?.getAttribute('data-spells') || '[]')
       .sort((a, b) => a.name.localeCompare(b.name, 'ru'));
@@ -253,7 +279,7 @@ const spellSchools = [
         const toggle = document.createElement('button');
         toggle.type = 'button';
         toggle.className = 'subclass-toggle';
-        toggle.textContent = classId + ' ▾';
+        toggle.textContent = classId;
         toggle.dataset.class = classId;
         const inner = document.createElement('div');
         inner.className = 'subclass-list';
@@ -285,11 +311,19 @@ const spellSchools = [
         .filter(cb => cb instanceof HTMLInputElement && cb.checked)
         .map(cb => cb instanceof HTMLInputElement ? cb.value : '');
       const selectedSubclasses = Array.from(document.querySelectorAll('input[name="spell-subclass"]')).filter(cb=>cb instanceof HTMLInputElement && cb.checked).map(cb=>cb.value);
+      const selectedComponents = Array.from(document.querySelectorAll('input[name="spell-component"]')).filter(cb=>cb instanceof HTMLInputElement && cb.checked).map(cb=>cb.value);
+      const concentrationChecked = (document.querySelector('input[name="spell-concentration"]') instanceof HTMLInputElement) && document.querySelector('input[name="spell-concentration"]').checked;
+      const selectedCastingTypes = Array.from(document.querySelectorAll('input[name="casting-type"]')).filter(cb=>cb instanceof HTMLInputElement && cb.checked).map(cb=>cb.value);
+      const hasTableChecked = (document.querySelector('input[name="spell-has-table"]') instanceof HTMLInputElement) && document.querySelector('input[name="spell-has-table"]').checked;
       // Count active filters
       let activeFilters = 0;
       if (selectedLevels.length > 0) activeFilters += selectedLevels.length;
       if (selectedSchools.length > 0) activeFilters += selectedSchools.length;
       if (selectedClasses.length > 0) activeFilters += selectedClasses.length;
+      if (selectedComponents.length > 0) activeFilters += selectedComponents.length;
+      if (concentrationChecked) activeFilters += 1;
+      if (selectedCastingTypes.length > 0) activeFilters += selectedCastingTypes.length;
+      if (hasTableChecked) activeFilters += 1;
       if (filterCount) {
         filterCount.textContent = String(activeFilters);
         filterCount.style.display = activeFilters > 0 ? 'flex' : 'none';
@@ -315,7 +349,37 @@ const spellSchools = [
           return selectedSubclasses.includes(parsed.classId + '|' + parsed.subclassId);
         }));
 
-        const isVisible = matchesSearch && matchesLevel && matchesSchool && matchesClass && matchesSubclass;
+        // components filter: selectedComponents is ANDed (spell must have all selected component types)
+        let matchesComponents = true;
+        if (selectedComponents.length > 0) {
+          matchesComponents = selectedComponents.every(name => {
+            if (!spell.components) return false;
+            if (name === 'verbal') return !!spell.components.verbal;
+            if (name === 'somatic') return !!spell.components.somatic;
+            if (name === 'material') return !!spell.components.material;
+            return true;
+          });
+        }
+
+        // concentration filter
+        const matchesConcentration = !concentrationChecked || (typeof spell.duration === 'string' && spell.duration.toLowerCase().includes('концентрация'));
+
+        // casting type filter: any of selected casting types (OR)
+        let matchesCastingType = true;
+        if (selectedCastingTypes.length > 0) {
+          const ct = (String(spell.castingTime || '')).toLowerCase();
+          matchesCastingType = selectedCastingTypes.some(t => {
+            if (t === 'action') return ct.includes('действ');
+            if (t === 'bonus') return ct.includes('бонус');
+            if (t === 'reaction') return ct.includes('реакц') || ct.includes('реакция');
+            return false;
+          });
+        }
+
+        // has table filter
+        const matchesHasTable = !hasTableChecked || (typeof spell.description === 'string' && /<table/i.test(spell.description));
+
+        const isVisible = matchesSearch && matchesLevel && matchesSchool && matchesClass && matchesSubclass && matchesComponents && matchesConcentration && matchesCastingType && matchesHasTable;
         if (card instanceof HTMLElement) card.style.display = isVisible ? '' : 'none';
         if (isVisible) visibleCount++;
       });
@@ -447,6 +511,10 @@ const spellSchools = [
     levelCheckboxes?.forEach(cb => cb.addEventListener('change', filterSpells));
     schoolCheckboxes?.forEach(cb => cb.addEventListener('change', filterSpells));
     classCheckboxes?.forEach(cb => cb.addEventListener('change', filterSpells));
+    componentCheckboxes?.forEach(cb => cb.addEventListener('change', filterSpells));
+    castingTypeCheckboxes?.forEach(cb => cb.addEventListener('change', filterSpells));
+    if (concentrationCheckbox instanceof HTMLInputElement) concentrationCheckbox.addEventListener('change', filterSpells);
+    if (hasTableCheckbox instanceof HTMLInputElement) hasTableCheckbox.addEventListener('change', filterSpells);
     
     // Ensure label fills when checkbox is checked (tile fill)
     filterPopup?.addEventListener('change', (e) => {
@@ -474,7 +542,11 @@ const spellSchools = [
       if (t instanceof HTMLElement && t.classList.contains('subclass-toggle')) {
         const parent = t.parentElement;
         const list = parent?.querySelector('.subclass-list');
-        if (list) list.style.display = list.style.display === 'none' ? 'block' : 'none';
+        if (list) {
+          const open = list.style.display !== 'block';
+          list.style.display = open ? 'block' : 'none';
+          t.classList.toggle('open', open);
+        }
       }
     });
 
@@ -1003,6 +1075,61 @@ const spellSchools = [
     flex-wrap: wrap;
     gap: 0.75rem;
     margin-top: 0.5rem;
+  }
+
+  /* Subclass specific styles */
+  .subclass-class {
+    display: block;
+    border: 1px solid var(--card-border);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background: var(--card-bg);
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .subclass-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--text);
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .subclass-toggle::after {
+    content: '▾';
+    transition: transform .15s ease;
+    opacity: 0.8;
+    margin-left: 0.5rem;
+  }
+
+  .subclass-toggle.open::after {
+    transform: rotate(180deg);
+  }
+
+  .subclass-list {
+    display: none;
+    padding: 0.5rem;
+    gap: 0.5rem;
+    box-shadow: none;
+  }
+
+  .subclass-list .checkbox-label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    min-width: 0;
+    padding: 0.45rem 0.6rem;
+    border-radius: 0.35rem;
+    background: transparent;
+    border: 1px solid var(--card-border);
   }
 
   .checkbox-label {
