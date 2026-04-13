@@ -176,7 +176,7 @@ export const ranger: Class = {
       level: 9,
       profBonus: '+4',
       features: ['Компетентность'],
-      favoredEnemy: 3,
+      favoredEnemy: 4,
       preparedSpells: 9,
       spellSlots: {
         1: 4,
