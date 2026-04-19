@@ -27,6 +27,8 @@ interface Props {
     magicItems?: number;
     spellSlotsLvl?: number;
     knownTheories?: number;
+    fisticuffs?: string;
+    moxiePoints?: string;
     spellSlots?: {
       1: number;
       2: number;
@@ -65,6 +67,8 @@ const hasSpellSlotsLvl = levels[0].spellSlotsLvl !== undefined;
 const hasPlansKnown = levels[0].plansKnown !== undefined;
 const hasMagicItems = levels[0].magicItems !== undefined;
 const hasKnownTheories = levels[0].knownTheories !== undefined;
+const hasFisticuffs = levels[0].fisticuffs !== undefined;
+const hasMoxiePoints = levels[0].moxiePoints !== undefined;
 const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level => 
   Object.keys(level.spellSlots || {}).reduce((max, slot) => 
     level.spellSlots?.[parseInt(slot)] ? Math.max(max, parseInt(slot)) : max, 0)
@@ -100,6 +104,8 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
         {hasPlansKnown && <th class="plans-known-lvl">Известные схемы</th>}
         {hasMagicItems && <th class="magic-items-lvl">Магические предметы</th>}
         {hasKnownTheories && <th class="known-theories">Известные теории</th>}
+        {hasFisticuffs && <th class="fisticuffs">Кулачный бой</th>}
+        {hasMoxiePoints && <th class="moxie-points">Очки удали</th>}
         {hasSpellcasting && (
           <>
             <th colspan={maxSpellLevel}>Ячейки заклинаний</th>
@@ -133,6 +139,8 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
             (hasPlansKnown ? 1 : 0) +
             (hasMagicItems ? 1 : 0) +
             (hasKnownTheories ? 1 : 0) +
+            (hasFisticuffs ? 1 : 0) +
+            (hasMoxiePoints ? 1 : 0) +
             // Колонки, специфичные для заклинаний
             (hasCantrips ? 1 : 0) +
             1 // Колонка "Подг. закл."
@@ -172,6 +180,8 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
           {hasPlansKnown && <td class="plans-known-lvl">{level.plansKnown}</td>}
           {hasMagicItems && <td class="magic-items-lvl">{level.magicItems}</td>}
           {hasKnownTheories && <td class="knownTheories">{level.knownTheories}</td>}
+          {hasFisticuffs && <td class="fisticuffs">{level.knownTheories}</td>}
+          {hasMoxiePoints && <td class="moxiePoints">{level.knownTheories}</td>}
           {hasSpellcasting && (
             <>
               {Array.from({length: maxSpellLevel}, (_, i) => (
@@ -206,7 +216,7 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
     text-align: center;
   }
   
-  .rage, .rage-damage, .second-wind, .maneuvers, .sneak-attack, .bardic-inspiration, .wild-shape, .chanel-divinity, .martial-arts, .spirit-points, .unarmed-movement, .favored-enemy, .sorcery-points, .invocations, .num-of-spell-slots, .spell-slots-lvl, .blood-magic-die, .known-maledicts, .magic-items-lvl, .plans-known-lvl, .known-theories {
+  .rage, .rage-damage, .second-wind, .maneuvers, .sneak-attack, .bardic-inspiration, .wild-shape, .chanel-divinity, .martial-arts, .spirit-points, .unarmed-movement, .favored-enemy, .sorcery-points, .invocations, .num-of-spell-slots, .spell-slots-lvl, .blood-magic-die, .known-maledicts, .magic-items-lvl, .plans-known-lvl, .known-theories, .fisticuffs, .moxie-points {
     min-width: 30px;
     text-align: center;
   }

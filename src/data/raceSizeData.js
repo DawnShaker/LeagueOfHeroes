@@ -176,11 +176,11 @@ export const raceData = {
     }
   },
   giff: {
-    size: 'средний',
-    baseHeight: defaultSizeData.средний.baseHeight,
-    baseWeight: defaultSizeData.средний.baseWeight,
-    heightRange: defaultSizeData.средний.heightRange,
-    weightRange: defaultSizeData.средний.weightRange
+    baseHeight: { футов: 6, дюймов: 4 },
+    baseWeight: 180,
+    heightRange: [1, 24],
+    weightRange: [2, 16],
+    size: 'средний'
   },
   githGithyanki: {
     baseHeight: { футов: 5, дюймов: 0 },

@@ -541,7 +541,7 @@ const showCalculator = !!raceSizeEntry && !_excludeCalc.includes(species.id);
           const baseTotalInches = (Number(bh2['футов'] || bh['футов']) * 12) + Number(bh2['дюймов'] || bh['дюймов']);
           const totalInches = baseTotalInches + extraInches;
           const hi = toFeetInches(totalInches);
-          finalHeight.textContent = `${hi.ft} фут. ${hi.inch} дюйм. (${totalInches} дюймов)`;
+          finalHeight.textContent = `${hi.ft} \' ${hi.inch} \'' (${totalInches} дюймов)`;
 
           // Final weight: baseWeight + (weightMultiplier * heightModifier)
           const finalW = (Number(bw2) + (weightMultiplier * extraInches));

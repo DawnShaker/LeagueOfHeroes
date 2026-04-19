@@ -11,7 +11,7 @@ export const bloodhunter: Class = {
   hitDice: 10,
   hitPoints: {
     level1: '10 + модификатор Телосложения',
-    higherLevels: '1к10 (или 6) + модификатор Телосложения за каждый уровень после первого'
+    higherLevels: '1д10 (или 6) + модификатор Телосложения за каждый уровень после первого'
   },
   proficiencies: {
     armor: ['Лёгкие', 'Средние', 'Щиты'],
@@ -64,140 +64,140 @@ export const bloodhunter: Class = {
       level: 1,
       profBonus: '+2',
       features: ['Охотничья погибель', 'Проклятая кровь', 'Оружейные приёмы'],
-      bloodMagicDie: '1к4',
+      bloodMagicDie: '1д4',
       knownMaledicts: 1
     },
     {
       level: 2,
       profBonus: '+2',
       features: ['Боевой стиль', 'Алый обряд'],
-      bloodMagicDie: '1к4',
+      bloodMagicDie: '1д4',
       knownMaledicts: 1
     },
     {
       level: 3,
       profBonus: '+2',
       features: ['Подкласс кровавого охотника'],
-      bloodMagicDie: '1к4',
+      bloodMagicDie: '1д4',
       knownMaledicts: 1
     },
     {
       level: 4,
       profBonus: '+2',
       features: ['Увеличение характеристик'],
-      bloodMagicDie: '1к4',
+      bloodMagicDie: '1д4',
       knownMaledicts: 1
     },
     {
       level: 5,
       profBonus: '+3',
       features: ['Дополнительная атака'],
-      bloodMagicDie: '1к6',
+      bloodMagicDie: '1д6',
       knownMaledicts: 1
     },
     {
       level: 6,
       profBonus: '+3',
       features: ['Клеймо наказания', 'Проклятая кровь (2/отдых)'],
-      bloodMagicDie: '1к6',
+      bloodMagicDie: '1д6',
       knownMaledicts: 2
     },
     {
       level: 7,
       profBonus: '+3',
       features: ['Умение ордена', 'Изначальный обряд'],
-      bloodMagicDie: '1к6',
+      bloodMagicDie: '1д6',
       knownMaledicts: 2
     },
     {
       level: 8,
       profBonus: '+3',
       features: ['Увеличение характеристик'],
-      bloodMagicDie: '1к6',
+      bloodMagicDie: '1д6',
       knownMaledicts: 2
     },
     {
       level: 9,
       profBonus: '+4',
       features: ['Мрачная психометрия'],
-      bloodMagicDie: '1к6',
+      bloodMagicDie: '1д6',
       knownMaledicts: 2
     },
     {
       level: 10,
       profBonus: '+4',
       features: ['Тёмное усиление'],
-      bloodMagicDie: '1к6',
+      bloodMagicDie: '1д6',
       knownMaledicts: 3
     },
     {
       level: 11,
       profBonus: '+4',
       features: ['Умение ордена'],
-      bloodMagicDie: '1к8',
+      bloodMagicDie: '1д8',
       knownMaledicts: 3
     },
     {
       level: 12,
       profBonus: '+4',
       features: ['Увеличение характеристик'],
-      bloodMagicDie: '1к8',
+      bloodMagicDie: '1д8',
       knownMaledicts: 3
     },
     {
       level: 13,
       profBonus: '+5',
       features: ['Клеймо привязки', 'Проклятая кровь (3/отдых)'],
-      bloodMagicDie: '1к8',
+      bloodMagicDie: '1д8',
       knownMaledicts: 3
     },
     {
       level: 14,
       profBonus: '+5',
       features: ['Закалённая душа', 'Тайный обряд'],
-      bloodMagicDie: '1к8',
+      bloodMagicDie: '1д8',
       knownMaledicts: 4
     },
     {
       level: 15,
       profBonus: '+5',
       features: ['Умение ордена'],
-      bloodMagicDie: '1к8',
+      bloodMagicDie: '1д8',
       knownMaledicts: 4
     },
     {
       level: 16,
       profBonus: '+5',
       features: ['Увеличение характеристик'],
-      bloodMagicDie: '1к8',
+      bloodMagicDie: '1д8',
       knownMaledicts: 4
     },
     {
       level: 17,
       profBonus: '+6',
       features: ['Проклятая кровь (4/отдых)'],
-      bloodMagicDie: '1к10',
+      bloodMagicDie: '1д10',
       knownMaledicts: 4
     },
     {
       level: 18,
       profBonus: '+6',
       features: ['Умение ордена'],
-      bloodMagicDie: '1к10',
+      bloodMagicDie: '1д10',
       knownMaledicts: 5
     },
     {
       level: 19,
       profBonus: '+6',
       features: ['Эпическая черта'],
-      bloodMagicDie: '1к10',
+      bloodMagicDie: '1д10',
       knownMaledicts: 5
     },
     {
       level: 20,
       profBonus: '+6',
       features: ['Кровавое мастерство'],
-      bloodMagicDie: '1к10',
+      bloodMagicDie: '1д10',
       knownMaledicts: 5
     }
   ],
@@ -250,7 +250,7 @@ export const bloodhunter: Class = {
         },
         {
           title: 'Проклятье Экзорциста',
-          description: 'Требование: 15 уровень, орден Истребителей Призраков\nБонусным действием выберите одно существо находящееся в 30 футах от вас и которое вы можете видеть и при этом находящееся под состоянием очарования, испуга или одержимости. Цель больше не является очарованной, испуганной или одержимой.\nУсиление. Существо, которое очаровало, испугало или вселилось в цель вашего проклятья получает 3к6 психического урона и должно совершить спасбросок Мудрости или стать ошеломлённой до конца вашего следующего хода.'
+          description: 'Требование: 15 уровень, орден Истребителей Призраков\nБонусным действием выберите одно существо находящееся в 30 футах от вас и которое вы можете видеть и при этом находящееся под состоянием очарования, испуга или одержимости. Цель больше не является очарованной, испуганной или одержимой.\nУсиление. Существо, которое очаровало, испугало или вселилось в цель вашего проклятья получает 3д6 психического урона и должно совершить спасбросок Мудрости или стать ошеломлённой до конца вашего следующего хода.'
         },
         {
           title: 'Проклятье Коррозии',

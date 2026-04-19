@@ -11105,10 +11105,10 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
       { type: 'subclass', name: '<a href="/classes/paladin?subclass=oathbreaker">Клятвопреступник</a>' },
-      { type: 'subclass', name: 'Теневая магия' },
-      { type: 'subclass', name: 'Мастер Тени' },
+      { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=shadow">Теневая магия</a>' },
+      { type: 'subclass', name: '<a href="/classes/monk?subclass=shadow">Мастер Тени</a>' },
       { type: 'species', name: '<a href="/races/elf/">Эльф</a> (Дроу)' },
-      { type: 'species', name: 'Полуэльф (Дроу)' },
+      { type: 'species', name: '<a href="/races/halfelf/">Полуэльф</a> (Дроу)' },
       { type: 'background', name: '<a href="/backgrounds/silverquill%20student/">Студент Сильверквилла</a>' }
     ]
   },
@@ -11119,7 +11119,7 @@ export const spells: Spell[] = [
     level: '2',
     school: 'преобразование',
     castingTime: '1 действие',
-    range: 'касание',
+    range: 'Касание',
     components: {
       verbal: true,
       somatic: true,
@@ -11185,7 +11185,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/adept-of-the-red-robes/">Адепт Красных одежд</a>' },
       { type: 'background', name: '<a href="/backgrounds/dimir%20operative/">Оперативник Димиров</a>' },
       { type: 'feat', name: '<a href="/feats/adept-of-the-white-robes/">Адепт Белых одежд</a>' },
-      { type: 'feat', name: 'Телепат' }
+      { type: 'feat', name: '<a href="/feats/telepathic/">Телепат</a>' }
     ]
   },
   {
@@ -11315,7 +11315,7 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'species', name: '<a href="/races/dwarf/">Дварф (Дуергар)</a>' },
-      { type: 'species', name: 'Фэйри' },
+      { type: 'species', name: '<a href="/races/fairy/">Фэйри</a>' },
       { type: 'background', name: '<a href="/backgrounds/quandrix%20student/">Студент Квандрикса</a>' },
       { type: 'background', name: '<a href="/backgrounds/simic%20scientist/">Учёный Симиков</a>' },
       { type: 'feat', name: '<a href="/feats/adept-of-the-red-robes/">Адепт Красных одежд</a>' }
@@ -13547,7 +13547,7 @@ export const spells: Spell[] = [
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
       { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
       { type: 'subclass', name: '<a href="/classes/paladin?subclass=ancients">Клятва Древних</a>' },
-      { type: 'subclass', name: 'Путь Дикого сердца' },
+      { type: 'subclass', name: '<a href="/classes/barbarian?subclass=wild-heart">Путь Дикого сердца</a>' },
       { type: 'background', name: '<a href="/backgrounds/selesnya%20initiate/">Посвящённый Селезнии</a>' }
     ]
   },
