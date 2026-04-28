@@ -1,14 +1,12 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ClassTable from '../../components/classes/ClassTable.astro';
-import { classes } from '../../data/classes';
+import { classes, premiumClasses } from '../../data/classes';
 import { spells as allSpells } from '../../data/spells';
 
 export function getStaticPaths() {
-  return classes.map(classData => ({
-    params: { id: classData.id },
-    props: { classData }
-  }));
+  const all = Array.isArray(premiumClasses) && premiumClasses.length > 0 ? [...classes, ...premiumClasses] : classes;
+  return all.map(classData => ({ params: { id: classData.id }, props: { classData } }));
 }
 
 const { classData } = Astro.props;
@@ -137,42 +135,45 @@ return { level, spells };
           <span class="feature-level">{feature.level} уровень</span>
         </div>
         <div class="feature-description">
-            {feature.description.split('\n').map(paragraph => (
-              <p>{paragraph}</p>
-            ))}
+            {(feature.description || '').split('\n').map(paragraph => (
+                <p>{paragraph}</p>
+              ))}
           {feature.collapsible && (
             <div class="collapsible-content">
-              {feature.collapsible.map(item => (
-                <details class="collapsible-item">
-                  <summary>{item.title}</summary>
-                  <div class="collapsible-description">
-                    {item.tableData ? (
-                      <table class="spell-table">
-                        <thead>
-                          <tr>
-                            {item.tableData.headers.map(header => (
-                              <th>{header}</th>
-                            ))}
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {item.tableData.rows.map(row => (
-                            <tr>
-                              {row.map(cell => (
-                                <td>{cell}</td>
+              {feature.collapsible && (
+                <div class="collapsible-content">
+                  {feature.collapsible.map(item => (
+                    <details class="collapsible-item">
+                      <summary>{item.title}</summary>
+                      <div class="collapsible-description">
+                        {(Array.isArray(item.description) ? item.description : (item.description || '').split('\n')).map(paragraph => (
+                          <p>{paragraph}</p>
+                        ))}
+                        {item.tableData && (
+                          <table class="spell-table">
+                            <thead>
+                              <tr>
+                                {item.tableData.headers.map(header => (
+                                  <th>{header}</th>
+                                ))}
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {item.tableData.rows.map(row => (
+                                <tr>
+                                  {row.map(cell => (
+                                    <td>{cell}</td>
+                                  ))}
+                                </tr>
                               ))}
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    ) : (
-                      item.description.split('\n').map(paragraph => (
-                        <p>{paragraph}</p>
-                      ))
-                    )}
-                  </div>
-                </details>
-              ))}
+                            </tbody>
+                          </table>
+                        )}
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </div>
@@ -693,8 +694,14 @@ return { level, spells };
       
       if (feature.collapsible) {
         // Render any textual description first (server renders this too)
-        if (feature.description) {
-          feature.description.split('\n').forEach(paragraph => {
+        if (Array.isArray(feature.description)) {
+          feature.description.forEach(paragraph => {
+            const p = document.createElement('p');
+            p.textContent = paragraph;
+            descriptionContainer.appendChild(p);
+          });
+        } else if (feature.description) {
+          (feature.description || '').split('\n').forEach(paragraph => {
             const p = document.createElement('p');
             p.textContent = paragraph;
             descriptionContainer.appendChild(p);
@@ -703,6 +710,9 @@ return { level, spells };
 
         const collapsibleContent = document.createElement('div');
         collapsibleContent.className = 'collapsible-content';
+
+        // helpful debugging when testing in browser
+        try { console.debug('createFeatureElement: collapsible for', feature.name, feature.collapsible); } catch (e) { /* ignore */ }
 
         feature.collapsible.forEach(item => {
           const details = document.createElement('details');
@@ -716,6 +726,21 @@ return { level, spells };
           description.className = 'collapsible-description';
           
           if (item.tableData) {
+            // If there's a textual description, render it first (support array or string)
+            if (Array.isArray(item.description)) {
+              item.description.forEach(paragraph => {
+                const p = document.createElement('p');
+                p.textContent = paragraph;
+                description.appendChild(p);
+              });
+            } else if (item.description) {
+              (item.description || '').split('\n').forEach(paragraph => {
+                const p = document.createElement('p');
+                p.textContent = paragraph;
+                description.appendChild(p);
+              });
+            }
+
             // Create table from structured data
             const table = document.createElement('table');
             table.className = 'spell-table';
@@ -746,24 +771,45 @@ return { level, spells };
             
             description.appendChild(table);
           } else {
-            // Regular text content
-            item.description.split('\n').forEach(paragraph => {
-              const p = document.createElement('p');
-              p.textContent = paragraph;
-              description.appendChild(p);
-            });
+            // Regular text content: support both arrays and strings
+            if (Array.isArray(item.description)) {
+              item.description.forEach(paragraph => {
+                const p = document.createElement('p');
+                p.textContent = paragraph;
+                description.appendChild(p);
+              });
+            } else {
+              (item.description || '').split('\n').forEach(paragraph => {
+                const p = document.createElement('p');
+                p.textContent = paragraph;
+                description.appendChild(p);
+              });
+            }
           }
           
           details.appendChild(description);
           collapsibleContent.appendChild(details);
         });
-        
+
         descriptionContainer.appendChild(collapsibleContent);
+
+        // Ensure newly created collapsible content is linkified and annotated for item tooltips
+        try {
+          linkifySpellsInNode(collapsibleContent, allSpells);
+        } catch (e) {
+          console.error('linkify collapsed failed', e);
+        }
+        try {
+          const inst = window.__itemTooltipInstance;
+          if (inst && typeof inst.annotateItemAnchors === 'function') inst.annotateItemAnchors(collapsibleContent);
+        } catch (err) {
+          // non-fatal
+        }
       } else if (feature.name.toLowerCase().includes('таблица')) {
-        const table = createTableElement(feature.description);
+        const table = createTableElement(feature.description || '');
         descriptionContainer.appendChild(table);
       } else {
-        feature.description.split('\n').forEach(paragraph => {
+        (feature.description || '').split('\n').forEach(paragraph => {
           const p = document.createElement('p');
           p.textContent = paragraph;
           descriptionContainer.appendChild(p);
@@ -856,14 +902,14 @@ return { level, spells };
       window.history.pushState({ subclassId }, '', newUrl);
       if (classLore && baseLore) {
         if (subclass) {
-          classLore.innerHTML = subclass.description.split('\n').map(paragraph =>
-            `<p>${paragraph}</p>`
-          ).join('');
+            classLore.innerHTML = (subclass.description || '').split('\n').map(paragraph =>
+              `<p>${paragraph}</p>`
+            ).join('');
           baseLore.style.display = 'block';
         } else {
-          classLore.innerHTML = classData.description.split('\n').map(paragraph =>
-            `<p>${paragraph}</p>`
-          ).join('');
+            classLore.innerHTML = (classData.description || '').split('\n').map(paragraph =>
+              `<p>${paragraph}</p>`
+            ).join('');
           baseLore.style.display = 'none';
         }
       }
@@ -1360,6 +1406,16 @@ return { level, spells };
 
   .collapsible-description p:last-child {
     margin-bottom: 0;
+  }
+
+  /* Ensure collapsible content is visible and uses the site text color */
+  .collapsible-description,
+  .collapsible-description p,
+  .collapsible-description table,
+  .collapsible-description td,
+  .collapsible-description th {
+    color: var(--text) !important;
+    visibility: visible !important;
   }
 
   .spell-table {

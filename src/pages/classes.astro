@@ -1,12 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ClassCard from '../components/classes/ClassCard.astro';
-import { classes } from '../data/classes';
+import { classes, premiumClasses } from '../data/classes';
 
 // Sort classes by Russian name
 const sortedClasses = [...classes].sort((a, b) => 
   a.name.localeCompare(b.name, 'ru')
 );
+const sortedPremium = (premiumClasses || []).slice().sort((a, b) => 
+  a.name.localeCompare(b.name, 'ru'));
 
 ---
 
@@ -16,6 +18,26 @@ const sortedClasses = [...classes].sort((a, b) =>
     
     <div class="classes-grid">
       {sortedClasses.map(classData => (
+        <ClassCard
+          name={classData.name}
+          nameEn={classData.nameEn}
+          portrait={classData.portrait}
+          sourceBook={classData.sourceBook}
+          id={classData.id}
+        />
+      ))}
+    </div>
+    
+  <!--
+    <div class="premium-separator">
+      <div class="rule"></div>
+      <div class="label">Эти классы доступны игрокам с ролью @Герой лиги или выше</div>
+      <div class="rule"></div>
+    </div>
+  -->
+
+    <div class="classes-grid premium-grid">
+      {sortedPremium && sortedPremium.map(classData => (
         <ClassCard
           name={classData.name}
           nameEn={classData.nameEn}
@@ -40,4 +62,26 @@ const sortedClasses = [...classes].sort((a, b) =>
     gap: 1.5rem;
     margin-top: 2rem;
   }
+
+  .premium-separator {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2.5rem 0 1rem;
+  }
+
+  .premium-separator .rule {
+    height: 1px;
+    background: var(--card-border);
+    flex: 1 1 auto;
+  }
+
+  .premium-separator .label {
+    white-space: nowrap;
+    font-weight: 700;
+    color: var(--text);
+    padding: 0 0.75rem;
+  }
+
+  .premium-grid { margin-top: 1rem; }
 </style>

@@ -15,6 +15,9 @@ import { artificer } from './artificer';
 import { apothecary } from './apothecary';
 import { monsterhunter } from './monsterhunter';
 import { pugilist } from './pugilist';
-
+import { witcher } from './witcher';
 
 export const classes = [fighter, wizard, paladin, barbarian, rogue, bard, druid, cleric, monk, ranger, sorcerer, warlock, bloodhunter, artificer];
+
+// Premium / community classes (shown separately on Classes page)
+//export const premiumClasses = [apothecary, monsterhunter, pugilist, witcher];
