@@ -24,6 +24,10 @@
   --theme-toggle-color: #1e293b;
   --theme-toggle-hover-bg: #f8fafc;
 
+  /* Highlight colors */
+  --highlight-positive: #16a34a;
+  --highlight-negative: #dc2626;
+
   /* Subclass feature colors */
   --subclass-feature-bg: #f3e8ff;
   --subclass-feature-border: #e2e8f0;
@@ -55,6 +59,10 @@
   --theme-toggle-border: #334155;
   --theme-toggle-color: #e2e8f0;
   --theme-toggle-hover-bg: #334155;
+
+  /* Highlight colors */
+  --highlight-positive: #4ade80;
+  --highlight-negative: #f87171;
 
   /* Subclass feature colors */
   --subclass-feature-bg: #2e1065;
@@ -176,6 +184,9 @@ a, a:link { color: var(--link); }
 a:visited { color: var(--link-visited); }
 a:hover, a:active { color: var(--link-hover); text-decoration-style: solid; }
 a:focus { outline: none; box-shadow: var(--link-focus-box); border-radius: 4px; }
+
+.highlight-prefix-positive { color: var(--highlight-positive); font-weight: 600; }
+.highlight-prefix-negative { color: var(--highlight-negative); font-weight: 600; }
 
 /* Responsive tooltip */
 @media (max-width: 768px) {
