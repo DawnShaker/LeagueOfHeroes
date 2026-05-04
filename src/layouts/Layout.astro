@@ -35,13 +35,28 @@ const { title } = Astro.props;
     <div id="spell-tooltip" role="tooltip" aria-hidden="true"></div>
     <script>
       (function() {
-        const HIGHLIGHT_REGEX = /\b(Преимуществ[А-Яа-яЁё]*|Помех[А-Яа-яЁё]*)/g;
-        const HIGHLIGHT_TEST = /\b(Преимуществ[А-Яа-яЁё]*|Помех[А-Яа-яЁё]*)/;
+        let HIGHLIGHT_REGEX;
+        let HIGHLIGHT_TEST;
         const SKIP_TAGS = new Set(['SCRIPT', 'STYLE', 'NOSCRIPT', 'CODE', 'PRE', 'TEXTAREA']);
+
+        // Попытаемся собрать продвинутый регекс с юникодными свойствами и lookbehind.
+        // Если среда не поддерживает такие фичи — откатываемся на более совместимый вариант.
+        try {
+          HIGHLIGHT_REGEX = new RegExp('(?<![\\p{L}\\p{N}_])(Преимуществ[\\p{L}\\p{N}_]*|Помех[\\p{L}\\p{N}_]*)(?![\\p{L}\\p{N}_])', 'gu');
+          HIGHLIGHT_TEST = new RegExp('(?<![\\p{L}\\p{N}_])(Преимуществ[\\p{L}\\p{N}_]*|Помех[\\p{L}\\p{N}_]*)(?![\\p{L}\\p{N}_])', 'u');
+          // Выполняем быстрый тест, чтобы поймать ошибки в рантайме
+          HIGHLIGHT_TEST.test('Преимущество');
+        } catch (e) {
+          HIGHLIGHT_REGEX = new RegExp('(^|[^A-Za-zА-Яа-яЁё0-9_])(Преимуществ[А-Яа-яЁё]*|Помех[А-Яа-яЁё]*)(?=$|[^A-Za-zА-Яа-яЁё0-9_])', 'g');
+          HIGHLIGHT_TEST = new RegExp('Преимуществ|Помех');
+        }
 
         function shouldSkip(node) {
           const parent = node.parentElement;
-          return !parent || SKIP_TAGS.has(parent.tagName);
+          if (!parent) return true;
+          if (SKIP_TAGS.has(parent.tagName)) return true;
+          if (parent.closest && parent.closest('.highlight-prefix-positive, .highlight-prefix-negative')) return true;
+          return false;
         }
 
         function replaceTextNode(textNode) {
@@ -53,14 +68,26 @@ const { title } = Astro.props;
           let match;
 
           while ((match = HIGHLIGHT_REGEX.exec(text)) !== null) {
-            const before = text.slice(lastIndex, match.index);
+            // В продвинутом регексе (с lookbehind) захватывается только слово в match[1].
+            // В fallback-регексе match[1] — префикс (или ''), match[2] — искомое слово.
+            let matchStart = match.index;
+            let word = '';
+            if (match[2] !== undefined) {
+              const prefix = match[1] || '';
+              word = match[2];
+              matchStart = match.index + prefix.length;
+            } else {
+              word = match[1] || match[0];
+            }
+
+            const before = text.slice(lastIndex, matchStart);
             if (before) fragment.appendChild(document.createTextNode(before));
 
             const highlighted = document.createElement('span');
-            highlighted.className = match[1].startsWith('Преимуществ')
+            highlighted.className = word.startsWith('Преимуществ')
               ? 'highlight-prefix-positive'
               : 'highlight-prefix-negative';
-            highlighted.textContent = match[0];
+            highlighted.textContent = word;
             fragment.appendChild(highlighted);
 
             lastIndex = HIGHLIGHT_REGEX.lastIndex;
@@ -97,7 +124,47 @@ const { title } = Astro.props;
           nodes.forEach(replaceTextNode);
         }
 
-        document.addEventListener('DOMContentLoaded', highlightPageText);
+        function observeMutations() {
+          const observer = new MutationObserver((mutations) => {
+            for (const mutation of mutations) {
+              for (const node of mutation.addedNodes) {
+                if (!node) continue;
+                if (node.nodeType === Node.TEXT_NODE) {
+                  if (!shouldSkip(node) && HIGHLIGHT_TEST.test(node.nodeValue)) replaceTextNode(node);
+                } else if (node.nodeType === Node.ELEMENT_NODE) {
+                  if (node.closest && node.closest('.highlight-prefix-positive, .highlight-prefix-negative')) continue;
+                  if (typeof node.textContent === 'string' && !HIGHLIGHT_TEST.test(node.textContent)) continue;
+
+                  const walker = document.createTreeWalker(
+                    node,
+                    NodeFilter.SHOW_TEXT,
+                    {
+                      acceptNode(n) {
+                        return shouldSkip(n) || !n.nodeValue.trim()
+                          ? NodeFilter.FILTER_REJECT
+                          : HIGHLIGHT_TEST.test(n.nodeValue)
+                          ? NodeFilter.FILTER_ACCEPT
+                          : NodeFilter.FILTER_REJECT;
+                      }
+                    },
+                    false
+                  );
+
+                  const nodes = [];
+                  while (walker.nextNode()) nodes.push(walker.currentNode);
+                  nodes.forEach(replaceTextNode);
+                }
+              }
+            }
+          });
+
+          observer.observe(document.body, { childList: true, subtree: true });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+          highlightPageText();
+          observeMutations();
+        });
       })();
     </script>
   </body>
