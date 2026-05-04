@@ -21,3 +21,4 @@ export const classes = [fighter, wizard, paladin, barbarian, rogue, bard, druid,
 
 // Premium / community classes (shown separately on Classes page)
 //export const premiumClasses = [apothecary, monsterhunter, pugilist, witcher];
+export const premiumClasses = [];
