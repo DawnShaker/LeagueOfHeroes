@@ -560,7 +560,7 @@ export const barbarian: Class = {
           collapsible: [
             {
               title: 'Дикая магия',
-              description: '-',
+              description: 'Дикая магия',
               tableData: {
                 headers: ['д8', 'Магический эффект'],
                 rows: [

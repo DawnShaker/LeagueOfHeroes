@@ -16,6 +16,7 @@ import { apothecary } from './apothecary';
 import { monsterhunter } from './monsterhunter';
 import { pugilist } from './pugilist';
 import { witcher } from './witcher';
+import { bloodhunterV2 } from './bloodhunterV2';
 
 export const classes = [fighter, wizard, paladin, barbarian, rogue, bard, druid, cleric, monk, ranger, sorcerer, warlock, bloodhunter, artificer];
 

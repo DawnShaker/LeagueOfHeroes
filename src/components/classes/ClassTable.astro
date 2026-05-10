@@ -22,8 +22,8 @@ interface Props {
     sorceryPoints?: number;
     bloodMagicDie?: string;
     knownMaledicts?: number;
-    brandOfCastigation?: string;
     amplifyBloodCurse?: number;
+    brandOfCastigation?: string;
     numOfSpellSlots?: number;
     plansKnown?: number;
     magicItems?: number;
@@ -67,8 +67,8 @@ const hasSorceryPoints = levels[0].sorceryPoints !== undefined;
 const hasInvocations = levels[0].invocations !== undefined;
 const hasBloodMagicDie = levels[0].bloodMagicDie !== undefined;
 const hasKnownMaledicts = levels[0].knownMaledicts !== undefined;
-const hasBrandOfCastigation = levels[0].brandOfCastigation !== undefined;
 const hasAmplifyBloodCurse = levels[0].amplifyBloodCurse !== undefined;
+const hasBrandOfCastigation = levels[0].brandOfCastigation !== undefined;
 const hasNumOfSpellSlots = levels[0].numOfSpellSlots !== undefined;
 const hasSpellSlotsLvl = levels[0].spellSlotsLvl !== undefined;
 const hasPlansKnown = levels[0].plansKnown !== undefined;
@@ -149,8 +149,8 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
             (hasInvocations ? 1 : 0) +
             (hasBloodMagicDie ? 1 : 0) +
             (hasKnownMaledicts ? 1 : 0) +
-            (hasBrandOfCastigation ? 1 : 0) +
             (hasAmplifyBloodCurse ? 1 : 0) +
+            (hasBrandOfCastigation ? 1 : 0) +
             (hasNumOfSpellSlots ? 1 : 0) +
             (hasSpellSlotsLvl ? 1 : 0) +
             (hasPlansKnown ? 1 : 0) +
@@ -195,8 +195,8 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
           {hasInvocations && <td class="invocations">{level.invocations}</td>}
           {hasBloodMagicDie && <td class="blood-magic-die">{level.bloodMagicDie}</td>}
           {hasKnownMaledicts && <td class="known-maledicts">{level.knownMaledicts}</td>}
-          {hasBrandOfCastigation && <td class="brand-of-castigation">{level.brandOfCastigation}</td>}
           {hasAmplifyBloodCurse && <td class="amplify-blood-curse">{level.amplifyBloodCurse}</td>}
+          {hasBrandOfCastigation && <td class="brand-of-castigation">{level.brandOfCastigation}</td>}
           {hasNumOfSpellSlots && <td class="num-of-spell-slots">{level.numOfSpellSlots}</td>}
           {hasSpellSlotsLvl && <td class="spell-slots-lvl">{level.spellSlotsLvl}</td>}
           {hasPlansKnown && <td class="plans-known-lvl">{level.plansKnown}</td>}

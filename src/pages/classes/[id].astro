@@ -432,14 +432,18 @@ return { level, spells };
       if (!container) return;
 
       // First, add class/dataset to existing anchors with /spells/ in href
-      const anchors = container.querySelectorAll('a[href*="/spells/"]');
+      const anchors = container.querySelectorAll('a[href*="/spells"], a[data-spell-id]');
       anchors.forEach(a => {
         if (!a.classList.contains('spell-link')) {
-          const href = a.getAttribute('href') || '';
-          const m = href.match(/\/spells\/(.+?)(?:[\/\?#]|$)/);
-          if (m) {
+          if (a.dataset && a.dataset.spellId) {
             a.classList.add('spell-link');
-            a.dataset.spellId = decodeURIComponent(m[1]);
+          } else {
+            const href = a.getAttribute('href') || '';
+            const m = href.match(/\/spells\/(.+?)(?:[\/\?#]|$)/);
+            if (m) {
+              a.classList.add('spell-link');
+              a.dataset.spellId = decodeURIComponent(m[1]);
+            }
           }
         }
       });
