@@ -1098,7 +1098,6 @@ export const spells: Spell[] = [
   range: 'Касание',
   components: {
   verbal: true,
-      somatic: true,
   material: 'светлячок или фосфоресцирующий мох'
   },
   duration: '1 час',
