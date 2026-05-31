@@ -320,18 +320,14 @@ const showCalculator = !!raceSizeEntry && !_excludeCalc.includes(species.id);
       function linkifySpellsInNode(container, spellsList) {
         if (!container) return;
 
-        const anchors = container.querySelectorAll('a[href*="/spells"], a[data-spell-id]');
+        const anchors = container.querySelectorAll('a[href*="/spells/"]');
         anchors.forEach(a => {
           if (!a.classList.contains('spell-link')) {
-            if (a.dataset && a.dataset.spellId) {
+            const href = a.getAttribute('href') || '';
+            const m = href.match(/\/spells\/(.+?)(?:[\/\?#]|$)/);
+            if (m) {
               a.classList.add('spell-link');
-            } else {
-              const href = a.getAttribute('href') || '';
-              const m = href.match(/\/spells\/(.+?)(?:[\/\?#]|$)/);
-              if (m) {
-                a.classList.add('spell-link');
-                a.dataset.spellId = decodeURIComponent(m[1]);
-              }
+              a.dataset.spellId = decodeURIComponent(m[1]);
             }
           }
         });
