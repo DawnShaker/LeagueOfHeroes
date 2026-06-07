@@ -112,8 +112,90 @@ const abilities = {
     const abilityButtons = document.querySelectorAll('.tri-filter[data-filter="ability-score"]');
     const extraReqButton = document.querySelector('.tri-filter[data-filter="no-extra-req"]');
 
-    // Load filters from localStorage
+    // Read filters from URL (preferred) — supports tri-state via include/exclude params
+    function getFiltersFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      const out: any = {};
+
+      const search = params.get('search');
+      if (search) out.search = search;
+
+      // feat-type: includes in `feat-type`, excludes in `feat-type-exclude`
+      const ftInc = params.get('feat-type');
+      const ftExc = params.get('feat-type-exclude');
+      if (ftInc || ftExc) {
+        const map: any = {};
+        if (ftInc) ftInc.split(',').forEach(v => { if (v) map[v] = 'include'; });
+        if (ftExc) ftExc.split(',').forEach(v => { if (v) map[v] = 'exclude'; });
+        out['feat-type'] = map;
+      }
+
+      // ability-score: includes in `ability-score`, excludes in `ability-score-exclude`
+      const abInc = params.get('ability-score');
+      const abExc = params.get('ability-score-exclude');
+      if (abInc || abExc) {
+        const map: any = {};
+        if (abInc) abInc.split(',').forEach(v => { if (v) map[v] = 'include'; });
+        if (abExc) abExc.split(',').forEach(v => { if (v) map[v] = 'exclude'; });
+        out['ability-score'] = map;
+      }
+
+      const extra = params.get('no-extra-req');
+      if (extra) out['no-extra-req'] = extra;
+
+      return out;
+    }
+
+    // Load filters: prefer URL params, fallback to localStorage
     function loadFilters() {
+      const urlFilters = getFiltersFromURL();
+      if (Object.keys(urlFilters).length > 0) {
+        try {
+          if (urlFilters.search && searchInput instanceof HTMLInputElement) {
+            searchInput.value = urlFilters.search;
+          }
+
+          if (urlFilters['feat-type']) {
+            const mapping = urlFilters['feat-type'];
+            Object.entries(mapping).forEach(([v, s]) => {
+              const btn = document.querySelector(`.tri-filter[data-filter="feat-type"][data-value="${v}"]`);
+              if (btn instanceof HTMLElement && (s === 'include' || s === 'exclude')) btn.dataset.state = String(s);
+            });
+          }
+
+          if (urlFilters['ability-score']) {
+            const mapping = urlFilters['ability-score'];
+            Object.entries(mapping).forEach(([v, s]) => {
+              const btn = document.querySelector(`.tri-filter[data-filter="ability-score"][data-value="${v}"]`);
+              if (btn instanceof HTMLElement && (s === 'include' || s === 'exclude')) btn.dataset.state = String(s);
+            });
+          }
+
+          if (urlFilters['no-extra-req'] && extraReqButton instanceof HTMLElement) {
+            extraReqButton.dataset.state = urlFilters['no-extra-req'];
+          }
+
+          // Apply classes
+          triButtons.forEach(b => {
+            const el = b instanceof HTMLElement ? b : null;
+            const state = el?.dataset.state || 'neutral';
+            if (el) {
+              el.classList.remove('state-neutral', 'state-include', 'state-exclude');
+              el.classList.add(`state-${state}`);
+            }
+          });
+
+          // Persist URL-driven selection to localStorage
+          saveFilters();
+          updateFilterCount();
+          filterFeats();
+          return;
+        } catch (e) {
+          console.error('Failed to apply filters from URL', e);
+        }
+      }
+
+      // Fallback: load from localStorage (existing behavior)
       const saved = localStorage.getItem('featFilters');
       if (!saved) return;
       try {
@@ -189,6 +271,47 @@ const abilities = {
       if (extraReqButton instanceof HTMLElement) out['no-extra-req'] = extraReqButton.dataset.state || 'neutral';
 
       localStorage.setItem('featFilters', JSON.stringify(out));
+      // Reflect filters in URL so they can be shared / preserved
+      updateURL();
+    }
+
+    // Update the current URL to reflect selected filters (no history entry)
+    function updateURL() {
+      const params = new URLSearchParams();
+
+      const featInc: string[] = [];
+      const featExc: string[] = [];
+      document.querySelectorAll('.tri-filter[data-filter="feat-type"]').forEach(b => {
+        if (!(b instanceof HTMLElement)) return;
+        const st = b.dataset.state || 'neutral';
+        const val = b.dataset.value;
+        if (st === 'include') featInc.push(val);
+        if (st === 'exclude') featExc.push(val);
+      });
+      if (featInc.length) params.set('feat-type', featInc.join(','));
+      if (featExc.length) params.set('feat-type-exclude', featExc.join(','));
+
+      const abInc: string[] = [];
+      const abExc: string[] = [];
+      document.querySelectorAll('.tri-filter[data-filter="ability-score"]').forEach(b => {
+        if (!(b instanceof HTMLElement)) return;
+        const st = b.dataset.state || 'neutral';
+        const val = b.dataset.value;
+        if (st === 'include') abInc.push(val);
+        if (st === 'exclude') abExc.push(val);
+      });
+      if (abInc.length) params.set('ability-score', abInc.join(','));
+      if (abExc.length) params.set('ability-score-exclude', abExc.join(','));
+
+      const extraState = extraReqButton instanceof HTMLElement ? extraReqButton.dataset.state || 'neutral' : 'neutral';
+      if (extraState && extraState !== 'neutral') params.set('no-extra-req', extraState);
+
+      const searchTerm = (searchInput instanceof HTMLInputElement) ? searchInput.value.trim() : '';
+      if (searchTerm) params.set('search', searchTerm);
+
+      const queryString = params.toString();
+      const newUrl = queryString ? `/feats?${queryString}` : '/feats';
+      window.history.replaceState({}, '', newUrl);
     }
 
     // Update filter count display
@@ -308,7 +431,7 @@ const abilities = {
       updateFilterCount();
     }
 
-    // Reset all filters UI (does NOT clear saved settings)
+    // Reset all filters UI and saved settings
     function resetFilters() {
       triButtons.forEach(b => {
         if (b instanceof HTMLElement) {
@@ -317,7 +440,10 @@ const abilities = {
           b.classList.add('state-neutral');
         }
       });
+      if (searchInput instanceof HTMLInputElement) searchInput.value = '';
+      localStorage.removeItem('featFilters');
       updateFilterCount();
+      updateURL();
       filterFeats();
     }
 

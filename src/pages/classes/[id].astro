@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import ClassTable from '../../components/classes/ClassTable.astro';
 import { classes, premiumClasses } from '../../data/classes';
 import { spells as allSpells } from '../../data/spells';
+import { glossary } from '../../data/glossary';
 
 export function getStaticPaths() {
   const all = Array.isArray(premiumClasses) && premiumClasses.length > 0 ? [...classes, ...premiumClasses] : classes;
@@ -201,7 +202,7 @@ return { level, spells };
   </div>
 </Layout>
 
-<script type="module" define:vars={{ classData, allSpells }}>
+<script type="module" define:vars={{ classData, allSpells, glossary }}>
 
   document.addEventListener('DOMContentLoaded', () => {
     const subclassSelect = document.getElementById('subclass-select');
@@ -240,29 +241,37 @@ return { level, spells };
 
     document.addEventListener('mouseover', (e) => {
       const target = e.target;
-      const link = target.closest ? target.closest('.spell-link') : null;
+      const link = target.closest ? target.closest('.spell-link, .state-link') : null;
 
-      if (link && link.dataset.spellId) {
+      if (link) {
         if (tooltipHideTimeout) {
           clearTimeout(tooltipHideTimeout);
           tooltipHideTimeout = null;
         }
 
         currentSpellLink = link;
-        const spellId = link.dataset.spellId;
 
-        tooltipShowTimeout = setTimeout(() => {
-          const spell = allSpells.find(s => s.id === spellId);
-          if (spell) {
-            showTooltip(spell, e);
-          }
-        }, tooltipConfig.fadeInDelay);
+        if (link.classList.contains('spell-link') && link.dataset.spellId) {
+          const spellId = link.dataset.spellId;
+          tooltipShowTimeout = setTimeout(() => {
+            const spell = allSpells.find(s => s.id === spellId);
+            if (spell) {
+              showTooltip(spell, e);
+            }
+          }, tooltipConfig.fadeInDelay);
+        } else if (link.classList.contains('state-link')) {
+          const ruleId = link.dataset.ruleId || (link.getAttribute && (link.getAttribute('href')||'').split('#')[1]);
+          tooltipShowTimeout = setTimeout(() => {
+            const rule = (glossary || []).find(r => r.id === ruleId || r.name === ruleId);
+            if (rule) showStateTooltip(rule, e);
+          }, tooltipConfig.fadeInDelay);
+        }
       }
     });
 
     document.addEventListener('mouseout', (e) => {
       const target = e.target;
-      const link = target.closest ? target.closest('.spell-link') : null;
+      const link = target.closest ? target.closest('.spell-link, .state-link') : null;
 
       if (link) {
         if (tooltipShowTimeout) {
@@ -282,7 +291,7 @@ return { level, spells };
     document.addEventListener('mousemove', (e) => {
       if (!tooltipEl || tooltipEl.style.display === 'none') return;
       const target = e.target;
-      const link = target.closest ? target.closest('.spell-link') : null;
+      const link = target.closest ? target.closest('.spell-link, .state-link') : null;
       if (link === currentSpellLink) {
         positionTooltip(e);
       }
@@ -295,6 +304,8 @@ return { level, spells };
     }
 
     function showTooltip(spell, event) {
+      // Ensure this is the regular (spell) tooltip style
+      if (tooltipEl && tooltipEl.classList) tooltipEl.classList.remove('state-tooltip');
       tooltipEl.innerHTML = renderTooltipContent(spell);
       tooltipEl.style.display = 'block';
       tooltipEl.setAttribute('aria-hidden', 'false');
@@ -306,6 +317,7 @@ return { level, spells };
       tooltipEl.setAttribute('aria-hidden', 'true');
       tooltipEl.innerHTML = '';
       currentSpellLink = null;
+      if (tooltipEl && tooltipEl.classList) tooltipEl.classList.remove('state-tooltip');
     }
 
     function positionTooltip(event) {
@@ -390,10 +402,36 @@ return { level, spells };
       return parts.join(', ');
     }
 
+    // State tooltip rendering
+    function showStateTooltip(rule, event) {
+      // Mark tooltip as a "state" tooltip so CSS can style it differently
+      if (tooltipEl && tooltipEl.classList) tooltipEl.classList.add('state-tooltip');
+      tooltipEl.innerHTML = renderStateTooltipContent(rule);
+      tooltipEl.style.display = 'block';
+      tooltipEl.setAttribute('aria-hidden', 'false');
+      positionTooltip(event);
+    }
+
+    function renderStateTooltipContent(rule) {
+      const title = rule.name || '';
+      const cat = rule.category ? `<span class="tooltip-source">${rule.category}</span>` : '';
+      const body = rule.html || rule.description || '';
+      return `
+        <div class="tooltip-card">
+          <div class="tooltip-header">
+            <div class="tooltip-title">${title}</div>
+            ${cat}
+          </div>
+          <div class="tooltip-desc">${body}</div>
+        </div>
+      `;
+    }
+
     // Linkify server-rendered feature content (but NOT the top-level class
     // description). Markers in features should become links and get tooltip hooks.
     try {
       linkifySpellsInNode(featuresContainer, allSpells);
+      try { linkifyStatesInNode(featuresContainer, glossary); } catch (e) { /* ignore */ }
     } catch (e) {
       console.error('initial linkify failed', e);
     }
@@ -584,6 +622,127 @@ return { level, spells };
           a.href = `/spells/${encodeURIComponent(m.id)}`;
           a.className = 'spell-link';
           a.dataset.spellId = m.id;
+          a.textContent = m.name;
+          frag.appendChild(a);
+          pos = m.index + m.length;
+        }
+        if (pos < nodeText.length) frag.appendChild(document.createTextNode(nodeText.slice(pos)));
+        parent.insertBefore(frag, tNode);
+        parent.removeChild(tNode);
+      }
+    }
+
+    function linkifyStatesInNode(container, glossaryList) {
+      if (!container || !glossaryList) return;
+
+      // Annotate existing anchors linking to glossary
+      const anchors = container.querySelectorAll('a[href*="/glossary"], a[data-rule-id], a[data-glossary-id]');
+      anchors.forEach(a => {
+        if (!a.classList.contains('state-link')) {
+          const href = a.getAttribute && a.getAttribute('href') || '';
+          let id = a.dataset && (a.dataset.ruleId || a.dataset.glossaryId) || null;
+          if (!id && href.indexOf('#') !== -1) {
+            id = href.split('#')[1];
+          }
+          if (id) {
+            a.classList.add('state-link');
+            a.dataset.ruleId = id;
+          }
+        }
+      });
+
+      // Build list of state glossary entries
+      const states = (glossaryList || []).filter(g => (g.category || '').toLowerCase() === 'состояния');
+      if (!states.length) return;
+
+      const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
+      const textNodes = [];
+      let node;
+      while (node = walker.nextNode()) { // eslint-disable-line no-cond-assign
+        textNodes.push(node);
+      }
+
+      for (const tNode of textNodes) {
+        if (!tNode.nodeValue || !tNode.nodeValue.trim()) continue;
+        if (tNode.parentElement && tNode.parentElement.closest('a')) continue;
+
+        const nodeText = tNode.nodeValue;
+        const lowerText = nodeText.toLowerCase();
+
+        // Extra stems for known problematic states (handles inflected forms)
+        const extraStems = {
+          bloodied: ['окровавлен', 'окровавл'],
+          exhaustion: ['истощен', 'истощ']
+        };
+
+        // Collect candidate states that either contain the exact name or a known stem
+        const candidates = states.filter(s => {
+          const name = (s.name || '').toLowerCase();
+          if (!name) return false;
+          if (lowerText.indexOf(name) !== -1) return true;
+          const stems = extraStems[s.id] || [];
+          return stems.some(st => lowerText.indexOf(st) !== -1);
+        });
+        if (candidates.length === 0) continue;
+
+        const matches = [];
+        for (const cand of candidates) {
+          const name = cand.name || '';
+          const lname = name.toLowerCase();
+          const stems = (extraStems[cand.id] || []).slice();
+          // search patterns: prefer full name first, then stems
+          const patterns = [lname].concat(stems);
+          for (const pat of patterns) {
+            let start = 0;
+            while (true) {
+              const idx = lowerText.indexOf(pat, start);
+              if (idx === -1) break;
+              // If pattern is a stem (shorter than the full name), expand to full word
+              let end = idx + pat.length;
+              // expand right to include trailing cyrillic letters (inflection)
+              while (end < nodeText.length && /[A-Za-zА-Яа-яЁё]/.test(nodeText[end])) end++;
+              const actualText = nodeText.slice(idx, end);
+              const leftChar = idx > 0 ? nodeText[idx - 1] : '';
+              const rightChar = end < nodeText.length ? nodeText[end] : '';
+              const leftOk = leftChar === '' || /[\s\(\[\.,;:\-–—]/.test(leftChar);
+              const rightOk = rightChar === '' || /[\s\)\]\.,;:\-–—]/.test(rightChar);
+              if (leftOk && rightOk) {
+                matches.push({ index: idx, name: actualText, id: cand.id, length: actualText.length });
+              }
+              start = idx + pat.length;
+            }
+          }
+        }
+        if (matches.length === 0) continue;
+
+        matches.sort((a, b) => {
+          if (b.length !== a.length) return b.length - a.length;
+          return a.index - b.index;
+        });
+        const occupied = new Array(nodeText.length).fill(false);
+        const chosen = [];
+        for (const m of matches) {
+          let conflict = false;
+          for (let p = m.index; p < m.index + m.length; p++) {
+            if (occupied[p]) { conflict = true; break; }
+          }
+          if (!conflict) {
+            chosen.push(m);
+            for (let p = m.index; p < m.index + m.length; p++) occupied[p] = true;
+          }
+        }
+        chosen.sort((a, b) => a.index - b.index);
+
+        const parent = tNode.parentNode;
+        if (!parent) continue;
+        let pos = 0;
+        const frag = document.createDocumentFragment();
+        for (const m of chosen) {
+          if (m.index > pos) frag.appendChild(document.createTextNode(nodeText.slice(pos, m.index)));
+          const a = document.createElement('a');
+          a.href = `/glossary#${encodeURIComponent(m.id)}`;
+          a.className = 'state-link';
+          a.dataset.ruleId = m.id;
           a.textContent = m.name;
           frag.appendChild(a);
           pos = m.index + m.length;
@@ -800,6 +959,7 @@ return { level, spells };
         // Ensure newly created collapsible content is linkified and annotated for item tooltips
         try {
           linkifySpellsInNode(collapsibleContent, allSpells);
+          try { linkifyStatesInNode(collapsibleContent, glossary); } catch (e) { /* ignore */ }
         } catch (e) {
           console.error('linkify collapsed failed', e);
         }
@@ -820,6 +980,7 @@ return { level, spells };
             // After building description, linkify spell anchors and plain names safely
             try {
               linkifySpellsInNode(descriptionContainer, allSpells);
+              try { linkifyStatesInNode(descriptionContainer, glossary); } catch (e) { /* ignore */ }
             } catch (e) {
               // non-fatal
               console.error('linkify error', e);
@@ -875,6 +1036,7 @@ return { level, spells };
       // Ensure spell links and tooltip hooks are set after rendering
       try {
         linkifySpellsInNode(featuresContainer, allSpells);
+        try { linkifyStatesInNode(featuresContainer, glossary); } catch (e) { /* ignore */ }
         try {
           const inst = window.__itemTooltipInstance;
           if (inst && typeof inst.annotateItemAnchors === 'function') {

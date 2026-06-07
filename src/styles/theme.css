@@ -4,6 +4,8 @@
   --primary-dark: #5b21b6;
   --background: #f8fafc;
   --text: #1e293b;
+  /* Accent for state tooltips */
+  --state-accent: #b58900;
   /* Link colors (light theme defaults) */
   --link: #6d28d9;
   --link-visited: #7c3aed;
@@ -40,6 +42,8 @@
   --primary-dark: #8b5cf6;
   --background: #0f172a;
   --text: #e2e8f0;
+  /* Accent for state tooltips in dark mode */
+  --state-accent: #ffd86b;
   /* Link colors for dark theme */
   --link: #c7b6ff;
   --link-visited: #a78bfa;
@@ -165,11 +169,20 @@
   margin-bottom: 0;
 }
 
+/* State tooltip variant (use a yellow/golden accent instead of primary) */
+#spell-tooltip.state-tooltip .tooltip-title {
+  color: var(--state-accent);
+}
+#spell-tooltip.state-tooltip .tooltip-attrs strong {
+  color: var(--state-accent);
+}
+
 /* Spell link styling */
 .spell-link {
   color: var(--link);
   text-decoration: underline;
   cursor: pointer;
+  /* spells use a dotted underline to visually distinguish them */
   text-decoration-style: dotted;
   text-underline-offset: 2px;
 }
@@ -178,6 +191,30 @@
 
 .spell-link:hover { color: var(--link-hover); text-decoration-style: solid; }
 .spell-link:focus { outline: none; box-shadow: var(--link-focus-box); border-radius: 4px; }
+
+/* Item links: standard link appearance (solid underline, regular color) */
+.item-link {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+.item-link:visited { color: var(--link-visited); }
+.item-link:hover { color: var(--link-hover); }
+.item-link:focus { outline: none; box-shadow: var(--link-focus-box); border-radius: 4px; }
+
+/* State links: use state accent color for the link text itself */
+.state-link {
+  color: var(--state-accent);
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.state-link:visited { color: var(--state-accent); opacity: 0.9; }
+.state-link:hover { filter: brightness(0.95); }
 
 /* Global link defaults (uses theme variables) */
 a, a:link { color: var(--link); }
