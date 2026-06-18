@@ -52,9 +52,10 @@ import { plasmoid } from './plasmoid';
 import { reborn } from './reborn';
 import { thrikreen } from './thrikreen';
 import { warforged } from './warforged';
+import { lupin } from './lupin';
 
 
-const allSpecies = [aasimar,human,tortle,gnome,dwarf,goliath,dragonborn,elf,tiefling,orc,halfling,genasi,aarakocra,autognome,bugbear,giff,goblin,vedalken,verdan,simichybrid,shifter,centaur,changeling,customlineage,fairy,firbolg,harengon,gith,hobgoblin,kenku,kobold,lizardfolk,minotaur,triton,tabaxi,satyr,yuanti,halfelf,grung,dhampir,hadozee,halforc,hexblood,kalashtar,kender,leonin,locathah,loxodon,owlin,plasmoid,reborn,thrikreen,warforged];
+const allSpecies = [lupin,aasimar,human,tortle,gnome,dwarf,goliath,dragonborn,elf,tiefling,orc,halfling,genasi,aarakocra,autognome,bugbear,giff,goblin,vedalken,verdan,simichybrid,shifter,centaur,changeling,customlineage,fairy,firbolg,harengon,gith,hobgoblin,kenku,kobold,lizardfolk,minotaur,triton,tabaxi,satyr,yuanti,halfelf,grung,dhampir,hadozee,halforc,hexblood,kalashtar,kender,leonin,locathah,loxodon,owlin,plasmoid,reborn,thrikreen,warforged];
 
 export const speciesData = allSpecies.sort((a, b) => 
   a.name.localeCompare(b.name, 'ru')

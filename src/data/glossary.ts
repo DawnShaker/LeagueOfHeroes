@@ -601,7 +601,7 @@ export const glossary = [
     },
     {
         id: 'Possession',
-        name: 'Одержимость',
+        name: 'Одержимый',
         nameEn: 'Possession',
         category: 'Состояния',
         html: `<p>
