@@ -617,7 +617,7 @@ export const bloodhunterV2: Class = {
           collapsible: [
             {
               title: 'Формулы',
-              description: '',
+              description: 'Формулы',
               tableData: {
                 headers: ['Уровень Кровавого охотника', 'Создаваемые мутагены', 'Известные формулы'],
                 rows: [

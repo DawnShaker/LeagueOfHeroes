@@ -199,7 +199,7 @@ export const monsterhunter: Class = {
         collapsible: [
         {
             title: 'Изучаемые языки',
-            description: '',
+            description: 'Изучаемые языки',
             tableData: {
             headers: ['Тип существа', 'Язык'],
             rows: [
