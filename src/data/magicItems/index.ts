@@ -8444,7 +8444,7 @@ export const magicItems: MagicItem[] = [
     type: 'Чудесный предмет',
     weight: '—',
     attunement: true,
-    rarity: 'Uncommon',
+    rarity: 'Rare',
     source: {
       book: 'PaBTSO',
       page: 219
