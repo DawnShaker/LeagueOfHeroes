@@ -2,7 +2,7 @@
 export const rulesLinks = [
   { href: '/general-rules', label: 'Общие правила' },
   { href: '/heroes-league-errata', label: 'Эррата Лиги Героев' },
-  //{ href: '/masters-rules', label: 'Мастерские правила' },
+  { href: '/masters-rules', label: 'Мастерские правила' },
   { href: '/rules/downtime-activities', label: 'Активности простоя' },
   { href: '/bastions', label: 'Бастионы' }
 ];
