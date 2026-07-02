@@ -1,5 +1,5 @@
 import { readFileSync } from 'fs';
-import { fileURLToPath } from 'url';
+import { join } from 'path';
 
 export interface Participant {
   name: string;
@@ -47,7 +47,7 @@ export interface GameStatsResult {
   };
 }
 
-const CSV_PATH = fileURLToPath(new URL('../../stats.csv', import.meta.url));
+const CSV_PATH = join(process.cwd(), 'stats.csv');
 
 function parseCsv(csv: string): Party[] {
   const rows = csv
