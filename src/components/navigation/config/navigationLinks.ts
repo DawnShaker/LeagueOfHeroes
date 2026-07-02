@@ -20,7 +20,8 @@ export const toolsLinks = [
   //{ href: '/tools/dice-roller', label: 'Бросок костей' },
   //{ href: '/tools/name-generator', label: 'Генератор имён' },
   { href: '/tools/encounter-builder', label: 'Калькулятор столкновений' },
-  { href: '/tools/tokenator', label: 'Генератор токенов (Tokenator)' }
+  { href: '/tools/tokenator', label: 'Генератор токенов (Tokenator)' },
+  { href: '/tools/game-stats', label: 'Игровая статистика' }
 ];
 
 export const guideLinks = [
