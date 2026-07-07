@@ -9501,7 +9501,7 @@ export const spells: Spell[] = [
     <table>
         <thead>
           <tr>
-            <th>1д53</th>
+            <th>1д54</th>
             <th>Вид</th>
           </tr>
         </thead>

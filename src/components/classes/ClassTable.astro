@@ -5,6 +5,7 @@ interface Props {
     profBonus: string;
     features: string[];
     rage?: number;
+    theories?: number;
     rageDamage?: string;
     secondWind?: string;
     maneuvers?: string;
@@ -28,7 +29,6 @@ interface Props {
     plansKnown?: number;
     magicItems?: number;
     spellSlotsLvl?: number;
-    knownTheories?: number;
     fisticuffs?: string;
     moxiePoints?: string;
     focusPoints?: string;
@@ -49,6 +49,7 @@ interface Props {
 }
 const { levels } = Astro.props;
 const hasSpellcasting = levels[0].spellSlots !== undefined;
+const hasTheories = levels[0].theories !== undefined;
 const hasBardicInspiration= levels[0].bardicInspiration !== undefined;
 const hasPreparedSpells = levels[0].preparedSpells !== undefined;
 const hasCantrips = levels[0].cantrips !== undefined;
@@ -73,7 +74,6 @@ const hasNumOfSpellSlots = levels[0].numOfSpellSlots !== undefined;
 const hasSpellSlotsLvl = levels[0].spellSlotsLvl !== undefined;
 const hasPlansKnown = levels[0].plansKnown !== undefined;
 const hasMagicItems = levels[0].magicItems !== undefined;
-const hasKnownTheories = levels[0].knownTheories !== undefined;
 const hasFisticuffs = levels[0].fisticuffs !== undefined;
 const hasMoxiePoints = levels[0].moxiePoints !== undefined;
 const hasFocusPoints = levels[0].focusPoints !== undefined;
@@ -93,6 +93,7 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
         <th class="features">Умения класса</th>
         {hasBardicInspiration && <th class="bardic-inspiration">Бардовское вдохновение</th>}
         {hasWildShape && <th class="wild-shape">Дикая форма</th>}
+        {hasTheories && <th class="theories">Известные теории</th>}
         {hasChanelDivinity && <th class="chanel-divinity">Божественный канал</th>}
         {hasCantrips && <th class="cantrips">Заговоры</th>}
         {hasPreparedSpells && <th class="prepared">Подг. закл.</th>}
@@ -115,7 +116,6 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
         {hasSpellSlotsLvl && <th class="spell-slots-lvl">Уровень ячеек</th>}
         {hasPlansKnown && <th class="plans-known-lvl">Известные схемы</th>}
         {hasMagicItems && <th class="magic-items-lvl">Магические предметы</th>}
-        {hasKnownTheories && <th class="known-theories">Известные теории</th>}
         {hasFisticuffs && <th class="fisticuffs">Кулачный бой</th>}
         {hasMoxiePoints && <th class="moxie-points">Очки удали</th>}
         {hasFocusPoints && <th class="focus-points">Очки фокуса</th>}
@@ -135,6 +135,7 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
             // Добавляем 1 для каждой дополнительной колонки в зависимости от класса
             (hasBardicInspiration ? 1 : 0) +
             (hasWildShape ? 1 : 0) +
+            (hasTheories ? 1 : 0) +
             (hasChanelDivinity ? 1 : 0) +
             (hasRage ? 1 : 0) +
             (hasRageDamage ? 1 : 0) +
@@ -155,7 +156,6 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
             (hasSpellSlotsLvl ? 1 : 0) +
             (hasPlansKnown ? 1 : 0) +
             (hasMagicItems ? 1 : 0) +
-            (hasKnownTheories ? 1 : 0) +
             (hasFisticuffs ? 1 : 0) +
             (hasMoxiePoints ? 1 : 0) +
             (hasFocusPoints ? 1 : 0) +
@@ -179,6 +179,7 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
           <td class="features">{level.features.join(', ')}</td>
           {hasBardicInspiration && <td class="bardic-inspiration">{level.bardicInspiration}</td>}
           {hasWildShape && <td class="wild-shape">{level.wildShape}</td>}
+          {hasTheories && <td class="theories">{level.theories}</td>}
           {hasChanelDivinity && <td class="chanel-divinity">{level.chanelDivinity}</td>}
           {hasCantrips && <td class="cantrips">{level.cantrips}</td>}
           {hasPreparedSpells && <td class="prepared">{level.preparedSpells}</td>}
@@ -201,9 +202,8 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
           {hasSpellSlotsLvl && <td class="spell-slots-lvl">{level.spellSlotsLvl}</td>}
           {hasPlansKnown && <td class="plans-known-lvl">{level.plansKnown}</td>}
           {hasMagicItems && <td class="magic-items-lvl">{level.magicItems}</td>}
-          {hasKnownTheories && <td class="knownTheories">{level.knownTheories}</td>}
           {hasFisticuffs && <td class="fisticuffs">{level.fisticuffs}</td>}
-          {hasMoxiePoints && <td class="moxiePoints">{level.moxiePoints}</td>}
+          {hasMoxiePoints && <td class="moxie-points">{level.moxiePoints}</td>}
           {hasFocusPoints && <td class="focus-points">{level.focusPoints}</td>}
           {hasSigns && <td class="signs">{level.signs}</td>}
           {hasAlchemyFormulas && <td class="alchemy-formulas">{level.alchemyFormulas}</td>}
@@ -241,7 +241,7 @@ const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level =>
     text-align: center;
   }
   
-  .brand-of-castigation, .amplify-blood-curse, .focus-points, .signs, .alchemy-formulas, .rage, .rage-damage, .second-wind, .maneuvers, .sneak-attack, .bardic-inspiration, .wild-shape, .chanel-divinity, .martial-arts, .spirit-points, .unarmed-movement, .favored-enemy, .sorcery-points, .invocations, .num-of-spell-slots, .spell-slots-lvl, .blood-magic-die, .known-maledicts, .magic-items-lvl, .plans-known-lvl, .known-theories, .fisticuffs, .moxie-points {
+  .theories, .brand-of-castigation, .amplify-blood-curse, .focus-points, .signs, .alchemy-formulas, .rage, .rage-damage, .second-wind, .maneuvers, .sneak-attack, .bardic-inspiration, .wild-shape, .chanel-divinity, .martial-arts, .spirit-points, .unarmed-movement, .favored-enemy, .sorcery-points, .invocations, .num-of-spell-slots, .spell-slots-lvl, .blood-magic-die, .known-maledicts, .magic-items-lvl, .plans-known-lvl, .fisticuffs, .moxie-points {
     min-width: 30px;
     text-align: center;
   }

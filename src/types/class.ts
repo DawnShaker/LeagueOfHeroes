@@ -1,4 +1,4 @@
-interface ClassFeature {
+export interface ClassFeature {
   name: string;
   level: number;
   description: string;
@@ -12,7 +12,7 @@ interface ClassFeature {
   }[];
 }
 
-interface Subclass {
+export interface Subclass {
   id: string;
   name: string;
   nameEn: string;
@@ -20,7 +20,7 @@ interface Subclass {
   features: ClassFeature[];
 }
 
-interface ClassLevel {
+export interface ClassLevel {
   level: number;
   profBonus: string;
   features: string[];
@@ -37,6 +37,7 @@ interface ClassLevel {
     8: number;
     9: number;
   };
+  [key: string]: unknown;
 }
 
 interface Equipment {

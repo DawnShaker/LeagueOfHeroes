@@ -1,16 +1,18 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ClassTable from '../../components/classes/ClassTable.astro';
+import ClassSidebar from '../../components/classes/ClassSidebar.astro';
 import { classes, premiumClasses } from '../../data/classes';
 import { spells as allSpells } from '../../data/spells';
 import { glossary } from '../../data/glossary';
+import type { Class, ClassFeature } from '../../types/class';
 
 export function getStaticPaths() {
   const all = Array.isArray(premiumClasses) && premiumClasses.length > 0 ? [...classes, ...premiumClasses] : classes;
   return all.map(classData => ({ params: { id: classData.id }, props: { classData } }));
 }
 
-const { classData } = Astro.props;
+const { classData } = Astro.props as { classData: Class };
 
 // Функция для преобразования текстовой таблицы в структурированные данные
 function parseTableData(text: string) {
@@ -24,12 +26,18 @@ return { level, spells };
 
 <Layout title={`${classData.name}`}>
   <div class="content">
-    <a href="/classes" class="back-link">← Назад к классам</a>
+    <div class="page-shell">
+      <aside class="sidebar-column">
+        <ClassSidebar classes={classes} activeClassId={classData.id} currentSubclassId={Astro.url.searchParams.get('subclass') || ''} />
+      </aside>
 
-    <div class="class-header">
-      <h1>{classData.name} <span class="name-en">[{classData.nameEn}]</span></h1>
-      <div class="source">{classData.sourceBook}</div>
-    </div>
+      <div class="main-column">
+        <a href="/classes" class="back-link">← Назад к классам</a>
+
+        <div class="class-header">
+          <h1>{classData.name} <span class="name-en">[{classData.nameEn}]</span></h1>
+          <div class="source">{classData.sourceBook}</div>
+        </div>
 
     <div class="class-description">
       <div class="subclass-selector">
@@ -132,7 +140,7 @@ return { level, spells };
       <div class="feature">
         <div class="feature-header">
             <h3>{feature.name}</h3>
-            <button type="button" class="copy-feature-btn" aria-label="Скопировать описание">Скопировать описание</button>
+            <button type="button" class="copy-feature-btn" aria-label="Скопировать ссылку">Скопировать ссылку</button>
           <span class="feature-level">{feature.level} уровень</span>
         </div>
         <div class="feature-description">
@@ -199,6 +207,8 @@ return { level, spells };
         <path d="m18 15-6-6-6 6"/>
       </svg>
     </button>
+      </div>
+    </div>
   </div>
 </Layout>
 
@@ -210,7 +220,143 @@ return { level, spells };
     const baseLore = document.getElementById('base-lore');
     const featuresContainer = document.getElementById('features-container');
     const featureTemplate = document.getElementById('feature-template');
+    const sidebar = document.querySelector('.class-sidebar');
+    const sidebarColumn = document.querySelector('.sidebar-column');
+    const sidebarToggle = document.querySelector('.sidebar-toggle');
     let currentSubclass = null;
+    let pendingFeatureAnchor = null;
+
+    function slugifyFeatureValue(value) {
+      return String(value || '')
+        .toLowerCase()
+        .trim()
+        .replace(/[\s/\\]+/g, '-')
+        .replace(/[^a-zа-я0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '');
+    }
+
+    function getFeatureAnchor(featureName, level, isSubclassFeature = false, fallbackIndex = 0) {
+      const slug = slugifyFeatureValue(featureName || `feature-${fallbackIndex + 1}`);
+      const suffix = isSubclassFeature ? '-subclass' : '';
+      return `feature-${slug}-${level || fallbackIndex + 1}${suffix}`;
+    }
+
+    function assignFeatureAnchors() {
+      if (!featuresContainer) return;
+      const featureElements = Array.from(featuresContainer.querySelectorAll('.feature'));
+      featureElements.forEach((featureEl, index) => {
+        const heading = featureEl.querySelector('h3');
+        const featureName = heading?.textContent?.trim() || `feature-${index + 1}`;
+        const levelText = featureEl.querySelector('.feature-level')?.textContent || '';
+        const levelMatch = levelText.match(/(\d+)/);
+        const level = levelMatch ? Number(levelMatch[1]) : index + 1;
+        const isSubclassFeature = featureEl.classList.contains('subclass-feature');
+        const anchor = featureEl.id || getFeatureAnchor(featureName, level, isSubclassFeature, index);
+        featureEl.id = anchor;
+        featureEl.setAttribute('data-feature-anchor', anchor);
+      });
+    }
+
+    function getCurrentFeatureAnchor() {
+      return decodeURIComponent((window.location.hash || '').replace(/^#/, '')) || '';
+    }
+
+    function scrollToFeatureAnchor(anchor, behavior = 'smooth') {
+      if (!anchor) return;
+      const target = document.getElementById(anchor);
+      if (!target) return;
+      target.scrollIntoView({ behavior, block: 'start' });
+      target.classList.add('is-targeted');
+      window.setTimeout(() => target.classList.remove('is-targeted'), 1800);
+    }
+
+    function buildFeatureUrl(featureAnchor = '') {
+      const url = new URL(window.location.href);
+      if (featureAnchor) {
+        url.hash = featureAnchor;
+      } else {
+        url.hash = '';
+      }
+      return url.toString();
+    }
+
+    function showCopyTooltip(btnEl, message = 'Ссылка скопирована!') {
+      let tip = document.querySelector('.copy-tooltip');
+      if (!tip) {
+        tip = document.createElement('div');
+        tip.className = 'copy-tooltip';
+        tip.setAttribute('role', 'status');
+        tip.setAttribute('aria-live', 'polite');
+        document.body.appendChild(tip);
+      }
+      tip.textContent = message;
+      tip.style.opacity = '0';
+      tip.style.display = 'block';
+
+      const btnRect = btnEl.getBoundingClientRect();
+      requestAnimationFrame(() => {
+        const tipRect = tip.getBoundingClientRect();
+        let left = btnRect.left + (btnRect.width / 2) - (tipRect.width / 2);
+        let top = btnRect.top - tipRect.height - 8;
+        if (top < 8) top = btnRect.bottom + 8;
+        left = Math.max(8, Math.min(left, window.innerWidth - tipRect.width - 8));
+        tip.style.left = left + 'px';
+        tip.style.top = top + 'px';
+        tip.style.opacity = '1';
+      });
+
+      clearTimeout(tip._hideTimeout);
+      tip._hideTimeout = setTimeout(() => {
+        tip.style.opacity = '0';
+        setTimeout(() => { tip.style.display = 'none'; }, 250);
+      }, 900);
+    }
+
+    function fallbackCopy(text, btn, restore) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        if (typeof restore === 'function') restore();
+        try { showCopyTooltip(btn); } catch (e) { /* ignore */ }
+      } catch (err) {
+        window.prompt('Скопируйте текст вручную:', text);
+      }
+      ta.remove();
+    }
+
+    function syncSidebarSelection() {
+      const activeAnchor = getCurrentFeatureAnchor();
+      document.querySelectorAll('.sidebar-feature-link').forEach(link => {
+        link.classList.toggle('is-active', link.getAttribute('data-feature-anchor') === activeAnchor);
+      });
+      document.querySelectorAll('.subclass-item').forEach(item => {
+        item.classList.toggle('is-selected', item.getAttribute('data-subclass-id') === (currentSubclass || ''));
+      });
+    }
+
+    function applySidebarState(isCollapsed) {
+      sidebar?.classList.toggle('is-collapsed', isCollapsed);
+      sidebarColumn?.classList.toggle('is-collapsed', isCollapsed);
+      if (sidebarToggle) {
+        sidebarToggle.setAttribute('aria-expanded', String(!isCollapsed));
+      }
+    }
+
+    const sidebarCollapseKey = `class-${classData.id}-sidebar-collapsed`;
+    const savedSidebarState = localStorage.getItem(sidebarCollapseKey);
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    applySidebarState(savedSidebarState ? savedSidebarState === '1' : isMobile);
+
+    sidebarToggle?.addEventListener('click', () => {
+      const nextState = !sidebar?.classList.contains('is-collapsed');
+      applySidebarState(nextState);
+      localStorage.setItem(sidebarCollapseKey, nextState ? '1' : '0');
+    });
 
     // Create tooltip element and initialize inline tooltip handlers
     const tooltipEl = document.createElement('div');
@@ -838,8 +984,8 @@ return { level, spells };
       const copyBtn = document.createElement('button');
       copyBtn.type = 'button';
       copyBtn.className = 'copy-feature-btn';
-      copyBtn.setAttribute('aria-label', 'Скопировать описание');
-      copyBtn.textContent = 'Скопировать описание';
+      copyBtn.setAttribute('aria-label', 'Скопировать ссылку');
+      copyBtn.textContent = 'Скопировать ссылку';
       // Ensure dynamically created button has expected visual styling
       copyBtn.style.background = 'var(--background)';
       copyBtn.style.border = '1px solid var(--card-border)';
@@ -1033,6 +1179,11 @@ return { level, spells };
         const featureElement = createFeatureElement(feature, isSubclassFeature);
         featuresContainer.appendChild(featureElement);
       });
+      assignFeatureAnchors();
+      if (pendingFeatureAnchor) {
+        scrollToFeatureAnchor(pendingFeatureAnchor);
+        pendingFeatureAnchor = null;
+      }
       // Ensure spell links and tooltip hooks are set after rendering
       try {
         linkifySpellsInNode(featuresContainer, allSpells);
@@ -1053,18 +1204,18 @@ return { level, spells };
     subclassSelect?.addEventListener('change', (e) => {
       const subclassId = e.target.value;
       const subclass = classData.subclasses.find(s => s.id === subclassId);
+      currentSubclass = subclassId || null;
       
-      // Save subclass selection to localStorage
       if (subclassId) {
         localStorage.setItem(`class-${classData.id}-subclass`, subclassId);
       } else {
         localStorage.removeItem(`class-${classData.id}-subclass`);
       }
 
-      // Update URL with subclass selection
+      const currentHash = pendingFeatureAnchor || getCurrentFeatureAnchor();
       const newUrl = subclassId 
-        ? `/classes/${classData.id}?subclass=${subclassId}`
-        : `/classes/${classData.id}`;
+        ? `/classes/${classData.id}?subclass=${subclassId}${currentHash ? `#${currentHash}` : ''}`
+        : `/classes/${classData.id}${currentHash ? `#${currentHash}` : ''}`;
       window.history.pushState({ subclassId }, '', newUrl);
       if (classLore && baseLore) {
         if (subclass) {
@@ -1081,6 +1232,7 @@ return { level, spells };
       }
 
       updateFeatures(subclassId);
+      syncSidebarSelection();
     });
     
     // Load saved subclass selection on page load
@@ -1090,23 +1242,48 @@ return { level, spells };
       const urlSubclass = urlParams.get('subclass');
       const savedSubclass = urlSubclass || localStorage.getItem(`class-${classData.id}-subclass`);
       
+      const initialHash = getCurrentFeatureAnchor();
+      if (initialHash) {
+        pendingFeatureAnchor = initialHash;
+      }
+
       if (savedSubclass && subclassSelect) {
+        currentSubclass = savedSubclass;
         subclassSelect.value = savedSubclass;
-        // Trigger change event to update the display
         subclassSelect.dispatchEvent(new Event('change'));
+      } else {
+        currentSubclass = null;
+        updateFeatures('');
+        assignFeatureAnchors();
+        syncSidebarSelection();
+        if (pendingFeatureAnchor) {
+          scrollToFeatureAnchor(pendingFeatureAnchor);
+          pendingFeatureAnchor = null;
+        }
       }
     }
     
     // Handle browser back/forward buttons
-    window.addEventListener('popstate', (event) => {
+    window.addEventListener('popstate', () => {
       const urlParams = new URLSearchParams(window.location.search);
       const subclassId = urlParams.get('subclass') || '';
+      currentSubclass = subclassId || null;
+      pendingFeatureAnchor = getCurrentFeatureAnchor();
       
       if (subclassSelect) {
         subclassSelect.value = subclassId;
-        // Trigger change event to update the display
         subclassSelect.dispatchEvent(new Event('change'));
       }
+    });
+
+    window.addEventListener('hashchange', () => {
+      pendingFeatureAnchor = getCurrentFeatureAnchor();
+      if (!pendingFeatureAnchor) {
+        syncSidebarSelection();
+        return;
+      }
+      updateFeatures(currentSubclass || '');
+      syncSidebarSelection();
     });
     
     // Save scroll position periodically and on page unload
@@ -1168,6 +1345,56 @@ return { level, spells };
     // Initial check for button visibility
     toggleScrollButton();
 
+    document.addEventListener('click', (e) => {
+      const sidebarFeature = e.target.closest ? e.target.closest('.sidebar-feature-link') : null;
+      const btn = e.target.closest ? e.target.closest('.copy-feature-btn') : null;
+
+      if (sidebarFeature) {
+        e.preventDefault();
+        const featureAnchor = sidebarFeature.getAttribute('data-feature-anchor') || '';
+        const subclassId = sidebarFeature.getAttribute('data-subclass-id') || '';
+        pendingFeatureAnchor = featureAnchor;
+        currentSubclass = subclassId || currentSubclass;
+
+        if (subclassSelect) {
+          subclassSelect.value = subclassId || '';
+          subclassSelect.dispatchEvent(new Event('change'));
+        } else {
+          updateFeatures(subclassId || '');
+        }
+
+        const url = new URL(`/classes/${classData.id}`, window.location.origin);
+        if (subclassId) {
+          url.searchParams.set('subclass', subclassId);
+        } else {
+          url.searchParams.delete('subclass');
+        }
+        if (featureAnchor) {
+          url.hash = featureAnchor;
+        }
+        window.history.pushState({ subclassId, anchor: featureAnchor }, '', `${url.pathname}${url.search}${url.hash}`);
+        syncSidebarSelection();
+        return;
+      }
+
+      if (!btn) return;
+      const featureEl = btn.closest('.feature');
+      if (!featureEl) return;
+
+      const featureAnchor = featureEl.id || featureEl.getAttribute('data-feature-anchor') || '';
+      const linkToCopy = featureAnchor ? buildFeatureUrl(featureAnchor) : buildFeatureUrl();
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(linkToCopy).then(() => {
+          showCopyTooltip(btn);
+        }).catch(() => {
+          fallbackCopy(linkToCopy, btn, () => { showCopyTooltip(btn); });
+        });
+      } else {
+        fallbackCopy(linkToCopy, btn, () => { showCopyTooltip(btn); });
+      }
+    });
+
     // Initialize shared item tooltip using utility (load script and use window.ItemTooltip)
     (function ensureItemTooltipAndInit(){
       function ensureItemTooltip(){
@@ -1228,91 +1455,6 @@ return { level, spells };
   });
 </script>
 
-<script type="module" define:vars={{ classData }}>
-  // Copy feature description handler (delegated)
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest ? e.target.closest('.copy-feature-btn') : null;
-    if (!btn) return;
-
-    const featureEl = btn.closest('.feature');
-    if (!featureEl) return;
-
-    const name = (featureEl.querySelector('h3')?.innerText || '').trim();
-    const levelText = (featureEl.querySelector('.feature-level')?.innerText || '').trim();
-    const desc = (featureEl.querySelector('.feature-description')?.innerText || '').trim();
-    const className = (classData && classData.name) ? classData.name : '';
-
-    const textToCopy = `${name}\n${className} ${levelText}\n${desc}`;
-
-    // Show a small tooltip above the button when copied.
-    const restoreLabel = () => { /* no-op: we keep button label */ };
-
-    const showCopyTooltip = (btnEl) => {
-      let tip = document.querySelector('.copy-tooltip');
-      if (!tip) {
-        tip = document.createElement('div');
-        tip.className = 'copy-tooltip';
-        tip.setAttribute('role', 'status');
-        tip.setAttribute('aria-live', 'polite');
-        document.body.appendChild(tip);
-      }
-      tip.textContent = 'Скопировано!';
-      tip.style.opacity = '0';
-      tip.style.display = 'block';
-
-      // position above button
-      const btnRect = btnEl.getBoundingClientRect();
-      // allow render to compute size
-      requestAnimationFrame(() => {
-        const tipRect = tip.getBoundingClientRect();
-        let left = btnRect.left + (btnRect.width / 2) - (tipRect.width / 2);
-        let top = btnRect.top - tipRect.height - 8;
-        // if not enough space above, show below
-        if (top < 8) top = btnRect.bottom + 8;
-        // clamp horizontally
-        left = Math.max(8, Math.min(left, window.innerWidth - tipRect.width - 8));
-        tip.style.left = left + 'px';
-        tip.style.top = top + 'px';
-        tip.style.opacity = '1';
-      });
-
-      clearTimeout(tip._hideTimeout);
-      tip._hideTimeout = setTimeout(() => {
-        tip.style.opacity = '0';
-        setTimeout(() => { tip.style.display = 'none'; }, 250);
-      }, 900);
-    };
-
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(textToCopy).then(() => {
-        showCopyTooltip(btn);
-      }).catch(() => {
-        fallbackCopy(textToCopy, btn, () => { showCopyTooltip(btn); });
-      });
-    } else {
-      fallbackCopy(textToCopy, btn, () => { showCopyTooltip(btn); });
-    }
-  });
-
-  function fallbackCopy(text, btn, restore) {
-    const ta = document.createElement('textarea');
-    ta.value = text;
-    ta.style.position = 'fixed';
-    ta.style.left = '-9999px';
-    document.body.appendChild(ta);
-    ta.select();
-    try {
-      document.execCommand('copy');
-      if (typeof restore === 'function') restore();
-      // ensure tooltip shows if provided as restore
-      try { showCopyTooltip(btn); } catch (e) { /* ignore */ }
-    } catch (err) {
-      // last resort: prompt
-      window.prompt('Скопируйте текст вручную:', text);
-    }
-    ta.remove();
-  }
-</script>
 
 <style is:global>
   .feature-header {
@@ -1359,6 +1501,21 @@ return { level, spells };
   .content {
     max-width: 1200px;
     margin: 0 auto;
+  }
+
+  .page-shell {
+    display: grid;
+    grid-template-columns: 320px minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .sidebar-column {
+    width: 100%;
+  }
+
+  .main-column {
+    min-width: 0;
   }
 
   .back-link {
@@ -1498,6 +1655,13 @@ return { level, spells };
     margin-bottom: 1rem;
     box-shadow: var(--card-shadow);
     border: 1px solid var(--card-border);
+    transition: box-shadow 180ms ease, border-color 180ms ease, transform 180ms ease;
+  }
+
+  .feature.is-targeted {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 20%, transparent), var(--card-shadow);
+    transform: translateY(-1px);
   }
 
   .feature-header {
@@ -1793,6 +1957,12 @@ return { level, spells };
   }
 
   /* Responsive table design */
+  @media (max-width: 1024px) {
+    .page-shell {
+      grid-template-columns: 1fr;
+    }
+  }
+
   @media (max-width: 768px) {
     .feature-description table,
     .collapsible-description table {
