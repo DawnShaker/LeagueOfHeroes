@@ -60,15 +60,12 @@ const sortedPremium = [...premiumList].sort((a: Class, b: Class) =>
 
 <style>
   .content {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
   }
 
   .page-shell {
-    display: grid;
-    grid-template-columns: 320px minmax(0, 1fr);
-    gap: 1.5rem;
-    align-items: start;
+    display: block;
   }
 
   .main-column {
@@ -105,7 +102,13 @@ const sortedPremium = [...premiumList].sort((a: Class, b: Class) =>
   .premium-grid { margin-top: 1rem; }
 
   @media (max-width: 1024px) {
-    .page-shell {
+    .classes-grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .classes-grid {
       grid-template-columns: 1fr;
     }
   }

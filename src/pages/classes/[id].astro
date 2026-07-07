@@ -1504,17 +1504,19 @@ return { level, spells };
   }
 
   .page-shell {
-    display: grid;
-    grid-template-columns: 320px minmax(0, 1fr);
-    gap: 1.5rem;
-    align-items: start;
+    position: relative;
+    display: block;
   }
 
   .sidebar-column {
-    width: 100%;
+    width: 0;
+    height: 0;
+    overflow: visible;
   }
 
   .main-column {
+    width: min(100%, 1200px);
+    margin: 0 auto;
     min-width: 0;
   }
 

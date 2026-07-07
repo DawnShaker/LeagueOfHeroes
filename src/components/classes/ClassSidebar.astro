@@ -33,10 +33,16 @@ function buildFeatureAnchor(name: string, level: number, isSubclass = false): st
 }
 ---
 
-<nav class="class-sidebar" aria-label="Навигация по классам">
+<button type="button" class="class-sidebar-fab" aria-label="Открыть меню классов" aria-expanded="false">
+  <span aria-hidden="true">☰</span>
+</button>
+
+<div class="class-sidebar-overlay" hidden></div>
+
+<nav class="class-sidebar is-collapsed" aria-label="Навигация по классам" data-sidebar-key={`class-${activeClassId || 'all'}-sidebar-collapsed`}>
   <div class="sidebar-head">
     <div class="sidebar-title">Классы</div>
-    <button type="button" class="sidebar-toggle" aria-label="Свернуть сайдбар" aria-expanded="false">
+    <button type="button" class="class-sidebar-close" aria-label="Закрыть меню классов" aria-expanded="true">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="m15 18-6-6 6-6" />
       </svg>
@@ -122,27 +128,102 @@ function buildFeatureAnchor(name: string, level: number, isSubclass = false): st
   </div>
 </nav>
 
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const sidebar = document.querySelector('.class-sidebar');
+    const openButton = document.querySelector('.class-sidebar-fab');
+    const closeButton = document.querySelector('.class-sidebar-close');
+    const overlay = document.querySelector('.class-sidebar-overlay');
+
+    if (!sidebar || !openButton || !overlay) return;
+
+    const storageKey = sidebar.getAttribute('data-sidebar-key') || 'class-sidebar-collapsed';
+
+    function setSidebarOpen(isOpen) {
+      sidebar.classList.toggle('is-collapsed', !isOpen);
+      openButton.hidden = isOpen;
+      openButton.setAttribute('aria-expanded', String(isOpen));
+      closeButton?.setAttribute('aria-expanded', String(isOpen));
+
+      if (isOpen) {
+        overlay.hidden = false;
+        document.body.style.overflow = 'hidden';
+      } else {
+        overlay.hidden = true;
+        document.body.style.overflow = '';
+      }
+
+      localStorage.setItem(storageKey, isOpen ? '0' : '1');
+    }
+
+    const savedState = localStorage.getItem(storageKey);
+    setSidebarOpen(savedState === '0');
+
+    openButton.addEventListener('click', () => setSidebarOpen(true));
+    closeButton?.addEventListener('click', () => setSidebarOpen(false));
+    overlay.addEventListener('click', () => setSidebarOpen(false));
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !sidebar.classList.contains('is-collapsed')) {
+        setSidebarOpen(false);
+      }
+    });
+  });
+</script>
+
 <style>
+  .class-sidebar-fab {
+    position: fixed;
+    top: 5.75rem;
+    left: 1rem;
+    z-index: 1001;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid var(--card-border);
+    border-radius: 999px;
+    background: var(--card-bg);
+    color: var(--text);
+    box-shadow: var(--card-shadow);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+
+  .class-sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.45);
+  }
+
+  .class-sidebar-overlay[hidden] {
+    display: none;
+  }
+
   .class-sidebar {
-    position: sticky;
+    position: fixed;
     top: 5.5rem;
-    align-self: start;
-    width: 100%;
-    max-width: 320px;
+    left: 0;
+    z-index: 1000;
+    width: min(320px, calc(100vw - 1rem));
     padding: 1rem;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
-    border-radius: 0.75rem;
+    border-left: none;
+    border-radius: 0 0.75rem 0.75rem 0;
     box-shadow: var(--card-shadow);
     max-height: calc(100vh - 6.5rem);
     overflow-y: auto;
-    transition: width 180ms ease, padding 180ms ease, max-width 180ms ease;
+    transform: translateX(0);
+    transition: transform 220ms ease;
   }
 
   .class-sidebar.is-collapsed {
-    width: 56px;
-    max-width: 56px;
-    padding: 0.75rem 0.4rem;
+    transform: translateX(-105%);
   }
 
   .sidebar-head {
@@ -160,7 +241,7 @@ function buildFeatureAnchor(name: string, level: number, isSubclass = false): st
     white-space: nowrap;
   }
 
-  .sidebar-toggle {
+  .class-sidebar-close {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -176,11 +257,11 @@ function buildFeatureAnchor(name: string, level: number, isSubclass = false): st
 
   .class-sidebar.is-collapsed .sidebar-title,
   .class-sidebar.is-collapsed .sidebar-content {
-    display: none;
+    display: block;
   }
 
-  .class-sidebar.is-collapsed .sidebar-toggle {
-    transform: rotate(180deg);
+  .class-sidebar.is-collapsed ~ * {
+    pointer-events: auto;
   }
 
   .class-list {
@@ -301,11 +382,15 @@ function buildFeatureAnchor(name: string, level: number, isSubclass = false): st
   }
 
   @media (max-width: 1024px) {
+    .class-sidebar-fab {
+      top: 5.25rem;
+      left: 0.75rem;
+    }
+
     .class-sidebar {
-      position: static;
-      max-width: none;
-      margin-bottom: 1.5rem;
-      max-height: none;
+      top: 5rem;
+      width: min(320px, calc(100vw - 1rem));
+      max-height: calc(100vh - 6rem);
     }
   }
 </style>
