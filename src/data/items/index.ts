@@ -924,7 +924,7 @@ export const items: Item[] = [
     id: 'poison-basic',
     name: 'Яд, обычный',
     nameEn: 'Poison, Basic',
-    type: 'Снаряжение приключенца',
+    type: 'Яд',
     cost: '100 зм',
     weight: '0 фнт.',
     sourceBook: 'PHB\'24',

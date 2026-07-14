@@ -18,12 +18,12 @@ export const defaultSizeData = {
 };
 
 export const raceData = {
-  aarakokra: {
-    size: 'средний',
-    baseHeight: defaultSizeData.средний.baseHeight,
-    baseWeight: defaultSizeData.средний.baseWeight,
-    heightRange: defaultSizeData.средний.heightRange,
-    weightRange: defaultSizeData.средний.weightRange
+  aarakocra: {
+    baseHeight: { футов: 4, дюймов: 6 },
+    baseWeight: 60,
+    heightRange: [1, 8],
+    weightRange: [1, 6],
+    size: 'средний'
   },
   aasimar: {
     sizeOptions: ['маленький', 'средний'],
@@ -83,6 +83,21 @@ export const raceData = {
       heightRange: [1, 8],
       weightRange: [2, 8],
       size: 'средний'
+    }
+  },
+  dhampir: {
+    sizeOptions: ['маленький', 'средний'],
+    средний: {
+      baseHeight: defaultSizeData.средний.baseHeight,
+      baseWeight: defaultSizeData.средний.baseWeight,
+      heightRange: defaultSizeData.средний.heightRange,
+      weightRange: defaultSizeData.средний.weightRange
+    },
+    маленький: {
+      baseHeight: defaultSizeData.маленький.baseHeight,
+      baseWeight: defaultSizeData.маленький.baseWeight,
+      heightRange: defaultSizeData.маленький.heightRange,
+      weightRange: defaultSizeData.маленький.weightRange
     }
   },
   dragonborn: {
@@ -564,49 +579,69 @@ export const raceData = {
     heightRange: [1, 21],
     weightRange: [2, 8],
     size: 'средний'
+  },
+  hexblood: {
+    sizeOptions: ['маленький', 'средний'],
+    средний: {
+      baseHeight: defaultSizeData.средний.baseHeight,
+      baseWeight: defaultSizeData.средний.baseWeight,
+      heightRange: defaultSizeData.средний.heightRange,
+      weightRange: defaultSizeData.средний.weightRange
+    },
+    маленький: {
+      baseHeight: defaultSizeData.маленький.baseHeight,
+      baseWeight: defaultSizeData.маленький.baseWeight,
+      heightRange: defaultSizeData.маленький.heightRange,
+      weightRange: defaultSizeData.маленький.weightRange
+    }
+  },
+  lupin: {
+    sizeOptions: ['маленький', 'средний'],
+    средний: {
+      baseHeight: defaultSizeData.средний.baseHeight,
+      baseWeight: defaultSizeData.средний.baseWeight,
+      heightRange: defaultSizeData.средний.heightRange,
+      weightRange: defaultSizeData.средний.weightRange
+    },
+    маленький: {
+      baseHeight: defaultSizeData.маленький.baseHeight,
+      baseWeight: defaultSizeData.маленький.baseWeight,
+      heightRange: defaultSizeData.маленький.heightRange,
+      weightRange: defaultSizeData.маленький.weightRange
+    }
+  },
+  reborn: {
+    sizeOptions: ['маленький', 'средний'],
+    средний: {
+      baseHeight: defaultSizeData.средний.baseHeight,
+      baseWeight: defaultSizeData.средний.baseWeight,
+      heightRange: defaultSizeData.средний.heightRange,
+      weightRange: defaultSizeData.средний.weightRange
+    },
+    маленький: {
+      baseHeight: defaultSizeData.маленький.baseHeight,
+      baseWeight: defaultSizeData.маленький.baseWeight,
+      heightRange: defaultSizeData.маленький.heightRange,
+      weightRange: defaultSizeData.маленький.weightRange
+    }
+  },
+  customOrigin: {
+    sizeOptions: ['маленький', 'средний'],
+    средний: {
+      baseHeight: { футов: 4, дюймов: -1 },
+      baseWeight: 110,
+      heightRange: [1, 37],
+      weightRange: [2, 8],
+      size: 'средний'
+    },
+    маленький: {
+      baseHeight: { футов: 2, дюймов: 5 },
+      baseWeight: 35,
+      heightRange: [1, 18],
+      weightRange: [1, 4],
+      size: 'маленький'
+    }
   }
-};
-
-// Placeholder entries for races/variants not present in data yet —
-// добавлены как заглушки, чтобы калькулятор мог работать для этих id.
-raceData.hexblood = {
-  baseHeight: defaultSizeData.средний.baseHeight,
-  baseWeight: defaultSizeData.средний.baseWeight,
-  heightRange: defaultSizeData.средний.heightRange,
-  weightRange: defaultSizeData.средний.weightRange,
-  size: 'средний',
-  heightDice: null,
-  weightDice: null
-};
-
-raceData.dhampir = {
-  baseHeight: defaultSizeData.средний.baseHeight,
-  baseWeight: defaultSizeData.средний.baseWeight,
-  heightRange: defaultSizeData.средний.heightRange,
-  weightRange: defaultSizeData.средний.weightRange,
-  size: 'средний',
-  heightDice: null,
-  weightDice: null
-};
-
-raceData.reborn = {
-  baseHeight: defaultSizeData.средний.baseHeight,
-  baseWeight: defaultSizeData.средний.baseWeight,
-  heightRange: defaultSizeData.средний.heightRange,
-  weightRange: defaultSizeData.средний.weightRange,
-  size: 'средний',
-  heightDice: null,
-  weightDice: null
-};
-
-raceData.customOrigin = {
-  baseHeight: defaultSizeData.средний.baseHeight,
-  baseWeight: defaultSizeData.средний.baseWeight,
-  heightRange: defaultSizeData.средний.heightRange,
-  weightRange: defaultSizeData.средний.weightRange,
-  size: 'средний',
-  heightDice: null,
-  weightDice: null
 };
 
 export function getRaceData(race, selectedSize = null) {

@@ -18,8 +18,7 @@ export function getStaticPaths() {
 const { species } = Astro.props;
 const raceSizeDataEntry = raceData[species.id] || null;
 const raceSizeEntry = getRaceData(species.id) || null;
-const _excludeCalc = ['customOrigin','reborn','dhampir','hexblood'];
-const showCalculator = !!raceSizeEntry && !_excludeCalc.includes(species.id);
+const showCalculator = !!raceSizeEntry;
 ---
 
 <Layout title={`${species.name}`}>
