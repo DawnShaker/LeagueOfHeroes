@@ -1,88 +1,88 @@
 ---
-import type { ClassLevel } from '../../types/class';
-
-interface TableClassLevel extends ClassLevel {
-  rage?: number;
-  theories?: number;
-  rageDamage?: string;
-  secondWind?: string;
-  maneuvers?: string;
-  bardicInspiration?: string;
-  chanelDivinity?: number;
-  wildShape?: number;
-  sneakAttack?: string;
-  invocations?: number;
-  martialArts?: string;
-  spiritPoints?: string;
-  unarmedMovement?: string;
-  favoredEnemy?: number;
-  sorceryPoints?: number;
-  bloodMagicDie?: string;
-  knownMaledicts?: number;
-  amplifyBloodCurse?: number;
-  brandOfCastigation?: string;
-  numOfSpellSlots?: number;
-  plansKnown?: number;
-  magicItems?: number;
-  spellSlotsLvl?: number;
-  fisticuffs?: string;
-  moxiePoints?: string;
-  focusPoints?: string;
-  signs?: string;
-  alchemyFormulas?: string;
-}
-
 interface Props {
-  levels: TableClassLevel[];
+  levels: {
+    level: number;
+    profBonus: string;
+    features: string[];
+    rage?: number;
+    theories?: number;
+    rageDamage?: string;
+    secondWind?: string;
+    maneuvers?: string;
+    bardicInspiration?: string;
+    chanelDivinity: number;
+    wildShape?: number;
+    sneakAttack?: string;
+    invocations?: number;
+    cantrips?: number;
+    preparedSpells?: number;
+    martialArts?: string;
+    spiritPoints?: string;
+    unarmedMovement?: string;
+    favoredEnemy?: number;
+    sorceryPoints?: number;
+    bloodMagicDie?: string;
+    knownMaledicts?: number;
+    amplifyBloodCurse?: number;
+    brandOfCastigation?: string;
+    numOfSpellSlots?: number;
+    plansKnown?: number;
+    magicItems?: number;
+    spellSlotsLvl?: number;
+    fisticuffs?: string;
+    moxiePoints?: string;
+    focusPoints?: string;
+    signs?: string;
+    alchemyFormulas?: string;
+    spellSlots?: {
+      1: number;
+      2: number;
+      3: number;
+      4: number;
+      5: number;
+      6: number;
+      7: number;
+      8: number;
+      9: number;
+    };
+  }[];
 }
-
 const { levels } = Astro.props;
-const firstLevel = levels[0];
-
-const hasSpellcasting = firstLevel?.spellSlots !== undefined;
-const hasTheories = firstLevel?.theories !== undefined;
-const hasBardicInspiration = firstLevel?.bardicInspiration !== undefined;
-const hasPreparedSpells = firstLevel?.preparedSpells !== undefined;
-const hasCantrips = firstLevel?.cantrips !== undefined;
-const hasChanelDivinity = firstLevel?.chanelDivinity !== undefined;
-const hasWildShape = firstLevel?.wildShape !== undefined;
-const hasRage = firstLevel?.rage !== undefined;
-const hasRageDamage = firstLevel?.rageDamage !== undefined;
-const hasSecondWind = firstLevel?.secondWind !== undefined;
-const hasManeuvers = firstLevel?.maneuvers !== undefined;
-const hasSneakAttack = firstLevel?.sneakAttack !== undefined;
-const hasMartialArts = firstLevel?.martialArts !== undefined;
-const hasSpiritPoints = firstLevel?.spiritPoints !== undefined;
-const hasUnarmedMovement = firstLevel?.unarmedMovement !== undefined;
-const hasFavoredEnemy = firstLevel?.favoredEnemy !== undefined;
-const hasSorceryPoints = firstLevel?.sorceryPoints !== undefined;
-const hasInvocations = firstLevel?.invocations !== undefined;
-const hasBloodMagicDie = firstLevel?.bloodMagicDie !== undefined;
-const hasKnownMaledicts = firstLevel?.knownMaledicts !== undefined;
-const hasAmplifyBloodCurse = firstLevel?.amplifyBloodCurse !== undefined;
-const hasBrandOfCastigation = firstLevel?.brandOfCastigation !== undefined;
-const hasNumOfSpellSlots = firstLevel?.numOfSpellSlots !== undefined;
-const hasSpellSlotsLvl = firstLevel?.spellSlotsLvl !== undefined;
-const hasPlansKnown = firstLevel?.plansKnown !== undefined;
-const hasMagicItems = firstLevel?.magicItems !== undefined;
-const hasFisticuffs = firstLevel?.fisticuffs !== undefined;
-const hasMoxiePoints = firstLevel?.moxiePoints !== undefined;
-const hasFocusPoints = firstLevel?.focusPoints !== undefined;
-const hasSigns = firstLevel?.signs !== undefined;
-const hasAlchemyFormulas = firstLevel?.alchemyFormulas !== undefined;
-
-const maxSpellLevel = hasSpellcasting
-  ? Math.max(
-      ...levels.map(level =>
-        Object.keys(level.spellSlots || {}).reduce((max, slot) => {
-          const spellLevel = Number(slot) as keyof NonNullable<ClassLevel['spellSlots']>;
-          return level.spellSlots?.[spellLevel]
-            ? Math.max(max, Number(slot))
-            : max;
-        }, 0)
-      )
-    )
-  : 0;
+const hasSpellcasting = levels[0].spellSlots !== undefined;
+const hasTheories = levels[0].theories !== undefined;
+const hasBardicInspiration= levels[0].bardicInspiration !== undefined;
+const hasPreparedSpells = levels[0].preparedSpells !== undefined;
+const hasCantrips = levels[0].cantrips !== undefined;
+const hasChanelDivinity= levels[0].chanelDivinity !== undefined;
+const hasWildShape= levels[0].wildShape !== undefined;
+const hasRage = levels[0].rage !== undefined;
+const hasRageDamage = levels[0].rageDamage !== undefined;
+const hasSecondWind = levels[0].secondWind !== undefined;
+const hasManeuvers = levels[0].maneuvers !== undefined;
+const hasSneakAttack = levels[0].sneakAttack !== undefined;
+const hasMartialArts = levels[0].martialArts !== undefined;
+const hasSpiritPoints = levels[0].spiritPoints !== undefined;
+const hasUnarmedMovement = levels[0].unarmedMovement !== undefined;
+const hasFavoredEnemy = levels[0].favoredEnemy !== undefined;
+const hasSorceryPoints = levels[0].sorceryPoints !== undefined;
+const hasInvocations = levels[0].invocations !== undefined;
+const hasBloodMagicDie = levels[0].bloodMagicDie !== undefined;
+const hasKnownMaledicts = levels[0].knownMaledicts !== undefined;
+const hasAmplifyBloodCurse = levels[0].amplifyBloodCurse !== undefined;
+const hasBrandOfCastigation = levels[0].brandOfCastigation !== undefined;
+const hasNumOfSpellSlots = levels[0].numOfSpellSlots !== undefined;
+const hasSpellSlotsLvl = levels[0].spellSlotsLvl !== undefined;
+const hasPlansKnown = levels[0].plansKnown !== undefined;
+const hasMagicItems = levels[0].magicItems !== undefined;
+const hasFisticuffs = levels[0].fisticuffs !== undefined;
+const hasMoxiePoints = levels[0].moxiePoints !== undefined;
+const hasFocusPoints = levels[0].focusPoints !== undefined;
+const hasSigns = levels[0].signs !== undefined;
+const hasAlchemyFormulas = levels[0].alchemyFormulas !== undefined;
+const maxSpellLevel = hasSpellcasting ? Math.max(...levels.map(level => 
+  Object.keys(level.spellSlots || {}).reduce((max, slot) => 
+    level.spellSlots?.[parseInt(slot)] ? Math.max(max, parseInt(slot)) : max, 0)
+)) : 0;
 ---
 <div class="table-container">
   <table class="class-table">
