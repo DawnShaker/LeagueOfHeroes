@@ -1,0 +1,242 @@
+<section class="wizard-step" data-step="class-features">
+  <div class="class-features-heading">
+    <span class="wizard-kicker">Глава четвёртая</span>
+    <h2>Выбери умения класса</h2>
+    <p>Здесь собраны только обязательные варианты, которые нужно выбрать для выбранного класса.</p>
+  </div>
+
+  <div id="class-features-empty" class="class-features-empty" hidden>
+    На 1 уровне у выбранного класса нет дополнительных выборов.
+  </div>
+
+  <div id="class-features-list" class="class-features-list"></div>
+  <p id="class-features-warning" class="choice-warning" hidden></p>
+</section>
+
+<style>
+  .class-features-heading {
+    margin-bottom: 1.25rem;
+  }
+
+  .class-features-heading h2 {
+    margin: .35rem 0 .55rem;
+    font-family: Georgia, serif;
+    font-size: clamp(1.9rem, 3.5vw, 3rem);
+  }
+
+  .class-features-heading p {
+    max-width: 780px;
+    margin: 0;
+    opacity: .68;
+  }
+
+  .class-features-list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  :global(.class-feature-group) {
+    display: grid;
+    gap: 0;
+  }
+
+  :global(.class-feature-summary) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .85rem 1rem;
+    border: 1px solid color-mix(in srgb, var(--wizard-gold) 35%, var(--card-border));
+    border-bottom: 0;
+    border-radius: .8rem .8rem 0 0;
+    background: color-mix(in srgb, var(--card-bg) 88%, #000);
+  }
+
+  :global(.class-feature-summary span) {
+    color: var(--wizard-gold);
+    font-size: .7rem;
+    font-weight: 900;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  :global(.class-feature-summary h3) {
+    margin: .2rem 0 0;
+    color: var(--wizard-gold-light);
+    font-family: Georgia, serif;
+    font-size: 1.2rem;
+  }
+
+
+  :global(.class-feature-group-link) {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  :global(.class-feature-group-link:hover) {
+    color: var(--wizard-gold);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  :global(.class-feature-summary p) {
+    max-width: 720px;
+    margin: .35rem 0 0;
+    font-size: .78rem;
+    line-height: 1.4;
+    opacity: .62;
+  }
+
+  :global(.class-feature-summary strong) {
+    display: grid;
+    place-items: center;
+    min-width: 52px;
+    min-height: 36px;
+    padding: 0 .65rem;
+    border: 1px solid color-mix(in srgb, var(--wizard-gold) 45%, var(--card-border));
+    border-radius: 999px;
+    background: var(--background);
+    color: var(--wizard-gold-light);
+    font-family: Georgia, serif;
+    font-size: 1.05rem;
+  }
+
+  :global(.class-feature-table-wrap) {
+    overflow-x: auto;
+    border: 1px solid color-mix(in srgb, var(--wizard-gold) 35%, var(--card-border));
+    border-radius: 0 0 .8rem .8rem;
+    background: color-mix(in srgb, var(--background) 92%, #000);
+  }
+
+  :global(.class-feature-table) {
+    width: 100%;
+    min-width: 520px;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+  }
+
+  :global(.class-feature-table th),
+  :global(.class-feature-table td) {
+    height: 44px;
+    padding: .6rem .9rem;
+    border-right: 1px solid color-mix(in srgb, var(--card-border) 55%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--card-border) 72%, transparent);
+    vertical-align: middle;
+  }
+
+  :global(.class-feature-table th:first-child),
+  :global(.class-feature-table td:first-child) {
+    width: 78%;
+    text-align: left;
+  }
+
+  :global(.class-feature-table th:last-child),
+  :global(.class-feature-table td:last-child) {
+    width: 22%;
+    border-right: 0;
+    text-align: center;
+  }
+
+  :global(.class-feature-table th) {
+    background: color-mix(in srgb, var(--card-bg) 88%, #000);
+    color: var(--wizard-gold-light);
+    font-size: .76rem;
+    letter-spacing: .035em;
+    text-transform: uppercase;
+  }
+
+  :global(.class-feature-table tbody tr:nth-child(odd)) {
+    background: color-mix(in srgb, var(--card-bg) 34%, transparent);
+  }
+
+  :global(.class-feature-table tbody tr:nth-child(even)) {
+    background: color-mix(in srgb, var(--card-bg) 14%, transparent);
+  }
+
+  :global(.class-feature-table tbody tr:hover) {
+    background: color-mix(in srgb, var(--wizard-gold) 13%, var(--card-bg));
+    box-shadow: inset 4px 0 0 var(--wizard-gold);
+  }
+
+  :global(.class-feature-table tbody tr:last-child td) {
+    border-bottom: 0;
+  }
+
+  :global(.class-feature-name) {
+    padding-left: 1rem;
+    font-weight: 800;
+  }
+
+  :global(.class-feature-name > span),
+  :global(.class-feature-name > a) {
+    display: block;
+  }
+
+  :global(.class-feature-name small) {
+    display: block;
+    margin-top: .18rem;
+    font-size: .72rem;
+    font-weight: 500;
+    opacity: .58;
+  }
+
+  :global(.class-feature-name a) {
+    color: var(--wizard-gold-light);
+    text-decoration: none;
+  }
+
+  :global(.class-feature-name a:hover) {
+    color: var(--wizard-gold);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  :global(.class-feature-check) {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin: 0;
+    accent-color: var(--wizard-gold);
+    cursor: pointer;
+  }
+
+  :global(.class-feature-check:hover) {
+    transform: scale(1.1);
+  }
+
+  :global(.class-feature-check:focus-visible) {
+    outline: 2px solid var(--wizard-gold-light);
+    outline-offset: 3px;
+  }
+
+  .class-features-empty {
+    padding: 1.1rem;
+    border: 1px dashed var(--card-border);
+    border-radius: .75rem;
+    opacity: .65;
+  }
+
+  .choice-warning {
+    margin-top: 1rem;
+    padding: .75rem .9rem;
+    border: 1px solid color-mix(in srgb, #ef4444 55%, var(--card-border));
+    border-radius: .6rem;
+    background: color-mix(in srgb, #ef4444 10%, transparent);
+  }
+
+  @media (max-width: 700px) {
+    :global(.class-feature-table) {
+      min-width: 440px;
+    }
+
+    :global(.class-feature-table th:first-child),
+    :global(.class-feature-table td:first-child) {
+      width: 72%;
+    }
+
+    :global(.class-feature-table th:last-child),
+    :global(.class-feature-table td:last-child) {
+      width: 28%;
+    }
+  }
+</style>

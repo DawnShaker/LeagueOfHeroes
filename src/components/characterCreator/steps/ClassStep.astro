@@ -1,0 +1,47 @@
+---
+interface Props {
+  classOptions: any[];
+}
+
+const { classOptions } = Astro.props;
+---
+
+<section class="wizard-step" data-step="class">
+  <div class="class-step-heading" id="class-picker">
+    <span class="wizard-kicker">Глава третья</span>
+    <h2>Выбери класс</h2>
+    <p>Класс определяет боевой стиль, кость хитов, владения и способности героя.</p>
+  </div>
+
+  <label class="class-search-field">
+    <span>Поиск класса</span>
+    <input
+      id="class-search"
+      type="search"
+      placeholder="Воин, волшебник, плут…"
+      autocomplete="off"
+    />
+  </label>
+
+  <div class="class-grid" id="class-grid">
+    {classOptions.map((item: any) => (
+      <button
+        class="class-card"
+        type="button"
+        data-class-id={item.id}
+        data-search-text={`${item.name} ${item.nameEn}`}
+      >
+        <div class="class-card-image">
+          <img src={item.portrait} alt="" loading="lazy" />
+          <span></span>
+        </div>
+        <div class="class-card-copy">
+          <strong>{item.name}</strong>
+          <small>к{item.hitDice} · {item.primaryAbility}</small>
+        </div>
+      </button>
+    ))}
+  </div>
+
+  <div id="class-details"></div>
+</section>

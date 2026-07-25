@@ -1,0 +1,76 @@
+---
+// import Layout from '../../layouts/Layout.astro';
+// import CharacterWizard from '../../components/characterCreator/CharacterWizard.astro';
+// import { speciesData } from '../../data/species/index';
+// import { raceData, getRaceData } from '../../data/raceSizeData.js';
+// import { classes } from '../../data/classes';
+
+import Layout from '../../../layouts/Layout.astro';
+import CharacterWizard from '../../../components/characterCreator/CharacterWizard.astro';
+import { speciesData } from '../../../data/species/index';
+import { raceData, getRaceData } from '../../../data/raceSizeData.js';
+import { classes } from '../../../data/classes';
+
+const speciesOptions = speciesData.map((item: any) => ({
+  id: item.id,
+  name: item.name,
+  nameEn: item.nameEn,
+  sourceBook: item.sourceBook,
+  portrait: item.portrait,
+  lore: item.lore,
+  type: item.type,
+  size: item.size,
+  speed: item.speed,
+  abilities: Array.isArray(item.abilities)
+    ? item.abilities
+    : Array.isArray(item.traits?.abilities)
+      ? item.traits.abilities.map((description: string) => ({
+          title: 'Особенность',
+          description
+        }))
+      : [],
+  variants: Array.isArray(item.variants)
+    ? item.variants.map((variant: any) => ({
+        id: `${item.id}-${String(variant.nameEn || variant.name)
+          .toLowerCase()
+          .replace(/[^a-zа-я0-9]+/gi, '-')}`,
+        name: variant.name,
+        nameEn: variant.nameEn,
+        sourceBook: variant.sourceBook,
+        lore: variant.lore,
+        abilities: variant.abilities ?? [],
+        replacesAbilities: variant.replacesAbilities ?? []
+      }))
+    : [],
+  sizeCalculator: getRaceData(item.id)
+    ? {
+        base: getRaceData(item.id),
+        raw: raceData[item.id] ?? null
+      }
+    : null
+}));
+
+const classOptions = classes.map((item: any) => ({
+  id: item.id,
+  name: item.name,
+  nameEn: item.nameEn,
+  sourceBook: item.sourceBook,
+  portrait: item.portrait,
+  description: item.description,
+  primaryAbility: item.primaryAbility,
+  hitDice: item.hitDice,
+  hitPoints: item.hitPoints,
+  proficiencies: item.proficiencies,
+  levels: item.levels ?? [],
+  features: item.features ?? [],
+  equipment: item.equipment ?? null,
+  level1Features: Array.isArray(item.features)
+    ? item.features.filter((feature: any) => Number(feature.level ?? 0) === 1)
+    : []
+}));
+
+---
+
+<Layout title="Создание персонажа — League of Heroes">
+  <CharacterWizard speciesOptions={speciesOptions} classOptions={classOptions} />
+</Layout>

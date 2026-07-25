@@ -1,0 +1,24 @@
+<section class="wizard-step" data-step="abilities">
+  <div class="step-heading">
+    <span>Глава пятая</span>
+    <h2>Распредели характеристики</h2>
+    <p>Распредели 27 очков Point Buy и 3 очка бонуса предыстории. На одну характеристику можно добавить не больше +2.</p>
+  </div>
+  <div class="points-summary">
+    <strong>Point Buy: <span id="point-buy-remaining">27</span>/27</strong>
+    <strong>Бонус предыстории: <span id="background-bonus-remaining">3</span>/3</strong>
+  </div>
+  <div class="ability-grid">
+    {[['strength','Сила','СИЛ'],['dexterity','Ловкость','ЛОВ'],['constitution','Телосложение','ТЕЛ'],['intelligence','Интеллект','ИНТ'],['wisdom','Мудрость','МДР'],['charisma','Харизма','ХАР']].map(([id,name,short]) => (
+      <article class="ability-card">
+        <span>{short}</span><strong>{name}</strong>
+        <div class="ability-control"><button type="button" data-base-action="decrease" data-stat={id}>−</button><output data-base-value={id}>8</output><button type="button" data-base-action="increase" data-stat={id}>+</button></div>
+        <small>База Point Buy</small>
+        <div class="ability-control background-control"><button type="button" data-bonus-action="decrease" data-stat={id}>−</button><output data-bonus-value={id}>0</output><button type="button" data-bonus-action="increase" data-stat={id}>+</button></div>
+        <small>Бонус предыстории</small>
+        <div class="ability-total"><span>Итого</span><strong data-total-value={id}>8</strong><output data-modifier={id}>−1</output></div>
+      </article>
+    ))}
+  </div>
+  <p class="ability-warning" id="ability-warning" hidden></p>
+</section>
