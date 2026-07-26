@@ -269,6 +269,8 @@ export function buildEquipmentShopItems({
     cost: item.cost || '—',
     costCopper: parseMoneyToCopper(item.cost),
     weight: parseWeight(item.weight),
+    description: item.description || '',
+    sourceBook: item.sourceBook || '',
     href: `/items/${item.id}`
   }));
 }

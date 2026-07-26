@@ -22,6 +22,7 @@ import { spells } from '../../data/spells';
 import { items } from '../../data/items';
 import roll20TemplateRaw from '../../data/roll20/blank-2014.json?raw';
 import roll20ExportClientUrl from './client/roll20Export.js?url';
+import roll20EquipmentExportClientUrl from './client/roll20EquipmentExport.js?url';
 import characterStateClientUrl from './client/characterState.js?url';
 import allRoll20SpellsRaw from '../../data/roll20/all-spells.json?raw';
 import {
@@ -220,6 +221,7 @@ const creatorOptions = {
 </div>
 
 <script is:inline src={roll20ExportClientUrl}></script>
+<script is:inline src={roll20EquipmentExportClientUrl}></script>
 <script is:inline src={characterStateClientUrl}></script>
 
 <script define:vars={{ speciesOptions, classOptions, backgroundOptions, featOptions, customLineageGeneralFeatOptions, allSelectableFeatOptions, magicInitiateSpellOptions, creatorOptions, roll20Template, classSpellOptions, classSpellLimits, classFeatureOptions, weaponMasteryOptions, rogueWeaponMasteryIds, bloodCurseOptions, WEAPON_MASTERY_COUNTS, WEAPON_MASTERY_DESCRIPTIONS, equipmentShopItems, EQUIPMENT_PACK_CONTENTS, SKILL_ALIASES, CLASS_SKILL_OPTIONS, GENERIC_BACKGROUND_CHARACTERISTICS, EQUIPMENT_NAME_ALIASES, PACKAGED_EQUIPMENT_NAMES, ROLL20_SKILLS, ROLL20_SKILL_ABILITIES, ALIGNMENTS, CHARACTER_STORAGE_KEY, CREATOR_STEPS, ABILITY_KEYS, POINT_BUY_COSTS, DEFAULT_CHARACTER_STATE }}>
@@ -272,6 +274,252 @@ const creatorOptions = {
   function saveState() {
     getStateModule().saveState(STORAGE_KEY, state);
   }
+
+  function isCoreElfSpecies(species) {
+    const identity = `${species?.id || ''} ${species?.name || ''} ${species?.nameEn || ''}`
+      .toLocaleLowerCase('ru')
+      .replace(/ё/g, 'е');
+    return /(?:^|[\s_-])elf(?:$|[\s_-])|(?:^|\s)эльф(?:$|\s)/.test(identity)
+      && !/eladrin|эладрин|shadar[\s_-]?kai|шадар[\s-]?кай|half[\s_-]?elf|полуэльф|horavar|хоравар/.test(identity);
+  }
+
+  function isCoreTieflingSpecies(species) {
+    return /tiefling|тифлинг/.test(`${species?.id || ''} ${species?.name || ''} ${species?.nameEn || ''}`
+      .toLocaleLowerCase('ru')
+      .replace(/ё/g, 'е'));
+  }
+
+  function isCoreGnomeSpecies(species) {
+    const identity = `${species?.id || ''} ${species?.name || ''} ${species?.nameEn || ''}`
+      .toLocaleLowerCase('ru')
+      .replace(/ё/g, 'е');
+    return /(?:^|[\s_-])gnome(?:$|[\s_-])|(?:^|\s)гном(?:$|\s)/.test(identity)
+      && !/deep[\s_-]?gnome|глубинн(?:ый|ого)\s+гном|svirfneblin|свирфнеблин|autognome|автогном/.test(identity);
+  }
+
+
+  function isCoreGithSpecies(species) {
+    const identity = `${species?.id || ''} ${species?.name || ''} ${species?.nameEn || ''}`
+      .toLocaleLowerCase('ru')
+      .replace(/ё/g, 'е');
+    return /(?:^|[\s_-])gith(?:$|[\s_-])|(?:^|\s)гит(?:$|[\s-])/.test(identity)
+      && !/githyanki|гитъянк|githzerai|гитцера/.test(identity);
+  }
+
+  function isCoreGenasiSpecies(species) {
+    const identity = `${species?.id || ''} ${species?.name || ''} ${species?.nameEn || ''}`
+      .toLocaleLowerCase('ru')
+      .replace(/ё/g, 'е');
+    return /genasi|дженази/.test(identity)
+      && !/air[\s_-]?genasi|воздушн|earth[\s_-]?genasi|землян|fire[\s_-]?genasi|огненн|water[\s_-]?genasi|водн/.test(identity);
+  }
+
+  function preferredRequiredVariantId(species) {
+    const variants = Array.isArray(species?.variants) ? species.variants : [];
+    if (!variants.length) return null;
+
+    const findByIdentity = (patterns) => {
+      const found = variants.find((variant) => {
+        const identity = `${variant?.id || ''} ${variant?.name || ''} ${variant?.nameEn || ''}`
+          .toLocaleLowerCase('ru')
+          .replace(/ё/g, 'е');
+        return patterns.some((pattern) => pattern.test(identity));
+      });
+      return found?.id || null;
+    };
+
+    if (isCoreGithSpecies(species)) {
+      return findByIdentity([/githyanki/, /гитъянк/]) || variants[0]?.id || null;
+    }
+    if (isCoreGenasiSpecies(species)) {
+      return findByIdentity([/air[\s_-]?genasi/, /воздушн(?:ый|ого)?\s+дженази/, /дженази\s+воздух/]) || variants[0]?.id || null;
+    }
+    return null;
+  }
+
+  const CORE_GNOME_VARIANTS = [
+    {
+      id: 'forest-gnome',
+      sourceBook: 'PHB24',
+      name: 'Лесной гном',
+      nameEn: 'Forest Gnome',
+      lore: 'Лесные гномы связаны с иллюзиями и магией животных.',
+      abilities: [
+        {
+          title: 'Гномье происхождение — Лесной гном',
+          description: 'Вы знаете заговор Малая иллюзия. Вы также всегда имеете подготовленное заклинание Разговор с животными. Вы можете накладывать его без траты ячейки заклинаний количество раз, равное вашему бонусу мастерства, и восстанавливаете все использования после продолжительного отдыха. Вы также можете накладывать это заклинание, используя имеющиеся ячейки заклинаний.'
+        }
+      ]
+    },
+    {
+      id: 'rock-gnome',
+      sourceBook: 'PHB24',
+      name: 'Скальный гном',
+      nameEn: 'Rock Gnome',
+      lore: 'Скальные гномы сочетают магию с изобретательностью и создают крошечные механические устройства.',
+      abilities: [
+        {
+          title: 'Гномье происхождение — Скальный гном',
+          description: 'Вы знаете заговоры Починка и Фокусы. Кроме того, вы можете потратить 10 минут на наложение заклинания Фокусы, чтобы создать крошечное механическое устройство. Одновременно у вас может быть до трёх таких устройств.'
+        }
+      ]
+    }
+  ];
+
+  const CORE_TIEFLING_VARIANTS = [
+    {
+      id: 'abyssal-tiefling',
+      sourceBook: 'PHB24',
+      name: 'Тифлинг Бездны',
+      nameEn: 'Abyssal Tiefling',
+      lore: 'Наследие Бездны наделяет тифлинга стойкостью к ядам и губительной магией демонических планов.',
+      abilities: [
+        {
+          title: 'Происхождение исчадия — Бездна',
+          description: '1 уровень. Вы получаете сопротивление урону ядом и знаете заговор Ядовитые брызги.\n\n3 уровень. Вы получаете заклинание Луч болезни.\n\n5 уровень. Вы получаете заклинание Удержание личности.'
+        }
+      ]
+    },
+    {
+      id: 'chthonic-tiefling',
+      sourceBook: 'PHB24',
+      name: 'Хтонический тифлинг',
+      nameEn: 'Chthonic Tiefling',
+      lore: 'Хтоническое наследие связывает тифлинга с Нижними планами, смертью и некротической энергией.',
+      abilities: [
+        {
+          title: 'Происхождение исчадия — Хтоническое',
+          description: '1 уровень. Вы получаете сопротивление урону некротической энергией и знаете заговор Леденящее прикосновение.\n\n3 уровень. Вы получаете заклинание Ложная жизнь.\n\n5 уровень. Вы получаете заклинание Луч слабости.'
+        }
+      ]
+    },
+    {
+      id: 'infernal-tiefling',
+      sourceBook: 'PHB24',
+      name: 'Инфернальный тифлинг',
+      nameEn: 'Infernal Tiefling',
+      lore: 'Инфернальное наследие связывает тифлинга с адским пламенем и магией Девяти Преисподних.',
+      abilities: [
+        {
+          title: 'Происхождение исчадия — Инфернальное',
+          description: '1 уровень. Вы получаете сопротивление урону огнём и знаете заговор Огненный снаряд.\n\n3 уровень. Вы получаете заклинание Адское возмездие.\n\n5 уровень. Вы получаете заклинание Тьма.'
+        }
+      ]
+    }
+  ];
+
+  const CORE_ELF_VARIANTS = [
+    {
+      id: 'drow',
+      sourceBook: 'PHB24',
+      name: 'Дроу',
+      nameEn: 'Drow',
+      lore: 'Дроу связаны с магией Подземья и обладают особенно острым тёмным зрением.',
+      abilities: [
+        {
+          title: 'Происхождение — Дроу',
+          description: '1 уровень. Дальность вашего тёмного зрения увеличивается до 120 футов. Вы знаете заговор Пляшущие огоньки.\n\n3 уровень. Вы получаете заклинание Огонь фей.\n\n5 уровень. Вы получаете заклинание Тьма.'
+        }
+      ]
+    },
+    {
+      id: 'high-elf',
+      sourceBook: 'PHB24',
+      name: 'Высший эльф',
+      nameEn: 'High Elf',
+      lore: 'Высшие эльфы тесно связаны с тайной магией и легко осваивают волшебные заговоры.',
+      abilities: [
+        {
+          title: 'Происхождение — Высший эльф',
+          description: '1 уровень. Вы знаете заговор Фокусы. Когда вы завершаете продолжительный отдых, вы можете заменить этот заговор на другой заговор из списка заклинаний волшебника.\n\n3 уровень. Вы получаете заклинание Обнаружение магии.\n\n5 уровень. Вы получаете заклинание Туманный шаг.'
+        }
+      ]
+    },
+    {
+      id: 'wood-elf',
+      sourceBook: 'PHB24',
+      name: 'Лесной эльф',
+      nameEn: 'Wood Elf',
+      lore: 'Лесные эльфы быстры, скрытны и хранят глубокую связь с природной магией.',
+      abilities: [
+        {
+          title: 'Происхождение — Лесной эльф',
+          description: '1 уровень. Ваша скорость увеличивается до 35 футов. Вы знаете заговор Искусство друидов.\n\n3 уровень. Вы получаете заклинание Скороход.\n\n5 уровень. Вы получаете заклинание Бесследное передвижение.'
+        }
+      ]
+    }
+  ];
+
+  function isCoreElfVariant(variant) {
+    return new Set(CORE_ELF_VARIANTS.map((item) => item.id)).has(String(variant?.id || ''));
+  }
+
+  function isCoreTieflingVariant(variant) {
+    return new Set(CORE_TIEFLING_VARIANTS.map((item) => item.id)).has(String(variant?.id || ''));
+  }
+
+  function isCoreGnomeVariant(variant) {
+    return new Set(CORE_GNOME_VARIANTS.map((item) => item.id)).has(String(variant?.id || ''));
+  }
+
+  function lineageTableAbilityToCard(ability, variant) {
+    const title = String(ability?.title || '');
+    const description = String(ability?.description || '').trim();
+    if (!/таблиц/i.test(title) || !description.includes('\t')) return ability;
+
+    const lines = description.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+    const dataLine = lines.find((line, index) => index > 0 && line.includes('\t')) || lines[lines.length - 1] || '';
+    const cells = dataLine.split('\t').map((cell) => cell.trim());
+    if (cells.length < 2) return ability;
+
+    const lineageName = cells[0] || variant?.name || 'Происхождение';
+    const level1 = cells[1] && cells[1] !== '-' ? `1 уровень. ${cells[1]}` : '';
+    const level3 = cells[2] && cells[2] !== '-' ? `3 уровень. Вы получаете заклинание ${cells[2]}.` : '';
+    const level5 = cells[3] && cells[3] !== '-' ? `5 уровень. Вы получаете заклинание ${cells[3]}.` : '';
+
+    return {
+      ...ability,
+      title: `Происхождение — ${lineageName}`,
+      description: [level1, level3, level5].filter(Boolean).join('\n\n')
+    };
+  }
+
+  function mergeCoreVariants(species, coreVariants) {
+    const existingVariants = Array.isArray(species?.variants) ? species.variants : [];
+    const coreIds = new Set(coreVariants.map((variant) => String(variant.id || '').toLocaleLowerCase('ru')));
+    const coreNames = new Set(coreVariants.flatMap((variant) => [variant.name, variant.nameEn])
+      .filter(Boolean)
+      .map((value) => String(value).toLocaleLowerCase('ru').replace(/ё/g, 'е').trim()));
+
+    const preservedVariants = existingVariants.filter((variant) => {
+      const id = String(variant?.id || '').toLocaleLowerCase('ru');
+      const names = [variant?.name, variant?.nameEn]
+        .filter(Boolean)
+        .map((value) => String(value).toLocaleLowerCase('ru').replace(/ё/g, 'е').trim());
+      return !coreIds.has(id) && !names.some((name) => coreNames.has(name));
+    });
+
+    species.variants = [
+      ...coreVariants.map((variant) => structuredClone(variant)),
+      ...preservedVariants
+    ];
+  }
+
+  function ensureCoreSpeciesVariants() {
+    for (const species of speciesOptions) {
+      if (isCoreElfSpecies(species)) {
+        mergeCoreVariants(species, CORE_ELF_VARIANTS);
+      }
+      if (isCoreTieflingSpecies(species)) {
+        mergeCoreVariants(species, CORE_TIEFLING_VARIANTS);
+      }
+      if (isCoreGnomeSpecies(species)) {
+        mergeCoreVariants(species, CORE_GNOME_VARIANTS);
+      }
+    }
+  }
+
+  ensureCoreSpeciesVariants();
 
   function findSpecies() {
     return getStateModule().findSpecies(state, speciesOptions);
@@ -387,6 +635,79 @@ const creatorOptions = {
     return ((Number(value) - Number(min)) / span) * 100;
   }
 
+  function normalizedSpeciesIdentity(species = findSpecies()) {
+    return `${species?.id || ''} ${species?.name || ''} ${species?.nameEn || ''}`
+      .toLocaleLowerCase('ru')
+      .replace(/ё/g, 'е');
+  }
+
+  function isEladrinSpecies(species = findSpecies()) {
+    return /(?:^|[\s_-])eladrin(?:$|[\s_-])|эладрин/.test(normalizedSpeciesIdentity(species));
+  }
+
+  function isShadarKaiSpecies(species = findSpecies()) {
+    return /shadar[\s_-]?kai|шадар[\s-]?кай/.test(normalizedSpeciesIdentity(species));
+  }
+
+  const ELADRIN_SEASONS = {
+    spring: {
+      name: 'Весна',
+      description: 'После телепортации вы можете переместить одно согласное существо в пределах 5 футов от вас вместо себя.'
+    },
+    summer: {
+      name: 'Лето',
+      description: 'После телепортации выбранные вами существа в пределах 5 футов получают урон огнём, равный вашему бонусу мастерства.'
+    },
+    autumn: {
+      name: 'Осень',
+      description: 'После телепортации до двух существ в пределах 10 футов должны преуспеть в спасброске Мудрости, иначе будут очарованы вами до конца вашего следующего хода.'
+    },
+    winter: {
+      name: 'Зима',
+      description: 'После телепортации одно существо в пределах 5 футов должно преуспеть в спасброске Мудрости, иначе будет испугано вами до конца вашего следующего хода.'
+    }
+  };
+
+  function selectedEladrinSeason() {
+    return (state.choices['species:eladrinSeason'] || [])[0] || '';
+  }
+
+  function effectiveSpeciesAbilities(species, variant) {
+    return getEffectiveAbilities(species, variant)
+      .filter((ability) => {
+        const title = String(ability?.title || '').toLocaleLowerCase('ru').replace(/ё/g, 'е');
+        if (isCoreElfSpecies(species) && isCoreElfVariant(variant) && /происхождени[ея]\s+эльфов.*таблиц/.test(title)) return false;
+        if (isCoreTieflingSpecies(species) && isCoreTieflingVariant(variant) && /происхождени[ея]\s+исчадия.*таблиц/.test(title)) return false;
+        if (isCoreGnomeSpecies(species) && isCoreGnomeVariant(variant) && /гномь[ея]\s+происхождени[ея].*таблиц/.test(title)) return false;
+        return true;
+      })
+      .map((originalAbility) => {
+      const ability = lineageTableAbilityToCard(originalAbility, variant);
+      const title = String(ability?.title || '').toLocaleLowerCase('ru').replace(/ё/g, 'е');
+      if (isCoreElfSpecies(species) && variant?.id === 'drow' && /темн(?:ое|ого)\s+зрени|darkvision/.test(title)) {
+        return {
+          ...ability,
+          description: String(ability.description || '').replace(/60\s*фут(?:ов|а)?/gi, '120 футов')
+        };
+      }
+      if (isEladrinSpecies(species) && /шаг\s+фей|fey\s+step/.test(title)) {
+        const season = ELADRIN_SEASONS[selectedEladrinSeason()];
+        if (!season) return ability;
+        return {
+          ...ability,
+          description: `${ability.description || ''}\n\nСезон — ${season.name}. ${season.description}`
+        };
+      }
+      if (isShadarKaiSpecies(species) && /благословение\s+королевы\s+воронов|blessing\s+of\s+the\s+raven\s+queen/.test(title)) {
+        return {
+          ...ability,
+          description: 'Бонусным действием вы телепортируетесь на расстояние до 30 футов в свободное место, которое видите. Вы можете использовать эту особенность количество раз, равное бонусу мастерства, и восстанавливаете все использования после продолжительного отдыха. Начиная с 3 уровня после телепортации вы получаете сопротивление всему урону до начала своего следующего хода.'
+        };
+      }
+      return ability;
+    });
+  }
+
   function renderSpeciesDetails() {
     const container = $('#species-details');
     const species = findSpecies();
@@ -405,7 +726,7 @@ const creatorOptions = {
     }
 
     const variant = findVariant(species);
-    const abilities = getEffectiveAbilities(species, variant);
+    const abilities = effectiveSpeciesAbilities(species, variant);
 
     initialisePhysique(species);
 
@@ -442,7 +763,7 @@ const creatorOptions = {
                   <label class="variant-field">
                     <span>Подвид или вариант</span>
                     <select id="species-variant-select">
-                      <option value="">Базовый вариант</option>
+                      ${(isCoreElfSpecies(species) || isCoreTieflingSpecies(species) || isCoreGnomeSpecies(species) || isCoreGithSpecies(species) || isCoreGenasiSpecies(species)) ? '' : '<option value="">Базовый вариант</option>'}
                       ${species.variants
                         .map(
                           (item) => `
@@ -673,6 +994,56 @@ const creatorOptions = {
             : ''
         }
 
+        ${
+          isEladrinSpecies(species)
+            ? `
+              <section class="content-section custom-lineage-section eladrin-season-section">
+                <div class="content-section-heading">
+                  <span class="section-icon">✦</span>
+                  <div>
+                    <span class="section-kicker">Наследие фей</span>
+                    <h3>Сезон Эладрина</h3>
+                  </div>
+                </div>
+                <p class="species-choice-description">Выберите сезон, который определяет дополнительный эффект способности «Шаг фей».</p>
+                <div class="custom-lineage-option-grid">
+                  ${Object.entries(ELADRIN_SEASONS).map(([id, season]) => `
+                    <label class="custom-lineage-option">
+                      <input type="radio" name="eladrin-season" value="${id}" ${selectedEladrinSeason() === id ? 'checked' : ''} />
+                      <span><strong>${escapeHtml(season.name)}</strong><small>${escapeHtml(season.description)}</small></span>
+                    </label>
+                  `).join('')}
+                </div>
+              </section>
+            `
+            : ''
+        }
+
+        ${
+          isCoreGnomeSpecies(species) && isCoreGnomeVariant(variant)
+            ? `
+              <section class="content-section custom-lineage-section gnome-spell-ability-section">
+                <div class="content-section-heading">
+                  <span class="section-icon">✦</span>
+                  <div>
+                    <span class="section-kicker">Гномье происхождение</span>
+                    <h3>Заклинательная характеристика</h3>
+                  </div>
+                </div>
+                <p class="species-choice-description">Выберите характеристику для заклинаний, полученных от происхождения гнома.</p>
+                <div class="custom-lineage-option-grid">
+                  ${['Интеллект','Мудрость','Харизма'].map((ability) => `
+                    <label class="custom-lineage-option">
+                      <input type="radio" name="gnome-spell-ability" value="${ability}" ${(state.choices['species:gnomeSpellAbility'] || [])[0] === ability ? 'checked' : ''} />
+                      <span><strong>${ability}</strong><small>Используется для заклинаний гномьего происхождения.</small></span>
+                    </label>
+                  `).join('')}
+                </div>
+              </section>
+            `
+            : ''
+        }
+
         <section class="content-section traits-section">
           <div class="content-section-heading">
             <span class="section-icon">✦</span>
@@ -712,7 +1083,11 @@ const creatorOptions = {
     });
 
     $('#species-variant-select')?.addEventListener('change', (event) => {
-      state.speciesVariant = event.target.value || null;
+      state.speciesVariant = event.target.value
+        || (isCoreElfSpecies(species) ? 'high-elf' : null)
+        || (isCoreTieflingSpecies(species) ? 'infernal-tiefling' : null)
+        || (isCoreGnomeSpecies(species) ? 'forest-gnome' : null)
+        || preferredRequiredVariantId(species);
       renderSpeciesDetails();
     });
 
@@ -728,6 +1103,22 @@ const creatorOptions = {
       if (!input.checked) return;
       state.choices['species:customLineageFeature'] = [input.value];
       if (input.value !== 'skill') state.choices['species:skill'] = [];
+      saveState();
+      renderSpeciesDetails();
+      updatePreview();
+    }));
+
+    $$('[name="eladrin-season"]').forEach((input) => input.addEventListener('change', () => {
+      if (!input.checked) return;
+      state.choices['species:eladrinSeason'] = [input.value];
+      saveState();
+      renderSpeciesDetails();
+      updatePreview();
+    }));
+
+    $$('[name="gnome-spell-ability"]').forEach((input) => input.addEventListener('change', () => {
+      if (!input.checked) return;
+      state.choices['species:gnomeSpellAbility'] = [input.value];
       saveState();
       renderSpeciesDetails();
       updatePreview();
@@ -1756,37 +2147,66 @@ const creatorOptions = {
     const speciesName = `${species.id || ''} ${species.name || ''} ${species.nameEn || ''}`;
     const isTiefling = /tiefling|тифлинг/i.test(speciesName);
 
-    if (isTiefling && !variant) {
-      const tieflingLineages = [
-        {
-          spell: spellByName('Ядовитые брызги', 'cantrip'),
-          choiceLabel: 'Происхождение Бездны',
-          choiceDescription: 'Сопротивление урону ядом'
-        },
-        {
-          spell: spellByName('Леденящее прикосновение', 'cantrip'),
-          choiceLabel: 'Хтоническое происхождение',
-          choiceDescription: 'Сопротивление урону некротической энергией'
-        },
-        {
-          spell: spellByName('Огненный снаряд', 'cantrip'),
-          choiceLabel: 'Инфернальное происхождение',
-          choiceDescription: 'Сопротивление урону огнём'
-        }
-      ];
-      const lineageCantrips = uniqueSpells(tieflingLineages.map(({ spell, choiceLabel, choiceDescription }) =>
-        spell ? { ...spell, choiceLabel, choiceDescription } : null
-      ));
+    if (isCoreElfSpecies(species) && isCoreElfVariant(variant)) {
+      const lineageCantripName = {
+        drow: 'Пляшущие огоньки',
+        'high-elf': 'Фокусы',
+        'wood-elf': 'Искусство друидов'
+      }[variant?.id || 'high-elf'];
+      const lineageCantrip = spellByName(lineageCantripName, 'cantrip');
+      if (!lineageCantrip) return null;
+      return {
+        id: `species-elf-${variant?.id || 'high-elf'}`,
+        category: 'Вид',
+        title: `Эльф — ${variant?.name || 'Высший эльф'}`,
+        description: 'Заговор автоматически получен от выбранного происхождения эльфа.',
+        limits: { cantrip: 0, level1: 0 },
+        fixed: [lineageCantrip],
+        options: []
+      };
+    }
+
+    if (isCoreGnomeSpecies(species) && isCoreGnomeVariant(variant)) {
+      const fixed = variant?.id === 'rock-gnome'
+        ? uniqueSpells([
+            spellByName('Починка', 'cantrip'),
+            spellByName('Фокусы', 'cantrip')
+          ])
+        : uniqueSpells([
+            spellByName('Малая иллюзия', 'cantrip'),
+            spellByName('Разговор с животными', '1') || spellByName('Разговор с животными')
+          ]);
+      if (!fixed.length) return null;
+      return {
+        id: `species-gnome-${variant?.id || 'forest-gnome'}`,
+        category: 'Вид',
+        title: `Гном — ${variant?.name || 'Лесной гном'}`,
+        description: `Заклинания автоматически получены от выбранного гномьего происхождения. Заклинательная характеристика: ${(state.choices['species:gnomeSpellAbility'] || [])[0] || 'не выбрана'}.`,
+        limits: { cantrip: 0, level1: 0 },
+        fixed,
+        options: []
+      };
+    }
+
+    if (isTiefling && isCoreTieflingVariant(variant)) {
+      const lineageCantripName = {
+        'abyssal-tiefling': 'Ядовитые брызги',
+        'chthonic-tiefling': 'Леденящее прикосновение',
+        'infernal-tiefling': 'Огненный снаряд'
+      }[variant?.id || 'infernal-tiefling'];
+      const lineageCantrip = spellByName(lineageCantripName, 'cantrip');
       const thaumaturgy = spellByName('Чудотворство', 'cantrip');
+      const fixed = uniqueSpells([thaumaturgy, lineageCantrip]);
+      if (!fixed.length) return null;
 
       return {
-        id: 'species-tiefling-lineage',
+        id: `species-tiefling-${variant?.id || 'infernal-tiefling'}`,
         category: 'Вид',
-        title: 'Тифлинг — происхождение исчадия',
-        description: 'Выбор заговора одновременно определяет происхождение исчадия и соответствующее сопротивление. Чудотворство получено автоматически.',
-        limits: { cantrip: 1, level1: 0 },
-        fixed: uniqueSpells([thaumaturgy]),
-        options: lineageCantrips
+        title: `Тифлинг — ${variant?.name || 'Инфернальный тифлинг'}`,
+        description: 'Заговоры автоматически получены от выбранного происхождения исчадия.',
+        limits: { cantrip: 0, level1: 0 },
+        fixed,
+        options: []
       };
     }
 
@@ -1964,6 +2384,18 @@ const creatorOptions = {
       const mentioned = skillsMentioned(featText);
       const normalizedId = String(feat.id || '').toLowerCase();
       const normalizedName = String(feat.name || '').toLocaleLowerCase('ru');
+
+      // «Ваятель рун» не даёт владение навыком. В описании черты могут
+      // встречаться названия навыков, но они не должны создавать выбор
+      // в колонке «Черта» на этапе навыков.
+      if (
+        normalizedId === 'rune-shaper'
+        || normalizedId === 'rune-carver'
+        || /ваятель\s+рун|резчик\s+рун|rune\s+(?:shaper|carver)/i.test(normalizedName)
+      ) {
+        continue;
+      }
+
       if (normalizedId === 'skilled' || /одар[её]нн|умелост/.test(normalizedName)) {
         count += 3;
         creatorOptions.allSkills.forEach((skill) => allowed.add(skill));
@@ -2032,19 +2464,66 @@ const creatorOptions = {
       || /(?:владение|получаете владение)[^.!?]{0,70}(?:одним|одного|1)\s+навык/i.test(speciesSkillText);
 
     let speciesCount = parsedSpeciesCount || (speciesHasChoice ? 1 : speciesMatches.length);
+    let speciesAllowed = speciesMatches.length && !speciesHasChoice
+      ? speciesMatches
+      : (speciesCount ? creatorOptions.allSkills : []);
+
+    // Точные ограничения видов. В текстах этих особенностей перечислены все
+    // доступные варианты, но выбрать разрешено только один. Общий парсер раньше
+    // принимал перечисление за несколько автоматических владений либо открывал
+    // вообще все навыки.
+    const normalizedSpeciesId = String(species?.id || '').toLocaleLowerCase('ru');
+    const normalizedSpeciesName = String(species?.name || '').toLocaleLowerCase('ru').replace(/ё/g, 'е');
+    const singleSpeciesSkillChoice =
+      ['changeling', 'kender', 'centaur', 'kobold', 'leonin', 'lupin', 'tortle', 'elf', 'horavar', 'half-elf-horavar'].includes(normalizedSpeciesId)
+      || /(?:изменяющ|чейнджлинг|кендер|кентавр|кобольд|леонин|люпин|тортл|хоравар|полуэльф.*хоравар|^эльф$)/i.test(normalizedSpeciesName);
+
+    if (singleSpeciesSkillChoice) {
+      speciesCount = 1;
+      // Для этих видов доступны только навыки, прямо перечисленные в их
+      // особенности. Это также не даёт базовому эльфу выбирать любой навык.
+      speciesAllowed = speciesMatches;
+    }
+
+    // Вердан получает только Убеждение. Упоминание Истории в тексте вида не
+    // является владением и не должно попадать в таблицу навыков.
+    if (normalizedSpeciesId === 'verdan' || /вердан/i.test(normalizedSpeciesName)) {
+      speciesCount = 1;
+      speciesAllowed = ['Убеждение'];
+    }
+
     if (isCustomLineageSpecies()) {
       speciesCount = (state.choices['species:customLineageFeature'] || [])[0] === 'skill' ? 1 : 0;
+      speciesAllowed = speciesCount ? creatorOptions.allSkills : [];
     }
 
     const classMatches = skillsMentioned(classDescription);
-    const explicitClassOptions = CLASS_SKILL_OPTIONS[String(state.class || '').toLowerCase()];
-    const classAllowed = Array.isArray(explicitClassOptions) ? explicitClassOptions : classMatches;
+    const normalizedClassId = String(characterClass?.id || state.class || '')
+      .toLocaleLowerCase('ru')
+      .replace(/ё/g, 'е')
+      .trim();
+    const normalizedClassName = `${characterClass?.name || ''} ${characterClass?.nameEn || ''}`
+      .toLocaleLowerCase('ru')
+      .replace(/ё/g, 'е');
+
+    let explicitClassOptions = CLASS_SKILL_OPTIONS[normalizedClassId];
+
+    // В данных дополнительных классов id может отличаться по написанию.
+    // Поэтому для Артефактора и Кровавого охотника используем также имя класса.
+    if (!Array.isArray(explicitClassOptions) && /artificer|артефактор|артификатор|изобретатель/i.test(`${normalizedClassId} ${normalizedClassName}`)) {
+      explicitClassOptions = CLASS_SKILL_OPTIONS.artificer;
+    }
+    if (!Array.isArray(explicitClassOptions) && /blood[-_\s]?hunter|кровав(?:ый|ого)\s+охотник/i.test(`${normalizedClassId} ${normalizedClassName}`)) {
+      explicitClassOptions = CLASS_SKILL_OPTIONS.bloodhunter;
+    }
+
+    const classAllowed = Array.isArray(explicitClassOptions) ? [...explicitClassOptions] : classMatches;
     const backgroundAllowed = skillsMentioned(backgroundDescription);
 
     return {
       class: { key: 'class:skills', count: classCount, allowed: classAllowed },
       background: { key: 'background:skills', count: backgroundCount, allowed: backgroundAllowed.length ? backgroundAllowed : (backgroundCount ? creatorOptions.allSkills : []) },
-      species: { key: 'species:skill', count: speciesCount, allowed: isCustomLineageSpecies() ? (speciesCount ? creatorOptions.allSkills : []) : (speciesMatches.length && !speciesHasChoice ? speciesMatches : (speciesCount ? creatorOptions.allSkills : [])) },
+      species: { key: 'species:skill', count: speciesCount, allowed: speciesAllowed },
       feat: getFeatSkillConfiguration()
     };
   }
@@ -2360,6 +2839,11 @@ const creatorOptions = {
       if (source === 'background') {
         count = findBackground() ? 1 : 0;
         allowed = [...creatorOptions.allTools];
+      }
+
+      if (source === 'species' && isCoreElfSpecies(findSpecies())) {
+        count = 0;
+        allowed = [];
       }
 
       // У классов список может содержать несколько отдельных владений.
@@ -3433,7 +3917,7 @@ const creatorOptions = {
     const languages = [...new Set([...(state.choices['languages:fixed'] || ['Общий']), ...(state.choices['languages:selected'] || [])])];
     const skills = [...(state.choices['class:skills'] || []), ...(state.choices['background:skills'] || []), ...(state.choices['species:skill'] || []), ...(state.choices['feat:skills'] || [])];
     const root = $('#final-sheet'); if (!root) return;
-    root.innerHTML = `<div class="final-identity"><span>Персонаж 1 уровня</span><h3>${escapeHtml(state.name || 'Безымянный герой')}</h3><p>${escapeHtml([[species?.name, variant?.name].filter(Boolean).join(' — '), characterClass?.name, background?.name].filter(Boolean).join(' · ') || 'Выбор не завершён')}</p></div><div class="final-stats">${abilityKeys.map((key) => `<div><span>${labels[key]}</span><strong>${totalScore(key)}</strong><small>${formatModifier(modifier(totalScore(key)))}</small></div>`).join('')}</div><div class="final-details"><p><strong>Рост и вес:</strong> ${state.physique.heightInches ? `${Math.floor(state.physique.heightInches/12)}′ ${state.physique.heightInches%12}″ · ${state.physique.weightPounds} фун.` : '—'}</p><p><strong>Мировоззрение:</strong> ${escapeHtml(ALIGNMENTS[state.alignment] || '—')}</p><p><strong>Языки:</strong> ${escapeHtml([...new Set(languages)].join(', '))}</p><p><strong>Навыки:</strong> ${escapeHtml(skills.join(', ') || '—')}</p><p><strong>Компетентность:</strong> ${escapeHtml((state.choices['class:expertise'] || []).join(', ') || '—')}</p><p><strong>Черта происхождения:</strong> ${escapeHtml(selectedOriginFeats().map((feat) => feat.name).join(', ') || '—')}</p><p><strong>Заговоры:</strong> ${escapeHtml(getClassSpells().filter((spell) => state.spells.cantrips.includes(spell.id)).map((spell) => spell.name).join(', ') || '—')}</p><p><strong>Заклинания 1 уровня:</strong> ${escapeHtml(getClassSpells().filter((spell) => state.spells.level1.includes(spell.id)).map((spell) => spell.name).join(', ') || '—')}</p><p><strong>Черты характера:</strong> ${escapeHtml((state.choices['background:traits'] || []).join(' / ') || '—')}</p><p><strong>Идеал:</strong> ${escapeHtml(state.choices['background:ideal']?.[0] || '—')}</p><p><strong>Привязанность:</strong> ${escapeHtml(state.choices['background:bond']?.[0] || '—')}</p><p><strong>Слабость:</strong> ${escapeHtml(state.choices['background:flaw']?.[0] || '—')}</p></div>`;
+    root.innerHTML = `<div class="final-identity"><span>Персонаж 1 уровня</span><h3>${escapeHtml(state.name || 'Безымянный герой')}</h3><p>${escapeHtml([[species?.name, variant?.name].filter(Boolean).join(' — '), characterClass?.name, background?.name].filter(Boolean).join(' · ') || 'Выбор не завершён')}</p></div><div class="final-stats">${abilityKeys.map((key) => `<div><span>${labels[key]}</span><strong>${totalScore(key)}</strong><small>${formatModifier(modifier(totalScore(key)))}</small></div>`).join('')}</div><div class="final-details"><p><strong>Сезон Эладрина:</strong> ${escapeHtml(ELADRIN_SEASONS[selectedEladrinSeason()]?.name || '—')}</p><p><strong>Рост и вес:</strong> ${state.physique.heightInches ? `${Math.floor(state.physique.heightInches/12)}′ ${state.physique.heightInches%12}″ · ${state.physique.weightPounds} фун.` : '—'}</p><p><strong>Мировоззрение:</strong> ${escapeHtml(ALIGNMENTS[state.alignment] || '—')}</p><p><strong>Языки:</strong> ${escapeHtml([...new Set(languages)].join(', '))}</p><p><strong>Навыки:</strong> ${escapeHtml(skills.join(', ') || '—')}</p><p><strong>Компетентность:</strong> ${escapeHtml((state.choices['class:expertise'] || []).join(', ') || '—')}</p><p><strong>Черта происхождения:</strong> ${escapeHtml(selectedOriginFeats().map((feat) => feat.name).join(', ') || '—')}</p><p><strong>Выборы класса:</strong> ${escapeHtml(getClassFeatureGroups().flatMap((group) => (state.choices[`classFeature:${group.id}`] || []).map((id) => group.options.find((option) => option.id === id)?.name || id)).join(', ') || '—')}</p><p><strong>Заговоры:</strong> ${escapeHtml(getClassSpells().filter((spell) => state.spells.cantrips.includes(spell.id)).map((spell) => spell.name).join(', ') || '—')}</p><p><strong>Заклинания 1 уровня:</strong> ${escapeHtml(getClassSpells().filter((spell) => state.spells.level1.includes(spell.id)).map((spell) => spell.name).join(', ') || '—')}</p><p><strong>Черты характера:</strong> ${escapeHtml((state.choices['background:traits'] || []).join(' / ') || '—')}</p><p><strong>Идеал:</strong> ${escapeHtml(state.choices['background:ideal']?.[0] || '—')}</p><p><strong>Привязанность:</strong> ${escapeHtml(state.choices['background:bond']?.[0] || '—')}</p><p><strong>Слабость:</strong> ${escapeHtml(state.choices['background:flaw']?.[0] || '—')}</p></div>`;
   }
 
   function showStep(index) {
@@ -3484,6 +3968,24 @@ const creatorOptions = {
 
   loadState();
 
+  const loadedSpecies = findSpecies();
+  if (isCoreElfSpecies(loadedSpecies) && !state.speciesVariant) {
+    state.speciesVariant = 'high-elf';
+    saveState();
+  }
+  if (isCoreTieflingSpecies(loadedSpecies) && !state.speciesVariant) {
+    state.speciesVariant = 'infernal-tiefling';
+    saveState();
+  }
+  if (isCoreGnomeSpecies(loadedSpecies) && !state.speciesVariant) {
+    state.speciesVariant = 'forest-gnome';
+    saveState();
+  }
+  if ((isCoreGithSpecies(loadedSpecies) || isCoreGenasiSpecies(loadedSpecies)) && !state.speciesVariant) {
+    state.speciesVariant = preferredRequiredVariantId(loadedSpecies);
+    saveState();
+  }
+
   const nameInput = $('#character-name');
   if (nameInput) {
     nameInput.value = state.name;
@@ -3499,8 +4001,17 @@ const creatorOptions = {
       state.choices['species:skill'] = [];
       state.choices['species:originFeat'] = [];
       state.choices['species:customLineageFeature'] = [];
+      state.choices['species:eladrinSeason'] = [];
+      state.choices['species:gnomeSpellAbility'] = [];
       state.choices['feat:skills'] = [];
-      state.speciesVariant = null;
+      const selectedSpecies = speciesOptions.find((item) => item.id === state.species);
+      state.speciesVariant = isCoreElfSpecies(selectedSpecies)
+        ? 'high-elf'
+        : isCoreTieflingSpecies(selectedSpecies)
+          ? 'infernal-tiefling'
+          : isCoreGnomeSpecies(selectedSpecies)
+            ? 'forest-gnome'
+            : preferredRequiredVariantId(selectedSpecies);
       state.physique = structuredClone(defaultState.physique);
       renderSpeciesDetails();
       updatePreview();
@@ -3574,6 +4085,21 @@ const creatorOptions = {
   $('#next-step')?.addEventListener('click', () => {
     if (steps[state.step] === 'species' && !state.species) {
       alert('Сначала выберите вид.');
+      return;
+    }
+
+    if (steps[state.step] === 'species' && (isCoreGithSpecies(findSpecies()) || isCoreGenasiSpecies(findSpecies())) && !findVariant(findSpecies())) {
+      alert(isCoreGithSpecies(findSpecies()) ? 'Выберите подвид гита.' : 'Выберите происхождение дженази.');
+      return;
+    }
+
+    if (steps[state.step] === 'species' && isCoreGnomeSpecies(findSpecies()) && isCoreGnomeVariant(findVariant(findSpecies())) && !(state.choices['species:gnomeSpellAbility'] || [])[0]) {
+      alert('Выберите заклинательную характеристику гномьего происхождения.');
+      return;
+    }
+
+    if (steps[state.step] === 'species' && isEladrinSpecies() && !selectedEladrinSeason()) {
+      alert('Выберите сезон Эладрина.');
       return;
     }
 
@@ -3709,7 +4235,10 @@ const creatorOptions = {
   }
 
   function getSpeciesSpeed(species) {
-    const source = species?.speed;
+    const selectedVariant = findVariant(species);
+    if (isCoreElfSpecies(species) && selectedVariant?.id === 'wood-elf') return '35';
+    const variantSpeed = selectedVariant?.speed;
+    const source = variantSpeed ?? species?.speed;
     if (typeof source === 'number') return String(source);
     if (source && typeof source === 'object') {
       const walking = source.walk ?? source.walking ?? source.speed ?? Object.values(source)[0];
