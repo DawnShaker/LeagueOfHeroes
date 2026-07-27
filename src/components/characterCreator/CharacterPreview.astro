@@ -37,6 +37,8 @@
   .character-preview {
     position: sticky;
     top: 5.25rem;
+    min-width: 0;
+    max-width: 100%;
     overflow: hidden;
   }
 
@@ -50,6 +52,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top center;
   }
 
   .preview-portrait span {
@@ -76,6 +79,7 @@
     margin: 0.3rem 0 1rem;
     font-family: Georgia, serif;
     font-size: 1.55rem;
+    overflow-wrap: anywhere;
   }
 
   .preview-content dl {
@@ -96,8 +100,10 @@
   }
 
   .preview-content dd {
+    min-width: 0;
     margin: 0;
     font-weight: 700;
     text-align: right;
+    overflow-wrap: anywhere;
   }
 </style>

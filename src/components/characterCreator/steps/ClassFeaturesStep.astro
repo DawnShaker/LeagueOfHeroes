@@ -102,10 +102,53 @@
   }
 
   :global(.class-feature-table-wrap) {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     overflow-x: auto;
+    overscroll-behavior-inline: contain;
     border: 1px solid color-mix(in srgb, var(--wizard-gold) 35%, var(--card-border));
     border-radius: 0 0 .8rem .8rem;
     background: color-mix(in srgb, var(--background) 92%, #000);
+  }
+
+  :global(.weapon-mastery-toolbar) {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) minmax(150px, .35fr) minmax(150px, .35fr);
+    gap: .7rem;
+    padding: .8rem;
+    border-bottom: 1px solid var(--card-border);
+    background: color-mix(in srgb, var(--card-bg) 68%, var(--background));
+  }
+
+  :global(.weapon-mastery-toolbar label) {
+    display: grid;
+    gap: .3rem;
+  }
+
+  :global(.weapon-mastery-toolbar span) {
+    color: var(--wizard-gold);
+    font-size: .68rem;
+    font-weight: 900;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  :global(.weapon-mastery-toolbar input),
+  :global(.weapon-mastery-toolbar select) {
+    min-width: 0;
+    padding: .65rem .75rem;
+    border: 1px solid var(--card-border);
+    border-radius: .55rem;
+    background: var(--background);
+    color: var(--text);
+    font: inherit;
+  }
+
+  :global(.class-feature-empty-filter) {
+    padding: 1.2rem !important;
+    text-align: center !important;
+    opacity: .62;
   }
 
   :global(.class-feature-table) {
@@ -193,15 +236,32 @@
   }
 
   :global(.class-feature-check) {
+    appearance: none;
+    -webkit-appearance: none;
+    display: inline-grid;
+    place-items: center;
     width: 1.25rem;
     height: 1.25rem;
     margin: 0;
-    accent-color: var(--wizard-gold);
+    border: 1px solid color-mix(in srgb, var(--text) 55%, var(--card-border));
+    border-radius: .18rem;
+    background-color: color-mix(in srgb, var(--background) 88%, white);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: .9rem;
     cursor: pointer;
+    transition: transform .12s ease, border-color .12s ease, background-color .12s ease;
+  }
+
+  :global(.class-feature-check:checked) {
+    border-color: var(--wizard-gold-light);
+    background-color: var(--wizard-gold);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23101827' stroke-linecap='round' stroke-linejoin='round' stroke-width='2.4' d='m3 8 3 3 7-7'/%3E%3C/svg%3E");
   }
 
   :global(.class-feature-check:hover) {
     transform: scale(1.1);
+    border-color: var(--wizard-gold);
   }
 
   :global(.class-feature-check:focus-visible) {
@@ -225,6 +285,10 @@
   }
 
   @media (max-width: 700px) {
+    :global(.weapon-mastery-toolbar) {
+      grid-template-columns: 1fr;
+    }
+
     :global(.class-feature-table) {
       min-width: 440px;
     }
@@ -237,6 +301,16 @@
     :global(.class-feature-table th:last-child),
     :global(.class-feature-table td:last-child) {
       width: 28%;
+    }
+  }
+
+  @media (min-width: 701px) and (max-width: 1340px) {
+    :global(.weapon-mastery-toolbar) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    :global(.weapon-mastery-toolbar label:first-child) {
+      grid-column: 1 / -1;
     }
   }
 </style>

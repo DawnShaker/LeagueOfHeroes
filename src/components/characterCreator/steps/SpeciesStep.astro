@@ -111,7 +111,7 @@ const { speciesOptions } = Astro.props;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
     gap: 0.65rem;
-    max-height: 480px;
+    max-height: min(66vh, 680px);
     overflow-y: auto;
     padding: 0.25rem 0.35rem 0.25rem 0.15rem;
     scrollbar-gutter: stable;
@@ -224,7 +224,7 @@ const { speciesOptions } = Astro.props;
     .species-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 0.5rem;
-      max-height: 430px;
+      max-height: min(62vh, 560px);
     }
 
     .species-card {

@@ -33,6 +33,7 @@ export const halfelf: Species = {
         name: 'Водный',
         nameEn: 'Aquatic',
         sourceBook: 'SCAG14',
+        speed: { walk: 30, swimming: 30 },
         lore: '-',
         abilities: [
         {

@@ -388,7 +388,10 @@
     upsert('hitdie_final', '@{hitdietype}');
     upsert('ac', String(10 + modifier(totalScore('dexterity'))));
     upsert('speed', speed);
-    upsert('initiative_bonus', modifier(totalScore('dexterity')) / 100);
+    const harengonInitiativeBonus = /harengon|зайцегон/i.test(
+      `${species?.id || ''} ${species?.name || ''} ${species?.nameEn || ''}`
+    ) ? 2 : 0;
+    upsert('initiative_bonus', (modifier(totalScore('dexterity')) + harengonInitiativeBonus) / 100);
 
     abilityKeys.forEach((key) => {
       const score = totalScore(key);
@@ -586,6 +589,15 @@
       speciesName
     ));
 
+    if (background?.feature) {
+      addTrait(
+        background.feature,
+        background.featureDescription || '',
+        'Предыстория',
+        backgroundName
+      );
+    }
+
     originFeats.forEach((originFeat) => {
       const fromSpecies = (state.choices['species:originFeat'] || []).includes(originFeat.id);
       const source = fromSpecies ? speciesName : (backgroundName || 'Предыстория');
@@ -660,6 +672,7 @@
     upsert('flaws', state.choices['background:flaw']?.[0] || state.flaws || '');
     upsert('other_other', [
       featName ? `Черта происхождения: ${featName}` : '',
+      background?.lore ? `История предыстории:\n${htmlToRoll20Text(background.lore)}` : '',
       speciesTraits.length ? `Особенности вида:\n${speciesTraits.join('\n')}` : '',
       state.physique.heightInches ? `Рост: ${Math.floor(state.physique.heightInches / 12)} фт. ${state.physique.heightInches % 12} дюйм.` : '',
       state.physique.weightPounds ? `Вес: ${state.physique.weightPounds} фунт.` : ''

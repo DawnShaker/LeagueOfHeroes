@@ -82,12 +82,22 @@
     font-size: 1.15rem;
     line-height: 1;
   }
+  :global(.skills-summary-card small) {
+    margin-top: .24rem;
+    font-size: .61rem;
+    line-height: 1.25;
+    opacity: .62;
+    text-align: center;
+  }
 
   .skills-warning { margin-bottom: .85rem; padding: .75rem .9rem; border: 1px solid color-mix(in srgb, #ef4444 55%, var(--card-border)); border-radius: .55rem; background: color-mix(in srgb, #ef4444 10%, transparent); }
+  .skills-warning.is-info { border-color: color-mix(in srgb, var(--wizard-gold) 55%, var(--card-border)); background: color-mix(in srgb, var(--wizard-gold) 10%, transparent); }
 
   .skills-table-wrap {
+    box-sizing: border-box;
     width: 100%;
     max-width: 100%;
+    min-width: 0;
     overflow-x: auto;
     overflow-y: hidden;
     overscroll-behavior-inline: contain;
@@ -193,6 +203,22 @@
     .skills-table-wrap {
       border-radius: .65rem;
       box-shadow: inset -18px 0 18px -18px rgb(0 0 0 / .65);
+    }
+  }
+
+  @media (max-width: 760px) {
+    .skills-table-inner,
+    .skills-summary-row {
+      min-width: 680px;
+    }
+
+    .skills-summary-row {
+      grid-template-columns: 34% 66%;
+    }
+
+    .skills-table th:first-child,
+    .skills-table :global(td:first-child) {
+      width: 34%;
     }
   }
 </style>

@@ -127,36 +127,58 @@ export const raceData = {
   eladrin: {
     baseHeight: { футов: 4, дюймов: 6 },
     baseWeight: 90,
-    heightRange: [1, 24],
+    heightRange: [2, 24],
     weightRange: [1, 4],
+    heightDice: '2d12',
+    weightDice: '1d4',
+    size: 'средний'
+  },
+  // PHB 2014, Random Height and Weight: high elf.
+  // Used as the base entry for the 2024 elf; individual lineages can still
+  // choose any value within the sliders instead of rolling.
+  elf: {
+    baseHeight: { футов: 4, дюймов: 6 },
+    baseWeight: 90,
+    heightRange: [2, 20],
+    weightRange: [1, 4],
+    heightDice: '2d10',
+    weightDice: '1d4',
     size: 'средний'
   },
   elfDrow: {
     baseHeight: { футов: 4, дюймов: 5 },
     baseWeight: 75,
-    heightRange: [1, 13],
+    heightRange: [2, 12],
     weightRange: [1, 6],
+    heightDice: '2d6',
+    weightDice: '1d6',
     size: 'средний'
   },
   elfSea: {
     baseHeight: { футов: 4, дюймов: 6 },
     baseWeight: 90,
-    heightRange: [1, 16],
+    heightRange: [2, 16],
     weightRange: [1, 4],
+    heightDice: '2d8',
+    weightDice: '1d4',
     size: 'средний'
   },
   elfShadarKai: {
     baseHeight: { футов: 4, дюймов: 8 },
     baseWeight: 90,
-    heightRange: [1, 16],
+    heightRange: [2, 16],
     weightRange: [1, 4],
+    heightDice: '2d8',
+    weightDice: '1d4',
     size: 'средний'
   },
   elfWood: {
     baseHeight: { футов: 4, дюймов: 6 },
     baseWeight: 100,
-    heightRange: [1, 21],
+    heightRange: [2, 20],
     weightRange: [1, 4],
+    heightDice: '2d10',
+    weightDice: '1d4',
     size: 'средний'
   },
   fairy: {
@@ -200,8 +222,10 @@ export const raceData = {
   githGithyanki: {
     baseHeight: { футов: 5, дюймов: 0 },
     baseWeight: 100,
-    heightRange: [1, 24],
+    heightRange: [2, 24],
     weightRange: [2, 8],
+    heightDice: '2d12',
+    weightDice: '2d4',
     size: 'средний',
     baseRace: 'gith',
     subraceName: 'Githyanki'
@@ -209,11 +233,24 @@ export const raceData = {
   githGithzerai: {
     baseHeight: { футов: 4, дюймов: 11 },
     baseWeight: 90,
-    heightRange: [1, 24],
+    heightRange: [2, 24],
     weightRange: [1, 4],
+    heightDice: '2d12',
+    weightDice: '1d4',
     size: 'средний',
     baseRace: 'gith',
     subraceName: 'Githzerai'
+  },
+  // Wizards of the Coast UA: Eladrin and Gith. The base entry follows
+  // githzerai, the first required variant in the character creator.
+  gith: {
+    baseHeight: { футов: 4, дюймов: 11 },
+    baseWeight: 90,
+    heightRange: [2, 24],
+    weightRange: [1, 4],
+    heightDice: '2d12',
+    weightDice: '1d4',
+    size: 'средний'
   },
   gnome: {
     baseHeight: { футов: 2, дюймов: 11 },
@@ -625,7 +662,10 @@ export const raceData = {
       weightRange: defaultSizeData.маленький.weightRange
     }
   },
-  customOrigin: {
+  // Tasha's Cauldron of Everything defines the size as the player's choice:
+  // Small or Medium. It gives no fixed anatomy, so use the shared ranges for
+  // those two sizes that the rest of this calculator uses.
+  'custom lineage': {
     sizeOptions: ['маленький', 'средний'],
     средний: {
       baseHeight: { футов: 4, дюймов: -1 },

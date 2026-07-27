@@ -52,7 +52,7 @@ import { rulesLinks, characterLinks, toolsLinks, guideLinks, handbookLinks } fro
     dropdowns.forEach(dropdown => {
       const trigger = dropdown.querySelector('.dropdown-trigger');
       trigger?.addEventListener('click', (e) => {
-        if (window.innerWidth <= 768) {
+        if (window.innerWidth <= 1100) {
           e.preventDefault();
           if (activeDropdown && activeDropdown !== dropdown) {
             activeDropdown.classList.remove('active');
@@ -70,7 +70,7 @@ import { rulesLinks, characterLinks, toolsLinks, guideLinks, handbookLinks } fro
 
     // Close dropdowns when clicking outside
     document.addEventListener('click', (e) => {
-      if (window.innerWidth <= 768) {
+      if (window.innerWidth <= 1100) {
         const target = e.target as HTMLElement;
         if (!target.closest('.dropdown')) {
           dropdowns.forEach(dropdown => {
@@ -84,7 +84,7 @@ import { rulesLinks, characterLinks, toolsLinks, guideLinks, handbookLinks } fro
     // Close mobile menu when clicking a link
     navItems?.addEventListener('click', (e) => {
       const target = e.target as HTMLElement;
-      if (window.innerWidth <= 768 && target.classList.contains('dropdown-item')) {
+      if (window.innerWidth <= 1100 && target.classList.contains('dropdown-item')) {
         dropdowns.forEach(dropdown => {
           dropdown.classList.toggle('active');
         });
@@ -122,10 +122,12 @@ import { rulesLinks, characterLinks, toolsLinks, guideLinks, handbookLinks } fro
   }
 
   .site-title {
+    flex: 0 0 auto;
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--primary);
     text-decoration: none;
+    white-space: nowrap;
   }
 
   .nav-items {
@@ -189,7 +191,7 @@ import { rulesLinks, characterLinks, toolsLinks, guideLinks, handbookLinks } fro
     transition: all 0.3s ease;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1100px) {
     .nav-content {
       padding: 0 1rem;
     }
@@ -213,6 +215,30 @@ import { rulesLinks, characterLinks, toolsLinks, guideLinks, handbookLinks } fro
 
     .nav-items.active {
       display: flex;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .top-nav {
+      padding: 0 .75rem;
+    }
+
+    .nav-content {
+      height: 3.75rem;
+      padding: 0;
+    }
+
+    .site-title {
+      font-size: 1.05rem;
+    }
+
+    .donate-buttons {
+      display: none;
+    }
+
+    .menu-toggle {
+      width: 28px;
+      height: 20px;
     }
   }
 </style>

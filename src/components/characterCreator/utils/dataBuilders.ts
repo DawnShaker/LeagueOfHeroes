@@ -88,6 +88,7 @@ export function buildFightingStyleOptions(featsData: any[]) {
       id: item.id,
       name: item.name,
       href: `/feats/${item.id}`,
+      requirements: Array.isArray(item.requirements) ? item.requirements : [],
       description: Array.isArray(item.effects)
         ? item.effects.join('\n\n')
         : String(item.description ?? '')

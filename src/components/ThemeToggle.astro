@@ -57,6 +57,19 @@ import PaletteEditor from './PaletteEditor.astro';
   :global(.dark) .moon-icon {
     display: none;
   }
+
+  @media (max-width: 760px) {
+    .theme-toggle {
+      top: .72rem;
+      right: 4.25rem;
+      bottom: auto;
+      left: auto;
+      z-index: 1101;
+      width: 2.25rem;
+      height: 2.25rem;
+      padding: .42rem;
+    }
+  }
 </style>
 
 <script is:inline>

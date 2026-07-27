@@ -87,18 +87,38 @@ try {
 
 
 
-const backgroundOptions = buildBackgroundOptions({
-  backgroundsData,
-  allTools: ALL_TOOLS,
-  artisanTools: ARTISAN_TOOLS,
-  musicalInstruments: MUSICAL_INSTRUMENTS,
-  gamingSets: GAMING_SETS,
-  standardLanguages: STANDARD_LANGUAGES,
-  rareLanguages: RARE_LANGUAGES,
-  toolOptionsFromDescription,
-  languageOptionsForSource,
-  languageChoiceCount
-});
+const backgroundOptions = [
+  ...buildBackgroundOptions({
+    backgroundsData,
+    allTools: ALL_TOOLS,
+    artisanTools: ARTISAN_TOOLS,
+    musicalInstruments: MUSICAL_INSTRUMENTS,
+    gamingSets: GAMING_SETS,
+    standardLanguages: STANDARD_LANGUAGES,
+    rareLanguages: RARE_LANGUAGES,
+    toolOptionsFromDescription,
+    languageOptionsForSource,
+    languageChoiceCount
+  }),
+  {
+    id: 'custom-background',
+    name: 'Своя предыстория',
+    nameEn: 'Custom Background',
+    sourceBook: 'Пользовательская',
+    lore: 'Создайте уникальное прошлое героя и самостоятельно определите его владения, черту и личностные характеристики.',
+    feat: '',
+    skills: '',
+    tools: '',
+    equipment: 'Определяется игроком и ведущим',
+    skillCount: 2,
+    toolCount: 1,
+    languageText: '',
+    languageCount: 0,
+    variants: null,
+    characteristics: null,
+    isCustom: true
+  }
+];
 
 const featOptions = buildFeatOptions(featsData);
 
@@ -111,6 +131,35 @@ const customLineageGeneralFeatOptions =
   );
 
 const allSelectableFeatOptions = [...featOptions, ...customLineageGeneralFeatOptions];
+
+const backgroundSpecialFeatIds = new Set([
+  'strike-of-the-giants',
+  'squire-of-solamnia',
+  'vampires-plaything',
+  'initiate-of-high-sorcery',
+  'scion-of-the-outer-planes'
+]);
+
+const backgroundSpecialFeatOptions = featsData
+  .filter((item: any) => backgroundSpecialFeatIds.has(item.id))
+  .map((item: any) => ({
+    id: item.id,
+    name: item.name,
+    nameEn: item.nameEn,
+    type: item.type,
+    requirements: Array.isArray(item.requirements) ? item.requirements : [],
+    effects: Array.isArray(item.effects) ? item.effects : [],
+    abilityScoreIncrease: Array.isArray(item.abilityScoreIncrease)
+      ? item.abilityScoreIncrease
+      : []
+  }));
+
+const allResolvedFeatOptions = Array.from(
+  new Map(
+    [...allSelectableFeatOptions, ...backgroundSpecialFeatOptions]
+      .map((feat: any) => [feat.id, feat])
+  ).values()
+);
 
 const fightingStyleOptions = buildFightingStyleOptions(featsData);
 
@@ -177,6 +226,9 @@ const creatorOptions = {
       <span class="wizard-kicker">Кузница героев</span>
       <h1>Создание персонажа</h1>
       <p>Собери героя шаг за шагом. Черновик сохраняется автоматически.</p>
+      <div class="forge-theme-status" id="forge-theme-status" aria-live="polite">
+        Облик кузницы изменится вместе с героем
+      </div>
     </div>
     <button type="button" class="button button-secondary" id="reset-character">
       Начать заново
@@ -224,7 +276,7 @@ const creatorOptions = {
 <script is:inline src={roll20EquipmentExportClientUrl}></script>
 <script is:inline src={characterStateClientUrl}></script>
 
-<script define:vars={{ speciesOptions, classOptions, backgroundOptions, featOptions, customLineageGeneralFeatOptions, allSelectableFeatOptions, magicInitiateSpellOptions, creatorOptions, roll20Template, classSpellOptions, classSpellLimits, classFeatureOptions, weaponMasteryOptions, rogueWeaponMasteryIds, bloodCurseOptions, WEAPON_MASTERY_COUNTS, WEAPON_MASTERY_DESCRIPTIONS, equipmentShopItems, EQUIPMENT_PACK_CONTENTS, SKILL_ALIASES, CLASS_SKILL_OPTIONS, GENERIC_BACKGROUND_CHARACTERISTICS, EQUIPMENT_NAME_ALIASES, PACKAGED_EQUIPMENT_NAMES, ROLL20_SKILLS, ROLL20_SKILL_ABILITIES, ALIGNMENTS, CHARACTER_STORAGE_KEY, CREATOR_STEPS, ABILITY_KEYS, POINT_BUY_COSTS, DEFAULT_CHARACTER_STATE }}>
+<script define:vars={{ speciesOptions, classOptions, backgroundOptions, featOptions, customLineageGeneralFeatOptions, allSelectableFeatOptions, backgroundSpecialFeatOptions, allResolvedFeatOptions, magicInitiateSpellOptions, creatorOptions, roll20Template, classSpellOptions, classSpellLimits, classFeatureOptions, weaponMasteryOptions, rogueWeaponMasteryIds, bloodCurseOptions, WEAPON_MASTERY_COUNTS, WEAPON_MASTERY_DESCRIPTIONS, equipmentShopItems, EQUIPMENT_PACK_CONTENTS, SKILL_ALIASES, CLASS_SKILL_OPTIONS, GENERIC_BACKGROUND_CHARACTERISTICS, EQUIPMENT_NAME_ALIASES, PACKAGED_EQUIPMENT_NAMES, ROLL20_SKILLS, ROLL20_SKILL_ABILITIES, ALIGNMENTS, CHARACTER_STORAGE_KEY, CREATOR_STEPS, ABILITY_KEYS, POINT_BUY_COSTS, DEFAULT_CHARACTER_STATE }}>
   const STORAGE_KEY = CHARACTER_STORAGE_KEY;
   const steps = [...CREATOR_STEPS];
   const abilityKeys = [...ABILITY_KEYS];
@@ -245,6 +297,40 @@ const creatorOptions = {
       '"': '&quot;'
     }[char])
   );
+  const SKILL_ABILITY_SHORT = {
+    'Акробатика': 'Лов',
+    'Расследование': 'Инт',
+    'Атлетика': 'Сил',
+    'Восприятие': 'Мдр',
+    'Выживание': 'Мдр',
+    'Выступление': 'Хар',
+    'Запугивание': 'Хар',
+    'История': 'Инт',
+    'Ловкость рук': 'Лов',
+    'Магия': 'Инт',
+    'Медицина': 'Мдр',
+    'Обман': 'Хар',
+    'Природа': 'Инт',
+    'Проницательность': 'Мдр',
+    'Религия': 'Инт',
+    'Скрытность': 'Лов',
+    'Убеждение': 'Хар',
+    'Уход за животными': 'Мдр'
+  };
+  const normalizeSkillName = (value) => ({
+    'Анализ': 'Расследование',
+    'Внимательность': 'Восприятие'
+  })[value] || value;
+  const skillDisplayName = (skill) =>
+    `${normalizeSkillName(skill)} (${SKILL_ABILITY_SHORT[normalizeSkillName(skill)] || '—'})`;
+  const skillListDisplay = (value) => {
+    const text = String(value || '').trim();
+    if (!text) return '—';
+    const parts = text.split(',').map((part) => normalizeSkillName(part.trim())).filter(Boolean);
+    return parts.length && parts.every((part) => creatorOptions.allSkills.includes(part))
+      ? parts.map(skillDisplayName).join(', ')
+      : text;
+  };
 
   function normalizeSpellNameClient(value) {
     return String(value || '')
@@ -269,6 +355,14 @@ const creatorOptions = {
       defaultState,
       abilityKeys
     );
+    Object.keys(state.choices || {}).forEach((key) => {
+      if (Array.isArray(state.choices[key])) {
+        state.choices[key] = state.choices[key].map(normalizeSkillName);
+      }
+    });
+    if (Array.isArray(state.customBackground?.skills)) {
+      state.customBackground.skills = state.customBackground.skills.map(normalizeSkillName);
+    }
   }
 
   function saveState() {
@@ -312,6 +406,128 @@ const creatorOptions = {
       .replace(/ё/g, 'е');
     return /genasi|дженази/.test(identity)
       && !/air[\s_-]?genasi|воздушн|earth[\s_-]?genasi|землян|fire[\s_-]?genasi|огненн|water[\s_-]?genasi|водн/.test(identity);
+  }
+
+  function speciesRequiresVariant(species = findSpecies()) {
+    return species?.variantMode === 'required'
+      || isCoreElfSpecies(species)
+      || isCoreTieflingSpecies(species)
+      || isCoreGnomeSpecies(species)
+      || isCoreGithSpecies(species)
+      || isCoreGenasiSpecies(species);
+  }
+
+  function activeSpeciesFeatureText(species = findSpecies(), variant = findVariant(species)) {
+    return getEffectiveAbilities(species, variant)
+      .map((ability) => `${ability?.title || ''} ${ability?.description || ''}`)
+      .join(' ')
+      .toLocaleLowerCase('ru')
+      .replace(/ё/g, 'е');
+  }
+
+  function speciesNeedsSpellAbility(species = findSpecies(), variant = findVariant(species)) {
+    if (!species || (speciesRequiresVariant(species) && !variant)) return false;
+    const text = activeSpeciesFeatureText(species, variant);
+    return text.includes('интеллект')
+      && text.includes('мудрость')
+      && text.includes('харизма')
+      && /выбер|выберите/.test(text)
+      && /заклинательн|базов.+характерист/.test(text);
+  }
+
+  function isDragonbornSpecies(species = findSpecies()) {
+    const identity = `${species?.id || ''} ${species?.name || ''} ${species?.nameEn || ''}`
+      .toLocaleLowerCase('ru')
+      .replace(/ё/g, 'е');
+    return /dragonborn|драконорожденн/.test(identity);
+  }
+
+  function dragonAncestryOptions(species = findSpecies(), variant = findVariant(species)) {
+    if (!isDragonbornSpecies(species)) return [];
+    const table = getEffectiveAbilities(species, variant).find((ability) =>
+      /происхождени[ея]\s+драконов.*таблиц/i.test(String(ability?.title || ''))
+    );
+    if (!table?.description) return [];
+    return String(table.description)
+      .split(/\r?\n/)
+      .slice(1)
+      .map((row) => row.split('\t').map((cell) => cell.trim()))
+      .filter((cells) => cells.length >= 2 && cells[0] && cells[1])
+      .map(([name, damage]) => ({ id: `${name}:${damage}`, name, damage }));
+  }
+
+  function speciesCantripChoice(species = findSpecies(), variant = findVariant(species)) {
+    const identity = `${species?.id || ''} ${species?.name || ''} ${variant?.id || ''} ${variant?.name || ''} ${variant?.nameEn || ''}`
+      .toLocaleLowerCase('ru')
+      .replace(/ё/g, 'е');
+    if (/astral|астральн/.test(identity) && /elf|эльф/.test(identity)) {
+      return {
+        title: 'Заговор астрального эльфа',
+        options: ['Пляшущие огоньки', 'Свет', 'Священное пламя']
+      };
+    }
+    if (/halfelf|half-elf|полуэльф/.test(identity) && /lunar|solar|лунн|солнечн/.test(identity)) {
+      return {
+        title: 'Заговор волшебника',
+        options: uniqueSpells((classSpellOptions.wizard || []).filter((spell) => spell.level === 'cantrip'))
+          .map((spell) => spell.name)
+      };
+    }
+    return null;
+  }
+
+  function isKhoravarVariant(species = findSpecies(), variant = findVariant(species)) {
+    const identity = `${species?.id || ''} ${species?.name || ''} ${variant?.id || ''} ${variant?.name || ''} ${variant?.nameEn || ''}`
+      .toLocaleLowerCase('ru')
+      .replace(/ё/g, 'е');
+    return /хоравар|khoravar/.test(identity);
+  }
+
+  function isWoodHalfElfVariant(species = findSpecies(), variant = findVariant(species)) {
+    const identity = `${species?.id || ''} ${species?.name || ''} ${species?.nameEn || ''} ${variant?.id || ''} ${variant?.name || ''} ${variant?.nameEn || ''}`
+      .toLocaleLowerCase('ru')
+      .replace(/ё/g, 'е');
+    return /halfelf|half-elf|полуэльф/.test(identity)
+      && /(?:^|[\s_-])wood(?:$|[\s_-])|лесной/.test(identity);
+  }
+
+  const ADAPTIVE_WEAPONS = [
+    'Боевой топор', 'Булава', 'Длинное копьё', 'Длинный лук', 'Длинный меч',
+    'Дубинка', 'Кинжал', 'Короткий лук', 'Короткий меч', 'Копьё',
+    'Лёгкий арбалет', 'Молот', 'Палица', 'Рапира', 'Ручной топор',
+    'Тяжёлый арбалет', 'Боевой молот', 'Двуручный меч', 'Алебарда'
+  ];
+
+  function adaptiveSpeciesProficiencyConfig(species = findSpecies(), variant = findVariant(species)) {
+    const identity = `${species?.id || ''} ${species?.name || ''} ${species?.nameEn || ''} ${variant?.id || ''} ${variant?.name || ''} ${variant?.nameEn || ''}`
+      .toLocaleLowerCase('ru')
+      .replace(/ё/g, 'е');
+    if (/astral|астральн/.test(identity) && /elf|эльф/.test(identity)) {
+      return { title: 'Астральный транс', skillCount: 1, flexibleCount: 1 };
+    }
+    if (/githyanki|гитъянк/.test(identity)) {
+      return { title: 'Астральное знание', skillCount: 1, flexibleCount: 1 };
+    }
+    if (/shadar[\s_-]?kai|шадар[\s-]?кай|eladrin|эладрин/.test(identity)) {
+      return { title: 'Транс', skillCount: 0, flexibleCount: 2 };
+    }
+    return null;
+  }
+
+  function isKoboldSpecies(species = findSpecies()) {
+    const identity = `${species?.id || ''} ${species?.name || ''} ${species?.nameEn || ''}`
+      .toLocaleLowerCase('ru')
+      .replace(/ё/g, 'е');
+    return /kobold|кобольд/.test(identity);
+  }
+
+  function elfTranceChoiceVariant(variant = findVariant(findSpecies())) {
+    const identity = `${variant?.id || ''} ${variant?.name || ''} ${variant?.nameEn || ''}`
+      .toLocaleLowerCase('ru')
+      .replace(/ё/g, 'е');
+    if (/shadar[\s_-]?kai|шадар[\s-]?кай/.test(identity)) return 'Шадар-кай';
+    if (/eladrin|эладрин/.test(identity)) return 'Эладрин';
+    return null;
   }
 
   function preferredRequiredVariantId(species) {
@@ -534,11 +750,174 @@ const creatorOptions = {
   }
 
   function findBackground() {
-    return getStateModule().findBackground(state, backgroundOptions);
+    const background = getStateModule().findBackground(state, backgroundOptions);
+    if (!background?.isCustom) return background;
+    const custom = state.customBackground || {};
+    const feat = featOptions.find((item) => item.id === custom.featId);
+    return {
+      ...background,
+      name: String(custom.name || '').trim() || background.name,
+      lore: String(custom.description || '').trim() || background.lore,
+      skills: (custom.skills || []).join(', '),
+      tools: (custom.tools || []).join(', '),
+      languageText: (custom.languages || []).join(', '),
+      feat: feat?.name || '',
+      feature: String(custom.feature || '').trim(),
+      featureDescription: String(custom.featureDescription || '').trim()
+    };
+  }
+
+  const CLASS_FORGE_THEMES = {
+    artificer: ['#38bdf8', '#bae6fd', '⚙'],
+    bard: ['#e879f9', '#f5d0fe', '♪'],
+    barbarian: ['#f97316', '#fed7aa', 'ᚱ'],
+    fighter: ['#94a3b8', '#e2e8f0', '⚔'],
+    wizard: ['#818cf8', '#c7d2fe', '✧'],
+    druid: ['#4ade80', '#bbf7d0', '❧'],
+    cleric: ['#facc15', '#fef08a', '✦'],
+    warlock: ['#a855f7', '#e9d5ff', '◈'],
+    bloodhunter: ['#ef4444', '#fecaca', '◆'],
+    monk: ['#f59e0b', '#fde68a', '☯'],
+    paladin: ['#fbbf24', '#fef3c7', '☀'],
+    rogue: ['#2dd4bf', '#ccfbf1', '♠'],
+    ranger: ['#22c55e', '#bbf7d0', '➶'],
+    sorcerer: ['#f43f5e', '#fecdd3', '✹'],
+    pugilist: ['#fb923c', '#ffedd5', '✊']
+  };
+
+  const FORGE_CLASS_ALIASES = [
+    [/артефактор|artificer/, 'artificer'],
+    [/бард|bard/, 'bard'],
+    [/варвар|barbarian/, 'barbarian'],
+    [/воин|fighter/, 'fighter'],
+    [/волшебник|wizard/, 'wizard'],
+    [/друид|druid/, 'druid'],
+    [/жрец|cleric/, 'cleric'],
+    [/колдун|warlock/, 'warlock'],
+    [/кровав|blood.?hunter/, 'bloodhunter'],
+    [/монах|monk/, 'monk'],
+    [/паладин|paladin/, 'paladin'],
+    [/плут|rogue/, 'rogue'],
+    [/следопыт|ranger/, 'ranger'],
+    [/чародей|sorcerer/, 'sorcerer'],
+    [/кулачн|pugilist/, 'pugilist']
+  ];
+
+  function forgeIdentity(...values) {
+    return values.filter(Boolean).join(' ').toLocaleLowerCase('ru').replace(/ё/g, 'е');
+  }
+
+  function classForgeTheme(characterClass) {
+    const identity = forgeIdentity(characterClass?.id, characterClass?.name, characterClass?.nameEn);
+    const key = FORGE_CLASS_ALIASES.find(([pattern]) => pattern.test(identity))?.[1];
+    return CLASS_FORGE_THEMES[key] || ['#d2a754', '#f1d38f', '✦'];
+  }
+
+  function speciesForgeColor(species, variant) {
+    const identity = forgeIdentity(species?.id, species?.name, species?.nameEn, variant?.id, variant?.name, variant?.nameEn);
+    const match = [
+      [/тифлинг|tiefling/, '#fb7185'],
+      [/эльф|elf|эладрин|eladrin/, '#a78bfa'],
+      [/дварф|гном|dwarf/, '#f59e0b'],
+      [/драконорожден|dragonborn/, '#f97316'],
+      [/дженази|genasi/, '#38bdf8'],
+      [/аасимар|aasimar/, '#fde68a'],
+      [/орк|orc/, '#84cc16'],
+      [/полурослик|halfling/, '#fbbf24'],
+      [/гит|gith/, '#22d3ee'],
+      [/человек|human/, '#94a3b8']
+    ].find(([pattern]) => pattern.test(identity));
+    return match?.[1] || '#9b74ff';
+  }
+
+  function backgroundForgeSymbol(background, classSymbol) {
+    const identity = forgeIdentity(background?.id, background?.name, background?.nameEn);
+    const match = [
+      [/солдат|рыцар|воен|soldier|knight/, '⚔'],
+      [/моряк|пират|sailor|pirate/, '⚓'],
+      [/ремесл|купец|guild|artisan|merchant/, '⚒'],
+      [/учен|мудрец|студент|sage|student|scholar/, '✧'],
+      [/благород|дворян|noble|court/, '♜'],
+      [/преступ|беспризор|criminal|urchin/, '◆'],
+      [/отшельник|служитель|acolyte|hermit/, '☼'],
+      [/великан|giant/, 'ᛉ'],
+      [/вампир|vampire/, '♢']
+    ].find(([pattern]) => pattern.test(identity));
+    return match?.[1] || classSymbol;
+  }
+
+  function updateForgeTheme() {
+    const root = $('#character-wizard');
+    if (!root) return;
+
+    const species = findSpecies();
+    const variant = findVariant(species);
+    const characterClass = findClass();
+    const background = findBackground();
+    const [primary, primaryLight, classSymbol] = classForgeTheme(characterClass);
+    const alignment = String(state.alignment || '');
+    const alignmentColor = alignment.includes('good')
+      ? '#fde68a'
+      : alignment.includes('evil')
+        ? '#991b1b'
+        : alignment.includes('chaotic')
+          ? '#c084fc'
+          : alignment.includes('lawful')
+            ? '#60a5fa'
+            : '#64748b';
+
+    root.style.setProperty('--wizard-gold', primary);
+    root.style.setProperty('--wizard-gold-light', primaryLight);
+    root.style.setProperty('--forge-secondary', speciesForgeColor(species, variant));
+    root.style.setProperty('--forge-alignment', alignmentColor);
+    root.dataset.forgeSymbol = backgroundForgeSymbol(background, classSymbol);
+    root.dataset.forgeTemper = alignment.includes('evil')
+      ? 'shadow'
+      : alignment.includes('good')
+        ? 'radiant'
+        : alignment.includes('chaotic')
+          ? 'wild'
+          : 'balanced';
+
+    const status = $('#forge-theme-status');
+    if (status) {
+      const parts = [
+        characterClass?.name && `Стиль: ${characterClass.name}`,
+        species?.name && `искра: ${species.name}`,
+        state.alignment && `путь: ${ALIGNMENTS[state.alignment]}`
+      ].filter(Boolean);
+      status.textContent = parts.length ? parts.join(' · ') : 'Облик кузницы изменится вместе с героем';
+    }
+  }
+
+  function isCustomBackground() {
+    return Boolean(getStateModule().findBackground(state, backgroundOptions)?.isCustom);
+  }
+
+  function getCustomBackground() {
+    if (!state.customBackground || typeof state.customBackground !== 'object') {
+      state.customBackground = {};
+    }
+    const custom = state.customBackground;
+    custom.skills = Array.isArray(custom.skills) ? custom.skills : [];
+    custom.tools = Array.isArray(custom.tools) ? custom.tools : [];
+    custom.languages = Array.isArray(custom.languages) ? custom.languages : [];
+    return custom;
   }
 
   function getEffectiveAbilities(species, variant) {
-    return getStateModule().getEffectiveAbilities(species, variant);
+    const abilities = getStateModule().getEffectiveAbilities(species, variant);
+    if (!isWoodHalfElfVariant(species, variant)) return abilities;
+    const selectableTitles = new Set([
+      'Владение эльфийским оружием',
+      'Быстрые ноги',
+      'Маскировка в дикой местности'
+    ]);
+    const selectedTitle = (state.choices['species:woodHalfElfLegacy'] || [])[0];
+    return abilities.filter((ability) =>
+      !selectableTitles.has(String(ability?.title || ''))
+      || String(ability?.title || '') === selectedTitle
+    );
   }
 
   function loreToHtml(value, limit = null) {
@@ -558,22 +937,31 @@ const creatorOptions = {
       .join('');
   }
 
-  function getSizeEntry(species, sizeKey) {
+  function getActiveSizeCalculator(species) {
     if (!species?.sizeCalculator) return null;
 
-    const raw = species.sizeCalculator.raw || {};
+    return species.sizeCalculator.variants?.[state.speciesVariant]
+      || species.sizeCalculator;
+  }
+
+  function getSizeEntry(species, sizeKey) {
+    const calculator = getActiveSizeCalculator(species);
+    if (!calculator) return null;
+
+    const raw = calculator.raw || {};
     if (raw.sizeOptions?.length && sizeKey && raw[sizeKey]) {
       return raw[sizeKey];
     }
 
-    return species.sizeCalculator.base || null;
+    return calculator.base || null;
   }
 
   function initialisePhysique(species) {
-    if (!species?.sizeCalculator) return;
+    const calculator = getActiveSizeCalculator(species);
+    if (!calculator) return;
 
-    const raw = species.sizeCalculator.raw || {};
-    const base = species.sizeCalculator.base || {};
+    const raw = calculator.raw || {};
+    const base = calculator.base || {};
     const defaultSize =
       state.physique.size ||
       base.size ||
@@ -591,11 +979,21 @@ const creatorOptions = {
       state.physique.heightModifier = Math.round(
         (Number(heightRange[0] || 0) + Number(heightRange[1] || 0)) / 2
       );
+    } else {
+      state.physique.heightModifier = Math.min(
+        Number(heightRange[1] || 0),
+        Math.max(Number(heightRange[0] || 0), Number(state.physique.heightModifier))
+      );
     }
 
     if (state.physique.weightMultiplier === null) {
       state.physique.weightMultiplier = Math.round(
         (Number(weightRange[0] || 0) + Number(weightRange[1] || 0)) / 2
+      );
+    } else {
+      state.physique.weightMultiplier = Math.min(
+        Number(weightRange[1] || 0),
+        Math.max(Number(weightRange[0] || 0), Number(state.physique.weightMultiplier))
       );
     }
   }
@@ -635,6 +1033,21 @@ const creatorOptions = {
     return ((Number(value) - Number(min)) / span) * 100;
   }
 
+  function rollDice(expression) {
+    const match = String(expression || '').trim().match(/^(\d+)d(\d+)$/i);
+    if (!match) return null;
+
+    const count = Number(match[1]);
+    const sides = Number(match[2]);
+    if (!count || !sides) return null;
+
+    let total = 0;
+    for (let index = 0; index < count; index += 1) {
+      total += Math.floor(Math.random() * sides) + 1;
+    }
+    return total;
+  }
+
   function normalizedSpeciesIdentity(species = findSpecies()) {
     return `${species?.id || ''} ${species?.name || ''} ${species?.nameEn || ''}`
       .toLocaleLowerCase('ru')
@@ -642,11 +1055,19 @@ const creatorOptions = {
   }
 
   function isEladrinSpecies(species = findSpecies()) {
-    return /(?:^|[\s_-])eladrin(?:$|[\s_-])|эладрин/.test(normalizedSpeciesIdentity(species));
+    const variant = findVariant(species);
+    const identity = `${normalizedSpeciesIdentity(species)} ${variant?.id || ''} ${variant?.name || ''} ${variant?.nameEn || ''}`
+      .toLocaleLowerCase('ru')
+      .replace(/ё/g, 'е');
+    return /(?:^|[\s_-])eladrin(?:$|[\s_-])|эладрин/.test(identity);
   }
 
   function isShadarKaiSpecies(species = findSpecies()) {
-    return /shadar[\s_-]?kai|шадар[\s-]?кай/.test(normalizedSpeciesIdentity(species));
+    const variant = findVariant(species);
+    const identity = `${normalizedSpeciesIdentity(species)} ${variant?.id || ''} ${variant?.name || ''} ${variant?.nameEn || ''}`
+      .toLocaleLowerCase('ru')
+      .replace(/ё/g, 'е');
+    return /shadar[\s_-]?kai|шадар[\s-]?кай/.test(identity);
   }
 
   const ELADRIN_SEASONS = {
@@ -678,7 +1099,12 @@ const creatorOptions = {
         const title = String(ability?.title || '').toLocaleLowerCase('ru').replace(/ё/g, 'е');
         if (isCoreElfSpecies(species) && isCoreElfVariant(variant) && /происхождени[ея]\s+эльфов.*таблиц/.test(title)) return false;
         if (isCoreTieflingSpecies(species) && isCoreTieflingVariant(variant) && /происхождени[ея]\s+исчадия.*таблиц/.test(title)) return false;
-        if (isCoreGnomeSpecies(species) && isCoreGnomeVariant(variant) && /гномь[ея]\s+происхождени[ея].*таблиц/.test(title)) return false;
+        if (
+          isCoreGnomeSpecies(species)
+          && isCoreGnomeVariant(variant)
+          && /гномь[ея]\s+происхождени[ея]/.test(title)
+          && /лесной\s+гном[\s\S]*скальный\s+гном/i.test(String(ability?.description || ''))
+        ) return false;
         return true;
       })
       .map((originalAbility) => {
@@ -688,6 +1114,15 @@ const creatorOptions = {
         return {
           ...ability,
           description: String(ability.description || '').replace(/60\s*фут(?:ов|а)?/gi, '120 футов')
+        };
+      }
+      if (isDragonbornSpecies(species) && /сопротивление\s+урону/.test(title)) {
+        const ancestry = (state.choices['species:dragonAncestry'] || [])[0];
+        const [name, damage] = String(ancestry || '').split(':');
+        if (!name || !damage) return ability;
+        return {
+          ...ability,
+          description: `Ваш драконий предок — ${name}. Вы обладаете сопротивлением урону типа «${damage}».`
         };
       }
       if (isEladrinSpecies(species) && /шаг\s+фей|fey\s+step/.test(title)) {
@@ -733,7 +1168,7 @@ const creatorOptions = {
     const sizeEntry = getSizeEntry(species, state.physique.size);
     const result = calculatePhysique(species);
 
-    const rawSizeData = species.sizeCalculator?.raw || {};
+    const rawSizeData = getActiveSizeCalculator(species)?.raw || {};
     const heightRange = sizeEntry?.heightRange || [0, 0];
     const weightRange = sizeEntry?.weightRange || [0, 0];
 
@@ -763,7 +1198,9 @@ const creatorOptions = {
                   <label class="variant-field">
                     <span>Подвид или вариант</span>
                     <select id="species-variant-select">
-                      ${(isCoreElfSpecies(species) || isCoreTieflingSpecies(species) || isCoreGnomeSpecies(species) || isCoreGithSpecies(species) || isCoreGenasiSpecies(species)) ? '' : '<option value="">Базовый вариант</option>'}
+                      ${speciesRequiresVariant(species)
+                        ? `<option value="" ${state.speciesVariant ? '' : 'selected'} disabled>Выберите происхождение</option>`
+                        : `<option value="" ${state.speciesVariant ? '' : 'selected'}>Базовый вариант</option>`}
                       ${species.variants
                         .map(
                           (item) => `
@@ -787,35 +1224,21 @@ const creatorOptions = {
           </div>
         </header>
 
-        <section class="content-section lore-section">
-          <div class="content-section-heading">
-            <span class="section-icon">◈</span>
-            <div>
-              <span class="section-kicker">Наследие</span>
-              <h3>Кто такие ${escapeHtml(species.name.toLowerCase())}</h3>
-            </div>
+        <details class="content-section full-lore species-lore-disclosure">
+          <summary>Показать описание</summary>
+          <div class="full-lore-content">
+            ${
+              variant?.lore
+                ? `
+                  <h4>Базовое описание</h4>
+                  ${loreToHtml(species.lore)}
+                  <h4>${escapeHtml(variant.name)}</h4>
+                  ${loreToHtml(variant.lore)}
+                `
+                : loreToHtml(species.lore)
+            }
           </div>
-
-          <div class="lore-preview">
-            ${loreToHtml(variant?.lore || species.lore, 2)}
-          </div>
-
-          <details class="full-lore">
-            <summary>Показать полное описание</summary>
-            <div class="full-lore-content">
-              ${
-                variant?.lore
-                  ? `
-                    <h4>Базовое описание</h4>
-                    ${loreToHtml(species.lore)}
-                    <h4>${escapeHtml(variant.name)}</h4>
-                    ${loreToHtml(variant.lore)}
-                  `
-                  : loreToHtml(species.lore)
-              }
-            </div>
-          </details>
-        </section>
+        </details>
 
         <section class="species-stats">
           <div>
@@ -828,7 +1251,7 @@ const creatorOptions = {
           </div>
           <div>
             <span>Скорость</span>
-            <strong>${escapeHtml(species.speed || '—')} фт.</strong>
+            <strong>${escapeHtml(getSpeciesMovementLabel(species) || '—')}</strong>
           </div>
         </section>
 
@@ -995,6 +1418,77 @@ const creatorOptions = {
         }
 
         ${
+          isKoboldSpecies(species)
+            ? `
+              <section class="content-section custom-lineage-section">
+                <div class="content-section-heading">
+                  <span class="section-icon">✦</span>
+                  <div>
+                    <span class="section-kicker">Наследие кобольдов</span>
+                    <h3>Драконье наследство</h3>
+                  </div>
+                </div>
+                <p class="species-choice-description">Выберите одно проявление драконьего наследства.</p>
+                <div class="custom-lineage-option-grid">
+                  ${[
+                    ['cunning', 'Хитрость', 'На этапе «Навыки» выберите Магию, Расследование, Медицину, Ловкость рук или Выживание.'],
+                    ['defiance', 'Неповиновение', 'Вы получаете преимущество против состояния Испуганный.'],
+                    ['sorcery', 'Драконье чародейство', 'На этапе «Заклинания» выберите один заговор чародея.']
+                  ].map(([id, name, description]) => `
+                    <label class="custom-lineage-option">
+                      <input type="radio" name="kobold-legacy" value="${id}" ${(state.choices['species:koboldLegacy'] || [])[0] === id ? 'checked' : ''} />
+                      <span><strong>${name}</strong><small>${description}</small></span>
+                    </label>
+                  `).join('')}
+                </div>
+              </section>
+            `
+            : ''
+        }
+
+        ${
+          adaptiveSpeciesProficiencyConfig(species, variant)
+            ? `
+              <section class="content-section custom-lineage-section adaptive-proficiency-section">
+                <div class="content-section-heading">
+                  <span class="section-icon">✦</span>
+                  <div>
+                    <span class="section-kicker">${escapeHtml(adaptiveSpeciesProficiencyConfig(species, variant).title)}</span>
+                    <h3>Временные владения</h3>
+                  </div>
+                </div>
+                <p class="species-choice-description">Эти владения можно заменить после следующего продолжительного отдыха.</p>
+                <div class="custom-lineage-choices">
+                  ${adaptiveSpeciesProficiencyConfig(species, variant).skillCount ? `
+                    <label class="variant-field">
+                      <span>Навык</span>
+                      <select id="adaptive-species-skill">
+                        <option value="" ${(state.choices['species:adaptiveSkill'] || [])[0] ? '' : 'selected'} disabled>Выберите навык</option>
+                        ${creatorOptions.allSkills.map((skill) => `
+                          <option value="${escapeHtml(skill)}" ${(state.choices['species:adaptiveSkill'] || [])[0] === skill ? 'selected' : ''}>${escapeHtml(skillDisplayName(skill))}</option>
+                        `).join('')}
+                      </select>
+                    </label>
+                  ` : ''}
+                  <label class="variant-field">
+                    <span>Оружие или инструмент — выберите ${adaptiveSpeciesProficiencyConfig(species, variant).flexibleCount}</span>
+                    <select id="adaptive-species-flexible" multiple size="8">
+                      ${[
+                        ...ADAPTIVE_WEAPONS.map((name) => `Оружие: ${name}`),
+                        ...creatorOptions.allTools.map((name) => `Инструмент: ${name}`)
+                      ].map((option) => `
+                        <option value="${escapeHtml(option)}" ${(state.choices['species:adaptiveProficiencies'] || []).includes(option) ? 'selected' : ''}>${escapeHtml(option)}</option>
+                      `).join('')}
+                    </select>
+                    <small>${(state.choices['species:adaptiveProficiencies'] || []).length}/${adaptiveSpeciesProficiencyConfig(species, variant).flexibleCount}</small>
+                  </label>
+                </div>
+              </section>
+            `
+            : ''
+        }
+
+        ${
           isEladrinSpecies(species)
             ? `
               <section class="content-section custom-lineage-section eladrin-season-section">
@@ -1020,22 +1514,129 @@ const creatorOptions = {
         }
 
         ${
-          isCoreGnomeSpecies(species) && isCoreGnomeVariant(variant)
+          speciesNeedsSpellAbility(species, variant)
             ? `
-              <section class="content-section custom-lineage-section gnome-spell-ability-section">
+              <section class="content-section custom-lineage-section species-spell-ability-section">
                 <div class="content-section-heading">
                   <span class="section-icon">✦</span>
                   <div>
-                    <span class="section-kicker">Гномье происхождение</span>
+                    <span class="section-kicker">Магия вида</span>
                     <h3>Заклинательная характеристика</h3>
                   </div>
                 </div>
-                <p class="species-choice-description">Выберите характеристику для заклинаний, полученных от происхождения гнома.</p>
+                <p class="species-choice-description">Выберите характеристику для заклинаний, полученных от вида или происхождения.</p>
                 <div class="custom-lineage-option-grid">
                   ${['Интеллект','Мудрость','Харизма'].map((ability) => `
                     <label class="custom-lineage-option">
-                      <input type="radio" name="gnome-spell-ability" value="${ability}" ${(state.choices['species:gnomeSpellAbility'] || [])[0] === ability ? 'checked' : ''} />
-                      <span><strong>${ability}</strong><small>Используется для заклинаний гномьего происхождения.</small></span>
+                      <input type="radio" name="species-spell-ability" value="${ability}" ${(state.choices['species:spellAbility'] || [])[0] === ability ? 'checked' : ''} />
+                      <span><strong>${ability}</strong><small>Используется для заклинаний выбранного происхождения.</small></span>
+                    </label>
+                  `).join('')}
+                </div>
+              </section>
+            `
+            : ''
+        }
+
+        ${
+          dragonAncestryOptions(species, variant).length
+            ? `
+              <section class="content-section custom-lineage-section dragon-ancestry-section">
+                <div class="content-section-heading">
+                  <span class="section-icon">✦</span>
+                  <div>
+                    <span class="section-kicker">Наследие драконов</span>
+                    <h3>Драконий предок</h3>
+                  </div>
+                </div>
+                <p class="species-choice-description">Предок определяет тип урона дыхания и сопротивление этому типу урона.</p>
+                <div class="custom-lineage-option-grid">
+                  ${dragonAncestryOptions(species, variant).map((option) => `
+                    <label class="custom-lineage-option">
+                      <input type="radio" name="dragon-ancestry" value="${escapeHtml(option.id)}" ${(state.choices['species:dragonAncestry'] || [])[0] === option.id ? 'checked' : ''} />
+                      <span><strong>${escapeHtml(option.name)}</strong><small>Тип урона: ${escapeHtml(option.damage)}</small></span>
+                    </label>
+                  `).join('')}
+                </div>
+              </section>
+            `
+            : ''
+        }
+
+        ${
+          speciesCantripChoice(species, variant)
+            ? `
+              <section class="content-section custom-lineage-section species-cantrip-section">
+                <div class="content-section-heading">
+                  <span class="section-icon">✦</span>
+                  <div>
+                    <span class="section-kicker">Магия вида</span>
+                    <h3>${escapeHtml(speciesCantripChoice(species, variant).title)}</h3>
+                  </div>
+                </div>
+                <label class="variant-field">
+                  <span>Выберите один заговор</span>
+                  <select id="species-cantrip-select">
+                    <option value="" ${(state.choices['species:cantrip'] || [])[0] ? '' : 'selected'} disabled>Выберите заговор</option>
+                    ${speciesCantripChoice(species, variant).options.map((name) => `
+                      <option value="${escapeHtml(name)}" ${(state.choices['species:cantrip'] || [])[0] === name ? 'selected' : ''}>${escapeHtml(name)}</option>
+                    `).join('')}
+                  </select>
+                </label>
+              </section>
+            `
+            : ''
+        }
+
+        ${
+          isWoodHalfElfVariant(species, variant)
+            ? `
+              <section class="content-section custom-lineage-section wood-halfelf-section">
+                <div class="content-section-heading">
+                  <span class="section-icon">✦</span>
+                  <div>
+                    <span class="section-kicker">Эльфийское происхождение</span>
+                    <h3>Наследие лесного эльфа</h3>
+                  </div>
+                </div>
+                <p class="species-choice-description">Вместо универсальности навыков выберите только одну особенность лесного эльфа.</p>
+                <div class="custom-lineage-option-grid">
+                  ${[
+                    ['Владение эльфийским оружием', 'Владение эльфийским оружием'],
+                    ['Быстрые ноги', 'Скорость ходьбы 35 футов'],
+                    ['Маскировка в дикой местности', 'Возможность скрываться в природных условиях']
+                  ].map(([id, description]) => `
+                    <label class="custom-lineage-option">
+                      <input type="radio" name="wood-halfelf-legacy" value="${escapeHtml(id)}" ${(state.choices['species:woodHalfElfLegacy'] || [])[0] === id ? 'checked' : ''} />
+                      <span><strong>${escapeHtml(id)}</strong><small>${escapeHtml(description)}</small></span>
+                    </label>
+                  `).join('')}
+                </div>
+              </section>
+            `
+            : ''
+        }
+
+        ${
+          isKhoravarVariant(species, variant)
+            ? `
+              <section class="content-section custom-lineage-section khoravar-proficiency-section">
+                <div class="content-section-heading">
+                  <span class="section-icon">✦</span>
+                  <div>
+                    <span class="section-kicker">Универсальные умения</span>
+                    <h3>Тип владения</h3>
+                  </div>
+                </div>
+                <p class="species-choice-description">Выберите, что получить от хораварского происхождения: один навык или один инструмент.</p>
+                <div class="custom-lineage-option-grid">
+                  ${[
+                    ['skill', 'Навык', 'Навык выбирается на шаге «Навыки».'],
+                    ['tool', 'Инструмент', 'Инструмент выбирается на шаге «Инструменты».']
+                  ].map(([id, name, description]) => `
+                    <label class="custom-lineage-option">
+                      <input type="radio" name="khoravar-proficiency" value="${id}" ${(state.choices['species:khoravarProficiencyType'] || [])[0] === id ? 'checked' : ''} />
+                      <span><strong>${name}</strong><small>${description}</small></span>
                     </label>
                   `).join('')}
                 </div>
@@ -1083,12 +1684,28 @@ const creatorOptions = {
     });
 
     $('#species-variant-select')?.addEventListener('change', (event) => {
-      state.speciesVariant = event.target.value
-        || (isCoreElfSpecies(species) ? 'high-elf' : null)
-        || (isCoreTieflingSpecies(species) ? 'infernal-tiefling' : null)
-        || (isCoreGnomeSpecies(species) ? 'forest-gnome' : null)
-        || preferredRequiredVariantId(species);
+      const previousTop = event.currentTarget.getBoundingClientRect().top;
+      state.speciesVariant = event.currentTarget.value || null;
+      state.choices['species:elfTranceProficiencyType'] = [];
+      state.choices['species:eladrinSeason'] = [];
+      state.choices['species:skill'] = [];
+      state.choices['species:tools'] = [];
+      state.choices['species:spellAbility'] = [];
+      state.choices['species:cantrip'] = [];
+      state.choices['species:dragonAncestry'] = [];
+      state.choices['species:khoravarProficiencyType'] = [];
+      state.choices['species:woodHalfElfLegacy'] = [];
+      state.choices['species:adaptiveSkill'] = [];
+      state.choices['species:adaptiveProficiencies'] = [];
+      state.physique.heightModifier = null;
+      state.physique.weightMultiplier = null;
       renderSpeciesDetails();
+      const nextSelect = $('#species-variant-select');
+      if (nextSelect) {
+        nextSelect.focus({ preventScroll: true });
+        const offset = nextSelect.getBoundingClientRect().top - previousTop;
+        if (Math.abs(offset) > 0.5) window.scrollBy(0, offset);
+      }
     });
 
 
@@ -1108,6 +1725,25 @@ const creatorOptions = {
       updatePreview();
     }));
 
+    $$('[name="kobold-legacy"]').forEach((input) => input.addEventListener('change', () => {
+      if (!input.checked) return;
+      state.choices['species:koboldLegacy'] = [input.value];
+      if (input.value !== 'cunning') state.choices['species:skill'] = [];
+      saveState();
+      renderSpeciesDetails();
+      updatePreview();
+    }));
+
+    $$('[name="elf-trance-proficiency"]').forEach((input) => input.addEventListener('change', () => {
+      if (!input.checked) return;
+      state.choices['species:elfTranceProficiencyType'] = [input.value];
+      if (input.value === 'skill') state.choices['species:tools'] = [];
+      else state.choices['species:skill'] = [];
+      saveState();
+      renderSpeciesDetails();
+      updatePreview();
+    }));
+
     $$('[name="eladrin-season"]').forEach((input) => input.addEventListener('change', () => {
       if (!input.checked) return;
       state.choices['species:eladrinSeason'] = [input.value];
@@ -1116,13 +1752,63 @@ const creatorOptions = {
       updatePreview();
     }));
 
-    $$('[name="gnome-spell-ability"]').forEach((input) => input.addEventListener('change', () => {
+    $$('[name="species-spell-ability"]').forEach((input) => input.addEventListener('change', () => {
       if (!input.checked) return;
-      state.choices['species:gnomeSpellAbility'] = [input.value];
+      state.choices['species:spellAbility'] = [input.value];
       saveState();
       renderSpeciesDetails();
       updatePreview();
     }));
+
+    $$('[name="dragon-ancestry"]').forEach((input) => input.addEventListener('change', () => {
+      if (!input.checked) return;
+      state.choices['species:dragonAncestry'] = [input.value];
+      saveState();
+      renderSpeciesDetails();
+      updatePreview();
+    }));
+
+    $('#species-cantrip-select')?.addEventListener('change', (event) => {
+      state.choices['species:cantrip'] = event.target.value ? [event.target.value] : [];
+      saveState();
+      renderSpeciesDetails();
+      updatePreview();
+    });
+
+    $$('[name="khoravar-proficiency"]').forEach((input) => input.addEventListener('change', () => {
+      if (!input.checked) return;
+      state.choices['species:khoravarProficiencyType'] = [input.value];
+      if (input.value === 'skill') state.choices['species:tools'] = [];
+      else state.choices['species:skill'] = [];
+      saveState();
+      renderSpeciesDetails();
+      updatePreview();
+    }));
+
+    $$('[name="wood-halfelf-legacy"]').forEach((input) => input.addEventListener('change', () => {
+      if (!input.checked) return;
+      state.choices['species:woodHalfElfLegacy'] = [input.value];
+      saveState();
+      renderSpeciesDetails();
+      updatePreview();
+    }));
+
+    $('#adaptive-species-skill')?.addEventListener('change', (event) => {
+      state.choices['species:adaptiveSkill'] = event.target.value ? [event.target.value] : [];
+      saveState();
+      renderSpeciesDetails();
+      updatePreview();
+    });
+
+    $('#adaptive-species-flexible')?.addEventListener('change', (event) => {
+      const limit = adaptiveSpeciesProficiencyConfig()?.flexibleCount || 0;
+      state.choices['species:adaptiveProficiencies'] = Array.from(event.target.selectedOptions)
+        .map((option) => option.value)
+        .slice(0, limit);
+      saveState();
+      renderSpeciesDetails();
+      updatePreview();
+    });
 
     $('#size-select')?.addEventListener('change', (event) => {
       state.physique.size = event.target.value;
@@ -1201,16 +1887,22 @@ const creatorOptions = {
       const weightRange = current.weightRange || [0, 0];
 
       state.physique.heightModifier =
-        Math.floor(
-          Math.random() *
-            (Number(heightRange[1] || 0) - Number(heightRange[0] || 0) + 1)
-        ) + Number(heightRange[0] || 0);
+        rollDice(current.heightDice)
+        ?? (
+          Math.floor(
+            Math.random() *
+              (Number(heightRange[1] || 0) - Number(heightRange[0] || 0) + 1)
+          ) + Number(heightRange[0] || 0)
+        );
 
       state.physique.weightMultiplier =
-        Math.floor(
-          Math.random() *
-            (Number(weightRange[1] || 0) - Number(weightRange[0] || 0) + 1)
-        ) + Number(weightRange[0] || 0);
+        rollDice(current.weightDice)
+        ?? (
+          Math.floor(
+            Math.random() *
+              (Number(weightRange[1] || 0) - Number(weightRange[0] || 0) + 1)
+          ) + Number(weightRange[0] || 0)
+        );
 
       const heightSlider = $('#height-slider');
       const weightSlider = $('#weight-slider');
@@ -1260,7 +1952,6 @@ const creatorOptions = {
               </div>
               <button class="button button-secondary button-small" type="button" id="change-class">Изменить</button>
             </div>
-            <p>${escapeHtml(String(characterClass.description || '').split('\n').filter(Boolean)[0] || '')}</p>
           </div>
           <div class="class-hero-image">
             <img src="${escapeHtml(characterClass.portrait || '')}" alt="" />
@@ -1268,17 +1959,10 @@ const creatorOptions = {
           </div>
         </header>
 
-        <section class="content-section lore-section">
-          <div class="content-section-heading">
-            <span class="section-icon">◈</span>
-            <div><span class="section-kicker">Путь героя</span><h3>Кто такие ${escapeHtml(characterClass.name.toLowerCase())}</h3></div>
-          </div>
-          <div class="lore-preview">${loreToHtml(characterClass.description, 2)}</div>
-          <details class="full-lore">
-            <summary>Показать полное описание</summary>
-            <div class="full-lore-content">${loreToHtml(characterClass.description)}</div>
-          </details>
-        </section>
+        <details class="content-section full-lore class-lore-disclosure">
+          <summary>Показать описание</summary>
+          <div class="full-lore-content">${loreToHtml(characterClass.description)}</div>
+        </details>
 
         <section class="class-stats">
           <div><span>Кость хитов</span><strong>к${escapeHtml(characterClass.hitDice)}</strong></div>
@@ -1356,7 +2040,7 @@ const creatorOptions = {
   function selectedOriginFeats() {
     return getStateModule().selectedOriginFeats(
       state,
-      allSelectableFeatOptions
+      allResolvedFeatOptions
     );
   }
 
@@ -1390,8 +2074,9 @@ const creatorOptions = {
 
   const BACKGROUND_SPECIAL_FEAT_RULES = [
     { background: /резчик\s+рун|rune\s+carver/i, featIds: ['rune-shaper'] },
-    { background: /найденыш\s+великанов|giant\s+foundling/i, featIds: ['strike-of-the-giants'] },
-    { background: /рыцарь\s+соламнии|knight\s+of\s+solamnia/i, featIds: ['squire-of-solamnia'] },
+    { background: /великаний\s+подкидыш|найденыш\s+великанов|giant\s+foundling/i, featIds: ['strike-of-the-giants'] },
+    { background: /соламнийск(?:ий|ого)\s+рыцар|рыцарь\s+соламнии|knight\s+of\s+solamnia/i, featIds: ['squire-of-solamnia'] },
+    { background: /вампирск(?:ий|ого)\s+посвящ[её]нн|vampire\s+devotee/i, featIds: ['vampires-plaything'] },
     { background: /маг\s+высшего\s+волшебства|mage\s+of\s+high\s+sorcery/i, featIds: ['initiate-of-high-sorcery'] },
     { background: /планарн(?:ый|ого)\s+философ|planar\s+philosopher/i, featIds: ['scion-of-the-outer-planes'] },
     { background: /студент.*(?:лорхолд|призмари|квандрикс|сильверквилл|визерблум)|(?:lorehold|prismari|quandrix|silverquill|witherbloom)\s+student/i, featIds: ['strixhaven-initiate'] }
@@ -1426,7 +2111,7 @@ const creatorOptions = {
 
     // Устаревшие и сеттинговые предыстории могут прямо называть особую черту,
     // которая не входит в стандартный список черт происхождения.
-    for (const feat of allSelectableFeatOptions) {
+    for (const feat of allResolvedFeatOptions) {
       const names = [feat.name, feat.nameEn, feat.id].map(normalizeRuleText).filter(Boolean);
       if (names.some((name) => name.length > 3 && normalizedRule.includes(name))) {
         options.set(feat.id, feat);
@@ -1437,7 +2122,7 @@ const creatorOptions = {
     for (const rule of BACKGROUND_SPECIAL_FEAT_RULES) {
       if (!rule.background.test(backgroundName)) continue;
       for (const featId of rule.featIds) {
-        const feat = allSelectableFeatOptions.find((item) => item.id === featId);
+        const feat = allResolvedFeatOptions.find((item) => item.id === featId);
         if (feat) options.set(feat.id, feat);
       }
     }
@@ -1526,6 +2211,11 @@ const creatorOptions = {
     });
   }
 
+  let weaponMasterySearch = '';
+  let weaponMasteryCategory = 'all';
+  let weaponMasteryRange = 'all';
+  let faithSearch = '';
+
   function renderClassFeatures(message = '') {
     const masteryGroup = getClassFeatureGroups().find((group) => group.id === 'weapon-mastery');
     if (masteryGroup) {
@@ -1553,6 +2243,22 @@ const creatorOptions = {
         .slice(0, group.count);
 
       const inputType = group.count === 1 ? 'radio' : 'checkbox';
+      const visibleOptions = group.options.filter((option) => {
+          if (group.id === 'faith') {
+            const searchText = `${option.name || ''} ${option.detail || ''}`
+              .toLocaleLowerCase('ru');
+            return !faithSearch || searchText.includes(faithSearch);
+          }
+          if (group.id !== 'weapon-mastery') return true;
+
+            const searchText = `${option.name || ''} ${option.detail || ''}`
+              .toLocaleLowerCase('ru');
+            return (
+              (!weaponMasterySearch || searchText.includes(weaponMasterySearch))
+              && (weaponMasteryCategory === 'all' || option.category === weaponMasteryCategory)
+              && (weaponMasteryRange === 'all' || option.rangeType === weaponMasteryRange)
+            );
+          });
 
       return `<section class="class-feature-group">
         <div class="class-feature-summary">
@@ -1565,6 +2271,38 @@ const creatorOptions = {
         </div>
 
         <div class="class-feature-table-wrap">
+          ${group.id === 'weapon-mastery' ? `
+            <div class="weapon-mastery-toolbar">
+              <label>
+                <span>Поиск</span>
+                <input id="weapon-mastery-search" type="search" placeholder="Оружие или приём…" value="${escapeHtml(weaponMasterySearch)}">
+              </label>
+              <label>
+                <span>Категория</span>
+                <select id="weapon-mastery-category">
+                  <option value="all" ${weaponMasteryCategory === 'all' ? 'selected' : ''}>Все</option>
+                  <option value="simple" ${weaponMasteryCategory === 'simple' ? 'selected' : ''}>Простое</option>
+                  <option value="martial" ${weaponMasteryCategory === 'martial' ? 'selected' : ''}>Воинское</option>
+                </select>
+              </label>
+              <label>
+                <span>Дистанция</span>
+                <select id="weapon-mastery-range">
+                  <option value="all" ${weaponMasteryRange === 'all' ? 'selected' : ''}>Все</option>
+                  <option value="melee" ${weaponMasteryRange === 'melee' ? 'selected' : ''}>Ближнее</option>
+                  <option value="ranged" ${weaponMasteryRange === 'ranged' ? 'selected' : ''}>Дальнее</option>
+                </select>
+              </label>
+            </div>
+          ` : ''}
+          ${group.id === 'faith' ? `
+            <div class="weapon-mastery-toolbar">
+              <label>
+                <span>Поиск божества или пути</span>
+                <input id="faith-search" type="search" placeholder="Имя, сфера или домен…" value="${escapeHtml(faithSearch)}">
+              </label>
+            </div>
+          ` : ''}
           <table class="class-feature-table">
             <thead>
               <tr>
@@ -1573,7 +2311,7 @@ const creatorOptions = {
               </tr>
             </thead>
             <tbody>
-              ${group.options.map((option) => {
+              ${visibleOptions.map((option) => {
                 const checked = state.choices[key].includes(option.id);
                 const optionTitle = option.href
                   ? `<a href="${escapeHtml(option.href)}" target="_blank" rel="noopener">${escapeHtml(option.name)} ↗</a>`
@@ -1599,7 +2337,7 @@ const creatorOptions = {
                     >
                   </td>
                 </tr>`;
-              }).join('')}
+              }).join('') || '<tr><td colspan="2" class="class-feature-empty-filter">Ничего не найдено.</td></tr>'}
             </tbody>
           </table>
         </div>
@@ -1608,6 +2346,33 @@ const creatorOptions = {
 
     warning.textContent = message;
     warning.hidden = !message;
+
+    $('#weapon-mastery-search')?.addEventListener('input', (event) => {
+      weaponMasterySearch = event.target.value.trim().toLocaleLowerCase('ru');
+      renderClassFeatures();
+      const search = $('#weapon-mastery-search');
+      if (search) {
+        search.focus();
+        search.setSelectionRange(search.value.length, search.value.length);
+      }
+    });
+    $('#weapon-mastery-category')?.addEventListener('change', (event) => {
+      weaponMasteryCategory = event.target.value;
+      renderClassFeatures();
+    });
+    $('#weapon-mastery-range')?.addEventListener('change', (event) => {
+      weaponMasteryRange = event.target.value;
+      renderClassFeatures();
+    });
+    $('#faith-search')?.addEventListener('input', (event) => {
+      faithSearch = event.target.value.trim().toLocaleLowerCase('ru');
+      renderClassFeatures();
+      const search = $('#faith-search');
+      if (search) {
+        search.focus();
+        search.setSelectionRange(search.value.length, search.value.length);
+      }
+    });
 
     $$('[data-class-feature]').forEach((input) => input.addEventListener('change', () => {
       const group = groups.find((item) => item.id === input.dataset.classFeature);
@@ -1812,7 +2577,26 @@ const creatorOptions = {
     const sourceNames = { background: 'от предыстории', species: 'от расы' };
     const choices = [];
     for (const entry of magicEntries) {
-      choices.push({ id:`feat:${entry.source}:magic-list`, title:'Список заклинаний', description:'Выберите список Жреца, Друида или Волшебника. Заклинания из него появятся на этапе «Заклинания».', count:1, options:[{value:'cleric',label:'Жрец'},{value:'druid',label:'Друид'},{value:'wizard',label:'Волшебник'}], source:`Черта: ${entry.feat.name} (${sourceNames[entry.source]})` });
+      const otherEntry = magicEntries.find((candidate) => candidate.source !== entry.source);
+      const otherList = otherEntry
+        ? (state.choices[`feat:${otherEntry.source}:magic-list`] || [])[0]
+        : '';
+      choices.push({
+        id:`feat:${entry.source}:magic-list`,
+        title:'Список заклинаний',
+        description:'Выберите список Жреца, Друида или Волшебника. При повторном получении черты нужно выбрать другой список.',
+        count:1,
+        options:[
+          {value:'cleric',label:'Жрец'},
+          {value:'druid',label:'Друид'},
+          {value:'wizard',label:'Волшебник'}
+        ].map((option) => ({
+          ...option,
+          disabled: option.value === otherList,
+          reason: option.value === otherList ? 'Этот список уже выбран для второго «Посвящённого в магию».' : ''
+        })),
+        source:`Черта: ${entry.feat.name} (${sourceNames[entry.source]})`
+      });
       choices.push({ id:`feat:${entry.source}:spell-ability`, title:'Заклинательная характеристика', description:'Выберите характеристику для заклинаний этой черты.', count:1, options:['Интеллект','Мудрость','Харизма'], source:`Черта: ${entry.feat.name} (${sourceNames[entry.source]})` });
     }
     renderBackgroundChoiceCards(container, choices);
@@ -1825,9 +2609,10 @@ const creatorOptions = {
       && (!speciesGrantsExtraFeat() || Boolean(speciesId))
       && !(backgroundId && speciesId && backgroundId === speciesId && !isRepeatableOriginFeat(backgroundId));
     if (!basicComplete) return false;
-    return selectedOriginFeatEntries()
-      .filter((entry) => entry.id === 'magic-initiate')
-      .every((entry) =>
+    const magicEntries = selectedOriginFeatEntries().filter((entry) => entry.id === 'magic-initiate');
+    const magicLists = magicEntries.map((entry) => (state.choices[`feat:${entry.source}:magic-list`] || [])[0]).filter(Boolean);
+    return new Set(magicLists).size === magicLists.length
+      && magicEntries.every((entry) =>
         (state.choices[`feat:${entry.source}:magic-list`] || []).length === 1
         && (state.choices[`feat:${entry.source}:spell-ability`] || []).length === 1
       );
@@ -1863,7 +2648,9 @@ const creatorOptions = {
               <p>${escapeHtml(choice.description || '')}</p>
               <div class="${isCharacteristicChoice ? 'characteristic-option-list' : 'dynamic-option-grid'}">
                 ${options.map((option, optionIndex) => {
-                  const alignmentMarker = String(option.label || '').match(/\(([^)]+)\)\s*$/)?.[1] || '';
+                  const alignmentMarker = choice.id === 'background:ideal'
+                    ? String(option.label || '').match(/\(([^)]+)\)\s*$/)?.[1] || ''
+                    : '';
                   return `
                   <label class="${isCharacteristicChoice ? 'characteristic-option-row' : 'dynamic-option'} ${option.disabled ? 'is-disabled' : ''}" ${option.reason ? `title="${escapeHtml(option.reason)}"` : ''}>
                     <input type="${choice.count > 1 ? 'checkbox' : 'radio'}"
@@ -1986,6 +2773,77 @@ const creatorOptions = {
       return;
     }
 
+    if (isCustomBackground()) {
+      const custom = getCustomBackground();
+      const optionTags = (options, selected, labeler = (value) => value) => options.map((value) =>
+        `<option value="${escapeHtml(value)}" ${selected.includes(value) ? 'selected' : ''}>${escapeHtml(labeler(value))}</option>`
+      ).join('');
+      container.innerHTML = `
+        <article class="background-profile custom-background-profile">
+          <header class="background-hero">
+            <div>
+              <span class="source-label">Пользовательская предыстория</span>
+              <div class="background-title-row"><h2>${escapeHtml(custom.name || 'Своя предыстория')}</h2><button class="button button-secondary button-small" type="button" id="change-background">Изменить</button></div>
+              <p>Заполните все поля. Эти сведения попадут в лист персонажа и экспорт.</p>
+            </div>
+            <span class="background-rune">✎</span>
+          </header>
+          <section class="content-section custom-background-form">
+            <div class="content-section-heading"><span class="section-icon">✦</span><div><span class="section-kicker">Уникальное прошлое</span><h3>Настройка предыстории</h3></div></div>
+            <div class="custom-background-grid">
+              <label><span>Название</span><input data-custom-background-field="name" value="${escapeHtml(custom.name || '')}" placeholder="Например, Хранитель руин"></label>
+              <label class="custom-background-wide"><span>Описание</span><textarea data-custom-background-field="description" rows="4" placeholder="Кем герой был до начала приключений?">${escapeHtml(custom.description || '')}</textarea></label>
+              <label><span>Навыки (выберите 2)</span><select multiple size="7" data-custom-background-field="skills" data-custom-limit="2">${optionTags(creatorOptions.allSkills, custom.skills, skillDisplayName)}</select><small>${custom.skills.length}/2</small></label>
+              <label><span>Инструмент (выберите 1)</span><select data-custom-background-field="tools"><option value="">— Выберите —</option>${optionTags(creatorOptions.allTools, custom.tools)}</select></label>
+              <label><span>Языки (до 2)</span><select multiple size="7" data-custom-background-field="languages" data-custom-limit="2">${optionTags([...creatorOptions.standardLanguages, ...creatorOptions.rareLanguages], custom.languages)}</select><small>${custom.languages.length}/2</small></label>
+              <label><span>Черта происхождения</span><select data-custom-background-field="featId"><option value="">— Выберите —</option>${featOptions.map((feat) => `<option value="${escapeHtml(feat.id)}" ${custom.featId === feat.id ? 'selected' : ''}>${escapeHtml(feat.name)}</option>`).join('')}</select></label>
+              <label><span>Название особенности</span><input data-custom-background-field="feature" value="${escapeHtml(custom.feature || '')}" placeholder="Например, Знаток руин"></label>
+              <label class="custom-background-wide"><span>Описание особенности</span><textarea data-custom-background-field="featureDescription" rows="3">${escapeHtml(custom.featureDescription || '')}</textarea></label>
+              <label><span>Черта характера 1</span><textarea data-custom-background-field="trait1" rows="2">${escapeHtml(custom.trait1 || '')}</textarea></label>
+              <label><span>Черта характера 2</span><textarea data-custom-background-field="trait2" rows="2">${escapeHtml(custom.trait2 || '')}</textarea></label>
+              <label><span>Идеал</span><textarea data-custom-background-field="ideal" rows="2">${escapeHtml(custom.ideal || '')}</textarea></label>
+              <label><span>Привязанность</span><textarea data-custom-background-field="bond" rows="2">${escapeHtml(custom.bond || '')}</textarea></label>
+              <label class="custom-background-wide"><span>Слабость</span><textarea data-custom-background-field="flaw" rows="2">${escapeHtml(custom.flaw || '')}</textarea></label>
+            </div>
+          </section>
+        </article>`;
+
+      $$('[data-custom-background-field]').forEach((field) => {
+        field.addEventListener('change', () => {
+          const key = field.dataset.customBackgroundField;
+          if (field.multiple) {
+            const limit = Number(field.dataset.customLimit || 99);
+            const values = Array.from(field.selectedOptions).map((option) => option.value);
+            if (values.length > limit) {
+              alert(`Можно выбрать не больше ${limit}.`);
+              renderBackgroundDetails();
+              return;
+            }
+            custom[key] = values;
+          } else if (key === 'tools') {
+            custom.tools = field.value ? [field.value] : [];
+          } else {
+            custom[key] = field.value;
+          }
+          state.choices['background:skills'] = [...custom.skills];
+          state.choices['background:tools'] = [...custom.tools];
+          state.choices['languages:selected'] = [...custom.languages];
+          state.choices['background:originFeat'] = custom.featId ? [custom.featId] : [];
+          state.choices['background:traits'] = [custom.trait1, custom.trait2].filter(Boolean);
+          state.choices['background:ideal'] = custom.ideal ? [custom.ideal] : [];
+          state.choices['background:bond'] = custom.bond ? [custom.bond] : [];
+          state.choices['background:flaw'] = custom.flaw ? [custom.flaw] : [];
+          saveState();
+          updatePreview();
+          renderBackgroundDetails();
+        });
+      });
+      $('#change-background')?.addEventListener('click', () => $('#background-picker')?.scrollIntoView({ behavior:'smooth', block:'start' }));
+      updatePreview();
+      saveState();
+      return;
+    }
+
     const choices = [];
 
     if (background.variants?.table?.length) choices.push({ id:'background:variant', title:background.variants.title || 'Вариант предыстории', description:background.variants.description || '', count:1, options:background.variants.table.map((item)=>item.result), source:`Предыстория: ${background.name}` });
@@ -1999,7 +2857,7 @@ const creatorOptions = {
       <article class="background-profile">
         <header class="background-hero"><div><span class="source-label">${escapeHtml(background.sourceBook || 'Предыстория')}</span><div class="background-title-row"><h2>${escapeHtml(background.name)} <small>[${escapeHtml(background.nameEn || '')}]</small></h2><button class="button button-secondary button-small" type="button" id="change-background">Изменить</button></div><p>${escapeHtml(String(background.lore || '').split('\n').filter(Boolean)[0] || '')}</p></div><span class="background-rune">✧</span></header>
         <section class="content-section lore-section"><div class="content-section-heading"><span class="section-icon">◈</span><div><span class="section-kicker">Прошлая жизнь</span><h3>История персонажа</h3></div></div><div class="lore-preview">${loreToHtml(background.lore, 2)}</div><details class="full-lore"><summary>Показать полное описание</summary><div class="full-lore-content">${loreToHtml(background.lore)}</div></details></section>
-        <section class="background-stats"><div><span>Навыки</span><strong>${escapeHtml(background.skills || '—')}</strong></div><div><span>Инструменты</span><strong>${escapeHtml(background.tools || '—')}</strong></div><div><span>Черта</span><strong>Выбирается на следующем этапе</strong></div></section>
+        <section class="background-stats"><div><span>Навыки</span><strong>${escapeHtml(skillListDisplay(background.skills))}</strong></div><div><span>Инструменты</span><strong>${escapeHtml(background.tools || '—')}</strong></div><div><span>Черта</span><strong>Выбирается на следующем этапе</strong></div></section>
         <section class="content-section background-rewards"><div class="content-section-heading"><span class="section-icon">✦</span><div><span class="section-kicker">Наследие прошлого</span><h3>Снаряжение и особенности</h3></div></div><div class="background-reward-grid"><article><span>Снаряжение</span><strong>${escapeHtml(background.equipment || '—')}</strong></article><article><span>Выбранный вариант</span><strong>${escapeHtml(state.choices['background:variant']?.[0] || '—')}</strong></article></div></section>
         ${background.spellTable ? `<section class="content-section background-spells"><div class="content-section-heading"><span class="section-icon">✺</span><div><span class="section-kicker">Магия</span><h3>${escapeHtml(background.spellTable.name || 'Заклинания')}</h3></div></div><p>${escapeHtml(background.spellTable.description || '')}</p><div class="spell-table-list">${(background.spellTable.spells || []).map((row)=>`<p><strong>${escapeHtml(row.level || '')}</strong><span>${escapeHtml((row.spells || []).join(', '))}</span></p>`).join('')}</div></section>` : ''}
         <section class="content-section background-choices-section"><div id="background-rule-choices"></div></section>
@@ -2047,13 +2905,16 @@ const creatorOptions = {
     });
 
     $$('.class-card').forEach((card) => {
-      card.classList.toggle('is-selected', card.dataset.classId === state.class);
+      const isSelected = card.dataset.classId === state.class;
+      card.classList.toggle('is-selected', isSelected);
+      card.setAttribute('aria-pressed', String(isSelected));
     });
 
     $$('.background-card').forEach((card) => {
       card.classList.toggle('is-selected', card.dataset.backgroundId === state.background);
     });
 
+    updateForgeTheme();
     saveState();
   }
 
@@ -2063,8 +2924,68 @@ const creatorOptions = {
   const usedPointBuy = () => getStateModule().usedPointBuy(state, COST_TABLE);
   const usedBackgroundBonus = () => getStateModule().usedBackgroundBonus(state);
   const totalScore = (key) => getStateModule().totalScore(state, key);
+  const ABILITY_NAMES = {
+    strength: 'Сила',
+    dexterity: 'Ловкость',
+    constitution: 'Телосложение',
+    intelligence: 'Интеллект',
+    wisdom: 'Мудрость',
+    charisma: 'Харизма'
+  };
+
+  function abilityKeysMentioned(value) {
+    const text = String(value || '').toLocaleLowerCase('ru');
+    return Object.entries(ABILITY_NAMES)
+      .filter(([, name]) => text.includes(name.toLocaleLowerCase('ru')))
+      .map(([key]) => key);
+  }
+
+  function classSpellcastingAbility(characterClass) {
+    const identity = `${characterClass?.id || ''} ${characterClass?.name || ''} ${characterClass?.nameEn || ''}`
+      .toLocaleLowerCase('ru');
+    if (/wizard|artificer|волшебник|артефактор|артификатор|изобретатель/.test(identity)) return 'Интеллект';
+    if (/cleric|druid|ranger|жрец|друид|следопыт/.test(identity)) return 'Мудрость';
+    if (/bard|sorcerer|warlock|paladin|бард|чародей|колдун|паладин/.test(identity)) return 'Харизма';
+    return '';
+  }
+
+  function renderClassAbilityGuide() {
+    const guide = $('#class-ability-guide');
+    if (!guide) return;
+    const characterClass = findClass();
+    if (!characterClass) {
+      guide.hidden = true;
+      $$('[data-ability-card]').forEach((card) => card.classList.remove('is-primary-ability'));
+      return;
+    }
+
+    const primaryText = String(characterClass.primaryAbility || '').trim() || 'Не указана';
+    const primaryKeys = abilityKeysMentioned(primaryText);
+    const savingThrows = Array.isArray(characterClass?.proficiencies?.savingThrows)
+      ? characterClass.proficiencies.savingThrows.join(' и ')
+      : 'Не указаны';
+    const spellcastingAbility = classSpellcastingAbility(characterClass);
+
+    guide.hidden = false;
+    guide.innerHTML = `
+      <div class="class-ability-guide-heading">
+        <div><span>Подсказка по классу</span><h3>${escapeHtml(characterClass.name || characterClass.nameEn || 'Выбранный класс')}</h3></div>
+        <p>Это рекомендации, а не ограничение. Сначала повысь основные характеристики класса; Телосложение полезно любому герою благодаря хитам.</p>
+      </div>
+      <div class="class-ability-guide-grid">
+        <div class="class-ability-guide-item"><span>Основные характеристики</span><strong>${escapeHtml(primaryText)}</strong></div>
+        <div class="class-ability-guide-item"><span>Спасброски класса</span><strong>${escapeHtml(savingThrows)}</strong></div>
+        ${spellcastingAbility ? `<div class="class-ability-guide-item"><span>Характеристика заклинаний</span><strong>${escapeHtml(spellcastingAbility)}</strong></div>` : ''}
+        <div class="class-ability-guide-item"><span>Полезно всем</span><strong>Телосложение повышает запас хитов</strong></div>
+      </div>`;
+
+    $$('[data-ability-card]').forEach((card) => {
+      card.classList.toggle('is-primary-ability', primaryKeys.includes(card.dataset.abilityCard));
+    });
+  }
 
   function renderAbilities(message = '') {
+    renderClassAbilityGuide();
     const point = $('#point-buy-remaining'); if (point) point.textContent = String(27 - usedPointBuy());
     const bonus = $('#background-bonus-remaining'); if (bonus) bonus.textContent = String(3 - usedBackgroundBonus());
     abilityKeys.forEach((key) => {
@@ -2136,13 +3057,21 @@ const creatorOptions = {
     // В расовых описаниях заклинания часто записаны обычным текстом.
     // Берём только формулировки «знаете/изучаете заговор», чтобы не
     // подтягивать заклинания 3-го и 5-го уровней из таблиц происхождения.
-    const explicitlyKnown = allCantrips.filter((spell) => {
+    let explicitlyKnown = allCantrips.filter((spell) => {
       const name = String(spell.name || '').toLocaleLowerCase('ru');
       return abilityText.includes(`знаете заговор ${name}`)
         || abilityText.includes(`изучаете заговор ${name}`)
+        || abilityText.includes(`вам известен заговор ${name}`)
         || abilityText.includes(`знаете заговором ${name}`)
         || abilityText.includes(`изучаете заговором ${name}`);
     });
+    const selectedSpeciesCantrip = (state.choices['species:cantrip'] || [])[0];
+    if (selectedSpeciesCantrip) {
+      explicitlyKnown = uniqueSpells([
+        ...explicitlyKnown,
+        spellByName(selectedSpeciesCantrip, 'cantrip')
+      ]);
+    }
 
     const speciesName = `${species.id || ''} ${species.name || ''} ${species.nameEn || ''}`;
     const isTiefling = /tiefling|тифлинг/i.test(speciesName);
@@ -2181,7 +3110,7 @@ const creatorOptions = {
         id: `species-gnome-${variant?.id || 'forest-gnome'}`,
         category: 'Вид',
         title: `Гном — ${variant?.name || 'Лесной гном'}`,
-        description: `Заклинания автоматически получены от выбранного гномьего происхождения. Заклинательная характеристика: ${(state.choices['species:gnomeSpellAbility'] || [])[0] || 'не выбрана'}.`,
+        description: `Заклинания автоматически получены от выбранного гномьего происхождения. Заклинательная характеристика: ${(state.choices['species:spellAbility'] || [])[0] || 'не выбрана'}.`,
         limits: { cantrip: 0, level1: 0 },
         fixed,
         options: []
@@ -2210,6 +3139,24 @@ const creatorOptions = {
       };
     }
 
+    if (
+      isKoboldSpecies(species)
+      && (state.choices['species:koboldLegacy'] || [])[0] === 'sorcery'
+    ) {
+      const sorcererCantrips = uniqueSpells(
+        (classSpellOptions.sorcerer || []).filter((spell) => spell.level === 'cantrip')
+      );
+      return {
+        id: 'species-kobold-sorcery',
+        category: 'Вид',
+        title: 'Кобольд — Драконье чародейство',
+        description: 'Выберите один заговор из списка заклинаний чародея.',
+        limits: { cantrip: 1, level1: 0 },
+        fixed: [],
+        options: sorcererCantrips
+      };
+    }
+
     if (!explicitlyKnown.length) return null;
 
     return {
@@ -2223,8 +3170,12 @@ const creatorOptions = {
     };
   }
 
+  function magicInitiateClassLabel(listId) {
+    return ({ cleric: 'Жрец', druid: 'Друид', wizard: 'Волшебник' })[listId] || 'Неизвестный класс';
+  }
+
   function magicInitiateSourceLabel(listId) {
-    return ({ cleric: 'ПВМ_Ж', druid: 'ПВМ_Д', wizard: 'ПВМ_В' })[listId] || 'ПВМ';
+    return `Черта: Посвящённый в магию (${magicInitiateClassLabel(listId)})`;
   }
 
   function withSpellAvailability(spells, label) {
@@ -2242,7 +3193,18 @@ const creatorOptions = {
     const background = findBackground();
     const className = findClass()?.name || 'Класс';
     let classOptions = withSpellAvailability(classSpellOptions[state.class] || [], `Класс: ${className}`);
-    const backgroundLevel1Names = (background?.spellTable?.spells || [])
+    const backgroundSpellPrerequisite = String(background?.spellTable?.prerequisite || '')
+      .toLocaleLowerCase('ru')
+      .replace(/ё/g, 'е');
+    const backgroundRequiresStrixhavenFeat =
+      /поступивш(?:ий|его)\s+в\s+стриксхейвен|strixhaven\s+initiate/.test(backgroundSpellPrerequisite);
+    const hasStrixhavenFeat = selectedOriginFeatEntries()
+      .some((entry) => entry.id === 'strixhaven-initiate');
+    const backgroundSpellTableUnlocked =
+      !backgroundRequiresStrixhavenFeat || hasStrixhavenFeat;
+    const backgroundLevel1Names = (backgroundSpellTableUnlocked
+      ? background?.spellTable?.spells || []
+      : [])
       .filter((row) => /1/.test(String(row.level || '')))
       .flatMap((row) => row.spells || []);
     const backgroundAdded = uniqueSpells(withSpellAvailability(
@@ -2251,7 +3213,11 @@ const creatorOptions = {
     ));
     classOptions = uniqueSpells([...classOptions, ...backgroundAdded]);
     if (Number(base.cantrips||0) || Number(base.level1||0)) sources.push({
-      id:'class', category:'Класс', title:className, spellLabel:`Класс: ${className}`, description:backgroundAdded.length ? `Список класса дополнен заклинаниями предыстории «${background?.name}».` : 'Заклинания, доступные выбранному классу на 1 уровне.',
+      id:'class', category:'Класс', title:className, spellLabel:`Класс: ${className}`, description:backgroundAdded.length
+        ? `Список класса дополнен заклинаниями предыстории «${background?.name}».`
+        : backgroundRequiresStrixhavenFeat && !hasStrixhavenFeat
+          ? `Расширенный список предыстории «${background?.name}» не подключён: выберите черту «Поступивший в Стриксхейвен».`
+          : 'Заклинания, доступные выбранному классу на 1 уровне.',
       limits:{cantrip:Number(base.cantrips||0), level1:Number(base.level1||0)}, options:classOptions
     });
 
@@ -2268,8 +3234,9 @@ const creatorOptions = {
 
     for (const entry of getMagicInitiateEntries()) {
       if (!entry.listId) continue;
+      const classLabel = magicInitiateClassLabel(entry.listId);
       const sourceLabel = magicInitiateSourceLabel(entry.listId);
-      sources.push({ id:`feat-${entry.source}`, category:'Черта', title:`${entry.feat.name}: ${entry.listId}`, spellLabel:sourceLabel, description:`Заклинательная характеристика: ${entry.ability || 'не выбрана'}.`, limits:{cantrip:2,level1:1}, options:uniqueSpells(withSpellAvailability(magicInitiateSpellOptions[entry.listId] || [], sourceLabel)) });
+      sources.push({ id:`feat-${entry.source}`, category:'Черта', title:`${entry.feat.name}: ${classLabel}`, spellLabel:sourceLabel, description:`Заклинательная характеристика: ${entry.ability || 'не выбрана'}.`, limits:{cantrip:2,level1:1}, options:uniqueSpells(withSpellAvailability(magicInitiateSpellOptions[entry.listId] || [], sourceLabel)) });
     }
 
     const feats = selectedOriginFeatEntries();
@@ -2467,6 +3434,7 @@ const creatorOptions = {
     let speciesAllowed = speciesMatches.length && !speciesHasChoice
       ? speciesMatches
       : (speciesCount ? creatorOptions.allSkills : []);
+    let speciesFixed = !speciesHasChoice ? speciesMatches.slice(0, speciesCount) : [];
 
     // Точные ограничения видов. В текстах этих особенностей перечислены все
     // доступные варианты, но выбрать разрешено только один. Общий парсер раньше
@@ -2475,14 +3443,15 @@ const creatorOptions = {
     const normalizedSpeciesId = String(species?.id || '').toLocaleLowerCase('ru');
     const normalizedSpeciesName = String(species?.name || '').toLocaleLowerCase('ru').replace(/ё/g, 'е');
     const singleSpeciesSkillChoice =
-      ['changeling', 'kender', 'centaur', 'kobold', 'leonin', 'lupin', 'tortle', 'elf', 'horavar', 'half-elf-horavar'].includes(normalizedSpeciesId)
-      || /(?:изменяющ|чейнджлинг|кендер|кентавр|кобольд|леонин|люпин|тортл|хоравар|полуэльф.*хоравар|^эльф$)/i.test(normalizedSpeciesName);
+      ['changeling', 'kender', 'centaur', 'kobold', 'leonin', 'lupin', 'tortle', 'elf', 'vedalken', 'horavar', 'half-elf-horavar'].includes(normalizedSpeciesId)
+      || /(?:изменяющ|чейнджлинг|кендер|кентавр|кобольд|леонин|люпин|тортл|ведалкен|хоравар|полуэльф.*хоравар|^эльф$)/i.test(normalizedSpeciesName);
 
     if (singleSpeciesSkillChoice) {
       speciesCount = 1;
       // Для этих видов доступны только навыки, прямо перечисленные в их
       // особенности. Это также не даёт базовому эльфу выбирать любой навык.
       speciesAllowed = speciesMatches;
+      speciesFixed = [];
     }
 
     // Вердан получает только Убеждение. Упоминание Истории в тексте вида не
@@ -2490,11 +3459,46 @@ const creatorOptions = {
     if (normalizedSpeciesId === 'verdan' || /вердан/i.test(normalizedSpeciesName)) {
       speciesCount = 1;
       speciesAllowed = ['Убеждение'];
+      speciesFixed = ['Убеждение'];
     }
 
     if (isCustomLineageSpecies()) {
       speciesCount = (state.choices['species:customLineageFeature'] || [])[0] === 'skill' ? 1 : 0;
       speciesAllowed = speciesCount ? creatorOptions.allSkills : [];
+      speciesFixed = [];
+    }
+
+    if (isKoboldSpecies(species)) {
+      const cunning = (state.choices['species:koboldLegacy'] || [])[0] === 'cunning';
+      speciesCount = cunning ? 1 : 0;
+      speciesAllowed = cunning
+        ? ['Магия', 'Расследование', 'Медицина', 'Ловкость рук', 'Выживание']
+        : [];
+      speciesFixed = [];
+    }
+
+    if (elfTranceChoiceVariant(variant)) {
+      const choosesSkill =
+        (state.choices['species:elfTranceProficiencyType'] || [])[0] === 'skill';
+      speciesCount = choosesSkill ? 1 : 0;
+      speciesAllowed = choosesSkill ? [...creatorOptions.allSkills] : [];
+      speciesFixed = [];
+    }
+
+    if (isKhoravarVariant(species, variant)) {
+      const choosesSkill =
+        (state.choices['species:khoravarProficiencyType'] || [])[0] === 'skill';
+      speciesCount = choosesSkill ? 1 : 0;
+      speciesAllowed = choosesSkill ? [...creatorOptions.allSkills] : [];
+      speciesFixed = [];
+    }
+
+    const adaptiveProficiencies = adaptiveSpeciesProficiencyConfig(species, variant);
+    if (adaptiveProficiencies?.skillCount) {
+      const selectedSkill = (state.choices['species:adaptiveSkill'] || [])[0];
+      speciesCount = selectedSkill ? 1 : 0;
+      speciesAllowed = selectedSkill ? [selectedSkill] : [];
+      speciesFixed = selectedSkill ? [selectedSkill] : [];
     }
 
     const classMatches = skillsMentioned(classDescription);
@@ -2518,12 +3522,14 @@ const creatorOptions = {
     }
 
     const classAllowed = Array.isArray(explicitClassOptions) ? [...explicitClassOptions] : classMatches;
-    const backgroundAllowed = skillsMentioned(backgroundDescription);
+    const backgroundAllowed = isCustomBackground()
+      ? [...getCustomBackground().skills]
+      : skillsMentioned(backgroundDescription);
 
     return {
-      class: { key: 'class:skills', count: classCount, allowed: classAllowed },
-      background: { key: 'background:skills', count: backgroundCount, allowed: backgroundAllowed.length ? backgroundAllowed : (backgroundCount ? creatorOptions.allSkills : []) },
-      species: { key: 'species:skill', count: speciesCount, allowed: speciesAllowed },
+      class: { key: 'class:skills', count: classCount, allowed: classAllowed, fixed: [] },
+      background: { key: 'background:skills', count: isCustomBackground() ? backgroundAllowed.length : backgroundCount, allowed: backgroundAllowed.length ? backgroundAllowed : (backgroundCount ? creatorOptions.allSkills : []), fixed: isCustomBackground() ? [...backgroundAllowed] : [] },
+      species: { key: 'species:skill', count: speciesCount, allowed: speciesAllowed, fixed: speciesFixed },
       feat: getFeatSkillConfiguration()
     };
   }
@@ -2538,13 +3544,21 @@ const creatorOptions = {
       ['class', 'Класс'], ['background', 'Предыстория'], ['species', 'Вид'], ['feat', 'Черта']
     ];
 
+    const fixedBySource = Object.fromEntries(sources.map(([source]) => [source, config[source].fixed || []]));
+    const fixedByAnySource = new Set(Object.values(fixedBySource).flat());
+
     for (const [source] of sources) {
       const item = config[source];
+      const fixed = fixedBySource[source];
       const current = Array.isArray(state.choices[item.key]) ? state.choices[item.key] : [];
-      const filtered = current.filter((skill) => item.allowed.includes(skill));
+      const filtered = current.filter((skill) =>
+        item.allowed.includes(skill)
+        && !fixed.includes(skill)
+        && !(fixedByAnySource.has(skill) && !fixed.includes(skill))
+      );
       state.choices[item.key] = source === 'feat' && item.sharedSkilledLimit
-        ? filtered.slice(0, item.sharedSkilledLimit)
-        : filtered.slice(0, item.count);
+        ? [...fixed, ...filtered].slice(0, item.sharedSkilledLimit)
+        : [...fixed, ...filtered].slice(0, item.count);
     }
 
     summary.innerHTML = sources.map(([source, label]) => {
@@ -2556,29 +3570,51 @@ const creatorOptions = {
       const shownLimit = source === 'feat' && item.sharedSkilledLimit
         ? item.sharedSkilledLimit
         : item.count;
-      return `<div class="skills-summary-card"><span>${label}</span><strong>${shownCount}/${shownLimit}</strong></div>`;
+      const featSkillCount = (state.choices['feat:skills'] || []).length;
+      const featToolCount = (state.choices['feat:tools'] || []).length;
+      return `<div class="skills-summary-card">
+        <span>${source === 'feat' && item.sharedSkilledLimit ? 'Черта «Одарённый»' : label}</span>
+        <strong>${shownCount}/${shownLimit}</strong>
+        ${source === 'feat' && item.sharedSkilledLimit ? `<small>Навыки: ${featSkillCount} · Инструменты: ${featToolCount}</small>` : ''}
+      </div>`;
     }).join('');
 
     body.innerHTML = creatorOptions.allSkills.map((skill) => {
       const cells = sources.map(([source]) => {
         const item = config[source];
         const selected = (state.choices[item.key] || []).includes(skill);
-        const available = item.allowed.includes(skill) && item.count > 0;
+        const fixed = (item.fixed || []).includes(skill);
+        const fixedElsewhere = fixedByAnySource.has(skill) && !fixed;
+        const available = item.allowed.includes(skill) && item.count > 0 && !fixedElsewhere;
         if (!available) {
           return '<td class="skill-unavailable"><span class="skill-unavailable-mark" aria-hidden="true">—</span></td>';
         }
-        return `<td><input class="skill-source-check" type="checkbox" data-skill-source="${source}" value="${escapeHtml(skill)}" ${selected ? 'checked' : ''} aria-label="${escapeHtml(skill)}: ${source}"></td>`;
+        return `<td><input class="skill-source-check" type="checkbox" data-skill-source="${source}" value="${escapeHtml(skill)}" ${selected ? 'checked' : ''} ${fixed ? 'disabled data-fixed-skill="true" title="Получено автоматически"' : ''} aria-label="${escapeHtml(skillDisplayName(skill))}: ${source}"></td>`;
       }).join('');
-      return `<tr><td class="skill-name">${escapeHtml(skill)}</td>${cells}</tr>`;
+      return `<tr><td class="skill-name">${escapeHtml(skillDisplayName(skill))}</td>${cells}</tr>`;
     }).join('');
 
-    warning.textContent = message;
-    warning.hidden = !message;
+    const sharedLimit = Number(config.feat.sharedSkilledLimit || 0);
+    const sharedSelected = skilledSharedSelectedCount();
+    const sharedRemaining = Math.max(0, sharedLimit - sharedSelected);
+    const featSkillCount = (state.choices['feat:skills'] || []).length;
+    const featToolCount = (state.choices['feat:tools'] || []).length;
+    const skilledInfo = sharedLimit > 0
+      ? sharedRemaining > 0
+        ? `Черта «Одарённый»: навыки ${featSkillCount}, инструменты ${featToolCount}. Осталось распределить: ${sharedRemaining}. Остаток можно потратить на инструменты на соответствующем шаге.`
+        : featToolCount === 0
+          ? `Все ${sharedLimit} выборов черты «Одарённый» потрачены на навыки. На шаге «Инструменты» новые инструменты от этой черты будут недоступны. Чтобы выбрать инструмент, снимите здесь один из навыков от черты.`
+          : `Черта «Одарённый» распределена полностью: навыки ${featSkillCount}, инструменты ${featToolCount}.`
+      : '';
+    warning.textContent = message || skilledInfo;
+    warning.hidden = !(message || skilledInfo);
+    warning.classList.toggle('is-info', !message && Boolean(skilledInfo));
 
     $$('[data-skill-source]').forEach((input) => input.addEventListener('change', () => {
       const source = input.dataset.skillSource;
       const skill = input.value;
       const item = config[source];
+      if (input.dataset.fixedSkill === 'true') return;
       for (const [otherSource] of sources) {
         const other = config[otherSource];
         state.choices[other.key] = (state.choices[other.key] || []).filter((value) => value !== skill);
@@ -2605,10 +3641,18 @@ const creatorOptions = {
     const config = getSkillConfiguration();
     return ['class', 'background', 'species', 'feat'].every((source) => {
       if (source === 'feat' && config.feat.sharedSkilledLimit) {
-        return skilledSharedSelectedCount() === config.feat.sharedSkilledLimit;
+        // «Одарённый» даёт общий выбор навыков ИЛИ инструментов.
+        // Не заставляем тратить все выборы на шаге навыков: остаток
+        // пользователь сможет заполнить на шаге инструментов.
+        return skilledSharedSelectedCount() <= config.feat.sharedSkilledLimit;
       }
       return (state.choices[config[source].key] || []).length === config[source].count;
     });
+  }
+
+  function skilledChoicesFullyResolved() {
+    const limit = skilledSharedChoiceLimit();
+    return !limit || skilledSharedSelectedCount() === limit;
   }
 
 
@@ -2661,7 +3705,7 @@ const creatorOptions = {
       const recommended = ['Ловкость рук', 'Скрытность'].includes(skill);
       return `<label class="expertise-option ${checked ? 'is-selected' : ''}">
         <input type="checkbox" data-expertise-skill value="${escapeHtml(skill)}" ${checked ? 'checked' : ''}>
-        <span><strong>${escapeHtml(skill)}</strong>${recommended ? '<small>Рекомендуется плуту</small>' : '<small>Навык, которым вы владеете</small>'}</span>
+        <span><strong>${escapeHtml(skillDisplayName(skill))}</strong>${recommended ? '<small>Рекомендуется плуту</small>' : '<small>Навык, которым вы владеете</small>'}</span>
       </label>`;
     }).join('') || '<p class="expertise-no-skills">Сначала выберите навыки, которыми владеет персонаж.</p>';
 
@@ -2789,10 +3833,25 @@ const creatorOptions = {
     for (const source of ['class','background','species','feat']) {
       const parsed = parseLanguageSource(sourceTextForLanguages(source));
       const characterClass = findClass();
+      if (source === 'background' && isCustomBackground()) {
+        parsed.fixed = [...getCustomBackground().languages];
+        parsed.bonusChoices = 0;
+        parsed.unlockedRare = getCustomBackground().languages.filter((language) =>
+          creatorOptions.rareLanguages.includes(language)
+        );
+      }
       if (source === 'class' && /^(rogue|плут)$/i.test(String(characterClass?.id || characterClass?.name || ''))) {
         if (!parsed.fixed.includes('Воровской жаргон')) parsed.fixed.push('Воровской жаргон');
         parsed.bonusChoices = Math.max(parsed.bonusChoices, 1);
-        if (!parsed.unlockedRare.includes('Воровской жаргон')) parsed.unlockedRare.push('Воровской жаргон');
+        parsed.unlockedRare = [...new Set([...parsed.unlockedRare, ...creatorOptions.rareLanguages])];
+      }
+      if (source === 'species') {
+        const identity = `${findSpecies()?.id || ''} ${findSpecies()?.name || ''} ${findSpecies()?.nameEn || ''}`
+          .toLocaleLowerCase('ru')
+          .replace(/ё/g, 'е');
+        if (/kenku|кенку|locathah|локат/.test(identity)) {
+          parsed.bonusChoices = Math.max(parsed.bonusChoices, 1);
+        }
       }
       config[source] = {
         key: `${source}:languages`,
@@ -2825,6 +3884,13 @@ const creatorOptions = {
     return /инструмент|набор для|игров(?:ой|ого) набор|транспорт/i.test(value) ? 1 : 0;
   }
 
+  function toolsMentioned(value) {
+    const text = String(value || '').toLocaleLowerCase('ru').replace(/ё/g, 'е');
+    return creatorOptions.allTools.filter((tool) =>
+      text.includes(tool.toLocaleLowerCase('ru').replace(/ё/g, 'е'))
+    );
+  }
+
   function getToolConfiguration() {
     const characterClass = findClass();
     const config = {};
@@ -2833,17 +3899,61 @@ const creatorOptions = {
       const text = sourceTextForTools(source);
       let count = toolChoiceCount(text);
       let allowed = clientToolOptionsFromDescription(text);
+      let fixed = [];
 
       // По правилам конструктора любая выбранная предыстория даёт
       // одно владение любым инструментом независимо от старого текста данных.
       if (source === 'background') {
-        count = findBackground() ? 1 : 0;
-        allowed = [...creatorOptions.allTools];
+        if (isCustomBackground()) {
+          count = getCustomBackground().tools.length;
+          allowed = [...getCustomBackground().tools];
+          fixed = [...getCustomBackground().tools];
+        } else {
+          count = findBackground() ? 1 : 0;
+          allowed = [...creatorOptions.allTools];
+        }
       }
 
       if (source === 'species' && isCoreElfSpecies(findSpecies())) {
-        count = 0;
-        allowed = [];
+        const choosesTool =
+          elfTranceChoiceVariant(findVariant(findSpecies()))
+          && (state.choices['species:elfTranceProficiencyType'] || [])[0] === 'tool';
+        count = choosesTool ? 1 : 0;
+        allowed = choosesTool ? [...creatorOptions.allTools] : [];
+      }
+
+      if (source === 'species' && isKhoravarVariant()) {
+        const choosesTool =
+          (state.choices['species:khoravarProficiencyType'] || [])[0] === 'tool';
+        count = choosesTool ? 1 : 0;
+        allowed = choosesTool ? [...creatorOptions.allTools] : [];
+        fixed = [];
+      }
+
+      if (source === 'species' && adaptiveSpeciesProficiencyConfig()) {
+        const selectedTools = (state.choices['species:adaptiveProficiencies'] || [])
+          .filter((value) => value.startsWith('Инструмент: '))
+          .map((value) => value.replace(/^Инструмент:\s*/, ''));
+        count = selectedTools.length;
+        allowed = [...selectedTools];
+        fixed = [...selectedTools];
+      }
+
+      if (source === 'species' && /autognome|автогном/i.test(
+        `${findSpecies()?.id || ''} ${findSpecies()?.name || ''} ${findSpecies()?.nameEn || ''}`
+      )) {
+        count = 2;
+        allowed = [...creatorOptions.allTools];
+      }
+
+      if (source === 'species') {
+        const mentioned = toolsMentioned(text);
+        const offersChoice = /выберите|на выбор|по вашему выбору|люб(?:ой|ого|ым)|\sили\s/i.test(text);
+        if (mentioned.length && !offersChoice) {
+          fixed = mentioned;
+          count = Math.max(count, fixed.length);
+          allowed = [...new Set([...allowed, ...fixed])];
+        }
       }
 
       // У классов список может содержать несколько отдельных владений.
@@ -2852,13 +3962,20 @@ const creatorOptions = {
         const entries = characterClass.proficiencies.tools.map((entry) => String(entry || ''));
         let total = 0;
         const classAllowed = new Set();
+        const classFixed = [];
         for (const entry of entries) {
           const entryOptions = clientToolOptionsFromDescription(entry);
           entryOptions.forEach((tool) => classAllowed.add(tool));
           total += toolChoiceCount(entry);
+          const exact = creatorOptions.allTools.find((tool) =>
+            tool.toLocaleLowerCase('ru').replace(/ё/g, 'е')
+            === entry.trim().toLocaleLowerCase('ru').replace(/ё/g, 'е')
+          );
+          if (exact) classFixed.push(exact);
         }
         count = total;
         allowed = [...classAllowed];
+        fixed = [...new Set(classFixed)];
       }
 
       if (source === 'feat' && /ремесленник|crafter/i.test(text)) {
@@ -2870,8 +3987,6 @@ const creatorOptions = {
         count = Math.max(count, skilledSharedChoiceLimit());
         allowed = [...new Set([...allowed, ...creatorOptions.allTools])];
       }
-
-      let fixed = [];
 
       // Артифактор: два фиксированных владения и один инструмент ремесленника на выбор.
       if (source === 'class' && /^(artificer|артифактор|артификатор|изобретатель)$/i.test(String(characterClass?.id || characterClass?.name || '').trim())) {
@@ -2905,6 +4020,13 @@ const creatorOptions = {
     return ({ class:'Класс', background:'Предыстория', species:'Вид', feat:'Черта' })[source] || source;
   }
 
+  function languageTotalKnownLimit(config, fixedLanguages) {
+    const bonusChoices = ['class','background','species','feat']
+      .reduce((sum, source) => sum + Math.max(0, Number(config[source].bonusChoices || 0)), 0);
+    const thievesCantIsExtra = (config.class?.fixed || []).includes('Воровской жаргон') ? 1 : 0;
+    return Math.max(3 + bonusChoices + thievesCantIsExtra, fixedLanguages.length);
+  }
+
   function renderLanguagesTable(message = '') {
     const body = $('#languages-table-body');
     const summary = $('#languages-summary');
@@ -2914,8 +4036,7 @@ const creatorOptions = {
     const config = getLanguageConfiguration();
     const sources = ['class','background','species','feat'];
     const fixedLanguages = [...new Set(['Общий', ...sources.flatMap((source) => config[source].fixed || [])])];
-    const bonusChoices = sources.reduce((sum, source) => sum + Math.max(0, Number(config[source].bonusChoices || 0)), 0);
-    const totalKnownLimit = Math.max(3 + bonusChoices, fixedLanguages.length);
+    const totalKnownLimit = languageTotalKnownLimit(config, fixedLanguages);
     const selectableLimit = Math.max(0, totalKnownLimit - fixedLanguages.length);
     const selectedKey = 'languages:selected';
     const fixedKey = 'languages:fixed';
@@ -2929,7 +4050,14 @@ const creatorOptions = {
 
     const allowedLanguages = [...allStandard, ...rareSourceMap.keys()].filter((language) => !fixedLanguages.includes(language));
     const selected = Array.isArray(state.choices[selectedKey]) ? state.choices[selectedKey] : [];
-    state.choices[selectedKey] = [...new Set(selected.filter((language) => allowedLanguages.includes(language)))].slice(0, selectableLimit);
+    const selectedAllowed = [...new Set(selected.filter((language) => allowedLanguages.includes(language)))];
+    const rogueLanguageChoice = (config.class?.fixed || []).includes('Воровской жаргон');
+    state.choices[selectedKey] = rogueLanguageChoice
+      ? [
+          ...selectedAllowed.filter((language) => !creatorOptions.rareLanguages.includes(language)),
+          ...selectedAllowed.filter((language) => creatorOptions.rareLanguages.includes(language)).slice(0, 1)
+        ].slice(0, selectableLimit)
+      : selectedAllowed.slice(0, selectableLimit);
     state.choices[fixedKey] = fixedLanguages;
 
     for (const source of sources) state.choices[`${source}:languages`] = [];
@@ -2966,6 +4094,14 @@ const creatorOptions = {
       const value = input.value;
       const current = state.choices[selectedKey] || [];
       if (input.checked) {
+        if (
+          rogueLanguageChoice
+          && creatorOptions.rareLanguages.includes(value)
+          && current.some((language) => creatorOptions.rareLanguages.includes(language))
+        ) {
+          renderLanguagesTable('Плут может выбрать не больше одного редкого языка за счёт «Воровского жаргона».');
+          return;
+        }
         if (current.length >= selectableLimit) {
           renderLanguagesTable(`Уже известно максимальное количество языков: ${totalKnownLimit}.`);
           return;
@@ -2987,24 +4123,37 @@ const creatorOptions = {
 
     const config = getToolConfiguration();
     const sources = [['class','Класс'],['background','Предыстория'],['species','Вид'],['feat','Черта']];
+    const fixedByAnySource = new Set(sources.flatMap(([source]) => config[source].fixed || []));
 
     for (const [source] of sources) {
       const item = config[source];
       const fixed = Array.isArray(item.fixed) ? item.fixed : [];
       const current = Array.isArray(state.choices[item.key]) ? state.choices[item.key] : [];
-      const selectable = current.filter((value) => item.allowed.includes(value) && !fixed.includes(value));
+      const selectable = current.filter((value) =>
+        item.allowed.includes(value)
+        && !fixed.includes(value)
+        && !(fixedByAnySource.has(value) && !fixed.includes(value))
+      );
       state.choices[item.key] = source === 'feat' && skilledSharedChoiceLimit() > 0
         ? [...fixed, ...selectable].slice(0, skilledSharedChoiceLimit())
         : [...fixed, ...selectable].slice(0, item.count);
     }
 
-    const fixedByAnySource = new Set(sources.flatMap(([source]) => config[source].fixed || []));
+    const skilledLimit = skilledSharedChoiceLimit();
+    const skilledSkillCount = (state.choices['feat:skills'] || []).length;
+    const skilledToolCount = (state.choices['feat:tools'] || []).length;
+    const skilledTotal = skilledSharedSelectedCount();
+    const skilledRemaining = Math.max(0, skilledLimit - skilledTotal);
 
     summary.innerHTML = sources.map(([source,label]) => {
       const sharedLimit = source === 'feat' ? skilledSharedChoiceLimit() : 0;
       const selectedCount = sharedLimit ? skilledSharedSelectedCount() : (state.choices[config[source].key] || []).length;
       const limit = sharedLimit || config[source].count;
-      return `<div class="choice-summary-card"><span>${label}</span><strong>${selectedCount}/${limit}</strong></div>`;
+      return `<div class="choice-summary-card">
+        <span>${source === 'feat' && sharedLimit ? 'Черта «Одарённый»' : label}</span>
+        <strong>${selectedCount}/${limit}</strong>
+        ${source === 'feat' && sharedLimit ? `<small>Навыки: ${skilledSkillCount} · Инструменты: ${skilledToolCount}</small>` : ''}
+      </div>`;
     }).join('');
     body.innerHTML = creatorOptions.allTools.map((option) => `<tr><td class="choice-name">${escapeHtml(option)}</td>${sources.map(([source]) => {
       const item=config[source];
@@ -3012,11 +4161,20 @@ const creatorOptions = {
       const selectedElsewhere=sources.some(([otherSource])=>otherSource!==source&&(state.choices[config[otherSource].key]||[]).includes(option));
       const available=item.count>0&&item.allowed.includes(option)&&(!selectedElsewhere||fixed);
       const checked=(state.choices[item.key]||[]).includes(option);
-      return available ? `<td><input type="checkbox" data-tools-source="${source}" value="${escapeHtml(option)}" ${checked?'checked':''} ${fixed?'disabled data-fixed-tool="true"':''}></td>` : '<td class="choice-unavailable">—</td>';
+      const sharedLimitReached = source === 'feat' && skilledLimit > 0 && skilledTotal >= skilledLimit && !checked;
+      return available ? `<td><input type="checkbox" data-tools-source="${source}" value="${escapeHtml(option)}" ${checked?'checked':''} ${(fixed || sharedLimitReached) ? 'disabled' : ''} ${fixed?'data-fixed-tool="true"':''} ${sharedLimitReached?'title="Все выборы «Одарённого» уже потрачены"':''}></td>` : '<td class="choice-unavailable">—</td>';
     }).join('')}</tr>`).join('');
 
-    warning.textContent = message;
-    warning.hidden = !message;
+    const skilledInfo = skilledLimit > 0
+      ? skilledRemaining > 0
+        ? `Черта «Одарённый»: навыки ${skilledSkillCount}, инструменты ${skilledToolCount}. Осталось распределить: ${skilledRemaining}.`
+        : skilledToolCount === 0
+          ? `Все ${skilledLimit} выборов черты «Одарённый» уже потрачены на навыки. Чтобы выбрать инструмент, вернитесь на шаг «Навыки» и снимите один из выборов от черты.`
+          : `Черта «Одарённый» распределена полностью: навыки ${skilledSkillCount}, инструменты ${skilledToolCount}.`
+      : '';
+    warning.textContent = message || skilledInfo;
+    warning.hidden = !(message || skilledInfo);
+    warning.classList.toggle('is-info', !message && Boolean(skilledInfo));
 
     $$('[data-tools-source]').forEach((input) => input.addEventListener('change', () => {
       const source=input.dataset.toolsSource, value=input.value, item=config[source];
@@ -3065,13 +4223,7 @@ const creatorOptions = {
         ])
       ];
 
-      const bonusChoices = sources.reduce(
-        (sum, source) =>
-          sum + Math.max(0, Number(config[source].bonusChoices || 0)),
-        0
-      );
-
-      const total = Math.max(3 + bonusChoices, fixed.length);
+      const total = languageTotalKnownLimit(config, fixed);
       const selected = Array.isArray(state.choices['languages:selected'])
         ? state.choices['languages:selected']
         : [];
@@ -3721,12 +4873,17 @@ const creatorOptions = {
   function isSpellcasterAtLevelOne() { return getSpellSources().length > 0; }
 
   const spellSearchQueries = {};
+  const spellScrollPositions = {};
 
   function renderSpells(message = '') {
     const picker = $('#spell-picker');
     const nonCaster = $('#spell-non-caster');
     const root = $('#spell-sources');
     if (!picker || !nonCaster || !root) return;
+
+    $$('[data-spell-scroll]').forEach((grid) => {
+      spellScrollPositions[grid.dataset.spellScroll] = grid.scrollTop;
+    });
 
     ensureSpellSourceState();
     const sources = getSpellSources();
@@ -3792,7 +4949,12 @@ const creatorOptions = {
           : '';
 
         return `
-        <div class="spell-card ${isSelected ? 'is-selected' : ''} ${isUnavailable ? 'is-unavailable' : ''}" ${unavailableText ? `title="${escapeHtml(unavailableText)}"` : ''}>
+        <div class="spell-card ${isSelected ? 'is-selected' : ''} ${isUnavailable ? 'is-unavailable' : ''}"
+          data-spell-card
+          role="checkbox"
+          tabindex="${isUnavailable ? '-1' : '0'}"
+          aria-checked="${isSelected ? 'true' : 'false'}"
+          ${unavailableText ? `title="${escapeHtml(unavailableText)}"` : ''}>
           <input type="checkbox"
             data-spell-source="${escapeHtml(source.id)}"
             data-spell-level="${bucketKey}"
@@ -3829,7 +4991,7 @@ const creatorOptions = {
             <div><span>Магия без ячеек</span><h4>Заговоры</h4></div>
             <strong>${selected.cantrip.length}/${source.limits.cantrip}</strong>
           </div>
-          <div class="spell-grid">${cards(source, 'cantrip', 'cantrip', query)}</div>
+          <div class="spell-grid" data-spell-scroll="${escapeHtml(`${source.id}:cantrip`)}">${cards(source, 'cantrip', 'cantrip', query)}</div>
         </section>` : '';
 
       const level1Section = hasLevel1 ? `
@@ -3838,7 +5000,7 @@ const creatorOptions = {
             <div><span>Магия первого круга</span><h4>Заклинания 1 уровня</h4></div>
             <strong>${selected.level1.length}/${source.limits.level1}</strong>
           </div>
-          <div class="spell-grid">${cards(source, 'level1', '1', query)}</div>
+          <div class="spell-grid" data-spell-scroll="${escapeHtml(`${source.id}:level1`)}">${cards(source, 'level1', '1', query)}</div>
         </section>` : '';
 
       return `
@@ -3868,6 +5030,10 @@ const creatorOptions = {
           </div>
         </section>`;
     }).join('');
+
+    $$('[data-spell-scroll]').forEach((grid) => {
+      grid.scrollTop = Number(spellScrollPositions[grid.dataset.spellScroll] || 0);
+    });
 
     syncLegacySpellBuckets();
     const warning = $('#spell-warning');
@@ -3908,20 +5074,281 @@ const creatorOptions = {
       saveState();
       renderSpells();
     }));
+
+    const toggleSpellCard = (card) => {
+      const input = card.querySelector('[data-spell-source]');
+      if (!input || input.disabled) return;
+      input.checked = !input.checked;
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+    };
+
+    $$('[data-spell-card]').forEach((card) => {
+      card.addEventListener('click', (event) => {
+        if (event.target.closest('a, input')) return;
+        toggleSpellCard(card);
+      });
+      card.addEventListener('keydown', (event) => {
+        if (event.target.closest('a, input')) return;
+        if (!['Enter', ' '].includes(event.key)) return;
+        event.preventDefault();
+        toggleSpellCard(card);
+      });
+    });
   }
 
   function renderAlignment() { $$('.alignment-card').forEach((button) => button.classList.toggle('is-selected', button.dataset.alignment === state.alignment)); }
+
+  function backgroundStepComplete() {
+    if (!state.background) return false;
+    if (isCustomBackground()) {
+      const custom = getCustomBackground();
+      return ['name', 'description', 'feature', 'featureDescription', 'trait1', 'trait2', 'ideal', 'bond', 'flaw']
+        .every((key) => String(custom[key] || '').trim())
+        && custom.skills.length === 2
+        && custom.tools.length === 1
+        && custom.languages.length > 0
+        && Boolean(custom.featId);
+    }
+    const background = findBackground();
+    return (!background?.variants?.table?.length || (state.choices['background:variant'] || []).length === 1)
+      && (state.choices['background:traits'] || []).length === 2
+      && (state.choices['background:ideal'] || []).length === 1
+      && (state.choices['background:bond'] || []).length === 1
+      && (state.choices['background:flaw'] || []).length === 1;
+  }
+
+  function spellStepComplete() {
+    const sources = getSpellSources();
+    return sources.every((source) => {
+      const selected = state.spells.sources?.[source.id] || { cantrip: [], level1: [] };
+      return selected.cantrip.length === Number(source.limits.cantrip || 0)
+        && selected.level1.length === Number(source.limits.level1 || 0);
+    });
+  }
+
+  function stepIsComplete(step) {
+    if (step === 'identity') return Boolean(String(state.name || '').trim());
+    if (step === 'species') {
+      const species = findSpecies();
+      return Boolean(state.species && (!speciesRequiresVariant(species) || findVariant(species)));
+    }
+    if (step === 'class') return Boolean(state.class);
+    if (step === 'class-features') return Boolean(state.class) && classFeaturesComplete();
+    if (step === 'alignment') return Boolean(state.alignment);
+    if (step === 'background') return backgroundStepComplete();
+    if (step === 'origin-feats') return Boolean(state.background) && originFeatsComplete();
+    if (step === 'skills') return Boolean(state.species && state.class && state.background)
+      && skillsComplete()
+      && skilledChoicesFullyResolved();
+    if (step === 'expertise') return Boolean(state.class) && expertiseComplete();
+    if (step === 'languages') return Boolean(state.species && state.class && state.background) && choiceTableComplete('languages');
+    if (step === 'tools') return Boolean(state.species && state.class && state.background) && choiceTableComplete('tools');
+    if (step === 'equipment') return Boolean(state.equipment?.initializedFor);
+    if (step === 'abilities') return usedPointBuy() === 27 && usedBackgroundBonus() === 3;
+    if (step === 'spells') return Boolean(state.class) && spellStepComplete();
+    if (step === 'summary') return false;
+    return false;
+  }
+
+  function stepAllowsAdvance(step) {
+    if (step === 'identity') return true;
+
+    if (step === 'species') {
+      const species = findSpecies();
+      if (!state.species) return false;
+      if (speciesRequiresVariant(species) && !findVariant(species)) return false;
+      if (isKoboldSpecies() && !(state.choices['species:koboldLegacy'] || [])[0]) return false;
+      if (speciesNeedsSpellAbility() && !(state.choices['species:spellAbility'] || [])[0]) return false;
+      if (dragonAncestryOptions().length && !(state.choices['species:dragonAncestry'] || [])[0]) return false;
+      if (speciesCantripChoice() && !(state.choices['species:cantrip'] || [])[0]) return false;
+      if (isKhoravarVariant() && !(state.choices['species:khoravarProficiencyType'] || [])[0]) return false;
+      if (isWoodHalfElfVariant() && !(state.choices['species:woodHalfElfLegacy'] || [])[0]) return false;
+      if (adaptiveSpeciesProficiencyConfig()) {
+        const config = adaptiveSpeciesProficiencyConfig();
+        if (config.skillCount && !(state.choices['species:adaptiveSkill'] || [])[0]) return false;
+        if ((state.choices['species:adaptiveProficiencies'] || []).length !== config.flexibleCount) return false;
+      }
+      if (isEladrinSpecies() && !selectedEladrinSeason()) return false;
+      if (isCustomLineageSpecies() && !(state.choices['species:customLineageFeature'] || [])[0]) return false;
+      return true;
+    }
+
+    if (step === 'class') return Boolean(state.class);
+    if (step === 'class-features') return classFeaturesComplete();
+    if (step === 'alignment') return Boolean(state.alignment);
+
+    if (step === 'background') {
+      if (!state.background || !backgroundStepComplete()) return false;
+      return !Array.from(document.querySelectorAll('#background-rule-choices .pending-choice-card')).some((card) => {
+        const values = (card.querySelector('.choice-head-actions > strong')?.textContent || '0/0')
+          .split('/')
+          .map(Number);
+        return values[0] !== values[1];
+      });
+    }
+
+    if (step === 'origin-feats') return originFeatsComplete();
+    if (step === 'skills') return skillsComplete() && skilledChoicesFullyResolved();
+    if (step === 'expertise') return expertiseComplete();
+    if (step === 'languages') return choiceTableComplete('languages');
+    if (step === 'tools') return choiceTableComplete('tools');
+    if (step === 'equipment') return true;
+    if (step === 'abilities') return usedPointBuy() === 27 && usedBackgroundBonus() === 3;
+    if (step === 'spells') return spellStepComplete();
+    return true;
+  }
+
+  function conditionalStepAvailable(step) {
+    if (step === 'class-features') {
+      return Boolean(state.class) && getClassFeatureGroups().some((group) =>
+        Number(group?.count || 0) > 0 && Array.isArray(group?.options) && group.options.length > 0
+      );
+    }
+    if (step === 'expertise') {
+      return Boolean(state.class) && getExpertiseConfiguration().count > 0;
+    }
+    return true;
+  }
+
+  function visibleStepIndices() {
+    return steps
+      .map((step, index) => conditionalStepAvailable(step) ? index : -1)
+      .filter((index) => index >= 0);
+  }
+
+  function adjacentVisibleStepIndex(index, direction) {
+    const visible = visibleStepIndices();
+    const candidates = direction < 0
+      ? visible.filter((candidate) => candidate < index)
+      : visible.filter((candidate) => candidate > index);
+    return direction < 0
+      ? (candidates[candidates.length - 1] ?? visible[0] ?? 0)
+      : (candidates[0] ?? visible[visible.length - 1] ?? steps.length - 1);
+  }
+
+  function normalizeVisibleStepIndex(index, direction = 0) {
+    const clamped = Math.max(0, Math.min(steps.length - 1, index));
+    if (conditionalStepAvailable(steps[clamped])) return clamped;
+    if (direction) return adjacentVisibleStepIndex(clamped, direction);
+    const next = visibleStepIndices().find((candidate) => candidate > clamped);
+    return next ?? adjacentVisibleStepIndex(clamped, -1);
+  }
+
+  function canNavigateToStep(targetIndex) {
+    const visible = visibleStepIndices();
+    const currentPosition = visible.indexOf(state.step);
+    const targetPosition = visible.indexOf(targetIndex);
+    if (targetPosition < 0) return false;
+    if (currentPosition < 0 || targetPosition <= currentPosition) return true;
+    return visible
+      .slice(currentPosition, targetPosition)
+      .every((index) => stepAllowsAdvance(steps[index]));
+  }
+
+  function updateNavigationChrome() {
+    const visible = visibleStepIndices();
+    const currentVisiblePosition = visible.indexOf(state.step);
+    $$('.sidebar-step').forEach((button, buttonIndex) => {
+      const step = button.dataset.sidebarStep || steps[buttonIndex];
+      const available = conditionalStepAvailable(step);
+      const targetIndex = steps.indexOf(step);
+      const locked = available && !canNavigateToStep(targetIndex);
+      button.hidden = !available;
+      button.disabled = locked;
+      button.classList.toggle('is-locked', locked);
+      button.title = locked
+        ? 'Сначала завершите предыдущие этапы'
+        : '';
+      button.classList.toggle('is-active', available && step === steps[state.step]);
+      button.classList.toggle('is-complete', available && stepIsComplete(step));
+    });
+    $('#previous-step').disabled = currentVisiblePosition <= 0;
+    $('#next-step').hidden = currentVisiblePosition === visible.length - 1;
+    $('#next-step').disabled = false;
+    $('#step-counter').textContent = `Шаг ${Math.max(1, currentVisiblePosition + 1)} из ${visible.length}`;
+    if (window.matchMedia('(max-width: 760px)').matches) {
+      const activeStep = $('.sidebar-step.is-active');
+      const sidebarNav = activeStep?.closest('nav');
+      if (activeStep && sidebarNav) {
+        sidebarNav.scrollTo({
+          left: Math.max(0, activeStep.offsetLeft - (sidebarNav.clientWidth - activeStep.offsetWidth) / 2),
+          behavior: 'smooth'
+        });
+      }
+    }
+  }
+
+  function getSpeciesResources() {
+    const species = findSpecies();
+    const variant = findVariant(species);
+    const numberWords = { один: 1, одну: 1, два: 2, три: 3, четыре: 4 };
+    return getEffectiveAbilities(species, variant).flatMap((feature, index) => {
+      const text = String(feature?.description || '').toLocaleLowerCase('ru').replace(/ё/g, 'е');
+      if (!/(?:восстанавливаете|восстанавливаются|вновь использовать|снова использовать)/i.test(text)) return [];
+      let maximum = /бонус(?:у|а)? мастерства/i.test(text) ? 2 : 0;
+      const countMatch = text.match(/(?:использовать|применить|совершить)[^.!?]{0,100}?(\d+|один|одну|два|три|четыре)\s+раз/i);
+      if (!maximum && countMatch) maximum = Number(countMatch[1]) || numberWords[countMatch[1]] || 0;
+      if (!maximum && /однократно|один раз/i.test(text)) maximum = 1;
+      if (!maximum) return [];
+      const shortRest = /коротк(?:ого|ий|ом)\s+отдых/i.test(text);
+      const longRest = /продолжительн(?:ого|ый|ом)\s+отдых/i.test(text);
+      if (!shortRest && !longRest) return [];
+      return [{
+        id: `${species?.id || 'species'}:${variant?.id || 'base'}:${index}`,
+        name: feature?.title || `Особенность ${index + 1}`,
+        maximum,
+        rest: shortRest ? 'short' : 'long'
+      }];
+    });
+  }
+
+  function ensureSpeciesResourceState() {
+    if (!state.resources || typeof state.resources !== 'object') state.resources = {};
+    const resources = getSpeciesResources();
+    for (const resource of resources) {
+      const value = Number(state.resources[resource.id]);
+      if (!Number.isFinite(value)) state.resources[resource.id] = resource.maximum;
+      else state.resources[resource.id] = Math.max(0, Math.min(resource.maximum, value));
+    }
+    return resources;
+  }
+
+  function bindSummaryResourceControls() {
+    $$('[data-resource-action]').forEach((button) => button.addEventListener('click', () => {
+      const resource = ensureSpeciesResourceState().find((item) => item.id === button.dataset.resourceId);
+      if (!resource) return;
+      const change = button.dataset.resourceAction === 'spend' ? -1 : 1;
+      state.resources[resource.id] = Math.max(0, Math.min(resource.maximum, Number(state.resources[resource.id]) + change));
+      saveState();
+      renderSummary();
+    }));
+    $$('[data-rest-type]').forEach((button) => button.addEventListener('click', () => {
+      const rest = button.dataset.restType;
+      for (const resource of ensureSpeciesResourceState()) {
+        if (rest === 'long' || resource.rest === 'short') state.resources[resource.id] = resource.maximum;
+      }
+      saveState();
+      renderSummary();
+    }));
+  }
+
   function renderSummary() {
     const species = findSpecies(), variant = findVariant(species), characterClass = findClass(), background = findBackground();
     const labels = {strength:'СИЛ',dexterity:'ЛОВ',constitution:'ТЕЛ',intelligence:'ИНТ',wisdom:'МДР',charisma:'ХАР'};
     const languages = [...new Set([...(state.choices['languages:fixed'] || ['Общий']), ...(state.choices['languages:selected'] || [])])];
     const skills = [...(state.choices['class:skills'] || []), ...(state.choices['background:skills'] || []), ...(state.choices['species:skill'] || []), ...(state.choices['feat:skills'] || [])];
     const root = $('#final-sheet'); if (!root) return;
-    root.innerHTML = `<div class="final-identity"><span>Персонаж 1 уровня</span><h3>${escapeHtml(state.name || 'Безымянный герой')}</h3><p>${escapeHtml([[species?.name, variant?.name].filter(Boolean).join(' — '), characterClass?.name, background?.name].filter(Boolean).join(' · ') || 'Выбор не завершён')}</p></div><div class="final-stats">${abilityKeys.map((key) => `<div><span>${labels[key]}</span><strong>${totalScore(key)}</strong><small>${formatModifier(modifier(totalScore(key)))}</small></div>`).join('')}</div><div class="final-details"><p><strong>Сезон Эладрина:</strong> ${escapeHtml(ELADRIN_SEASONS[selectedEladrinSeason()]?.name || '—')}</p><p><strong>Рост и вес:</strong> ${state.physique.heightInches ? `${Math.floor(state.physique.heightInches/12)}′ ${state.physique.heightInches%12}″ · ${state.physique.weightPounds} фун.` : '—'}</p><p><strong>Мировоззрение:</strong> ${escapeHtml(ALIGNMENTS[state.alignment] || '—')}</p><p><strong>Языки:</strong> ${escapeHtml([...new Set(languages)].join(', '))}</p><p><strong>Навыки:</strong> ${escapeHtml(skills.join(', ') || '—')}</p><p><strong>Компетентность:</strong> ${escapeHtml((state.choices['class:expertise'] || []).join(', ') || '—')}</p><p><strong>Черта происхождения:</strong> ${escapeHtml(selectedOriginFeats().map((feat) => feat.name).join(', ') || '—')}</p><p><strong>Выборы класса:</strong> ${escapeHtml(getClassFeatureGroups().flatMap((group) => (state.choices[`classFeature:${group.id}`] || []).map((id) => group.options.find((option) => option.id === id)?.name || id)).join(', ') || '—')}</p><p><strong>Заговоры:</strong> ${escapeHtml(getClassSpells().filter((spell) => state.spells.cantrips.includes(spell.id)).map((spell) => spell.name).join(', ') || '—')}</p><p><strong>Заклинания 1 уровня:</strong> ${escapeHtml(getClassSpells().filter((spell) => state.spells.level1.includes(spell.id)).map((spell) => spell.name).join(', ') || '—')}</p><p><strong>Черты характера:</strong> ${escapeHtml((state.choices['background:traits'] || []).join(' / ') || '—')}</p><p><strong>Идеал:</strong> ${escapeHtml(state.choices['background:ideal']?.[0] || '—')}</p><p><strong>Привязанность:</strong> ${escapeHtml(state.choices['background:bond']?.[0] || '—')}</p><p><strong>Слабость:</strong> ${escapeHtml(state.choices['background:flaw']?.[0] || '—')}</p></div>`;
+    const resources = ensureSpeciesResourceState();
+    const resourceSection = resources.length ? `<section class="final-resource-section">
+      <div class="final-resource-heading"><div><span>Особенности вида</span><h4>Использования и отдых</h4></div><div><button type="button" data-rest-type="short">Короткий отдых</button><button type="button" data-rest-type="long">Продолжительный отдых</button></div></div>
+      <div class="final-resource-grid">${resources.map((resource) => `<article><div><strong>${escapeHtml(resource.name)}</strong><small>Восстановление: ${resource.rest === 'short' ? 'короткий или продолжительный отдых' : 'продолжительный отдых'}</small></div><div class="resource-counter"><button type="button" data-resource-action="spend" data-resource-id="${escapeHtml(resource.id)}" ${state.resources[resource.id] <= 0 ? 'disabled' : ''}>−</button><strong>${state.resources[resource.id]}/${resource.maximum}</strong><button type="button" data-resource-action="restore" data-resource-id="${escapeHtml(resource.id)}" ${state.resources[resource.id] >= resource.maximum ? 'disabled' : ''}>+</button></div></article>`).join('')}</div>
+    </section>` : '';
+    root.innerHTML = `<div class="final-identity"><span>Персонаж 1 уровня</span><h3>${escapeHtml(state.name || 'Безымянный герой')}</h3><p>${escapeHtml([[species?.name, variant?.name].filter(Boolean).join(' — '), characterClass?.name, background?.name].filter(Boolean).join(' · ') || 'Выбор не завершён')}</p></div><div class="final-stats">${abilityKeys.map((key) => `<div><span>${labels[key]}</span><strong>${totalScore(key)}</strong><small>${formatModifier(modifier(totalScore(key)))}</small></div>`).join('')}</div>${resourceSection}<div class="final-details"><p><strong>Сезон Эладрина:</strong> ${escapeHtml(ELADRIN_SEASONS[selectedEladrinSeason()]?.name || '—')}</p><p><strong>Драконий предок:</strong> ${escapeHtml((state.choices['species:dragonAncestry'] || [])[0] || '—')}</p><p><strong>Заклинательная характеристика вида:</strong> ${escapeHtml((state.choices['species:spellAbility'] || [])[0] || '—')}</p><p><strong>Заговор вида:</strong> ${escapeHtml((state.choices['species:cantrip'] || [])[0] || '—')}</p><p><strong>Временный навык вида:</strong> ${escapeHtml((state.choices['species:adaptiveSkill'] || [])[0] || '—')}</p><p><strong>Временные владения вида:</strong> ${escapeHtml((state.choices['species:adaptiveProficiencies'] || []).join(', ') || '—')}</p><p><strong>Рост и вес:</strong> ${state.physique.heightInches ? `${Math.floor(state.physique.heightInches/12)}′ ${state.physique.heightInches%12}″ · ${state.physique.weightPounds} фун.` : '—'}</p><p><strong>Мировоззрение:</strong> ${escapeHtml(ALIGNMENTS[state.alignment] || '—')}</p><p><strong>Языки:</strong> ${escapeHtml([...new Set(languages)].join(', '))}</p><p><strong>Навыки:</strong> ${escapeHtml(skills.map(skillDisplayName).join(', ') || '—')}</p><p><strong>Компетентность:</strong> ${escapeHtml((state.choices['class:expertise'] || []).map(skillDisplayName).join(', ') || '—')}</p><p><strong>Черта происхождения:</strong> ${escapeHtml(selectedOriginFeats().map((feat) => feat.name).join(', ') || '—')}</p><p><strong>Выборы класса:</strong> ${escapeHtml(getClassFeatureGroups().flatMap((group) => (state.choices[`classFeature:${group.id}`] || []).map((id) => group.options.find((option) => option.id === id)?.name || id)).join(', ') || '—')}</p><p><strong>Заговоры:</strong> ${escapeHtml(getClassSpells().filter((spell) => state.spells.cantrips.includes(spell.id)).map((spell) => spell.name).join(', ') || '—')}</p><p><strong>Заклинания 1 уровня:</strong> ${escapeHtml(getClassSpells().filter((spell) => state.spells.level1.includes(spell.id)).map((spell) => spell.name).join(', ') || '—')}</p><p><strong>Черты характера:</strong> ${escapeHtml((state.choices['background:traits'] || []).join(' / ') || '—')}</p><p><strong>Идеал:</strong> ${escapeHtml(state.choices['background:ideal']?.[0] || '—')}</p><p><strong>Привязанность:</strong> ${escapeHtml(state.choices['background:bond']?.[0] || '—')}</p><p><strong>Слабость:</strong> ${escapeHtml(state.choices['background:flaw']?.[0] || '—')}</p></div>`;
+    bindSummaryResourceControls();
   }
 
-  function showStep(index) {
-    state.step = Math.max(0, Math.min(steps.length - 1, index));
+  function showStep(index, direction = 0) {
+    state.step = normalizeVisibleStepIndex(index, direction);
 
     $$('.wizard-step').forEach((section) => {
       section.classList.toggle(
@@ -3930,15 +5357,7 @@ const creatorOptions = {
       );
     });
 
-    $$('.sidebar-step').forEach((button, buttonIndex) => {
-      button.classList.toggle('is-active', buttonIndex === state.step);
-      button.classList.toggle('is-complete', buttonIndex < state.step);
-    });
-
-    $('#previous-step').disabled = state.step === 0;
-    $('#next-step').hidden = state.step === steps.length - 1;
-    $('#next-step').disabled = false;
-    $('#step-counter').textContent = `Шаг ${state.step + 1} из ${steps.length}`;
+    updateNavigationChrome();
 
     if (steps[state.step] === 'species') {
       renderSpeciesDetails();
@@ -3968,24 +5387,6 @@ const creatorOptions = {
 
   loadState();
 
-  const loadedSpecies = findSpecies();
-  if (isCoreElfSpecies(loadedSpecies) && !state.speciesVariant) {
-    state.speciesVariant = 'high-elf';
-    saveState();
-  }
-  if (isCoreTieflingSpecies(loadedSpecies) && !state.speciesVariant) {
-    state.speciesVariant = 'infernal-tiefling';
-    saveState();
-  }
-  if (isCoreGnomeSpecies(loadedSpecies) && !state.speciesVariant) {
-    state.speciesVariant = 'forest-gnome';
-    saveState();
-  }
-  if ((isCoreGithSpecies(loadedSpecies) || isCoreGenasiSpecies(loadedSpecies)) && !state.speciesVariant) {
-    state.speciesVariant = preferredRequiredVariantId(loadedSpecies);
-    saveState();
-  }
-
   const nameInput = $('#character-name');
   if (nameInput) {
     nameInput.value = state.name;
@@ -4003,15 +5404,18 @@ const creatorOptions = {
       state.choices['species:customLineageFeature'] = [];
       state.choices['species:eladrinSeason'] = [];
       state.choices['species:gnomeSpellAbility'] = [];
+      state.choices['species:spellAbility'] = [];
+      state.choices['species:cantrip'] = [];
+      state.choices['species:dragonAncestry'] = [];
+      state.choices['species:khoravarProficiencyType'] = [];
+      state.choices['species:woodHalfElfLegacy'] = [];
+      state.choices['species:adaptiveSkill'] = [];
+      state.choices['species:adaptiveProficiencies'] = [];
+      state.choices['species:koboldLegacy'] = [];
+      state.choices['species:elfTranceProficiencyType'] = [];
+      state.choices['species:tools'] = [];
       state.choices['feat:skills'] = [];
-      const selectedSpecies = speciesOptions.find((item) => item.id === state.species);
-      state.speciesVariant = isCoreElfSpecies(selectedSpecies)
-        ? 'high-elf'
-        : isCoreTieflingSpecies(selectedSpecies)
-          ? 'infernal-tiefling'
-          : isCoreGnomeSpecies(selectedSpecies)
-            ? 'forest-gnome'
-            : preferredRequiredVariantId(selectedSpecies);
+      state.speciesVariant = null;
       state.physique = structuredClone(defaultState.physique);
       renderSpeciesDetails();
       updatePreview();
@@ -4031,6 +5435,7 @@ const creatorOptions = {
   $$('.class-card').forEach((card) => {
     card.addEventListener('click', () => {
       state.class = card.dataset.classId;
+      faithSearch = '';
       state.choices['class:skills'] = [];
       state.choices['class:expertise'] = [];
       Object.keys(state.choices).filter((key) => key.startsWith('classFeature:')).forEach((key) => delete state.choices[key]);
@@ -4038,6 +5443,7 @@ const creatorOptions = {
       state.equipment.initializedFor = '';
       renderClassDetails();
       updatePreview();
+      updateNavigationChrome();
     });
   });
 
@@ -4074,12 +5480,21 @@ const creatorOptions = {
 
   $$('.sidebar-step').forEach((button, index) => {
     button.addEventListener('click', () => {
-      showStep(index);
+      const targetIndex = steps.indexOf(button.dataset.sidebarStep || steps[index]);
+      if (targetIndex >= 0 && canNavigateToStep(targetIndex)) showStep(targetIndex);
     });
   });
 
+  document.addEventListener('change', () => {
+    queueMicrotask(updateNavigationChrome);
+  });
+
+  document.addEventListener('input', (event) => {
+    if (event.target === nameInput) queueMicrotask(updateNavigationChrome);
+  });
+
   $('#previous-step')?.addEventListener('click', () => {
-    showStep(state.step - 1);
+    showStep(adjacentVisibleStepIndex(state.step, -1), -1);
   });
 
   $('#next-step')?.addEventListener('click', () => {
@@ -4088,14 +5503,51 @@ const creatorOptions = {
       return;
     }
 
-    if (steps[state.step] === 'species' && (isCoreGithSpecies(findSpecies()) || isCoreGenasiSpecies(findSpecies())) && !findVariant(findSpecies())) {
-      alert(isCoreGithSpecies(findSpecies()) ? 'Выберите подвид гита.' : 'Выберите происхождение дженази.');
+    if (steps[state.step] === 'species' && speciesRequiresVariant(findSpecies()) && !findVariant(findSpecies())) {
+      alert('Выберите происхождение или подвид.');
       return;
     }
 
-    if (steps[state.step] === 'species' && isCoreGnomeSpecies(findSpecies()) && isCoreGnomeVariant(findVariant(findSpecies())) && !(state.choices['species:gnomeSpellAbility'] || [])[0]) {
-      alert('Выберите заклинательную характеристику гномьего происхождения.');
+    if (steps[state.step] === 'species' && isKoboldSpecies() && !(state.choices['species:koboldLegacy'] || [])[0]) {
+      alert('Выберите драконье наследство кобольда.');
       return;
+    }
+
+    if (steps[state.step] === 'species' && speciesNeedsSpellAbility() && !(state.choices['species:spellAbility'] || [])[0]) {
+      alert('Выберите заклинательную характеристику вида.');
+      return;
+    }
+
+    if (steps[state.step] === 'species' && dragonAncestryOptions().length && !(state.choices['species:dragonAncestry'] || [])[0]) {
+      alert('Выберите драконьего предка.');
+      return;
+    }
+
+    if (steps[state.step] === 'species' && speciesCantripChoice() && !(state.choices['species:cantrip'] || [])[0]) {
+      alert('Выберите заговор, полученный от вида.');
+      return;
+    }
+
+    if (steps[state.step] === 'species' && isKhoravarVariant() && !(state.choices['species:khoravarProficiencyType'] || [])[0]) {
+      alert('Выберите тип владения хораварского происхождения.');
+      return;
+    }
+
+    if (steps[state.step] === 'species' && isWoodHalfElfVariant() && !(state.choices['species:woodHalfElfLegacy'] || [])[0]) {
+      alert('Выберите одну особенность лесного эльфа.');
+      return;
+    }
+
+    if (steps[state.step] === 'species' && adaptiveSpeciesProficiencyConfig()) {
+      const config = adaptiveSpeciesProficiencyConfig();
+      if (config.skillCount && !(state.choices['species:adaptiveSkill'] || [])[0]) {
+        alert('Выберите временное владение навыком.');
+        return;
+      }
+      if ((state.choices['species:adaptiveProficiencies'] || []).length !== config.flexibleCount) {
+        alert(`Выберите ${config.flexibleCount} владения оружием или инструментами.`);
+        return;
+      }
     }
 
     if (steps[state.step] === 'species' && isEladrinSpecies() && !selectedEladrinSeason()) {
@@ -4123,6 +5575,20 @@ const creatorOptions = {
       return;
     }
 
+    if (steps[state.step] === 'background' && isCustomBackground()) {
+      const custom = getCustomBackground();
+      const requiredText = ['name', 'description', 'feature', 'featureDescription', 'trait1', 'trait2', 'ideal', 'bond', 'flaw'];
+      const complete = requiredText.every((key) => String(custom[key] || '').trim())
+        && custom.skills.length === 2
+        && custom.tools.length === 1
+        && custom.languages.length > 0
+        && Boolean(custom.featId);
+      if (!complete) {
+        alert('Заполните все поля своей предыстории: выберите 2 навыка, 1 инструмент, хотя бы 1 язык и черту происхождения.');
+        return;
+      }
+    }
+
     if (steps[state.step] === 'origin-feats' && !originFeatsComplete()) {
       alert(speciesGrantsExtraFeat() ? 'Выберите одну черту от предыстории и одну дополнительную черту от вида.' : 'Выберите одну черту происхождения от предыстории.');
       return;
@@ -4135,6 +5601,19 @@ const creatorOptions = {
 
     if (steps[state.step] === 'expertise' && !expertiseComplete()) {
       alert('Выберите 2 навыка с компетентностью из тех, которыми владеет плут.');
+      return;
+    }
+
+    if (steps[state.step] === 'languages' && !choiceTableComplete('languages')) {
+      alert('Выберите положенное количество языков.');
+      return;
+    }
+
+    if (steps[state.step] === 'tools' && !choiceTableComplete('tools')) {
+      const skilledRemaining = Math.max(0, skilledSharedChoiceLimit() - skilledSharedSelectedCount());
+      alert(skilledRemaining > 0
+        ? `Черта «Одарённый»: выберите ещё ${skilledRemaining} владения навыками или инструментами. Вернуться к навыкам можно через меню слева.`
+        : 'Выберите положенное количество инструментов от каждого источника.');
       return;
     }
 
@@ -4152,7 +5631,7 @@ const creatorOptions = {
     if (steps[state.step] === 'abilities' && (usedPointBuy() !== 27 || usedBackgroundBonus() !== 3)) { alert('Распределите все 27 очков Point Buy и все 3 очка бонуса предыстории.'); return; }
     if (steps[state.step] === 'spells' && isSpellcasterAtLevelOne()) { const incomplete=getSpellSources().find((source)=>{const selected=state.spells.sources?.[source.id]||{cantrip:[],level1:[]};return selected.cantrip.length!==source.limits.cantrip||selected.level1.length!==source.limits.level1}); if(incomplete){const selected=state.spells.sources?.[incomplete.id]||{cantrip:[],level1:[]};alert(`Заполните источник «${incomplete.title}»: заговоры ${selected.cantrip.length}/${incomplete.limits.cantrip}, заклинания 1 уровня ${selected.level1.length}/${incomplete.limits.level1}.`);return;} }
     if (steps[state.step] === 'alignment' && !state.alignment) { alert('Выберите мировоззрение.'); return; }
-    showStep(state.step + 1);
+    showStep(adjacentVisibleStepIndex(state.step, 1), 1);
   });
 
 
@@ -4174,6 +5653,7 @@ const creatorOptions = {
       });
     }
     renderAlignment();
+    updateForgeTheme();
     saveState();
   }));
   $('#edit-character')?.addEventListener('click', () => showStep(1));
@@ -4237,6 +5717,11 @@ const creatorOptions = {
   function getSpeciesSpeed(species) {
     const selectedVariant = findVariant(species);
     if (isCoreElfSpecies(species) && selectedVariant?.id === 'wood-elf') return '35';
+    if (isWoodHalfElfVariant(species, selectedVariant)) {
+      return (state.choices['species:woodHalfElfLegacy'] || [])[0] === 'Быстрые ноги'
+        ? '35'
+        : String(species?.speed || 30);
+    }
     const variantSpeed = selectedVariant?.speed;
     const source = variantSpeed ?? species?.speed;
     if (typeof source === 'number') return String(source);
@@ -4246,6 +5731,18 @@ const creatorOptions = {
       return String(parsed || 30);
     }
     return String(extractNumber(source, 30) || 30);
+  }
+
+  function getSpeciesMovementLabel(species) {
+    const selectedVariant = findVariant(species);
+    const source = selectedVariant?.speed;
+    if (!source || typeof source !== 'object') return `${getSpeciesSpeed(species)} фт.`;
+    const parts = [];
+    const walking = source.walk ?? source.walking ?? source.speed ?? species?.speed;
+    if (walking) parts.push(`${extractNumber(walking, 30)} фт.`);
+    if (source.swimming) parts.push(`плавание ${extractNumber(source.swimming, 0)} фт.`);
+    if (source.flying) parts.push(`полёт ${extractNumber(source.flying, 0)} фт.`);
+    return parts.join(' · ') || `${getSpeciesSpeed(species)} фт.`;
   }
 
 
@@ -4297,9 +5794,31 @@ const creatorOptions = {
     }
   });
 
+  function resetTransientInterfaceState() {
+    weaponMasterySearch = '';
+    weaponMasteryCategory = 'all';
+    weaponMasteryRange = 'all';
+    faithSearch = '';
+
+    Object.keys(spellSearchQueries).forEach((sourceId) => delete spellSearchQueries[sourceId]);
+    Object.keys(spellScrollPositions).forEach((sourceId) => delete spellScrollPositions[sourceId]);
+
+    $$('#character-wizard input[type="search"]').forEach((input) => {
+      input.value = '';
+    });
+
+    const equipmentCategory = $('#equipment-category');
+    if (equipmentCategory) equipmentCategory.value = 'all';
+
+    $$('.species-card, .class-card, .background-card').forEach((card) => {
+      card.hidden = false;
+    });
+  }
+
   $('#reset-character')?.addEventListener('click', () => {
     localStorage.removeItem(STORAGE_KEY);
     state = structuredClone(defaultState);
+    resetTransientInterfaceState();
 
     if (nameInput) nameInput.value = '';
 
@@ -4318,8 +5837,54 @@ const creatorOptions = {
   .character-wizard {
     --wizard-gold: #d2a754;
     --wizard-gold-light: #f1d38f;
+    --forge-secondary: #9b74ff;
+    --forge-alignment: #64748b;
     max-width: 1500px;
     margin: 0 auto;
+    position: relative;
+    isolation: isolate;
+    transition: color .35s ease;
+  }
+
+  .character-wizard::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 10% 8%, color-mix(in srgb, var(--forge-secondary) 15%, transparent), transparent 29rem),
+      radial-gradient(circle at 88% 20%, color-mix(in srgb, var(--wizard-gold) 12%, transparent), transparent 34rem),
+      linear-gradient(135deg, transparent 35%, color-mix(in srgb, var(--forge-alignment) 5%, transparent));
+    transition: background .45s ease, opacity .45s ease;
+  }
+
+  .character-wizard::after {
+    content: attr(data-forge-symbol);
+    position: absolute;
+    top: 5.5rem;
+    right: clamp(1rem, 5vw, 5rem);
+    z-index: 0;
+    color: var(--forge-secondary);
+    font: 700 clamp(8rem, 20vw, 19rem)/1 Georgia, serif;
+    opacity: .045;
+    pointer-events: none;
+    transform: rotate(-8deg);
+    transition: color .4s ease, transform .4s ease;
+  }
+
+  .wizard-header,
+  .wizard-layout {
+    position: relative;
+    z-index: 1;
+  }
+
+  .character-wizard[data-forge-temper='wild']::after {
+    transform: rotate(8deg) scale(1.08);
+  }
+
+  .character-wizard[data-forge-temper='shadow']::before {
+    opacity: .72;
   }
 
   .wizard-header {
@@ -4345,6 +5910,23 @@ const creatorOptions = {
     opacity: 0.72;
   }
 
+  .forge-theme-status {
+    width: fit-content;
+    max-width: 100%;
+    margin-top: .8rem;
+    padding: .35rem .65rem;
+    border: 1px solid color-mix(in srgb, var(--wizard-gold) 34%, var(--card-border));
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--forge-secondary) 8%, var(--card-bg));
+    color: color-mix(in srgb, var(--wizard-gold-light) 88%, var(--text-color, #e6eaf2));
+    font-size: .72rem;
+    line-height: 1.35;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: border-color .35s ease, background .35s ease, color .35s ease;
+  }
+
   .wizard-kicker,
   .section-kicker,
   .source-label {
@@ -4363,24 +5945,40 @@ const creatorOptions = {
     padding: 1.25rem 0;
   }
 
+  .wizard-layout > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+
   .wizard-main,
   .creator-sidebar,
   .character-preview {
-    border: 1px solid var(--card-border);
+    border: 1px solid color-mix(in srgb, var(--wizard-gold) 18%, var(--card-border));
     border-radius: 0.85rem;
-    background: var(--card-bg);
-    box-shadow: var(--card-shadow);
+    background:
+      linear-gradient(145deg, color-mix(in srgb, var(--forge-secondary) 3%, transparent), transparent 32%),
+      var(--card-bg);
+    box-shadow:
+      var(--card-shadow),
+      0 0 30px color-mix(in srgb, var(--wizard-gold) 4%, transparent);
+    transition: border-color .4s ease, background .4s ease, box-shadow .4s ease;
   }
 
   .wizard-main {
     min-width: 0;
+    max-width: 100%;
     overflow: hidden;
   }
 
   .wizard-step {
     display: none;
+    width: 100%;
+    max-width: 100%;
     min-height: 650px;
+    min-width: 0;
     padding: clamp(1.2rem, 3vw, 2.2rem);
+    box-sizing: border-box;
+    overflow: hidden;
   }
 
   .wizard-step.is-active {
@@ -4638,6 +6236,12 @@ const creatorOptions = {
     border-top: 1px solid var(--card-border);
   }
 
+  .species-lore-disclosure,
+  .class-lore-disclosure {
+    margin-top: 0;
+    padding-top: 1.15rem;
+  }
+
   .full-lore summary {
     color: var(--wizard-gold-light);
     font-weight: 800;
@@ -4872,101 +6476,242 @@ const creatorOptions = {
   .class-step-heading p { margin: 0; opacity: .68; }
   .class-search-field { display: grid; gap: .45rem; margin: 1rem 0; }
   .class-search-field > span { font-size: .72rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; opacity: .65; }
-  .class-search-field input { width: 100%; padding: .8rem .95rem; border: 1px solid var(--card-border); border-radius: .62rem; background: var(--background); color: var(--text); font: inherit; }
+  .class-search-field input {
+    width: 100%;
+    padding: .85rem 1rem;
+    border: 1px solid color-mix(in srgb, var(--wizard-gold) 20%, var(--card-border));
+    border-radius: .72rem;
+    outline: none;
+    background: color-mix(in srgb, var(--background) 88%, var(--card-bg));
+    color: var(--text);
+    font: inherit;
+    transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .class-search-field input:focus {
+    border-color: var(--wizard-gold);
+    background: var(--background);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--wizard-gold) 16%, transparent);
+  }
   .class-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: .65rem;
-    max-height: 520px;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: .8rem;
+    max-height: 560px;
     overflow-y: auto;
-    padding: .25rem .35rem .25rem .15rem;
+    padding: .35rem .55rem .45rem .2rem;
     margin-bottom: 1rem;
     scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--wizard-gold) 45%, var(--card-border)) transparent;
+  }
+
+  .class-grid::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .class-grid::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .class-grid::-webkit-scrollbar-thumb {
+    border: 2px solid transparent;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--wizard-gold) 45%, var(--card-border));
+    background-clip: padding-box;
   }
 
   .class-card {
+    position: relative;
     display: grid;
-    grid-template-rows: 112px minmax(58px, auto);
+    grid-template-rows: 190px minmax(76px, auto);
     min-width: 0;
-    min-height: 170px;
+    min-height: 266px;
     padding: 0;
     overflow: hidden;
-    border: 1px solid var(--card-border);
-    border-radius: .62rem;
-    background: color-mix(in srgb, var(--card-bg) 90%, var(--background));
+    border: 1px solid color-mix(in srgb, var(--wizard-gold) 14%, var(--card-border));
+    border-radius: .82rem;
+    background:
+      linear-gradient(145deg, color-mix(in srgb, var(--card-bg) 96%, var(--wizard-gold) 4%), var(--background));
     color: var(--text);
     cursor: pointer;
     text-align: left;
-    transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .12);
+    transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
   }
 
   .class-card:hover {
-    transform: translateY(-2px);
-    border-color: color-mix(in srgb, var(--wizard-gold) 65%, var(--card-border));
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--wizard-gold) 70%, var(--card-border));
+    box-shadow: 0 12px 26px rgba(0, 0, 0, .22);
+  }
+
+  .class-card:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--wizard-gold-light) 72%, transparent);
+    outline-offset: 3px;
   }
 
   .class-card.is-selected {
     border-color: var(--wizard-gold);
     box-shadow:
       0 0 0 2px color-mix(in srgb, var(--wizard-gold) 38%, transparent),
-      0 7px 18px rgba(0, 0, 0, .18);
+      0 14px 30px rgba(0, 0, 0, .28);
   }
 
   .class-card-image {
     position: relative;
-    height: 112px;
+    height: 190px;
     min-height: 0;
+    overflow: hidden;
     background: #151519;
   }
 
   .class-card-image img {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: 112px;
-    object-fit: cover;
-    object-position: top center;
-    transition: transform .2s ease;
+    height: 100%;
   }
 
-  .class-card:hover .class-card-image img { transform: scale(1.035); }
+  .class-card-image-backdrop {
+    object-fit: cover;
+    object-position: center;
+    filter: blur(15px) saturate(.72) brightness(.55);
+    opacity: .62;
+    transform: scale(1.16);
+  }
 
-  .class-card-image span {
+  .class-card-image-portrait {
+    z-index: 1;
+    object-fit: contain;
+    object-position: center;
+    filter: saturate(.94) contrast(1.03);
+    transition: transform .35s ease, filter .35s ease;
+  }
+
+  .class-card:hover .class-card-image-portrait {
+    transform: scale(1.025);
+    filter: saturate(1.06) contrast(1.04);
+  }
+
+  .class-card-image-shade {
     position: absolute;
-    inset: 68px 0 0;
-    background: linear-gradient(transparent, color-mix(in srgb, var(--card-bg) 92%, var(--background)));
+    z-index: 2;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(7, 12, 23, .04) 40%, rgba(7, 12, 23, .82) 100%),
+      linear-gradient(90deg, rgba(7, 12, 23, .2), transparent 35%, rgba(7, 12, 23, .12));
     pointer-events: none;
   }
 
-  .class-card-copy {
+  .class-card-selected {
+    position: absolute;
+    z-index: 3;
+    top: .62rem;
+    right: .62rem;
     display: grid;
-    align-content: center;
-    gap: .18rem;
+    place-items: center;
+    width: 1.8rem;
+    height: 1.8rem;
+    border: 1px solid color-mix(in srgb, var(--wizard-gold-light) 75%, transparent);
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--wizard-gold) 88%, #5e3b0d);
+    color: #111827;
+    font-size: .9rem;
+    font-weight: 1000;
+    opacity: 0;
+    transform: scale(.72);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .32);
+    transition: opacity .16s ease, transform .16s ease;
+    pointer-events: none;
+  }
+
+  .class-card.is-selected .class-card-selected {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .class-card-copy {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .65rem;
     min-width: 0;
-    padding: .55rem .65rem .65rem;
+    padding: .68rem .72rem .75rem;
     border-top: 1px solid color-mix(in srgb, var(--wizard-gold) 20%, var(--card-border));
-    background: color-mix(in srgb, var(--card-bg) 94%, var(--background));
+    background:
+      linear-gradient(135deg, color-mix(in srgb, var(--card-bg) 97%, var(--wizard-gold) 3%), var(--background));
   }
 
   .class-card.is-selected .class-card-copy {
-    background: color-mix(in srgb, var(--wizard-gold) 12%, var(--card-bg));
+    background:
+      linear-gradient(135deg, color-mix(in srgb, var(--wizard-gold) 15%, var(--card-bg)), var(--card-bg));
   }
 
-  .class-card-copy strong {
+  .class-card.is-selected .class-card-copy::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: linear-gradient(var(--wizard-gold-light), var(--wizard-gold));
+  }
+
+  .class-card-title {
+    display: grid;
+    gap: .12rem;
+    min-width: 0;
+  }
+
+  .class-card-title strong {
     overflow: hidden;
     color: var(--wizard-gold-light);
     font-family: Georgia, serif;
-    font-size: .98rem;
+    font-size: 1.08rem;
     line-height: 1.15;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
-  .class-card-copy small {
+  .class-card-title small {
     overflow: hidden;
-    opacity: .62;
-    font-size: .72rem;
+    opacity: .42;
+    font-size: .61rem;
+    letter-spacing: .045em;
     line-height: 1.25;
     text-overflow: ellipsis;
+    text-transform: uppercase;
     white-space: nowrap;
+  }
+
+  .class-card-meta {
+    display: grid;
+    justify-items: end;
+    gap: .22rem;
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+
+  .class-card-meta small {
+    max-width: 8.5rem;
+    overflow: hidden;
+    opacity: .64;
+    font-size: .67rem;
+    line-height: 1.2;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .class-card-meta .class-card-die {
+    display: inline-flex;
+    padding: .18rem .42rem;
+    border: 1px solid color-mix(in srgb, var(--wizard-gold) 34%, var(--card-border));
+    border-radius: 999px;
+    color: var(--wizard-gold-light);
+    background: color-mix(in srgb, var(--wizard-gold) 9%, transparent);
+    font-size: .65rem;
+    font-weight: 800;
+    opacity: .9;
   }
   .class-profile { display: grid; gap: 1rem; margin-top: 1rem; }
   .class-hero { display: grid; grid-template-columns: minmax(0, 1fr) 230px; overflow: hidden; border: 1px solid color-mix(in srgb, var(--wizard-gold) 24%, var(--card-border)); border-radius: .9rem; background: color-mix(in srgb, var(--card-bg) 92%, var(--background)); }
@@ -5010,6 +6755,17 @@ const creatorOptions = {
 
 
   .background-choices-section { padding: 1rem; }
+  .custom-background-form { padding: 1.15rem; }
+  .custom-background-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .9rem; }
+  .custom-background-grid label { display: grid; align-content: start; gap: .42rem; }
+  .custom-background-grid label > span { color: var(--wizard-gold); font-size: .7rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+  .custom-background-grid input, .custom-background-grid textarea, .custom-background-grid select { width: 100%; min-width: 0; padding: .75rem .8rem; border: 1px solid var(--card-border); border-radius: .55rem; background: var(--background); color: var(--text); font: inherit; outline: none; }
+  .custom-background-grid input:focus, .custom-background-grid textarea:focus, .custom-background-grid select:focus { border-color: var(--wizard-gold); box-shadow: 0 0 0 3px color-mix(in srgb, var(--wizard-gold) 14%, transparent); }
+  .custom-background-grid textarea { resize: vertical; }
+  .custom-background-grid select[multiple] { padding: .35rem; }
+  .custom-background-grid option { padding: .35rem .45rem; }
+  .custom-background-grid small { opacity: .65; }
+  .custom-background-wide { grid-column: 1 / -1; }
   .inline-choice-title { margin-bottom: 1rem; padding-bottom: .8rem; border-bottom: 1px solid var(--card-border); }
   .inline-choice-title h3 { margin: .25rem 0 .35rem; font-family: Georgia, serif; font-size: 1.35rem; }
   .inline-choice-title p { margin: 0; opacity: .68; }
@@ -5051,7 +6807,7 @@ const creatorOptions = {
   .points-summary{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:1rem}.points-summary strong{padding:.7rem 1rem;border:1px solid var(--card-border);border-radius:.5rem;background:var(--background);color:var(--wizard-gold-light)}
   .ability-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.ability-card{display:grid;justify-items:center;gap:.42rem;padding:1.15rem;border:1px solid var(--card-border);border-radius:.6rem;background:color-mix(in srgb,var(--card-bg) 86%,var(--background))}.ability-card>span{color:var(--wizard-gold);font-weight:900;letter-spacing:.14em}.ability-card>small{opacity:.58}.ability-control{display:grid;grid-template-columns:38px 62px 38px;align-items:center;gap:.35rem}.ability-control button{height:36px;border:1px solid var(--card-border);border-radius:.4rem;background:var(--background);color:var(--text);font-size:1.2rem;cursor:pointer}.ability-control output{text-align:center;font-size:1.45rem;font-weight:800}.background-control output{font-size:1.15rem;color:var(--wizard-gold-light)}.ability-total{margin-top:.35rem;display:grid;grid-template-columns:auto auto;align-items:center;gap:.15rem .65rem;padding-top:.65rem;border-top:1px solid var(--card-border);width:100%}.ability-total span{opacity:.65}.ability-total strong{font-size:1.65rem;color:var(--wizard-gold-light)}.ability-total output{grid-column:2;font-size:1rem;color:var(--wizard-gold-light)}.ability-warning{margin-top:1rem;color:#ef9b83}
   .alignment-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.alignment-card{min-height:130px;display:grid;align-content:center;gap:.5rem;padding:1rem;border:1px solid var(--card-border);border-radius:.65rem;background:color-mix(in srgb,var(--card-bg) 86%,var(--background));color:var(--text);text-align:left;cursor:pointer}.alignment-card strong{font-family:Georgia,serif;color:var(--wizard-gold-light);font-size:1.05rem}.alignment-card small{opacity:.72;line-height:1.45}.alignment-card:hover,.alignment-card.is-selected{border-color:var(--wizard-gold);box-shadow:0 0 0 2px color-mix(in srgb,var(--wizard-gold) 30%,transparent)}
-  .final-sheet{border:1px solid var(--card-border);border-radius:.7rem;overflow:hidden}.final-identity{padding:1.35rem;background:color-mix(in srgb,var(--wizard-gold) 10%,var(--card-bg))}.final-identity span{color:var(--wizard-gold);text-transform:uppercase;letter-spacing:.12em;font-size:.7rem}.final-identity h3{font-family:Georgia,serif;font-size:2rem;margin:.35rem 0}.final-stats{display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid var(--card-border);border-bottom:1px solid var(--card-border)}.final-stats div{display:grid;justify-items:center;padding:.8rem;border-right:1px solid var(--card-border)}.final-stats div:last-child{border-right:0}.final-stats span{color:var(--wizard-gold);font-size:.72rem}.final-stats strong{font-size:1.35rem}.final-stats small{opacity:.65}.final-details{padding:1.2rem}.final-actions{display:flex;gap:.8rem;margin-top:1rem}
+  .final-sheet{border:1px solid var(--card-border);border-radius:.7rem;overflow:hidden}.final-identity{padding:1.35rem;background:color-mix(in srgb,var(--wizard-gold) 10%,var(--card-bg))}.final-identity span{color:var(--wizard-gold);text-transform:uppercase;letter-spacing:.12em;font-size:.7rem}.final-identity h3{font-family:Georgia,serif;font-size:2rem;margin:.35rem 0}.final-stats{display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid var(--card-border);border-bottom:1px solid var(--card-border)}.final-stats div{display:grid;justify-items:center;padding:.8rem;border-right:1px solid var(--card-border)}.final-stats div:last-child{border-right:0}.final-stats span{color:var(--wizard-gold);font-size:.72rem}.final-stats strong{font-size:1.35rem}.final-stats small{opacity:.65}.final-resource-section{padding:1.1rem 1.2rem;border-bottom:1px solid var(--card-border);background:color-mix(in srgb,var(--wizard-gold) 4%,var(--card-bg))}.final-resource-heading{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.8rem}.final-resource-heading span{color:var(--wizard-gold);font-size:.68rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}.final-resource-heading h4{margin:.2rem 0 0;font-family:Georgia,serif;font-size:1.2rem}.final-resource-heading>div:last-child{display:flex;flex-wrap:wrap;gap:.45rem}.final-resource-heading button,.resource-counter button{padding:.5rem .65rem;border:1px solid color-mix(in srgb,var(--wizard-gold) 42%,var(--card-border));border-radius:.45rem;background:var(--background);color:var(--wizard-gold-light);font:inherit;font-weight:800;cursor:pointer}.final-resource-grid{display:grid;gap:.55rem}.final-resource-grid article{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.75rem;border:1px solid var(--card-border);border-radius:.58rem;background:var(--background)}.final-resource-grid article>div:first-child{display:grid;gap:.18rem}.final-resource-grid small{opacity:.62}.resource-counter{display:flex;align-items:center;gap:.55rem;white-space:nowrap}.resource-counter button{min-width:34px}.resource-counter button:disabled{cursor:not-allowed;opacity:.35}.final-details{padding:1.2rem}.final-actions{display:flex;gap:.8rem;margin-top:1rem}
 
 
   .spell-availability-source {
@@ -5073,30 +6829,144 @@ const creatorOptions = {
     display: none !important;
   }
 
-  @media (max-width: 1120px) {
+  @media (max-width: 1340px) {
     .wizard-layout {
       grid-template-columns: 190px minmax(0, 1fr);
     }
 
     .character-preview {
-      grid-column: 1 / -1;
+      grid-column: 2;
       position: static;
+      display: grid;
+      grid-template-columns: minmax(160px, 210px) minmax(0, 1fr);
+      align-items: stretch;
+    }
+
+    .character-preview .preview-portrait {
+      min-height: 210px;
+      height: 100%;
+    }
+
+    .character-preview .preview-content {
+      align-self: center;
+      margin-top: 0;
+      padding: 1.1rem 1.25rem;
+    }
+
+    .character-preview .preview-content h2 {
+      margin-bottom: .75rem;
     }
   }
 
   @media (max-width: 760px) {
+    .character-wizard {
+      width: 100%;
+    }
+
     .wizard-header {
       align-items: start;
       flex-direction: column;
+      gap: 1rem;
+      padding: .85rem .25rem 1.15rem;
+    }
+
+    .wizard-header h1 {
+      margin: .25rem 0 .55rem;
+      font-size: clamp(2.15rem, 12vw, 3.35rem);
+      line-height: .98;
+    }
+
+    .wizard-header p {
+      font-size: .9rem;
+      line-height: 1.5;
+    }
+
+    .wizard-header .button {
+      width: 100%;
     }
 
     .wizard-layout {
       display: block;
+      padding: .65rem 0 0;
     }
 
     .creator-sidebar {
-      position: static;
-      margin-bottom: 1rem;
+      margin-bottom: .65rem;
+    }
+
+    .wizard-main {
+      border-radius: .7rem;
+    }
+
+    .wizard-step {
+      min-height: 0;
+      padding: 1.1rem .9rem 1.3rem;
+    }
+
+    .wizard-step > div:first-child h2 {
+      max-width: 100%;
+      font-size: clamp(1.75rem, 9vw, 2.3rem);
+      line-height: 1.05;
+      overflow-wrap: anywhere;
+    }
+
+    .wizard-step > div:first-child p {
+      font-size: .88rem;
+      line-height: 1.55;
+    }
+
+    .wizard-footer {
+      position: sticky;
+      bottom: 0;
+      z-index: 30;
+      gap: .45rem;
+      padding: .72rem;
+      background: color-mix(in srgb, var(--card-bg) 96%, var(--background));
+      box-shadow: 0 -10px 24px rgba(0,0,0,.2);
+    }
+
+    .wizard-footer .button {
+      min-height: 44px;
+      padding: .62rem .72rem;
+      font-size: .78rem;
+    }
+
+    .wizard-footer > span {
+      flex: 0 0 auto;
+      font-size: .68rem;
+    }
+
+    .character-preview {
+      display: grid;
+      grid-template-columns: 96px minmax(0, 1fr);
+      margin-top: .75rem;
+    }
+
+    .character-preview .preview-portrait {
+      min-height: 150px;
+    }
+
+    .character-preview .preview-content {
+      padding: .8rem .85rem;
+    }
+
+    .character-preview .preview-kicker {
+      font-size: .58rem;
+    }
+
+    .character-preview .preview-content h2 {
+      margin: .2rem 0 .55rem;
+      font-size: 1.12rem;
+    }
+
+    .character-preview .preview-content dl {
+      gap: .3rem;
+    }
+
+    .character-preview .preview-content dl > div {
+      gap: .45rem;
+      padding-bottom: .28rem;
+      font-size: .72rem;
     }
 
     .species-hero,
@@ -5123,10 +6993,66 @@ const creatorOptions = {
 
     .species-stats,
     .class-stats,
-    .class-grid,
     .proficiency-grid,
-    .traits-list {
+    .traits-list,
+    .background-stats,
+    .background-reward-grid,
+    .background-characteristic-grid {
       grid-template-columns: 1fr;
+    }
+
+    .class-grid {
+      grid-template-columns: 1fr;
+      max-height: 520px;
+      padding-right: .25rem;
+    }
+
+    .class-card {
+      grid-template-columns: 118px minmax(0, 1fr);
+      grid-template-rows: 148px;
+      min-height: 148px;
+    }
+
+    .class-card-image {
+      height: 148px;
+    }
+
+    .class-card-copy {
+      align-items: flex-start;
+      flex-direction: column;
+      justify-content: center;
+      border-top: 0;
+      border-left: 1px solid color-mix(in srgb, var(--wizard-gold) 20%, var(--card-border));
+    }
+
+    .class-card-meta {
+      justify-items: start;
+    }
+
+    .class-card-meta small {
+      max-width: 100%;
+      text-align: left;
+      white-space: normal;
+    }
+
+    .ability-grid,
+    .alignment-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .65rem;
+    }
+
+    .ability-card {
+      padding: .85rem .6rem;
+    }
+
+    .points-summary {
+      gap: .55rem;
+    }
+
+    .points-summary strong {
+      flex: 1 1 150px;
+      padding: .6rem .7rem;
+      font-size: .8rem;
     }
 
     .content-section-heading.size-heading {
@@ -5136,6 +7062,8 @@ const creatorOptions = {
 
     .background-hero { grid-template-columns: 1fr; }
     .background-rune { justify-self: start; width: 72px; height: 72px; font-size: 2.5rem; }
+    .custom-background-grid { grid-template-columns: 1fr; }
+    .custom-background-wide { grid-column: auto; }
 
     .result-row {
       grid-template-columns: 1fr;
@@ -5145,6 +7073,70 @@ const creatorOptions = {
       grid-row: auto;
       grid-column: auto;
       margin-top: 0.2rem;
+    }
+
+    .spell-table-list p {
+      grid-template-columns: 1fr;
+      gap: .25rem;
+    }
+
+    .characteristic-option-row {
+      grid-template-columns: auto 1.75rem minmax(0, 1fr);
+      gap: .55rem;
+    }
+
+    .alignment-requirement,
+    .characteristic-option-row small {
+      grid-column: 3;
+      justify-self: start;
+      white-space: normal;
+    }
+
+    .final-stats {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .final-stats div:nth-child(3n) {
+      border-right: 0;
+    }
+
+    .final-resource-heading,
+    .final-resource-grid article,
+    .final-actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .final-actions .button {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .character-preview {
+      grid-template-columns: 88px minmax(0, 1fr);
+    }
+
+    .character-preview .preview-portrait {
+      height: auto;
+      min-height: 145px;
+    }
+
+    .ability-grid,
+    .alignment-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .final-stats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .final-stats div:nth-child(3n) {
+      border-right: 1px solid var(--card-border);
+    }
+
+    .final-stats div:nth-child(2n) {
+      border-right: 0;
     }
   }
 
@@ -5177,6 +7169,18 @@ const creatorOptions = {
   :global(.origin-feat-requirements) { display:block !important; margin-top:.35rem !important; color:#aeb8ca !important; opacity:1 !important; }
   :global(.origin-feat-general-row.is-selected) { background:rgba(155,116,255,.08); }
   :global(.origin-feat-empty) { padding:1.4rem !important; text-align:center !important; color:#aeb8ca; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .character-wizard,
+    .character-wizard::before,
+    .character-wizard::after,
+    .forge-theme-status,
+    .wizard-main,
+    .creator-sidebar,
+    .character-preview {
+      transition: none;
+    }
+  }
 </style>
 
 <style is:global>

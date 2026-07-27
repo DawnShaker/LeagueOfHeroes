@@ -112,6 +112,14 @@
   .equipment-inventory :global(.equipment-pack-details li){font-size:.8rem;line-height:1.35;opacity:.82}
   @media(max-width:1180px){.equipment-toolbar{align-items:stretch}.equipment-actions{width:100%}.equipment-action{flex:1 1 220px}.equipment-layout{grid-template-columns:1fr}.equipment-shop-head{grid-template-columns:1fr}.equipment-shop-wrap,.equipment-inventory{max-height:420px}}
   @media(max-width:720px){
+    .equipment-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%}
+    .equipment-summary article{min-width:0;padding:.65rem .7rem}
+    .equipment-actions{display:grid;grid-template-columns:1fr;width:100%}
+    .equipment-action{width:100%}
+    .equipment-variants{grid-template-columns:1fr}
+    .equipment-variant-section{padding:.75rem}
+    .equipment-inventory :global(.equipment-inventory-row){align-items:flex-start;flex-direction:column}
+    .equipment-inventory :global(.equipment-quantity){align-self:flex-end}
     .equipment-inventory :global(.equipment-pack-details ul){grid-template-columns:1fr}
     .equipment-shop-table th:nth-child(2),.equipment-shop-table :global(td:nth-child(2)),
     .equipment-shop-table th:nth-child(4),.equipment-shop-table :global(td:nth-child(4)){display:none}

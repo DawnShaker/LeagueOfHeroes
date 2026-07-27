@@ -140,6 +140,7 @@ export const tiefling: Species = {
         name: 'Крылатый',
         nameEn: 'Winged',
         sourceBook: 'SCAG14',
+        speed: { walk: 30, flying: 30 },
         lore: '-',
         abilities: [
         {
@@ -159,6 +160,7 @@ export const tiefling: Species = {
     type: 'Гуманоид',
     size: 'Средний или Маленький',
     speed: 30,
+    variantMode: 'required',
     abilities: [
         {
           title: 'Языки',

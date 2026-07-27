@@ -1,4 +1,5 @@
 export interface SpeciesVariant {
+  id?: string;
   name: string;
   nameEn: string;
   sourceBook: string;
@@ -13,6 +14,11 @@ export interface SpeciesVariant {
     rows: string[][];
   };
   lore?: string;
+  speed?: number | {
+    walk?: number;
+    swimming?: number;
+    flying?: number;
+  };
 }
 
 export interface Species {
@@ -25,8 +31,13 @@ export interface Species {
   type: string;
   size: string;
   speed: number;
+  abilities?: {
+    title: string;
+    description: string;
+  }[];
   variants?: SpeciesVariant[];
-  traits: {
+  variantMode?: 'required' | 'optional';
+  traits?: {
     abilities: string[];
   };
 }

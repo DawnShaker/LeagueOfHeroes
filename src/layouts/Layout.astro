@@ -114,8 +114,7 @@ const { title } = Astro.props;
                   ? NodeFilter.FILTER_ACCEPT
                   : NodeFilter.FILTER_REJECT;
               }
-            },
-            false
+            }
           );
 
           const nodes = [];
@@ -133,8 +132,8 @@ const { title } = Astro.props;
                 if (!node) continue;
                 if (node.nodeType === Node.TEXT_NODE) {
                   if (!shouldSkip(node) && HIGHLIGHT_TEST.test(node.nodeValue)) replaceTextNode(node);
-                } else if (node.nodeType === Node.ELEMENT_NODE) {
-                  if (node.closest && node.closest('.highlight-prefix-positive, .highlight-prefix-negative')) continue;
+                } else if (node instanceof Element) {
+                  if (node.closest('.highlight-prefix-positive, .highlight-prefix-negative')) continue;
                   if (typeof node.textContent === 'string' && !HIGHLIGHT_TEST.test(node.textContent)) continue;
 
                   const walker = document.createTreeWalker(
@@ -148,8 +147,7 @@ const { title } = Astro.props;
                           ? NodeFilter.FILTER_ACCEPT
                           : NodeFilter.FILTER_REJECT;
                       }
-                    },
-                    false
+                    }
                   );
 
                   const nodes = [];
@@ -203,7 +201,9 @@ const { title } = Astro.props;
 
   @media (max-width: 768px) {
     main {
-      padding-top: 4rem;
+      width: 100%;
+      padding: 4rem .55rem .75rem;
+      overflow-x: clip;
     }
   }
 

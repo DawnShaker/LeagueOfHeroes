@@ -7,6 +7,12 @@ import { STAT_NAMES } from '../../utils/pointBuy';
 <Layout title="Point Buy калькулятор">
   <div class="content">
     <h1 class="text-center">Point Buy калькулятор</h1>
+    <p class="calculator-description">
+      Распределите 27 очков между шестью характеристиками. Базовые значения
+      можно повышать от 8 до 15. Затем распределите 3 очка бонуса
+      предыстории: +2 и +1 либо три раза по +1; итоговое значение
+      характеристики на этом этапе не может превышать 17.
+    </p>
     
     <div class="calculator">
       <table>
@@ -26,6 +32,7 @@ import { STAT_NAMES } from '../../utils/pointBuy';
 
       <div class="controls">
         <h3>Оставшиеся очки: <span id="points-remaining">27</span>/27</h3>
+        <h3>Оставшийся бонус предыстории: <span id="bonuses-remaining">3</span>/3</h3>
         <button id="reset-btn" class="reset-btn">Сбросить</button>
       </div>
     </div>
@@ -41,11 +48,15 @@ import { STAT_NAMES } from '../../utils/pointBuy';
   function renderStats() {
     const table = document.getElementById('stats-table');
     const pointsDisplay = document.getElementById('points-remaining');
+    const bonusesDisplay = document.getElementById('bonuses-remaining');
     
-    if (!table || !pointsDisplay) return;
+    if (!table || !pointsDisplay || !bonusesDisplay) return;
 
     table.innerHTML = '';
     pointsDisplay.textContent = points.toString();
+    bonusesDisplay.textContent = String(
+      3 - Object.values(stats).reduce((sum, stat) => sum + stat.racial, 0)
+    );
 
     Object.entries(stats).forEach(([stat, values]) => {
       const row = document.createElement('tr');
@@ -120,7 +131,16 @@ import { STAT_NAMES } from '../../utils/pointBuy';
 
   function updateRacialBonus(stat: string, change: number) {
     const newRacial = stats[stat].racial + change;
-    if (newRacial >= 0 && newRacial <= 2) {
+    const usedBonuses = Object.values(stats).reduce(
+      (sum, item) => sum + item.racial,
+      0
+    );
+    if (
+      newRacial >= 0
+      && newRacial <= 2
+      && usedBonuses + change >= 0
+      && usedBonuses + change <= 3
+    ) {
       stats[stat].racial = newRacial;
       renderStats();
     }
@@ -134,6 +154,14 @@ import { STAT_NAMES } from '../../utils/pointBuy';
   }
 
   .text-center {
+    text-align: center;
+  }
+
+  .calculator-description {
+    max-width: 720px;
+    margin: 0.75rem auto 0;
+    color: var(--muted);
+    line-height: 1.6;
     text-align: center;
   }
 
