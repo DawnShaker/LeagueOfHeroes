@@ -105,7 +105,7 @@ const backgroundOptions = [
     name: 'Своя предыстория',
     nameEn: 'Custom Background',
     sourceBook: 'Пользовательская',
-    lore: 'Создайте уникальное прошлое героя и самостоятельно определите его владения, черту и личностные характеристики.',
+    lore: 'Запишите уникальное прошлое героя. Владения, языки и черта происхождения выбираются на следующих общих этапах конструктора.',
     feat: '',
     skills: '',
     tools: '',
@@ -362,6 +362,28 @@ const creatorOptions = {
     });
     if (Array.isArray(state.customBackground?.skills)) {
       state.customBackground.skills = state.customBackground.skills.map(normalizeSkillName);
+    }
+    if (state.background === 'custom-background' && state.customBackground) {
+      const custom = state.customBackground;
+      if (!custom.selectionsMigrated) {
+        if (!(state.choices['background:skills'] || []).length && Array.isArray(custom.skills)) {
+          state.choices['background:skills'] = custom.skills.slice(0, 2);
+        }
+        if (!(state.choices['background:tools'] || []).length && Array.isArray(custom.tools)) {
+          state.choices['background:tools'] = custom.tools.slice(0, 1);
+        }
+        if (!(state.choices['languages:selected'] || []).length && Array.isArray(custom.languages)) {
+          state.choices['languages:selected'] = custom.languages.slice(0, 2);
+        }
+        if (!(state.choices['background:originFeat'] || []).length && custom.featId) {
+          state.choices['background:originFeat'] = [custom.featId];
+        }
+        custom.selectionsMigrated = true;
+        custom.skills = [];
+        custom.tools = [];
+        custom.languages = [];
+        custom.featId = '';
+      }
     }
   }
 
@@ -753,14 +775,14 @@ const creatorOptions = {
     const background = getStateModule().findBackground(state, backgroundOptions);
     if (!background?.isCustom) return background;
     const custom = state.customBackground || {};
-    const feat = featOptions.find((item) => item.id === custom.featId);
+    const feat = featOptions.find((item) => item.id === state.choices['background:originFeat']?.[0]);
     return {
       ...background,
       name: String(custom.name || '').trim() || background.name,
       lore: String(custom.description || '').trim() || background.lore,
-      skills: (custom.skills || []).join(', '),
-      tools: (custom.tools || []).join(', '),
-      languageText: (custom.languages || []).join(', '),
+      skills: (state.choices['background:skills'] || []).join(', '),
+      tools: (state.choices['background:tools'] || []).join(', '),
+      languageText: '',
       feat: feat?.name || '',
       feature: String(custom.feature || '').trim(),
       featureDescription: String(custom.featureDescription || '').trim()
@@ -898,11 +920,7 @@ const creatorOptions = {
     if (!state.customBackground || typeof state.customBackground !== 'object') {
       state.customBackground = {};
     }
-    const custom = state.customBackground;
-    custom.skills = Array.isArray(custom.skills) ? custom.skills : [];
-    custom.tools = Array.isArray(custom.tools) ? custom.tools : [];
-    custom.languages = Array.isArray(custom.languages) ? custom.languages : [];
-    return custom;
+    return state.customBackground;
   }
 
   function getEffectiveAbilities(species, variant) {
@@ -2136,6 +2154,42 @@ const creatorOptions = {
     const className = `${characterClass?.name || ''} ${characterClass?.nameEn || ''}`.toLocaleLowerCase('ru');
     const groups = [...(classFeatureOptions[state.class] || [])];
 
+    if (classId === 'paladin' && Array.isArray(characterClass?.subclasses)) {
+      groups.unshift({
+        id: 'paladin-oath',
+        name: 'Священная клятва',
+        count: 1,
+        description: 'Выберите идеал и будущий подкласс паладина. Клятва определяет путь персонажа уже сейчас, а её механические умения открываются на 3 уровне.',
+        href: '/classes/paladin#feature-подкласс-паладина-3',
+        options: characterClass.subclasses.map((subclass) => ({
+          id: subclass.id,
+          name: subclass.name,
+          detail: subclass.id === 'oathbreaker'
+            ? `${subclass.nameEn} · только с разрешения Мастера`
+            : subclass.nameEn,
+          description: subclass.description || '',
+          href: `/classes/paladin?subclass=${encodeURIComponent(subclass.id)}`
+        }))
+      });
+    }
+
+    if (classId === 'warlock' && Array.isArray(characterClass?.subclasses)) {
+      groups.unshift({
+        id: 'warlock-patron-path',
+        name: 'Вид потустороннего покровителя',
+        count: 1,
+        description: 'Выберите будущий подкласс колдуна. Затем конструктор отметит конкретных сущностей, подходящих этому виду договора.',
+        href: '/classes/warlock#feature-подкласс-колдуна-3',
+        options: characterClass.subclasses.map((subclass) => ({
+          id: subclass.id,
+          name: subclass.name,
+          detail: subclass.nameEn,
+          description: subclass.description || '',
+          href: `/classes/warlock?subclass=${encodeURIComponent(subclass.id)}`
+        }))
+      });
+    }
+
     const masteryEntry = Object.entries(WEAPON_MASTERY_COUNTS).find(([key]) =>
       classId === key || classId.includes(key) || className.includes(key)
     );
@@ -2175,7 +2229,64 @@ const creatorOptions = {
       });
     }
 
-    return groups;
+    return groups.map((group) => {
+      if (group.id === 'warlock-patron') {
+        const custom = getCustomPatron();
+        return {
+          ...group,
+          options: group.options.map((option) => {
+            const resolved = option.id === 'patron-custom'
+              ? {
+                ...option,
+                name: String(custom.name || '').trim() || option.name,
+                type: custom.type || option.type,
+                alignment: custom.alignment || option.alignment,
+                realm: custom.realm || option.realm,
+                source: custom.source || option.source,
+                description: custom.description || option.description,
+                pactIdeas: [
+                  custom.pactTerms ? `Цена и условия: ${custom.pactTerms}` : '',
+                  custom.manifestation ? `Способ общения: ${custom.manifestation}` : '',
+                  custom.goals ? `Цели: ${custom.goals}` : ''
+                ].filter(Boolean).join(' ')
+              }
+              : option;
+            return {
+              ...resolved,
+              exportDescription: [
+                resolved.description,
+                `Вид: ${resolved.type}.`,
+                `Мировоззрение: ${resolved.alignment}.`,
+                `Обитель: ${resolved.realm}.`,
+                resolved.pactIdeas ? `Идеи и условия договора: ${resolved.pactIdeas}` : '',
+                resolved.source ? `Источник: ${resolved.source}.` : ''
+              ].filter(Boolean).join('\n\n')
+            };
+          })
+        };
+      }
+      if (group.id !== 'faith') return group;
+      const custom = getCustomDeity();
+      return {
+        ...group,
+        options: group.options.map((option) => option.id === 'faith-other-deity'
+          ? {
+              ...option,
+              name: String(custom.name || '').trim() || option.name,
+              description: [
+                custom.title ? `${custom.name || 'Божество'} — ${custom.title}` : custom.name,
+                custom.alignment ? `Мировоззрение: ${custom.alignment}` : '',
+                custom.domains ? `Домены: ${custom.domains}` : '',
+                custom.portfolio ? `Сфера влияния: ${custom.portfolio}` : '',
+                custom.pantheon ? `Пантеон или мир: ${custom.pantheon}` : '',
+                custom.symbol ? `Священный символ: ${custom.symbol}` : '',
+                custom.description,
+                custom.tenets ? `Заповеди и требования:\n${custom.tenets}` : ''
+              ].filter(Boolean).join('\n\n')
+            }
+          : option)
+      };
+    });
   }
 
   function getSelectedClassFeatureEffects() {
@@ -2206,8 +2317,21 @@ const creatorOptions = {
 
   function classFeaturesComplete() {
     return getClassFeatureGroups().every((group) => {
-      const selected = state.choices[`classFeature:${group.id}`] || [];
-      return selected.length === group.count;
+      const selected = group.id === 'paladin-oath' || group.id === 'warlock-patron-path'
+        ? (state.choices[`classFeature:${group.id}`] || state.choices['class:subclass'] || [])
+        : (state.choices[`classFeature:${group.id}`] || []);
+      if (selected.length !== group.count) return false;
+      if (group.id === 'faith' && selected.includes('faith-other-deity')) {
+        const custom = getCustomDeity();
+        return ['name', 'alignment', 'domains', 'portfolio', 'symbol', 'description']
+          .every((key) => String(custom[key] || '').trim());
+      }
+      if (group.id === 'warlock-patron' && selected.includes('patron-custom')) {
+        const custom = getCustomPatron();
+        return ['name', 'type', 'alignment', 'realm', 'description', 'pactTerms', 'manifestation', 'goals']
+          .every((key) => String(custom[key] || '').trim());
+      }
+      return true;
     });
   }
 
@@ -2215,6 +2339,151 @@ const creatorOptions = {
   let weaponMasteryCategory = 'all';
   let weaponMasteryRange = 'all';
   let faithSearch = '';
+  let faithAlignment = 'all';
+  let faithDomain = 'all';
+  let faithSort = 'name';
+  let patronSearch = '';
+  let patronType = 'all';
+  let patronAlignment = 'all';
+  let patronSort = 'name';
+
+  const PALADIN_OATH_DEITY_RECOMMENDATIONS = {
+    devotion: ['deity-torm', 'deity-tyr', 'deity-helm', 'deity-ilmater', 'deity-lathander'],
+    glory: ['deity-tempus', 'deity-torm', 'deity-tymora', 'deity-sune', 'deity-lathander'],
+    ancients: ['deity-mielikki', 'deity-silvanus', 'deity-chauntea', 'deity-eldath', 'deity-lathander'],
+    vengeance: ['deity-tyr', 'deity-torm', 'deity-tempus', 'deity-helm', 'deity-kelemvor'],
+    crown: ['deity-helm', 'deity-tyr', 'deity-torm', 'deity-bane'],
+    redemption: ['deity-ilmater', 'deity-eldath', 'deity-chauntea', 'deity-lathander', 'deity-selune'],
+    conquest: ['deity-bane', 'deity-tempus', 'deity-talos', 'deity-helm'],
+    watchers: ['deity-helm', 'deity-mystra', 'deity-savras', 'deity-torm', 'deity-selune'],
+    oathbreaker: ['deity-shar', 'deity-myrkul', 'deity-bhaal', 'deity-bane', 'deity-cyric'],
+    genies: ['deity-gond', 'deity-talos', 'deity-umberlee', 'deity-silvanus']
+  };
+
+  function selectedPaladinOath() {
+    return state.choices['classFeature:paladin-oath']?.[0]
+      || state.choices['class:subclass']?.[0]
+      || '';
+  }
+
+  function recommendedDeityIds() {
+    return new Set(PALADIN_OATH_DEITY_RECOMMENDATIONS[selectedPaladinOath()] || []);
+  }
+
+  function getCustomDeity() {
+    state.customDeity = {
+      ...structuredClone(defaultState.customDeity || {}),
+      ...(state.customDeity || {})
+    };
+    return state.customDeity;
+  }
+
+  function selectedWarlockPatronPath() {
+    return state.choices['classFeature:warlock-patron-path']?.[0]
+      || state.choices['class:subclass']?.[0]
+      || '';
+  }
+
+  function getCustomPatron() {
+    state.customPatron = {
+      ...structuredClone(defaultState.customPatron || {}),
+      ...(state.customPatron || {})
+    };
+    return state.customPatron;
+  }
+
+  function renderCustomPatronForm() {
+    const custom = getCustomPatron();
+    const alignments = ['ЗД', 'НД', 'ХД', 'ЗН', 'Н', 'ХН', 'ЗЗ', 'НЗ', 'ХЗ', 'Любое'];
+    const types = ['Небожитель', 'Архифея', 'Демон', 'Дьявол', 'Карга', 'Дальний предел', 'Бездонный', 'Гений', 'Нежить', 'Теневая сущность', 'Другой'];
+    return `<section class="custom-deity-panel" aria-labelledby="custom-patron-title">
+      <div class="custom-deity-heading">
+        <div>
+          <span>Собственный вариант</span>
+          <h4 id="custom-patron-title">Создайте своего покровителя</h4>
+        </div>
+        <small>* обязательные поля</small>
+      </div>
+      <div class="custom-deity-grid">
+        <label><span>Имя *</span><input data-custom-patron="name" value="${escapeHtml(custom.name)}" placeholder="Например, Та, что шепчет за звёздами"></label>
+        <label><span>Титул</span><input data-custom-patron="title" value="${escapeHtml(custom.title)}" placeholder="Хранительница последней двери"></label>
+        <label><span>Вид *</span><select data-custom-patron="type"><option value="">Выберите…</option>${types.map((type) => `<option value="${type}" ${custom.type === type ? 'selected' : ''}>${type}</option>`).join('')}</select></label>
+        <label><span>Мировоззрение *</span><select data-custom-patron="alignment"><option value="">Выберите…</option>${alignments.map((alignment) => `<option value="${alignment}" ${custom.alignment === alignment ? 'selected' : ''}>${alignment}</option>`).join('')}</select></label>
+        <label><span>Обитель или план *</span><input data-custom-patron="realm" value="${escapeHtml(custom.realm)}" placeholder="Дальний предел, Девять Преисподних…"></label>
+        <label><span>Источник</span><input data-custom-patron="source" value="${escapeHtml(custom.source)}" placeholder="Собственный мир или книга"></label>
+        <label class="custom-deity-wide"><span>Краткое описание *</span><textarea data-custom-patron="description" rows="3" placeholder="Кто эта сущность и чем она могущественна?">${escapeHtml(custom.description)}</textarea></label>
+        <label class="custom-deity-wide"><span>Цена и условия договора *</span><textarea data-custom-patron="pactTerms" rows="3" placeholder="Что колдун отдал или обещал?">${escapeHtml(custom.pactTerms)}</textarea></label>
+        <label class="custom-deity-wide"><span>Способ общения *</span><textarea data-custom-patron="manifestation" rows="2" placeholder="Сны, знакомый, голос в клинке, письмена в огне…">${escapeHtml(custom.manifestation)}</textarea></label>
+        <label class="custom-deity-wide"><span>Цели покровителя *</span><textarea data-custom-patron="goals" rows="3" placeholder="Чего он хочет от колдуна сейчас и в будущем?">${escapeHtml(custom.goals)}</textarea></label>
+      </div>
+    </section>`;
+  }
+
+  function renderCustomDeityForm() {
+    const custom = getCustomDeity();
+    const alignmentOptions = [
+      ['ЗД', 'Законно-доброе'],
+      ['НД', 'Нейтрально-доброе'],
+      ['ХД', 'Хаотично-доброе'],
+      ['ЗН', 'Законно-нейтральное'],
+      ['Н', 'Нейтральное'],
+      ['ХН', 'Хаотично-нейтральное'],
+      ['ЗЗ', 'Законно-злое'],
+      ['НЗ', 'Нейтрально-злое'],
+      ['ХЗ', 'Хаотично-злое']
+    ];
+
+    return `<section class="custom-deity-panel" aria-labelledby="custom-deity-title">
+      <div class="custom-deity-heading">
+        <div>
+          <span>Собственный вариант</span>
+          <h4 id="custom-deity-title">Опишите божество или пантеон</h4>
+        </div>
+        <small>* обязательные поля</small>
+      </div>
+      <div class="custom-deity-grid">
+        <label>
+          <span>Имя *</span>
+          <input data-custom-deity="name" value="${escapeHtml(custom.name)}" placeholder="Например, Хранитель Пепла">
+        </label>
+        <label>
+          <span>Титул или прозвище</span>
+          <input data-custom-deity="title" value="${escapeHtml(custom.title)}" placeholder="Владыка угасших костров">
+        </label>
+        <label>
+          <span>Мировоззрение *</span>
+          <select data-custom-deity="alignment">
+            <option value="">Выберите…</option>
+            ${alignmentOptions.map(([value, label]) => `<option value="${value}" ${custom.alignment === value ? 'selected' : ''}>${label} (${value})</option>`).join('')}
+          </select>
+        </label>
+        <label>
+          <span>Домены *</span>
+          <input data-custom-deity="domains" value="${escapeHtml(custom.domains)}" placeholder="Свет, Жизнь">
+        </label>
+        <label>
+          <span>Сфера влияния *</span>
+          <input data-custom-deity="portfolio" value="${escapeHtml(custom.portfolio)}" placeholder="Огонь, память и возрождение">
+        </label>
+        <label>
+          <span>Пантеон или мир</span>
+          <input data-custom-deity="pantheon" value="${escapeHtml(custom.pantheon)}" placeholder="Собственный сеттинг">
+        </label>
+        <label class="custom-deity-wide">
+          <span>Священный символ *</span>
+          <input data-custom-deity="symbol" value="${escapeHtml(custom.symbol)}" placeholder="Серебряная чаша с негаснущим углём">
+        </label>
+        <label class="custom-deity-wide">
+          <span>Краткое описание *</span>
+          <textarea data-custom-deity="description" rows="3" placeholder="Кто это божество и чему оно покровительствует?">${escapeHtml(custom.description)}</textarea>
+        </label>
+        <label class="custom-deity-wide">
+          <span>Заповеди и требования</span>
+          <textarea data-custom-deity="tenets" rows="3" placeholder="Каких принципов придерживаются последователи?">${escapeHtml(custom.tenets)}</textarea>
+        </label>
+      </div>
+    </section>`;
+  }
 
   function renderClassFeatures(message = '') {
     const masteryGroup = getClassFeatureGroups().find((group) => group.id === 'weapon-mastery');
@@ -2237,18 +2506,20 @@ const creatorOptions = {
 
     list.innerHTML = groups.map((group) => {
       const key = `classFeature:${group.id}`;
+      if (
+        (group.id === 'paladin-oath' || group.id === 'warlock-patron-path')
+        && !(state.choices[key] || []).length
+        && (state.choices['class:subclass'] || []).length
+      ) {
+        state.choices[key] = state.choices['class:subclass'].slice(0, 1);
+      }
       const selected = Array.isArray(state.choices[key]) ? state.choices[key] : [];
       state.choices[key] = selected
         .filter((id) => group.options.some((option) => option.id === id))
         .slice(0, group.count);
 
       const inputType = group.count === 1 ? 'radio' : 'checkbox';
-      const visibleOptions = group.options.filter((option) => {
-          if (group.id === 'faith') {
-            const searchText = `${option.name || ''} ${option.detail || ''}`
-              .toLocaleLowerCase('ru');
-            return !faithSearch || searchText.includes(faithSearch);
-          }
+      let visibleOptions = group.options.filter((option) => {
           if (group.id !== 'weapon-mastery') return true;
 
             const searchText = `${option.name || ''} ${option.detail || ''}`
@@ -2259,6 +2530,76 @@ const creatorOptions = {
               && (weaponMasteryRange === 'all' || option.rangeType === weaponMasteryRange)
             );
           });
+
+      if (group.id === 'faith') {
+        const recommendedIds = recommendedDeityIds();
+        const specialOptions = group.options.filter((option) => option.kind !== 'deity');
+        const deityOptions = group.options
+          .filter((option) => option.kind === 'deity')
+          .filter((option) => {
+            const searchText = [
+              option.name,
+              option.portfolio,
+              option.description,
+              ...(option.domains || [])
+            ].filter(Boolean).join(' ').toLocaleLowerCase('ru');
+
+            return (
+              (!faithSearch || searchText.includes(faithSearch))
+              && (faithAlignment === 'all' || option.alignment === faithAlignment)
+              && (faithDomain === 'all' || option.domains?.includes(faithDomain))
+            );
+          })
+          .sort((left, right) => {
+            const recommendationOrder =
+              Number(recommendedIds.has(right.id)) - Number(recommendedIds.has(left.id));
+            if (recommendationOrder) return recommendationOrder;
+            if (faithSort === 'alignment') {
+              return String(left.alignment).localeCompare(String(right.alignment), 'ru')
+                || left.name.localeCompare(right.name, 'ru');
+            }
+            if (faithSort === 'domain') {
+              return String(left.domains?.[0] || '').localeCompare(String(right.domains?.[0] || ''), 'ru')
+                || left.name.localeCompare(right.name, 'ru');
+            }
+            return left.name.localeCompare(right.name, 'ru');
+          });
+
+        visibleOptions = [...specialOptions, ...deityOptions];
+      }
+
+      if (group.id === 'warlock-patron') {
+        const selectedPath = selectedWarlockPatronPath();
+        visibleOptions = group.options
+          .filter((option) => {
+            if (option.id === 'patron-custom') return true;
+            const searchText = [
+              option.name, option.type, option.realm, option.description,
+              option.pactIdeas, option.source
+            ].filter(Boolean).join(' ').toLocaleLowerCase('ru');
+            return (
+              (!patronSearch || searchText.includes(patronSearch))
+              && (patronType === 'all' || option.type === patronType)
+              && (patronAlignment === 'all' || option.alignment === patronAlignment)
+            );
+          })
+          .sort((left, right) => {
+            if (left.id === 'patron-custom') return -1;
+            if (right.id === 'patron-custom') return 1;
+            const suitableOrder =
+              Number(right.subclassIds?.includes(selectedPath)) - Number(left.subclassIds?.includes(selectedPath));
+            if (suitableOrder) return suitableOrder;
+            if (patronSort === 'type') {
+              return String(left.type).localeCompare(String(right.type), 'ru')
+                || left.name.localeCompare(right.name, 'ru');
+            }
+            if (patronSort === 'alignment') {
+              return String(left.alignment).localeCompare(String(right.alignment), 'ru')
+                || left.name.localeCompare(right.name, 'ru');
+            }
+            return left.name.localeCompare(right.name, 'ru');
+          });
+      }
 
       return `<section class="class-feature-group">
         <div class="class-feature-summary">
@@ -2296,14 +2637,73 @@ const creatorOptions = {
             </div>
           ` : ''}
           ${group.id === 'faith' ? `
-            <div class="weapon-mastery-toolbar">
+            ${state.class === 'paladin' ? (
+              selectedPaladinOath()
+                ? `<div class="faith-oath-recommendation">
+                    <strong>Рекомендации для выбранной клятвы</strong>
+                    <span>${group.options
+                      .filter((option) => recommendedDeityIds().has(option.id))
+                      .map((option) => option.name)
+                      .join(' · ') || 'Для этой клятвы нет прямых рекомендаций — выберите покровителя по истории персонажа.'}</span>
+                    <small>Это подсказка, а не ограничение: можно выбрать любое божество или служить только клятве.</small>
+                  </div>`
+                : `<div class="faith-oath-recommendation is-pending">
+                    <strong>Сначала выберите священную клятву</strong>
+                    <small>После выбора подходящие божества будут отмечены и подняты в начало списка.</small>
+                  </div>`
+            ) : ''}
+            <div class="faith-toolbar">
               <label>
-                <span>Поиск божества или пути</span>
-                <input id="faith-search" type="search" placeholder="Имя, сфера или домен…" value="${escapeHtml(faithSearch)}">
+                <span>Поиск</span>
+                <input id="faith-search" type="search" placeholder="Имя, сфера или описание…" value="${escapeHtml(faithSearch)}">
+              </label>
+              <label>
+                <span>Мировоззрение</span>
+                <select id="faith-alignment">
+                  <option value="all">Все</option>
+                  ${[...new Set(group.options.filter((option) => option.kind === 'deity').map((option) => option.alignment))]
+                    .sort((left, right) => left.localeCompare(right, 'ru'))
+                    .map((alignment) => `<option value="${escapeHtml(alignment)}" ${faithAlignment === alignment ? 'selected' : ''}>${escapeHtml(alignment)}</option>`)
+                    .join('')}
+                </select>
+              </label>
+              <label>
+                <span>Домен</span>
+                <select id="faith-domain">
+                  <option value="all">Все</option>
+                  ${[...new Set(group.options.filter((option) => option.kind === 'deity').flatMap((option) => option.domains || []))]
+                    .sort((left, right) => left.localeCompare(right, 'ru'))
+                    .map((domain) => `<option value="${escapeHtml(domain)}" ${faithDomain === domain ? 'selected' : ''}>${escapeHtml(domain)}</option>`)
+                    .join('')}
+                </select>
+              </label>
+              <label>
+                <span>Сортировка</span>
+                <select id="faith-sort">
+                  <option value="name" ${faithSort === 'name' ? 'selected' : ''}>По имени</option>
+                  <option value="alignment" ${faithSort === 'alignment' ? 'selected' : ''}>По мировоззрению</option>
+                  <option value="domain" ${faithSort === 'domain' ? 'selected' : ''}>По домену</option>
+                </select>
               </label>
             </div>
           ` : ''}
-          <table class="class-feature-table">
+          ${group.id === 'warlock-patron' ? `
+            <div class="faith-oath-recommendation ${selectedWarlockPatronPath() ? '' : 'is-pending'}">
+              <strong>${selectedWarlockPatronPath() ? 'Подходящие покровители подняты вверх' : 'Сначала выберите вид покровителя'}</strong>
+              <small>${selectedWarlockPatronPath()
+                ? 'Совместимость — сюжетная подсказка, а не запрет. С разрешения Мастера можно выбрать любую сущность.'
+                : 'После выбора подкласса подходящие сущности будут отмечены и отсортированы первыми.'}</small>
+              <small>Источники: <a href="${escapeHtml(group.href)}" target="_blank" rel="noopener">официальное описание колдуна ↗</a> · <a href="${escapeHtml(group.secondaryHref)}" target="_blank" rel="noopener">D&D.su ↗</a></small>
+            </div>
+            <div class="faith-toolbar">
+              <label><span>Поиск</span><input id="patron-search" type="search" placeholder="Имя, вид, обитель или описание…" value="${escapeHtml(patronSearch)}"></label>
+              <label><span>Вид</span><select id="patron-type"><option value="all">Все</option>${[...new Set(group.options.map((option) => option.type))].sort((a, b) => a.localeCompare(b, 'ru')).map((type) => `<option value="${escapeHtml(type)}" ${patronType === type ? 'selected' : ''}>${escapeHtml(type)}</option>`).join('')}</select></label>
+              <label><span>Мировоззрение</span><select id="patron-alignment"><option value="all">Все</option>${[...new Set(group.options.map((option) => option.alignment))].sort((a, b) => a.localeCompare(b, 'ru')).map((alignment) => `<option value="${escapeHtml(alignment)}" ${patronAlignment === alignment ? 'selected' : ''}>${escapeHtml(alignment)}</option>`).join('')}</select></label>
+              <label><span>Сортировка</span><select id="patron-sort"><option value="name" ${patronSort === 'name' ? 'selected' : ''}>По имени</option><option value="type" ${patronSort === 'type' ? 'selected' : ''}>По виду</option><option value="alignment" ${patronSort === 'alignment' ? 'selected' : ''}>По мировоззрению</option></select></label>
+            </div>
+          ` : ''}
+          ${group.id === 'faith' || group.id === 'warlock-patron' ? '<div class="faith-table-scroll">' : group.id === 'paladin-oath' || group.id === 'warlock-patron-path' ? '<div class="oath-table-scroll">' : ''}
+          <table class="class-feature-table ${group.id === 'faith' || group.id === 'warlock-patron' ? 'faith-table' : group.id === 'paladin-oath' || group.id === 'warlock-patron-path' ? 'oath-table' : ''}">
             <thead>
               <tr>
                 <th>${escapeHtml(group.name)}</th>
@@ -2321,7 +2721,53 @@ const creatorOptions = {
                     ? `<small><a class="class-feature-detail-link" href="/faq" target="_blank" rel="noopener">${escapeHtml(option.detail)} ↗</a></small>`
                     : `<small>${escapeHtml(option.detail)}</small>`
                   : '';
-                const label = `${optionTitle}${detailLabel}`;
+                const label = group.id === 'paladin-oath' || group.id === 'warlock-patron-path'
+                  ? `<details class="oath-disclosure">
+                      <summary>
+                        <span>${escapeHtml(option.name)}</span>
+                        <small>${escapeHtml(option.detail || '')}</small>
+                      </summary>
+                      <p>${escapeHtml(option.description || '')}</p>
+                    </details>`
+                  : group.id === 'faith' && option.kind === 'deity'
+                    ? `<details class="faith-disclosure">
+                      <summary>
+                        <span>${escapeHtml(option.name)}</span>
+                        <span class="faith-badges">
+                          ${recommendedDeityIds().has(option.id) ? '<em class="faith-recommended">Подходит к клятве</em>' : ''}
+                          <em>${escapeHtml(option.alignment)}</em>
+                          ${(option.domains || []).map((domain) => `<em>${escapeHtml(domain)}</em>`).join('')}
+                        </span>
+                      </summary>
+                      <div class="faith-description">
+                        <p>${escapeHtml(option.description)}</p>
+                        <dl>
+                          <div><dt>Сфера</dt><dd>${escapeHtml(option.portfolio)}</dd></div>
+                          <div><dt>Домены</dt><dd>${escapeHtml((option.domains || []).join(', '))}</dd></div>
+                        </dl>
+                      </div>
+                    </details>`
+                    : group.id === 'warlock-patron' && option.kind === 'patron'
+                      ? `<details class="faith-disclosure">
+                        <summary>
+                          <span>${escapeHtml(option.name)}</span>
+                          <span class="faith-badges">
+                            ${option.subclassIds?.includes(selectedWarlockPatronPath()) ? '<em class="faith-recommended">Подходит к виду</em>' : ''}
+                            <em>${escapeHtml(option.type)}</em>
+                            <em>${escapeHtml(option.alignment)}</em>
+                          </span>
+                        </summary>
+                        <div class="faith-description">
+                          <p>${escapeHtml(option.description)}</p>
+                          <dl>
+                            <div><dt>Обитель</dt><dd>${escapeHtml(option.realm)}</dd></div>
+                            <div><dt>Источник</dt><dd>${escapeHtml(option.source)}</dd></div>
+                          </dl>
+                          <p><strong>Идеи договора:</strong> ${escapeHtml(option.pactIdeas)}</p>
+                          ${option.href ? `<p><a href="${escapeHtml(option.href)}" target="_blank" rel="noopener">Открыть карточку на D&D.su ↗</a></p>` : ''}
+                        </div>
+                      </details>`
+                    : `${optionTitle}${detailLabel}`;
 
                 return `<tr>
                   <td class="class-feature-name">${label}</td>
@@ -2340,6 +2786,9 @@ const creatorOptions = {
               }).join('') || '<tr><td colspan="2" class="class-feature-empty-filter">Ничего не найдено.</td></tr>'}
             </tbody>
           </table>
+          ${group.id === 'faith' || group.id === 'paladin-oath' || group.id === 'warlock-patron' || group.id === 'warlock-patron-path' ? '</div>' : ''}
+          ${group.id === 'faith' && state.choices[key].includes('faith-other-deity') ? renderCustomDeityForm() : ''}
+          ${group.id === 'warlock-patron' && state.choices[key].includes('patron-custom') ? renderCustomPatronForm() : ''}
         </div>
       </section>`;
     }).join('');
@@ -2373,6 +2822,58 @@ const creatorOptions = {
         search.setSelectionRange(search.value.length, search.value.length);
       }
     });
+    $('#faith-alignment')?.addEventListener('change', (event) => {
+      faithAlignment = event.target.value;
+      renderClassFeatures();
+    });
+    $('#faith-domain')?.addEventListener('change', (event) => {
+      faithDomain = event.target.value;
+      renderClassFeatures();
+    });
+    $('#faith-sort')?.addEventListener('change', (event) => {
+      faithSort = event.target.value;
+      renderClassFeatures();
+    });
+    $('#patron-search')?.addEventListener('input', (event) => {
+      patronSearch = event.target.value.trim().toLocaleLowerCase('ru');
+      renderClassFeatures();
+      const search = $('#patron-search');
+      if (search) {
+        search.focus();
+        search.setSelectionRange(search.value.length, search.value.length);
+      }
+    });
+    $('#patron-type')?.addEventListener('change', (event) => {
+      patronType = event.target.value;
+      renderClassFeatures();
+    });
+    $('#patron-alignment')?.addEventListener('change', (event) => {
+      patronAlignment = event.target.value;
+      renderClassFeatures();
+    });
+    $('#patron-sort')?.addEventListener('change', (event) => {
+      patronSort = event.target.value;
+      renderClassFeatures();
+    });
+
+    $$('[data-custom-deity]').forEach((field) => {
+      field.addEventListener('input', () => {
+        const key = field.dataset.customDeity;
+        if (!key) return;
+        getCustomDeity()[key] = field.value;
+        saveState();
+        updateNavigationChrome();
+      });
+    });
+    $$('[data-custom-patron]').forEach((field) => {
+      field.addEventListener('input', () => {
+        const key = field.dataset.customPatron;
+        if (!key) return;
+        getCustomPatron()[key] = field.value;
+        saveState();
+        updateNavigationChrome();
+      });
+    });
 
     $$('[data-class-feature]').forEach((input) => input.addEventListener('change', () => {
       const group = groups.find((item) => item.id === input.dataset.classFeature);
@@ -2393,6 +2894,11 @@ const creatorOptions = {
         state.choices[key] = input.checked
           ? [...selected, input.value]
           : selected.filter((value) => value !== input.value);
+      }
+
+      if (group.id === 'paladin-oath' || group.id === 'warlock-patron-path') {
+        state.choices['class:subclass'] = [...state.choices[key]];
+        state.subclass = state.choices[key][0] || null;
       }
 
       saveState();
@@ -2775,66 +3281,54 @@ const creatorOptions = {
 
     if (isCustomBackground()) {
       const custom = getCustomBackground();
-      const optionTags = (options, selected, labeler = (value) => value) => options.map((value) =>
-        `<option value="${escapeHtml(value)}" ${selected.includes(value) ? 'selected' : ''}>${escapeHtml(labeler(value))}</option>`
-      ).join('');
       container.innerHTML = `
         <article class="background-profile custom-background-profile">
           <header class="background-hero">
             <div>
               <span class="source-label">Пользовательская предыстория</span>
               <div class="background-title-row"><h2>${escapeHtml(custom.name || 'Своя предыстория')}</h2><button class="button button-secondary button-small" type="button" id="change-background">Изменить</button></div>
-              <p>Заполните все поля. Эти сведения попадут в лист персонажа и экспорт.</p>
+              <p>Здесь записывается история героя. Игровые выборы выполняются на следующих общих этапах конструктора.</p>
             </div>
             <span class="background-rune">✎</span>
           </header>
           <section class="content-section custom-background-form">
             <div class="content-section-heading"><span class="section-icon">✦</span><div><span class="section-kicker">Уникальное прошлое</span><h3>Настройка предыстории</h3></div></div>
+            <div class="custom-background-next-steps">
+              <strong>Дальше вы выберете:</strong>
+              <span>2 навыка</span>
+              <span>1 инструмент</span>
+              <span>2 языка</span>
+              <span>1 черту происхождения</span>
+            </div>
             <div class="custom-background-grid">
-              <label><span>Название</span><input data-custom-background-field="name" value="${escapeHtml(custom.name || '')}" placeholder="Например, Хранитель руин"></label>
-              <label class="custom-background-wide"><span>Описание</span><textarea data-custom-background-field="description" rows="4" placeholder="Кем герой был до начала приключений?">${escapeHtml(custom.description || '')}</textarea></label>
-              <label><span>Навыки (выберите 2)</span><select multiple size="7" data-custom-background-field="skills" data-custom-limit="2">${optionTags(creatorOptions.allSkills, custom.skills, skillDisplayName)}</select><small>${custom.skills.length}/2</small></label>
-              <label><span>Инструмент (выберите 1)</span><select data-custom-background-field="tools"><option value="">— Выберите —</option>${optionTags(creatorOptions.allTools, custom.tools)}</select></label>
-              <label><span>Языки (до 2)</span><select multiple size="7" data-custom-background-field="languages" data-custom-limit="2">${optionTags([...creatorOptions.standardLanguages, ...creatorOptions.rareLanguages], custom.languages)}</select><small>${custom.languages.length}/2</small></label>
-              <label><span>Черта происхождения</span><select data-custom-background-field="featId"><option value="">— Выберите —</option>${featOptions.map((feat) => `<option value="${escapeHtml(feat.id)}" ${custom.featId === feat.id ? 'selected' : ''}>${escapeHtml(feat.name)}</option>`).join('')}</select></label>
-              <label><span>Название особенности</span><input data-custom-background-field="feature" value="${escapeHtml(custom.feature || '')}" placeholder="Например, Знаток руин"></label>
-              <label class="custom-background-wide"><span>Описание особенности</span><textarea data-custom-background-field="featureDescription" rows="3">${escapeHtml(custom.featureDescription || '')}</textarea></label>
-              <label><span>Черта характера 1</span><textarea data-custom-background-field="trait1" rows="2">${escapeHtml(custom.trait1 || '')}</textarea></label>
-              <label><span>Черта характера 2</span><textarea data-custom-background-field="trait2" rows="2">${escapeHtml(custom.trait2 || '')}</textarea></label>
-              <label><span>Идеал</span><textarea data-custom-background-field="ideal" rows="2">${escapeHtml(custom.ideal || '')}</textarea></label>
-              <label><span>Привязанность</span><textarea data-custom-background-field="bond" rows="2">${escapeHtml(custom.bond || '')}</textarea></label>
-              <label class="custom-background-wide"><span>Слабость</span><textarea data-custom-background-field="flaw" rows="2">${escapeHtml(custom.flaw || '')}</textarea></label>
+              <label><span>Название *</span><input data-custom-background-field="name" value="${escapeHtml(custom.name || '')}" placeholder="Например, Хранитель руин"></label>
+              <label class="custom-background-wide"><span>Описание *</span><textarea data-custom-background-field="description" rows="4" placeholder="Кем герой был до начала приключений?">${escapeHtml(custom.description || '')}</textarea></label>
+              <label><span>Название особенности *</span><input data-custom-background-field="feature" value="${escapeHtml(custom.feature || '')}" placeholder="Например, Знаток руин"></label>
+              <label class="custom-background-wide"><span>Описание особенности *</span><textarea data-custom-background-field="featureDescription" rows="3" placeholder="Как прошлое героя помогает ему во время приключений?">${escapeHtml(custom.featureDescription || '')}</textarea></label>
+              <label><span>Черта характера 1 *</span><textarea data-custom-background-field="trait1" rows="2">${escapeHtml(custom.trait1 || '')}</textarea></label>
+              <label><span>Черта характера 2 *</span><textarea data-custom-background-field="trait2" rows="2">${escapeHtml(custom.trait2 || '')}</textarea></label>
+              <label><span>Идеал *</span><textarea data-custom-background-field="ideal" rows="2">${escapeHtml(custom.ideal || '')}</textarea></label>
+              <label><span>Привязанность *</span><textarea data-custom-background-field="bond" rows="2">${escapeHtml(custom.bond || '')}</textarea></label>
+              <label class="custom-background-wide"><span>Слабость *</span><textarea data-custom-background-field="flaw" rows="2">${escapeHtml(custom.flaw || '')}</textarea></label>
             </div>
           </section>
         </article>`;
 
       $$('[data-custom-background-field]').forEach((field) => {
-        field.addEventListener('change', () => {
+        const persistCustomBackgroundField = () => {
           const key = field.dataset.customBackgroundField;
-          if (field.multiple) {
-            const limit = Number(field.dataset.customLimit || 99);
-            const values = Array.from(field.selectedOptions).map((option) => option.value);
-            if (values.length > limit) {
-              alert(`Можно выбрать не больше ${limit}.`);
-              renderBackgroundDetails();
-              return;
-            }
-            custom[key] = values;
-          } else if (key === 'tools') {
-            custom.tools = field.value ? [field.value] : [];
-          } else {
-            custom[key] = field.value;
-          }
-          state.choices['background:skills'] = [...custom.skills];
-          state.choices['background:tools'] = [...custom.tools];
-          state.choices['languages:selected'] = [...custom.languages];
-          state.choices['background:originFeat'] = custom.featId ? [custom.featId] : [];
+          custom[key] = field.value;
           state.choices['background:traits'] = [custom.trait1, custom.trait2].filter(Boolean);
           state.choices['background:ideal'] = custom.ideal ? [custom.ideal] : [];
           state.choices['background:bond'] = custom.bond ? [custom.bond] : [];
           state.choices['background:flaw'] = custom.flaw ? [custom.flaw] : [];
           saveState();
           updatePreview();
+          updateNavigationChrome();
+        };
+        field.addEventListener('input', persistCustomBackgroundField);
+        field.addEventListener('change', () => {
+          persistCustomBackgroundField();
           renderBackgroundDetails();
         });
       });
@@ -3523,12 +4017,12 @@ const creatorOptions = {
 
     const classAllowed = Array.isArray(explicitClassOptions) ? [...explicitClassOptions] : classMatches;
     const backgroundAllowed = isCustomBackground()
-      ? [...getCustomBackground().skills]
+      ? [...creatorOptions.allSkills]
       : skillsMentioned(backgroundDescription);
 
     return {
       class: { key: 'class:skills', count: classCount, allowed: classAllowed, fixed: [] },
-      background: { key: 'background:skills', count: isCustomBackground() ? backgroundAllowed.length : backgroundCount, allowed: backgroundAllowed.length ? backgroundAllowed : (backgroundCount ? creatorOptions.allSkills : []), fixed: isCustomBackground() ? [...backgroundAllowed] : [] },
+      background: { key: 'background:skills', count: isCustomBackground() ? 2 : backgroundCount, allowed: backgroundAllowed.length ? backgroundAllowed : (backgroundCount ? creatorOptions.allSkills : []), fixed: [] },
       species: { key: 'species:skill', count: speciesCount, allowed: speciesAllowed, fixed: speciesFixed },
       feat: getFeatSkillConfiguration()
     };
@@ -3834,11 +4328,9 @@ const creatorOptions = {
       const parsed = parseLanguageSource(sourceTextForLanguages(source));
       const characterClass = findClass();
       if (source === 'background' && isCustomBackground()) {
-        parsed.fixed = [...getCustomBackground().languages];
+        parsed.fixed = [];
         parsed.bonusChoices = 0;
-        parsed.unlockedRare = getCustomBackground().languages.filter((language) =>
-          creatorOptions.rareLanguages.includes(language)
-        );
+        parsed.unlockedRare = [...creatorOptions.rareLanguages];
       }
       if (source === 'class' && /^(rogue|плут)$/i.test(String(characterClass?.id || characterClass?.name || ''))) {
         if (!parsed.fixed.includes('Воровской жаргон')) parsed.fixed.push('Воровской жаргон');
@@ -3905,9 +4397,9 @@ const creatorOptions = {
       // одно владение любым инструментом независимо от старого текста данных.
       if (source === 'background') {
         if (isCustomBackground()) {
-          count = getCustomBackground().tools.length;
-          allowed = [...getCustomBackground().tools];
-          fixed = [...getCustomBackground().tools];
+          count = 1;
+          allowed = [...creatorOptions.allTools];
+          fixed = [];
         } else {
           count = findBackground() ? 1 : 0;
           allowed = [...creatorOptions.allTools];
@@ -5103,11 +5595,7 @@ const creatorOptions = {
     if (isCustomBackground()) {
       const custom = getCustomBackground();
       return ['name', 'description', 'feature', 'featureDescription', 'trait1', 'trait2', 'ideal', 'bond', 'flaw']
-        .every((key) => String(custom[key] || '').trim())
-        && custom.skills.length === 2
-        && custom.tools.length === 1
-        && custom.languages.length > 0
-        && Boolean(custom.featId);
+        .every((key) => String(custom[key] || '').trim());
     }
     const background = findBackground();
     return (!background?.variants?.table?.length || (state.choices['background:variant'] || []).length === 1)
@@ -5436,8 +5924,19 @@ const creatorOptions = {
     card.addEventListener('click', () => {
       state.class = card.dataset.classId;
       faithSearch = '';
+      faithAlignment = 'all';
+      faithDomain = 'all';
+      faithSort = 'name';
+      patronSearch = '';
+      patronType = 'all';
+      patronAlignment = 'all';
+      patronSort = 'name';
+      state.customDeity = structuredClone(defaultState.customDeity || {});
+      state.customPatron = structuredClone(defaultState.customPatron || {});
       state.choices['class:skills'] = [];
       state.choices['class:expertise'] = [];
+      delete state.choices['class:subclass'];
+      state.subclass = null;
       Object.keys(state.choices).filter((key) => key.startsWith('classFeature:')).forEach((key) => delete state.choices[key]);
       state.spells = { cantrips: [], level1: [], sources: {} };
       state.equipment.initializedFor = '';
@@ -5566,7 +6065,13 @@ const creatorOptions = {
     }
 
     if (steps[state.step] === 'class-features' && !classFeaturesComplete()) {
-      alert('Завершите обязательные выборы умений класса.');
+      const customDeitySelected = (state.choices['classFeature:faith'] || []).includes('faith-other-deity');
+      const customPatronSelected = (state.choices['classFeature:warlock-patron'] || []).includes('patron-custom');
+      alert(customDeitySelected
+        ? 'Заполните обязательные поля собственного божества: имя, мировоззрение, домены, сферу влияния, священный символ и краткое описание.'
+        : customPatronSelected
+          ? 'Заполните обязательные поля собственного покровителя: имя, вид, мировоззрение, обитель, описание, условия договора, способ общения и цели.'
+          : 'Завершите обязательные выборы умений класса.');
       return;
     }
 
@@ -5578,13 +6083,9 @@ const creatorOptions = {
     if (steps[state.step] === 'background' && isCustomBackground()) {
       const custom = getCustomBackground();
       const requiredText = ['name', 'description', 'feature', 'featureDescription', 'trait1', 'trait2', 'ideal', 'bond', 'flaw'];
-      const complete = requiredText.every((key) => String(custom[key] || '').trim())
-        && custom.skills.length === 2
-        && custom.tools.length === 1
-        && custom.languages.length > 0
-        && Boolean(custom.featId);
+      const complete = requiredText.every((key) => String(custom[key] || '').trim());
       if (!complete) {
-        alert('Заполните все поля своей предыстории: выберите 2 навыка, 1 инструмент, хотя бы 1 язык и черту происхождения.');
+        alert('Заполните письменные поля своей предыстории: название, описание, особенность и личностные характеристики.');
         return;
       }
     }
@@ -6756,6 +7257,9 @@ const creatorOptions = {
 
   .background-choices-section { padding: 1rem; }
   .custom-background-form { padding: 1.15rem; }
+  .custom-background-next-steps { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem; margin-bottom: 1rem; padding: .8rem .9rem; border: 1px solid color-mix(in srgb, var(--wizard-gold) 35%, var(--card-border)); border-radius: .65rem; background: color-mix(in srgb, var(--wizard-gold) 7%, var(--background)); }
+  .custom-background-next-steps strong { width: 100%; color: var(--wizard-gold-light); }
+  .custom-background-next-steps span { padding: .22rem .48rem; border: 1px solid var(--card-border); border-radius: 999px; background: color-mix(in srgb, var(--card-bg) 72%, var(--background)); font-size: .72rem; font-weight: 750; }
   .custom-background-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .9rem; }
   .custom-background-grid label { display: grid; align-content: start; gap: .42rem; }
   .custom-background-grid label > span { color: var(--wizard-gold); font-size: .7rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }

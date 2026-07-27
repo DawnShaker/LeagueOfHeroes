@@ -19,6 +19,18 @@
             saved.choices && typeof saved.choices === 'object'
               ? saved.choices
               : {},
+          customDeity: {
+            ...structuredClone(defaultState.customDeity || {}),
+            ...(saved.customDeity && typeof saved.customDeity === 'object'
+              ? saved.customDeity
+              : {})
+          },
+          customPatron: {
+            ...structuredClone(defaultState.customPatron || {}),
+            ...(saved.customPatron && typeof saved.customPatron === 'object'
+              ? saved.customPatron
+              : {})
+          },
           spells: {
             cantrips: Array.isArray(saved.spells?.cantrips)
               ? saved.spells.cantrips

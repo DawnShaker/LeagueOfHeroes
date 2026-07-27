@@ -79,8 +79,9 @@ export function buildClassFeatureOptions(fightingStyleOptions: any[]) {
     ...DEITY_OPTIONS,
     {
       id: 'faith-other-deity',
+      kind: 'custom-deity',
       name: 'Другое божество или пантеон',
-      detail: 'Выберите божество из другого сеттинга или согласуйте собственного покровителя с ведущим.'
+      detail: 'Создайте собственного покровителя или опишите божество из другого сеттинга.'
     }
   ];
   const faithGroup = (description: string, extraOptions: any[] = []) => ({
@@ -110,8 +111,8 @@ export function buildClassFeatureOptions(fightingStyleOptions: any[]) {
     [{ id: 'faith-nature-itself', name: 'Сама природа и её духи', detail: 'Духовный путь без служения одному божеству.' }]
   )],
   paladin: [faithGroup(
-    'Паладин может служить божеству, но источником его пути также может быть священная клятва или идеал.',
-    [{ id: 'faith-sacred-oath', name: 'Священная клятва или идеал', detail: 'Путь паладина без служения одному божеству.' }]
+    'Божество не является источником силы паладина: силу даёт его клятва. Здесь можно выбрать связанного с клятвой покровителя или оставить путь светским.',
+    [{ id: 'faith-sacred-oath', name: 'Только клятва — без божества', detail: 'Паладин следует идеалам выбранной клятвы и не служит одному божеству.' }]
   )],
   monk: [faithGroup(
     'Монастырь может быть связан с божеством либо с самостоятельной философской традицией.',
@@ -125,10 +126,16 @@ export function buildClassFeatureOptions(fightingStyleOptions: any[]) {
       { id: 'armor-of-shadows', name: 'Доспехи теней', detail: 'Доспех мага без траты ячейки', effects: [{ type: 'fixedSpell', spell: 'Доспех мага' }], href: '/classes/warlock#feature-таинственные-воззвания-1' },
       { id: 'eldritch-mind', name: 'Мистический разум', detail: 'Преимущество на спасброски Телосложения для концентрации', effects: [{ type: 'trait' }], href: '/classes/warlock#feature-таинственные-воззвания-1' }
     ]
-  }, faithGroup(
-    'Покровитель колдуна не обязан быть богом: договор часто заключается с иной могущественной сущностью.',
-    [{ id: 'faith-otherworldly-patron', name: 'Потусторонний покровитель (не божество)', detail: 'Архифея, исчадие, небожитель, Великий Древний или иная могущественная сущность.' }]
-  )]
+  }, {
+    id: 'warlock-patron',
+    name: 'Конкретный покровитель',
+    count: 1,
+    description: 'Выберите сущность, с которой заключён договор. Вид покровителя подсказывает подходящий подкласс, но его мировоззрение не ограничивает мировоззрение героя.',
+    href: WARLOCK_PATRON_SOURCE_URL,
+    secondaryHref: WARLOCK_PATRON_DNDSU_URL,
+    options: WARLOCK_PATRONS
+  }]
   } as Record<string, any[]>;
 }
 import { DEITY_OPTIONS, FAITH_SOURCE_URL } from './deities.ts';
+import { WARLOCK_PATRONS, WARLOCK_PATRON_SOURCE_URL, WARLOCK_PATRON_DNDSU_URL } from './patrons.ts';

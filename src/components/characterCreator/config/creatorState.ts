@@ -23,6 +23,29 @@ export const DEFAULT_CHARACTER_STATE = {
   class: null,
   background: null,
   choices: {},
+  customDeity: {
+    name: '',
+    title: '',
+    alignment: '',
+    domains: '',
+    portfolio: '',
+    pantheon: '',
+    symbol: '',
+    description: '',
+    tenets: ''
+  },
+  customPatron: {
+    name: '',
+    title: '',
+    type: '',
+    alignment: '',
+    realm: '',
+    source: '',
+    description: '',
+    pactTerms: '',
+    manifestation: '',
+    goals: ''
+  },
   spells: { cantrips: [], level1: [], sources: {} },
   equipment: {
     initializedFor: '',

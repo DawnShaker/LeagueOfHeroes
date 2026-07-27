@@ -1,15 +1,16 @@
 ---
-import { species } from '../../data/species';
+import { speciesData } from '../../data/species/index';
 import SpeciesCard from './SpeciesCard.astro';
 ---
 
 <div class="species-grid">
-  {species.map(s => (
+  {speciesData.map(s => (
     <SpeciesCard
       id={s.id}
       name={s.name}
-      description={s.description}
-      imageUrl={s.imageUrl}
+      nameEn={s.nameEn}
+      portrait={s.portrait}
+      sourceBook={s.sourceBook}
     />
   ))}
 </div>

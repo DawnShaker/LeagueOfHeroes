@@ -129,7 +129,7 @@ const variants = parseVariants(description);
 const basicDescription = formatBasicDescription(description);
 const { table } = isTableFormat(description) ? splitTableDescription(description) : { table: '' };
 
-const isTableData = typeof description === 'object' && description.headers && description.rows;
+const isTableData = false;
 ---
 
 <div class="species-ability">

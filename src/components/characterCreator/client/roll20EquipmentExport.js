@@ -44,7 +44,7 @@
   function normalizeDice(value) {
     return String(value || '')
       .toLocaleLowerCase('ru')
-      .replace(/(\d*)д(\d+)/g, (_, count, size) => `${count || 1}d${size}`);
+      .replace(/(\d*)[дк](\d+)/g, (_, count, size) => `${count || 1}d${size}`);
   }
 
   function damageTypeFromDescription(description) {
@@ -210,6 +210,54 @@
     });
   }
 
+  function parseNaturalAttack(feature) {
+    const name = cleanText(feature?.title || feature?.name);
+    const description = cleanText(feature?.description);
+    if (!name || !description) return null;
+    if (!/(?:безоружн|природн\w*\s+(?:рукопашн\w*\s+)?оруж)/i.test(description)) return null;
+
+    const damageMatch = normalizeDice(description).match(/\b(\d+d\d+)\b/i);
+    const damageType = damageTypeFromDescription(description);
+    if (!damageMatch || !damageType) return null;
+
+    let ability = '@{strength_mod}';
+    if (/модификатор\s+телосложен/i.test(description)) ability = '@{constitution_mod}';
+    else if (/модификатор\s+ловкост/i.test(description)) ability = '@{dexterity_mod}';
+
+    return {
+      name,
+      description,
+      damage: damageMatch[1],
+      damageType,
+      ability,
+      range: '5'
+    };
+  }
+
+  function addNaturalAttack(payload, attack) {
+    const attackRowId = createRoll20Id();
+    const { name, description, damage, damageType, ability, range } = attack;
+
+    addRepeatingRow(payload, 'attack', attackRowId, {
+      'options-flag': '0',
+      itemid: '',
+      atkname: name,
+      atk_desc: description,
+      dmgbase: damage,
+      dmgtype: damageType,
+      atkrange: range,
+      atkattr_base: ability,
+      dmgattr: ability,
+      atkmagic: '',
+      atkdmgtype: `${damage} ${damageType}`,
+      atkbonus: '+2',
+      atkcritrange: '20',
+      rollbase_dmg: `@{wtype}&{template:dmg} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[${damage}+@{dmgattr}]]}} {{dmg1type=${damageType}}} @{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg} {{spelllevel=@{spelllevel}}} {{innate=@{spell_innate}}} {{globaldamage=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}`,
+      rollbase_crit: `@{wtype}&{template:dmg} {{crit=1}} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[${damage}+@{dmgattr}]]}} {{dmg1type=${damageType}}} @{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} {{crit1=[[${damage}]]}} {{crit2=[[0]]}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg} {{spelllevel=@{spelllevel}}} {{innate=@{spell_innate}}} {{globaldamage=[[0]]}} {{globaldamagecrit=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}`,
+      rollbase: `@{wtype}&{template:atk} {{mod=@{atkbonus}}} {{rname=[@{atkname}](~repeating_attack_attack_dmg)}} {{rnamec=[@{atkname}](~repeating_attack_attack_crit)}} {{r1=[[@{d20}cs>@{atkcritrange}+@{atkattr_base}+2[PROF]]]}} @{rtype}cs>@{atkcritrange}+@{atkattr_base}+2[PROF]]]}} {{range=@{atkrange}}} {{desc=@{atk_desc}}} {{spelllevel=@{spelllevel}}} {{innate=@{spell_innate}}} {{globalattack=@{global_attack_mod}}} @{charname_output}`
+    });
+  }
+
   function addArmor(payload, item, quantity) {
     const rowId = createRoll20Id();
     const armor = parseArmor(item);
@@ -252,7 +300,14 @@
   }
 
   function enhanceEquipment(payload, context) {
-    const { state, equipmentShopItems, EQUIPMENT_PACK_CONTENTS } = context;
+    const {
+      state,
+      equipmentShopItems,
+      EQUIPMENT_PACK_CONTENTS,
+      findSpecies,
+      findVariant,
+      getEffectiveAbilities
+    } = context;
     if (!payload?.character || !Array.isArray(payload.character.attribs)) return payload;
 
     // Основной экспорт создаёт упрощённые строки. Заменяем только инвентарь
@@ -321,6 +376,17 @@
       if (!item) continue;
       exportItem(item, Math.max(1, Number(entry.quantity || 1)));
     }
+
+    const species = typeof findSpecies === 'function' ? findSpecies() : null;
+    const variant = typeof findVariant === 'function' ? findVariant(species) : null;
+    const speciesFeatures = typeof getEffectiveAbilities === 'function'
+      ? getEffectiveAbilities(species, variant)
+      : [];
+
+    speciesFeatures
+      .map(parseNaturalAttack)
+      .filter(Boolean)
+      .forEach((attack) => addNaturalAttack(payload, attack));
 
     const weightAttribute = payload.character.attribs.find((item) => item.name === 'weighttotal');
     if (weightAttribute) weightAttribute.current = totalWeight;

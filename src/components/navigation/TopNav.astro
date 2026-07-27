@@ -27,16 +27,16 @@ import { rulesLinks, characterLinks, toolsLinks, guideLinks, handbookLinks } fro
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navItems = document.querySelector('.nav-items');
-    const dropdowns = document.querySelectorAll('.dropdown');
-    let activeDropdown = null;
+    const menuToggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+    const navItems = document.querySelector<HTMLElement>('.nav-items');
+    const dropdowns = document.querySelectorAll<HTMLElement>('.dropdown');
+    let activeDropdown: HTMLElement | null = null;
 
     menuToggle?.addEventListener('click', () => {
       navItems?.classList.toggle('active');
       const isOpen = navItems?.classList.contains('active');
       
-      const bars = menuToggle.querySelectorAll('.bar');
+      const bars = menuToggle.querySelectorAll<HTMLElement>('.bar');
       if (isOpen) {
         bars[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
         bars[1].style.opacity = '0';
@@ -85,11 +85,10 @@ import { rulesLinks, characterLinks, toolsLinks, guideLinks, handbookLinks } fro
     navItems?.addEventListener('click', (e) => {
       const target = e.target as HTMLElement;
       if (window.innerWidth <= 1100 && target.classList.contains('dropdown-item')) {
-        dropdowns.forEach(dropdown => {
-          dropdown.classList.toggle('active');
-        });
+        dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
+        activeDropdown = null;
         navItems.classList.remove('active');
-        const bars = menuToggle?.querySelectorAll('.bar');
+        const bars = menuToggle?.querySelectorAll<HTMLElement>('.bar');
         if (bars) {
           bars[0].style.transform = 'none';
           bars[1].style.opacity = '1';

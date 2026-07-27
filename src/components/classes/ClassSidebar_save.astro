@@ -131,16 +131,16 @@ function buildFeatureAnchor(name: string, level: number, isSubclass = false): st
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const sidebar = document.querySelector('.class-sidebar');
-    const openButton = document.querySelector('.class-sidebar-fab');
-    const closeButton = document.querySelector('.class-sidebar-close');
-    const overlay = document.querySelector('.class-sidebar-overlay');
+    const sidebar = document.querySelector<HTMLElement>('.class-sidebar');
+    const openButton = document.querySelector<HTMLButtonElement>('.class-sidebar-fab');
+    const closeButton = document.querySelector<HTMLButtonElement>('.class-sidebar-close');
+    const overlay = document.querySelector<HTMLElement>('.class-sidebar-overlay');
 
     if (!sidebar || !openButton || !overlay) return;
 
     const storageKey = sidebar.getAttribute('data-sidebar-key') || 'class-sidebar-collapsed';
 
-    function setSidebarOpen(isOpen) {
+    function setSidebarOpen(isOpen: boolean) {
       sidebar.classList.toggle('is-collapsed', !isOpen);
       openButton.hidden = isOpen;
       openButton.setAttribute('aria-expanded', String(isOpen));

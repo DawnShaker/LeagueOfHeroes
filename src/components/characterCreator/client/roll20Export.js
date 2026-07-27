@@ -435,7 +435,7 @@
 
     upsert(
       'passive_wisdom',
-      String(10 + modifier(totalScore('wisdom')) + (expertiseSkills.has('Внимательность') ? 4 : (proficientSkillIds.has('perception') ? 2 : 0)))
+      String(10 + modifier(totalScore('wisdom')) + (expertiseSkills.has('Восприятие') ? 4 : (proficientSkillIds.has('perception') ? 2 : 0)))
     );
 
 
@@ -499,7 +499,7 @@
     }
 
     function classFeatureDescription(group, option) {
-      let baseDescription = option?.description || '';
+      let baseDescription = option?.exportDescription || option?.description || '';
       const isPactOfTheTome = group?.id === 'eldritch-invocation'
         && (option?.id === 'pact-of-the-tome' || /Договор гримуара/i.test(String(option?.name || '')));
       if (!isPactOfTheTome) return baseDescription;

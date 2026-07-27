@@ -20,12 +20,12 @@ const { species } = Astro.props;
       </div>
     </header>
 
-    {species.subspecies && (
+    {species.variants?.length && (
       <div class="subspecies-select">
         <label for="subspecies">Subspecies:</label>
         <select id="subspecies">
           <option value="">Base Species</option>
-          {species.subspecies.map(sub => (
+          {species.variants.map(sub => (
             <option value={sub.name}>{sub.name} [{sub.nameEn}]</option>
           ))}
         </select>
@@ -41,23 +41,22 @@ const { species } = Astro.props;
       <h3>Traits</h3>
       <dl>
         <dt>Creature Type</dt>
-        <dd>{species.traits.creatureType}</dd>
+        <dd>{species.type}</dd>
 
         <dt>Size</dt>
         <dd>
-          {species.traits.size.category} 
-          ({species.traits.size.heightRange}, {species.traits.size.weightRange})
+          {species.size}
         </dd>
 
         <dt>Speed</dt>
-        <dd>{species.traits.speed} feet</dd>
+        <dd>{species.speed} feet</dd>
       </dl>
 
       <div class="abilities">
         <h4>Abilities</h4>
         <ul>
-          {species.traits.abilities.map(ability => (
-            <li>{ability}</li>
+          {(species.abilities || []).map(ability => (
+            <li><strong>{ability.title}.</strong> {ability.description}</li>
           ))}
         </ul>
       </div>
