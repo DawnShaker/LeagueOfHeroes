@@ -191,8 +191,7 @@ const rarityLabels = {
 
 <script>
   function initializeMagicItems() {
-    /** @type {HTMLInputElement|null} */
-    const searchInput = document.getElementById('item-search');
+    const searchInput = document.getElementById('item-search') as HTMLInputElement | null;
     const filterButton = document.getElementById('filter-button');
     const filterPopup = document.getElementById('filter-popup');
     const closeButton = document.querySelector('.close-button');
@@ -200,14 +199,14 @@ const rarityLabels = {
     const filterCount = document.getElementById('filter-count');
     const clearSearchButton = document.getElementById('clear-search');
     const itemsCounter = document.getElementById('items-counter');
-    const itemRows = document.querySelectorAll('.item-row');
-    const sortableHeaders = document.querySelectorAll('.sortable');
-    const itemDetails = document.getElementById('item-details');
-    const items = JSON.parse(document.getElementById('items-data')?.getAttribute('data-items') || '[]');
+    const itemRows = document.querySelectorAll<HTMLElement>('.item-row');
+    const sortableHeaders = document.querySelectorAll<HTMLElement>('.sortable');
+    const itemDetails = document.getElementById('item-details') as HTMLElement | null;
+    const items: any[] = JSON.parse(document.getElementById('items-data')?.getAttribute('data-items') || '[]');
     let currentSort = { column: 'name', direction: 'asc' };
 
     // Crafting tools mapping
-    const craftingToolsMap = {
+    const craftingToolsMap: Record<number, string> = {
       0: 'См. изготовляющие инструменты для немаг. аналога',
       1: 'Инструменты алхимика',
       2: 'Инструменты гончара',
@@ -259,7 +258,7 @@ const rarityLabels = {
       }
 
       // Get unique crafting tools
-      const craftingToolsSet = new Set();
+      const craftingToolsSet = new Set<number>();
       items.forEach(item => {
         if (item.craftingTools && Array.isArray(item.craftingTools)) {
           item.craftingTools.forEach(toolIndex => {
@@ -508,7 +507,7 @@ const rarityLabels = {
 
     function sortItems(column: string) {
       const tbody = document.querySelector('tbody');
-      const rows = Array.from(document.querySelectorAll('.item-row'));
+      const rows = Array.from(document.querySelectorAll<HTMLElement>('.item-row'));
       
       if (!tbody) return;
       
@@ -726,8 +725,8 @@ const rarityLabels = {
 
     // Tooltip functionality for base analog links
     function initTooltips() {
-      let tooltip = null;
-      let regularItems = null;
+      let tooltip: HTMLElement | null = null;
+      let regularItems: any[] | null = null;
 
       // Load regular items data
       async function loadRegularItems() {
@@ -767,7 +766,7 @@ const rarityLabels = {
         return tooltipEl;
       }
 
-      async function showTooltip(e, itemId) {
+      async function showTooltip(e: MouseEvent, itemId: string) {
         const items = await loadRegularItems();
         const item = items.find(i => i.id === itemId);
         if (!item) return;
@@ -791,6 +790,7 @@ const rarityLabels = {
           </div>
         `;
 
+        if (!(e.target instanceof HTMLElement)) return;
         const rect = e.target.getBoundingClientRect();
         tooltip.style.left = `${rect.right + 10}px`;
         tooltip.style.top = `${rect.top}px`;
@@ -812,7 +812,7 @@ const rarityLabels = {
         }
       }
 
-      function handleScroll(e) {
+      function handleScroll(e: WheelEvent) {
         if (e.shiftKey && tooltip && tooltip.style.display === 'block') {
           e.preventDefault();
           tooltip.scrollTop += e.deltaY > 0 ? 20 : -20;
@@ -822,6 +822,7 @@ const rarityLabels = {
       // Event delegation for dynamically created links
       document.addEventListener('mouseover', (e) => {
         const target = e.target;
+        if (!(target instanceof HTMLElement)) return;
         if (target.matches('a[href^="/items/"]')) {
           const itemId = target.getAttribute('href').split('/').pop();
           if (itemId) {
@@ -832,103 +833,7 @@ const rarityLabels = {
 
       document.addEventListener('mouseout', (e) => {
         const target = e.target;
-        if (target.matches('a[href^="/items/"]')) {
-          hideTooltip();
-        }
-      });
-
-      document.addEventListener('wheel', handleScroll, { passive: false });
-    }
-
-    // Tooltip functionality for base analog links
-    function initTooltips() {
-      let tooltip = null;
-      let isScrolling = false;
-
-      function createTooltip() {
-        const tooltipEl = document.createElement('div');
-        tooltipEl.className = 'item-tooltip';
-        tooltipEl.style.cssText = `
-          position: absolute;
-          background: var(--card-bg);
-          border: 1px solid var(--card-border);
-          border-radius: 0.5rem;
-          padding: 1rem;
-          box-shadow: var(--card-shadow);
-          z-index: 1000;
-          max-width: 300px;
-          max-height: 200px;
-          overflow-y: auto;
-          display: none;
-          pointer-events: none;
-        `;
-        document.body.appendChild(tooltipEl);
-        return tooltipEl;
-      }
-
-      function showTooltip(e, itemId) {
-        const item = items.find(i => i.id === itemId);
-        if (!item) return;
-
-        if (!tooltip) {
-          tooltip = createTooltip();
-        }
-
-        tooltip.innerHTML = `
-          <div class="tooltip-header">
-            <h4>${item.name}</h4>
-            <div class="tooltip-source">${item.source.book}, ${item.source.page}</div>
-          </div>
-          <div class="tooltip-meta">
-            <p>${item.type}, ${rarityLabels[item.rarity]}${item.attunement ? ` (требует настройки${item.attunementRequirement ? ` ${item.attunementRequirement}` : ''})` : ''}</p>
-            <p><strong>Вес:</strong> ${item.weight}</p>
-          </div>
-          <div class="tooltip-description">
-            ${item.description}
-          </div>
-        `;
-
-        const rect = e.target.getBoundingClientRect();
-        tooltip.style.left = `${rect.right + 10}px`;
-        tooltip.style.top = `${rect.top}px`;
-        tooltip.style.display = 'block';
-
-        // Adjust position if tooltip goes off screen
-        const tooltipRect = tooltip.getBoundingClientRect();
-        if (tooltipRect.right > window.innerWidth) {
-          tooltip.style.left = `${rect.left - tooltipRect.width - 10}px`;
-        }
-        if (tooltipRect.bottom > window.innerHeight) {
-          tooltip.style.top = `${rect.bottom - tooltipRect.height}px`;
-        }
-      }
-
-      function hideTooltip() {
-        if (tooltip) {
-          tooltip.style.display = 'none';
-        }
-      }
-
-      function handleScroll(e) {
-        if (e.shiftKey && tooltip && tooltip.style.display === 'block') {
-          e.preventDefault();
-          tooltip.scrollTop += e.deltaY > 0 ? 20 : -20;
-        }
-      }
-
-      // Event delegation for dynamically created links
-      document.addEventListener('mouseover', (e) => {
-        const target = e.target;
-        if (target.matches('a[href^="/items/"]')) {
-          const itemId = target.getAttribute('href').split('/').pop();
-          if (itemId) {
-            showTooltip(e, itemId);
-          }
-        }
-      });
-
-      document.addEventListener('mouseout', (e) => {
-        const target = e.target;
+        if (!(target instanceof HTMLElement)) return;
         if (target.matches('a[href^="/items/"]')) {
           hideTooltip();
         }
@@ -990,7 +895,7 @@ const rarityLabels = {
     // Initialize tooltips (use shared ItemTooltip util)
     (function ensureItemTooltipAndInit(){
       function ensureItemTooltip(){
-        return new Promise((resolve,reject)=>{
+        return new Promise<NonNullable<Window['ItemTooltip']>>((resolve,reject)=>{
           if (window.ItemTooltip) return resolve(window.ItemTooltip);
           if (document.querySelector('script[data-item-tooltip]')){
             const check = setInterval(()=>{ if (window.ItemTooltip){ clearInterval(check); resolve(window.ItemTooltip); } },50);
@@ -1001,7 +906,10 @@ const rarityLabels = {
           s.src = '/js/itemTooltip.js';
           s.async = true;
           s.setAttribute('data-item-tooltip','1');
-          s.onload = ()=> resolve(window.ItemTooltip);
+          s.onload = () => {
+            if (window.ItemTooltip) resolve(window.ItemTooltip);
+            else reject(new Error('ItemTooltip не зарегистрирован после загрузки скрипта'));
+          };
           s.onerror = (e) => reject(e);
           document.head.appendChild(s);
         });
@@ -1068,9 +976,9 @@ const rarityLabels = {
       slider.style.top = 'auto';
       slider.style.zIndex = '2147483647';
 
-      const randomHistory = [];
+      const randomHistory: any[] = [];
 
-      function makeListItem(item) {
+      function makeListItem(item: any) {
         const li = document.createElement('li');
         li.className = 'history-item enter';
         const a = document.createElement('a');
@@ -1105,7 +1013,9 @@ const rarityLabels = {
       }
 
       function pickRandomVisible() {
-        const visibleRows = Array.from(document.querySelectorAll('.item-row')).filter(r => r instanceof HTMLElement && r.style.display !== 'none');
+        const visibleRows = Array.from(document.querySelectorAll('.item-row')).filter(
+          (row): row is HTMLElement => row instanceof HTMLElement && row.style.display !== 'none'
+        );
         if (visibleRows.length > 0) {
           const pick = visibleRows[Math.floor(Math.random() * visibleRows.length)];
           return pick.dataset.itemId;

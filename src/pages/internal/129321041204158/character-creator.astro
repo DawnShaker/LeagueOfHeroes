@@ -93,6 +93,15 @@ const classOptions = classes
     proficiencies: item.proficiencies,
     levels: item.levels ?? [],
     features: item.features ?? [],
+    subclasses: Array.isArray(item.subclasses)
+      ? item.subclasses.map((subclass: any) => ({
+          id: subclass.id,
+          name: subclass.name,
+          nameEn: subclass.nameEn,
+          description: subclass.description,
+          sourceBook: subclass.sourceBook
+        }))
+      : [],
     equipment: item.equipment ?? null,
     level1Features: Array.isArray(item.features)
       ? item.features.filter((feature: any) => Number(feature.level ?? 0) === 1)

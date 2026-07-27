@@ -40,7 +40,7 @@ export interface Background {
   spellTable?: SpellTable;
   variants?: {
     title: string;
-    description: string;
+    description?: string;
     table: {
       roll: number;
       result: string;

@@ -41,8 +41,9 @@ import { STAT_NAMES } from '../../utils/pointBuy';
 
 <script>
   import { COST_TABLE, INITIAL_STATS, STAT_NAMES } from '../../utils/pointBuy';
+  import type { Stats } from '../../utils/pointBuy';
 
-  let stats = JSON.parse(JSON.stringify(INITIAL_STATS));
+  let stats: Stats = JSON.parse(JSON.stringify(INITIAL_STATS));
   let points = 27;
 
   function renderStats() {
@@ -96,16 +97,17 @@ import { STAT_NAMES } from '../../utils/pointBuy';
       const stat = target.dataset.stat;
       const action = target.dataset.action;
       
-      if (!stat || !action) return;
+      if (!stat || !action || !(stat in stats)) return;
+      const statKey = stat as keyof Stats;
 
       if (action === 'increase-base') {
-        updateStat(stat, 1);
+        updateStat(statKey, 1);
       } else if (action === 'decrease-base') {
-        updateStat(stat, -1);
+        updateStat(statKey, -1);
       } else if (action === 'increase-racial') {
-        updateRacialBonus(stat, 1);
+        updateRacialBonus(statKey, 1);
       } else if (action === 'decrease-racial') {
-        updateRacialBonus(stat, -1);
+        updateRacialBonus(statKey, -1);
       }
     });
   });
@@ -117,7 +119,7 @@ import { STAT_NAMES } from '../../utils/pointBuy';
     );
   }
 
-  function updateStat(stat: string, change: number) {
+  function updateStat(stat: keyof Stats, change: number) {
     const currentBase = stats[stat].base;
     const newBase = currentBase + change;
     const newPointCost = calculateTotalPoints() + (COST_TABLE[newBase] || 0) - (COST_TABLE[currentBase] || 0);
@@ -129,7 +131,7 @@ import { STAT_NAMES } from '../../utils/pointBuy';
     }
   }
 
-  function updateRacialBonus(stat: string, change: number) {
+  function updateRacialBonus(stat: keyof Stats, change: number) {
     const newRacial = stats[stat].racial + change;
     const usedBonuses = Object.values(stats).reduce(
       (sum, item) => sum + item.racial,

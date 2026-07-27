@@ -195,13 +195,13 @@ const { stats, parties } = data;
     ]
   };
 
-  const chartTypeSelect = document.getElementById('chart-type');
-  const chartMetricSelect = document.getElementById('chart-metric');
-  const filterGmSelect = document.getElementById('filter-gm');
-  const filterPlayerSelect = document.getElementById('filter-player');
-  const chartContainer = document.getElementById('chart-container');
-  const chartTitle = document.getElementById('chart-title');
-  const chartDescription = document.getElementById('chart-description');
+  const chartTypeSelect = document.getElementById('chart-type') as HTMLSelectElement;
+  const chartMetricSelect = document.getElementById('chart-metric') as HTMLSelectElement;
+  const filterGmSelect = document.getElementById('filter-gm') as HTMLSelectElement;
+  const filterPlayerSelect = document.getElementById('filter-player') as HTMLSelectElement;
+  const chartContainer = document.getElementById('chart-container') as HTMLElement;
+  const chartTitle = document.getElementById('chart-title') as HTMLElement;
+  const chartDescription = document.getElementById('chart-description') as HTMLElement;
   const partyTableBody = document.querySelector('.table-section tbody');
 
   function getFilteredParties() {

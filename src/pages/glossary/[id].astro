@@ -7,7 +7,6 @@ export async function getStaticPaths() {
 
 const { id } = Astro.params;
 const encodedId = encodeURIComponent(id);
-const jsEncodedId = JSON.stringify(encodedId);
 ---
 <!doctype html>
 <html>
@@ -16,10 +15,10 @@ const jsEncodedId = JSON.stringify(encodedId);
     <meta http-equiv="refresh" content={`0;url=/glossary#${encodedId}`} />
     <meta name="robots" content="noindex" />
     <title>Redirecting…</title>
-    <script>
+    <script define:vars={{ encodedId }}>
       // In case meta-refresh is blocked, use JS redirect
       (function(){
-        try { window.location.replace('/glossary#' + {jsEncodedId}); } catch(e){}
+        try { window.location.replace('/glossary#' + encodedId); } catch(e){}
       })();
     </script>
   </head>

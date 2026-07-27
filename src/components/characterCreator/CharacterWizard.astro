@@ -790,21 +790,29 @@ const creatorOptions = {
   }
 
   const CLASS_FORGE_THEMES = {
-    artificer: ['#38bdf8', '#bae6fd', '⚙'],
-    bard: ['#e879f9', '#f5d0fe', '♪'],
-    barbarian: ['#f97316', '#fed7aa', 'ᚱ'],
-    fighter: ['#94a3b8', '#e2e8f0', '⚔'],
-    wizard: ['#818cf8', '#c7d2fe', '✧'],
-    druid: ['#4ade80', '#bbf7d0', '❧'],
-    cleric: ['#facc15', '#fef08a', '✦'],
-    warlock: ['#a855f7', '#e9d5ff', '◈'],
-    bloodhunter: ['#ef4444', '#fecaca', '◆'],
-    monk: ['#f59e0b', '#fde68a', '☯'],
-    paladin: ['#fbbf24', '#fef3c7', '☀'],
-    rogue: ['#2dd4bf', '#ccfbf1', '♠'],
-    ranger: ['#22c55e', '#bbf7d0', '➶'],
-    sorcerer: ['#f43f5e', '#fecdd3', '✹'],
-    pugilist: ['#fb923c', '#ffedd5', '✊']
+    artificer: { primary: '#38bdf8', light: '#bae6fd', deep: '#075985', symbol: '⚙', aura: 'craft' },
+    bard: { primary: '#e879f9', light: '#f5d0fe', deep: '#86198f', symbol: '♪', aura: 'grace' },
+    barbarian: { primary: '#f97316', light: '#fed7aa', deep: '#9a3412', symbol: 'ᚱ', aura: 'martial' },
+    fighter: { primary: '#94a3b8', light: '#e2e8f0', deep: '#334155', symbol: '⚔', aura: 'martial' },
+    wizard: { primary: '#818cf8', light: '#c7d2fe', deep: '#3730a3', symbol: '✧', aura: 'arcane' },
+    druid: { primary: '#4ade80', light: '#bbf7d0', deep: '#166534', symbol: '❧', aura: 'primal' },
+    cleric: { primary: '#facc15', light: '#fef08a', deep: '#a16207', symbol: '✦', aura: 'divine' },
+    warlock: { primary: '#a855f7', light: '#e9d5ff', deep: '#581c87', symbol: '◈', aura: 'shadow' },
+    bloodhunter: { primary: '#ef4444', light: '#fecaca', deep: '#7f1d1d', symbol: '◆', aura: 'blood' },
+    monk: { primary: '#f59e0b', light: '#fde68a', deep: '#92400e', symbol: '☯', aura: 'focus' },
+    paladin: { primary: '#fbbf24', light: '#fef3c7', deep: '#92400e', symbol: '☀', aura: 'divine' },
+    rogue: { primary: '#2dd4bf', light: '#ccfbf1', deep: '#115e59', symbol: '♠', aura: 'shadow' },
+    ranger: { primary: '#22c55e', light: '#bbf7d0', deep: '#166534', symbol: '➶', aura: 'primal' },
+    sorcerer: { primary: '#f43f5e', light: '#fecdd3', deep: '#9f1239', symbol: '✹', aura: 'arcane' },
+    pugilist: { primary: '#fb923c', light: '#ffedd5', deep: '#9a3412', symbol: '✊', aura: 'martial' }
+  };
+
+  const DEFAULT_FORGE_CLASS_THEME = {
+    primary: '#d2a754',
+    light: '#f1d38f',
+    deep: '#713f12',
+    symbol: '✦',
+    aura: 'unshaped'
   };
 
   const FORGE_CLASS_ALIASES = [
@@ -832,24 +840,28 @@ const creatorOptions = {
   function classForgeTheme(characterClass) {
     const identity = forgeIdentity(characterClass?.id, characterClass?.name, characterClass?.nameEn);
     const key = FORGE_CLASS_ALIASES.find(([pattern]) => pattern.test(identity))?.[1];
-    return CLASS_FORGE_THEMES[key] || ['#d2a754', '#f1d38f', '✦'];
+    return CLASS_FORGE_THEMES[key] || DEFAULT_FORGE_CLASS_THEME;
   }
 
-  function speciesForgeColor(species, variant) {
+  function speciesForgeTheme(species, variant) {
     const identity = forgeIdentity(species?.id, species?.name, species?.nameEn, variant?.id, variant?.name, variant?.nameEn);
     const match = [
-      [/тифлинг|tiefling/, '#fb7185'],
-      [/эльф|elf|эладрин|eladrin/, '#a78bfa'],
-      [/дварф|гном|dwarf/, '#f59e0b'],
-      [/драконорожден|dragonborn/, '#f97316'],
-      [/дженази|genasi/, '#38bdf8'],
-      [/аасимар|aasimar/, '#fde68a'],
-      [/орк|orc/, '#84cc16'],
-      [/полурослик|halfling/, '#fbbf24'],
-      [/гит|gith/, '#22d3ee'],
-      [/человек|human/, '#94a3b8']
+      [/огненн.*дженази|fire.?genasi/, { color: '#fb7185', glow: '#f97316', ancestry: 'elemental' }],
+      [/водн.*дженази|water.?genasi/, { color: '#22d3ee', glow: '#0ea5e9', ancestry: 'elemental' }],
+      [/воздушн.*дженази|air.?genasi/, { color: '#bae6fd', glow: '#38bdf8', ancestry: 'elemental' }],
+      [/земл.*дженази|earth.?genasi/, { color: '#a3e635', glow: '#a16207', ancestry: 'elemental' }],
+      [/драконорожден|dragonborn/, { color: '#f97316', glow: '#ef4444', ancestry: 'draconic' }],
+      [/тифлинг|tiefling/, { color: '#fb7185', glow: '#7c3aed', ancestry: 'infernal' }],
+      [/эльф|elf|эладрин|eladrin/, { color: '#a78bfa', glow: '#22d3ee', ancestry: 'fey' }],
+      [/дварф|гном|dwarf|gnome/, { color: '#f59e0b', glow: '#78716c', ancestry: 'stone' }],
+      [/дженази|genasi/, { color: '#38bdf8', glow: '#0ea5e9', ancestry: 'elemental' }],
+      [/аасимар|aasimar/, { color: '#fde68a', glow: '#f8fafc', ancestry: 'celestial' }],
+      [/орк|orc/, { color: '#84cc16', glow: '#365314', ancestry: 'savage' }],
+      [/полурослик|halfling/, { color: '#fbbf24', glow: '#84cc16', ancestry: 'smallfolk' }],
+      [/гит|gith/, { color: '#22d3ee', glow: '#a3e635', ancestry: 'astral' }],
+      [/человек|human/, { color: '#94a3b8', glow: '#e2e8f0', ancestry: 'mortal' }]
     ].find(([pattern]) => pattern.test(identity));
-    return match?.[1] || '#9b74ff';
+    return match?.[1] || { color: '#9b74ff', glow: '#6366f1', ancestry: 'unknown' };
   }
 
   function backgroundForgeSymbol(background, classSymbol) {
@@ -876,7 +888,8 @@ const creatorOptions = {
     const variant = findVariant(species);
     const characterClass = findClass();
     const background = findBackground();
-    const [primary, primaryLight, classSymbol] = classForgeTheme(characterClass);
+    const classTheme = classForgeTheme(characterClass);
+    const speciesTheme = speciesForgeTheme(species, variant);
     const alignment = String(state.alignment || '');
     const alignmentColor = alignment.includes('good')
       ? '#fde68a'
@@ -888,11 +901,15 @@ const creatorOptions = {
             ? '#60a5fa'
             : '#64748b';
 
-    root.style.setProperty('--wizard-gold', primary);
-    root.style.setProperty('--wizard-gold-light', primaryLight);
-    root.style.setProperty('--forge-secondary', speciesForgeColor(species, variant));
+    root.style.setProperty('--wizard-gold', classTheme.primary);
+    root.style.setProperty('--wizard-gold-light', classTheme.light);
+    root.style.setProperty('--forge-class-deep', classTheme.deep);
+    root.style.setProperty('--forge-secondary', speciesTheme.color);
+    root.style.setProperty('--forge-secondary-glow', speciesTheme.glow);
     root.style.setProperty('--forge-alignment', alignmentColor);
-    root.dataset.forgeSymbol = backgroundForgeSymbol(background, classSymbol);
+    root.dataset.forgeSymbol = backgroundForgeSymbol(background, classTheme.symbol);
+    root.dataset.forgeAura = classTheme.aura;
+    root.dataset.forgeAncestry = speciesTheme.ancestry;
     root.dataset.forgeTemper = alignment.includes('evil')
       ? 'shadow'
       : alignment.includes('good')
@@ -910,6 +927,17 @@ const creatorOptions = {
       ].filter(Boolean);
       status.textContent = parts.length ? parts.join(' · ') : 'Облик кузницы изменится вместе с героем';
     }
+
+    $$('.class-card').forEach((card) => {
+      const theme = classForgeTheme({ id: card.dataset.classId });
+      card.style.setProperty('--choice-accent', theme.primary);
+      card.style.setProperty('--choice-accent-light', theme.light);
+    });
+    $$('.species-card').forEach((card) => {
+      const theme = speciesForgeTheme({ id: card.dataset.speciesId });
+      card.style.setProperty('--choice-accent', theme.color);
+      card.style.setProperty('--choice-accent-light', theme.glow);
+    });
   }
 
   function isCustomBackground() {
@@ -6338,26 +6366,33 @@ const creatorOptions = {
   .character-wizard {
     --wizard-gold: #d2a754;
     --wizard-gold-light: #f1d38f;
+    --forge-class-deep: #713f12;
     --forge-secondary: #9b74ff;
+    --forge-secondary-glow: #6366f1;
     --forge-alignment: #64748b;
     max-width: 1500px;
     margin: 0 auto;
     position: relative;
     isolation: isolate;
-    transition: color .35s ease;
+    transition: color .35s ease, background-color .45s ease;
   }
 
   .character-wizard::before {
     content: '';
     position: absolute;
-    inset: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     z-index: 0;
     pointer-events: none;
     background:
-      radial-gradient(circle at 10% 8%, color-mix(in srgb, var(--forge-secondary) 15%, transparent), transparent 29rem),
-      radial-gradient(circle at 88% 20%, color-mix(in srgb, var(--wizard-gold) 12%, transparent), transparent 34rem),
-      linear-gradient(135deg, transparent 35%, color-mix(in srgb, var(--forge-alignment) 5%, transparent));
-    transition: background .45s ease, opacity .45s ease;
+      radial-gradient(circle at 10% 9%, color-mix(in srgb, var(--forge-secondary-glow) 20%, transparent), transparent 31rem),
+      radial-gradient(circle at 88% 18%, color-mix(in srgb, var(--wizard-gold) 18%, transparent), transparent 35rem),
+      radial-gradient(circle at 52% 72%, color-mix(in srgb, var(--forge-class-deep) 16%, transparent), transparent 40rem),
+      linear-gradient(135deg, color-mix(in srgb, var(--forge-class-deep) 8%, transparent), transparent 38%, color-mix(in srgb, var(--forge-alignment) 7%, transparent));
+    opacity: .78;
+    transition: background .55s ease, opacity .45s ease;
   }
 
   .character-wizard::after {
@@ -6374,6 +6409,18 @@ const creatorOptions = {
     transition: color .4s ease, transform .4s ease;
   }
 
+  .wizard-layout::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: 1rem;
+    pointer-events: none;
+    opacity: .28;
+    background-size: 44px 44px, 44px 44px;
+    transition: background .5s ease, opacity .4s ease;
+  }
+
   .wizard-header,
   .wizard-layout {
     position: relative;
@@ -6385,10 +6432,63 @@ const creatorOptions = {
   }
 
   .character-wizard[data-forge-temper='shadow']::before {
-    opacity: .72;
+    opacity: .9;
+    filter: saturate(.78) brightness(.72);
+  }
+
+  .character-wizard[data-forge-temper='radiant']::before {
+    opacity: .92;
+    filter: saturate(1.08) brightness(1.08);
+  }
+
+  .character-wizard[data-forge-temper='wild']::before {
+    filter: saturate(1.22);
+  }
+
+  .character-wizard[data-forge-aura='arcane'] .wizard-layout::after {
+    background:
+      radial-gradient(circle, color-mix(in srgb, var(--wizard-gold-light) 16%, transparent) 0 1px, transparent 1.5px) 0 0 / 38px 38px,
+      radial-gradient(circle, color-mix(in srgb, var(--forge-secondary) 12%, transparent) 0 1px, transparent 1.5px) 19px 19px / 38px 38px;
+  }
+
+  .character-wizard[data-forge-aura='primal'] .wizard-layout::after {
+    background:
+      radial-gradient(ellipse at 25% 50%, transparent 0 42%, color-mix(in srgb, var(--wizard-gold) 13%, transparent) 44% 47%, transparent 49%) 0 0 / 74px 42px,
+      radial-gradient(ellipse at 75% 50%, transparent 0 42%, color-mix(in srgb, var(--forge-secondary) 10%, transparent) 44% 47%, transparent 49%) 37px 21px / 74px 42px;
+  }
+
+  .character-wizard[data-forge-aura='martial'] .wizard-layout::after,
+  .character-wizard[data-forge-aura='blood'] .wizard-layout::after {
+    background:
+      repeating-linear-gradient(125deg, transparent 0 31px, color-mix(in srgb, var(--wizard-gold) 9%, transparent) 32px 33px, transparent 34px 66px);
+  }
+
+  .character-wizard[data-forge-aura='divine'] .wizard-layout::after {
+    background:
+      linear-gradient(90deg, transparent 48%, color-mix(in srgb, var(--wizard-gold-light) 9%, transparent) 49% 51%, transparent 52%) 0 0 / 72px 72px,
+      linear-gradient(0deg, transparent 48%, color-mix(in srgb, var(--forge-secondary) 7%, transparent) 49% 51%, transparent 52%) 0 0 / 72px 72px;
+  }
+
+  .character-wizard[data-forge-aura='shadow'] .wizard-layout::after {
+    opacity: .38;
+    background:
+      radial-gradient(circle at 50% 50%, transparent 0 24%, color-mix(in srgb, var(--forge-secondary) 12%, transparent) 25% 27%, transparent 29%) 0 0 / 82px 82px;
+  }
+
+  .character-wizard[data-forge-aura='craft'] .wizard-layout::after {
+    background:
+      linear-gradient(30deg, color-mix(in srgb, var(--wizard-gold) 8%, transparent) 12%, transparent 12.5% 87%, color-mix(in srgb, var(--wizard-gold) 8%, transparent) 87.5%) 0 0 / 52px 30px,
+      linear-gradient(150deg, color-mix(in srgb, var(--forge-secondary) 7%, transparent) 12%, transparent 12.5% 87%, color-mix(in srgb, var(--forge-secondary) 7%, transparent) 87.5%) 0 0 / 52px 30px;
+  }
+
+  .character-wizard[data-forge-aura='grace'] .wizard-layout::after,
+  .character-wizard[data-forge-aura='focus'] .wizard-layout::after {
+    background:
+      repeating-radial-gradient(ellipse at 50% 100%, transparent 0 21px, color-mix(in srgb, var(--wizard-gold) 8%, transparent) 22px 23px, transparent 24px 44px);
   }
 
   .wizard-header {
+    position: relative;
     display: flex;
     align-items: end;
     justify-content: space-between;
@@ -6396,6 +6496,63 @@ const creatorOptions = {
     padding: 1.5rem 0 2rem;
     border-bottom: 1px solid
       color-mix(in srgb, var(--wizard-gold) 28%, var(--card-border));
+  }
+
+  .wizard-header::before {
+    content: '';
+    position: absolute;
+    inset: -.4rem 0 .35rem;
+    z-index: -1;
+    border-radius: 1rem;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg, color-mix(in srgb, var(--forge-secondary) 8%, transparent), transparent 46%),
+      radial-gradient(circle at 82% 45%, color-mix(in srgb, var(--forge-secondary-glow) 10%, transparent), transparent 18rem);
+    opacity: .9;
+    transition: background .5s ease, opacity .4s ease;
+  }
+
+  .character-wizard[data-forge-ancestry='draconic'] .wizard-header::before {
+    background:
+      radial-gradient(circle at 20px 20px, transparent 0 13px, color-mix(in srgb, var(--forge-secondary) 11%, transparent) 14px 15px, transparent 16px) 0 0 / 40px 40px,
+      linear-gradient(90deg, color-mix(in srgb, var(--forge-secondary) 10%, transparent), transparent 55%);
+  }
+
+  .character-wizard[data-forge-ancestry='fey'] .wizard-header::before {
+    background:
+      radial-gradient(ellipse at 12% 55%, color-mix(in srgb, var(--forge-secondary-glow) 15%, transparent), transparent 16rem),
+      repeating-radial-gradient(ellipse at 85% 120%, transparent 0 28px, color-mix(in srgb, var(--forge-secondary) 7%, transparent) 29px 30px, transparent 31px 58px);
+  }
+
+  .character-wizard[data-forge-ancestry='infernal'] .wizard-header::before {
+    background:
+      conic-gradient(from 220deg at 88% 30%, transparent, color-mix(in srgb, var(--forge-secondary-glow) 11%, transparent), transparent 42%),
+      linear-gradient(90deg, color-mix(in srgb, var(--forge-secondary) 10%, transparent), transparent 58%);
+  }
+
+  .character-wizard[data-forge-ancestry='elemental'] .wizard-header::before {
+    background:
+      radial-gradient(ellipse at 12% 50%, color-mix(in srgb, var(--forge-secondary) 13%, transparent), transparent 18rem),
+      radial-gradient(ellipse at 88% 42%, color-mix(in srgb, var(--forge-secondary-glow) 12%, transparent), transparent 20rem);
+  }
+
+  .character-wizard[data-forge-ancestry='stone'] .wizard-header::before {
+    background:
+      repeating-linear-gradient(135deg, transparent 0 38px, color-mix(in srgb, var(--forge-secondary) 7%, transparent) 39px 40px),
+      linear-gradient(90deg, color-mix(in srgb, var(--forge-secondary-glow) 8%, transparent), transparent 55%);
+  }
+
+  .character-wizard[data-forge-ancestry='celestial'] .wizard-header::before {
+    opacity: 1;
+    background:
+      radial-gradient(circle at 86% 35%, color-mix(in srgb, var(--forge-secondary-glow) 18%, transparent), transparent 15rem),
+      linear-gradient(90deg, color-mix(in srgb, var(--forge-secondary) 9%, transparent), transparent 58%);
+  }
+
+  .character-wizard[data-forge-ancestry='astral'] .wizard-header::before {
+    background:
+      radial-gradient(circle, color-mix(in srgb, var(--forge-secondary-glow) 14%, transparent) 0 1px, transparent 1.5px) 0 0 / 31px 31px,
+      linear-gradient(90deg, color-mix(in srgb, var(--forge-secondary) 9%, transparent), transparent 58%);
   }
 
   .wizard-header h1 {
@@ -6457,11 +6614,12 @@ const creatorOptions = {
     border: 1px solid color-mix(in srgb, var(--wizard-gold) 18%, var(--card-border));
     border-radius: 0.85rem;
     background:
-      linear-gradient(145deg, color-mix(in srgb, var(--forge-secondary) 3%, transparent), transparent 32%),
-      var(--card-bg);
+      radial-gradient(circle at 100% 0, color-mix(in srgb, var(--forge-secondary) 7%, transparent), transparent 20rem),
+      linear-gradient(145deg, color-mix(in srgb, var(--wizard-gold) 5%, transparent), transparent 38%),
+      color-mix(in srgb, var(--card-bg) 97%, var(--forge-class-deep));
     box-shadow:
       var(--card-shadow),
-      0 0 30px color-mix(in srgb, var(--wizard-gold) 4%, transparent);
+      0 0 36px color-mix(in srgb, var(--wizard-gold) 7%, transparent);
     transition: border-color .4s ease, background .4s ease, box-shadow .4s ease;
   }
 
@@ -6524,9 +6682,14 @@ const creatorOptions = {
   }
 
   .button-primary {
-    border: 1px solid #ad7934;
-    background: linear-gradient(#e1b966, #b77f32);
-    color: #221506;
+    border: 1px solid color-mix(in srgb, var(--wizard-gold) 72%, #111827);
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--wizard-gold-light) 76%, var(--wizard-gold)),
+      color-mix(in srgb, var(--wizard-gold) 78%, var(--forge-class-deep))
+    );
+    color: color-mix(in srgb, #07111f 88%, var(--forge-class-deep));
+    box-shadow: 0 7px 20px color-mix(in srgb, var(--wizard-gold) 16%, transparent);
   }
 
   .button-secondary {
@@ -7022,6 +7185,8 @@ const creatorOptions = {
   }
 
   .class-card {
+    --choice-accent: var(--wizard-gold);
+    --choice-accent-light: var(--wizard-gold-light);
     position: relative;
     display: grid;
     grid-template-rows: 190px minmax(76px, auto);
@@ -7029,10 +7194,10 @@ const creatorOptions = {
     min-height: 266px;
     padding: 0;
     overflow: hidden;
-    border: 1px solid color-mix(in srgb, var(--wizard-gold) 14%, var(--card-border));
+    border: 1px solid color-mix(in srgb, var(--choice-accent) 18%, var(--card-border));
     border-radius: .82rem;
     background:
-      linear-gradient(145deg, color-mix(in srgb, var(--card-bg) 96%, var(--wizard-gold) 4%), var(--background));
+      linear-gradient(145deg, color-mix(in srgb, var(--card-bg) 95%, var(--choice-accent) 5%), var(--background));
     color: var(--text);
     cursor: pointer;
     text-align: left;
@@ -7042,19 +7207,19 @@ const creatorOptions = {
 
   .class-card:hover {
     transform: translateY(-3px);
-    border-color: color-mix(in srgb, var(--wizard-gold) 70%, var(--card-border));
-    box-shadow: 0 12px 26px rgba(0, 0, 0, .22);
+    border-color: color-mix(in srgb, var(--choice-accent) 76%, var(--card-border));
+    box-shadow: 0 12px 26px rgba(0, 0, 0, .22), 0 0 20px color-mix(in srgb, var(--choice-accent) 10%, transparent);
   }
 
   .class-card:focus-visible {
-    outline: 3px solid color-mix(in srgb, var(--wizard-gold-light) 72%, transparent);
+    outline: 3px solid color-mix(in srgb, var(--choice-accent-light) 72%, transparent);
     outline-offset: 3px;
   }
 
   .class-card.is-selected {
-    border-color: var(--wizard-gold);
+    border-color: var(--choice-accent);
     box-shadow:
-      0 0 0 2px color-mix(in srgb, var(--wizard-gold) 38%, transparent),
+      0 0 0 2px color-mix(in srgb, var(--choice-accent) 38%, transparent),
       0 14px 30px rgba(0, 0, 0, .28);
   }
 
@@ -7146,7 +7311,7 @@ const creatorOptions = {
 
   .class-card.is-selected .class-card-copy {
     background:
-      linear-gradient(135deg, color-mix(in srgb, var(--wizard-gold) 15%, var(--card-bg)), var(--card-bg));
+      linear-gradient(135deg, color-mix(in srgb, var(--choice-accent) 17%, var(--card-bg)), var(--card-bg));
   }
 
   .class-card.is-selected .class-card-copy::before {
@@ -7154,7 +7319,7 @@ const creatorOptions = {
     position: absolute;
     inset: 0 auto 0 0;
     width: 3px;
-    background: linear-gradient(var(--wizard-gold-light), var(--wizard-gold));
+    background: linear-gradient(var(--choice-accent-light), var(--choice-accent));
   }
 
   .class-card-title {
@@ -7165,7 +7330,7 @@ const creatorOptions = {
 
   .class-card-title strong {
     overflow: hidden;
-    color: var(--wizard-gold-light);
+    color: var(--choice-accent-light);
     font-family: Georgia, serif;
     font-size: 1.08rem;
     line-height: 1.15;
@@ -7206,10 +7371,10 @@ const creatorOptions = {
   .class-card-meta .class-card-die {
     display: inline-flex;
     padding: .18rem .42rem;
-    border: 1px solid color-mix(in srgb, var(--wizard-gold) 34%, var(--card-border));
+    border: 1px solid color-mix(in srgb, var(--choice-accent) 38%, var(--card-border));
     border-radius: 999px;
-    color: var(--wizard-gold-light);
-    background: color-mix(in srgb, var(--wizard-gold) 9%, transparent);
+    color: var(--choice-accent-light);
+    background: color-mix(in srgb, var(--choice-accent) 10%, transparent);
     font-size: .65rem;
     font-weight: 800;
     opacity: .9;
@@ -7367,6 +7532,22 @@ const creatorOptions = {
       width: 100%;
     }
 
+    .character-wizard::before {
+      opacity: .56;
+    }
+
+    .character-wizard::after {
+      top: 7rem;
+      right: .5rem;
+      font-size: 9rem;
+      opacity: .035;
+    }
+
+    .wizard-layout::after {
+      opacity: .16;
+      background-size: 58px 58px, 58px 58px;
+    }
+
     .wizard-header {
       align-items: start;
       flex-direction: column;
@@ -7383,6 +7564,11 @@ const creatorOptions = {
     .wizard-header p {
       font-size: .9rem;
       line-height: 1.5;
+    }
+
+    .wizard-header::before {
+      inset: -.25rem -.35rem .25rem;
+      opacity: .62;
     }
 
     .wizard-header .button {
@@ -7678,6 +7864,8 @@ const creatorOptions = {
     .character-wizard,
     .character-wizard::before,
     .character-wizard::after,
+    .wizard-header::before,
+    .wizard-layout::after,
     .forge-theme-status,
     .wizard-main,
     .creator-sidebar,

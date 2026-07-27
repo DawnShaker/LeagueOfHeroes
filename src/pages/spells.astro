@@ -310,11 +310,11 @@ const spellSchools = [
       const selectedClasses = Array.from(classCheckboxes)
         .filter(cb => cb instanceof HTMLInputElement && cb.checked)
         .map(cb => cb instanceof HTMLInputElement ? cb.value : '');
-      const selectedSubclasses = Array.from(document.querySelectorAll('input[name="spell-subclass"]')).filter(cb=>cb instanceof HTMLInputElement && cb.checked).map(cb=>cb.value);
-      const selectedComponents = Array.from(document.querySelectorAll('input[name="spell-component"]')).filter(cb=>cb instanceof HTMLInputElement && cb.checked).map(cb=>cb.value);
-      const concentrationChecked = (document.querySelector('input[name="spell-concentration"]') instanceof HTMLInputElement) && document.querySelector('input[name="spell-concentration"]').checked;
-      const selectedCastingTypes = Array.from(document.querySelectorAll('input[name="casting-type"]')).filter(cb=>cb instanceof HTMLInputElement && cb.checked).map(cb=>cb.value);
-      const hasTableChecked = (document.querySelector('input[name="spell-has-table"]') instanceof HTMLInputElement) && document.querySelector('input[name="spell-has-table"]').checked;
+      const selectedSubclasses = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="spell-subclass"]')).filter(cb => cb.checked).map(cb => cb.value);
+      const selectedComponents = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="spell-component"]')).filter(cb => cb.checked).map(cb => cb.value);
+      const concentrationChecked = document.querySelector<HTMLInputElement>('input[name="spell-concentration"]')?.checked ?? false;
+      const selectedCastingTypes = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="casting-type"]')).filter(cb => cb.checked).map(cb => cb.value);
+      const hasTableChecked = document.querySelector<HTMLInputElement>('input[name="spell-has-table"]')?.checked ?? false;
       // Count active filters
       let activeFilters = 0;
       if (selectedLevels.length > 0) activeFilters += selectedLevels.length;
@@ -541,7 +541,7 @@ const spellSchools = [
       const t = e.target;
       if (t instanceof HTMLElement && t.classList.contains('subclass-toggle')) {
         const parent = t.parentElement;
-        const list = parent?.querySelector('.subclass-list');
+        const list = parent?.querySelector<HTMLElement>('.subclass-list');
         if (list) {
           const open = list.style.display !== 'block';
           list.style.display = open ? 'block' : 'none';
@@ -634,7 +634,9 @@ const spellSchools = [
       }
 
       btn.addEventListener('click', ()=>{
-        const visible = Array.from(spellRows).filter(r => (r instanceof HTMLElement) && r.style.display !== 'none');
+        const visible = Array.from(spellRows).filter(
+          (row): row is HTMLElement => row instanceof HTMLElement && row.style.display !== 'none'
+        );
         if (!visible || visible.length === 0) return;
         const pick = visible[Math.floor(Math.random()*visible.length)];
         const id = pick.dataset.spellId;

@@ -34,7 +34,6 @@ const sourceBooks = [...new Set(speciesData.map(species => species.sourceBook))]
           portrait={species.portrait}
           sourceBook={species.sourceBook}
           id={species.id}
-          class="species-card"
         />
       ))}
     </div>
@@ -45,9 +44,9 @@ const sourceBooks = [...new Set(speciesData.map(species => species.sourceBook))]
 
   function initSearch() {
     /** @type {HTMLInputElement|null} */
-    const searchInput = document.getElementById('species-search');
+    const searchInput = document.getElementById('species-search') as HTMLInputElement | null;
     /** @type {HTMLSelectElement|null} */
-    const sourceFilter = document.getElementById('source-filter');
+    const sourceFilter = document.getElementById('source-filter') as HTMLSelectElement | null;
     const cards = document.querySelectorAll('.species-card');
     
     function filterCards() {
@@ -75,7 +74,7 @@ const sourceBooks = [...new Set(speciesData.map(species => species.sourceBook))]
   // Init item tooltip across races page
   (function ensureItemTooltipAndInit() {
     function ensureItemTooltip() {
-      return new Promise((resolve, reject) => {
+      return new Promise<NonNullable<Window['ItemTooltip']>>((resolve, reject) => {
         if (window.ItemTooltip) return resolve(window.ItemTooltip);
         if (document.querySelector('script[data-item-tooltip]')) {
           const check = setInterval(() => {
@@ -88,7 +87,10 @@ const sourceBooks = [...new Set(speciesData.map(species => species.sourceBook))]
         s.src = '/js/itemTooltip.js';
         s.async = true;
         s.setAttribute('data-item-tooltip', '1');
-        s.onload = () => { resolve(window.ItemTooltip); };
+        s.onload = () => {
+          if (window.ItemTooltip) resolve(window.ItemTooltip);
+          else reject(new Error('ItemTooltip не зарегистрирован после загрузки скрипта'));
+        };
         s.onerror = (e) => { reject(e); };
         document.head.appendChild(s);
       });

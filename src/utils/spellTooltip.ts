@@ -176,7 +176,7 @@ export class SpellTooltip {
     `;
   }
 
-  private formatComponents(components: { verbal: boolean; somatic: boolean; material?: string }): string {
+  private formatComponents(components: { verbal?: boolean; somatic?: boolean; material?: string }): string {
     const parts: string[] = [];
 
     if (components.verbal) parts.push('В');

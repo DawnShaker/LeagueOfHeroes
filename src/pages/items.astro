@@ -119,10 +119,10 @@ const itemTypes = [...new Set(items.map(item => item.type))].sort();
   import { parseCurrencyString, convertToGold } from '../utils/currency';
 
   function initializeItems() {
-    const searchInput = document.getElementById('item-search');
-    const itemRows = document.querySelectorAll('.item-row');
-    const sortableHeaders = document.querySelectorAll('.sortable');
-    const itemDetails = document.getElementById('item-details');
+    const searchInput = document.getElementById('item-search') as HTMLInputElement | null;
+    const itemRows = document.querySelectorAll<HTMLElement>('.item-row');
+    const sortableHeaders = document.querySelectorAll<HTMLElement>('.sortable');
+    const itemDetails = document.getElementById('item-details') as HTMLElement | null;
     const filterButton = document.getElementById('filter-button');
     const filterPopup = document.getElementById('filter-popup');
     const closeButton = document.getElementById('close-filter');
@@ -134,8 +134,8 @@ const itemTypes = [...new Set(items.map(item => item.type))].sort();
 
     function filterItems() {
       const searchTerm = searchInput?.value.toLowerCase() || '';
-      const selectedTypes = Array.from(document.querySelectorAll('input[name="type"]:checked')).map(cb => (cb).value);
-      const selectedSources = Array.from(document.querySelectorAll('input[name="source"]:checked')).map(cb => (cb).value);
+      const selectedTypes = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="type"]:checked')).map(cb => cb.value);
+      const selectedSources = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="source"]:checked')).map(cb => cb.value);
       
       let visibleCount = 0;
       let totalInSources = 0;
@@ -313,7 +313,7 @@ const itemTypes = [...new Set(items.map(item => item.type))].sort();
     // Add event listeners for filter checkboxes using event delegation
     filterPopup?.addEventListener('change', (e) => {
       const target = e.target;
-      if (target.type === 'checkbox') {
+      if (target instanceof HTMLInputElement && target.type === 'checkbox') {
         filterItems();
       }
     });
@@ -400,7 +400,7 @@ const itemTypes = [...new Set(items.map(item => item.type))].sort();
         Object.entries(filters).forEach(([filterType, values]) => {
           if (Array.isArray(values)) {
             values.forEach(value => {
-              const checkbox = document.querySelector(`input[name="${filterType}"][value="${value}"]`);
+              const checkbox = document.querySelector<HTMLInputElement>(`input[name="${filterType}"][value="${value}"]`);
               if (checkbox) checkbox.checked = true;
             });
           }
@@ -414,7 +414,7 @@ const itemTypes = [...new Set(items.map(item => item.type))].sort();
     // Initialize item tooltip for item links (load script and use window.ItemTooltip)
     (function ensureItemTooltipAndInit() {
       function ensureItemTooltip() {
-        return new Promise((resolve, reject) => {
+        return new Promise<NonNullable<Window['ItemTooltip']>>((resolve, reject) => {
               if (window.ItemTooltip) return resolve(window.ItemTooltip);
               if (document.querySelector('script[data-item-tooltip]')) {
                 // wait for loader to set window.ItemTooltip
@@ -428,7 +428,10 @@ const itemTypes = [...new Set(items.map(item => item.type))].sort();
           s.src = '/js/itemTooltip.js';
           s.async = true;
           s.setAttribute('data-item-tooltip', '1');
-          s.onload = () => { resolve(window.ItemTooltip); };
+          s.onload = () => {
+            if (window.ItemTooltip) resolve(window.ItemTooltip);
+            else reject(new Error('ItemTooltip не зарегистрирован после загрузки скрипта'));
+          };
           s.onerror = (e) => { reject(e); };
           document.head.appendChild(s);
         });
@@ -456,8 +459,8 @@ const itemTypes = [...new Set(items.map(item => item.type))].sort();
     // Save filters to localStorage
     function saveFilters() {
       const filters = {
-        type: Array.from(document.querySelectorAll('input[name="type"]:checked')).map(cb => (cb).value),
-        source: Array.from(document.querySelectorAll('input[name="source"]:checked')).map(cb => (cb).value)
+        type: Array.from(document.querySelectorAll<HTMLInputElement>('input[name="type"]:checked')).map(cb => cb.value),
+        source: Array.from(document.querySelectorAll<HTMLInputElement>('input[name="source"]:checked')).map(cb => cb.value)
       };
       
       localStorage.setItem('itemFilters', JSON.stringify(filters));
@@ -500,8 +503,8 @@ const itemTypes = [...new Set(items.map(item => item.type))].sort();
 
     // Reset all filters
     function resetFilters() {
-      document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-        (cb).checked = false;
+      document.querySelectorAll<HTMLInputElement>('input[type="checkbox"]').forEach(cb => {
+        cb.checked = false;
       });
       localStorage.removeItem('itemFilters');
       filterItems();
