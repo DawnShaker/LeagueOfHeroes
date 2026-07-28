@@ -1,12 +1,12 @@
 <section class="wizard-step" data-step="class-features">
   <div class="class-features-heading">
     <span class="wizard-kicker">Глава четвёртая</span>
-    <h2>Выбери умения класса</h2>
-    <p>Здесь собраны только обязательные варианты, которые нужно выбрать для выбранного класса.</p>
+    <h2>Выбери умения класса и вида</h2>
+    <p>Здесь собраны обязательные варианты класса и изменяемые владения вида. У каждого выбора указан источник и кратко объяснено, когда он действует.</p>
   </div>
 
   <div id="class-features-empty" class="class-features-empty" hidden>
-    На 1 уровне у выбранного класса нет дополнительных выборов.
+    На 1 уровне у выбранных класса и вида нет дополнительных выборов.
   </div>
 
   <div id="class-features-list" class="class-features-list"></div>
@@ -110,6 +110,28 @@
     border: 1px solid color-mix(in srgb, var(--wizard-gold) 35%, var(--card-border));
     border-radius: 0 0 .8rem .8rem;
     background: color-mix(in srgb, var(--background) 92%, #000);
+  }
+
+  :global(.adaptive-proficiency-table-wrap) {
+    max-height: min(31rem, 62vh);
+    overflow: auto;
+    border-top: 1px solid var(--card-border);
+  }
+
+  :global(.adaptive-proficiency-table) {
+    min-width: 0;
+  }
+
+  :global(.adaptive-proficiency-table thead) {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+
+  :global(.adaptive-proficiency-table th:last-child),
+  :global(.adaptive-proficiency-table td:last-child) {
+    width: 112px;
+    text-align: center;
   }
 
   :global(.weapon-mastery-toolbar) {
@@ -506,6 +528,10 @@
     box-shadow: inset 4px 0 0 var(--wizard-gold);
   }
 
+  :global(.class-feature-choice-row) {
+    cursor: pointer;
+  }
+
   :global(.class-feature-table tbody tr:last-child td) {
     border-bottom: 0;
   }
@@ -517,7 +543,9 @@
 
   :global(.class-feature-name > span),
   :global(.class-feature-name > a) {
-    display: block;
+    display: inline-flex;
+    width: fit-content;
+    max-width: 100%;
   }
 
   :global(.class-feature-name small) {

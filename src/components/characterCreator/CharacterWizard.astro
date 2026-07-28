@@ -287,6 +287,57 @@ const creatorOptions = {
 
   const $ = (selector) => document.querySelector(selector);
   const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+
+  function captureWizardScrollState() {
+    const root = $('#character-wizard');
+    if (!root) return null;
+
+    const positions = [root, ...root.querySelectorAll('*')]
+      .filter((element) => element.scrollTop > 0 || element.scrollLeft > 0)
+      .map((element) => {
+        if (element.id) {
+          return { type: 'id', value: element.id, index: 0, top: element.scrollTop, left: element.scrollLeft };
+        }
+        const className = Array.from(element.classList || [])[0];
+        if (!className) return null;
+        const matches = Array.from(root.getElementsByClassName(className));
+        return {
+          type: 'class',
+          value: className,
+          index: matches.indexOf(element),
+          top: element.scrollTop,
+          left: element.scrollLeft
+        };
+      })
+      .filter(Boolean);
+
+    return { windowX: window.scrollX, windowY: window.scrollY, positions };
+  }
+
+  function restoreWizardScrollState(snapshot) {
+    if (!snapshot) return;
+    const root = $('#character-wizard');
+    if (!root) return;
+
+    for (const position of snapshot.positions) {
+      const element = position.type === 'id'
+        ? document.getElementById(position.value)
+        : root.getElementsByClassName(position.value)[position.index];
+      if (!element) continue;
+      element.scrollTop = position.top;
+      element.scrollLeft = position.left;
+    }
+    window.scrollTo(snapshot.windowX, snapshot.windowY);
+  }
+
+  function preserveWizardScrollAfterRender() {
+    const snapshot = captureWizardScrollState();
+    requestAnimationFrame(() => {
+      restoreWizardScrollState(snapshot);
+      requestAnimationFrame(() => restoreWizardScrollState(snapshot));
+    });
+  }
+
   const escapeHtml = (value) => String(value ?? '').replace(
     /[&<>'"]/g,
     (char) => ({
@@ -524,16 +575,159 @@ const creatorOptions = {
     const identity = `${species?.id || ''} ${species?.name || ''} ${species?.nameEn || ''} ${variant?.id || ''} ${variant?.name || ''} ${variant?.nameEn || ''}`
       .toLocaleLowerCase('ru')
       .replace(/ё/g, 'е');
+    const speciesLabel = [species?.name, variant?.name].filter(Boolean).join(' — ');
     if (/astral|астральн/.test(identity) && /elf|эльф/.test(identity)) {
-      return { title: 'Астральный транс', skillCount: 1, flexibleCount: 1 };
+      return {
+        title: 'Астральный транс',
+        speciesLabel,
+        skillCount: 1,
+        flexibleCount: 1,
+        description: 'После каждого продолжительного отдыха выберите один навык и одно оружие или инструмент. Владения действуют до окончания следующего продолжительного отдыха.'
+      };
     }
     if (/githyanki|гитъянк/.test(identity)) {
-      return { title: 'Астральное знание', skillCount: 1, flexibleCount: 1 };
+      return {
+        title: 'Астральное знание',
+        speciesLabel,
+        skillCount: 1,
+        flexibleCount: 1,
+        description: 'После каждого продолжительного отдыха выберите один навык и одно оружие или инструмент. Владения действуют до окончания следующего продолжительного отдыха.'
+      };
     }
-    if (/shadar[\s_-]?kai|шадар[\s-]?кай|eladrin|эладрин/.test(identity)) {
-      return { title: 'Транс', skillCount: 0, flexibleCount: 2 };
+    if (
+      /shadar[\s_-]?kai|шадар[\s-]?кай|eladrin|эладрин/.test(identity)
+      || (/sea|морск/.test(identity) && /elf|эльф/.test(identity))
+    ) {
+      return {
+        title: 'Транс',
+        speciesLabel,
+        skillCount: 0,
+        flexibleCount: 2,
+        description: 'После каждого продолжительного отдыха выберите два владения оружием или инструментами, которых у персонажа ещё нет. Их можно заменить после следующего продолжительного отдыха.'
+      };
     }
     return null;
+  }
+
+  function adaptiveSpeciesClassFeatureChoicesComplete() {
+    const config = adaptiveSpeciesProficiencyConfig();
+    if (!config) return true;
+    const skillCount = (state.choices['species:adaptiveSkill'] || []).filter(Boolean).length;
+    return skillCount === config.skillCount;
+  }
+
+  function selectedAdaptiveWeapons() {
+    return (state.choices['species:adaptiveProficiencies'] || [])
+      .filter((value) => value.startsWith('Оружие: '));
+  }
+
+  function syncAdaptiveSpeciesToolChoices({ migrateLegacy = false } = {}) {
+    const config = adaptiveSpeciesProficiencyConfig();
+    if (!config) return;
+
+    const weapons = selectedAdaptiveWeapons().slice(0, config.flexibleCount);
+    const legacyTools = (state.choices['species:adaptiveProficiencies'] || [])
+      .filter((value) => value.startsWith('Инструмент: '))
+      .map((value) => value.replace(/^Инструмент:\s*/, ''));
+    const currentTools = Array.isArray(state.choices['species:tools'])
+      ? state.choices['species:tools']
+      : [];
+    const toolLimit = Math.max(0, config.flexibleCount - weapons.length);
+    const tools = [...new Set([...currentTools, ...(migrateLegacy ? legacyTools : [])])]
+      .filter((tool) => creatorOptions.allTools.includes(tool))
+      .slice(0, toolLimit);
+
+    state.choices['species:tools'] = tools;
+    state.choices['species:adaptiveProficiencies'] = [
+      ...weapons,
+      ...tools.map((tool) => `Инструмент: ${tool}`)
+    ];
+  }
+
+  function adaptiveProficiencyItem(value) {
+    const name = String(value || '').replace(/^(?:Оружие|Инструмент):\s*/, '');
+    const normalized = normalizeEquipmentName(name);
+    return equipmentShopItems.find((item) => normalizeEquipmentName(item.name) === normalized) || null;
+  }
+
+  function renderAdaptiveSpeciesProficiencyGroup() {
+    const config = adaptiveSpeciesProficiencyConfig();
+    if (!config) return '';
+    const selectedSkill = (state.choices['species:adaptiveSkill'] || [])[0] || '';
+    const selectedFlexible = state.choices['species:adaptiveProficiencies'] || [];
+    const selectedWeapons = selectedFlexible.filter((value) => value.startsWith('Оружие: '));
+    const selectedTools = selectedFlexible.filter((value) => value.startsWith('Инструмент: '));
+    const flexibleOptions = ADAPTIVE_WEAPONS.map((name) => `Оружие: ${name}`);
+    return `
+      <section class="class-feature-group adaptive-species-feature">
+        <div class="class-feature-summary">
+          <div>
+            <span>Умение вида · ${escapeHtml(config.speciesLabel || 'Выбранный вид')}</span>
+            <h3>${escapeHtml(config.title)}: временные владения</h3>
+            <p>${escapeHtml(config.description)}</p>
+          </div>
+          <strong>${(selectedSkill ? 1 : 0) + selectedFlexible.length}/${config.skillCount + config.flexibleCount}</strong>
+        </div>
+        <div class="class-feature-table-wrap adaptive-species-fields">
+          <div class="faith-oath-recommendation">
+            <strong>Почему этот выбор находится здесь</strong>
+            <small>Оружие выбирается здесь, а оставшиеся ${Math.max(0, config.flexibleCount - selectedWeapons.length)} из ${config.flexibleCount} владений — на шаге «Инструменты». Эти владения даёт особенность вида «${escapeHtml(config.title)}», и после продолжительного отдыха их можно заменить.</small>
+          </div>
+          <div class="custom-lineage-choices">
+            ${config.skillCount ? `
+              <label class="variant-field">
+                <span>Временный навык — выберите ${config.skillCount}</span>
+                <select id="adaptive-species-skill">
+                  <option value="" ${selectedSkill ? '' : 'selected'} disabled>Выберите навык</option>
+                  ${creatorOptions.allSkills.map((skill) => `
+                    <option value="${escapeHtml(skill)}" ${selectedSkill === skill ? 'selected' : ''}>${escapeHtml(skillDisplayName(skill))}</option>
+                  `).join('')}
+                </select>
+              </label>
+            ` : ''}
+            <div class="adaptive-proficiency-table-wrap">
+              <table class="class-feature-table adaptive-proficiency-table">
+                <thead>
+                  <tr>
+                    <th>Оружие</th>
+                    <th>Выбрано оружия ${selectedWeapons.length}/${config.flexibleCount}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${flexibleOptions.map((option) => {
+                    const item = adaptiveProficiencyItem(option);
+                    const name = option.replace(/^(?:Оружие|Инструмент):\s*/, '');
+                    const checked = selectedWeapons.includes(option);
+                    const title = item
+                      ? `<a href="${escapeHtml(item.href)}" target="_blank" rel="noopener">${escapeHtml(name)} ↗</a>`
+                      : `<span>${escapeHtml(name)}</span>`;
+                    return `
+                      <tr class="class-feature-choice-row adaptive-proficiency-row">
+                        <td class="class-feature-name">
+                          ${title}
+                          <small>Временное владение оружием</small>
+                        </td>
+                        <td>
+                          <input
+                            class="class-feature-check"
+                            type="checkbox"
+                            data-adaptive-proficiency
+                            value="${escapeHtml(option)}"
+                            ${checked ? 'checked' : ''}
+                            aria-label="${escapeHtml(`${name}: временное владение от ${config.title}`)}"
+                          >
+                        </td>
+                      </tr>
+                    `;
+                  }).join('')}
+                </tbody>
+              </table>
+            </div>
+            ${selectedTools.length ? `<small class="adaptive-proficiency-transfer-note">На шаге «Инструменты» уже выбрано: ${escapeHtml(selectedTools.map((value) => value.replace(/^Инструмент:\s*/, '')).join(', '))}.</small>` : ''}
+          </div>
+        </div>
+      </section>
+    `;
   }
 
   function isKoboldSpecies(species = findSpecies()) {
@@ -1493,48 +1687,6 @@ const creatorOptions = {
         }
 
         ${
-          adaptiveSpeciesProficiencyConfig(species, variant)
-            ? `
-              <section class="content-section custom-lineage-section adaptive-proficiency-section">
-                <div class="content-section-heading">
-                  <span class="section-icon">✦</span>
-                  <div>
-                    <span class="section-kicker">${escapeHtml(adaptiveSpeciesProficiencyConfig(species, variant).title)}</span>
-                    <h3>Временные владения</h3>
-                  </div>
-                </div>
-                <p class="species-choice-description">Эти владения можно заменить после следующего продолжительного отдыха.</p>
-                <div class="custom-lineage-choices">
-                  ${adaptiveSpeciesProficiencyConfig(species, variant).skillCount ? `
-                    <label class="variant-field">
-                      <span>Навык</span>
-                      <select id="adaptive-species-skill">
-                        <option value="" ${(state.choices['species:adaptiveSkill'] || [])[0] ? '' : 'selected'} disabled>Выберите навык</option>
-                        ${creatorOptions.allSkills.map((skill) => `
-                          <option value="${escapeHtml(skill)}" ${(state.choices['species:adaptiveSkill'] || [])[0] === skill ? 'selected' : ''}>${escapeHtml(skillDisplayName(skill))}</option>
-                        `).join('')}
-                      </select>
-                    </label>
-                  ` : ''}
-                  <label class="variant-field">
-                    <span>Оружие или инструмент — выберите ${adaptiveSpeciesProficiencyConfig(species, variant).flexibleCount}</span>
-                    <select id="adaptive-species-flexible" multiple size="8">
-                      ${[
-                        ...ADAPTIVE_WEAPONS.map((name) => `Оружие: ${name}`),
-                        ...creatorOptions.allTools.map((name) => `Инструмент: ${name}`)
-                      ].map((option) => `
-                        <option value="${escapeHtml(option)}" ${(state.choices['species:adaptiveProficiencies'] || []).includes(option) ? 'selected' : ''}>${escapeHtml(option)}</option>
-                      `).join('')}
-                    </select>
-                    <small>${(state.choices['species:adaptiveProficiencies'] || []).length}/${adaptiveSpeciesProficiencyConfig(species, variant).flexibleCount}</small>
-                  </label>
-                </div>
-              </section>
-            `
-            : ''
-        }
-
-        ${
           isEladrinSpecies(species)
             ? `
               <section class="content-section custom-lineage-section eladrin-season-section">
@@ -2344,7 +2496,7 @@ const creatorOptions = {
   }
 
   function classFeaturesComplete() {
-    return getClassFeatureGroups().every((group) => {
+    return adaptiveSpeciesClassFeatureChoicesComplete() && getClassFeatureGroups().every((group) => {
       const selected = group.id === 'paladin-oath' || group.id === 'warlock-patron-path'
         ? (state.choices[`classFeature:${group.id}`] || state.choices['class:subclass'] || [])
         : (state.choices[`classFeature:${group.id}`] || []);
@@ -2529,10 +2681,12 @@ const creatorOptions = {
     if (!list || !empty || !warning) return;
 
     const groups = getClassFeatureGroups();
-    empty.hidden = groups.length > 0;
-    list.hidden = groups.length === 0;
+    const adaptiveSpeciesGroup = renderAdaptiveSpeciesProficiencyGroup();
+    const hasChoices = groups.length > 0 || Boolean(adaptiveSpeciesGroup);
+    empty.hidden = hasChoices;
+    list.hidden = !hasChoices;
 
-    list.innerHTML = groups.map((group) => {
+    list.innerHTML = adaptiveSpeciesGroup + groups.map((group) => {
       const key = `classFeature:${group.id}`;
       if (
         (group.id === 'paladin-oath' || group.id === 'warlock-patron-path')
@@ -2797,7 +2951,7 @@ const creatorOptions = {
                       </details>`
                     : `${optionTitle}${detailLabel}`;
 
-                return `<tr>
+                return `<tr class="class-feature-choice-row">
                   <td class="class-feature-name">${label}</td>
                   <td>
                     <input
@@ -2883,6 +3037,28 @@ const creatorOptions = {
       patronSort = event.target.value;
       renderClassFeatures();
     });
+    $('#adaptive-species-skill')?.addEventListener('change', (event) => {
+      state.choices['species:adaptiveSkill'] = event.target.value ? [event.target.value] : [];
+      saveState();
+      renderClassFeatures();
+      updatePreview();
+    });
+    $$('[data-adaptive-proficiency]').forEach((input) => input.addEventListener('change', () => {
+      const limit = adaptiveSpeciesProficiencyConfig()?.flexibleCount || 0;
+      syncAdaptiveSpeciesToolChoices({ migrateLegacy: true });
+      const selected = selectedAdaptiveWeapons();
+      if (input.checked && selected.length >= limit) {
+        renderClassFeatures(`Уже выбрано максимальное количество оружия: ${limit}.`);
+        return;
+      }
+      state.choices['species:adaptiveProficiencies'] = input.checked
+        ? [...selected, input.value]
+        : selected.filter((value) => value !== input.value);
+      syncAdaptiveSpeciesToolChoices();
+      saveState();
+      renderClassFeatures();
+      updatePreview();
+    }));
 
     $$('[data-custom-deity]').forEach((field) => {
       field.addEventListener('input', () => {
@@ -2932,6 +3108,7 @@ const creatorOptions = {
       saveState();
       renderClassFeatures();
     }));
+
   }
 
   function renderOriginFeats(message = '') {
@@ -3159,23 +3336,79 @@ const creatorOptions = {
       return;
     }
 
+    const characteristicConfigs = {
+      'background:traits': {
+        key: 'traits',
+        labels: ['Своя черта характера 1', 'Своя черта характера 2'],
+        help: 'Черты характера — заметные привычки, манеры речи и повторяющиеся особенности поведения героя. Для персонажа нужны две разные черты.'
+      },
+      'background:ideal': {
+        key: 'ideal',
+        labels: ['Свой идеал'],
+        help: 'Идеал — главный принцип или убеждение героя: то, чем он руководствуется, когда принимает важные решения.'
+      },
+      'background:bond': {
+        key: 'bond',
+        labels: ['Своя привязанность'],
+        help: 'Привязанность — человек, место, организация, предмет или цель, ради которых герой готов рисковать и действовать.'
+      },
+      'background:flaw': {
+        key: 'flaw',
+        labels: ['Своя слабость'],
+        help: 'Слабость — страх, порок или недостаток, который способен осложнить жизнь герою и повлиять на его решения.'
+      }
+    };
+    const ensureCustomCharacteristics = () => {
+      state.backgroundCharacteristics = {
+        ...structuredClone(defaultState.backgroundCharacteristics || {}),
+        ...(state.backgroundCharacteristics || {})
+      };
+      Object.values(characteristicConfigs).forEach((config) => {
+        const current = state.backgroundCharacteristics[config.key];
+        state.backgroundCharacteristics[config.key] = Array.from(
+          { length: config.labels.length },
+          (_, index) => String(Array.isArray(current) ? current[index] || '' : '')
+        );
+      });
+    };
+    const syncCustomCharacteristicChoice = (choice) => {
+      const config = characteristicConfigs[choice.id];
+      if (!config) return;
+      ensureCustomCharacteristics();
+      const predefined = new Set(normalizeOptions(choice.options).map((option) => option.value));
+      const selectedPredefined = (state.choices[choice.id] || [])
+        .filter((value) => predefined.has(value));
+      const customValues = state.backgroundCharacteristics[config.key]
+        .map((value) => String(value || '').trim())
+        .filter(Boolean);
+      const availablePredefinedSlots = Math.max(0, choice.count - customValues.length);
+      state.choices[choice.id] = [
+        ...selectedPredefined.slice(0, availablePredefinedSlots),
+        ...customValues
+      ].slice(0, choice.count);
+    };
+    ensureCustomCharacteristics();
+    choices.forEach(syncCustomCharacteristicChoice);
+
     container.innerHTML = `
       <div class="inline-choice-title">
-        <span class="section-kicker">Обязательные выборы</span>
-        <h3>Заверши обязательные выборы</h3>
-        <p>Выбранные значения сохраняются автоматически.</p>
+        <span class="section-kicker">Детали прошлого</span>
+        <h3>Настрой особенности предыстории</h3>
+        <p>Черты характера, идеал, привязанность и слабость обязательны. Остальные таблицы можно пропустить.</p>
       </div>
       <div class="pending-choices">
         ${choices.map((choice) => {
           const selected = Array.isArray(state.choices[choice.id]) ? state.choices[choice.id] : [];
           const options = normalizeOptions(choice.options);
           const isCharacteristicChoice = ['background:traits','background:ideal','background:bond','background:flaw'].includes(choice.id);
+          const characteristicConfig = characteristicConfigs[choice.id];
           return `
-            <section class="pending-choice-card ${isCharacteristicChoice ? 'is-characteristic-list' : ''}">
+            <section class="pending-choice-card ${isCharacteristicChoice ? 'is-characteristic-list' : ''} ${choice.optional ? 'is-optional' : ''}">
               <div class="pending-choice-head">
                 <div><span>${escapeHtml(choice.source)}</span><h3>${escapeHtml(choice.title)}</h3></div>
                 <div class="choice-head-actions">
                   ${choice.randomizable ? `<button type="button" class="choice-random-button" data-random-choice="${escapeHtml(choice.id)}">Случайно</button>` : ''}
+                  ${choice.optional ? '<em class="optional-choice-badge">Необязательно</em>' : ''}
                   <strong>${selected.length}/${choice.count}</strong>
                 </div>
               </div>
@@ -3187,7 +3420,7 @@ const creatorOptions = {
                     : '';
                   return `
                   <label class="${isCharacteristicChoice ? 'characteristic-option-row' : 'dynamic-option'} ${option.disabled ? 'is-disabled' : ''}" ${option.reason ? `title="${escapeHtml(option.reason)}"` : ''}>
-                    <input type="${choice.count > 1 ? 'checkbox' : 'radio'}"
+                    <input type="${choice.count > 1 || choice.optional ? 'checkbox' : 'radio'}"
                       name="${escapeHtml(choice.id)}"
                       value="${escapeHtml(option.value)}"
                       data-background-choice="${escapeHtml(choice.id)}"
@@ -3200,6 +3433,27 @@ const creatorOptions = {
                   </label>`;
                 }).join('')}
               </div>
+              ${characteristicConfig ? `
+                <div class="custom-characteristic-fields">
+                  <div>
+                    <strong>Или напишите свой вариант</strong>
+                    <p>${escapeHtml(characteristicConfig.help)}</p>
+                  </div>
+                  <div class="custom-characteristic-grid">
+                    ${characteristicConfig.labels.map((label, index) => `
+                      <label>
+                        <span>${escapeHtml(label)}</span>
+                        <textarea
+                          rows="2"
+                          maxlength="800"
+                          data-custom-characteristic="${escapeHtml(characteristicConfig.key)}"
+                          data-custom-characteristic-index="${index}"
+                          placeholder="${escapeHtml(label)}">${escapeHtml(state.backgroundCharacteristics[characteristicConfig.key][index] || '')}</textarea>
+                      </label>
+                    `).join('')}
+                  </div>
+                </div>
+              ` : ''}
               <div class="choice-error" data-choice-error="${escapeHtml(choice.id)}"></div>
             </section>
           `;
@@ -3210,6 +3464,10 @@ const creatorOptions = {
       const id = button.dataset.randomChoice;
       const choice = choices.find((item) => item.id === id);
       if (!choice) return;
+      const customConfig = characteristicConfigs[id];
+      if (customConfig) {
+        state.backgroundCharacteristics[customConfig.key] = customConfig.labels.map(() => '');
+      }
       const available = normalizeOptions(choice.options).filter((option) => !option.disabled);
       const shuffled = [...available].sort(() => Math.random() - 0.5);
       state.choices[id] = shuffled.slice(0, choice.count).map((option) => option.value);
@@ -3221,6 +3479,10 @@ const creatorOptions = {
       const id = input.dataset.backgroundChoice;
       const choice = choices.find((item) => item.id === id);
       let selected = Array.isArray(state.choices[id]) ? [...state.choices[id]] : [];
+      const customConfig = characteristicConfigs[id];
+      if (input.checked && customConfig && choice.count === 1) {
+        state.backgroundCharacteristics[customConfig.key] = customConfig.labels.map(() => '');
+      }
 
       if (input.type === 'radio') selected = input.checked ? [input.value] : [];
       else if (input.checked) {
@@ -3237,6 +3499,23 @@ const creatorOptions = {
       saveState();
       if (input.closest('#origin-feats-extra-choices')) renderOriginFeats();
       else renderBackgroundDetails();
+    }));
+
+    $$('[data-custom-characteristic]').forEach((field) => field.addEventListener('input', () => {
+      const key = field.dataset.customCharacteristic;
+      const index = Number(field.dataset.customCharacteristicIndex);
+      const choice = choices.find((item) => characteristicConfigs[item.id]?.key === key);
+      if (!choice || !Number.isInteger(index)) return;
+      state.backgroundCharacteristics[key][index] = field.value;
+      syncCustomCharacteristicChoice(choice);
+      const selectedNow = new Set(state.choices[choice.id]);
+      $$(`[data-background-choice="${choice.id}"]`).forEach((input) => {
+        input.checked = selectedNow.has(input.value);
+      });
+      const counter = field.closest('.pending-choice-card')?.querySelector('.choice-head-actions > strong');
+      if (counter) counter.textContent = `${state.choices[choice.id].length}/${choice.count}`;
+      saveState();
+      updateNavigationChrome();
     }));
   }
 
@@ -3296,6 +3575,17 @@ const creatorOptions = {
     });
   }
 
+  function backgroundVariantChoiceLimit(background) {
+    const description = String(background?.variants?.description || '')
+      .toLocaleLowerCase('ru')
+      .replace(/ё/g, 'е');
+    const numericMaximum = description.match(/(?:до|от\s+\d+\s+до)\s+(\d+)/)?.[1];
+    if (numericMaximum) return Math.max(1, Number(numericMaximum));
+    if (/до\s+трех|от\s+одного\s+до\s+трех/.test(description)) return 3;
+    if (/до\s+двух|от\s+одного\s+до\s+двух/.test(description)) return 2;
+    return 1;
+  }
+
 
   function renderBackgroundDetails() {
     const container = $('#background-details');
@@ -3333,11 +3623,11 @@ const creatorOptions = {
               <label class="custom-background-wide"><span>Описание *</span><textarea data-custom-background-field="description" rows="4" placeholder="Кем герой был до начала приключений?">${escapeHtml(custom.description || '')}</textarea></label>
               <label><span>Название особенности *</span><input data-custom-background-field="feature" value="${escapeHtml(custom.feature || '')}" placeholder="Например, Знаток руин"></label>
               <label class="custom-background-wide"><span>Описание особенности *</span><textarea data-custom-background-field="featureDescription" rows="3" placeholder="Как прошлое героя помогает ему во время приключений?">${escapeHtml(custom.featureDescription || '')}</textarea></label>
-              <label><span>Черта характера 1 *</span><textarea data-custom-background-field="trait1" rows="2">${escapeHtml(custom.trait1 || '')}</textarea></label>
-              <label><span>Черта характера 2 *</span><textarea data-custom-background-field="trait2" rows="2">${escapeHtml(custom.trait2 || '')}</textarea></label>
-              <label><span>Идеал *</span><textarea data-custom-background-field="ideal" rows="2">${escapeHtml(custom.ideal || '')}</textarea></label>
-              <label><span>Привязанность *</span><textarea data-custom-background-field="bond" rows="2">${escapeHtml(custom.bond || '')}</textarea></label>
-              <label class="custom-background-wide"><span>Слабость *</span><textarea data-custom-background-field="flaw" rows="2">${escapeHtml(custom.flaw || '')}</textarea></label>
+              <label><span>Черта характера 1 *</span><small>Привычка, манера речи или заметная особенность поведения.</small><textarea data-custom-background-field="trait1" rows="2" placeholder="Например: всегда ищу смешную сторону происходящего">${escapeHtml(custom.trait1 || '')}</textarea></label>
+              <label><span>Черта характера 2 *</span><small>Вторая отличительная черта должна дополнять образ героя.</small><textarea data-custom-background-field="trait2" rows="2" placeholder="Например: записываю каждую услышанную легенду">${escapeHtml(custom.trait2 || '')}</textarea></label>
+              <label><span>Идеал *</span><small>Главный принцип, которым герой руководствуется в решениях.</small><textarea data-custom-background-field="ideal" rows="2" placeholder="Например: свобода важнее безопасности">${escapeHtml(custom.ideal || '')}</textarea></label>
+              <label><span>Привязанность *</span><small>Человек, место, организация, предмет или цель, ради которых герой действует.</small><textarea data-custom-background-field="bond" rows="2" placeholder="Например: защищу родную труппу любой ценой">${escapeHtml(custom.bond || '')}</textarea></label>
+              <label class="custom-background-wide"><span>Слабость *</span><small>Страх, порок или недостаток, способный создать герою проблемы.</small><textarea data-custom-background-field="flaw" rows="2" placeholder="Например: не могу отказаться от опасного пари">${escapeHtml(custom.flaw || '')}</textarea></label>
             </div>
           </section>
         </article>`;
@@ -3368,11 +3658,19 @@ const creatorOptions = {
 
     const choices = [];
 
-    if (background.variants?.table?.length) choices.push({ id:'background:variant', title:background.variants.title || 'Вариант предыстории', description:background.variants.description || '', count:1, options:background.variants.table.map((item)=>item.result), source:`Предыстория: ${background.name}` });
-    choices.push({ id:'background:traits', title:'Черты характера', description:'Выберите две черты характера.', count:2, randomizable:true, options:characteristicOptions(background,'personalityTraits','trait'), source:`Предыстория: ${background.name}` });
-    choices.push({ id:'background:ideal', title:'Идеал', description:'Выберите один идеал.', count:1, randomizable:true, options:characteristicOptions(background,'ideals','ideal'), source:`Предыстория: ${background.name}` });
-    choices.push({ id:'background:bond', title:'Привязанность', description:'Выберите одну привязанность.', count:1, randomizable:true, options:characteristicOptions(background,'bonds','bond'), source:`Предыстория: ${background.name}` });
-    choices.push({ id:'background:flaw', title:'Слабость', description:'Выберите одну слабость.', count:1, randomizable:true, options:characteristicOptions(background,'flaws','flaw'), source:`Предыстория: ${background.name}` });
+    if (background.variants?.table?.length) choices.push({
+      id:'background:variant',
+      title:background.variants.title || 'Вариант предыстории',
+      description:background.variants.description || 'При желании выберите подходящий вариант.',
+      count:backgroundVariantChoiceLimit(background),
+      optional:true,
+      options:background.variants.table.map((item)=>item.result),
+      source:`Предыстория: ${background.name}`
+    });
+    choices.push({ id:'background:traits', title:'Черты характера', description:'Выберите или впишите две заметные особенности поведения, привычки или манеры героя.', count:2, randomizable:true, options:characteristicOptions(background,'personalityTraits','trait'), source:`Предыстория: ${background.name}` });
+    choices.push({ id:'background:ideal', title:'Идеал', description:'Выберите или впишите один главный принцип, которым руководствуется герой.', count:1, randomizable:true, options:characteristicOptions(background,'ideals','ideal'), source:`Предыстория: ${background.name}` });
+    choices.push({ id:'background:bond', title:'Привязанность', description:'Выберите или впишите одну связь, цель или ценность, ради которой герой готов действовать.', count:1, randomizable:true, options:characteristicOptions(background,'bonds','bond'), source:`Предыстория: ${background.name}` });
+    choices.push({ id:'background:flaw', title:'Слабость', description:'Выберите или впишите один недостаток, страх или порок, который создаёт герою трудности.', count:1, randomizable:true, options:characteristicOptions(background,'flaws','flaw'), source:`Предыстория: ${background.name}` });
 
 
     container.innerHTML = `
@@ -3380,7 +3678,7 @@ const creatorOptions = {
         <header class="background-hero"><div><span class="source-label">${escapeHtml(background.sourceBook || 'Предыстория')}</span><div class="background-title-row"><h2>${escapeHtml(background.name)} <small>[${escapeHtml(background.nameEn || '')}]</small></h2><button class="button button-secondary button-small" type="button" id="change-background">Изменить</button></div><p>${escapeHtml(String(background.lore || '').split('\n').filter(Boolean)[0] || '')}</p></div><span class="background-rune">✧</span></header>
         <section class="content-section lore-section"><div class="content-section-heading"><span class="section-icon">◈</span><div><span class="section-kicker">Прошлая жизнь</span><h3>История персонажа</h3></div></div><div class="lore-preview">${loreToHtml(background.lore, 2)}</div><details class="full-lore"><summary>Показать полное описание</summary><div class="full-lore-content">${loreToHtml(background.lore)}</div></details></section>
         <section class="background-stats"><div><span>Навыки</span><strong>${escapeHtml(skillListDisplay(background.skills))}</strong></div><div><span>Инструменты</span><strong>${escapeHtml(background.tools || '—')}</strong></div><div><span>Черта</span><strong>Выбирается на следующем этапе</strong></div></section>
-        <section class="content-section background-rewards"><div class="content-section-heading"><span class="section-icon">✦</span><div><span class="section-kicker">Наследие прошлого</span><h3>Снаряжение и особенности</h3></div></div><div class="background-reward-grid"><article><span>Снаряжение</span><strong>${escapeHtml(background.equipment || '—')}</strong></article><article><span>Выбранный вариант</span><strong>${escapeHtml(state.choices['background:variant']?.[0] || '—')}</strong></article></div></section>
+        <section class="content-section background-rewards"><div class="content-section-heading"><span class="section-icon">✦</span><div><span class="section-kicker">Наследие прошлого</span><h3>Снаряжение и особенности</h3></div></div><div class="background-reward-grid"><article><span>Снаряжение</span><strong>${escapeHtml(background.equipment || '—')}</strong></article><article><span>Выбранные варианты</span><strong>${escapeHtml((state.choices['background:variant'] || []).join(', ') || '—')}</strong></article></div></section>
         ${background.spellTable ? `<section class="content-section background-spells"><div class="content-section-heading"><span class="section-icon">✺</span><div><span class="section-kicker">Магия</span><h3>${escapeHtml(background.spellTable.name || 'Заклинания')}</h3></div></div><p>${escapeHtml(background.spellTable.description || '')}</p><div class="spell-table-list">${(background.spellTable.spells || []).map((row)=>`<p><strong>${escapeHtml(row.level || '')}</strong><span>${escapeHtml((row.spells || []).join(', '))}</span></p>`).join('')}</div></section>` : ''}
         <section class="content-section background-choices-section"><div id="background-rule-choices"></div></section>
       </article>`;
@@ -4128,9 +4426,14 @@ const creatorOptions = {
           ? `Все ${sharedLimit} выборов черты «Одарённый» потрачены на навыки. На шаге «Инструменты» новые инструменты от этой черты будут недоступны. Чтобы выбрать инструмент, снимите здесь один из навыков от черты.`
           : `Черта «Одарённый» распределена полностью: навыки ${featSkillCount}, инструменты ${featToolCount}.`
       : '';
-    warning.textContent = message || skilledInfo;
-    warning.hidden = !(message || skilledInfo);
-    warning.classList.toggle('is-info', !message && Boolean(skilledInfo));
+    const adaptiveConfig = adaptiveSpeciesProficiencyConfig();
+    const adaptiveInfo = adaptiveConfig?.skillCount
+      ? `Особенность вида «${adaptiveConfig.title}»: навык ${skillDisplayName((state.choices['species:adaptiveSkill'] || [])[0])} выбран на шаге 3.1. Это временное владение можно заменить после продолжительного отдыха.`
+      : '';
+    const skillsInfo = [skilledInfo, adaptiveInfo].filter(Boolean).join(' ');
+    warning.textContent = message || skillsInfo;
+    warning.hidden = !(message || skillsInfo);
+    warning.classList.toggle('is-info', !message && Boolean(skillsInfo));
 
     $$('[data-skill-source]').forEach((input) => input.addEventListener('change', () => {
       const source = input.dataset.skillSource;
@@ -4451,12 +4754,11 @@ const creatorOptions = {
       }
 
       if (source === 'species' && adaptiveSpeciesProficiencyConfig()) {
-        const selectedTools = (state.choices['species:adaptiveProficiencies'] || [])
-          .filter((value) => value.startsWith('Инструмент: '))
-          .map((value) => value.replace(/^Инструмент:\s*/, ''));
-        count = selectedTools.length;
-        allowed = [...selectedTools];
-        fixed = [...selectedTools];
+        syncAdaptiveSpeciesToolChoices({ migrateLegacy: true });
+        const adaptiveConfig = adaptiveSpeciesProficiencyConfig();
+        count = Math.max(0, adaptiveConfig.flexibleCount - selectedAdaptiveWeapons().length);
+        allowed = [...creatorOptions.allTools];
+        fixed = [];
       }
 
       if (source === 'species' && /autognome|автогном/i.test(
@@ -4658,6 +4960,7 @@ const creatorOptions = {
         ? [...fixed, ...selectable].slice(0, skilledSharedChoiceLimit())
         : [...fixed, ...selectable].slice(0, item.count);
     }
+    if (adaptiveSpeciesProficiencyConfig()) syncAdaptiveSpeciesToolChoices();
 
     const skilledLimit = skilledSharedChoiceLimit();
     const skilledSkillCount = (state.choices['feat:skills'] || []).length;
@@ -4692,9 +4995,19 @@ const creatorOptions = {
           ? `Все ${skilledLimit} выборов черты «Одарённый» уже потрачены на навыки. Чтобы выбрать инструмент, вернитесь на шаг «Навыки» и снимите один из выборов от черты.`
           : `Черта «Одарённый» распределена полностью: навыки ${skilledSkillCount}, инструменты ${skilledToolCount}.`
       : '';
-    warning.textContent = message || skilledInfo;
-    warning.hidden = !(message || skilledInfo);
-    warning.classList.toggle('is-info', !message && Boolean(skilledInfo));
+    const adaptiveConfig = adaptiveSpeciesProficiencyConfig();
+    const adaptiveWeapons = selectedAdaptiveWeapons();
+    const adaptiveToolLimit = adaptiveConfig
+      ? Math.max(0, adaptiveConfig.flexibleCount - adaptiveWeapons.length)
+      : 0;
+    const adaptiveTools = state.choices['species:tools'] || [];
+    const adaptiveInfo = adaptiveConfig
+      ? `Особенность вида «${adaptiveConfig.title}»: оружие ${adaptiveWeapons.length}/${adaptiveConfig.flexibleCount}, инструменты ${adaptiveTools.length}/${adaptiveToolLimit}. Незанятые оружием владения выберите здесь; после продолжительного отдыха их можно заменить.`
+      : '';
+    const toolsInfo = [skilledInfo, adaptiveInfo].filter(Boolean).join(' ');
+    warning.textContent = message || toolsInfo;
+    warning.hidden = !(message || toolsInfo);
+    warning.classList.toggle('is-info', !message && Boolean(toolsInfo));
 
     $$('[data-tools-source]').forEach((input) => input.addEventListener('change', () => {
       const source=input.dataset.toolsSource, value=input.value, item=config[source];
@@ -4719,6 +5032,9 @@ const creatorOptions = {
       }
       if (source === 'class' && /^(monk|монах)$/i.test(String(findClass()?.id || findClass()?.name || '').trim())) {
         state.equipment.initializedFor = '';
+      }
+      if (source === 'species' && adaptiveSpeciesProficiencyConfig()) {
+        syncAdaptiveSpeciesToolChoices();
       }
 
       saveState();
@@ -5625,9 +5941,7 @@ const creatorOptions = {
       return ['name', 'description', 'feature', 'featureDescription', 'trait1', 'trait2', 'ideal', 'bond', 'flaw']
         .every((key) => String(custom[key] || '').trim());
     }
-    const background = findBackground();
-    return (!background?.variants?.table?.length || (state.choices['background:variant'] || []).length === 1)
-      && (state.choices['background:traits'] || []).length === 2
+    return (state.choices['background:traits'] || []).length === 2
       && (state.choices['background:ideal'] || []).length === 1
       && (state.choices['background:bond'] || []).length === 1
       && (state.choices['background:flaw'] || []).length === 1;
@@ -5679,11 +5993,6 @@ const creatorOptions = {
       if (speciesCantripChoice() && !(state.choices['species:cantrip'] || [])[0]) return false;
       if (isKhoravarVariant() && !(state.choices['species:khoravarProficiencyType'] || [])[0]) return false;
       if (isWoodHalfElfVariant() && !(state.choices['species:woodHalfElfLegacy'] || [])[0]) return false;
-      if (adaptiveSpeciesProficiencyConfig()) {
-        const config = adaptiveSpeciesProficiencyConfig();
-        if (config.skillCount && !(state.choices['species:adaptiveSkill'] || [])[0]) return false;
-        if ((state.choices['species:adaptiveProficiencies'] || []).length !== config.flexibleCount) return false;
-      }
       if (isEladrinSpecies() && !selectedEladrinSeason()) return false;
       if (isCustomLineageSpecies() && !(state.choices['species:customLineageFeature'] || [])[0]) return false;
       return true;
@@ -5716,8 +6025,11 @@ const creatorOptions = {
 
   function conditionalStepAvailable(step) {
     if (step === 'class-features') {
-      return Boolean(state.class) && getClassFeatureGroups().some((group) =>
-        Number(group?.count || 0) > 0 && Array.isArray(group?.options) && group.options.length > 0
+      return Boolean(state.class) && (
+        Boolean(adaptiveSpeciesProficiencyConfig())
+        || getClassFeatureGroups().some((group) =>
+          Number(group?.count || 0) > 0 && Array.isArray(group?.options) && group.options.length > 0
+        )
       );
     }
     if (step === 'expertise') {
@@ -5912,6 +6224,20 @@ const creatorOptions = {
     });
   }
 
+  state.profile = {
+    ...structuredClone(defaultState.profile || {}),
+    ...(state.profile || {})
+  };
+  $$('[data-character-profile]').forEach((field) => {
+    const key = field.dataset.characterProfile;
+    if (!key) return;
+    field.value = state.profile[key] || '';
+    field.addEventListener('input', (event) => {
+      state.profile[key] = event.target.value;
+      saveState();
+    });
+  });
+
   $$('.species-card').forEach((card) => {
     card.addEventListener('click', () => {
       state.species = card.dataset.speciesId;
@@ -5985,6 +6311,7 @@ const creatorOptions = {
   $$('.background-card').forEach((card) => {
     card.addEventListener('click', () => {
       state.background = card.dataset.backgroundId;
+      state.backgroundCharacteristics = structuredClone(defaultState.backgroundCharacteristics || {});
       const keptOriginFeat = [...(state.choices['background:originFeat'] || [])];
       state.choices['background:skills'] = [];
       Object.keys(state.choices).filter((id) => (id.startsWith('background:') && id !== 'background:originFeat') || id.startsWith('feat:')).forEach((id) => delete state.choices[id]);
@@ -6015,6 +6342,17 @@ const creatorOptions = {
   document.addEventListener('change', () => {
     queueMicrotask(updateNavigationChrome);
   });
+
+  document.addEventListener('change', (event) => {
+    const target = event.target;
+    if (
+      target instanceof HTMLInputElement
+      && (target.type === 'checkbox' || target.type === 'radio')
+      && target.closest('#character-wizard')
+    ) {
+      preserveWizardScrollAfterRender();
+    }
+  }, true);
 
   document.addEventListener('input', (event) => {
     if (event.target === nameInput) queueMicrotask(updateNavigationChrome);
@@ -6065,18 +6403,6 @@ const creatorOptions = {
       return;
     }
 
-    if (steps[state.step] === 'species' && adaptiveSpeciesProficiencyConfig()) {
-      const config = adaptiveSpeciesProficiencyConfig();
-      if (config.skillCount && !(state.choices['species:adaptiveSkill'] || [])[0]) {
-        alert('Выберите временное владение навыком.');
-        return;
-      }
-      if ((state.choices['species:adaptiveProficiencies'] || []).length !== config.flexibleCount) {
-        alert(`Выберите ${config.flexibleCount} владения оружием или инструментами.`);
-        return;
-      }
-    }
-
     if (steps[state.step] === 'species' && isEladrinSpecies() && !selectedEladrinSeason()) {
       alert('Выберите сезон Эладрина.');
       return;
@@ -6093,6 +6419,11 @@ const creatorOptions = {
     }
 
     if (steps[state.step] === 'class-features' && !classFeaturesComplete()) {
+      const adaptiveConfig = adaptiveSpeciesProficiencyConfig();
+      if (adaptiveConfig && !adaptiveSpeciesClassFeatureChoicesComplete()) {
+        alert(`Завершите выбор от особенности вида «${adaptiveConfig.title}»: выберите ${adaptiveConfig.skillCount} временный навык.`);
+        return;
+      }
       const customDeitySelected = (state.choices['classFeature:faith'] || []).includes('faith-other-deity');
       const customPatronSelected = (state.choices['classFeature:warlock-patron'] || []).includes('patron-custom');
       alert(customDeitySelected
@@ -6147,7 +6478,7 @@ const creatorOptions = {
     }
 
     if (steps[state.step] === 'background') {
-      const incomplete = Array.from(document.querySelectorAll('#background-rule-choices .pending-choice-card')).some((card) => {
+      const incomplete = Array.from(document.querySelectorAll('#background-rule-choices .pending-choice-card:not(.is-optional)')).some((card) => {
         const values = (card.querySelector('.choice-head-actions > strong')?.textContent || '0/0').split('/').map(Number);
         return values[0] !== values[1];
       });
@@ -6171,13 +6502,17 @@ const creatorOptions = {
     const background = findBackground();
     if (background) {
       const configs = [
-        ['background:traits', 'personalityTraits', 'trait'],
-        ['background:ideal', 'ideals', 'ideal'],
-        ['background:bond', 'bonds', 'bond'],
-        ['background:flaw', 'flaws', 'flaw']
+        ['background:traits', 'personalityTraits', 'trait', 'traits'],
+        ['background:ideal', 'ideals', 'ideal', 'ideal'],
+        ['background:bond', 'bonds', 'bond', 'bond'],
+        ['background:flaw', 'flaws', 'flaw', 'flaw']
       ];
-      configs.forEach(([choiceId, key, labelKey]) => {
+      configs.forEach(([choiceId, key, labelKey, customKey]) => {
         const allowed = new Set(characteristicOptions(background, key, labelKey).filter((option) => !option.disabled).map((option) => option.value));
+        (state.backgroundCharacteristics?.[customKey] || [])
+          .map((value) => String(value || '').trim())
+          .filter(Boolean)
+          .forEach((value) => allowed.add(value));
         state.choices[choiceId] = (state.choices[choiceId] || []).filter((value) => allowed.has(value));
       });
     }
@@ -6344,6 +6679,25 @@ const creatorOptions = {
     });
   }
 
+  $('#character-wizard')?.addEventListener('click', (event) => {
+    if (!(event.target instanceof Element)) return;
+    if (event.target.closest('a, input, button, label, select, textarea, details, summary')) return;
+
+    const cell = event.target.closest('td');
+    const row = event.target.closest('tr');
+    if (!row || row.closest('thead')) return;
+
+    const enabledChoices = (scope) => [...scope.querySelectorAll('input[type="checkbox"], input[type="radio"]')]
+      .filter((input) => !input.disabled);
+    const cellChoices = cell ? enabledChoices(cell) : [];
+    const choices = cellChoices.length === 1 ? cellChoices : enabledChoices(row);
+
+    // Если в строке несколько источников выбора, клик по названию неоднозначен.
+    // В этом случае переключается только ячейка, содержащая одну конкретную галочку.
+    if (choices.length !== 1) return;
+    choices[0].click();
+  });
+
   $('#reset-character')?.addEventListener('click', () => {
     localStorage.removeItem(STORAGE_KEY);
     state = structuredClone(defaultState);
@@ -6375,6 +6729,16 @@ const creatorOptions = {
     position: relative;
     isolation: isolate;
     transition: color .35s ease, background-color .45s ease;
+  }
+
+  .character-wizard a {
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .character-wizard tbody td:has(input[type='checkbox']:not(:disabled)),
+  .character-wizard tbody td:has(input[type='radio']:not(:disabled)) {
+    cursor: pointer;
   }
 
   .character-wizard::before {
@@ -7458,6 +7822,8 @@ const creatorOptions = {
   .dynamic-option small { display: block; margin-left: auto; max-width: 155px; opacity: .72; font-size: .66rem; line-height: 1.25; text-align: right; }
 
   .pending-choice-card.is-characteristic-list { padding: .95rem 1rem 1rem; }
+  .pending-choice-card.is-optional { border-style: dashed; }
+  .optional-choice-badge { padding: .22rem .48rem; border: 1px solid color-mix(in srgb,var(--wizard-gold) 35%,var(--card-border)); border-radius: 999px; color: var(--wizard-gold-light); font-size: .64rem; font-style: normal; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; }
   .characteristic-option-list { display: grid; grid-template-columns: 1fr; gap: 0; max-height: none; overflow: visible; border: 1px solid var(--card-border); border-radius: .62rem; background: color-mix(in srgb, var(--card-bg) 74%, var(--background)); }
   .characteristic-option-row { display: grid; grid-template-columns: auto 1.75rem minmax(0, 1fr) auto auto; align-items: start; gap: .7rem; padding: .78rem .85rem; border: 0; border-bottom: 1px solid var(--card-border); border-radius: 0; background: transparent; line-height: 1.45; }
   .characteristic-option-row:first-child { border-radius: .6rem .6rem 0 0; }
@@ -7470,6 +7836,15 @@ const creatorOptions = {
   .alignment-requirement { align-self: center; padding: .22rem .45rem; border: 1px solid color-mix(in srgb, var(--wizard-gold) 35%, var(--card-border)); border-radius: 999px; color: var(--wizard-gold-light); font-size: .68rem; font-style: normal; font-weight: 800; white-space: nowrap; }
   .characteristic-option-row small { align-self: center; max-width: none; padding: .2rem .42rem; border-radius: 999px; background: color-mix(in srgb, #ef9b83 10%, transparent); color: #efb4a4; font-size: .64rem; text-align: center; white-space: nowrap; }
   .characteristic-option-row.is-disabled { opacity: .46; }
+  .custom-characteristic-fields { display: grid; gap: .75rem; margin-top: .85rem; padding: .9rem; border: 1px dashed color-mix(in srgb,var(--wizard-gold) 36%,var(--card-border)); border-radius: .62rem; background: color-mix(in srgb,var(--wizard-gold) 4%,transparent); }
+  .custom-characteristic-fields > div:first-child { display: grid; gap: .25rem; }
+  .custom-characteristic-fields > div:first-child strong { color: var(--wizard-gold-light); }
+  .custom-characteristic-fields > div:first-child p { margin: 0; opacity: .72; line-height: 1.5; }
+  .custom-characteristic-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .7rem; }
+  .custom-characteristic-grid label { display: grid; gap: .4rem; }
+  .custom-characteristic-grid label > span { color: var(--wizard-gold); font-size: .68rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+  .custom-characteristic-grid textarea { width: 100%; min-height: 5rem; padding: .75rem .85rem; border: 1px solid var(--card-border); border-radius: .52rem; background: var(--background); color: var(--text); font: inherit; line-height: 1.45; outline: none; resize: vertical; }
+  .custom-characteristic-grid textarea:focus { border-color: var(--wizard-gold); box-shadow: 0 0 0 3px color-mix(in srgb,var(--wizard-gold) 14%,transparent); }
   .choice-error { min-height: 1rem; margin-top: .45rem; color: #ef9b83; font-size: .8rem; }
 
 
@@ -7754,6 +8129,7 @@ const creatorOptions = {
     .background-rune { justify-self: start; width: 72px; height: 72px; font-size: 2.5rem; }
     .custom-background-grid { grid-template-columns: 1fr; }
     .custom-background-wide { grid-column: auto; }
+    .custom-characteristic-grid { grid-template-columns: 1fr; }
 
     .result-row {
       grid-template-columns: 1fr;

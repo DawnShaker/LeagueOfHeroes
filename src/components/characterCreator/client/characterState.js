@@ -11,6 +11,19 @@
         state = {
           ...structuredClone(defaultState),
           ...saved,
+          profile: {
+            ...structuredClone(defaultState.profile || {}),
+            ...(saved.profile && typeof saved.profile === 'object'
+              ? saved.profile
+              : {})
+          },
+          backgroundCharacteristics: {
+            ...structuredClone(defaultState.backgroundCharacteristics || {}),
+            ...(saved.backgroundCharacteristics &&
+            typeof saved.backgroundCharacteristics === 'object'
+              ? saved.backgroundCharacteristics
+              : {})
+          },
           physique: {
             ...structuredClone(defaultState.physique),
             ...(saved.physique || {})

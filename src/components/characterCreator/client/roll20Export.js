@@ -74,6 +74,42 @@
 
     const creatureType = species?.type || 'Гуманоид';
     const creatureSize = state.physique.size || species?.size || '';
+    const profile = state.profile && typeof state.profile === 'object'
+      ? state.profile
+      : {};
+    const profileSize = String(profile.size || '').trim() || creatureSize;
+
+    const classFeatureGroups = getClassFeatureGroups();
+    const selectedClassFeatureOption = (groupId) => {
+      const group = classFeatureGroups.find((item) => item.id === groupId);
+      const selectedId = state.choices?.[`classFeature:${groupId}`]?.[0];
+      return group?.options?.find((option) => option.id === selectedId) || null;
+    };
+    const selectedOath = selectedClassFeatureOption('paladin-oath');
+    const selectedDeity = selectedClassFeatureOption('faith');
+    const selectedPatron = selectedClassFeatureOption('warlock-patron');
+    const describeRelationship = (label, option) => {
+      if (!option) return '';
+      const details = option.exportDescription
+        ? [option.exportDescription]
+        : [
+            option.detail,
+            option.type ? `Вид: ${option.type}` : '',
+            option.alignment ? `Мировоззрение: ${option.alignment}` : '',
+            Array.isArray(option.domains) && option.domains.length
+              ? `Домены: ${option.domains.join(', ')}`
+              : '',
+            option.realm ? `Обитель: ${option.realm}` : '',
+            option.description
+          ].filter(Boolean);
+      return `${label}: ${option.name || option.id}${details.length ? `\n${details.join('\n')}` : ''}`;
+    };
+    const alliesAndOrganizations = [
+      String(profile.allies || '').trim(),
+      describeRelationship('Священная клятва', selectedOath),
+      describeRelationship('Божество или духовный путь', selectedDeity),
+      describeRelationship('Потусторонний покровитель', selectedPatron)
+    ].filter(Boolean).join('\n\n');
 
     const alignment = ALIGNMENTS[state.alignment] || '';
     const conModifier = modifier(totalScore('constitution'));
@@ -374,8 +410,15 @@
     upsert('race', speciesName);
     upsert('creature_type', creatureType);
     upsert('type', creatureType);
-    upsert('size', creatureSize);
-    upsert('character_size', creatureSize);
+    upsert('size', profileSize);
+    upsert('character_size', profileSize);
+    upsert('age', String(profile.age || '').trim());
+    upsert('eyes', String(profile.eyes || '').trim());
+    upsert('skin', String(profile.skin || '').trim());
+    upsert('hair', String(profile.hair || '').trim());
+    upsert('character_appearance', String(profile.appearance || '').trim());
+    upsert('character_backstory', String(profile.backstory || '').trim());
+    upsert('allies_and_organizations', alliesAndOrganizations);
 
     upsert('background', backgroundName);
     upsert('alignment', alignment);

@@ -18,10 +18,26 @@ export const POINT_BUY_COSTS: Record<number, number> = {
 export const DEFAULT_CHARACTER_STATE = {
   step: 0,
   name: '',
+  profile: {
+    age: '',
+    size: '',
+    eyes: '',
+    skin: '',
+    hair: '',
+    appearance: '',
+    allies: '',
+    backstory: ''
+  },
   species: null,
   speciesVariant: null,
   class: null,
   background: null,
+  backgroundCharacteristics: {
+    traits: ['', ''],
+    ideal: [''],
+    bond: [''],
+    flaw: ['']
+  },
   choices: {},
   customDeity: {
     name: '',

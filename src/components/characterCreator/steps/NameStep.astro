@@ -18,7 +18,58 @@
     />
   </label>
 
-  <div class="chapter-art" aria-hidden="true">✦</div>
+  <section class="profile-section" aria-labelledby="profile-appearance-title">
+    <div class="profile-section-heading">
+      <span>Облик героя</span>
+      <h3 id="profile-appearance-title">Основные сведения</h3>
+      <p>Эти поля необязательны: их можно заполнить сейчас или вернуться к ним позднее.</p>
+    </div>
+
+    <div class="profile-compact-grid">
+      <label>
+        <span>Возраст</span>
+        <input id="character-age" data-character-profile="age" type="text" maxlength="80" placeholder="Например: 27 лет" autocomplete="off" />
+      </label>
+      <label>
+        <span>Размер</span>
+        <input id="character-size" data-character-profile="size" type="text" maxlength="80" placeholder="Например: Средний" autocomplete="off" />
+      </label>
+      <label>
+        <span>Цвет глаз</span>
+        <input id="character-eyes" data-character-profile="eyes" type="text" maxlength="120" placeholder="Например: янтарный" autocomplete="off" />
+      </label>
+      <label>
+        <span>Цвет кожи, перьев или чешуи</span>
+        <input id="character-skin" data-character-profile="skin" type="text" maxlength="120" placeholder="Например: медно-красный" autocomplete="off" />
+      </label>
+      <label>
+        <span>Цвет волос, перьев или чешуи</span>
+        <input id="character-hair" data-character-profile="hair" type="text" maxlength="120" placeholder="Например: чёрный" autocomplete="off" />
+      </label>
+    </div>
+  </section>
+
+  <section class="profile-section profile-notes" aria-labelledby="profile-notes-title">
+    <div class="profile-section-heading">
+      <span>Летопись героя</span>
+      <h3 id="profile-notes-title">Описание персонажа</h3>
+    </div>
+
+    <div class="profile-notes-grid">
+      <label>
+        <span>Внешность персонажа</span>
+        <textarea data-character-profile="appearance" rows="6" maxlength="3000" placeholder="Как персонаж выглядит и какое первое впечатление производит?"></textarea>
+      </label>
+      <label>
+        <span>Союзники и организации</span>
+        <textarea data-character-profile="allies" rows="6" maxlength="3000" placeholder="Союзники, отряды, гильдии, церкви и другие связи. Выбранные божество, покровитель и клятва добавятся сюда автоматически при экспорте."></textarea>
+      </label>
+      <label class="profile-backstory">
+        <span>Предыстория персонажа</span>
+        <textarea data-character-profile="backstory" rows="8" maxlength="6000" placeholder="Кем герой был до начала приключений и как встал на этот путь?"></textarea>
+      </label>
+    </div>
+  </section>
 </section>
 
 <style>
@@ -52,7 +103,9 @@
     max-width: 620px;
   }
 
-  .name-field > span {
+  .name-field > span,
+  .profile-compact-grid label > span,
+  .profile-notes-grid label > span {
     color: var(--wizard-gold);
     font-size: 0.72rem;
     font-weight: 900;
@@ -60,7 +113,9 @@
     text-transform: uppercase;
   }
 
-  .name-field input {
+  .name-field input,
+  .profile-section input,
+  .profile-section textarea {
     width: 100%;
     padding: 1rem 1.05rem;
     border: 1px solid var(--card-border);
@@ -72,18 +127,81 @@
     outline: none;
   }
 
-  .name-field input:focus {
+  .name-field input:focus,
+  .profile-section input:focus,
+  .profile-section textarea:focus {
     border-color: var(--wizard-gold);
     box-shadow: 0 0 0 3px
       color-mix(in srgb, var(--wizard-gold) 16%, transparent);
   }
 
-  .chapter-art {
-    padding: 4rem 0 2rem;
-    color: color-mix(in srgb, var(--wizard-gold) 28%, transparent);
+  .profile-section {
+    margin-top: 1.5rem;
+    padding: 1.15rem;
+    border: 1px solid var(--card-border);
+    border-radius: 0.75rem;
+    background: color-mix(in srgb, var(--card-bg) 88%, transparent);
+  }
+
+  .profile-section-heading {
+    margin-bottom: 1rem;
+  }
+
+  .profile-section-heading > span {
+    color: var(--wizard-gold);
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .profile-section-heading h3 {
+    margin: 0.25rem 0;
     font-family: Georgia, serif;
-    font-size: clamp(5rem, 14vw, 9rem);
-    text-align: center;
-    user-select: none;
+    font-size: 1.35rem;
+  }
+
+  .profile-section-heading p {
+    margin: 0;
+    opacity: 0.66;
+  }
+
+  .profile-compact-grid,
+  .profile-notes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+
+  .profile-compact-grid label,
+  .profile-notes-grid label {
+    display: grid;
+    align-content: start;
+    gap: 0.45rem;
+  }
+
+  .profile-section textarea {
+    min-height: 9rem;
+    resize: vertical;
+    line-height: 1.45;
+  }
+
+  .profile-backstory {
+    grid-column: 1 / -1;
+  }
+
+  @media (max-width: 720px) {
+    .profile-section {
+      padding: 0.9rem;
+    }
+
+    .profile-compact-grid,
+    .profile-notes-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .profile-backstory {
+      grid-column: auto;
+    }
   }
 </style>
