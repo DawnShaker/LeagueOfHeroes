@@ -21,9 +21,9 @@ import { featsData } from '../../data/feats';
 import { spells } from '../../data/spells';
 import { items } from '../../data/items';
 import roll20TemplateRaw from '../../data/roll20/blank-2014.json?raw';
-import roll20ExportClientUrl from './client/roll20Export.js?url';
-import roll20EquipmentExportClientUrl from './client/roll20EquipmentExport.js?url';
-import characterStateClientUrl from './client/characterState.js?url';
+import roll20ExportClientRaw from './client/roll20Export.js?raw';
+import roll20EquipmentExportClientRaw from './client/roll20EquipmentExport.js?raw';
+import characterStateClientRaw from './client/characterState.js?raw';
 import allRoll20SpellsRaw from '../../data/roll20/all-spells.json?raw';
 import {
   ALL_SKILLS,
@@ -272,9 +272,9 @@ const creatorOptions = {
   </div>
 </div>
 
-<script is:inline src={roll20ExportClientUrl}></script>
-<script is:inline src={roll20EquipmentExportClientUrl}></script>
-<script is:inline src={characterStateClientUrl}></script>
+<script is:inline set:html={roll20ExportClientRaw}></script>
+<script is:inline set:html={roll20EquipmentExportClientRaw}></script>
+<script is:inline set:html={characterStateClientRaw}></script>
 
 <script define:vars={{ speciesOptions, classOptions, backgroundOptions, featOptions, customLineageGeneralFeatOptions, allSelectableFeatOptions, backgroundSpecialFeatOptions, allResolvedFeatOptions, magicInitiateSpellOptions, creatorOptions, roll20Template, classSpellOptions, classSpellLimits, classFeatureOptions, weaponMasteryOptions, rogueWeaponMasteryIds, bloodCurseOptions, WEAPON_MASTERY_COUNTS, WEAPON_MASTERY_DESCRIPTIONS, equipmentShopItems, EQUIPMENT_PACK_CONTENTS, SKILL_ALIASES, CLASS_SKILL_OPTIONS, GENERIC_BACKGROUND_CHARACTERISTICS, EQUIPMENT_NAME_ALIASES, PACKAGED_EQUIPMENT_NAMES, ROLL20_SKILLS, ROLL20_SKILL_ABILITIES, ALIGNMENTS, CHARACTER_STORAGE_KEY, CREATOR_STEPS, ABILITY_KEYS, POINT_BUY_COSTS, DEFAULT_CHARACTER_STATE }}>
   const STORAGE_KEY = CHARACTER_STORAGE_KEY;
@@ -1202,8 +1202,13 @@ const creatorOptions = {
 
     const raw = calculator.raw || {};
     const base = calculator.base || {};
+    const savedSize = String(state.physique.size || '');
+    const normalizedSavedSize = raw.sizeOptions?.find(
+      (option) => String(option).toLocaleLowerCase('ru-RU') === savedSize.toLocaleLowerCase('ru-RU')
+    );
     const defaultSize =
-      state.physique.size ||
+      normalizedSavedSize ||
+      (!raw.sizeOptions?.length ? state.physique.size : null) ||
       base.size ||
       raw.sizeOptions?.[0] ||
       species.size ||
@@ -1621,21 +1626,7 @@ const creatorOptions = {
 
                 <div class="custom-lineage-choices">
                   <section class="custom-lineage-choice-card">
-                    <div class="custom-lineage-card-heading"><span>01</span><div><h4>Размер</h4><p>Выберите размер персонажа.</p></div></div>
-                    <div class="custom-lineage-option-grid">
-                      <label class="custom-lineage-option">
-                        <input type="radio" name="custom-lineage-size" value="Маленький" ${state.physique.size === 'Маленький' ? 'checked' : ''} />
-                        <span><strong>Маленький</strong><small>Ваш персонаж считается существом Маленького размера.</small></span>
-                      </label>
-                      <label class="custom-lineage-option">
-                        <input type="radio" name="custom-lineage-size" value="Средний" ${state.physique.size !== 'Маленький' ? 'checked' : ''} />
-                        <span><strong>Средний</strong><small>Ваш персонаж считается существом Среднего размера.</small></span>
-                      </label>
-                    </div>
-                  </section>
-
-                  <section class="custom-lineage-choice-card">
-                    <div class="custom-lineage-card-heading"><span>02</span><div><h4>Выборочная особенность</h4><p>Выберите одну из двух особенностей.</p></div></div>
+                    <div class="custom-lineage-card-heading"><span>01</span><div><h4>Выборочная особенность</h4><p>Выберите одну из двух особенностей.</p></div></div>
                     <div class="custom-lineage-option-grid">
                       <label class="custom-lineage-option">
                         <input type="radio" name="custom-lineage-feature" value="darkvision" ${(state.choices['species:customLineageFeature'] || [])[0] === 'darkvision' ? 'checked' : ''} />
@@ -1649,7 +1640,7 @@ const creatorOptions = {
                   </section>
 
                   <div class="custom-lineage-feat-note">
-                    <span>03</span><div><strong>Дополнительная черта</strong><p>На этапе «Черты происхождения» откроется отдельная таблица с поиском. В ней можно выбрать черту Происхождения или подходящую Общую черту.</p></div>
+                    <span>02</span><div><strong>Дополнительная черта</strong><p>На этапе «Черты происхождения» откроется отдельная таблица с поиском. В ней можно выбрать черту Происхождения или подходящую Общую черту.</p></div>
                   </div>
                 </div>
               </section>
@@ -1906,13 +1897,6 @@ const creatorOptions = {
       }
     });
 
-
-    $$('[name="custom-lineage-size"]').forEach((input) => input.addEventListener('change', () => {
-      if (!input.checked) return;
-      state.physique.size = input.value;
-      saveState();
-      renderSpeciesDetails();
-    }));
 
     $$('[name="custom-lineage-feature"]').forEach((input) => input.addEventListener('change', () => {
       if (!input.checked) return;
@@ -2178,7 +2162,7 @@ const creatorOptions = {
             <article><span>Доспехи</span><strong>${escapeHtml(armor.join(', ') || 'Нет')}</strong></article>
             <article><span>Оружие</span><strong>${escapeHtml(weapons.join(', ') || 'Нет')}</strong></article>
             <article><span>Инструменты</span><strong>${escapeHtml(tools.join(', ') || 'Нет')}</strong></article>
-            <article><span>Навыки</span><strong>Выберите ${escapeHtml(proficiencies.skills?.count ?? 0)}</strong></article>
+            <article><span>Навыки</span><strong>${escapeHtml(proficiencies.skills?.count ?? 0)} на выбор</strong></article>
             <article><span>Бонус мастерства</span><strong>${escapeHtml(level1.profBonus || '+2')}</strong></article>
           </div>
         </section>
@@ -2493,6 +2477,90 @@ const creatorOptions = {
 
   function selectedClassFeatureOption(groupId) {
     return state.choices[`classFeature:${groupId}`]?.[0] || null;
+  }
+
+  function fullAlignmentName(value) {
+    const alignmentNames = {
+      'ЗД': 'Законно-доброе',
+      'НД': 'Нейтрально-доброе',
+      'ХД': 'Хаотично-доброе',
+      'ЗН': 'Законно-нейтральное',
+      'Н': 'Нейтральное',
+      'ХН': 'Хаотично-нейтральное',
+      'ЗЗ': 'Законно-злое',
+      'НЗ': 'Нейтрально-злое',
+      'ХЗ': 'Хаотично-злое',
+      'Любое': 'Любое'
+    };
+    const normalized = String(value || '').trim();
+    return alignmentNames[normalized] || normalized;
+  }
+
+  function renderProfileClassRelationships() {
+    const container = $('#profile-class-relationships');
+    if (!container) return;
+    const section = $('#automatic-class-relationships');
+    const alliesLabel = $('#profile-allies-label');
+    const alliesHelp = $('#profile-allies-help');
+
+    const groups = getClassFeatureGroups();
+    const configs = [
+      { groupId: 'paladin-oath', label: 'Священная клятва', fallback: 'class:subclass' },
+      { groupId: 'faith', label: 'Божество или духовный путь' },
+      { groupId: 'warlock-patron', label: 'Потусторонний покровитель' }
+    ];
+
+    const relationships = configs.flatMap((config) => {
+      const group = groups.find((item) => item.id === config.groupId);
+      if (!group) return [];
+
+      const selectedId =
+        state.choices[`classFeature:${config.groupId}`]?.[0]
+        || (config.fallback ? state.choices[config.fallback]?.[0] : '')
+        || '';
+      const option = group.options?.find((item) => item.id === selectedId);
+      if (!option) return [];
+
+      const details = [
+        option.detail,
+        option.type ? `Вид: ${option.type}` : '',
+        option.alignment ? `Мировоззрение: ${fullAlignmentName(option.alignment)}` : '',
+        Array.isArray(option.domains) && option.domains.length
+          ? `Домены: ${option.domains.join(', ')}`
+          : '',
+        option.realm ? `Обитель: ${option.realm}` : '',
+        option.description
+      ].filter(Boolean);
+
+      return [{
+        label: config.label,
+        name: option.name || selectedId,
+        description: details.join('\n')
+      }];
+    });
+
+    if (!relationships.length) {
+      if (section) section.hidden = true;
+      container.innerHTML = '';
+      if (alliesLabel) alliesLabel.textContent = 'Союзники и организации';
+      if (alliesHelp) {
+        alliesHelp.textContent = 'Опишите организации, группы и отдельных союзников персонажа.';
+      }
+      return;
+    }
+
+    if (section) section.hidden = false;
+    if (alliesLabel) alliesLabel.textContent = 'Дополнительные союзники и организации';
+    if (alliesHelp) {
+      alliesHelp.textContent = 'Этот текст будет добавлен к выбранным выше связям и не заменит их.';
+    }
+    container.innerHTML = relationships.map((relationship) => `
+      <article class="profile-relationship-card">
+        <span>${escapeHtml(relationship.label)}</span>
+        <strong>${escapeHtml(relationship.name)}</strong>
+        ${relationship.description ? `<p>${escapeHtml(relationship.description)}</p>` : ''}
+      </article>
+    `).join('');
   }
 
   function classFeaturesComplete() {
@@ -3067,6 +3135,7 @@ const creatorOptions = {
         getCustomDeity()[key] = field.value;
         saveState();
         updateNavigationChrome();
+        renderProfileClassRelationships();
       });
     });
     $$('[data-custom-patron]').forEach((field) => {
@@ -3076,6 +3145,7 @@ const creatorOptions = {
         getCustomPatron()[key] = field.value;
         saveState();
         updateNavigationChrome();
+        renderProfileClassRelationships();
       });
     });
 
@@ -3107,6 +3177,7 @@ const creatorOptions = {
 
       saveState();
       renderClassFeatures();
+      renderProfileClassRelationships();
     }));
 
   }
@@ -3160,12 +3231,16 @@ const creatorOptions = {
       const repeatable = isRepeatableOriginFeat(feat.id);
       const backgroundDisabled = fromSpecies && !repeatable;
       const speciesDisabled = fromBackground && !repeatable;
+      const selectedSpeciesName = findSpecies()?.name || 'выбранный вид';
+      const speciesSelectionLabel = customLineage
+        ? 'Уже выбрана видом «Своё происхождение»'
+        : `Уже выбрана видом «${selectedSpeciesName}»`;
       const backgroundAlreadySelectedLabel = backgroundDisabled
-        ? '<small class="origin-feat-already-selected">Уже выбрана своим происхождением</small>'
+        ? `<small class="origin-feat-already-selected">${escapeHtml(speciesSelectionLabel)}</small>`
         : '';
       return `<tr class="${backgroundDisabled ? 'is-disabled' : ''} ${speciesDisabled ? 'is-cross-source-blocked' : ''}">
         <td class="origin-feat-name"><a href="/feats/${encodeURIComponent(feat.id)}" target="_blank" rel="noopener">${escapeHtml(feat.name)}</a><small>${escapeHtml(feat.nameEn || '')}</small>${backgroundAlreadySelectedLabel}</td>
-        <td><input class="origin-feat-check" type="checkbox" autocomplete="off" data-origin-feat-source="background" value="${escapeHtml(feat.id)}" ${fromBackground ? 'checked' : ''} ${backgroundDisabled ? 'disabled title="Уже выбрана своим происхождением"' : ''} aria-label="${escapeHtml(feat.name)}: от предыстории"></td>
+        <td><input class="origin-feat-check" type="checkbox" autocomplete="off" data-origin-feat-source="background" value="${escapeHtml(feat.id)}" ${fromBackground ? 'checked' : ''} ${backgroundDisabled ? `disabled title="${escapeHtml(speciesSelectionLabel)}"` : ''} aria-label="${escapeHtml(feat.name)}: от предыстории"></td>
         ${speciesBonusFeat && !customLineage ? `<td><input class="origin-feat-check" type="checkbox" autocomplete="off" data-origin-feat-source="species" value="${escapeHtml(feat.id)}" ${fromSpecies ? 'checked' : ''} ${speciesDisabled ? 'disabled title="Уже выбрана в другой таблице"' : ''} aria-label="${escapeHtml(feat.name)}: от вида"></td>` : ''}
       </tr>`;
     }).join('');
@@ -3694,6 +3769,8 @@ const creatorOptions = {
     const variant = findVariant(species);
     const characterClass = findClass();
     const background = findBackground();
+
+    renderProfileClassRelationships();
 
     $('#preview-name').textContent = state.name.trim() || 'Безымянный герой';
     $('#preview-species').textContent =
@@ -4661,7 +4738,10 @@ const creatorOptions = {
       if (source === 'background' && isCustomBackground()) {
         parsed.fixed = [];
         parsed.bonusChoices = 0;
-        parsed.unlockedRare = [...creatorOptions.rareLanguages];
+        // Своя предыстория не открывает редкие языки сама по себе.
+        // Они появляются в таблице только тогда, когда их действительно
+        // разрешает выбранный вид, класс или черта.
+        parsed.unlockedRare = [];
       }
       if (source === 'class' && /^(rogue|плут)$/i.test(String(characterClass?.id || characterClass?.name || ''))) {
         if (!parsed.fixed.includes('Воровской жаргон')) parsed.fixed.push('Воровской жаргон');
@@ -6228,6 +6308,7 @@ const creatorOptions = {
     ...structuredClone(defaultState.profile || {}),
     ...(state.profile || {})
   };
+  delete state.profile.size;
   $$('[data-character-profile]').forEach((field) => {
     const key = field.dataset.characterProfile;
     if (!key) return;
@@ -6409,7 +6490,7 @@ const creatorOptions = {
     }
 
     if (steps[state.step] === 'species' && isCustomLineageSpecies() && !(state.choices['species:customLineageFeature'] || [])[0]) {
-      alert('Выберите размер и выборочную особенность «Своего происхождения».');
+      alert('Выберите выборочную особенность «Своего происхождения».');
       return;
     }
 
@@ -6704,10 +6785,14 @@ const creatorOptions = {
     resetTransientInterfaceState();
 
     if (nameInput) nameInput.value = '';
+    $$('[data-character-profile]').forEach((field) => {
+      field.value = '';
+    });
 
     renderSpeciesDetails();
     renderClassDetails();
     renderBackgroundDetails();
+    renderProfileClassRelationships();
     updatePreview();
     showStep(0);
   });
@@ -6857,7 +6942,7 @@ const creatorOptions = {
     align-items: end;
     justify-content: space-between;
     gap: 2rem;
-    padding: 1.5rem 0 2rem;
+    padding: 1.75rem clamp(1rem, 2vw, 2rem) 2rem;
     border-bottom: 1px solid
       color-mix(in srgb, var(--wizard-gold) 28%, var(--card-border));
   }
@@ -7553,9 +7638,9 @@ const creatorOptions = {
     --choice-accent-light: var(--wizard-gold-light);
     position: relative;
     display: grid;
-    grid-template-rows: 190px minmax(76px, auto);
+    grid-template-rows: 190px minmax(88px, auto);
     min-width: 0;
-    min-height: 266px;
+    min-height: 278px;
     padding: 0;
     overflow: hidden;
     border: 1px solid color-mix(in srgb, var(--choice-accent) 18%, var(--card-border));
@@ -7662,12 +7747,11 @@ const creatorOptions = {
 
   .class-card-copy {
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: .65rem;
+    display: grid;
+    align-content: center;
+    gap: .42rem;
     min-width: 0;
-    padding: .68rem .72rem .75rem;
+    padding: .8rem .9rem .85rem;
     border-top: 1px solid color-mix(in srgb, var(--wizard-gold) 20%, var(--card-border));
     background:
       linear-gradient(135deg, color-mix(in srgb, var(--card-bg) 97%, var(--wizard-gold) 3%), var(--background));
@@ -7693,13 +7777,15 @@ const creatorOptions = {
   }
 
   .class-card-title strong {
+    display: -webkit-box;
     overflow: hidden;
     color: var(--choice-accent-light);
     font-family: Georgia, serif;
     font-size: 1.08rem;
     line-height: 1.15;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: normal;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
 
   .class-card-title small {
@@ -7715,25 +7801,38 @@ const creatorOptions = {
 
   .class-card-meta {
     display: grid;
-    justify-items: end;
-    gap: .22rem;
-    flex: 0 1 auto;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: .55rem;
     min-width: 0;
+    width: 100%;
   }
 
   .class-card-meta small {
-    max-width: 8.5rem;
+    max-width: none;
     overflow: hidden;
     opacity: .64;
     font-size: .67rem;
     line-height: 1.2;
-    text-align: right;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    text-align: left;
+    white-space: normal;
+  }
+
+  .class-card-meta small:not(.class-card-die) {
+    grid-column: 1;
+    grid-row: 1;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
 
   .class-card-meta .class-card-die {
     display: inline-flex;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    flex: 0 0 auto;
+    min-width: max-content;
     padding: .18rem .42rem;
     border: 1px solid color-mix(in srgb, var(--choice-accent) 38%, var(--card-border));
     border-radius: 999px;
@@ -7927,7 +8026,7 @@ const creatorOptions = {
       align-items: start;
       flex-direction: column;
       gap: 1rem;
-      padding: .85rem .25rem 1.15rem;
+      padding: 1rem .85rem 1.25rem;
     }
 
     .wizard-header h1 {
@@ -8083,15 +8182,14 @@ const creatorOptions = {
     }
 
     .class-card-copy {
-      align-items: flex-start;
-      flex-direction: column;
-      justify-content: center;
+      align-content: center;
       border-top: 0;
       border-left: 1px solid color-mix(in srgb, var(--wizard-gold) 20%, var(--card-border));
     }
 
     .class-card-meta {
-      justify-items: start;
+      align-items: flex-start;
+      gap: .3rem;
     }
 
     .class-card-meta small {

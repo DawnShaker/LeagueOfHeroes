@@ -44,6 +44,38 @@ const { speciesOptions } = Astro.props;
   </div>
 
   <div id="species-details" class="species-details"></div>
+
+  <section class="profile-section" aria-labelledby="species-profile-title">
+    <div class="profile-section-heading">
+      <span>Облик героя</span>
+      <h3 id="species-profile-title">Основные сведения и внешность</h3>
+      <p>Необязательные сведения о возрасте и внешнем облике персонажа.</p>
+    </div>
+
+    <div class="profile-compact-grid">
+      <label>
+        <span>Возраст</span>
+        <input id="character-age" data-character-profile="age" type="text" maxlength="80" placeholder="Например: 27 лет" autocomplete="off" />
+      </label>
+      <label>
+        <span>Цвет глаз</span>
+        <input id="character-eyes" data-character-profile="eyes" type="text" maxlength="120" placeholder="Например: янтарный" autocomplete="off" />
+      </label>
+      <label>
+        <span>Цвет кожи, перьев или чешуи</span>
+        <input id="character-skin" data-character-profile="skin" type="text" maxlength="120" placeholder="Например: медно-красный" autocomplete="off" />
+      </label>
+      <label>
+        <span>Цвет волос, перьев или чешуи</span>
+        <input id="character-hair" data-character-profile="hair" type="text" maxlength="120" placeholder="Например: чёрный" autocomplete="off" />
+      </label>
+    </div>
+
+    <label class="profile-appearance-field">
+      <span>Внешность персонажа</span>
+      <textarea data-character-profile="appearance" rows="6" maxlength="3000" placeholder="Как персонаж выглядит и какое первое впечатление производит?"></textarea>
+    </label>
+  </section>
 </section>
 
 <style>
@@ -223,6 +255,82 @@ const { speciesOptions } = Astro.props;
     margin-top: 1.25rem;
   }
 
+  .profile-section {
+    margin-top: 1.5rem;
+    padding: 1.15rem;
+    border: 1px solid var(--card-border);
+    border-radius: 0.75rem;
+    background: color-mix(in srgb, var(--card-bg) 88%, transparent);
+  }
+
+  .profile-section-heading {
+    margin-bottom: 1rem;
+  }
+
+  .profile-section-heading > span,
+  .profile-compact-grid label > span,
+  .profile-appearance-field > span {
+    color: var(--wizard-gold);
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .profile-section-heading h3 {
+    margin: 0.25rem 0;
+    font-family: Georgia, serif;
+    font-size: 1.35rem;
+  }
+
+  .profile-section-heading p {
+    margin: 0;
+    opacity: 0.66;
+  }
+
+  .profile-compact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+
+  .profile-compact-grid label,
+  .profile-appearance-field {
+    display: grid;
+    align-content: start;
+    gap: 0.45rem;
+  }
+
+  .profile-appearance-field {
+    margin-top: 0.9rem;
+  }
+
+  .profile-section input,
+  .profile-section textarea {
+    width: 100%;
+    padding: 1rem 1.05rem;
+    border: 1px solid var(--card-border);
+    border-radius: 0.58rem;
+    background: var(--background);
+    color: var(--text);
+    font: inherit;
+    font-size: 1.05rem;
+    outline: none;
+  }
+
+  .profile-section textarea {
+    min-height: 9rem;
+    resize: vertical;
+    line-height: 1.45;
+  }
+
+  .profile-section input:focus,
+  .profile-section textarea:focus {
+    border-color: var(--wizard-gold);
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--wizard-gold) 16%, transparent);
+  }
+
   @media (max-width: 760px) {
     .species-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -245,6 +353,14 @@ const { speciesOptions } = Astro.props;
 
     .species-card-copy strong {
       font-size: 0.75rem;
+    }
+
+    .profile-section {
+      padding: 0.9rem;
+    }
+
+    .profile-compact-grid {
+      grid-template-columns: 1fr;
     }
   }
 

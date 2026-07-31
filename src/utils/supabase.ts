@@ -2,12 +2,12 @@
 // Клиентский и серверный инстансы Supabase
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-const CLIENT_URL = import.meta.env.VITE_SUPABASE_URL as string;
-const CLIENT_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
+const CLIENT_URL = import.meta.env.PUBLIC_SUPABASE_URL as string;
+const CLIENT_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY as string;
 
 if (!CLIENT_URL || !CLIENT_ANON_KEY) {
   // Не выбрасываем — это облегчает сборку во время разработки, но логируем проблему
-  console.warn('VITE_SUPABASE_URL или VITE_SUPABASE_ANON_KEY не установлены.');
+  console.warn('PUBLIC_SUPABASE_URL или PUBLIC_SUPABASE_ANON_KEY не установлены.');
 }
 
 export const supabase = createClient(CLIENT_URL ?? '', CLIENT_ANON_KEY ?? '');

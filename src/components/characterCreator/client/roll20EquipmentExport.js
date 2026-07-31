@@ -204,9 +204,9 @@
       atkdmgtype: `${damage} ${damageType}`.trim(),
       atkbonus: '+2',
       atkcritrange: '20',
-      rollbase_dmg: `@{wtype}&{template:dmg} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[${damage}+@{dmgattr}]]}} {{dmg1type=${damageType}}} @{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg} {{spelllevel=@{spelllevel}}} {{innate=@{spell_innate}}} {{globaldamage=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}`,
-      rollbase_crit: `@{wtype}&{template:dmg} {{crit=1}} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[${damage}+@{dmgattr}]]}} {{dmg1type=${damageType}}} @{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} {{crit1=[[${damage}]]}} {{crit2=[[0]]}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg} {{spelllevel=@{spelllevel}}} {{innate=@{spell_innate}}} {{globaldamage=[[0]]}} {{globaldamagecrit=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}`,
-      rollbase: `@{wtype}&{template:atk} {{mod=@{atkbonus}}} {{rname=[@{atkname}](~repeating_attack_attack_dmg)}} {{rnamec=[@{atkname}](~repeating_attack_attack_crit)}} {{r1=[[@{d20}cs>@{atkcritrange}+@{atkattr_base}+2[PROF]]]}} @{rtype}cs>@{atkcritrange}+@{atkattr_base}+2[PROF]]]}} {{range=@{atkrange}}} {{desc=@{atk_desc}}} {{spelllevel=@{spelllevel}}} {{innate=@{spell_innate}}} {{globalattack=@{global_attack_mod}}} @{charname_output}`
+      rollbase_dmg: `@{wtype}&{template:dmg} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[${damage}+@{dmgattr}]]}} {{dmg1type=${damageType}}} @{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} @{saveflag} @{hldmg} {{spelllevel=@{spelllevel}}} {{innate=@{spell_innate}}} {{globaldamage=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}`,
+      rollbase_crit: `@{wtype}&{template:dmg} {{crit=1}} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[${damage}+@{dmgattr}]]}} {{dmg1type=${damageType}}} @{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} {{crit1=[[${damage}]]}} {{crit2=[[0]]}} @{saveflag} @{hldmg} {{spelllevel=@{spelllevel}}} {{innate=@{spell_innate}}} {{globaldamage=[[0]]}} {{globaldamagecrit=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}`,
+      rollbase: `@{wtype}&{template:atk} {{mod=@{atkbonus}}} {{rname=[@{atkname}](~repeating_attack_attack_dmg)}} {{rnamec=[@{atkname}](~repeating_attack_attack_crit)}} {{r1=[[@{d20}cs>@{atkcritrange}+@{atkattr_base}+2[PROF]]]}} @{rtype}cs>@{atkcritrange}+@{atkattr_base}+2[PROF]]]}} {{range=@{atkrange}}} {{spelllevel=@{spelllevel}}} {{innate=@{spell_innate}}} {{globalattack=@{global_attack_mod}}} @{charname_output}`
     });
   }
 
@@ -226,7 +226,6 @@
 
     return {
       name,
-      description,
       damage: damageMatch[1],
       damageType,
       ability,
@@ -236,13 +235,12 @@
 
   function addNaturalAttack(payload, attack) {
     const attackRowId = createRoll20Id();
-    const { name, description, damage, damageType, ability, range } = attack;
+    const { name, damage, damageType, ability, range } = attack;
 
     addRepeatingRow(payload, 'attack', attackRowId, {
       'options-flag': '0',
       itemid: '',
       atkname: name,
-      atk_desc: description,
       dmgbase: damage,
       dmgtype: damageType,
       atkrange: range,
@@ -252,9 +250,9 @@
       atkdmgtype: `${damage} ${damageType}`,
       atkbonus: '+2',
       atkcritrange: '20',
-      rollbase_dmg: `@{wtype}&{template:dmg} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[${damage}+@{dmgattr}]]}} {{dmg1type=${damageType}}} @{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg} {{spelllevel=@{spelllevel}}} {{innate=@{spell_innate}}} {{globaldamage=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}`,
-      rollbase_crit: `@{wtype}&{template:dmg} {{crit=1}} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[${damage}+@{dmgattr}]]}} {{dmg1type=${damageType}}} @{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} {{crit1=[[${damage}]]}} {{crit2=[[0]]}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg} {{spelllevel=@{spelllevel}}} {{innate=@{spell_innate}}} {{globaldamage=[[0]]}} {{globaldamagecrit=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}`,
-      rollbase: `@{wtype}&{template:atk} {{mod=@{atkbonus}}} {{rname=[@{atkname}](~repeating_attack_attack_dmg)}} {{rnamec=[@{atkname}](~repeating_attack_attack_crit)}} {{r1=[[@{d20}cs>@{atkcritrange}+@{atkattr_base}+2[PROF]]]}} @{rtype}cs>@{atkcritrange}+@{atkattr_base}+2[PROF]]]}} {{range=@{atkrange}}} {{desc=@{atk_desc}}} {{spelllevel=@{spelllevel}}} {{innate=@{spell_innate}}} {{globalattack=@{global_attack_mod}}} @{charname_output}`
+      rollbase_dmg: `@{wtype}&{template:dmg} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[${damage}+@{dmgattr}]]}} {{dmg1type=${damageType}}} @{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} @{saveflag} @{hldmg} {{spelllevel=@{spelllevel}}} {{innate=@{spell_innate}}} {{globaldamage=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}`,
+      rollbase_crit: `@{wtype}&{template:dmg} {{crit=1}} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[${damage}+@{dmgattr}]]}} {{dmg1type=${damageType}}} @{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} {{crit1=[[${damage}]]}} {{crit2=[[0]]}} @{saveflag} @{hldmg} {{spelllevel=@{spelllevel}}} {{innate=@{spell_innate}}} {{globaldamage=[[0]]}} {{globaldamagecrit=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}`,
+      rollbase: `@{wtype}&{template:atk} {{mod=@{atkbonus}}} {{rname=[@{atkname}](~repeating_attack_attack_dmg)}} {{rnamec=[@{atkname}](~repeating_attack_attack_crit)}} {{r1=[[@{d20}cs>@{atkcritrange}+@{atkattr_base}+2[PROF]]]}} @{rtype}cs>@{atkcritrange}+@{atkattr_base}+2[PROF]]]}} {{range=@{atkrange}}} {{spelllevel=@{spelllevel}}} {{innate=@{spell_innate}}} {{globalattack=@{global_attack_mod}}} @{charname_output}`
     });
   }
 

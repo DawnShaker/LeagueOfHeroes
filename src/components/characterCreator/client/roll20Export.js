@@ -77,7 +77,7 @@
     const profile = state.profile && typeof state.profile === 'object'
       ? state.profile
       : {};
-    const profileSize = String(profile.size || '').trim() || creatureSize;
+    const profileSize = creatureSize;
 
     const classFeatureGroups = getClassFeatureGroups();
     const selectedClassFeatureOption = (groupId) => {
@@ -255,16 +255,69 @@
       return map[String(value ?? '').trim()] || '';
     }
 
+    const pendingTraits = [];
+
+    function traitGroup(source, sourceType) {
+      const normalizedSource = String(source || '').toLocaleLowerCase('ru');
+      const normalizedType = String(sourceType || '').toLocaleLowerCase('ru');
+      const normalizedClassName = String(className || '').toLocaleLowerCase('ru');
+
+      if (normalizedSource === 'раса') return 'species';
+      if (
+        normalizedSource === 'класс'
+        || normalizedSource.includes('умение класса')
+        || (normalizedClassName && normalizedType.includes(normalizedClassName))
+      ) return 'class';
+      if (normalizedSource === 'предыстория') return 'background';
+      if (normalizedSource === 'черта' || normalizedSource.includes('черта')) return 'feat';
+      return 'other';
+    }
+
     function addTrait(name, description, source, sourceType) {
       if (!name) return;
-      addRepeatingRow('traits', {
-        name,
-        source,
-        source_type: sourceType,
+      pendingTraits.push({
+        name: String(name),
+        source: String(source || ''),
+        sourceType: String(sourceType || ''),
         description: htmlToRoll20Text(description || ''),
-        'options-flag': '0',
-        display_flag: 'on'
+        group: traitGroup(source, sourceType)
       });
+    }
+
+    function writeTraits() {
+      const groups = [
+        { id: 'species', divider: '═════⊹⊱≼Раса≽⊰⊹═════' },
+        { id: 'class', divider: '════⊹⊱≼Класс≽⊰⊹═════' },
+        { id: 'background', divider: '═══⊹⊱≼Предыстория≽⊰⊹═══' },
+        { id: 'feat', divider: '════⊹⊱≼Черты≽⊰⊹════' },
+        { id: 'other', divider: '═══⊹⊱≼Прочее≽⊰⊹════' }
+      ];
+      const rowOrder = [];
+
+      groups.forEach((group) => {
+        const traits = pendingTraits.filter((trait) => trait.group === group.id);
+        if (!traits.length) return;
+
+        rowOrder.push(addRepeatingRow('traits', {
+          name: group.divider,
+          'options-flag': '0'
+        }));
+
+        traits.forEach((trait) => {
+          rowOrder.push(addRepeatingRow('traits', {
+            name: trait.name,
+            source: trait.source,
+            source_type: trait.sourceType,
+            description: trait.description,
+            'options-flag': '0',
+            display_flag: 'on'
+          }));
+        });
+      });
+
+      if (rowOrder.length) {
+        upsert('_reporder_repeating_traits', rowOrder.join(','));
+      }
     }
 
     function addProficiency(type, name) {
@@ -288,6 +341,145 @@
         tool_mod: '0',
         'options-flag': '0'
       });
+    }
+
+    const restResources = [];
+    const restResourceKeys = new Set();
+
+    function resourceAbilityKey(value) {
+      const normalized = String(value || '').toLocaleLowerCase('ru');
+      const aliases = {
+        strength: ['сила', 'силы'],
+        dexterity: ['ловкость', 'ловкости'],
+        constitution: ['телосложение', 'телосложения'],
+        intelligence: ['интеллект', 'интеллекта'],
+        wisdom: ['мудрость', 'мудрости'],
+        charisma: ['харизма', 'харизмы']
+      };
+      return Object.entries(aliases).find(([, names]) =>
+        names.some((name) => normalized.includes(name))
+      )?.[0] || '';
+    }
+
+    function inferRestResourceMaximum(description) {
+      const text = String(description || '');
+      if (
+        /(?:количеств[оа]\s+(?:раз|очк(?:ов|а))|числ[оа]\s+(?:использований|раз))[^.!?\n]{0,90}бонус(?:у|а|ом)?\s+мастерств/i.test(text)
+        || /бонус(?:у|а|ом)?\s+мастерств[^.!?\n]{0,90}(?:количеств[оа]\s+раз|числ[оа]\s+использований)/i.test(text)
+      ) return 2;
+
+      const modifierMatch = text.match(
+        /(?:количеств[оа]\s+раз|числ[оа]\s+использований)[^.!?\n]{0,90}модификатор(?:у|а|ом)?\s+(Силы|Ловкости|Телосложения|Интеллекта|Мудрости|Харизмы)/i
+      );
+      if (modifierMatch) {
+        const key = resourceAbilityKey(modifierMatch[1]);
+        if (key) return Math.max(1, modifier(totalScore(key)));
+      }
+
+      const numericMatch = text.match(
+        /(?:можете\s+использовать|использовать\s+(?:эту|это)|можете\s+(?:наложить|сотворить))[^.!?\n]{0,90}?\b([1-9])\s*(?:раз|раза)\b/i
+      );
+      if (numericMatch) return Math.max(1, Number(numericMatch[1]));
+
+      const wordMatch = text.match(
+        /(?:можете\s+использовать|можете\s+(?:наложить|сотворить))[^.!?\n]{0,90}?\b(один|два|три|четыре)\s+раз/i
+      );
+      if (wordMatch) {
+        return { один: 1, два: 2, три: 3, четыре: 4 }[wordMatch[1].toLocaleLowerCase('ru')] || 1;
+      }
+
+      return 1;
+    }
+
+    function inferRestResourceName(fallbackName, description) {
+      const text = String(description || '').trim();
+      const titledMatch = text.match(/^([^:.!?\n]{2,45})\.\s+/);
+      if (titledMatch && !/^вы\s/i.test(titledMatch[1])) return titledMatch[1].trim();
+
+      const firstSentence = text.split(/[.!?]\s/)[0]?.trim() || '';
+      const colonMatch = firstSentence.match(/^([^:\n]{2,45}):\s*/);
+      if (colonMatch && !/^вы\s/i.test(colonMatch[1])) return colonMatch[1].trim();
+
+      return String(fallbackName || 'Ресурс').trim();
+    }
+
+    function collectRestResource(name, description, source) {
+      const text = htmlToRoll20Text(description || '');
+      if (!text) return;
+
+      const restoresOnRest =
+        /(?:коротк|продолжительн)[а-яё]*\s+отдых/i.test(text)
+        || /отдых[а-яё]*[^.!?\n]{0,35}(?:коротк|продолжительн)/i.test(text);
+      if (!restoresOnRest) return;
+
+      // Не превращаем в счётчики постоянные эффекты и выборы, которые просто
+      // меняются после отдыха. Нужен явный расход применения, заряда или кости.
+      const spendsUses =
+        /количеств[оа]\s+раз/i.test(text)
+        || /числ[оа]\s+(?:использований|раз)/i.test(text)
+        || /очк(?:о|а|ов)\s+[^.!?\n]{0,35}(?:равн|трат|потрачен)/i.test(text)
+        || /кост(?:ь|и|ей)\s+[^.!?\n]{0,45}(?:трат|израсход|восстанавлив)/i.test(text)
+        || /не\s+можете\s+(?:использовать|сделать|применить|наложить|сотворить)[^.!?\n]{0,100}(?:снова|вновь|повторно)/i.test(text)
+        || /прежде\s+чем\s+сможете\s+(?:вновь|снова)/i.test(text)
+        || /необходимо\s+закончить[^.!?\n]{0,70}отдых[^.!?\n]{0,70}(?:вновь|снова)/i.test(text)
+        || /можете\s+(?:использовать|наложить|сотворить)[^.!?\n]{0,90}\b(?:1|один)\s+раз\b/i.test(text)
+        || /использовав\s+(?:это|эту)\s+(?:умение|особенность|способность|черту)/i.test(text);
+      if (!spendsUses) return;
+
+      // Если расходуемая часть явно открывается только позднее первого уровня,
+      // она пока не должна появляться в листе персонажа первого уровня.
+      const limitedUseIndex = text.search(
+        /количеств[оа]\s+раз|числ[оа]\s+(?:использований|раз)|не\s+можете\s+(?:использовать|сделать|применить|наложить|сотворить)|прежде\s+чем\s+сможете/i
+      );
+      const levelGate = text.match(/начиная\s+с\s+([2-9]|1\d|20)[-\s]?(?:го|го)?\s*уров/i);
+      if (levelGate && limitedUseIndex >= 0 && levelGate.index < limitedUseIndex) return;
+
+      const resourceName = inferRestResourceName(name, text);
+      const key = resourceName.toLocaleLowerCase('ru').replace(/ё/g, 'е').replace(/\s+/g, ' ').trim();
+      if (!key || restResourceKeys.has(key)) return;
+      restResourceKeys.add(key);
+      restResources.push({
+        name: resourceName,
+        maximum: String(inferRestResourceMaximum(text)),
+        source: String(source || '')
+      });
+    }
+
+    function writeRestResources() {
+      const resources = restResources.slice();
+      if (!resources.length) return;
+
+      const first = resources.shift();
+      upsert('class_resource_name', first.name);
+      upsert('class_resource', first.maximum, first.maximum);
+
+      const second = resources.shift();
+      if (second) {
+        upsert('other_resource_name', second.name);
+        upsert('other_resource', second.maximum, second.maximum);
+      }
+
+      while (resources.length) {
+        const rowId = createRoll20Id();
+        ['left', 'right'].forEach((side) => {
+          const resource = resources.shift();
+          if (!resource) return;
+          payload.character.attribs.push(
+            {
+              name: `repeating_resource_${rowId}_resource_${side}_name`,
+              current: resource.name,
+              max: '',
+              id: createRoll20Id()
+            },
+            {
+              name: `repeating_resource_${rowId}_resource_${side}`,
+              current: resource.maximum,
+              max: resource.maximum,
+              id: createRoll20Id()
+            }
+          );
+        });
+      }
     }
 
     // Каждая выбранная предыстория даёт персонажу 50 зм.
@@ -392,6 +584,7 @@
         itemname: shopItem?.name || parsed.name,
         itemcount: String(count),
         itemweight: String(shopItem?.weight || 0),
+        equipped: '1',
         inventorysubflag: '0',
         hasattack: '0',
         itemattackid: ''
@@ -424,6 +617,14 @@
     upsert('alignment', alignment);
     upsert('pb', '2');
     upsert('experience', '0');
+    // В листе Roll20 значение "off" означает обычную нагрузку (Сила × 15),
+    // а "disabled" полностью отключает её.
+    upsert('encumberance_setting', 'off');
+    // Современный лист Roll20 использует длинное имя, старые ревизии —
+    // сокращённое. Оба атрибута безопасны и оставляют настройку включённой
+    // после импорта в соответствующую версию листа.
+    upsert('ignore_non_equipped_items_weight', '1');
+    upsert('ignore_non_equipped_weight', '1');
     upsert('hp', String(maxHp), String(maxHp));
     upsert('hit_dice', '1', '1');
     upsert('hitdietype', String(hitDieSize));
@@ -453,18 +654,17 @@
       const abilityKey = ROLL20_SKILL_ABILITIES[roll20Name];
       if (!abilityKey) return;
 
-      const isProficient = proficientSkillIds.has(roll20Name);
       const localizedSkill = Object.entries(ROLL20_SKILLS).find(([, id]) => id === roll20Name)?.[0];
       const hasExpertise = Boolean(localizedSkill && expertiseSkills.has(localizedSkill));
+      const isProficient = hasExpertise || proficientSkillIds.has(roll20Name);
       const abilityModifier = modifier(totalScore(abilityKey));
       const proficiencyBonus = hasExpertise ? 4 : (isProficient ? 2 : 0);
       const totalBonus = abilityModifier + proficiencyBonus;
-      const signedAbility = abilityModifier >= 0
-        ? `+${abilityModifier}`
-        : String(abilityModifier);
-      const proficiencyPart = hasExpertise ? '+4[Expertise]' : (isProficient ? '+2[Proficiency]' : '');
 
-      upsert(`${roll20Name}_type`, hasExpertise ? '2' : (isProficient ? '1' : '0'));
+      // `_type` — это множитель бонуса мастерства, а не флаг владения.
+      // Даже у невладенного навыка он должен быть 1, чтобы Roll20 мог
+      // позже включить владение обычной галочкой. Для компетентности нужен 2.
+      upsert(`${roll20Name}_type`, hasExpertise ? '2' : '1');
       upsert(
         `${roll20Name}_prof`,
         isProficient ? `(@{pb}*@{${roll20Name}_type})` : '0'
@@ -472,7 +672,7 @@
       upsert(`${roll20Name}_bonus`, String(totalBonus));
       upsert(
         `${roll20Name}_roll`,
-        `@{wtype}&{template:simple} {{rname=^{${roll20Name.replaceAll('_', '-')}-u}}} {{mod=@{${roll20Name}_bonus}}} {{r1=[[@{d20}${proficiencyPart}${signedAbility}[${abilityKey}]@{pbd_safe}]]}} @{advantagetoggle}${proficiencyPart}${signedAbility}[${abilityKey}]@{pbd_safe}]]}} {{global=@{global_skill_mod}}} @{charname_output}`
+        `@{wtype}&{template:simple} {{rname=^{${roll20Name.replaceAll('_', '-')}-u}}} {{mod=@{${roll20Name}_bonus}}} {{r1=[[@{d20}+@{${roll20Name}_bonus}[Mods]@{pbd_safe}]]}} @{advantagetoggle}+@{${roll20Name}_bonus}[Mods]@{pbd_safe}]]}} {{global=@{global_skill_mod}}} @{charname_output}`
       );
     });
 
@@ -519,12 +719,12 @@
       : (Array.isArray(characterClass?.features)
           ? characterClass.features.filter((feature) => Number(feature?.level ?? 0) === 1)
           : []);
-    level1Features.forEach((feature) => addTrait(
-      feature?.name || 'Особенность класса',
-      feature?.description || '',
-      'Класс',
-      `${className} 1 уровень`
-    ));
+    level1Features.forEach((feature) => {
+      const featureName = feature?.name || 'Особенность класса';
+      const featureDescription = feature?.description || '';
+      addTrait(featureName, featureDescription, 'Класс', `${className} 1 уровень`);
+      collectRestResource(featureName, featureDescription, `${className} 1 уровень`);
+    });
 
     function selectedSpellNamesForSource(sourceId, level) {
       const source = typeof getSpellSources === 'function'
@@ -583,6 +783,7 @@
       selectedIds.forEach((selectedId) => {
         const option = group.options.find((item) => item.id === selectedId);
         if (!option) return;
+        const optionDescription = classFeatureDescription(group, option);
 
         if (group.id === 'weapon-mastery') {
           const masteryName = option.detail || 'Оружейный приём';
@@ -599,38 +800,45 @@
         if (group.id === 'fighting-style') {
           addTrait(
             option.name,
-            classFeatureDescription(group, option),
+            optionDescription,
             'Черта боевого стиля',
             `${className} 1 уровень`
           );
+          collectRestResource(option.name, optionDescription, `${className} 1 уровень`);
           return;
         }
 
         if (group.id === 'blood-curse') {
           addTrait(
             option.name,
-            classFeatureDescription(group, option),
+            optionDescription,
             'Проклятие крови',
             `${className} 1 уровень`
           );
+          collectRestResource(option.name, optionDescription, `${className} 1 уровень`);
           return;
         }
 
         addTrait(
           option.name,
-          classFeatureDescription(group, option),
+          optionDescription,
           group.name || 'Умение класса',
+          `${className} 1 уровень`
+        );
+        collectRestResource(
+          option.name,
+          optionDescription,
           `${className} 1 уровень`
         );
       });
     });
 
-    getEffectiveAbilities(species, variant).forEach((feature) => addTrait(
-      feature?.title || feature?.name || 'Особенность вида',
-      feature?.description || '',
-      'Раса',
-      speciesName
-    ));
+    getEffectiveAbilities(species, variant).forEach((feature) => {
+      const featureName = feature?.title || feature?.name || 'Особенность вида';
+      const featureDescription = feature?.description || '';
+      addTrait(featureName, featureDescription, 'Раса', speciesName);
+      collectRestResource(featureName, featureDescription, speciesName);
+    });
 
     if (background?.feature) {
       addTrait(
@@ -654,7 +862,13 @@
         'Черта',
         source
       );
+      exportedEffects.forEach((effect) => {
+        collectRestResource(originFeat.name, effect, source);
+      });
     });
+
+    writeTraits();
+    writeRestResources();
 
     // Экспортируем только фактический инвентарь конструктора.
     // Старый прямой экспорт первого набора класса удалён: он создавал дубли.
@@ -681,6 +895,7 @@
           itemname: shopItem.name,
           itemcount: String(quantity),
           itemweight: String(shopItem.weight || 0),
+          equipped: '1',
           inventorysubflag: '0',
           hasattack: '0',
           itemattackid: ''

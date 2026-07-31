@@ -22,6 +22,38 @@ const { backgroundOptions } = Astro.props;
     ))}
   </div>
   <div id="background-details"></div>
+
+  <section class="profile-section profile-history" aria-labelledby="background-profile-title">
+    <div class="profile-section-heading">
+      <span>Летопись героя</span>
+      <h3 id="background-profile-title">Связи и прошлое персонажа</h3>
+      <p>Выборы класса добавляются автоматически, а дополнительные сведения можно вписать самостоятельно.</p>
+    </div>
+
+    <div class="automatic-relationships" id="automatic-class-relationships" hidden>
+      <div class="automatic-relationships-heading">
+        <div>
+          <span>Выбрано в конструкторе</span>
+          <strong>Божество, покровитель и клятва</strong>
+        </div>
+      </div>
+      <div id="profile-class-relationships" class="profile-class-relationships" aria-live="polite">
+      </div>
+    </div>
+
+    <div class="profile-notes-grid">
+      <label>
+        <span id="profile-allies-label">Союзники и организации</span>
+        <textarea data-character-profile="allies" rows="7" maxlength="3000" placeholder="Союзники, отряды, гильдии, церкви и другие связи персонажа."></textarea>
+        <small id="profile-allies-help">Опишите организации, группы и отдельных союзников персонажа.</small>
+      </label>
+      <label>
+        <span>Предыстория персонажа</span>
+        <textarea data-character-profile="backstory" rows="7" maxlength="6000" placeholder="Кем герой был до начала приключений и как встал на этот путь?"></textarea>
+        <small>Опишите прошлую жизнь героя и событие, после которого он отправился навстречу приключениям.</small>
+      </label>
+    </div>
+  </section>
 </section>
 
 <style>
@@ -41,5 +73,159 @@ const { backgroundOptions } = Astro.props;
   .background-card-copy strong { overflow: hidden; color: var(--wizard-gold-light); font-family: Georgia, serif; font-size: 1rem; text-overflow: ellipsis; white-space: nowrap; }
   .background-card-copy small { overflow: hidden; opacity: .55; text-overflow: ellipsis; white-space: nowrap; }
   #background-details { margin-top: 1.25rem; }
-  @media (max-width: 520px) { .background-grid { grid-template-columns: 1fr; } }
+
+  .profile-section {
+    margin-top: 1.5rem;
+    padding: 1.15rem;
+    border: 1px solid var(--card-border);
+    border-radius: 0.75rem;
+    background: color-mix(in srgb, var(--card-bg) 88%, transparent);
+  }
+
+  .profile-section-heading {
+    margin-bottom: 1rem;
+  }
+
+  .profile-section-heading > span,
+  .profile-notes-grid label > span,
+  .automatic-relationships-heading span {
+    color: var(--wizard-gold);
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .profile-section-heading h3 {
+    margin: 0.25rem 0;
+    font-family: Georgia, serif;
+    font-size: 1.35rem;
+  }
+
+  .profile-section-heading p {
+    margin: 0;
+    opacity: 0.66;
+  }
+
+  .automatic-relationships {
+    margin-bottom: 0.9rem;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--wizard-gold) 30%, var(--card-border));
+    border-radius: 0.7rem;
+    background: color-mix(in srgb, var(--background) 78%, var(--card-bg));
+  }
+
+  .automatic-relationships-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .automatic-relationships-heading > div {
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .automatic-relationships-heading strong {
+    font-family: Georgia, serif;
+    font-size: 1.05rem;
+  }
+
+  .profile-class-relationships {
+    display: grid;
+    gap: 0.65rem;
+    padding: 0.85rem;
+  }
+
+  :global(.profile-relationship-card) {
+    display: grid;
+    gap: 0.28rem;
+    padding: 0.8rem 0.9rem;
+    border: 1px solid var(--card-border);
+    border-radius: 0.58rem;
+    background: color-mix(in srgb, var(--card-bg) 90%, var(--background));
+  }
+
+  :global(.profile-relationship-card > span) {
+    color: var(--wizard-gold);
+    font-size: 0.67rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  :global(.profile-relationship-card > strong) {
+    color: var(--wizard-gold-light);
+    font-family: Georgia, serif;
+    font-size: 1.05rem;
+  }
+
+  :global(.profile-relationship-card > p) {
+    margin: 0;
+    opacity: 0.72;
+    white-space: pre-line;
+  }
+
+  .profile-relationships-empty {
+    margin: 0;
+    padding: 0.35rem 0.2rem;
+    opacity: 0.58;
+  }
+
+  .profile-notes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+
+  .profile-notes-grid label {
+    display: grid;
+    align-content: start;
+    gap: 0.45rem;
+  }
+
+  .profile-notes-grid textarea {
+    width: 100%;
+    min-height: 11rem;
+    padding: 1rem 1.05rem;
+    resize: vertical;
+    border: 1px solid var(--card-border);
+    border-radius: 0.58rem;
+    background: var(--background);
+    color: var(--text);
+    font: inherit;
+    font-size: 1.02rem;
+    line-height: 1.45;
+    outline: none;
+  }
+
+  .profile-notes-grid textarea:focus {
+    border-color: var(--wizard-gold);
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--wizard-gold) 16%, transparent);
+  }
+
+  .profile-notes-grid label > small {
+    opacity: 0.6;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 720px) {
+    .background-grid,
+    .profile-notes-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .profile-section {
+      padding: 0.9rem;
+    }
+
+    .automatic-relationships-heading {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
 </style>

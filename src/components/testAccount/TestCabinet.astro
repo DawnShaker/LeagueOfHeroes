@@ -1,0 +1,394 @@
+---
+interface Props {
+  requestedMode?: 'auto' | 'admin' | 'master' | 'player';
+}
+
+const { requestedMode = 'auto' } = Astro.props;
+---
+
+<section id="test-cabinet" class="cabinet-shell" data-requested-mode={requestedMode}>
+  <div id="cabinet-loading" class="cabinet-loading">
+    <div class="loader" aria-hidden="true"></div>
+    <p>Загружаем личный кабинет…</p>
+  </div>
+
+  <div id="cabinet-error" class="cabinet-error" hidden>
+    <h1>Кабинет пока недоступен</h1>
+    <p id="cabinet-error-message"></p>
+    <a href="/test/auth/">Перейти ко входу</a>
+  </div>
+
+  <div id="cabinet-content" hidden>
+    <header class="profile-header">
+      <div class="profile-person">
+        <img id="profile-avatar" alt="" hidden />
+        <div>
+          <span id="profile-role" class="role-badge"></span>
+          <h1 id="profile-name">Герой</h1>
+          <p id="profile-email"></p>
+        </div>
+      </div>
+      <div class="profile-actions">
+        <nav id="mode-switcher" class="mode-switcher" aria-label="Режим личного кабинета"></nav>
+        <button id="account-sign-out" class="ghost-button" type="button">Выйти</button>
+      </div>
+    </header>
+
+    <div id="mode-description" class="mode-description"></div>
+
+    <section id="player-dashboard" class="dashboard-grid" hidden>
+      <article class="dashboard-card dashboard-card-featured">
+        <span>Персонажи</span>
+        <h2>Мои герои</h2>
+        <p>Продолжите сохранённого персонажа или создайте нового героя в конструкторе.</p>
+        <a href="/internal/129321041204158/character-creator/">Открыть конструктор →</a>
+      </article>
+      <article class="dashboard-card">
+        <span>Игры</span>
+        <h2>Мои кампании</h2>
+        <p>Здесь появятся приглашения от мастеров и расписание ближайших игр.</p>
+        <strong class="empty-value">Пока нет кампаний</strong>
+      </article>
+      <article class="dashboard-card">
+        <span>Профиль</span>
+        <h2>Discord подключён</h2>
+        <p>Имя и аватар синхронизируются при следующем входе через Discord.</p>
+        <strong class="success-value">Активен</strong>
+      </article>
+    </section>
+
+    <section id="master-dashboard" class="dashboard-grid" hidden>
+      <article class="dashboard-card dashboard-card-featured">
+        <span>Кампании</span>
+        <h2>Панель мастера</h2>
+        <p>Следующим этапом здесь появятся создание кампании, приглашения игроков и управление группой.</p>
+        <button class="disabled-action" type="button" disabled>Создать кампанию · скоро</button>
+      </article>
+      <article class="dashboard-card">
+        <span>Инструменты</span>
+        <h2>Подготовка игры</h2>
+        <div class="card-links">
+          <a href="/tools/encounter-builder/">Конструктор столкновений</a>
+          <a href="/tools/game-stats/">Статистика игр</a>
+          <a href="/bastions/">Бастионы</a>
+        </div>
+      </article>
+      <article class="dashboard-card">
+        <span>Режим игрока</span>
+        <h2>Мастер тоже играет</h2>
+        <p>Используйте переключатель сверху — Discord-сессия и роль при этом не меняются.</p>
+      </article>
+    </section>
+
+    <section id="admin-dashboard" class="admin-dashboard" hidden>
+      <div id="admin-stats" class="admin-stats"></div>
+      <article class="dashboard-card admin-users-card">
+        <div class="admin-heading">
+          <div>
+            <span>Администрирование</span>
+            <h2>Пользователи и роли</h2>
+          </div>
+          <button id="refresh-users" class="ghost-button" type="button">Обновить</button>
+        </div>
+        <p class="admin-help">Роль «Мастер» включает и кабинет игрока. Роль «Администратор» открывает все три режима.</p>
+        <div class="admin-table-wrap">
+          <table>
+            <thead><tr><th>Пользователь</th><th>Discord ID</th><th>Роль</th><th>Создан</th></tr></thead>
+            <tbody id="admin-users-body"></tbody>
+          </table>
+        </div>
+        <div id="admin-status" class="inline-status" hidden></div>
+      </article>
+    </section>
+  </div>
+</section>
+
+<script>
+  import {
+    accountModePath,
+    availableAccountModes,
+    defaultAccountMode,
+    isTestAccountConfigured,
+    normalizeAccountRole,
+    testAccountSupabase,
+    type AccountMode,
+    type AccountRole
+  } from '../../utils/testAccount';
+
+  const root = document.querySelector<HTMLElement>('#test-cabinet');
+  const loading = document.querySelector<HTMLElement>('#cabinet-loading');
+  const content = document.querySelector<HTMLElement>('#cabinet-content');
+  const errorPanel = document.querySelector<HTMLElement>('#cabinet-error');
+  const errorMessage = document.querySelector<HTMLElement>('#cabinet-error-message');
+  const requestedMode = (root?.dataset.requestedMode || 'auto') as AccountMode | 'auto';
+  let currentRole: AccountRole = 'player';
+  let currentUserId = '';
+
+  function showError(message: string) {
+    if (loading) loading.hidden = true;
+    if (content) content.hidden = true;
+    if (errorMessage) errorMessage.textContent = message;
+    if (errorPanel) errorPanel.hidden = false;
+  }
+
+  function roleLabel(role: AccountRole) {
+    return ({ player: 'Игрок', master: 'Мастер', admin: 'Администратор' })[role];
+  }
+
+  function modeDescription(mode: AccountMode) {
+    return ({
+      player: 'Личный режим игрока: персонажи, приглашения и участие в кампаниях.',
+      master: 'Режим мастера: подготовка игр, управление группами и мастерские инструменты.',
+      admin: 'Режим администратора: пользователи, роли и контроль тестового контура.'
+    })[mode];
+  }
+
+  function renderModeSwitcher(role: AccountRole, activeMode: AccountMode) {
+    const switcher = document.querySelector<HTMLElement>('#mode-switcher');
+    if (!switcher) return;
+    switcher.innerHTML = availableAccountModes(role).map((mode) => `
+      <a href="${accountModePath(mode)}" class="${mode === activeMode ? 'is-active' : ''}" data-account-mode="${mode}">
+        ${roleLabel(mode)}
+      </a>
+    `).join('');
+  }
+
+  function showMode(mode: AccountMode) {
+    for (const candidate of ['player', 'master', 'admin'] as AccountMode[]) {
+      const panel = document.querySelector<HTMLElement>(`#${candidate}-dashboard`);
+      if (panel) panel.hidden = candidate !== mode;
+    }
+    const description = document.querySelector<HTMLElement>('#mode-description');
+    if (description) description.textContent = modeDescription(mode);
+    window.localStorage.setItem('loh-test-account-mode', mode);
+  }
+
+  function formatDate(value: string | null) {
+    if (!value) return '—';
+    return new Intl.DateTimeFormat('ru-RU', { dateStyle: 'medium' }).format(new Date(value));
+  }
+
+  function escapeText(value: unknown) {
+    return String(value ?? '').replace(/[&<>"']/g, (character) => {
+      if (character === '&') return '&amp;';
+      if (character === '<') return '&lt;';
+      if (character === '>') return '&gt;';
+      if (character === '"') return '&quot;';
+      return '&#39;';
+    });
+  }
+
+  async function loadAdminUsers() {
+    if (!testAccountSupabase || currentRole !== 'admin') return;
+    const body = document.querySelector<HTMLElement>('#admin-users-body');
+    const status = document.querySelector<HTMLElement>('#admin-status');
+    if (status) status.hidden = true;
+    if (body) body.innerHTML = '<tr><td colspan="4">Загрузка пользователей…</td></tr>';
+
+    const { data, error } = await testAccountSupabase
+      .from('user_profiles')
+      .select('id,email,discord_id,display_name,avatar_url,role,created_at')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      if (body) body.innerHTML = '<tr><td colspan="4">Не удалось загрузить пользователей.</td></tr>';
+      if (status) {
+        status.textContent = error.message;
+        status.hidden = false;
+      }
+      return;
+    }
+
+    const users = data || [];
+    if (body) {
+      body.innerHTML = users.map((profile) => `
+        <tr>
+          <td>
+            <span class="admin-user">
+              ${profile.avatar_url ? `<img src="${escapeText(profile.avatar_url)}" alt="">` : ''}
+              <span><strong>${escapeText(profile.display_name || profile.email || 'Без имени')}</strong><small>${escapeText(profile.email || 'Discord OAuth')}</small></span>
+            </span>
+          </td>
+          <td><code>${escapeText(profile.discord_id || '—')}</code></td>
+          <td>
+            <select data-admin-role="${escapeText(profile.id)}" ${profile.id === currentUserId ? 'disabled title="Собственную роль изменяет другой администратор"' : ''}>
+              ${(['player', 'master', 'admin'] as AccountRole[]).map((role) => `<option value="${role}" ${normalizeAccountRole(profile.role) === role ? 'selected' : ''}>${roleLabel(role)}</option>`).join('')}
+            </select>
+          </td>
+          <td>${formatDate(profile.created_at)}</td>
+        </tr>
+      `).join('');
+    }
+
+    const counts = users.reduce((result, profile) => {
+      result[normalizeAccountRole(profile.role)] += 1;
+      return result;
+    }, { player: 0, master: 0, admin: 0 } as Record<AccountRole, number>);
+    const stats = document.querySelector<HTMLElement>('#admin-stats');
+    if (stats) {
+      stats.innerHTML = `
+        <div><span>Всего</span><strong>${users.length}</strong></div>
+        <div><span>Игроки</span><strong>${counts.player}</strong></div>
+        <div><span>Мастера</span><strong>${counts.master}</strong></div>
+        <div><span>Администраторы</span><strong>${counts.admin}</strong></div>
+      `;
+    }
+
+    document.querySelectorAll<HTMLSelectElement>('[data-admin-role]').forEach((select) => {
+      select.addEventListener('change', async () => {
+        const profileId = select.dataset.adminRole;
+        if (!profileId || !testAccountSupabase) return;
+        select.disabled = true;
+        const { error: updateError } = await testAccountSupabase
+          .from('user_profiles')
+          .update({ role: select.value })
+          .eq('id', profileId);
+        select.disabled = false;
+        if (status) {
+          status.textContent = updateError ? updateError.message : 'Роль обновлена.';
+          status.dataset.kind = updateError ? 'error' : 'success';
+          status.hidden = false;
+        }
+        if (!updateError) await loadAdminUsers();
+      });
+    });
+  }
+
+  async function initializeCabinet() {
+    if (!isTestAccountConfigured || !testAccountSupabase) {
+      showError('Supabase не настроен. Добавьте переменные PUBLIC_SUPABASE_URL и PUBLIC_SUPABASE_ANON_KEY.');
+      return;
+    }
+
+    const { data: sessionData } = await testAccountSupabase.auth.getSession();
+    if (!sessionData.session) {
+      const next = encodeURIComponent(window.location.pathname);
+      window.location.replace(`/test/auth/?next=${next}`);
+      return;
+    }
+
+    const user = sessionData.session.user;
+    currentUserId = user.id;
+    const { data: profile, error } = await testAccountSupabase
+      .from('user_profiles')
+      .select('id,email,discord_id,display_name,avatar_url,role,created_at')
+      .eq('id', user.id)
+      .single();
+
+    if (error || !profile) {
+      showError('Профиль не найден. Примените обновлённый файл supabase/schema.sql и войдите через Discord ещё раз.');
+      return;
+    }
+
+    currentRole = normalizeAccountRole(profile.role);
+    const allowedModes = availableAccountModes(currentRole);
+    const mode = requestedMode === 'auto' ? defaultAccountMode(currentRole) : requestedMode;
+    if (!allowedModes.includes(mode)) {
+      window.location.replace(accountModePath(defaultAccountMode(currentRole)));
+      return;
+    }
+    if (requestedMode === 'auto') {
+      window.location.replace(accountModePath(mode));
+      return;
+    }
+
+    const name = profile.display_name
+      || user.user_metadata?.full_name
+      || user.user_metadata?.name
+      || user.user_metadata?.user_name
+      || 'Герой';
+    const avatar = profile.avatar_url || user.user_metadata?.avatar_url || '';
+    const nameElement = document.querySelector<HTMLElement>('#profile-name');
+    const roleElement = document.querySelector<HTMLElement>('#profile-role');
+    const emailElement = document.querySelector<HTMLElement>('#profile-email');
+    const avatarElement = document.querySelector<HTMLImageElement>('#profile-avatar');
+    if (nameElement) nameElement.textContent = name;
+    if (roleElement) roleElement.textContent = `Роль: ${roleLabel(currentRole)}`;
+    if (emailElement) emailElement.textContent = profile.email || `Discord ID: ${profile.discord_id || 'не определён'}`;
+    if (avatarElement && avatar) {
+      avatarElement.src = avatar;
+      avatarElement.alt = `Аватар ${name}`;
+      avatarElement.hidden = false;
+    }
+
+    renderModeSwitcher(currentRole, mode);
+    showMode(mode);
+    if (loading) loading.hidden = true;
+    if (content) content.hidden = false;
+    if (mode === 'admin') await loadAdminUsers();
+  }
+
+  document.querySelector('#account-sign-out')?.addEventListener('click', async () => {
+    if (!testAccountSupabase) return;
+    await testAccountSupabase.auth.signOut();
+    window.localStorage.removeItem('loh-test-account-mode');
+    window.location.replace('/test/auth/');
+  });
+
+  document.querySelector('#refresh-users')?.addEventListener('click', loadAdminUsers);
+  initializeCabinet();
+</script>
+
+<style>
+  .cabinet-loading, .cabinet-error { display: grid; justify-items: center; gap: 1rem; padding: 5rem 1rem; text-align: center; }
+  .loader { width: 48px; height: 48px; border: 4px solid rgba(182,154,255,.2); border-top-color: #b69aff; border-radius: 50%; animation: spin .8s linear infinite; }
+  .cabinet-error h1 { color: #b69aff; font: 800 clamp(2rem, 6vw, 3.5rem) Georgia, serif; }
+  .cabinet-error p { max-width: 650px; color: #bdc6d6; line-height: 1.6; }
+  .cabinet-error a { color: #efcb6e; font-weight: 900; }
+  .profile-header { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; margin-bottom: 1rem; padding: 1.2rem; border: 1px solid rgba(163,177,204,.2); border-radius: 20px; background: rgba(17,31,55,.84); }
+  .profile-person, .profile-actions { display: flex; align-items: center; gap: 1rem; }
+  .profile-person img { width: 70px; height: 70px; border: 2px solid rgba(226,180,72,.55); border-radius: 18px; object-fit: cover; }
+  .profile-person h1 { margin: .28rem 0 .1rem; color: #b69aff; font: 800 clamp(1.6rem, 4vw, 2.3rem) Georgia, serif; }
+  .profile-person p { color: #9facbf; font-size: .85rem; }
+  .role-badge { color: #e2b448; font-size: .68rem; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
+  .profile-actions { align-items: stretch; }
+  .mode-switcher { display: flex; gap: .35rem; padding: .3rem; border: 1px solid #34425b; border-radius: 12px; background: #0b162a; }
+  .mode-switcher :global(a) { display: grid; place-items: center; min-height: 38px; padding: .5rem .8rem; border-radius: 8px; color: #aeb9cb; text-decoration: none; font-weight: 800; }
+  .mode-switcher :global(a:hover), .mode-switcher :global(a.is-active) { color: #10182a; background: #e2b448; }
+  .ghost-button { padding: .65rem .9rem; border: 1px solid #41506a; border-radius: 10px; color: #dce3ee; background: transparent; cursor: pointer; font-weight: 800; }
+  .ghost-button:hover { border-color: #b69aff; color: #cbbaff; }
+  .mode-description { margin-bottom: 1.25rem; padding: .8rem 1rem; border-left: 3px solid #9b74ff; color: #b8c2d2; background: rgba(155,116,255,.08); }
+  .dashboard-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+  .dashboard-card { min-width: 0; padding: 1.25rem; border: 1px solid rgba(163,177,204,.2); border-radius: 18px; background: linear-gradient(145deg, rgba(22,38,65,.94), rgba(10,22,42,.92)); }
+  .dashboard-card-featured { border-color: rgba(226,180,72,.38); background: linear-gradient(145deg, rgba(70,54,24,.35), rgba(14,27,50,.95)); }
+  .dashboard-card > span, .admin-heading span { color: #e2b448; font-size: .68rem; font-weight: 900; letter-spacing: .15em; text-transform: uppercase; }
+  .dashboard-card h2 { margin: .55rem 0 .65rem; color: #f3dfa1; font: 800 1.4rem Georgia, serif; }
+  .dashboard-card p { color: #aeb9cb; line-height: 1.55; }
+  .dashboard-card a { display: inline-block; margin-top: 1rem; color: #bfa9ff; font-weight: 900; text-decoration: none; }
+  .empty-value, .success-value { display: block; margin-top: 1rem; color: #8f9caf; }
+  .success-value { color: #7fd5a5; }
+  .card-links { display: grid; gap: .2rem; }
+  .disabled-action { margin-top: 1rem; padding: .7rem; border: 1px solid #394760; border-radius: 9px; color: #7e899c; background: #101b30; }
+  .admin-dashboard { display: grid; gap: 1rem; }
+  .admin-stats { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: .7rem; }
+  .admin-stats :global(div) { padding: 1rem; border: 1px solid rgba(163,177,204,.2); border-radius: 14px; background: rgba(17,31,55,.84); }
+  .admin-stats :global(span) { display: block; color: #9eabbf; font-size: .78rem; }
+  .admin-stats :global(strong) { display: block; margin-top: .25rem; color: #e7c66e; font: 800 1.8rem Georgia, serif; }
+  .admin-users-card { overflow: hidden; }
+  .admin-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .admin-help { margin-bottom: 1rem; }
+  .admin-table-wrap { overflow-x: auto; border: 1px solid #334159; border-radius: 12px; }
+  table { width: 100%; border-collapse: collapse; min-width: 720px; }
+  th, td { padding: .8rem; border-bottom: 1px solid #2d3a51; text-align: left; }
+  th { color: #efcc72; background: #101b30; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
+  td { color: #c8d0dd; }
+  .admin-user { display: flex; align-items: center; gap: .65rem; }
+  .admin-user :global(img) { width: 36px; height: 36px; border-radius: 9px; object-fit: cover; }
+  .admin-user :global(span) { display: grid; }
+  .admin-user :global(small) { color: #8996aa; }
+  td select { min-width: 150px; padding: .45rem; border: 1px solid #41506a; border-radius: 8px; color: #e4e9f2; background: #101b30; }
+  code { color: #a9b5c9; }
+  .inline-status { margin-top: 1rem; color: #8ee0b3; }
+  .inline-status[data-kind="error"] { color: #ffabb4; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (max-width: 900px) {
+    .profile-header, .profile-actions { align-items: stretch; flex-direction: column; }
+    .dashboard-grid { grid-template-columns: 1fr; }
+    .admin-stats { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  }
+  @media (max-width: 520px) {
+    .profile-person { align-items: flex-start; }
+    .mode-switcher { overflow-x: auto; }
+    .mode-switcher :global(a) { white-space: nowrap; }
+  }
+</style>

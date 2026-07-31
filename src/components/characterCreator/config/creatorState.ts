@@ -20,7 +20,6 @@ export const DEFAULT_CHARACTER_STATE = {
   name: '',
   profile: {
     age: '',
-    size: '',
     eyes: '',
     skin: '',
     hair: '',
