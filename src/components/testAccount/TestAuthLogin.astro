@@ -53,19 +53,43 @@
     button.disabled = true;
     showStatus('Открываем безопасную страницу Discord…');
 
+    const isEmbeddedPreview = window.self !== window.top;
+    const authWindow = isEmbeddedPreview
+      ? window.open('about:blank', 'loh-discord-auth')
+      : null;
+
     const redirectTo = new URL('/test/auth/callback/', window.location.origin).toString();
-    const { error } = await testAccountSupabase.auth.signInWithOAuth({
+    const { data, error } = await testAccountSupabase.auth.signInWithOAuth({
       provider: 'discord',
       options: {
         redirectTo,
-        scopes: 'identify'
+        scopes: 'identify',
+        skipBrowserRedirect: true
       }
     });
 
     if (error) {
+      authWindow?.close();
       button.disabled = false;
       showStatus(`Не удалось начать вход: ${error.message}`, 'error');
+      return;
     }
+
+    if (!data.url) {
+      authWindow?.close();
+      button.disabled = false;
+      showStatus('Supabase не вернул адрес страницы входа.', 'error');
+      return;
+    }
+
+    if (authWindow && !authWindow.closed) {
+      authWindow.opener = null;
+      authWindow.location.replace(data.url);
+      showStatus('Вход через Discord открыт в новой вкладке.');
+      return;
+    }
+
+    window.location.assign(data.url);
   });
 
   initializeLogin();
