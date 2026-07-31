@@ -55,7 +55,17 @@ const { speciesOptions } = Astro.props;
     <div class="profile-compact-grid">
       <label>
         <span>Возраст</span>
-        <input id="character-age" data-character-profile="age" type="text" maxlength="80" placeholder="Например: 27 лет" autocomplete="off" />
+        <input
+          id="character-age"
+          data-character-profile="age"
+          type="number"
+          inputmode="numeric"
+          step="1"
+          placeholder="Сначала выберите вид"
+          autocomplete="off"
+          aria-describedby="character-age-range"
+        />
+        <small id="character-age-range" class="profile-field-hint">Сначала выберите вид.</small>
       </label>
       <label>
         <span>Цвет глаз</span>
@@ -299,6 +309,18 @@ const { speciesOptions } = Astro.props;
     display: grid;
     align-content: start;
     gap: 0.45rem;
+  }
+
+  .profile-field-hint {
+    min-height: 1.2em;
+    color: color-mix(in srgb, var(--text) 68%, transparent);
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  #character-age:invalid {
+    border-color: #ef6464;
+    box-shadow: 0 0 0 1px color-mix(in srgb, #ef6464 42%, transparent);
   }
 
   .profile-appearance-field {

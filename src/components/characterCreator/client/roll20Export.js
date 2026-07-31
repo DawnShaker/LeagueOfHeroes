@@ -15,6 +15,7 @@
       getHitDieSize,
       getSpeciesSpeed,
       selectedOriginFeats,
+      selectedOriginFeatEntries,
       getEffectiveAbilities,
       normalizeEquipmentName,
       equipmentShopItems,
@@ -114,7 +115,6 @@
     const alignment = ALIGNMENTS[state.alignment] || '';
     const conModifier = modifier(totalScore('constitution'));
     const hitDieSize = getHitDieSize(characterClass);
-    const maxHp = Math.max(1, hitDieSize + conModifier);
     const speed = getSpeciesSpeed(species);
     const languages = [...new Set([...(state.choices['languages:fixed'] || ['Общий']), ...(state.choices['languages:selected'] || [])])];
     const tools = [...new Set([
@@ -130,11 +130,147 @@
       ...(state.choices['feat:skills'] || [])
     ])];
     const expertiseSkills = new Set(state.choices['class:expertise'] || []);
-    const originFeats = selectedOriginFeats();
-    const featName = originFeats.map((feat) => feat.name).join(', ');
-    const speciesTraits = getEffectiveAbilities(species, variant)
+    const originFeatEntries = typeof selectedOriginFeatEntries === 'function'
+      ? selectedOriginFeatEntries()
+      : selectedOriginFeats().map((feat) => ({ source: 'background', id: feat.id, feat }));
+    const effectiveSpeciesAbilities = getEffectiveAbilities(species, variant);
+    const speciesIdentity = `${species?.id || ''} ${species?.name || ''} ${species?.nameEn || ''}`;
+    const hasPowerfulBuild = effectiveSpeciesAbilities.some((feature) => {
+      const title = String(feature?.title || feature?.name || '');
+      const description = String(feature?.description || '');
+      return /(?:мощное|лошадиное|крупное)\s+телосложение/i.test(title)
+        || /считаетесь\s+на\s+один\s+размер\s+больше[\s\S]{0,180}(?:грузопод[ъь]ёмност|толкать|тянуть)/i.test(description);
+    });
+    const hasHalflingLuck = /(?:^|\s)(?:halfling|полурослик)(?:\s|$)/i.test(speciesIdentity)
+      && effectiveSpeciesAbilities.some((feature) => {
+        const title = String(feature?.title || feature?.name || '');
+        const description = String(feature?.description || '');
+        return /(?:везучий|удача\s+полурослика)/i.test(title)
+          || /выбрасываете\s+1[\s\S]{0,140}переброс/i.test(description);
+      });
+    const hasOriginFeat = (featId) => originFeatEntries.some((entry) => entry?.feat?.id === featId || entry?.id === featId);
+    const hasDwarvenToughness = effectiveSpeciesAbilities.some((feature) =>
+      /дварфийская выдержка/i.test(String(feature?.title || feature?.name || ''))
+    );
+    const maxHpBonus = (hasOriginFeat('tough') ? 2 : 0) + (hasDwarvenToughness ? 1 : 0);
+    const maxHp = Math.max(1, hitDieSize + conModifier + maxHpBonus);
+    const magicInitiateClassNames = {
+      cleric: 'Жрец',
+      druid: 'Друид',
+      wizard: 'Волшебник'
+    };
+    const originFeatDisplayName = (entry) => {
+      const feat = entry?.feat;
+      if (!feat) return '';
+      if (feat.id !== 'magic-initiate') return feat.name;
+      const listId = state.choices[`feat:${entry.source}:magic-list`]?.[0] || '';
+      const ability = state.choices[`feat:${entry.source}:spell-ability`]?.[0] || '';
+      const details = [magicInitiateClassNames[listId] || listId, ability].filter(Boolean);
+      return details.length ? `${feat.name} (${details.join(', ')})` : feat.name;
+    };
+    const featName = originFeatEntries.map(originFeatDisplayName).filter(Boolean).join(', ');
+    const speciesTraits = effectiveSpeciesAbilities
       .map((item) => [item?.title, item?.description].filter(Boolean).join(': '))
       .filter(Boolean);
+
+    const abilityAcAttribute = {
+      strength: '@{strength_mod}',
+      dexterity: '@{dexterity_mod}',
+      constitution: '@{constitution_mod}',
+      intelligence: '@{intelligence_mod}',
+      wisdom: '@{wisdom_mod}',
+      charisma: '@{charisma_mod}'
+    };
+    const abilityAcPart = {
+      strength: 'Strength',
+      dexterity: 'Dexterity',
+      constitution: 'Constitution',
+      intelligence: 'Intelligence',
+      wisdom: 'Wisdom',
+      charisma: 'Charisma'
+    };
+
+    function buildUnarmoredAcCandidates() {
+      const candidates = [];
+      const addCandidate = (base, abilities, allowsShield, source, priority = 0) => {
+        const abilityList = [...new Set(abilities.filter(Boolean))].slice(0, 2);
+        const value = Number(base) + abilityList.reduce(
+          (total, ability) => total + modifier(totalScore(ability)),
+          0
+        );
+        candidates.push({
+          base: Number(base),
+          abilities: abilityList,
+          allowsShield: Boolean(allowsShield),
+          source,
+          priority: Number(priority) || 0,
+          value
+        });
+      };
+
+      const classIdentity = [
+        characterClass?.id,
+        characterClass?.name,
+        characterClass?.nameEn,
+        state.class,
+        className,
+        roll20ClassName
+      ].filter(Boolean).join(' ').toLocaleLowerCase('ru');
+      if (/\bbarbarian\b|(?:^|\s)варвар(?:$|\s)/i.test(classIdentity)) {
+        addCandidate(10, ['dexterity', 'constitution'], true, 'Защита без доспехов варвара', 10);
+      } else if (/\bmonk\b|(?:^|\s)монах(?:$|\s)/i.test(classIdentity)) {
+        addCandidate(10, ['dexterity', 'wisdom'], false, 'Защита без доспехов монаха', 10);
+      }
+
+      // Панцирь тортла всегда задаёт самостоятельную формулу КД:
+      // 17 + None + None, при этом бонус щита разрешён. Не полагаемся
+      // только на текст особенности, чтобы изменение описания вида не
+      // возвращало ошибочную формулу варвара/монаха при экспорте.
+      if (/(?:^|\s)(?:tortle|тортл)(?:\s|$)/i.test(speciesIdentity)) {
+        addCandidate(17, [], true, 'Природный доспех тортла', 20);
+      }
+
+      effectiveSpeciesAbilities.forEach((feature) => {
+        const name = String(feature?.title || feature?.name || '');
+        const description = htmlToRoll20Text(feature?.description || '');
+        // Названия отличаются от вида к виду: «Природный доспех»,
+        // «Панцирь-хамелеон», «Усиленный каркас» и т. п. Определяем
+        // защиту по формуле КД в описании, а не по ограниченному списку имён.
+        if (!/(?:КД|Класс\s+Доспеха)/i.test(description)) return;
+
+        const baseMatch = description.match(
+          /(?:базов(?:ый|ого)\s+)?(?:КД|Класс\s+Доспеха)\s*[,—:-]?\s*(?:(?:равен|равно|равный|составляет)\s*)?(1[0-9])/i
+        );
+        const base = Number(baseMatch?.[1] || 0);
+        if (!base) return;
+
+        const abilities = [];
+        if (/модификатор(?:ы|а)?\s+Ловкост/i.test(description)) abilities.push('dexterity');
+        if (/модификатор(?:ы|а)?\s+Телосложен/i.test(description)) abilities.push('constitution');
+        if (/модификатор(?:ы|а)?\s+Мудрост/i.test(description)) abilities.push('wisdom');
+        if (/Ловкости\s+не\s+влияет/i.test(description)) {
+          const dexterityIndex = abilities.indexOf('dexterity');
+          if (dexterityIndex >= 0) abilities.splice(dexterityIndex, 1);
+        }
+        addCandidate(base, abilities, /щит/i.test(description), name);
+      });
+
+      return candidates.sort((left, right) =>
+        (right.value - left.value)
+        || (right.priority - left.priority)
+        || (Number(right.allowsShield) - Number(left.allowsShield))
+      );
+    }
+
+    const standardUnarmoredAc = 10 + modifier(totalScore('dexterity'));
+    const bestSpecialAc = buildUnarmoredAcCandidates()[0] || null;
+    // Особые формулы КД не складываются. При равном текущем результате
+    // сохраняем классовую/видовую формулу: иначе, например, монах с Мудростью
+    // 10 экспортируется как обычные 10 + Ловкость и КД больше не растёт после
+    // последующего повышения Мудрости на листе Roll20.
+    const unarmoredAc = bestSpecialAc?.value >= standardUnarmoredAc
+      ? bestSpecialAc
+      : null;
 
     function createRoll20Id() {
       // В repeating-секциях Roll20 символ "_" отделяет ID строки от имени поля.
@@ -388,6 +524,13 @@
         return { один: 1, два: 2, три: 3, четыре: 4 }[wordMatch[1].toLocaleLowerCase('ru')] || 1;
       }
 
+      const adverbMatch = text.match(
+        /(?:можете\s+использовать|можете\s+(?:наложить|сотворить))[^.!?\n]{0,90}?\b(однажды|дважды|трижды|четырежды)\b/i
+      );
+      if (adverbMatch) {
+        return { однажды: 1, дважды: 2, трижды: 3, четырежды: 4 }[adverbMatch[1].toLocaleLowerCase('ru')] || 1;
+      }
+
       return 1;
     }
 
@@ -403,7 +546,7 @@
       return String(fallbackName || 'Ресурс').trim();
     }
 
-    function collectRestResource(name, description, source) {
+    function collectRestResource(name, description, source, maximumOverride = null) {
       const text = htmlToRoll20Text(description || '');
       if (!text) return;
 
@@ -423,8 +566,9 @@
         || /прежде\s+чем\s+сможете\s+(?:вновь|снова)/i.test(text)
         || /необходимо\s+закончить[^.!?\n]{0,70}отдых[^.!?\n]{0,70}(?:вновь|снова)/i.test(text)
         || /можете\s+(?:использовать|наложить|сотворить)[^.!?\n]{0,90}\b(?:1|один)\s+раз\b/i.test(text)
+        || /можете\s+(?:использовать|наложить|сотворить)[^.!?\n]{0,90}\b(?:однажды|дважды|трижды|четырежды)\b/i.test(text)
         || /использовав\s+(?:это|эту)\s+(?:умение|особенность|способность|черту)/i.test(text);
-      if (!spendsUses) return;
+      if (!spendsUses && maximumOverride == null) return;
 
       // Если расходуемая часть явно открывается только позднее первого уровня,
       // она пока не должна появляться в листе персонажа первого уровня.
@@ -440,8 +584,11 @@
       restResourceKeys.add(key);
       restResources.push({
         name: resourceName,
-        maximum: String(inferRestResourceMaximum(text)),
-        source: String(source || '')
+        maximum: String(maximumOverride ?? inferRestResourceMaximum(text)),
+        source: String(source || ''),
+        // Если описание упоминает оба отдыха (например, Ярость), в меню
+        // Roll20 выбираем полный сброс после продолжительного отдыха.
+        reset: /продолжительн[а-яё]*\s+отдых/i.test(text) ? 'long' : 'short'
       });
     }
 
@@ -452,11 +599,15 @@
       const first = resources.shift();
       upsert('class_resource_name', first.name);
       upsert('class_resource', first.maximum, first.maximum);
+      upsert('options-flag-resource', 'on');
+      upsert('class_resource_reset', first.reset);
 
       const second = resources.shift();
       if (second) {
         upsert('other_resource_name', second.name);
         upsert('other_resource', second.maximum, second.maximum);
+        upsert('options-flag-resource2', 'on');
+        upsert('other_resource_reset', second.reset);
       }
 
       while (resources.length) {
@@ -475,6 +626,18 @@
               name: `repeating_resource_${rowId}_resource_${side}`,
               current: resource.maximum,
               max: resource.maximum,
+              id: createRoll20Id()
+            },
+            {
+              name: `repeating_resource_${rowId}_options-flag-${side}`,
+              current: 'on',
+              max: '',
+              id: createRoll20Id()
+            },
+            {
+              name: `repeating_resource_${rowId}_resource_${side}_reset`,
+              current: resource.reset,
+              max: '',
               id: createRoll20Id()
             }
           );
@@ -625,17 +788,68 @@
     // после импорта в соответствующую версию листа.
     upsert('ignore_non_equipped_items_weight', '1');
     upsert('ignore_non_equipped_weight', '1');
+    if (hasPowerfulBuild) {
+      // Roll20 использует этот флаг для удвоенной грузоподъёмности. Проверка
+      // выше учитывает разные названия одной механики, включая кентаврское
+      // «Лошадиное телосложение».
+      upsert('powerful_build', '1');
+      upsert('powerful_build_flag', '1');
+    }
+    if (hasHalflingLuck) {
+      // Одного флага недостаточно при JSON-импорте: обработчик листа может не
+      // запуститься. Поэтому сразу сохраняем и рассчитанное выражение d20.
+      upsert('halflingluck_flag', '1');
+      upsert('core_die', '1d20');
+      upsert('d20', '1d20ro<1');
+    }
     upsert('hp', String(maxHp), String(maxHp));
     upsert('hit_dice', '1', '1');
     upsert('hitdietype', String(hitDieSize));
     upsert('hitdieroll', String(hitDieSize));
     upsert('hitdie_final', '@{hitdietype}');
-    upsert('ac', String(10 + modifier(totalScore('dexterity'))));
+    const exportedAc = unarmoredAc?.value ?? (10 + modifier(totalScore('dexterity')));
+    upsert('ac', String(exportedAc));
+    if (unarmoredAc) {
+      // Поля настройки «Кастомный КД» листа D&D 5E by Roll20. Итоговый `ac`
+      // записывается отдельно, поэтому КД верен сразу после импорта, а эти
+      // поля сохраняют формулу для последующих изменений характеристик.
+      upsert('ac_style', 'custom');
+      upsert('ac_base', String(unarmoredAc.base));
+      upsert('ac_attr1', abilityAcAttribute[unarmoredAc.abilities[0]] || '0');
+      upsert('ac_attr2', abilityAcAttribute[unarmoredAc.abilities[1]] || '0');
+      upsert('ac_shield', unarmoredAc.allowsShield ? '@{shield_ac}' : '0');
+      upsert('customacwarningflag', 'hide');
+      upsert('custom_ac_source', unarmoredAc.source);
+      // Это штатные поля интерфейса D&D 5E by Roll20. Без них итоговый `ac`
+      // верен, но в настройках остаётся не выбран «Кастомный вариант».
+      upsert('custom_ac_flag', '1');
+      upsert('custom_ac_base', String(unarmoredAc.base));
+      upsert('armorwarningflag', 'hide');
+      upsert('custom_ac_part1', abilityAcPart[unarmoredAc.abilities[0]] || 'None');
+      upsert('custom_ac_part2', abilityAcPart[unarmoredAc.abilities[1]] || 'None');
+    }
     upsert('speed', speed);
-    const harengonInitiativeBonus = /harengon|зайцегон/i.test(
+    const hasHarengonInitiative = /harengon|зайцегон/i.test(
       `${species?.id || ''} ${species?.name || ''} ${species?.nameEn || ''}`
-    ) ? 2 : 0;
-    upsert('initiative_bonus', (modifier(totalScore('dexterity')) + harengonInitiativeBonus) / 100);
+    );
+    const hasAlertInitiative = hasOriginFeat('alert') || originFeatEntries.some((entry) =>
+      /^(?:бдительный|alert)$/i.test(
+        String(entry?.feat?.name || entry?.feat?.nameEn || entry?.name || '').trim()
+      )
+    );
+    const initiativeProficiencyBonus = (hasAlertInitiative || hasHarengonInitiative) ? 2 : 0;
+    const dexterityScore = totalScore('dexterity');
+    // `initmod` управляет отдельным полем «Бонус к инициативе» в настройках
+    // листа. `initiative_bonus` ниже — уже итоговое значение броска.
+    upsert('initmod', String(initiativeProficiencyBonus));
+    // В интерфейсе это отдельное поле «Бонус к инициативе», однако лист
+    // Roll20 хранит его в составном формате: полный итог инициативы и после
+    // точки значение Ловкости. Поэтому при Ловкости 16 (+3) и бонусе +2
+    // записываем 5.16 — тогда в отдельном поле лист показывает именно 2.
+    upsert(
+      'initiative_bonus',
+      modifier(dexterityScore) + initiativeProficiencyBonus + (dexterityScore / 100)
+    );
 
     abilityKeys.forEach((key) => {
       const score = totalScore(key);
@@ -694,7 +908,39 @@
       upsert(`${key}_save_bonus`, modifier(totalScore(key)) + 2);
     });
 
-    const selectedClassEffects = getClassFeatureGroups().flatMap((group) => { const selected = state.choices[`classFeature:${group.id}`] || []; return group.options.filter((option) => selected.includes(option.id)).flatMap((option) => option.effects || []); });
+    const selectedClassOptions = getClassFeatureGroups().flatMap((group) => {
+      const selected = state.choices[`classFeature:${group.id}`] || [];
+      return group.options.filter((option) => selected.includes(option.id));
+    });
+    const selectedClassEffects = selectedClassOptions.flatMap((option) => option.effects || []);
+
+    const hasDuelingFightingStyle = selectedClassOptions.some((option) =>
+      option?.id === 'dueling'
+      || /^дуэлянт$/i.test(String(option?.name || '').trim())
+      || /^dueling$/i.test(String(option?.nameEn || '').trim())
+    );
+
+    if (hasDuelingFightingStyle) {
+      const modifierName = 'Дуэлянт если рукопашное оружие в 1 руке и не держите других оружий';
+      const templateRow = payload.character.attribs.find((attribute) =>
+        /^repeating_damagemod_[^_]+_global_damage_active_flag$/.test(String(attribute.name || ''))
+      );
+      const rowId = templateRow?.name.match(/^repeating_damagemod_([^_]+)_/)?.[1] || createRoll20Id();
+      const rowPrefix = `repeating_damagemod_${rowId}_`;
+
+      // «Дуэлянт» добавляет только +2 к обычному урону подходящего оружия.
+      // Это не дополнительная кость критического урона и не отдельный тип
+      // урона, поэтому соответствующие поля строки оставляем пустыми.
+      upsert('global_damage_mod_flag', '1');
+      upsert(`${rowPrefix}options-flag`, 'on');
+      upsert(`${rowPrefix}global_damage_active_flag`, '1');
+      upsert(`${rowPrefix}global_damage_name`, modifierName);
+      upsert(`${rowPrefix}global_damage_damage`, '2');
+
+      // Эти вычисленные поля обычно обновляет worker листа Roll20. Заполняем их
+      // заранее, чтобы модификатор работал сразу после JSON-импорта.
+      upsert('global_damage_mod_roll', `2[${modifierName}]`);
+    }
     const grantedArmor = selectedClassEffects.filter((effect) => effect.type === 'armorTraining').flatMap((effect) => effect.categories || []);
     const grantedWeapons = selectedClassEffects.filter((effect) => effect.type === 'weaponProficiency').flatMap((effect) => effect.categories || []);
     const armorProficiencies = [...new Set([...(Array.isArray(classProficiencies.armor) ? classProficiencies.armor : []), ...grantedArmor])];
@@ -719,11 +965,33 @@
       : (Array.isArray(characterClass?.features)
           ? characterClass.features.filter((feature) => Number(feature?.level ?? 0) === 1)
           : []);
+    const firstClassLevel = Array.isArray(characterClass?.levels)
+      ? characterClass.levels.find((level) => Number(level?.level) === 1)
+      : null;
+    const classResourceMaximum = (featureName) => {
+      const normalizedName = String(featureName || '').toLocaleLowerCase('ru').replace(/ё/g, 'е');
+      const classId = String(characterClass?.id || '').toLocaleLowerCase('ru');
+      if (classId === 'fighter' && normalizedName.includes('второе дыхание')) {
+        return Number(firstClassLevel?.secondWind || 2);
+      }
+      if (classId === 'barbarian' && normalizedName === 'ярость') {
+        return Number(firstClassLevel?.rage || 2);
+      }
+      if (classId === 'ranger' && normalizedName.includes('избранный враг')) {
+        return Number(firstClassLevel?.favoredEnemy || 2);
+      }
+      return null;
+    };
     level1Features.forEach((feature) => {
       const featureName = feature?.name || 'Особенность класса';
       const featureDescription = feature?.description || '';
       addTrait(featureName, featureDescription, 'Класс', `${className} 1 уровень`);
-      collectRestResource(featureName, featureDescription, `${className} 1 уровень`);
+      collectRestResource(
+        featureName,
+        featureDescription,
+        `${className} 1 уровень`,
+        classResourceMaximum(featureName)
+      );
     });
 
     function selectedSpellNamesForSource(sourceId, level) {
@@ -833,7 +1101,7 @@
       });
     });
 
-    getEffectiveAbilities(species, variant).forEach((feature) => {
+    effectiveSpeciesAbilities.forEach((feature) => {
       const featureName = feature?.title || feature?.name || 'Особенность вида';
       const featureDescription = feature?.description || '';
       addTrait(featureName, featureDescription, 'Раса', speciesName);
@@ -849,21 +1117,30 @@
       );
     }
 
-    originFeats.forEach((originFeat) => {
-      const fromSpecies = (state.choices['species:originFeat'] || []).includes(originFeat.id);
+    originFeatEntries.forEach((originFeatEntry) => {
+      const originFeat = originFeatEntry.feat;
+      if (!originFeat) return;
+      const fromSpecies = originFeatEntry.source === 'species';
       const source = fromSpecies ? speciesName : (backgroundName || 'Предыстория');
       const featEffects = Array.isArray(originFeat.effects) ? originFeat.effects : [];
       const exportedEffects = fromSpecies && originFeat.type === 'general'
         ? featEffects.filter((effect) => !/^\s*Повышение характеристики[.:]/i.test(String(effect)))
         : featEffects;
+      const traitName = originFeatDisplayName(originFeatEntry);
+      const magicInitiateDetails = originFeat.id === 'magic-initiate'
+        ? [
+            `Список заклинаний: ${magicInitiateClassNames[state.choices[`feat:${originFeatEntry.source}:magic-list`]?.[0]] || 'не выбран'}.`,
+            `Заклинательная характеристика: ${state.choices[`feat:${originFeatEntry.source}:spell-ability`]?.[0] || 'не выбрана'}.`
+          ]
+        : [];
       addTrait(
-        originFeat.name,
-        exportedEffects.join('\n\n'),
+        traitName,
+        [...magicInitiateDetails, ...exportedEffects].join('\n\n'),
         'Черта',
         source
       );
       exportedEffects.forEach((effect) => {
-        collectRestResource(originFeat.name, effect, source);
+        collectRestResource(traitName, effect, source);
       });
     });
 

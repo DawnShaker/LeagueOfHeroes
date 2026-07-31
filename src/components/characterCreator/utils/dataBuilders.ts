@@ -95,37 +95,6 @@ export function buildFightingStyleOptions(featsData: any[]) {
     }));
 }
 
-export function buildMagicInitiateSpellOptions(spells: any[]) {
-  return {
-    cleric: spells
-      .filter((spell: any) =>
-        spell.sources?.some(
-          (source: any) =>
-            source.type === 'class' && /cleric|жрец/i.test(source.name)
-        )
-      )
-      .map(({ id, name, level }: any) => ({ id, name, level })),
-
-    druid: spells
-      .filter((spell: any) =>
-        spell.sources?.some(
-          (source: any) =>
-            source.type === 'class' && /druid|друид/i.test(source.name)
-        )
-      )
-      .map(({ id, name, level }: any) => ({ id, name, level })),
-
-    wizard: spells
-      .filter((spell: any) =>
-        spell.sources?.some(
-          (source: any) =>
-            source.type === 'class' && /wizard|волшебник/i.test(source.name)
-        )
-      )
-      .map(({ id, name, level }: any) => ({ id, name, level }))
-  };
-}
-
 export function buildRoll20RowsByName(
   template: any,
   normalizeSpellName: (value: unknown) => string
