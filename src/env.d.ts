@@ -10,6 +10,10 @@ interface ImportMeta {
 }
 
 interface Window {
+  __LOH_TEST_ACCOUNT_CONFIG__?: {
+    supabaseUrl?: string;
+    supabaseAnonKey?: string;
+  };
   speciesVariants?: Record<string, import('./types/species').SpeciesVariant>;
   ItemTooltip?: {
     new (): {
