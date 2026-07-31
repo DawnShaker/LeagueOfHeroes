@@ -3,8 +3,14 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 export type AccountRole = 'player' | 'master' | 'admin';
 export type AccountMode = AccountRole;
 
-const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL as string | undefined;
-const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY as string | undefined;
+const pageConfig =
+  typeof window !== 'undefined' ? window.__LOH_TEST_ACCOUNT_CONFIG__ : undefined;
+
+const supabaseUrl =
+  (import.meta.env.PUBLIC_SUPABASE_URL as string | undefined) || pageConfig?.supabaseUrl;
+const supabaseAnonKey =
+  (import.meta.env.PUBLIC_SUPABASE_ANON_KEY as string | undefined) ||
+  pageConfig?.supabaseAnonKey;
 
 export const isTestAccountConfigured = Boolean(supabaseUrl && supabaseAnonKey);
 
