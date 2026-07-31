@@ -9,3 +9,4 @@ export const ALIGNMENTS: Record<string, string> = {
   'neutral-evil': 'Нейтрально-злой',
   'chaotic-evil': 'Хаотично-злой'
 };
+//11
