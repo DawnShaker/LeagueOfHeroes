@@ -148,6 +148,12 @@
         return /(?:везучий|удача\s+полурослика)/i.test(title)
           || /выбрасываете\s+1[\s\S]{0,140}переброс/i.test(description);
       });
+    const hasIntegratedProtection = /(?:^|\s)(?:warforged|кован(?:ый|ая|ое|ые)?)(?:\s|$)/i.test(speciesIdentity)
+      && effectiveSpeciesAbilities.some((feature) =>
+        /(?:встроенная\s+защита|integrated\s+protection)/i.test(
+          String(feature?.title || feature?.name || '')
+        )
+      );
     const hasOriginFeat = (featId) => originFeatEntries.some((entry) => entry?.feat?.id === featId || entry?.id === featId);
     const hasDwarvenToughness = effectiveSpeciesAbilities.some((feature) =>
       /дварфийская выдержка/i.test(String(feature?.title || feature?.name || ''))
@@ -807,8 +813,25 @@
     upsert('hitdietype', String(hitDieSize));
     upsert('hitdieroll', String(hitDieSize));
     upsert('hitdie_final', '@{hitdietype}');
-    const exportedAc = unarmoredAc?.value ?? (10 + modifier(totalScore('dexterity')));
+    const integratedProtectionBonus = hasIntegratedProtection ? 1 : 0;
+    const exportedAc = (unarmoredAc?.value ?? (10 + modifier(totalScore('dexterity'))))
+      + integratedProtectionBonus;
+    // В пустом шаблоне Roll20 этот флаг отсутствует, поэтому после импорта
+    // блок «Общий модификатор КД» может быть скрыт. Он нужен независимо от
+    // выбранной формулы КД: для временных эффектов, заклинаний и предметов.
+    upsert('global_ac_mod_flag', '1');
     upsert('ac', String(exportedAc));
+    if (hasIntegratedProtection) {
+      // Встроенная защита кованого — постоянный общий модификатор КД, а не
+      // отдельная формула доспеха. Так бонус +1 совместим и с обычной бронёй,
+      // и с Защитой без доспехов, и с другими вариантами расчёта КД.
+      addRepeatingRow('acmod', {
+        global_ac_val: '1',
+        global_ac_name: 'Встроенная защита',
+        global_ac_active_flag: '1',
+        'options-flag': 'on'
+      });
+    }
     if (unarmoredAc) {
       // Поля настройки «Кастомный КД» листа D&D 5E by Roll20. Итоговый `ac`
       // записывается отдельно, поэтому КД верен сразу после импорта, а эти
