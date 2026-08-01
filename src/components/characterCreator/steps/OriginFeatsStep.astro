@@ -6,13 +6,13 @@ const { featOptions } = Astro.props;
   <div class="origin-feats-step-heading">
     <span class="wizard-kicker">Глава пятая</span>
     <h2>Выбери черты происхождения</h2>
-    <p>Любая предыстория даёт одну черту происхождения на выбор. Человек получает ещё одну черту от расы. Одну и ту же черту нельзя выбрать дважды, кроме «Одарённого» и «Посвящённого в магию».</p>
+    <p id="origin-feats-description">Каждая предыстория предоставляет одну на выбор из 12 стандартных черт происхождения.</p>
   </div>
   <div class="origin-feats-warning" id="origin-feats-warning" hidden></div>
   <div class="origin-feats-table-wrap">
     <div class="origin-feats-summary" id="origin-feats-summary"></div>
     <table class="origin-feats-table">
-      <thead><tr><th>Черта происхождения</th><th>От предыстории</th><th id="origin-feats-race-header">От вида</th></tr></thead>
+      <thead><tr><th>Черта происхождения</th><th id="origin-feats-background-header">От предыстории</th><th id="origin-feats-race-header">От вида</th></tr></thead>
       <tbody id="origin-feats-table-body"></tbody>
     </table>
   </div>
@@ -22,7 +22,7 @@ const { featOptions } = Astro.props;
       <div>
         <span>СВОЁ ПРОИСХОЖДЕНИЕ</span>
         <h3>Дополнительная черта</h3>
-        <p>Выберите черту Происхождения или подходящую Общую черту. Повышение характеристик Общей черты не применяется.</p>
+        <p>Выберите черту происхождения или доступную общую черту.</p>
       </div>
       <strong id="custom-lineage-feat-counter">0/1</strong>
     </div>

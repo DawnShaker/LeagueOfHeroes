@@ -34,7 +34,9 @@
     payload.schema_version = 3;
     payload.type = 'character';
     payload.character = payload.character || {};
-    payload.character.oldId = '';
+    // Roll20 использует oldId при импорте, чтобы переписать внутренние ссылки
+    // между карточками заклинаний и строками атак на новый ID персонажа.
+    payload.character.oldId = createRoll20Id();
     payload.character.name = state.name || 'Безымянный герой';
     payload.character.avatar = '';
     payload.character.defaulttoken = '';
@@ -542,8 +544,14 @@
 
     function inferRestResourceName(fallbackName, description) {
       const text = String(description || '').trim();
+      // У земного дженази расходуется ускоренное применение конкретного
+      // заговора, поэтому в ресурсе нужно короткое название заклинания, а не
+      // целое первое предложение «Вам известен заговор ...».
+      const knownCantripMatch = text.match(/^(?:вам\s+известен|вы\s+знаете)\s+заговор\s+([^.!?\n]{2,60})[.!?]/i);
+      if (knownCantripMatch) return knownCantripMatch[1].trim();
+
       const titledMatch = text.match(/^([^:.!?\n]{2,45})\.\s+/);
-      if (titledMatch && !/^вы\s/i.test(titledMatch[1])) return titledMatch[1].trim();
+      if (titledMatch && !/^(?:вы|вам)\s/i.test(titledMatch[1])) return titledMatch[1].trim();
 
       const firstSentence = text.split(/[.!?]\s/)[0]?.trim() || '';
       const colonMatch = firstSentence.match(/^([^:\n]{2,45}):\s*/);
@@ -794,6 +802,10 @@
     // после импорта в соответствующую версию листа.
     upsert('ignore_non_equipped_items_weight', '1');
     upsert('ignore_non_equipped_weight', '1');
+    // В актуальной русской версии листа Roll20 имя этого атрибута содержит
+    // историческую опечатку `ingore`. Без неё галочка визуально остаётся
+    // выключенной, даже если два корректно написанных варианта уже заданы.
+    upsert('ingore_non_equipped_weight', '1');
     if (hasPowerfulBuild) {
       // Roll20 использует этот флаг для удвоенной грузоподъёмности. Проверка
       // выше учитывает разные названия одной механики, включая кентаврское
@@ -943,26 +955,76 @@
       || /^dueling$/i.test(String(option?.nameEn || '').trim())
     );
 
-    if (hasDuelingFightingStyle) {
-      const modifierName = 'Дуэлянт если рукопашное оружие в 1 руке и не держите других оружий';
-      const templateRow = payload.character.attribs.find((attribute) =>
-        /^repeating_damagemod_[^_]+_global_damage_active_flag$/.test(String(attribute.name || ''))
+    const globalDamageModifiers = [];
+    const addGlobalDamageModifier = ({ name, damage, type = '' }) => {
+      if (!name || !damage) return;
+      const existingNameAttribute = payload.character.attribs.find((attribute) =>
+        /^repeating_damagemod_[^_]+_global_damage_name$/.test(String(attribute.name || ''))
+        && String(attribute.current || '') === name
       );
-      const rowId = templateRow?.name.match(/^repeating_damagemod_([^_]+)_/)?.[1] || createRoll20Id();
+      const unusedTemplateRow = payload.character.attribs.find((attribute) => {
+        const match = String(attribute.name || '').match(/^repeating_damagemod_([^_]+)_global_damage_active_flag$/);
+        if (!match) return false;
+        return !payload.character.attribs.some((candidate) =>
+          candidate.name === `repeating_damagemod_${match[1]}_global_damage_name`
+          && String(candidate.current || '').trim()
+        );
+      });
+      const rowId = existingNameAttribute?.name.match(/^repeating_damagemod_([^_]+)_/)?.[1]
+        || unusedTemplateRow?.name.match(/^repeating_damagemod_([^_]+)_/)?.[1]
+        || createRoll20Id();
       const rowPrefix = `repeating_damagemod_${rowId}_`;
 
-      // «Дуэлянт» добавляет только +2 к обычному урону подходящего оружия.
-      // Это не дополнительная кость критического урона и не отдельный тип
-      // урона, поэтому соответствующие поля строки оставляем пустыми.
       upsert('global_damage_mod_flag', '1');
       upsert(`${rowPrefix}options-flag`, 'on');
       upsert(`${rowPrefix}global_damage_active_flag`, '1');
-      upsert(`${rowPrefix}global_damage_name`, modifierName);
-      upsert(`${rowPrefix}global_damage_damage`, '2');
+      upsert(`${rowPrefix}global_damage_name`, name);
+      upsert(`${rowPrefix}global_damage_damage`, damage);
+      upsert(`${rowPrefix}global_damage_crit`, '');
+      upsert(`${rowPrefix}global_damage_type`, type);
+      globalDamageModifiers.push({ name, damage, type });
+    };
 
-      // Эти вычисленные поля обычно обновляет worker листа Roll20. Заполняем их
-      // заранее, чтобы модификатор работал сразу после JSON-импорта.
-      upsert('global_damage_mod_roll', `2[${modifierName}]`);
+    if (hasDuelingFightingStyle) {
+      // «Дуэлянт» добавляет только +2 к обычному урону подходящего оружия.
+      addGlobalDamageModifier({
+        name: 'Дуэлянт если рукопашное оружие в 1 руке и не держите других оружий',
+        damage: '2'
+      });
+    }
+
+    const damageModifierClassId = String(characterClass?.id || '').toLocaleLowerCase('ru');
+    const damageModifierLevelOne = Array.isArray(characterClass?.levels)
+      ? characterClass.levels.find((level) => Number(level?.level) === 1)
+      : null;
+
+    if (damageModifierClassId === 'barbarian') {
+      addGlobalDamageModifier({
+        name: 'Ярость',
+        damage: String(damageModifierLevelOne?.rageDamage || '2').replace(/^\+/, '')
+      });
+    }
+
+    if (damageModifierClassId === 'rogue') {
+      addGlobalDamageModifier({
+        name: 'Скрытая атака',
+        damage: String(damageModifierLevelOne?.sneakAttack || '1d6').replace(/д/gi, 'd'),
+        type: 'Sneak'
+      });
+    }
+
+    if (globalDamageModifiers.length) {
+      // Эти сводные поля обычно обновляет worker листа Roll20. Заполняем их
+      // заранее, чтобы строки работали сразу после JSON-импорта.
+      upsert(
+        'global_damage_mod_roll',
+        globalDamageModifiers.map((modifier) => `[[${modifier.damage}[${modifier.name}]]]`).join(' ')
+      );
+      upsert('global_damage_mod_crit', '');
+      upsert(
+        'global_damage_mod_type',
+        globalDamageModifiers.map((modifier) => modifier.type).filter(Boolean).join(', ')
+      );
     }
     const grantedArmor = selectedClassEffects.filter((effect) => effect.type === 'armorTraining').flatMap((effect) => effect.categories || []);
     const grantedWeapons = selectedClassEffects.filter((effect) => effect.type === 'weaponProficiency').flatMap((effect) => effect.categories || []);
@@ -1167,6 +1229,43 @@
       });
     });
 
+    // «Посвящённый в магию» даёт одно бесплатное применение выбранного
+    // заклинания 1-го уровня за продолжительный отдых. Карточка заклинания
+    // экспортируется ниже, а здесь создаём отдельный счётчик этого бесплатного
+    // применения. Заговоры не расходуют применение и ресурсами не становятся.
+    const spellSourcesForResources = typeof getSpellSources === 'function'
+      ? getSpellSources()
+      : [];
+    const spellSourceById = new Map(
+      spellSourcesForResources.map((spellSource) => [spellSource.id, spellSource])
+    );
+
+    originFeatEntries
+      .filter((entry) => entry?.feat?.id === 'magic-initiate' || entry?.id === 'magic-initiate')
+      .forEach((entry) => {
+        const spellSource = spellSourceById.get(`feat-${entry.source}`);
+        if (!spellSource) return;
+
+        const selectedLevel1Ids = new Set(
+          state.spells?.sources?.[spellSource.id]?.level1 || []
+        );
+        const availableSpells = [
+          ...(spellSource.fixed || []),
+          ...(spellSource.options || [])
+        ];
+
+        availableSpells
+          .filter((spell) => spell?.level === '1' && selectedLevel1Ids.has(spell.id))
+          .forEach((spell) => {
+            collectRestResource(
+              spell.name || spell.id,
+              'Вы можете наложить это заклинание один раз без траты ячейки заклинаний. Вы восстанавливаете это использование после Продолжительного отдыха.',
+              spellSource.spellLabel || spellSource.title || 'Черта: Посвящённый в магию',
+              1
+            );
+          });
+      });
+
     writeTraits();
     writeRestResources();
 
@@ -1273,35 +1372,201 @@
 
       const newRowId = createRoll20Id();
       const sourceAttributes = Array.isArray(spell.roll20Attributes) ? spell.roll20Attributes : [];
+      const sourceAttackAttributes = Array.isArray(spell.roll20AttackAttributes)
+        ? spell.roll20AttackAttributes
+        : [];
+      const normalizedSourceAttributes = sourceAttributes
+        .map((sourceAttribute) => {
+          const field = String(sourceAttribute?.field || '').trim()
+            || String(sourceAttribute?.name || '').match(/^repeating_spell-(?:cantrip|1)_[^_]+_(.+)$/)?.[1]
+            || '';
+          return field ? { ...sourceAttribute, field } : null;
+        })
+        .filter(Boolean);
+      const normalizedSourceAttackAttributes = sourceAttackAttributes
+        .map((sourceAttribute) => {
+          const field = String(sourceAttribute?.field || '').trim()
+            || String(sourceAttribute?.name || '').match(/^repeating_attack_[^_]+_(.+)$/)?.[1]
+            || '';
+          return field ? { ...sourceAttribute, field } : null;
+        })
+        .filter(Boolean);
+      const healingSpell = /^(?:лечение ран|лечащее слово)$/i.test(String(spell.name || '').trim());
+      // Only create an attack link when we can also export the linked attack
+      // row. Roll20 connects it back to the spell through repeating_attack's
+      // spellid field and the spell row's rollcontent macro.
+      const attackRowId = (normalizedSourceAttackAttributes.length || healingSpell) ? createRoll20Id() : '';
       const copiedFields = new Set();
+      const isCureWounds = /^лечение ран$/i.test(String(spell.name || '').trim());
+      const healingDice = isCureWounds ? '2d8' : '2d4';
+      const healingDie = isCureWounds ? 'd8' : 'd4';
 
-      sourceAttributes.forEach((sourceAttribute) => {
-        const fieldMatch = String(sourceAttribute.name).match(/^repeating_spell-(?:cantrip|1)_[^_]+_(.+)$/);
-        if (!fieldMatch) return;
-        const field = fieldMatch[1];
+      normalizedSourceAttributes.forEach((sourceAttribute) => {
+        const field = sourceAttribute.field;
         copiedFields.add(field);
+        let current = sourceAttribute.current ?? '';
+        if (field === 'rollcontent' && attackRowId) {
+          current = `%{${payload.character.oldId}|repeating_attack_${attackRowId}_attack}`;
+        } else if (field === 'spellattackid' && attackRowId) {
+          current = attackRowId;
+        } else if (field === 'spelllevel') {
+          // Roll20 uses the literal "cantrip" here. A numeric 0 makes its
+          // sheet worker write links to repeating_spell-0 instead of the real
+          // repeating_spell-cantrip row, so a cantrip attack never appears.
+          current = section;
+        } else if (field === 'spell_damage_progression' && section === 'cantrip' && attackRowId) {
+          current = 'Cantrip Dice';
+        } else if (field === 'spelloutput' && healingSpell) {
+          current = 'ATTACK';
+        } else if (healingSpell && field === 'spelldmgmod') {
+          current = 'Yes';
+        } else if (healingSpell && field === 'spellhealing') {
+          current = healingDice;
+        } else if (healingSpell && field === 'spellhldie') {
+          current = '2';
+        } else if (healingSpell && field === 'spellhldietype') {
+          current = healingDie;
+        }
         payload.character.attribs.push({
           name: `repeating_spell-${section}_${newRowId}_${field}`,
-          current: sourceAttribute.current ?? '',
+          current,
           max: sourceAttribute.max ?? '',
           id: createRoll20Id()
         });
       });
 
+      if (attackRowId && !copiedFields.has('spellattackid')) {
+        copiedFields.add('spellattackid');
+        payload.character.attribs.push({
+          name: `repeating_spell-${section}_${newRowId}_spellattackid`,
+          current: attackRowId,
+          max: '',
+          id: createRoll20Id()
+        });
+      }
+
+      if (attackRowId) {
+        normalizedSourceAttackAttributes.forEach((sourceAttribute) => {
+          const field = sourceAttribute.field;
+          let current = sourceAttribute.current ?? '';
+          // These values mirror a row generated manually by Roll20. Its sheet
+          // worker normalises the back-reference to lowercase.
+          if (field === 'spellid') current = newRowId.toLocaleLowerCase('en');
+          else if (field === 'spelllevel') current = section;
+          else if (field === 'atkname') current = spell.name || '';
+          else if (field === 'spell_innate') current = spellInnateLabel(source);
+          else if (field === 'spelldesc_link') {
+            current = `%{${payload.character.oldId}|repeating_spell-${section}_${newRowId.toLocaleLowerCase('en')}_output}`;
+          }
+
+          payload.character.attribs.push({
+            name: `repeating_attack_${attackRowId}_${field}`,
+            current,
+            max: sourceAttribute.max ?? '',
+            id: createRoll20Id()
+          });
+        });
+      }
+
+      if (healingSpell && !normalizedSourceAttackAttributes.length) {
+        const dice = healingDice;
+        const die = healingDie;
+        const sourceText = `${source?.spellLabel || ''} ${source?.title || ''} ${source?.description || ''}`
+          .toLocaleLowerCase('ru');
+        const abilityFromSource = /интеллект|intelligence/.test(sourceText)
+          ? 'intelligence'
+          : /мудрост|wisdom/.test(sourceText)
+            ? 'wisdom'
+            : /харизм|charisma/.test(sourceText)
+              ? 'charisma'
+              : '';
+        const classCastingAbility = {
+          wizard: 'intelligence', artificer: 'intelligence',
+          cleric: 'wisdom', druid: 'wisdom', ranger: 'wisdom',
+          bard: 'charisma', sorcerer: 'charisma', warlock: 'charisma', paladin: 'charisma'
+        }[state.class] || '';
+        const castingAbility = abilityFromSource || classCastingAbility;
+        const healingModifier = castingAbility ? modifier(totalScore(castingAbility)) : 0;
+        const castingAbilityLabel = {
+          intelligence: 'INT',
+          wisdom: 'WIS',
+          charisma: 'CHA'
+        }[castingAbility] || 'SPELL';
+        const modifierExpression = healingModifier
+          ? `${healingModifier > 0 ? '+' : ''}${healingModifier}`
+          : '';
+        const healingFormula = `${dice}${modifierExpression}`;
+        const healingRollFormula = `${dice}${modifierExpression}[${castingAbilityLabel}]`;
+        const upcast = `{{hldmg=[[(2*?{На каком уровне?|Уровень 1,0|Уровень 2,1|Уровень 3,2|Уровень 4,3|Уровень 5,4|Уровень 6,5|Уровень 7,6|Уровень 8,7|Уровень 9,8})${die}]]}}`;
+        const spellDescriptionLink = '{{spelldesc_link=[Показать описание заклинания](~repeating_attack_spelldesc_link)}}';
+        const damageRoll = `@{wtype}&{template:dmg} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[${healingRollFormula}]]}} {{dmg1type=Лечение}} @{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg} {{spelllevel=@{spelllevel}}} {{innate=@{spell_innate}}} {{globaldamage=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} ${spellDescriptionLink} @{charname_output}`;
+        const healingFields = {
+          atkattr_base: 'spell',
+          'options-flag': '0',
+          spellid: newRowId.toLocaleLowerCase('en'),
+          spelllevel: '1',
+          savedc: '(@{spell_save_dc})',
+          atkname: spell.name || '',
+          atkflag: '0',
+          dmgbase: dice,
+          dmgflag: '{{damage=1}} {{dmg1flag=1}}',
+          dmgattr: 'spell',
+          dmgtype: 'Лечение',
+          dmg2base: '',
+          dmg2attr: '0',
+          dmg2flag: '0',
+          dmg2type: '',
+          atkrange: spell.range || (isCureWounds ? 'Касание' : '60 футов'),
+          saveflag: '0',
+          saveeffect: '',
+          hldmg: upcast,
+          spell_innate: spellInnateLabel(source),
+          atk_desc: '',
+          spelldesc_link: `%{${payload.character.oldId}|repeating_spell-1_${newRowId.toLocaleLowerCase('en')}_output}`,
+          atkdmgtype: `${healingFormula} Лечение`,
+          rollbase_dmg: damageRoll,
+          rollbase_crit: damageRoll,
+          atkbonus: '-',
+          rollbase: damageRoll,
+          saveattr: ''
+        };
+        Object.entries(healingFields).forEach(([field, current]) => {
+          payload.character.attribs.push({
+            name: `repeating_attack_${attackRowId}_${field}`,
+            current,
+            max: '',
+            id: createRoll20Id()
+          });
+        });
+      }
+
       const fallbackFields = {
         spellname: spell.name || '',
-        spelllevel: section === 'cantrip' ? '0' : '1',
+        spelllevel: section,
         spellschool: spell.school || '',
         spellcastingtime: spell.castingTime || '',
         spellrange: spell.range || '',
         spellduration: spell.duration || '',
         spelldescription: stripHtml(spell.description || ''),
-        spelloutput: 'SPELLCARD',
+        spelloutput: healingSpell ? 'ATTACK' : 'SPELLCARD',
         spellprepared: '0',
         spell_ability: 'spell',
         'details-flag': '0',
         'options-flag': '0'
       };
+
+      if (healingSpell) {
+        fallbackFields.spelloutput = 'ATTACK';
+        fallbackFields.spelldmgmod = 'Yes';
+        fallbackFields.spellhealing = healingDice;
+        fallbackFields.spellhldie = '2';
+        fallbackFields.spellhldietype = healingDie;
+      }
+
+      if (attackRowId) {
+        fallbackFields.spellattackid = attackRowId;
+        fallbackFields.rollcontent = `%{${payload.character.oldId}|repeating_attack_${attackRowId}_attack}`;
+      }
 
       Object.entries(fallbackFields).forEach(([field, current]) => {
         if (copiedFields.has(field)) return;
@@ -1351,6 +1616,23 @@
         upsert('spell_save_dc', 8 + modifier(totalScore(castingAbility)) + 2);
       }
       upsert('lvl1_slots_expended', '0');
+    }
+
+    // Every attack macro stored in a spell must still point to an exported
+    // repeating_attack row. No spellid back-reference is required.
+    const exportedAttackRowIds = new Set(
+      payload.character.attribs
+        .map((attribute) => String(attribute.name || '').match(/^repeating_attack_([^_]+)_/i)?.[1])
+        .filter(Boolean)
+    );
+    const orphanedSpellAttacks = payload.character.attribs
+      .filter((attribute) => /^repeating_spell-(?:cantrip|\d+)_[^_]+_rollcontent$/i.test(String(attribute.name || '')))
+      .map((attribute) => String(attribute.current || '').match(/repeating_attack_([^_]+)_attack/i)?.[1] || '')
+      .filter((rowId) => rowId && !exportedAttackRowIds.has(rowId));
+    if (orphanedSpellAttacks.length) {
+      throw new Error(
+        `Экспорт Roll20 остановлен: не созданы строки атак для ${orphanedSpellAttacks.length} заклинаний.`
+      );
     }
 
     payload.character.attribs = payload.character.attribs.map((attribute) => ({

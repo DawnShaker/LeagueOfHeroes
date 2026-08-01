@@ -100,8 +100,29 @@ export function buildRoll20RowsByName(
   normalizeSpellName: (value: unknown) => string
 ) {
   const spellRows = new Map<string, any>();
+  const attackRows = new Map<string, any>();
 
   for (const attribute of template?.character?.attribs ?? []) {
+    const attackMatch = String(attribute.name ?? '').match(
+      /^repeating_attack_([^_]+)_(.+)$/
+    );
+
+    if (attackMatch) {
+      const [, rowId, field] = attackMatch;
+      if (!attackRows.has(rowId)) {
+        attackRows.set(rowId, { rowId, fields: {}, attributes: [] });
+      }
+      const attackRow = attackRows.get(rowId);
+      attackRow.fields[field] = attribute.current ?? '';
+      attackRow.attributes.push({
+        field,
+        name: attribute.name,
+        current: attribute.current ?? '',
+        max: attribute.max ?? ''
+      });
+      continue;
+    }
+
     const match = String(attribute.name ?? '').match(
       /^repeating_spell-(cantrip|1)_([^_]+)_(.+)$/
     );
@@ -123,10 +144,20 @@ export function buildRoll20RowsByName(
     const row = spellRows.get(key);
     row.fields[field] = attribute.current ?? '';
     row.attributes.push({
+      field,
       name: attribute.name,
       current: attribute.current ?? '',
       max: attribute.max ?? ''
     });
+  }
+
+  for (const row of spellRows.values()) {
+    const attackRowId = String(row.fields.rollcontent ?? '').match(
+      /repeating_attack_([^_]+)_attack/
+    )?.[1];
+    row.attackAttributes = attackRowId
+      ? (attackRows.get(attackRowId)?.attributes ?? [])
+      : [];
   }
 
   const rowsByName = new Map<string, any>();
@@ -181,7 +212,8 @@ export function buildClassSpellOptions({
             duration: spell.duration ?? row?.fields?.spellduration ?? '',
             description:
               spell.description ?? row?.fields?.spelldescription ?? '',
-            roll20Attributes: row?.attributes ?? []
+            roll20Attributes: row?.attributes ?? [],
+            roll20AttackAttributes: row?.attackAttributes ?? []
           };
         });
 

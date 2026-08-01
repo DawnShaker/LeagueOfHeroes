@@ -105,7 +105,7 @@ const backgroundOptions = [
     nameEn: 'Custom Background',
     sourceBook: 'Пользовательская',
     lore: 'Запишите уникальное прошлое героя. Владения, языки и черта происхождения выбираются на следующих общих этапах конструктора.',
-    feat: '',
+    feat: 'Любая черта происхождения',
     skills: '',
     tools: '',
     equipment: 'Определяется игроком и ведущим',
@@ -982,7 +982,7 @@ const creatorOptions = {
       skills: (state.choices['background:skills'] || []).join(', '),
       tools: (state.choices['background:tools'] || []).join(', '),
       languageText: '',
-      feat: feat?.name || '',
+      feat: background.feat,
       feature: String(custom.feature || '').trim(),
       featureDescription: String(custom.featureDescription || '').trim()
     };
@@ -2324,8 +2324,8 @@ const creatorOptions = {
   function selectedOriginFeatEntries() {
     return getStateModule().selectedOriginFeatEntries(
       state,
-      allSelectableFeatOptions
-    );
+      allResolvedFeatOptions
+    ).filter((entry) => entry.source !== 'background' || backgroundGrantsOriginFeat());
   }
 
   function clearOriginFeatSourceChoices(source) {
@@ -2336,10 +2336,10 @@ const creatorOptions = {
   }
 
   function selectedOriginFeats() {
-    return getStateModule().selectedOriginFeats(
-      state,
-      allResolvedFeatOptions
-    );
+    const ids = selectedOriginFeatEntries().map((entry) => entry.id);
+    return ids
+      .map((id) => allResolvedFeatOptions.find((feat) => feat.id === id))
+      .filter(Boolean);
   }
 
   function selectedOriginFeat() {
@@ -2380,19 +2380,13 @@ const creatorOptions = {
     { background: /студент.*(?:лорхолд|призмари|квандрикс|сильверквилл|визерблум)|(?:lorehold|prismari|quandrix|silverquill|witherbloom)\s+student/i, featIds: ['strixhaven-initiate'] }
   ];
 
-  function backgroundRuleText(background = findBackground()) {
+  function backgroundFeatRuleText(background = findBackground()) {
     if (!background) return '';
     const values = [
-      background.name,
-      background.nameEn,
       background.feat,
       background.originFeat,
-      background.feature,
-      background.features,
       background.proficiencies?.feat,
-      background.proficiencies?.originFeat,
-      background.description,
-      background.lore
+      background.proficiencies?.originFeat
     ];
     return values.map((value) => {
       if (Array.isArray(value)) return value.join(' ');
@@ -2401,11 +2395,21 @@ const creatorOptions = {
     }).join(' ');
   }
 
+  function backgroundGrantsOriginFeat(background = findBackground()) {
+    // В конструкторе каждая предыстория предоставляет одну стандартную
+    // черту происхождения. Явное правило предыстории может расширить список
+    // особой чертой, но не отменяет двенадцать основных вариантов.
+    return Boolean(background);
+  }
+
   function getBackgroundOriginFeatOptions() {
     const background = findBackground();
-    const ruleText = backgroundRuleText(background);
+    if (!background) return [];
+    const ruleText = backgroundFeatRuleText(background);
     const normalizedRule = normalizeRuleText(ruleText);
-    const options = new Map(featOptions.map((feat) => [feat.id, feat]));
+    const options = new Map(
+      featOptions.map((feat) => [feat.id, feat])
+    );
 
     // Устаревшие и сеттинговые предыстории могут прямо называть особую черту,
     // которая не входит в стандартный список черт происхождения.
@@ -2416,9 +2420,8 @@ const creatorOptions = {
       }
     }
 
-    const backgroundName = `${background?.name || ''} ${background?.nameEn || ''}`;
     for (const rule of BACKGROUND_SPECIAL_FEAT_RULES) {
-      if (!rule.background.test(backgroundName)) continue;
+      if (!rule.background.test(ruleText)) continue;
       for (const featId of rule.featIds) {
         const feat = allResolvedFeatOptions.find((item) => item.id === featId);
         if (feat) options.set(feat.id, feat);
@@ -3302,7 +3305,9 @@ const creatorOptions = {
     const body = $('#origin-feats-table-body');
     const summary = $('#origin-feats-summary');
     const warning = $('#origin-feats-warning');
+    const backgroundHeader = $('#origin-feats-background-header');
     const raceHeader = $('#origin-feats-race-header');
+    const description = $('#origin-feats-description');
     const customSection = $('#custom-lineage-feats');
     const customBody = $('#custom-lineage-feat-table-body');
     const customSearch = $('#custom-lineage-feat-search');
@@ -3311,7 +3316,10 @@ const creatorOptions = {
 
     const speciesBonusFeat = speciesGrantsExtraFeat();
     const customLineage = isCustomLineageSpecies();
-    const backgroundSelected = (state.choices['background:originFeat'] || []).slice(0, 1);
+    const backgroundFeatGrant = backgroundGrantsOriginFeat();
+    const backgroundSelected = backgroundFeatGrant
+      ? (state.choices['background:originFeat'] || []).slice(0, 1)
+      : [];
     const speciesSelected = speciesBonusFeat ? (state.choices['species:originFeat'] || []).slice(0, 1) : [];
 
     // Старые сохранения могли содержать одну и ту же неповторяемую черту
@@ -3330,9 +3338,11 @@ const creatorOptions = {
     state.choices['species:originFeat'] = speciesSelected;
 
     summary.innerHTML = `
-      <div class="origin-feats-summary-card"><span>Предыстория</span><strong>${backgroundSelected.length}/1</strong></div>
+      ${backgroundFeatGrant ? `<div class="origin-feats-summary-card"><span>Предыстория</span><strong>${backgroundSelected.length}/1</strong></div>` : ''}
       ${speciesBonusFeat && !customLineage ? `<div class="origin-feats-summary-card"><span>Вид</span><strong>${speciesSelected.length}/1</strong></div>` : ''}
     `;
+
+    if (backgroundHeader) backgroundHeader.hidden = !backgroundFeatGrant;
 
     if (raceHeader) {
       raceHeader.hidden = !speciesBonusFeat || customLineage;
@@ -3340,8 +3350,24 @@ const creatorOptions = {
       raceHeader.title = '';
     }
 
+    if (description) {
+      description.textContent = isCustomBackground()
+        ? '«Своя предыстория» предоставляет одну на выбор из 12 основных черт происхождения.'
+        : backgroundFeatGrant
+        ? (speciesBonusFeat
+          ? 'Предыстория предоставляет одну из 12 стандартных черт происхождения. Вид также даёт дополнительную черту; неповторяемую черту нельзя выбрать из двух источников одновременно.'
+          : 'Выберите одну из 12 стандартных черт происхождения, предоставленных предысторией.')
+        : speciesBonusFeat
+          ? 'Выбранная предыстория не предоставляет черту. Здесь показана только дополнительная черта от вида.'
+          : 'Выбранные предыстория и вид не предоставляют черту. Этап можно продолжить без выбора.';
+    }
+
     const backgroundFeatOptions = getBackgroundOriginFeatOptions();
-    body.innerHTML = backgroundFeatOptions.map((feat) => {
+    const tableFeatOptions = Array.from(new Map([
+      ...backgroundFeatOptions,
+      ...(speciesBonusFeat && !customLineage ? featOptions : [])
+    ].map((feat) => [feat.id, feat])).values());
+    body.innerHTML = tableFeatOptions.map((feat) => {
       const fromBackground = backgroundSelected.includes(feat.id);
       const fromSpecies = speciesSelected.includes(feat.id);
       const repeatable = isRepeatableOriginFeat(feat.id);
@@ -3356,10 +3382,10 @@ const creatorOptions = {
         : '';
       return `<tr class="${backgroundDisabled ? 'is-disabled' : ''} ${speciesDisabled ? 'is-cross-source-blocked' : ''}">
         <td class="origin-feat-name"><a href="/feats/${encodeURIComponent(feat.id)}" target="_blank" rel="noopener">${escapeHtml(feat.name)}</a><small>${escapeHtml(feat.nameEn || '')}</small>${backgroundAlreadySelectedLabel}</td>
-        <td><input class="origin-feat-check" type="checkbox" autocomplete="off" data-origin-feat-source="background" value="${escapeHtml(feat.id)}" ${fromBackground ? 'checked' : ''} ${backgroundDisabled ? `disabled title="${escapeHtml(speciesSelectionLabel)}"` : ''} aria-label="${escapeHtml(feat.name)}: от предыстории"></td>
+        ${backgroundFeatGrant ? `<td><input class="origin-feat-check" type="checkbox" autocomplete="off" data-origin-feat-source="background" value="${escapeHtml(feat.id)}" ${fromBackground ? 'checked' : ''} ${backgroundDisabled ? `disabled title="${escapeHtml(speciesSelectionLabel)}"` : ''} aria-label="${escapeHtml(feat.name)}: от предыстории"></td>` : ''}
         ${speciesBonusFeat && !customLineage ? `<td><input class="origin-feat-check" type="checkbox" autocomplete="off" data-origin-feat-source="species" value="${escapeHtml(feat.id)}" ${fromSpecies ? 'checked' : ''} ${speciesDisabled ? 'disabled title="Уже выбрана в другой таблице"' : ''} aria-label="${escapeHtml(feat.name)}: от вида"></td>` : ''}
       </tr>`;
-    }).join('');
+    }).join('') || '<tr><td class="origin-feat-empty">Выбранная предыстория и вид не предоставляют черту на этом этапе.</td></tr>';
 
     const renderCustomLineageTable = () => {
       if (!customSection || !customBody) return;
@@ -3371,6 +3397,7 @@ const creatorOptions = {
         if (requirements == null) return '';
         return String(requirements);
       };
+      const originFeatIds = new Set(featOptions.map((feat) => feat.id));
       const options = allSelectableFeatOptions.filter((feat) => {
         const haystack = `${feat.name || ''} ${feat.nameEn || ''} ${normalizeRequirements(feat.requirements)}`.toLocaleLowerCase('ru');
         return !query || haystack.includes(query);
@@ -3381,23 +3408,19 @@ const creatorOptions = {
         const repeatable = isRepeatableOriginFeat(feat.id);
         const selectedByBackground = backgroundSelected.includes(feat.id);
         const disabled = selectedByBackground && !repeatable;
-        const isGeneralFeat = feat.type === 'general';
-        const requirementItems = Array.isArray(feat.requirements)
-          ? feat.requirements
-          : feat.requirements
-            ? [String(feat.requirements)]
-            : [];
-        const requirements = isGeneralFeat && requirementItems.length
-          ? `<small class="origin-feat-requirements">${escapeHtml(requirementItems.join(' • '))}</small>`
+        const isOriginFeat = originFeatIds.has(feat.id);
+        const typeBadge = isOriginFeat
+          ? '<small class="origin-feat-type origin-feat-type-origin">Черта происхождения</small>'
+          : '<small class="origin-feat-type origin-feat-type-general">Общая черта</small>';
+        const requirements = normalizeRequirements(feat.requirements);
+        const requirementsLabel = requirements
+          ? `<small class="origin-feat-requirements">Требования: ${escapeHtml(requirements)}</small>`
           : '';
-        const typeBadge = isGeneralFeat
-          ? '<small class="origin-feat-type">Общая черта · повышение характеристик не применяется</small>'
-          : '<small class="origin-feat-type origin-feat-type-origin">Черта происхождения</small>';
         const alreadySelectedLabel = disabled
           ? '<small class="origin-feat-already-selected">Уже выбрана от предыстории</small>'
           : '';
-        return `<tr class="${isGeneralFeat ? 'origin-feat-general-row' : ''} ${selected ? 'is-selected' : ''} ${disabled ? 'is-disabled' : ''}">
-          <td class="origin-feat-name"><a href="/feats/${encodeURIComponent(feat.id)}" target="_blank" rel="noopener">${escapeHtml(feat.name)}</a><small>${escapeHtml(feat.nameEn || '')}</small>${typeBadge}${requirements}${alreadySelectedLabel}</td>
+        return `<tr class="${selected ? 'is-selected' : ''} ${disabled ? 'is-disabled' : ''}">
+          <td class="origin-feat-name"><a href="/feats/${encodeURIComponent(feat.id)}" target="_blank" rel="noopener">${escapeHtml(feat.name)}</a><small>${escapeHtml(feat.nameEn || '')}</small>${typeBadge}${requirementsLabel}${alreadySelectedLabel}</td>
           <td><input class="origin-feat-check" type="checkbox" autocomplete="off" data-origin-feat-source="species" value="${escapeHtml(feat.id)}" ${selected ? 'checked' : ''} ${disabled ? 'disabled title="Уже выбрана в другой таблице"' : ''} aria-label="${escapeHtml(feat.name)}: от Своего происхождения"></td>
         </tr>`;
       }).join('') || '<tr><td colspan="2" class="origin-feat-empty">По вашему запросу ничего не найдено.</td></tr>';
@@ -3505,9 +3528,10 @@ const creatorOptions = {
   }
 
   function originFeatsComplete() {
+    const backgroundFeatGrant = backgroundGrantsOriginFeat();
     const backgroundId = state.choices['background:originFeat']?.[0];
     const speciesId = state.choices['species:originFeat']?.[0];
-    const basicComplete = Boolean(backgroundId)
+    const basicComplete = (!backgroundFeatGrant || Boolean(backgroundId))
       && (!speciesGrantsExtraFeat() || Boolean(speciesId))
       && !(backgroundId && speciesId && backgroundId === speciesId && !isRepeatableOriginFeat(backgroundId));
     if (!basicComplete) return false;
@@ -6483,10 +6507,9 @@ const creatorOptions = {
     card.addEventListener('click', () => {
       state.background = card.dataset.backgroundId;
       state.backgroundCharacteristics = structuredClone(defaultState.backgroundCharacteristics || {});
-      const keptOriginFeat = [...(state.choices['background:originFeat'] || [])];
       state.choices['background:skills'] = [];
       Object.keys(state.choices).filter((id) => (id.startsWith('background:') && id !== 'background:originFeat') || id.startsWith('feat:')).forEach((id) => delete state.choices[id]);
-      state.choices['background:originFeat'] = keptOriginFeat;
+      state.choices['background:originFeat'] = [];
       state.equipment.initializedFor = '';
       renderBackgroundDetails();
       updatePreview();
@@ -6621,7 +6644,12 @@ const creatorOptions = {
     }
 
     if (steps[state.step] === 'origin-feats' && !originFeatsComplete()) {
-      alert(speciesGrantsExtraFeat() ? 'Выберите одну черту от предыстории и одну дополнительную черту от вида.' : 'Выберите одну черту происхождения от предыстории.');
+      const needsBackgroundFeat = backgroundGrantsOriginFeat();
+      alert(needsBackgroundFeat && speciesGrantsExtraFeat()
+        ? 'Выберите одну черту от предыстории и одну дополнительную черту от вида.'
+        : needsBackgroundFeat
+          ? 'Выберите черту, предоставленную предысторией.'
+          : 'Выберите дополнительную черту от вида.');
       return;
     }
 
@@ -6826,7 +6854,8 @@ const creatorOptions = {
       downloadJson(buildRoll20Payload(), '-roll20');
     } catch (error) {
       console.error(error);
-      alert('Не удалось подготовить файл Roll20. Откройте консоль браузера для подробностей.');
+      const details = error instanceof Error ? `\n\n${error.message}` : '';
+      alert(`Не удалось подготовить файл Roll20.${details}`);
     }
   });
 
@@ -7182,6 +7211,12 @@ const creatorOptions = {
 
   .wizard-step.is-active {
     display: block;
+  }
+
+  /* На первом шаге после поля имени больше нет содержимого, поэтому ему не
+     нужна общая минимальная высота длинных этапов конструктора. */
+  .wizard-step[data-step="identity"] {
+    min-height: 0;
   }
 
   .wizard-footer {
