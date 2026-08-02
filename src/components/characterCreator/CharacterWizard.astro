@@ -3491,11 +3491,20 @@ const creatorOptions = {
     const container = $('#origin-feats-extra-choices');
     if (!container) return;
     const magicEntries = selectedOriginFeatEntries().filter((entry) => entry.id === 'magic-initiate');
-    const activeSources = new Set(magicEntries.map((entry) => entry.source));
+    const scionEntries = selectedOriginFeatEntries().filter((entry) => entry.id === 'scion-of-the-outer-planes');
+    const activeMagicSources = new Set(magicEntries.map((entry) => entry.source));
+    const activeScionSources = new Set(scionEntries.map((entry) => entry.source));
     ['background', 'species'].forEach((source) => {
-      if (!activeSources.has(source)) clearOriginFeatSourceChoices(source);
+      if (!activeMagicSources.has(source)) {
+        delete state.choices[`feat:${source}:magic-list`];
+        delete state.choices[`feat:${source}:spell-ability`];
+      }
+      if (!activeScionSources.has(source)) {
+        delete state.choices[`feat:${source}:scion-plane`];
+        delete state.choices[`feat:${source}:scion-spell-ability`];
+      }
     });
-    if (!magicEntries.length) {
+    if (!magicEntries.length && !scionEntries.length) {
       container.innerHTML = '';
       return;
     }
@@ -3524,6 +3533,27 @@ const creatorOptions = {
       });
       choices.push({ id:`feat:${entry.source}:spell-ability`, title:'Заклинательная характеристика', description:'Выберите характеристику для заклинаний этой черты.', count:1, options:['Интеллект','Мудрость','Харизма'], source:`Черта: ${entry.feat.name} (${sourceNames[entry.source]})` });
     }
+    for (const entry of scionEntries) {
+      choices.push({
+        id: `feat:${entry.source}:scion-plane`,
+        title: 'Планарное влияние',
+        description: 'Выбранный план определяет сопротивление урону и автоматически получаемый заговор.',
+        count: 1,
+        options: SCION_PLAN_OPTIONS.map((plan) => ({
+          value: plan.value,
+          label: `${plan.label} — ${plan.resistance} — ${plan.cantrip}`
+        })),
+        source: `Черта: ${entry.feat.name} (${sourceNames[entry.source]})`
+      });
+      choices.push({
+        id: `feat:${entry.source}:scion-spell-ability`,
+        title: 'Заклинательная характеристика',
+        description: 'Выберите характеристику для заговора, полученного от выбранного плана.',
+        count: 1,
+        options: ['Интеллект', 'Мудрость', 'Харизма'],
+        source: `Черта: ${entry.feat.name} (${sourceNames[entry.source]})`
+      });
+    }
     renderBackgroundChoiceCards(container, choices);
   }
 
@@ -3537,11 +3567,17 @@ const creatorOptions = {
     if (!basicComplete) return false;
     const magicEntries = selectedOriginFeatEntries().filter((entry) => entry.id === 'magic-initiate');
     const magicLists = magicEntries.map((entry) => (state.choices[`feat:${entry.source}:magic-list`] || [])[0]).filter(Boolean);
-    return new Set(magicLists).size === magicLists.length
+    const magicComplete = new Set(magicLists).size === magicLists.length
       && magicEntries.every((entry) =>
         (state.choices[`feat:${entry.source}:magic-list`] || []).length === 1
         && (state.choices[`feat:${entry.source}:spell-ability`] || []).length === 1
       );
+    const scionEntries = selectedOriginFeatEntries().filter((entry) => entry.id === 'scion-of-the-outer-planes');
+    const scionComplete = scionEntries.every((entry) =>
+      (state.choices[`feat:${entry.source}:scion-plane`] || []).length === 1
+      && (state.choices[`feat:${entry.source}:scion-spell-ability`] || []).length === 1
+    );
+    return magicComplete && scionComplete;
   }
 
   function renderBackgroundChoiceCards(container, choices) {
@@ -4026,6 +4062,14 @@ const creatorOptions = {
       }));
   }
 
+  const SCION_PLAN_OPTIONS = [
+    { value: 'chaotic', label: 'Хаотичный', resistance: 'Яд', cantrip: 'Малая иллюзия' },
+    { value: 'evil', label: 'Злой', resistance: 'Некротическая энергия', cantrip: 'Леденящее прикосновение' },
+    { value: 'good', label: 'Добрый', resistance: 'Излучение', cantrip: 'Священное пламя' },
+    { value: 'lawful', label: 'Законный', resistance: 'Силовое поле', cantrip: 'Наставление' },
+    { value: 'outlands', label: 'Внешние земли', resistance: 'Психическая энергия', cantrip: 'Волшебная рука' }
+  ];
+
   function ensureSpellSourceState() {
     if (!state.spells || typeof state.spells !== 'object') state.spells = {};
     if (!state.spells.sources || typeof state.spells.sources !== 'object') state.spells.sources = {};
@@ -4247,9 +4291,25 @@ const creatorOptions = {
 
     const feats = selectedOriginFeatEntries();
     const hasFeat = (id) => feats.some((entry)=>entry.id===id);
-    if (hasFeat('scion-of-the-outer-planes')) {
-      const names=['Малая иллюзия','Леденящее прикосновение','Священное пламя','Указание','Волшебная рука'];
-      sources.push({id:'feat-scion',category:'Черта',title:'Наследник внешних планов',spellLabel:'Черта: Наследник внешних планов',description:'Выберите заговор, соответствующий выбранному плану.',limits:{cantrip:1,level1:0},options:uniqueSpells(names.map((n)=>spellByName(n,'cantrip')))});
+    const scionEntry = feats.find((entry) => entry.id === 'scion-of-the-outer-planes');
+    if (scionEntry) {
+      const planId = (state.choices[`feat:${scionEntry.source}:scion-plane`] || [])[0] || '';
+      const plan = SCION_PLAN_OPTIONS.find((option) => option.value === planId);
+      const spellAbility = (state.choices[`feat:${scionEntry.source}:scion-spell-ability`] || [])[0] || '';
+      const cantrip = plan ? spellByName(plan.cantrip, 'cantrip') : null;
+      if (plan && cantrip) {
+        const sourceLabel = `Черта: Наследник внешних планов (${plan.label}, ${spellAbility || 'характеристика не выбрана'})`;
+        sources.push({
+          id: `feat-scion-${scionEntry.source}`,
+          category: 'Черта',
+          title: `Наследник внешних планов: ${plan.label}`,
+          spellLabel: sourceLabel,
+          description: `Сопротивление урону: ${plan.resistance}. Заговор автоматически получен от выбранного плана. Заклинательная характеристика: ${spellAbility || 'не выбрана'}.`,
+          limits: { cantrip: 0, level1: 0 },
+          fixed: uniqueSpells(withSpellAvailability([cantrip], sourceLabel)),
+          options: []
+        });
+      }
     }
     if (hasFeat('initiate-of-high-sorcery')) {
       const lunar=['Диссонирующий шёпот','Псевдожизнь','Сглаз','Луч болезни','Сверкающие брызги','Маскировка','Падение пёрышком','Скороход','Понимание языков','Обнаружение зла и добра','Защита от зла и добра','Щит'];
@@ -4265,7 +4325,7 @@ const creatorOptions = {
       const cfg={
         'Лорхолд':[['Свет','Священное пламя','Чудотворство'],['cleric','wizard']],
         'Призмари':[['Огненный снаряд','Фокусы','Луч холода'],['bard','sorcerer']],
-        'Квандрикс':[['Искусство друидов','Указание','Волшебная рука'],['druid','wizard']],
+        'Квандрикс':[['Искусство друидов','Наставление','Волшебная рука'],['druid','wizard']],
         'Сильверквилл':[['Священное пламя','Чудотворство','Злая насмешка'],['bard','cleric']],
         'Визерблум':[['Искусство друидов','Уход за умирающим','Леденящее прикосновение'],['druid','wizard']]
       }[college] || [[],[]];
@@ -6644,6 +6704,17 @@ const creatorOptions = {
     }
 
     if (steps[state.step] === 'origin-feats' && !originFeatsComplete()) {
+      const incompleteScion = selectedOriginFeatEntries().find((entry) =>
+        entry.id === 'scion-of-the-outer-planes'
+        && (
+          (state.choices[`feat:${entry.source}:scion-plane`] || []).length !== 1
+          || (state.choices[`feat:${entry.source}:scion-spell-ability`] || []).length !== 1
+        )
+      );
+      if (incompleteScion) {
+        alert('Для черты «Наследник внешних планов» выберите план и заклинательную характеристику.');
+        return;
+      }
       const needsBackgroundFeat = backgroundGrantsOriginFeat();
       alert(needsBackgroundFeat && speciesGrantsExtraFeat()
         ? 'Выберите одну черту от предыстории и одну дополнительную черту от вида.'

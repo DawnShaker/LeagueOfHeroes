@@ -51,6 +51,7 @@
     const background = findBackground();
     const className = characterClass?.name || characterClass?.nameEn || state.class || '';
     const roll20ClassName = characterClass?.nameEn || characterClass?.name || state.class || '';
+    const isRangerClass = String(characterClass?.id || state.class || '').toLocaleLowerCase('en') === 'ranger';
     const baseSpeciesName = species?.name || species?.nameEn || state.species || '';
     const variantSpeciesName = variant?.name || variant?.nameEn || '';
     const speciesName = [baseSpeciesName, variantSpeciesName].filter(Boolean).join(' — ');
@@ -167,6 +168,49 @@
       druid: 'Друид',
       wizard: 'Волшебник'
     };
+    const scionPlanDetails = {
+      chaotic: { name: 'Хаотичный', resistance: 'Яд', cantrip: 'Малая иллюзия' },
+      evil: { name: 'Злой', resistance: 'Некротическая энергия', cantrip: 'Леденящее прикосновение' },
+      good: { name: 'Добрый', resistance: 'Излучение', cantrip: 'Священное пламя' },
+      lawful: { name: 'Законный', resistance: 'Силовое поле', cantrip: 'Наставление' },
+      outlands: { name: 'Внешние земли', resistance: 'Психическая энергия', cantrip: 'Волшебная рука' }
+    };
+    const strixhavenCollegeDetails = {
+      lorehold: {
+        name: 'Лорхолд',
+        cantrips: 'Выберите два: Свет, Священное пламя и Чудотворство',
+        level1: 'Выберите заклинание 1-го уровня из списка заклинаний жреца или волшебника'
+      },
+      prismari: {
+        name: 'Призмари',
+        cantrips: 'Выберите два: Огненный снаряд, Фокусы и Луч холода',
+        level1: 'Выберите заклинание 1-го уровня из списка заклинаний барда или чародея'
+      },
+      quandrix: {
+        name: 'Квандрикс',
+        cantrips: 'Выберите два: Искусство друидов, Наставление и Волшебная рука',
+        level1: 'Выберите заклинание 1-го уровня из списка заклинаний друида или волшебника'
+      },
+      silverquill: {
+        name: 'Сильверквилл',
+        cantrips: 'Выберите два: Священное пламя, Чудотворство и Злая насмешка',
+        level1: 'Выберите заклинание 1-го уровня из списка заклинаний барда или жреца'
+      },
+      witherbloom: {
+        name: 'Визерблум',
+        cantrips: 'Выберите два: Леденящее прикосновение, Искусство друидов и Уход за умирающим',
+        level1: 'Выберите заклинание 1-го уровня из списка заклинаний друида или волшебника'
+      }
+    };
+    const strixhavenCollege = (() => {
+      const identity = `${background?.id || ''} ${backgroundName}`.toLocaleLowerCase('ru');
+      if (/lorehold|лорхолд/.test(identity)) return strixhavenCollegeDetails.lorehold;
+      if (/prismari|призмари/.test(identity)) return strixhavenCollegeDetails.prismari;
+      if (/quandrix|квандрикс/.test(identity)) return strixhavenCollegeDetails.quandrix;
+      if (/silverquill|сильверквилл/.test(identity)) return strixhavenCollegeDetails.silverquill;
+      if (/witherbloom|визерблум/.test(identity)) return strixhavenCollegeDetails.witherbloom;
+      return null;
+    })();
     const originFeatDisplayName = (entry) => {
       const feat = entry?.feat;
       if (!feat) return '';
@@ -770,9 +814,24 @@
 
     upsert('character_name', payload.character.name);
     upsert('class', roll20ClassName);
-    upsert('class_display', `${roll20ClassName} 1`);
+    upsert('class_display', `${isRangerClass ? className : roll20ClassName} 1`);
     upsert('base_level', '1');
     upsert('level', '1');
+
+    // В актуальном листе D&D 5E by Roll20 встроенный Ranger использует иную
+    // конфигурацию. Через «Использовать кастомный класс» первый уровень
+    // следопыта корректно получает d10, спасброски Силы/Ловкости,
+    // половинную прогрессию заклинаний и Мудрость.
+    if (isRangerClass) {
+      upsert('custom_class', '1');
+      upsert('cust_classname', className || 'Следопыт');
+      upsert('cust_hitdietype', '10');
+      upsert('cust_strength_save_prof', '(@{pb})');
+      upsert('cust_dexterity_save_prof', '(@{pb})');
+      upsert('cust_wisdom_save_prof', '0');
+      upsert('cust_spellslots', 'half');
+      upsert('cust_spellcasting_ability', '@{wisdom_mod}+');
+    }
 
     // Поддерживаем поля разных версий листа D&D 5E by Roll20.
     upsert('subclass', subclassName);
@@ -1070,6 +1129,9 @@
     level1Features.forEach((feature) => {
       const featureName = feature?.name || 'Особенность класса';
       const featureDescription = feature?.description || '';
+      if (/^Божественный порядок$/i.test(featureName) && selectedClassFeatureOption('divine-order')) {
+        return;
+      }
       addTrait(featureName, featureDescription, 'Класс', `${className} 1 уровень`);
       collectRestResource(
         featureName,
@@ -1173,9 +1235,9 @@
         }
 
         addTrait(
-          option.name,
+          group.id === 'divine-order' ? `${group.name} (${option.name})` : option.name,
           optionDescription,
-          group.name || 'Умение класса',
+          group.id === 'divine-order' ? 'Класс' : (group.name || 'Умение класса'),
           `${className} 1 уровень`
         );
         collectRestResource(
@@ -1211,6 +1273,14 @@
       const exportedEffects = fromSpecies && originFeat.type === 'general'
         ? featEffects.filter((effect) => !/^\s*Повышение характеристики[.:]/i.test(String(effect)))
         : featEffects;
+      // Для «Наследника внешних планов» выбранный вариант записывается выше
+      // отдельными строками. Общая HTML-таблица всех пяти планов в Roll20
+      // только дублирует выбор и сильно растягивает карточку черты.
+      const hidesGeneralChoiceTable = originFeat.id === 'scion-of-the-outer-planes'
+        || originFeat.id === 'strixhaven-initiate';
+      const traitEffects = hidesGeneralChoiceTable
+        ? exportedEffects.filter((effect) => !/<table\b/i.test(String(effect)))
+        : exportedEffects;
       const traitName = originFeatDisplayName(originFeatEntry);
       const magicInitiateDetails = originFeat.id === 'magic-initiate'
         ? [
@@ -1218,13 +1288,54 @@
             `Заклинательная характеристика: ${state.choices[`feat:${originFeatEntry.source}:spell-ability`]?.[0] || 'не выбрана'}.`
           ]
         : [];
+      const selectedScionPlan = originFeat.id === 'scion-of-the-outer-planes'
+        ? scionPlanDetails[state.choices[`feat:${originFeatEntry.source}:scion-plane`]?.[0]]
+        : null;
+      const scionDetails = selectedScionPlan
+        ? [
+            `Выбранный план: ${selectedScionPlan.name}.`,
+            `Сопротивление урону: ${selectedScionPlan.resistance}.`,
+            `Заговор: ${selectedScionPlan.cantrip}.`,
+            `Заклинательная характеристика: ${state.choices[`feat:${originFeatEntry.source}:scion-spell-ability`]?.[0] || 'не выбрана'}.`
+          ]
+        : [];
+      const strixhavenCantrips = originFeat.id === 'strixhaven-initiate'
+        ? selectedSpellNamesForSource('feat-strixhaven', 'cantrip')
+        : [];
+      const strixhavenLevel1 = originFeat.id === 'strixhaven-initiate'
+        ? selectedSpellNamesForSource('feat-strixhaven', '1')
+        : [];
+      const strixhavenSelection = originFeat.id === 'strixhaven-initiate' && strixhavenCollege
+        ? [
+            `Факультет: ${strixhavenCollege.name}`,
+            'Заговоры:',
+            ...(strixhavenCantrips.length ? strixhavenCantrips : ['—']),
+            'Заклинание 1-го уровня:',
+            ...(strixhavenLevel1.length ? strixhavenLevel1 : ['—'])
+          ].join('\n')
+        : '';
+      const selectedCollegeDescription = originFeat.id === 'strixhaven-initiate' && strixhavenCollege
+        ? [
+            `Заклинания Стриксхейвена ${strixhavenCollege.name}`,
+            'Заговоры',
+            strixhavenCollege.cantrips,
+            'Заклинание 1-го уровня',
+            strixhavenCollege.level1
+          ].join('\n')
+        : '';
       addTrait(
         traitName,
-        [...magicInitiateDetails, ...exportedEffects].join('\n\n'),
+        [
+          ...magicInitiateDetails,
+          ...scionDetails,
+          strixhavenSelection,
+          ...traitEffects,
+          selectedCollegeDescription
+        ].filter(Boolean).join('\n\n'),
         'Черта',
         source
       );
-      exportedEffects.forEach((effect) => {
+      traitEffects.forEach((effect) => {
         collectRestResource(traitName, effect, source);
       });
     });
@@ -1602,7 +1713,7 @@
     }
     if (exportedSpellCount) {
       upsert('tab', 'spells');
-      upsert('caster_level', '1');
+      upsert('caster_level', isRangerClass ? '0' : '1');
       const firstLevel = Array.isArray(characterClass?.levels)
         ? characterClass.levels.find((level) => Number(level?.level) === 1)
         : null;

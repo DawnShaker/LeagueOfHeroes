@@ -97,8 +97,8 @@ export function buildClassFeatureOptions(fightingStyleOptions: any[]) {
   fighter: [{ id: 'fighting-style', name: 'Боевой стиль', count: 1, options: fighterStyleOptions }],
   cleric: [{
     id: 'divine-order', name: 'Божественный порядок', count: 1, href: '/classes/cleric#feature-божественный-порядок-1', options: [
-      { id: 'protector', name: 'Защитник', detail: 'Владение воинским оружием и тяжёлой бронёй', href: '/classes/cleric#feature-божественный-порядок-1', effects: [{ type: 'weaponProficiency', categories: ['Воинское оружие'] }, { type: 'armorTraining', categories: ['Тяжёлая броня'] }] },
-      { id: 'thaumaturge', name: 'Чудотворец', detail: 'Дополнительный заговор жреца; бонус Мудрости к Магии или Религии', href: '/classes/cleric#feature-божественный-порядок-1', effects: [{ type: 'extraCantrip', spellList: 'cleric', count: 1 }, { type: 'skillCheckBonus', skills: ['Магия', 'Религия'], ability: 'wisdom' }] }
+      { id: 'protector', name: 'Защитник', detail: 'Владение воинским оружием и тяжёлой бронёй', exportDescription: 'Защитник. Обученный битве, вы получаете владение воинским оружием и тяжёлыми доспехами.', href: '/classes/cleric#feature-божественный-порядок-1', effects: [{ type: 'weaponProficiency', categories: ['Воинское оружие'] }, { type: 'armorTraining', categories: ['Тяжёлая броня'] }] },
+      { id: 'thaumaturge', name: 'Чудотворец', detail: 'Дополнительный заговор жреца; бонус Мудрости к Магии или Религии', exportDescription: 'Чудотворец. Вы знаете 1 дополнительный заговор из списка заклинаний жреца. Кроме того, ваша мистическая связь с божественным даёт вам бонус к проверкам Интеллекта (Магия или Религия). Бонус равен вашему модификатору Мудрости (минимум +1).', href: '/classes/cleric#feature-божественный-порядок-1', effects: [{ type: 'extraCantrip', spellList: 'cleric', count: 1 }, { type: 'skillCheckBonus', skills: ['Магия', 'Религия'], ability: 'wisdom' }] }
     ]
   }, faithGroup('Выберите божество, которому служит жрец. Домены указаны как подсказка для будущего выбора подкласса.')],
   druid: [{
