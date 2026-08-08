@@ -51,7 +51,10 @@
     const background = findBackground();
     const className = characterClass?.name || characterClass?.nameEn || state.class || '';
     const roll20ClassName = characterClass?.nameEn || characterClass?.name || state.class || '';
-    const isRangerClass = String(characterClass?.id || state.class || '').toLocaleLowerCase('en') === 'ranger';
+    const normalizedClassId = String(characterClass?.id || state.class || '').toLocaleLowerCase('en');
+    const isRangerClass = normalizedClassId === 'ranger';
+    const isApothecaryClass = normalizedClassId === 'apothecary';
+    const usesCustomClass = isRangerClass || isApothecaryClass;
     const baseSpeciesName = species?.name || species?.nameEn || state.species || '';
     const variantSpeciesName = variant?.name || variant?.nameEn || '';
     const speciesName = [baseSpeciesName, variantSpeciesName].filter(Boolean).join(' — ');
@@ -92,6 +95,8 @@
     const selectedOath = selectedClassFeatureOption('paladin-oath');
     const selectedDeity = selectedClassFeatureOption('faith');
     const selectedPatron = selectedClassFeatureOption('warlock-patron');
+    const selectedEsotericTheory = selectedClassFeatureOption('esoteric-theory');
+    const selectedEsotericTheoryName = String(selectedEsotericTheory?.name || '').trim();
     const describeRelationship = (label, option) => {
       if (!option) return '';
       const details = option.exportDescription
@@ -126,13 +131,21 @@
       ...(state.choices['species:tools'] || []),
       ...(state.choices['feat:tools'] || [])
     ])];
-    const skills = [...new Set([
+    const skillsWithoutBedsideManners = [...new Set([
       ...(state.choices['class:skills'] || []),
       ...(state.choices['background:skills'] || []),
       ...(state.choices['species:skill'] || []),
+      ...(state.choices['species:adaptiveSkill'] || []),
       ...(state.choices['feat:skills'] || [])
     ])];
-    const expertiseSkills = new Set(state.choices['class:expertise'] || []);
+    const bedsideMannersSkills = selectedEsotericTheoryName === 'Прикроватные манеры'
+      ? ['Проницательность', 'Убеждение']
+      : [];
+    const skills = [...new Set([...skillsWithoutBedsideManners, ...bedsideMannersSkills])];
+    const expertiseSkills = new Set([
+      ...(state.choices['class:expertise'] || []),
+      ...bedsideMannersSkills.filter((skill) => skillsWithoutBedsideManners.includes(skill))
+    ]);
     const originFeatEntries = typeof selectedOriginFeatEntries === 'function'
       ? selectedOriginFeatEntries()
       : selectedOriginFeats().map((feat) => ({ source: 'background', id: feat.id, feat }));
@@ -144,6 +157,21 @@
       return /(?:мощное|лошадиное|крупное)\s+телосложение/i.test(title)
         || /считаетесь\s+на\s+один\s+размер\s+больше[\s\S]{0,180}(?:грузопод[ъь]ёмност|толкать|тянуть)/i.test(description);
     });
+    const speciesDarkvisionDistance = (() => {
+      if (
+        /custom.?lineage|сво[её]\s+происхождени/i.test(speciesIdentity)
+        && (state.choices?.['species:customLineageFeature'] || [])[0] !== 'darkvision'
+      ) return 0;
+
+      return effectiveSpeciesAbilities.reduce((maximum, feature) => {
+        const text = `${feature?.title || feature?.name || ''} ${feature?.description || ''}`
+          .toLocaleLowerCase('ru')
+          .replace(/ё/g, 'е');
+        if (!/(?:темн(?:ое|ого)\s+зрени|darkvision)/i.test(text)) return maximum;
+        const distance = text.match(/(?:темн(?:ое|ого)\s+зрени|darkvision)[\s\S]{0,100}?(\d+)\s*(?:фут|ft|feet)/i);
+        return Math.max(maximum, Number(distance?.[1] || 60));
+      }, 0);
+    })();
     const hasHalflingLuck = /(?:^|\s)(?:halfling|полурослик)(?:\s|$)/i.test(speciesIdentity)
       && effectiveSpeciesAbilities.some((feature) => {
         const title = String(feature?.title || feature?.name || '');
@@ -814,7 +842,7 @@
 
     upsert('character_name', payload.character.name);
     upsert('class', roll20ClassName);
-    upsert('class_display', `${isRangerClass ? className : roll20ClassName} 1`);
+    upsert('class_display', `${usesCustomClass ? className : roll20ClassName} 1`);
     upsert('base_level', '1');
     upsert('level', '1');
 
@@ -831,6 +859,30 @@
       upsert('cust_wisdom_save_prof', '0');
       upsert('cust_spellslots', 'half');
       upsert('cust_spellcasting_ability', '@{wisdom_mod}+');
+    }
+
+    // В Roll20 нет встроенного Apothecary. Экспортируем его через те же поля
+    // пользовательского класса: d8, спасброски Интеллекта/Мудрости и ручные
+    // ячейки. Лист не предлагает pact-прогрессию для пользовательского класса,
+    // поэтому точное число ячеек записывается ниже напрямую.
+    if (isApothecaryClass) {
+      upsert('custom_class', '1');
+      upsert('cust_classname', className || 'Апотекарий');
+      upsert('cust_hitdietype', '8');
+      upsert('cust_strength_save_prof', '0');
+      upsert('cust_dexterity_save_prof', '0');
+      upsert('cust_constitution_save_prof', '0');
+      upsert('cust_intelligence_save_prof', '(@{pb})');
+      upsert('cust_wisdom_save_prof', '(@{pb})');
+      upsert('cust_charisma_save_prof', '0');
+      upsert('cust_spellslots', 'none');
+      upsert('cust_spellcasting_ability', '@{intelligence_mod}+');
+      // При ручной прогрессии кастомного класса Roll20 выводит в настройках
+      // значения lvlN_slots_mod, а на листе использует lvlN_slots_total.
+      // На 1-м уровне у Апотекария одна ячейка 1-го уровня.
+      upsert('lvl1_slots_mod', '1');
+      upsert('lvl1_slots_total', '1');
+      upsert('lvl1_slots_expended', '0');
     }
 
     // Поддерживаем поля разных версий листа D&D 5E by Roll20.
@@ -1459,6 +1511,7 @@
         .replace(/^Черта:\s*/i, '')
         .replace(/^Предыстория:\s*/i, '')
         .replace(/^Умение класса:\s*/i, '')
+        .replace(/^Эзотерическая теория:\s*/i, '')
         .trim();
     }
 
@@ -1474,10 +1527,71 @@
       ];
     }
 
+    function inferSpellDamageProfile(spell) {
+      const text = stripHtml(spell?.description || '')
+        .replace(/\u00a0/g, ' ')
+        .replace(/(\d+)\s*[дd]\s*(\d+)/gi, '$1d$2');
+      const diceMatch = text.match(/\b(\d+d\d+(?:\s*[+-]\s*\d+)?)\b(?=[^.!?\n]{0,120}\bурон)/i)
+        || text.match(/\bурон[^.!?\n]{0,120}?\b(\d+d\d+(?:\s*[+-]\s*\d+)?)\b/i);
+      if (!diceMatch) return null;
+
+      const dice = String(diceMatch[1] || '').replace(/\s+/g, '');
+      const diceIndex = Number(diceMatch.index || 0);
+      const damageSentence = text.slice(
+        Math.max(0, text.lastIndexOf('.', diceIndex) + 1),
+        Math.min(text.length, diceIndex + 180)
+      ).toLocaleLowerCase('ru');
+      const damageTypes = [
+        [/кислот/i, 'Кислотой'],
+        [/дробящ/i, 'Дробящий'],
+        [/огн/i, 'Огнём'],
+        [/холод/i, 'Холодом'],
+        [/электрич/i, 'Электричеством'],
+        [/звуков/i, 'Звуком'],
+        [/яд(?:ом|а|овит)/i, 'Ядом'],
+        [/некротическ/i, 'Некротический'],
+        [/психическ/i, 'Психический'],
+        [/излучен/i, 'Излучением'],
+        [/силов/i, 'Силовой'],
+        [/колющ/i, 'Колющий'],
+        [/рубящ/i, 'Рубящий']
+      ];
+      const damageType = damageTypes.find(([pattern]) => pattern.test(damageSentence))?.[1] || '';
+
+      const lower = text.toLocaleLowerCase('ru');
+      const attackType = /дальнобойн\w*\s+атак\w*\s+заклинанием/i.test(lower)
+        ? 'Ranged'
+        : /рукопашн\w*\s+атак\w*\s+заклинанием/i.test(lower)
+          ? 'Melee'
+          : '';
+      const saveAbilities = [
+        [/спасброс\w*\s+силы/i, 'Strength', 'STR'],
+        [/спасброс\w*\s+ловкости/i, 'Dexterity', 'DEX'],
+        [/спасброс\w*\s+телосложения/i, 'Constitution', 'CON'],
+        [/спасброс\w*\s+интеллекта/i, 'Intelligence', 'INT'],
+        [/спасброс\w*\s+мудрости/i, 'Wisdom', 'WIS'],
+        [/спасброс\w*\s+харизмы/i, 'Charisma', 'CHA']
+      ];
+      const save = saveAbilities.find(([pattern]) => pattern.test(lower));
+      const die = dice.match(/d(\d+)/i)?.[1] || '';
+
+      return {
+        dice,
+        die,
+        damageType,
+        attackType,
+        saveAbility: save?.[1] || '',
+        saveShort: save?.[2] || '',
+        saveEffect: /половин\w*\s+урон/i.test(lower)
+          ? 'Половина урона при успехе'
+          : 'Нет урона при успехе'
+      };
+    }
+
     function addSpellCard(spell, source) {
       if (!spell) return;
       const section = spell.level === 'cantrip' ? 'cantrip' : '1';
-      const uniqueKey = `${source?.id || 'unknown'}:${section}:${spell.id || spell.name}`;
+      const uniqueKey = `${section}:${spell.id || spell.name}`;
       if (exportedSpellKeys.has(uniqueKey)) return;
       exportedSpellKeys.add(uniqueKey);
 
@@ -1503,10 +1617,11 @@
         })
         .filter(Boolean);
       const healingSpell = /^(?:лечение ран|лечащее слово)$/i.test(String(spell.name || '').trim());
+      const inferredDamage = inferSpellDamageProfile(spell);
       // Only create an attack link when we can also export the linked attack
       // row. Roll20 connects it back to the spell through repeating_attack's
       // spellid field and the spell row's rollcontent macro.
-      const attackRowId = (normalizedSourceAttackAttributes.length || healingSpell) ? createRoll20Id() : '';
+      const attackRowId = (normalizedSourceAttackAttributes.length || healingSpell || inferredDamage) ? createRoll20Id() : '';
       const copiedFields = new Set();
       const isCureWounds = /^лечение ран$/i.test(String(spell.name || '').trim());
       const healingDice = isCureWounds ? '2d8' : '2d4';
@@ -1529,6 +1644,16 @@
           current = 'Cantrip Dice';
         } else if (field === 'spelloutput' && healingSpell) {
           current = 'ATTACK';
+        } else if (field === 'spelloutput' && inferredDamage) {
+          current = 'ATTACK';
+        } else if (field === 'spellattack' && inferredDamage) {
+          current = inferredDamage.attackType || 'None';
+        } else if (field === 'spellsave' && inferredDamage) {
+          current = inferredDamage.saveShort;
+        } else if (field === 'spelldamage' && inferredDamage) {
+          current = inferredDamage.dice;
+        } else if (field === 'spelldamagetype' && inferredDamage) {
+          current = inferredDamage.damageType;
         } else if (healingSpell && field === 'spelldmgmod') {
           current = 'Yes';
         } else if (healingSpell && field === 'spellhealing') {
@@ -1537,11 +1662,36 @@
           current = '2';
         } else if (healingSpell && field === 'spellhldietype') {
           current = healingDie;
+        } else if (field === 'spellcomp_v') {
+          current = spell.components?.verbal ? '{{v=1}}' : 0;
+        } else if (field === 'spellcomp_s') {
+          current = spell.components?.somatic ? '{{s=1}}' : 0;
+        } else if (field === 'spellcomp_m') {
+          current = spell.components?.material ? '{{m=1}}' : 0;
+        } else if (field === 'spellcomp_materials') {
+          current = String(spell.components?.material || '').trim();
         }
         payload.character.attribs.push({
           name: `repeating_spell-${section}_${newRowId}_${field}`,
           current,
           max: sourceAttribute.max ?? '',
+          id: createRoll20Id()
+        });
+      });
+
+      const componentFields = {
+        spellcomp_v: spell.components?.verbal ? '{{v=1}}' : 0,
+        spellcomp_s: spell.components?.somatic ? '{{s=1}}' : 0,
+        spellcomp_m: spell.components?.material ? '{{m=1}}' : 0,
+        spellcomp_materials: String(spell.components?.material || '').trim()
+      };
+      Object.entries(componentFields).forEach(([field, current]) => {
+        if (copiedFields.has(field)) return;
+        copiedFields.add(field);
+        payload.character.attribs.push({
+          name: `repeating_spell-${section}_${newRowId}_${field}`,
+          current,
+          max: '',
           id: createRoll20Id()
         });
       });
@@ -1574,6 +1724,58 @@
             name: `repeating_attack_${attackRowId}_${field}`,
             current,
             max: sourceAttribute.max ?? '',
+            id: createRoll20Id()
+          });
+        });
+      }
+
+      if (inferredDamage && !normalizedSourceAttackAttributes.length && !healingSpell) {
+        const hasAttackRoll = Boolean(inferredDamage.attackType);
+        const hasSavingThrow = Boolean(inferredDamage.saveAbility) && !hasAttackRoll;
+        const cantripScaling = section === 'cantrip' && inferredDamage.die
+          ? `{{hldmg=[[(1*?{На каком уровне?|Уровень 0,0|Уровень 1,1|Уровень 2,2|Уровень 3,3|Уровень 4,4|Уровень 5,5|Уровень 6,6|Уровень 7,7|Уровень 8,8|Уровень 9,9})d${inferredDamage.die}]]}}`
+          : '';
+        const spellDescriptionLink = '{{spelldesc_link=[Показать описание](~repeating_attack_spelldesc_link)}}';
+        const damageRoll = `@{wtype}&{template:dmg} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[@{dmgbase}]]}} {{dmg1type=@{dmgtype}}} @{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg} {{spelllevel=@{spelllevel}}} {{innate=@{spell_innate}}} {{globaldamage=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} ${spellDescriptionLink} @{charname_output}`;
+        const attackRoll = `@{wtype}&{template:atkdmg} {{mod=@{atkbonus}}} {{rname=@{atkname}}} {{r1=[[@{d20}cs>@{atkcritrange}+@{spell_attack_bonus}]]}} @{rtype}cs>@{atkcritrange}+@{spell_attack_bonus}]]}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[@{dmgbase}]]}} {{dmg1type=@{dmgtype}}} @{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} {{crit1=[[@{dmgbase}[CRIT]]]}} {{crit2=[[0[CRIT]]]}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg} {{spelllevel=@{spelllevel}}} {{innate=@{spell_innate}}} {{globalattack=@{global_attack_mod}} {{globaldamage=[[0]]}} {{globaldamagecrit=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} ${spellDescriptionLink} @{charname_output}`;
+        const saveRoll = `@{wtype}&{template:atkdmg} {{mod=@{atkbonus}}} {{rname=@{atkname}}} {{r1=[[0d20]]}} {{r2=[[0d20]]}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[@{dmgbase}]]}} {{dmg1type=@{dmgtype}}} @{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} {{crit1=[[0]]}} {{crit2=[[0]]}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg} {{spelllevel=@{spelllevel}}} {{innate=@{spell_innate}}} {{globaldamage=[[0]]}} {{globaldamagecrit=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} ${spellDescriptionLink} @{charname_output}`;
+        const inferredAttackFields = {
+          atkattr_base: 'spell',
+          'options-flag': '0',
+          spellid: newRowId.toLocaleLowerCase('en'),
+          spelllevel: section,
+          savedc: '(@{spell_save_dc})',
+          atkname: spell.name || '',
+          atkflag: hasAttackRoll ? '{{attack=1}}' : '0',
+          dmgbase: inferredDamage.dice,
+          dmgflag: '{{damage=1}} {{dmg1flag=1}}',
+          dmgattr: '0',
+          dmgtype: inferredDamage.damageType,
+          dmg2base: '',
+          dmg2attr: '0',
+          dmg2flag: '0',
+          dmg2type: '',
+          atkrange: spell.range || '',
+          saveflag: hasSavingThrow
+            ? '{{save=1}} {{saveattr=@{saveattr}}} {{savedesc=@{saveeffect}}} {{savedc=[[[[@{savedc}]][SAVE]]]}}'
+            : '0',
+          saveattr: hasSavingThrow ? inferredDamage.saveAbility : '',
+          saveeffect: hasSavingThrow ? inferredDamage.saveEffect : '',
+          hldmg: cantripScaling,
+          spell_innate: spellInnateLabel(source),
+          atk_desc: '',
+          spelldesc_link: `%{${payload.character.oldId}|repeating_spell-${section}_${newRowId.toLocaleLowerCase('en')}_output}`,
+          atkdmgtype: `${inferredDamage.dice} ${inferredDamage.damageType}`.trim(),
+          rollbase_dmg: damageRoll,
+          rollbase_crit: damageRoll,
+          atkbonus: hasAttackRoll ? '@{spell_attack_bonus}' : '-',
+          rollbase: hasAttackRoll ? attackRoll : saveRoll
+        };
+        Object.entries(inferredAttackFields).forEach(([field, current]) => {
+          payload.character.attribs.push({
+            name: `repeating_attack_${attackRowId}_${field}`,
+            current,
+            max: '',
             id: createRoll20Id()
           });
         });
@@ -1651,6 +1853,7 @@
         });
       }
 
+      /** @type {Record<string, any>} */
       const fallbackFields = {
         spellname: spell.name || '',
         spelllevel: section,
@@ -1659,7 +1862,7 @@
         spellrange: spell.range || '',
         spellduration: spell.duration || '',
         spelldescription: stripHtml(spell.description || ''),
-        spelloutput: healingSpell ? 'ATTACK' : 'SPELLCARD',
+        spelloutput: (healingSpell || inferredDamage) ? 'ATTACK' : 'SPELLCARD',
         spellprepared: '0',
         spell_ability: 'spell',
         'details-flag': '0',
@@ -1672,6 +1875,15 @@
         fallbackFields.spellhealing = healingDice;
         fallbackFields.spellhldie = '2';
         fallbackFields.spellhldietype = healingDie;
+      }
+
+      if (inferredDamage) {
+        fallbackFields.spelloutput = 'ATTACK';
+        fallbackFields.spellattack = inferredDamage.attackType || 'None';
+        fallbackFields.spellsave = inferredDamage.saveShort;
+        fallbackFields.spelldamage = inferredDamage.dice;
+        fallbackFields.spelldamagetype = inferredDamage.damageType;
+        if (section === 'cantrip') fallbackFields.spell_damage_progression = 'Cantrip Dice';
       }
 
       if (attackRowId) {
@@ -1717,9 +1929,11 @@
       const firstLevel = Array.isArray(characterClass?.levels)
         ? characterClass.levels.find((level) => Number(level?.level) === 1)
         : null;
-      const slots = firstLevel?.spellSlots?.[1] ?? (state.class === 'warlock' ? 1 : 2);
+      const slots = firstLevel?.spellSlots?.[1]
+        ?? firstLevel?.numOfSpellSlots
+        ?? (state.class === 'warlock' || isApothecaryClass ? 1 : 2);
       upsert('lvl1_slots_total', String(slots));
-      const castingAbilityMap = { wizard: 'intelligence', artificer: 'intelligence', cleric: 'wisdom', druid: 'wisdom', ranger: 'wisdom', bard: 'charisma', sorcerer: 'charisma', warlock: 'charisma', paladin: 'charisma' };
+      const castingAbilityMap = { wizard: 'intelligence', artificer: 'intelligence', apothecary: 'intelligence', cleric: 'wisdom', druid: 'wisdom', ranger: 'wisdom', bard: 'charisma', sorcerer: 'charisma', warlock: 'charisma', paladin: 'charisma' };
       const castingAbility = castingAbilityMap[state.class] || '';
       if (castingAbility) {
         upsert('spellcasting_ability', `@{${castingAbility}_mod}+`);
@@ -1750,6 +1964,39 @@
       ...attribute,
       id: attribute.id || createRoll20Id()
     }));
+
+    const tokenAttribute = (name) => payload.character.attribs.find((attribute) => attribute.name === name);
+    const hpAttribute = tokenAttribute('hp');
+    const acAttribute = tokenAttribute('ac');
+    const passiveWisdomAttribute = tokenAttribute('passive_wisdom');
+    payload.character.defaulttoken = JSON.stringify({
+      width: 70,
+      height: 70,
+      imgsrc: String(payload.character.avatar || ''),
+      name: payload.character.name,
+      show_tooltip: false,
+      represents: payload.character.oldId,
+      bar1_value: String(hpAttribute?.current ?? maxHp),
+      bar1_max: String(hpAttribute?.max ?? maxHp),
+      bar1_num_permission: 'hidden',
+      bar1_link: hpAttribute?.id || '',
+      bar2_value: String(acAttribute?.current ?? exportedAc),
+      bar2_num_permission: 'hidden',
+      bar2_link: acAttribute?.id || '',
+      bar3_value: String(passiveWisdomAttribute?.current ?? ''),
+      bar3_num_permission: 'hidden',
+      bar3_link: passiveWisdomAttribute?.id || '',
+      bar_location: 'overlap_bottom',
+      compact_bar: 'compact',
+      showplayers_aura1: true,
+      showplayers_aura2: true,
+      has_bright_light_vision: true,
+      has_low_light_vision: true,
+      has_night_vision: speciesDarkvisionDistance > 0,
+      night_vision_distance: speciesDarkvisionDistance,
+      night_vision_effect: speciesDarkvisionDistance > 0 ? 'Dimming_0' : 'Nocturnal',
+      dim_light_opacity: '0.75'
+    });
     return payload;
   
   }

@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "League of Heroes — Roll20 Sync",
+  "version": "0.6.0",
+  "description": "Синхронизация персонажей и токенов League of Heroes с Roll20.",
+  "permissions": ["storage", "scripting"],
+  "host_permissions": ["https://*.supabase.co/*", "https://app.roll20.net/*"],
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [
+    {
+      "matches": ["https://app.roll20.net/*"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://leagueofheroes.netlify.app/test/cabinet/*",
+        "https://leagueoheroes.netlify.app/test/cabinet/*",
+        "https://*.local-corp.webcontainer.io/test/cabinet/*",
+        "https://*.webcontainer.io/test/cabinet/*",
+        "http://localhost/test/cabinet/*"
+      ],
+      "js": ["site-link.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["page-bridge.js"],
+      "matches": ["https://app.roll20.net/*"]
+    }
+  ],
+  "action": { "default_title": "League of Heroes — Roll20 Sync" }
+}

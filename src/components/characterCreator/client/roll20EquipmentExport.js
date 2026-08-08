@@ -47,6 +47,23 @@
       .replace(/(\d*)[дк](\d+)/g, (_, count, size) => `${count || 1}d${size}`);
   }
 
+  function roll20Weight(value) {
+    const match = String(value ?? '').replace(',', '.').match(/[\d.]+/);
+    const weight = match ? Number(match[0]) : 0;
+    return Number.isFinite(weight) ? String(weight) : '0';
+  }
+
+  function roll20ItemWeight(item) {
+    const weight = Number(roll20Weight(item?.weight));
+    const bundleMatch = cleanText(item?.name).match(/\((\d+)\)\s*$/);
+    const bundleSize = bundleMatch ? Number(bundleMatch[1]) : 1;
+    const unitWeight = bundleSize > 1 ? weight / bundleSize : weight;
+
+    return Number.isFinite(unitWeight)
+      ? String(Number(unitWeight.toFixed(6)))
+      : '0';
+  }
+
   function damageTypeFromDescription(description) {
     const text = String(description || '').toLocaleLowerCase('ru');
     if (/дробящ/.test(text)) return 'дробящий';
@@ -89,12 +106,13 @@
 
   function parseArmor(item) {
     const description = cleanText(item.description);
+    const category = String(item.category || '');
+    const isShield = /щит/i.test(category);
     const acMatch = description.match(/КД\s*:\s*(\d+)/i);
-    const ac = acMatch?.[1] || '';
+    const ac = isShield ? '2' : (acMatch?.[1] || '');
     const maxDexMatch = description.match(/макс\.?\s*(\d+)/i);
     const strengthMatch = description.match(/Сила\s*:\s*(\d+)/i);
     const stealthDisadvantage = /Скрытность\s*:\s*Помеха/i.test(description);
-    const category = String(item.category || '');
     const armorType = /тяж[её]л/i.test(category)
       ? 'Heavy Armor'
       : /средн/i.test(category)
@@ -106,7 +124,7 @@
             : 'Armor';
 
     let acFormula = ac;
-    if (/щит/i.test(category)) acFormula = '+2';
+    if (isShield) acFormula = '+2';
     else if (/л[её]гк/i.test(category)) acFormula = `${ac} + DEX`;
     else if (/средн/i.test(category)) acFormula = `${ac} + DEX (макс. ${maxDexMatch?.[1] || 2})`;
 
@@ -119,7 +137,6 @@
       `Item Type: ${armorType}`,
       ac ? `AC: ${ac}` : '',
       stealthDisadvantage ? 'Stealth:Disadvantage' : '',
-      strengthMatch ? `Strength: ${strengthMatch[1]}` : '',
       maxDexMatch ? `Max Dex: ${maxDexMatch[1]}` : ''
     ].filter(Boolean).join(', ');
 
@@ -176,7 +193,7 @@
       itemname: item.name,
       itemcount: String(quantity),
       itemproperties: weapon.properties,
-      itemweight: String(item.weight || 0),
+      itemweight: roll20ItemWeight(item),
       itemcontent: buildWeaponContent(item, weapon),
       itemmodifiers: itemModifiers,
       hasattack: '1',
@@ -264,7 +281,7 @@
       itemname: item.name,
       itemcount: String(quantity),
       itemproperties: armor.properties,
-      itemweight: String(item.weight || 0),
+      itemweight: roll20ItemWeight(item),
       itemcontent: buildArmorContent(item, armor),
       itemmodifiers: armor.modifiers,
       hasattack: '0',
@@ -281,7 +298,7 @@
       itemname: item.name,
       itemcount: String(quantity),
       itemproperties: '',
-      itemweight: String(item.weight || 0),
+      itemweight: roll20ItemWeight(item),
       itemcontent: [
         item.nameEn || '',
         item.category || '',
@@ -328,6 +345,45 @@
       [item.name, item.nameEn].filter(Boolean).forEach((name) => itemByName.set(normalizeName(name), item));
     });
 
+    // В наборах названия часто стоят в родительном падеже или отличаются от
+    // названия той же вещи в каталоге. Без этих соответствий предмет создавался
+    // в Roll20 с запасным весом 0.
+    const packItemAliases = new Map(Object.entries({
+      'спальный мешок': 'спальник',
+      'факелов': 'факел',
+      'факела': 'факел',
+      'рационов': 'рацион',
+      'рациона': 'рацион',
+      'бурдюк': 'бурдюк полный',
+      'фляги масла': 'масло',
+      'фляга масла': 'масло',
+      'костюма': 'костюм',
+      'костюмов': 'костюм',
+      'свечей': 'свеча',
+      'писчих перьев': 'писчее перо',
+      'футляра для карт или свитков': 'футляр для карт или свитков',
+      'листов бумаги': 'бумага',
+      'листов пергамента': 'пергамент'
+    }));
+    const packItemFallbacks = new Map(Object.entries({
+      'пеньковая веревка 50 футов': {
+        name: 'Пеньковая верёвка (50 футов)',
+        weight: 10
+      },
+      'котелок': {
+        name: 'Котелок',
+        weight: 1
+      }
+    }));
+
+    function resolvePackItem(name) {
+      const normalized = normalizeName(name);
+      const alias = packItemAliases.get(normalized);
+      return itemByName.get(normalized)
+        || (alias ? itemByName.get(normalizeName(alias)) : null)
+        || null;
+    }
+
     const packs = EQUIPMENT_PACK_CONTENTS || {};
     function packParts(name) {
       const normalized = normalizeName(name);
@@ -348,22 +404,28 @@
           const match = text.match(/^(\d+)\s+(.+)$/);
           const partQuantity = match ? Number(match[1]) : 1;
           const partName = match ? match[2] : text;
-          const partItem = itemByName.get(normalizeName(partName));
+          const partItem = resolvePackItem(partName);
           if (partItem) exportItem(partItem, partQuantity * quantity);
-          else addOrdinaryItem(payload, {
-            name: partName,
-            nameEn: '',
-            category: 'Снаряжение приключенца',
-            categoryGroup: 'gear',
-            weight: 0,
-            description: '',
-            sourceBook: ''
-          }, partQuantity * quantity);
+          else {
+            const exportedQuantity = partQuantity * quantity;
+            const fallback = packItemFallbacks.get(normalizeName(partName));
+            const fallbackWeight = Number(fallback?.weight || 0);
+            totalWeight += fallbackWeight * exportedQuantity;
+            addOrdinaryItem(payload, {
+              name: fallback?.name || partName,
+              nameEn: '',
+              category: 'Снаряжение приключенца',
+              categoryGroup: 'gear',
+              weight: fallbackWeight,
+              description: '',
+              sourceBook: ''
+            }, exportedQuantity);
+          }
         });
         return;
       }
 
-      totalWeight += Number(item.weight || 0) * quantity;
+      totalWeight += Number(roll20ItemWeight(item)) * quantity;
       if (item.categoryGroup === 'weapon') addWeapon(payload, item, quantity);
       else if (item.categoryGroup === 'armor') addArmor(payload, item, quantity);
       else addOrdinaryItem(payload, item, quantity);

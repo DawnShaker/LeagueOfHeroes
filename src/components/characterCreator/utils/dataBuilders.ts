@@ -178,6 +178,7 @@ export function buildRoll20RowsByName(
 export function buildClassSpellOptions({
   classOptions,
   spells,
+  classSpellNameOverrides = {},
   normalizeSpellLevel,
   normalizeSpellName,
   spellBelongsToClass,
@@ -185,12 +186,18 @@ export function buildClassSpellOptions({
 }: any) {
   return Object.fromEntries(
     classOptions.map((characterClass: any) => {
+      const overrideNames = new Set(
+        (classSpellNameOverrides[characterClass.id] || [])
+          .map((name: unknown) => normalizeSpellName(name))
+      );
       const items = spells
         .filter((spell: any) =>
           ['cantrip', '1'].includes(normalizeSpellLevel(spell.level))
         )
         .filter((spell: any) =>
           spellBelongsToClass(spell, characterClass)
+          || overrideNames.has(normalizeSpellName(spell.nameEn))
+          || overrideNames.has(normalizeSpellName(spell.name))
         )
         .map((spell: any) => {
           const level = normalizeSpellLevel(spell.level);
@@ -204,12 +211,18 @@ export function buildClassSpellOptions({
                 `${level}-${normalizeSpellName(spell.name).replace(/ /g, '-')}`
             ),
             name: spell.name,
+            nameEn: spell.nameEn,
             level,
             school: spell.school ?? row?.fields?.spellschool ?? '',
             castingTime:
               spell.castingTime ?? row?.fields?.spellcastingtime ?? '',
             range: spell.range ?? row?.fields?.spellrange ?? '',
             duration: spell.duration ?? row?.fields?.spellduration ?? '',
+            components: {
+              verbal: Boolean(spell.components?.verbal),
+              somatic: Boolean(spell.components?.somatic),
+              material: String(spell.components?.material || '').trim()
+            },
             description:
               spell.description ?? row?.fields?.spelldescription ?? '',
             roll20Attributes: row?.attributes ?? [],

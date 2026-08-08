@@ -13,7 +13,7 @@ export const fairy: Species = {
   abilities: [
     {
       title: 'Возраст',
-      description: 'Фэйри живут около 100 лет.'
+      description: 'Фэйри достигают совершеннолетия примерно в 20 лет и живут около 100 лет.'
     },
     {
       title: 'Магия фей',

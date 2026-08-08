@@ -1,0 +1,14 @@
+:root { color-scheme: dark; font: 16px/1.5 system-ui, sans-serif; background: #081327; color: #dce5f4; }
+body { margin: 0; }
+main { width: min(680px, calc(100% - 2rem)); margin: 5vh auto; padding: 2rem; border: 1px solid #374866; border-radius: 22px; background: #11213b; box-sizing: border-box; }
+.eyebrow { color: #e2b448; font-size: .72rem; font-weight: 900; letter-spacing: .15em; text-transform: uppercase; }
+h1 { margin: .35rem 0; color: #b99bff; font: 800 2.4rem Georgia, serif; }
+p { color: #acb8ca; }
+form, label { display: grid; gap: .55rem; }
+form { gap: 1rem; margin-top: 1.5rem; }
+label { color: #efcc72; font-weight: 800; }
+input { padding: .8rem; border: 1px solid #425270; border-radius: 9px; color: #f2f5fa; background: #09152a; }
+button { padding: .8rem 1rem; border: 0; border-radius: 10px; color: #11192a; background: #e2b448; cursor: pointer; font-weight: 900; }
+.connect-link { display: block; margin-top: 1.5rem; padding: .8rem 1rem; border-radius: 10px; color: #11192a; background: #e2b448; font-weight: 900; text-align: center; text-decoration: none; }
+output { min-height: 1.5rem; color: #76d7a4; }
+aside { margin-top: 1rem; padding: .8rem; border-left: 3px solid #b99bff; color: #aeb9cb; background: #0c1930; }

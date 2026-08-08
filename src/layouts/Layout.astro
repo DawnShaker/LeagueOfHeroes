@@ -9,11 +9,19 @@ interface Props {
 }
 
 const { title } = Astro.props;
+const publicSupabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL || process.env.PUBLIC_SUPABASE_URL || '';
+const publicSupabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || process.env.PUBLIC_SUPABASE_ANON_KEY || '';
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
+    <script is:inline define:vars={{ publicSupabaseUrl, publicSupabaseAnonKey }}>
+      window.__LOH_TEST_ACCOUNT_CONFIG__ = {
+        supabaseUrl: publicSupabaseUrl,
+        supabaseAnonKey: publicSupabaseAnonKey
+      };
+    </script>
     <script>
       (function() {
         const theme = localStorage.getItem('theme') ?? 'dark';

@@ -41,7 +41,11 @@ const { requestedMode = 'auto' } = Astro.props;
         <span>Персонажи</span>
         <h2>Мои герои</h2>
         <p>Продолжите сохранённого персонажа или создайте нового героя в конструкторе.</p>
-        <a href="/internal/129321041204158/character-creator/">Открыть конструктор →</a>
+        <strong id="character-slot-summary" class="slot-summary">Слоты персонажей: —</strong>
+        <div class="featured-actions">
+          <button id="create-character" class="primary-button" type="button">Создать персонажа</button>
+              <button id="open-extension-settings" class="ghost-button" type="button">Подключить расширение Roll20</button>
+        </div>
       </article>
       <article class="dashboard-card">
         <span>Игры</span>
@@ -54,6 +58,31 @@ const { requestedMode = 'auto' } = Astro.props;
         <h2>Discord подключён</h2>
         <p>Имя и аватар синхронизируются при следующем входе через Discord.</p>
         <strong class="success-value">Активен</strong>
+      </article>
+      <article class="dashboard-card character-library-card">
+        <div class="admin-heading">
+          <div>
+            <span>Облачное хранилище</span>
+            <h2>Персонажи Лиги</h2>
+          </div>
+          <button id="refresh-characters" class="ghost-button" type="button">Обновить</button>
+        </div>
+        <p>JSON конструктора и готовый экспорт Roll20 сохраняются в Supabase.</p>
+        <div id="character-list" class="character-list">
+          <div class="empty-value">Загрузка персонажей…</div>
+        </div>
+        <div id="character-status" class="inline-status" hidden></div>
+      </article>
+      <article id="roll20-extension-card" class="dashboard-card extension-card" tabindex="-1">
+        <span>Roll20</span>
+        <h2>Расширение Лиги и ключ доступа</h2>
+        <p>Установите расширение, затем подключите его одной кнопкой. Адрес Supabase, публичный ключ и личный ключ синхронизации будут переданы автоматически.</p>
+        <div class="extension-actions">
+          <button id="connect-extension" class="primary-button" type="button">Подключить расширение</button>
+        </div>
+        <a class="extension-download" href="/downloads/league-roll20-sync.zip" download>Скачать расширение для Chrome / Яндекс Браузера</a>
+        <div id="sync-token-list" class="sync-token-list"></div>
+        <div id="extension-status" class="inline-status" hidden></div>
       </article>
     </section>
 
@@ -93,7 +122,7 @@ const { requestedMode = 'auto' } = Astro.props;
         <p class="admin-help">Роль «Мастер» включает и кабинет игрока. Роль «Администратор» открывает все три режима.</p>
         <div class="admin-table-wrap">
           <table>
-            <thead><tr><th>Пользователь</th><th>Discord ID</th><th>Роль</th><th>Создан</th></tr></thead>
+            <thead><tr><th>Пользователь</th><th>Discord ID</th><th>Роль</th><th>Слоты героев</th><th>Создан</th></tr></thead>
             <tbody id="admin-users-body"></tbody>
           </table>
         </div>
@@ -123,6 +152,7 @@ const { requestedMode = 'auto' } = Astro.props;
   const requestedMode = (root?.dataset.requestedMode || 'auto') as AccountMode | 'auto';
   let currentRole: AccountRole = 'player';
   let currentUserId = '';
+  let currentCharacterSlots = 1;
 
   function showError(message: string) {
     if (loading) loading.hidden = true;
@@ -178,20 +208,178 @@ const { requestedMode = 'auto' } = Astro.props;
     });
   }
 
+  const creatorPath = '/internal/129321041204158/character-creator/';
+
+  function showInlineStatus(selector: string, message: string, kind: 'success' | 'error' = 'success') {
+    const element = document.querySelector<HTMLElement>(selector);
+    if (!element) return;
+    element.textContent = message;
+    element.dataset.kind = kind;
+    element.hidden = false;
+  }
+
+  async function createCharacter() {
+    if (!testAccountSupabase || !currentUserId) return;
+    const button = document.querySelector<HTMLButtonElement>('#create-character');
+    if (button) button.disabled = true;
+    const { data, error } = await testAccountSupabase
+      .rpc('create_character', { character_name: 'Безымянный герой' });
+    if (button) button.disabled = false;
+    if (error || !data) {
+      const message = error?.message?.includes('Character slot limit reached')
+        ? 'Свободных слотов нет. Администратор может увеличить лимит в своём кабинете.'
+        : error?.message || 'Не удалось создать персонажа.';
+      showInlineStatus('#character-status', message, 'error');
+      return;
+    }
+    window.location.assign(`${creatorPath}?character=${encodeURIComponent(String(data))}`);
+  }
+
+  async function deleteCharacter(characterId: string, characterName: string) {
+    if (!testAccountSupabase) return;
+    if (!window.confirm(`Удалить персонажа «${characterName}»? Это действие нельзя отменить.`)) return;
+    const { error } = await testAccountSupabase.from('characters').delete().eq('id', characterId);
+    if (error) {
+      showInlineStatus('#character-status', error.message, 'error');
+      return;
+    }
+    await loadCharacters();
+  }
+
+  async function loadCharacters() {
+    if (!testAccountSupabase || !currentUserId) return;
+    const list = document.querySelector<HTMLElement>('#character-list');
+    if (list) list.innerHTML = '<div class="empty-value">Загрузка персонажей…</div>';
+    const { data, error } = await testAccountSupabase
+      .from('characters')
+      .select('id,name,summary,revision,created_at,updated_at')
+      .order('updated_at', { ascending: false });
+    if (error) {
+      if (list) list.innerHTML = '<div class="empty-value">Не удалось загрузить персонажей.</div>';
+      showInlineStatus('#character-status', error.message, 'error');
+      return;
+    }
+    const characters = data || [];
+    const slotSummary = document.querySelector<HTMLElement>('#character-slot-summary');
+    const createButton = document.querySelector<HTMLButtonElement>('#create-character');
+    const hasFreeSlot = characters.length < currentCharacterSlots;
+    if (slotSummary) slotSummary.textContent = `Слоты персонажей: ${characters.length}/${currentCharacterSlots}`;
+    if (createButton) {
+      createButton.disabled = !hasFreeSlot;
+      createButton.textContent = hasFreeSlot ? 'Создать персонажа' : 'Все слоты заняты';
+      createButton.title = hasFreeSlot ? '' : 'Администратор может увеличить количество слотов.';
+    }
+    if (list) {
+      list.innerHTML = characters.length ? characters.map((character) => {
+        const summary = character.summary && typeof character.summary === 'object' ? character.summary : {};
+        const details = [summary.species, summary.class, summary.background].filter(Boolean).join(' · ') || 'Черновик персонажа';
+        return `<article class="character-row">
+          <div><strong>${escapeText(character.name || 'Безымянный герой')}</strong><small>${escapeText(details)} · версия ${escapeText(character.revision || 1)} · ${escapeText(formatDate(character.updated_at))}</small></div>
+          <div class="character-row-actions">
+            <a href="${creatorPath}?character=${encodeURIComponent(character.id)}">Открыть</a>
+            <button type="button" data-delete-character="${escapeText(character.id)}" data-character-name="${escapeText(character.name || 'Безымянный герой')}">Удалить</button>
+          </div>
+        </article>`;
+      }).join('') : '<div class="empty-value">Героев пока нет. Создайте первого персонажа.</div>';
+    }
+    document.querySelectorAll<HTMLButtonElement>('[data-delete-character]').forEach((button) => {
+      button.addEventListener('click', () => deleteCharacter(button.dataset.deleteCharacter || '', button.dataset.characterName || 'Безымянный герой'));
+    });
+  }
+
+  async function loadSyncTokens() {
+    if (!testAccountSupabase || !currentUserId) return;
+    const list = document.querySelector<HTMLElement>('#sync-token-list');
+    const { data, error } = await testAccountSupabase
+      .from('character_sync_tokens')
+      .select('id,label,created_at,last_used_at,revoked_at')
+      .order('created_at', { ascending: false });
+    if (!list) return;
+    if (error) {
+      list.innerHTML = `<div class="empty-value">${escapeText(error.message)}</div>`;
+      return;
+    }
+    const tokens = data || [];
+    list.innerHTML = tokens.length ? tokens.map((token) => `<div class="sync-token-row ${token.revoked_at ? 'is-revoked' : ''}">
+      <div><strong>${escapeText(token.label)}</strong><small>${token.revoked_at ? 'Отозван' : token.last_used_at ? `Использован ${formatDate(token.last_used_at)}` : `Создан ${formatDate(token.created_at)}`}</small></div>
+      ${token.revoked_at ? '' : `<button type="button" data-revoke-token="${escapeText(token.id)}">Отозвать</button>`}
+    </div>`).join('') : '<div class="empty-value">Активных ключей пока нет.</div>';
+    document.querySelectorAll<HTMLButtonElement>('[data-revoke-token]').forEach((button) => {
+      button.addEventListener('click', async () => {
+        if (!testAccountSupabase || !button.dataset.revokeToken) return;
+        await testAccountSupabase.rpc('revoke_character_sync_token', { sync_token_id: button.dataset.revokeToken });
+        await loadSyncTokens();
+      });
+    });
+  }
+
+  async function connectExtension() {
+    if (!testAccountSupabase) return;
+    const button = document.querySelector<HTMLButtonElement>('#connect-extension');
+    const config = window.__LOH_TEST_ACCOUNT_CONFIG__;
+    if (!config?.supabaseUrl || !config.supabaseAnonKey) {
+      showInlineStatus('#extension-status', 'На сайте не настроены публичные параметры Supabase.', 'error');
+      return;
+    }
+    if (button) button.disabled = true;
+    showInlineStatus('#extension-status', 'Создаём защищённое подключение…');
+    const { data, error } = await testAccountSupabase.rpc('create_character_sync_token', { token_label: 'Браузерное расширение' });
+    const record = Array.isArray(data) ? data[0] : data;
+    if (error || !record?.token) {
+      if (button) button.disabled = false;
+      showInlineStatus('#extension-status', error?.message || 'Не удалось создать ключ.', 'error');
+      return;
+    }
+
+    const requestId = `loh-connect-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    try {
+      await new Promise<void>((resolve, reject) => {
+        const timer = window.setTimeout(() => {
+          window.removeEventListener('message', listener);
+          reject(new Error('Расширение не найдено. Установите или перезагрузите его и нажмите кнопку ещё раз.'));
+        }, 4000);
+        function listener(event: MessageEvent) {
+          if (event.source !== window || event.data?.source !== 'LOH_BROWSER_EXTENSION' || event.data?.requestId !== requestId) return;
+          window.clearTimeout(timer);
+          window.removeEventListener('message', listener);
+          event.data.ok ? resolve() : reject(new Error(event.data.error || 'Расширение не приняло подключение.'));
+        }
+        window.addEventListener('message', listener);
+        window.postMessage({
+          source: 'LOH_LEAGUE_SITE',
+          type: 'CONNECT_EXTENSION',
+          requestId,
+          config: {
+            supabaseUrl: config.supabaseUrl,
+            supabaseAnonKey: config.supabaseAnonKey,
+            syncToken: record.token
+          }
+        }, window.location.origin);
+      });
+      showInlineStatus('#extension-status', 'Расширение подключено. Обновите открытую страницу Roll20.', 'success');
+    } catch (connectionError) {
+      await testAccountSupabase.rpc('revoke_character_sync_token', { sync_token_id: record.id });
+      showInlineStatus('#extension-status', connectionError instanceof Error ? connectionError.message : String(connectionError), 'error');
+    } finally {
+      if (button) button.disabled = false;
+      await loadSyncTokens();
+    }
+  }
+
   async function loadAdminUsers() {
     if (!testAccountSupabase || currentRole !== 'admin') return;
     const body = document.querySelector<HTMLElement>('#admin-users-body');
     const status = document.querySelector<HTMLElement>('#admin-status');
     if (status) status.hidden = true;
-    if (body) body.innerHTML = '<tr><td colspan="4">Загрузка пользователей…</td></tr>';
+    if (body) body.innerHTML = '<tr><td colspan="5">Загрузка пользователей…</td></tr>';
 
     const { data, error } = await testAccountSupabase
       .from('user_profiles')
-      .select('id,email,discord_id,display_name,avatar_url,role,created_at')
+      .select('id,email,discord_id,display_name,avatar_url,role,character_slots,created_at')
       .order('created_at', { ascending: false });
 
     if (error) {
-      if (body) body.innerHTML = '<tr><td colspan="4">Не удалось загрузить пользователей.</td></tr>';
+      if (body) body.innerHTML = '<tr><td colspan="5">Не удалось загрузить пользователей.</td></tr>';
       if (status) {
         status.textContent = error.message;
         status.hidden = false;
@@ -215,6 +403,7 @@ const { requestedMode = 'auto' } = Astro.props;
               ${(['player', 'master', 'admin'] as AccountRole[]).map((role) => `<option value="${role}" ${normalizeAccountRole(profile.role) === role ? 'selected' : ''}>${roleLabel(role)}</option>`).join('')}
             </select>
           </td>
+          <td><input class="slot-input" type="number" min="1" max="100" value="${escapeText(profile.character_slots || 1)}" data-character-slots="${escapeText(profile.id)}" aria-label="Количество слотов персонажей"></td>
           <td>${formatDate(profile.created_at)}</td>
         </tr>
       `).join('');
@@ -252,6 +441,27 @@ const { requestedMode = 'auto' } = Astro.props;
         if (!updateError) await loadAdminUsers();
       });
     });
+
+    document.querySelectorAll<HTMLInputElement>('[data-character-slots]').forEach((input) => {
+      input.addEventListener('change', async () => {
+        const profileId = input.dataset.characterSlots;
+        if (!profileId || !testAccountSupabase) return;
+        const slots = Math.max(1, Math.min(100, Number.parseInt(input.value, 10) || 1));
+        input.value = String(slots);
+        input.disabled = true;
+        const { error: updateError } = await testAccountSupabase
+          .from('user_profiles')
+          .update({ character_slots: slots })
+          .eq('id', profileId);
+        input.disabled = false;
+        if (status) {
+          status.textContent = updateError ? updateError.message : `Лимит изменён: ${slots}.`;
+          status.dataset.kind = updateError ? 'error' : 'success';
+          status.hidden = false;
+        }
+        if (!updateError && profileId === currentUserId) currentCharacterSlots = slots;
+      });
+    });
   }
 
   async function initializeCabinet() {
@@ -271,7 +481,7 @@ const { requestedMode = 'auto' } = Astro.props;
     currentUserId = user.id;
     const { data: profile, error } = await testAccountSupabase
       .from('user_profiles')
-      .select('id,email,discord_id,display_name,avatar_url,role,created_at')
+      .select('id,email,discord_id,display_name,avatar_url,role,character_slots,created_at')
       .eq('id', user.id)
       .single();
 
@@ -281,6 +491,7 @@ const { requestedMode = 'auto' } = Astro.props;
     }
 
     currentRole = normalizeAccountRole(profile.role);
+    currentCharacterSlots = Math.max(1, Number(profile.character_slots) || 1);
     const allowedModes = availableAccountModes(currentRole);
     const mode = requestedMode === 'auto' ? defaultAccountMode(currentRole) : requestedMode;
     if (!allowedModes.includes(mode)) {
@@ -315,6 +526,9 @@ const { requestedMode = 'auto' } = Astro.props;
     showMode(mode);
     if (loading) loading.hidden = true;
     if (content) content.hidden = false;
+    if (mode === 'player') {
+      await Promise.all([loadCharacters(), loadSyncTokens()]);
+    }
     if (mode === 'admin') await loadAdminUsers();
   }
 
@@ -326,6 +540,14 @@ const { requestedMode = 'auto' } = Astro.props;
   });
 
   document.querySelector('#refresh-users')?.addEventListener('click', loadAdminUsers);
+  document.querySelector('#create-character')?.addEventListener('click', createCharacter);
+  document.querySelector('#refresh-characters')?.addEventListener('click', loadCharacters);
+  document.querySelector('#connect-extension')?.addEventListener('click', connectExtension);
+  document.querySelector('#open-extension-settings')?.addEventListener('click', () => {
+    const card = document.querySelector<HTMLElement>('#roll20-extension-card');
+    card?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.setTimeout(() => document.querySelector<HTMLButtonElement>('#connect-extension')?.focus(), 450);
+  });
   initializeCabinet();
 </script>
 
@@ -355,6 +577,29 @@ const { requestedMode = 'auto' } = Astro.props;
   .dashboard-card h2 { margin: .55rem 0 .65rem; color: #f3dfa1; font: 800 1.4rem Georgia, serif; }
   .dashboard-card p { color: #aeb9cb; line-height: 1.55; }
   .dashboard-card a { display: inline-block; margin-top: 1rem; color: #bfa9ff; font-weight: 900; text-decoration: none; }
+  .primary-button { margin-top: 1rem; padding: .75rem 1rem; border: 0; border-radius: 10px; color: #11192a; background: #e2b448; cursor: pointer; font-weight: 900; }
+  .primary-button:disabled { opacity: .55; cursor: wait; }
+  .slot-summary { display: block; margin-top: .8rem; color: #efcb6e; }
+  .featured-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .65rem; margin-top: 1rem; }
+  .featured-actions .primary-button { margin-top: 0; }
+  .character-library-card, .extension-card { grid-column: 1 / -1; }
+  .extension-card:focus { outline: 2px solid #b69aff; outline-offset: 4px; }
+  .character-list, .sync-token-list { display: grid; gap: .65rem; margin-top: 1rem; }
+  .character-row, .sync-token-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .85rem; border: 1px solid #334159; border-radius: 12px; background: rgba(8,18,34,.58); }
+  .character-row > div:first-child, .sync-token-row > div:first-child { display: grid; gap: .22rem; min-width: 0; }
+  .character-row strong, .sync-token-row strong { color: #e7d9ff; }
+  .character-row small, .sync-token-row small { overflow: hidden; color: #8f9caf; text-overflow: ellipsis; white-space: nowrap; }
+  .character-row-actions { display: flex; align-items: center; gap: .45rem; flex: none; }
+  .character-row-actions :global(a), .character-row-actions button, .sync-token-row button { margin: 0; padding: .5rem .65rem; border: 1px solid #41506a; border-radius: 8px; color: #dce3ee; background: transparent; cursor: pointer; font: inherit; font-weight: 800; text-decoration: none; }
+  .character-row-actions button, .sync-token-row button { color: #ffabb7; }
+  .extension-actions, .token-result > div { display: flex; gap: .55rem; margin-top: .8rem; }
+  .extension-download { margin-top: .8rem; }
+  .extension-actions input, .token-result input { min-width: 0; flex: 1; padding: .7rem; border: 1px solid #41506a; border-radius: 9px; color: #e4e9f2; background: #0d182d; }
+  .token-result { margin-top: 1rem; padding: .85rem; border: 1px solid #725f2f; border-radius: 12px; background: rgba(226,180,72,.08); }
+  .token-result label { color: #efcc72; font-size: .82rem; font-weight: 800; }
+  .sync-token-row.is-revoked { opacity: .55; }
+  .inline-status { margin-top: .75rem; color: #7fd5a5; }
+  .inline-status[data-kind="error"] { color: #ff9cac; }
   .empty-value, .success-value { display: block; margin-top: 1rem; color: #8f9caf; }
   .success-value { color: #7fd5a5; }
   .card-links { display: grid; gap: .2rem; }
@@ -377,7 +622,13 @@ const { requestedMode = 'auto' } = Astro.props;
   .admin-user :global(span) { display: grid; }
   .admin-user :global(small) { color: #8996aa; }
   td select { min-width: 150px; padding: .45rem; border: 1px solid #41506a; border-radius: 8px; color: #e4e9f2; background: #101b30; }
+  .slot-input { width: 86px; padding: .45rem; border: 1px solid #41506a; border-radius: 8px; color: #e4e9f2; background: #101b30; }
   code { color: #a9b5c9; }
+  @media (max-width: 760px) {
+    .character-row, .sync-token-row, .extension-actions, .token-result > div { align-items: stretch; flex-direction: column; }
+    .character-row-actions { align-items: stretch; }
+    .character-row-actions :global(a), .character-row-actions button { flex: 1; text-align: center; }
+  }
   .inline-status { margin-top: 1rem; color: #8ee0b3; }
   .inline-status[data-kind="error"] { color: #ffabb4; }
   @keyframes spin { to { transform: rotate(360deg); } }

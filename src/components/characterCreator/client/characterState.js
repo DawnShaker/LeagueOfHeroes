@@ -197,10 +197,10 @@
       species?.id || state.species || ''
     ).toLocaleLowerCase('ru');
     const name = String(species?.name || '').toLocaleLowerCase('ru');
+    const compactId = id.replace(/[^a-zа-я0-9]+/gi, '');
 
     return (
-      id === 'custom lineage' ||
-      id === 'custom-lineage' ||
+      compactId === 'customlineage' ||
       /сво[её]\s+происхождение/.test(name)
     );
   }

@@ -1,0 +1,64 @@
+.loh-extension-surface { position: relative; z-index: 5; display: block; width: 100%; margin: 8px 0; padding: 18px; border: 1px solid #725fc1; border-radius: 6px; box-shadow: 0 3px 10px rgba(0,0,0,.22); color: #e9e4ff; background: rgba(31,25,48,.98); font: 13px/1.4 system-ui,sans-serif; }
+#loh-roll20-sync { min-height: 170px; }
+#loh-token-editor { min-height: 520px; max-height: calc(100vh - 180px); overflow: auto; }
+.loh-extension-surface[hidden], .loh-extension-surface .loh-panel:not(.is-active) { display: none !important; }
+.loh-sheet-tabs { display: flex; align-items: center; gap: 0; width: 100%; margin: 0; padding: 0 8px; border-bottom: 1px solid #777; }
+.loh-sheet-tabs .loh-roll20-tab { margin: 0 0 -1px; padding: 9px 13px; border: 1px solid transparent; border-radius: 0; color: #5f3bb8 !important; background: transparent !important; font-weight: 800 !important; }
+.loh-sheet-tabs .loh-roll20-tab:hover { color: #fff !important; background: #3d286f !important; }
+.loh-sheet-tabs .loh-roll20-tab.active, .loh-sheet-tabs .loh-roll20-tab.is-active { color: #fff !important; border-color: #7058d8; background: #5b3db6 !important; }
+.loh-extension-surface * { box-sizing: border-box; }
+.loh-extension-surface .loh-panel { max-width: 920px; margin: 0 auto; }
+.loh-extension-surface .loh-main-row { display: flex; align-items: center; gap: 7px; margin: 18px auto 0; }
+.loh-extension-surface strong { flex: none; color: #c7adff; font-size: 12px; }
+.loh-extension-surface select, .loh-extension-surface input, .loh-extension-surface textarea { width: 100%; min-width: 0; margin: 3px 0 0; padding: 7px 9px; border: 1px solid #4b5268; border-radius: 4px; color: #fff; background: #111827; font: inherit; }
+.loh-extension-surface textarea { resize: vertical; }
+.loh-extension-surface label { display: block; color: #c8bfdc; font-size: 11px; font-weight: 700; }
+.loh-extension-surface .loh-main-row > select { min-width: 180px; flex: 1; }
+.loh-extension-surface .loh-buttons { display: flex; flex: none; gap: 6px; }
+.loh-extension-surface .loh-wrap { flex-wrap: wrap; margin-top: 12px; }
+.loh-extension-surface button { padding: 7px 10px; border: 1px solid #7058d8; border-radius: 4px; color: #fff; background: #533eb9; cursor: pointer; font-size: 12px; font-weight: 800; }
+.loh-extension-surface button:hover { background: #6952d0; }
+.loh-extension-surface button:disabled { opacity: .55; cursor: wait; }
+.loh-extension-surface button.loh-danger { border-color: #9a4056; background: #6e293a; }
+.loh-extension-surface .loh-status { max-width: 920px; margin: 12px auto 0; color: #aeb8ca; font-size: 12px; }
+.loh-extension-surface .loh-status[data-kind="error"] { color: #ff9dac; }
+.loh-extension-surface .loh-status[data-kind="success"] { color: #79d9a6; }
+.loh-extension-surface .loh-card-grid { display: grid; grid-template-columns: minmax(0, 1fr); }
+.loh-extension-surface .loh-card { padding: 16px; border: 1px solid #4a3a72; border-radius: 7px; background: rgba(17,24,39,.6); }
+.loh-extension-surface h3 { margin: 0 0 12px; color: #d6c3ff; font: 700 18px Georgia,serif; }
+.loh-extension-surface .loh-form-row { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; margin-bottom: 10px; }
+.loh-extension-surface .loh-hint { margin: 10px 0 0; color: #aaa3bc; font-size: 11px; }
+.loh-extension-surface .loh-check { display: flex; align-items: center; gap: 7px; margin-top: 14px; }
+.loh-extension-surface .loh-check input { width: auto; margin: 0; }
+.loh-token-toolbar { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.loh-token-toolbar h3 { margin: 0; }
+.loh-token-source { color: #aaa3bc; font-size: 11px; }
+.loh-token-layout { display: grid; grid-template-columns: minmax(360px,1fr) minmax(360px,1fr); gap: 12px; }
+.loh-token-column { display: grid; align-content: start; gap: 12px; min-width: 0; }
+.loh-token-identity { display: grid; grid-template-columns: 180px minmax(0,1fr); gap: 16px; }
+.loh-token-preview { display: grid; place-items: center; width: 180px; height: 180px; overflow: hidden; border: 2px solid #6952d0; border-radius: 50%; color: #8f88a2; background: #0d111c; }
+.loh-token-preview img { width: 100%; height: 100%; object-fit: cover; }
+.loh-token-preview.has-image span { display: none; }
+.loh-token-fields { min-width: 0; }
+.loh-token-quad { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; margin-top: 8px; }
+.loh-token-triple { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; margin-top: 7px; }
+.loh-inline-checks { display: flex; align-items: end; flex-wrap: wrap; gap: 8px 14px; margin-top: 9px; }
+.loh-inline-checks > label:not(.loh-check) { flex: 1 1 90px; }
+.loh-light-block { margin-top: 10px; padding-top: 9px; border-top: 1px solid #3b3451; }
+.loh-token-bar { display: grid; grid-template-columns: 72px minmax(130px,1fr) 78px 10px 78px; align-items: center; gap: 7px; margin: 7px 0; }
+.loh-token-aura { display: grid; grid-template-columns: 72px minmax(90px,1fr) 56px minmax(90px,1fr); align-items: center; gap: 7px; margin: 7px 0; }
+.loh-token-permission { display: grid; grid-template-columns: 85px auto auto minmax(120px,1fr); align-items: center; gap: 8px; min-height: 34px; border-bottom: 1px solid #332c48; }
+.loh-token-bar input, .loh-token-bar select, .loh-token-aura input, .loh-token-permission select { margin: 0; }
+.loh-token-actions { position: sticky; bottom: -18px; z-index: 2; margin: 12px -18px -18px !important; padding: 12px 18px; border-top: 1px solid #4a3a72; background: rgba(25,20,40,.98); }
+.loh-extension-surface input[type="color"] { min-height: 34px; padding: 3px; }
+@media (max-width: 760px) {
+  .loh-extension-surface { padding: 12px; }
+  .loh-extension-surface .loh-main-row { align-items: stretch; flex-direction: column; margin-top: 10px; }
+  .loh-extension-surface .loh-buttons { display: grid; grid-template-columns: 1fr 1fr; }
+  .loh-extension-surface .loh-form-row { grid-template-columns: 1fr; }
+  .loh-token-layout, .loh-token-identity { grid-template-columns: 1fr; }
+  .loh-token-preview { width: 140px; height: 140px; margin: 0 auto; }
+  .loh-token-bar { grid-template-columns: 64px minmax(100px,1fr) 70px 8px 70px; }
+  .loh-token-permission { grid-template-columns: 70px auto auto; }
+  .loh-token-permission select { grid-column: 1 / -1; }
+}

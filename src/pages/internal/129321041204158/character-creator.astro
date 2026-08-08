@@ -1,6 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import CharacterWizard from '../../../components/characterCreator/CharacterWizard.astro';
+import CharacterCloudSync from '../../../components/characterCreator/CharacterCloudSync.astro';
 import { speciesData } from '../../../data/species/index';
 import { raceData, getRaceData } from '../../../data/raceSizeData.js';
 import { classes } from '../../../data/classes';
@@ -108,5 +109,6 @@ const classOptions = classes
 ---
 
 <Layout title="Создание персонажа — League of Heroes">
+  <CharacterCloudSync />
   <CharacterWizard speciesOptions={speciesOptions} classOptions={classOptions} />
 </Layout>

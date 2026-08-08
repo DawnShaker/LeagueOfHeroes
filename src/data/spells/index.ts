@@ -22,6 +22,7 @@ export const spells: Spell[] = [
       page: 239
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
@@ -39,7 +40,123 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
       { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+      { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
       { type: 'other', name: 'Договор гримуара' }
+    ]
+  },
+  {
+    id: 'bacterial-barrage',
+    name: 'Бактериальный Шквал',
+    nameEn: 'Bacterial Barrage',
+    level: 'cantrip',
+    school: 'некромантия',
+    castingTime: '1 действие',
+    range: '30 футов',
+    components: {
+      verbal: true,
+      somatic: true
+    },
+    duration: 'Мгновенная',
+    description: `<p>Вы атакуете существо в пределах дистанции быстро распространяющейся инфекцией, которая использует существующие состояния. Совершите дальнобойную атаку заклинанием против цели, при попадании инфекция наносит 1д8 Некротического урона цели. Если цель страдает от состояния отравления или болезни, она вместо этого получает 1д12 Некротического урона.</p>
+
+<p><strong>Улучшение заговора.</strong> Урон заклинания увеличивается на одну кость, когда вы достигаете 5-го уровня (2д8 или 2д12), 11-го уровня (3д8 или 3д12) и 17-го уровня (4д8 или 4д12).</p>`,
+    source: {
+      book: 'SCGtD\`14',
+      page: 186
+    },
+    sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+      { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+      { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+      { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' },
+      { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+      { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+      { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+      { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+      { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+      { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+      { type: 'other', name: 'Договор гримуара' }
+    ]
+  },
+  {
+    id: 'acid-burn',
+    name: 'Кислотный Ожог',
+    nameEn: 'Acid Burn',
+    level: 'cantrip',
+    school: 'воплощение',
+    castingTime: '1 действие',
+    range: 'На себя',
+    components: {
+      verbal: true,
+      somatic: true
+    },
+    duration: 'Мгновенная',
+    description: `<p>Вы магически создаете струю едкой формулы в 15-футовом конусе перед собой. Все существа в конусе должны преуспеть в спасброске Ловкости или получить 1д6 урона Кислотой.</p>
+
+<p><strong>Улучшение заговора.</strong> Урон этого заклинания увеличивается на 1д6, когда вы достигаете 5-го уровня (2д6), 11-го уровня (3д6) и 17-го уровня (4д6).</p>`,
+    source: {
+      book: 'SCGtD\`14',
+      page: 186
+    },
+    sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+      { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+      { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
+      { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+      { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+      { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+      { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+      { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+      { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+      { type: 'other', name: 'Договор гримуара' }
+    ]
+  },
+  {
+    id: 'poison-needle',
+    name: 'Ядовитая Игла',
+    nameEn: 'Poison Needle',
+    level: 'cantrip',
+    school: 'вызов',
+    castingTime: '1 действие',
+    range: '60 футов',
+    components: {
+      verbal: true,
+      somatic: true
+    },
+    duration: 'Мгновенная',
+    description: `<p>Вы запускаете сотворённый дротик, покрытый смертельным ядом, в существо, которое вы можете видеть в пределах дистанции. Совершите дальнобойную атаку заклинанием против цели. При попадании цель получает 1д10 урона Ядом.</p>
+  <p>Если урон ядом снижает хиты цели до 0, цель стабилизируется, но отравлена на 1 час, даже после восстановления хитов, и парализована, пока отравлена таким образом.</p>
+  <p><strong>Улучшение заговора.</strong> Урон этого заклинания увеличивается на 1д10, когда вы достигаете 5-го уровня (2д10), 11-го уровня (3д10) и 17-го уровня (4д10).</p>`,
+    source: {
+      book: 'SCGtD\`14',
+      page: 186
+    },
+    sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+      { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+      { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+      { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+      { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+      { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' },
+      { type: 'species', name: '<a href="/races/elf/">Эльф Высший</a>' },
+      { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
+      { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
+      { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+      { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+      { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+      { type: 'other', name: 'Договор гримуара' }
+
     ]
   },
   {
@@ -85,6 +202,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
       { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+      { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
       { type: 'feat', name: '<a href="/feats/scion-of-the-outer-planes/">Наследник внешних планов</a>' },
       { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
       { type: 'feat', name: '<a href="/feats/telekinetic/">Телекинетик</a>' },
@@ -138,7 +256,7 @@ export const spells: Spell[] = [
     level: 'cantrip',
     school: 'воплощение',
     castingTime: '1 действие',
-    range: 'На себя (5-футовый радиус)',
+    range: 'На себя',
     components: {
       somatic: true,
       material: 'рукопашное оружие стоимостью не менее 1 см'
@@ -164,6 +282,7 @@ export const spells: Spell[] = [
       { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
       { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
       { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+      { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
       { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'other', name: 'Договор гримуара' }
@@ -189,9 +308,11 @@ export const spells: Spell[] = [
       page: 249
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=pathogenist">Патогенист</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=death">Домен Смерти</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
@@ -292,6 +413,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
       { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+      { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
       { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
       { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
       { type: 'other', name: 'Договор гримуара' }
@@ -335,6 +457,7 @@ export const spells: Spell[] = [
       { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
       { type: 'background', name: '<a href="/backgrounds/golgari%20agent/">Агент Голгари</a>' },
       { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+      { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
       { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'other', name: 'Договор гримуара' }
@@ -405,6 +528,7 @@ export const spells: Spell[] = [
       { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
       { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
       { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+      { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
       { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'other', name: 'Договор гримуара' }
@@ -512,6 +636,7 @@ export const spells: Spell[] = [
       { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
       { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
       { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+      { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
       { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
       { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
@@ -546,6 +671,7 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
       { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
+      { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'other', name: 'Договор гримуара' }
     ]
@@ -574,6 +700,7 @@ export const spells: Spell[] = [
       page: 333
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
@@ -621,6 +748,7 @@ export const spells: Spell[] = [
       { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
       { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
       { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+      { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
       { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'other', name: 'Договор гримуара' }
@@ -691,7 +819,7 @@ export const spells: Spell[] = [
     { type: 'background', name: '<a href="/backgrounds/simic%20scientist/">Учёный Симиков</a>' },
     { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Посвящённый Стриксхейвен</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
@@ -717,6 +845,7 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=alienist">Алиенист</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -763,6 +892,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+    { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
@@ -805,8 +935,8 @@ export const spells: Spell[] = [
   },
   duration: 'Мгновенно',
   description: `<p>Вы метаете частицу огня в существо или объект в пределах дистанции. Совершите дальнобойную атаку заклинанием против цели. В случае попадания цель получает 1д10 урона огнём.</p>
-<p>Легковоспламеняющийся предмет, поражённый этим заклинанием, начинает гореть, если он не надет и не несётся.</p>
-<p><strong>Улучшение заговора.</strong> Урон увеличивается на 1д10, когда вы достигаете 5 уровня (2д10), 11 уровня (3д10) и 17 уровня (4д10).</p>`,
+  <p>Легковоспламеняющийся предмет, поражённый этим заклинанием, начинает гореть, если он не надет и не несётся.</p>
+  <p><strong>Улучшение заговора.</strong> Урон увеличивается на 1д10, когда вы достигаете 5 уровня (2д10), 11 уровня (3д10) и 17 уровня (4д10).</p>`,
   source: {
     book: 'PHB\'24',
     page: 274
@@ -815,6 +945,7 @@ export const spells: Spell[] = [
     { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=chemist">Химик</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
     { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
     { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
@@ -829,8 +960,9 @@ export const spells: Spell[] = [
     { type: 'background', name: '<a href="/backgrounds/rakdos%20cultist/">Культист Ракдосов</a>' },
     { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Посвящённый Стриксхейвен</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -914,6 +1046,7 @@ export const spells: Spell[] = [
     { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
     { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
@@ -956,6 +1089,7 @@ export const spells: Spell[] = [
     { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
     { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
     { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'other', name: 'Договор гримуара' }
@@ -980,6 +1114,7 @@ export const spells: Spell[] = [
     page: 282
   },
   sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
     { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
     { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
@@ -994,8 +1129,9 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
     { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
     { type: 'feat', name: '<a href="/feats/scion-of-the-outer-planes/">Наследник внешних планов</a>' },
-    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Посвящённый Стриксхейвен</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
@@ -1107,6 +1243,7 @@ export const spells: Spell[] = [
     page: 292
   },
   sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
     { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
@@ -1128,7 +1265,8 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
     { type: 'feat', name: '<a href="/feats/blessed-warrior/">Благословлённый воин</a>' },
     { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
-    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Посвящённый Стриксхейвен</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
+    { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/light-bringer/">Несущий свет</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
@@ -1142,7 +1280,7 @@ export const spells: Spell[] = [
   level: 'cantrip',
   school: 'воплощение',
   castingTime: '1 действие',
-  range: 'На себя, 15 футовым радиусом',
+  range: 'На себя',
   components: {
   verbal: true
   },
@@ -1167,6 +1305,7 @@ export const spells: Spell[] = [
     { type: 'species', name: '<a href="/races/halfelf/">Лунный/Солнечный полуэльф</a>' },
     { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
     { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'other', name: 'Договор гримуара' }
@@ -1201,6 +1340,7 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
     { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
+    { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1225,6 +1365,7 @@ export const spells: Spell[] = [
     page: 297
   },
   sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
     { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
@@ -1271,6 +1412,7 @@ export const spells: Spell[] = [
     page: 298
   },
   sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
     { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
     { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
@@ -1289,10 +1431,11 @@ export const spells: Spell[] = [
     { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
     { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="/feats/blessed-warrior/">Благословлённый воин</a>' },
     { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
+    { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
     { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+    { type: 'feat', name: '<a href="/feats/eldrith-warrior/">Мистический боец</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
@@ -1316,6 +1459,7 @@ export const spells: Spell[] = [
     page: 298
   },
   sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
@@ -1331,6 +1475,7 @@ export const spells: Spell[] = [
     { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
     { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/eldrith-warrior/">Мистический боец</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
@@ -1373,6 +1518,7 @@ export const spells: Spell[] = [
     { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
     { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/eldrith-warrior/">Мистический боец</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'feat', name: '<a href="/feats/scion-of-the-outer-planes/">Наследник внешних планов</a>' },
     { type: 'other', name: 'Договор гримуара' }
@@ -1393,7 +1539,7 @@ export const spells: Spell[] = [
   description: `<p>Выберите область земли или камня, видимую в пределах дистанции заклинания и помещающуюся в 5-футовый куб. Вы можете управлять ею одним из нижеперечисленных способов:</p>
 <p>- Если вы нацелились на область рыхлой земли, вы можете мгновенно извлечь её и переместить на расстояние до 5 футов. Это перемещение не обладает достаточной силой, чтобы причинить урон.</p>
 <p>- Вы можете создавать узоры или цвета на поверхности земли или камня для передачи слов, изображений или форм. Эффект действует 1 час.</p>
-<p>- Если выбранная область находится на поверхности земли, вы можете сделать её труднопроходимой. В качестве альтернативы вы можете сделать труднопроходимую местность нормальной. Эффект действует 1 час.</p>
+<p>- Если выбранная область находится на поверхности земли, вы можете сделать её Труднопроходимой. В качестве альтернативы вы можете сделать Труднопроходимую местность нормальной. Эффект действует 1 час.</p>
 <p>Если вы сотворяете это заклинание несколько раз, вы можете поддерживать не более двух его немгновенных эффектов одновременно. Вы можете Действием отменить один из действующих эффектов.</p>`,
   source: {
     book: 'XGE\'14',
@@ -1415,6 +1561,7 @@ export const spells: Spell[] = [
     { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
     { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
     { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+    { type: 'feat', name: '<a href="/feats/eldrith-warrior/">Мистический боец</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
@@ -1441,6 +1588,7 @@ export const spells: Spell[] = [
     page: 306
   },
   sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
     { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
@@ -1460,9 +1608,10 @@ export const spells: Spell[] = [
     { type: 'species', name: '<a href="/races/yuan-ti/">Юань-ти</a>' },
     { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
     { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+    { type: 'feat', name: '<a href="/feats/eldrith-warrior/">Мистический боец</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-    { type: 'feat', name: '<a href="/feats/spell-sniper/">Меткий заклинатель</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
@@ -1511,6 +1660,8 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
+    { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
+    { type: 'feat', name: '<a href="/feats/eldrith-warrior/">Мистический боец</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
 },
@@ -1540,7 +1691,6 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
     { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="/feats/spell-sniper/">Меткий заклинатель</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
@@ -1575,7 +1725,6 @@ export const spells: Spell[] = [
     { type: 'background', name: '<a href="/backgrounds/izzet%20engineer/">Инженер Иззетов</a>' },
     { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'feat', name: '<a href="/feats/spell-sniper/">Меткий заклинатель</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
@@ -1599,6 +1748,7 @@ export const spells: Spell[] = [
     page: 312
   },
   sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
     { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
     { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
@@ -1606,10 +1756,11 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Колегия Знаний</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
     { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная Душа</a>' },
-    { type: 'feat', name: '<a href="/feats/blessed-warrior/">Благословлённый воин</a>' },
     { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
     { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+    { type: 'feat', name: '<a href="/feats/blessed-warrior/">Благословлённый воин</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
@@ -1688,6 +1839,7 @@ export const spells: Spell[] = [
     { type: 'species', name: '<a href="/races/genasi/">Дженази Воды</a>' },
     { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
     { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
+    { type: 'feat', name: '<a href="/feats/eldrith-warrior/">Мистический боец</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
@@ -1745,9 +1897,11 @@ export const spells: Spell[] = [
     page: 316
   },
   sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
     { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=thanaturg">Танатург</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
     { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
@@ -1761,7 +1915,9 @@ export const spells: Spell[] = [
     { type: 'species', name: '<a href="/races/genasi/">Дженази Воды</a>' },
     { type: 'background', name: '<a href="/backgrounds/izzet%20engineer/">Инженер Иззетов</a>' },
     { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/eldrith-warrior/">Мистический боец</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
@@ -1786,22 +1942,25 @@ export const spells: Spell[] = [
     page: 316
   },
   sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
     { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
     { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=thanaturg">Танатург</a>' },
     { type: 'subclass', name: '<a href="/classes/artificer?subclass=reanimator">Реаниматор</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=death">Домен Смерти</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
     { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
-    { type: 'subclass', name: '<a href="warlock?subclass=undying">Покровитель Бессмертный</a>' },
+    { type: 'subclass', name: '<a href="/classes/warlock?subclass=undying">Покровитель Бессмертный</a>' },
     { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
     { type: 'background', name: '<a href="/backgrounds/golgari%20agent/">Агент Голгари</a>' },
-    { type: 'feat', name: '<a href="/feats/blessed-warrior/">Благословлённый воин</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
+    { type: 'feat', name: '<a href="/feats/blessed-warrior/">Благословлённый воин</a>' },
     { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
     { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
+    { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: 'Договор гримуара' }
   ]
@@ -1840,7 +1999,7 @@ export const spells: Spell[] = [
   nameEn: 'Absorb elements',
   level: '1',
   school: 'ограждение',
-  castingTime: '1 реакция, совершаемая вами, когда вы получаете урон звуком, кислотой, огнём, холодом или электричеством',
+  castingTime: 'Реакция, совершаемая вами, когда вы получаете урон звуком, кислотой, огнём, холодом или электричеством',
   range: 'На себя',
   components: {
     somatic: true
@@ -1873,7 +2032,7 @@ export const spells: Spell[] = [
   nameEn: 'Speak with Animals',
   level: '1',
   school: 'прорицание',
-  castingTime: '1 действие или ритуал',
+  castingTime: 'Действие или ритуал',
   range: 'На себя',
   components: {
     verbal: true,
@@ -1911,7 +2070,7 @@ export const spells: Spell[] = [
   nameEn: 'Alarm',
   level: '1',
   school: 'ограждение',
-  castingTime: '1 действие или ритуал',
+  castingTime: 'Действие или ритуал',
   range: '30 футов',
   components: {
     verbal: true,
@@ -1927,7 +2086,8 @@ export const spells: Spell[] = [
     page: 239
   },
   sources: [
-      { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
     { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=abjurer">Оградитель</a>' },
@@ -1942,12 +2102,46 @@ export const spells: Spell[] = [
   ]
 },
 {
+  id: 'tashas-caustic-brew',
+  name: 'Едкое варево Таши',
+  nameEn: 'Tasha\'s Caustic Brew',
+  level: '1',
+  school: 'воплощение',
+  castingTime: '1 действие',
+  range: 'На себя',
+  components: {
+    verbal: true,
+    somatic: true,
+    material: 'немного тухлой пищи'
+  },
+  duration: 'Концентрация, вплоть до 1 минуты',
+  description: `<p>Вы испускаете струю кислоты вдоль линии длиной 30 футов и шириной 5 футов в выбранном вами направлении. Каждое существо, находящееся на этой линии, должно преуспеть в спасброске Ловкости, иначе станет покрыто кислотой на время действия заклинания или до тех пор, пока кто-то действием не соскребёт или не смоет кислоту с себя или другого существа. Существо, покрытое кислотой, получает 2д4 урона кислотой в начале каждого своего хода.</p>
+  <p><strong>Накладывание более высокой ячейкой.</strong> Когда вы накладываете это заклинание, используя ячейку 2-го уровня или выше, урон увеличивается на 2д4 за каждый уровень ячейки выше первого.</p>`,
+  source: {
+    book: 'TCE\'14',
+    page: 115
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
+    { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+    { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
+  ]
+},
+{
   id: 'animal-friendship',
   name: 'Дружба с животными',
   nameEn: 'Animal Friendship',
   level: '1',
   school: 'очарование',
-  castingTime: '1 действие или ритуал',
+  castingTime: 'Действие или ритуал',
   range: '30 футов',
   components: {
     verbal: true,
@@ -1956,7 +2150,7 @@ export const spells: Spell[] = [
   },
   duration: '24 часа',
   description: `<p>Выберите Зверя, видимого вами в пределах дистанции. Цель должна преуспеть в спасброске Мудрости, иначе получит состояние Очарованный на время действия заклинания. Если вы или ваш союзник наносите цели урон, заклинание заканчивается.</p>
-  <p><strong>Используя ячейку заклинания большего уровня.</strong> Вы можете нацелить заклинание на одного дополнительного Зверя за каждый уровень ячейки выше 1-го.</p>`,
+  <p><strong>Накладывание более высокой ячейкой.</strong> Вы можете нацелить заклинание на одного дополнительного Зверя за каждый уровень ячейки выше 1-го.</p>`,
   source: {
     book: 'PHB\'24',
     page: 239
@@ -1977,6 +2171,959 @@ export const spells: Spell[] = [
   ]
 },
 {
+  id: 'acrid-orb',
+  name: 'Едкая Сфера',
+  nameEn: 'Acrid Orb',
+  level: '1',
+  school: 'воплощение',
+  castingTime: '1 действие',
+  range: '30 футов',
+  components: {
+    verbal: true,
+    somatic: true,
+    material: 'фиал желудочной кислоты и щепотка сульфата'
+  },
+  duration: 'Мгновенная',
+  description: `<p>Вы создаете сферу кислотного геля и бросаете ее в одно существо в пределах дистанции. Совершите дальнобойную атаку заклинанием против цели. При попадании цель получает 2д6 урона Кислотой. Независимо от того, попала атака или промахнулась, сфера взрывается. Цель и каждое существо в пределах 5 футов от нее должны преуспеть в спасброске Ловкости или получить 2д6 урона Кислотой.</p>
+
+<p><strong>Накладывание более высокой ячейкой.</strong> Когда вы накладываете это заклинание, используя ячейку заклинания 2-го уровня или выше, урон от взрыва Кислотой увеличивается на 1д6 за каждый уровень ячейки выше 1-го.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 187
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+    { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
+  ]
+},
+{
+  id: 'infect',
+  name: 'Инфекция',
+  nameEn: 'Infect',
+  level: '1',
+  school: 'некромантия',
+  castingTime: '1 действие',
+  range: '60 футов',
+  components: {
+    verbal: true,
+    somatic: true,
+    material: 'чашка Петри'
+  },
+  duration: 'Концентрация, до 1 минуты',
+  description: `<p>Вы поражаете существо, которое вы можете видеть в пределах дистанции, магической болезнью. В начале каждого хода цели она должна совершить спасбросок Телосложения. Существо получает 1д12 Некротического урона при провале спасброска, или половину этого урона при успехе. Если цель преуспевает в трех таких спасбросках, заклинание заканчивается.</p>
+  <p>Заклинание Малое восстановление, наложенное на цель, преждевременно завершает это заклинание.</p>
+  <p><strong>Накладывание более высокой ячейкой.</strong> Если вы накладываете это заклинание, используя ячейку заклинания 2-го уровня или выше, урон увеличивается на 1д12 за каждые два уровня ячейки выше 1-го.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 187
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+    { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=pathogenist">Патогенист</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
+  ]
+},
+{
+  id: 'envenom',
+  name: 'Ядоностность',
+  nameEn: 'Envenom',
+  level: '1',
+  school: 'вызов',
+  castingTime: '1 действие',
+  range: '60 футов',
+  components: {
+    verbal: true,
+    somatic: true,
+    material: 'фиал простого яда'
+  },
+  duration: 'Концентрация, до 1 минуты',
+  description: `<p>Выберите существо, которое вы можете видеть в пределах дистанции, чтобы поразить его магическим ядом. Цель получает 2д4 урона Ядом и должна совершить спасбросок Телосложения. При провале спасброска она становится отравленной на время действия заклинания.</p>
+<p>Пока отравлена таким образом, цель должна совершать спасбросок Телосложения в конце каждого своего хода. Она получает 2д4 урона Ядом при провале спасброска. При успехе заклинание на этой цели заканчивается.</p>
+<p>Заклинание Малое восстановление, наложенное на цель, преждевременно завершает это заклинание.</p>
+<p><strong>Накладывание более высокой ячейкой.</strong> Если вы накладываете это заклинание, используя ячейку заклинания 2-го уровня или выше, вы можете выбрать целью одно дополнительное существо за каждый уровень ячейки выше 1-го.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 187
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+    { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=cojurer">Вызыватель</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
+    { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
+  ]
+},
+{
+  id: 'toxic-shield',
+  name: 'Ядовитый щит',
+  nameEn: 'Toxic Shield',
+  level: '2',
+  school: 'вызов',
+  castingTime: '1 действие',
+  range: 'На себя',
+  components: {
+    somatic: true,
+    material: 'капля дварфийской крови'
+  },
+  duration: 'Концентрация, до 1 минуты',
+  description: `<p>Вы получаете сопротивление урону ядом и преимущество на спасброски против состояния Отравленный на время действия заклинания. Кроме того, всякий раз, когда существо в пределах 5 футов от вас попадает по вам рукопашной атакой, щит обрызгивает его ядом, нанося 1д8 урона Ядом атакующему.</p>
+<p><strong>Накладывание более высокой ячейкой.</strong> Когда вы накладываете это заклинание, используя ячейку заклинания 3-го уровня или выше, урон Ядом увеличивается на 1д8 за каждые 2 уровня ячейки выше 2-го.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 187
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=mutagenist">Мутагенист</a>' },
+  ]
+},
+{
+  id: 'biohazard',
+  name: 'Биоугроза',
+  nameEn: 'Biohazard',
+  level: '2',
+  school: 'вызов',
+  castingTime: '1 действие',
+  range: '120 футов',
+  components: {
+    verbal: true,
+    somatic: true,
+    material: 'увядший корень и капля уксуса'
+  },
+  duration: '1 минута',
+  description: `<p>Вы покрываете 15-футовый куб ядовитой слизью на время действия заклинания. Область становится Труднопроходимой местностью и заполнена опасными испарениями. Существо, которое входит в область или начинает там свой ход, должно совершить спасбросок Телосложения. При провале спасброска существо получает 1д8 урона Ядом и получает состояние Отравленный до начала своего следующего хода. Существа подвергаются воздействию, даже если они задерживают дыхание или им не нужно дышать.</p>
+<p><strong>Накладывание более высокой ячейкой.</strong> Если вы накладываете это заклинание, используя ячейку заклинания 3-го уровня или выше, урон увеличивается на 1д8 за каждый уровень ячейки выше 2-го.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 187
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+    { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
+    { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=pathogenist">Патогенист</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=cojurer">Вызыватель</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
+  ]
+},
+{
+  id: 'caustic-grip',
+  name: 'Едкая Хватка',
+  nameEn: 'Caustic Grip',
+  level: '2',
+  school: 'воплощение',
+  castingTime: '1 действие',
+  range: 'На себя',
+  components: {
+    somatic: true
+  },
+  duration: 'Концентрация, до 1 минуты',
+  description: `<p>На время действия заклинания ваша рука выделяет липкую жгучую кислоту, которую вы можете использовать, чтобы удерживать существо в болезненной хватке. Когда вы накладываете это заклинание, и действием в свой ход до окончания заклинания, вы можете совершить рукопашную атаку заклинанием против одного существа в пределах 5 футов от вас. При попадании вы наносите 4д4 урона Кислотой цели, и существо становится Опутанным в вашей кислотной хватке до конца вашего следующего хода. Вы можете атаковать ту же цель раунд за раундом или выбрать новую в любое время. Если вы меняете цели, предыдущая цель больше не подвержена действию заклинания.</p>
+  <p>Существо, Опутанное вашей хваткой, может использовать свое Действие, чтобы совершить проверку Силы против Сл вашего заклинания. В случае успеха оно больше не опутано. Каждый раз, когда существо заканчивает свой ход, будучи опутанным этим заклинанием, оно получает дополнительно 4д4 урона Кислотой.</p>
+  <p><strong>Накладывание более высокой ячейкой.</strong> Если вы накладываете это заклинание, используя ячейку заклинания 3-го уровня или выше, урон увеличивается на 2д4 за каждый уровень ячейки выше 2-го.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 188
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
+    { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
+  ]
+},
+{
+  id: 'invigorate',
+  name: 'Ободрение',
+  nameEn: 'Invigorate',
+  level: '2',
+  school: 'ограждение',
+  castingTime: '1 действие',
+  range: '30 футов',
+  components: {
+    somatic: true,
+    material: 'шприц и образец крови'
+  },
+  duration: '1 час',
+  description: `<p>Выберите до трех существ в пределах дистанции. Каждая цель получает 10 временных хитов.</p>
+  <p><strong>Накладывание более высокой ячейкой.</strong> Когда вы накладываете это заклинание, используя ячейку заклинания 2-го уровня или выше, временные хиты увеличиваются на 5 за каждый уровень ячейки выше 2-го.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 188
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+    { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=thanaturg">Танатург</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=abjurer">Оградитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
+    { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
+    { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
+  ]
+},
+{
+  id: 'ocular-necrosis',
+  name: 'Окулярный Некроз',
+  nameEn: 'Ocular Necrosis',
+  level: '2',
+  school: 'некромантия',
+  castingTime: '1 действие',
+  range: '30 футов',
+  components: {
+    verbal: true,
+    somatic: true
+  },
+  duration: 'Мгновенная',
+  description: `<p>Совершите дальнобойную атаку заклинанием против существа, которое вы можете видеть в пределах дистанции. При попадании вы поражаете существо смертельным токсином, от которого у него кровоточат глаза. Существо получает 2д6 Некротического урона и ослеплено до конца вашего следующего хода.</p>
+  <p><strong>Накладывание более высокой ячейкой.</strong> Когда вы накладываете это заклинание, используя ячейку заклинания 3-го уровня или выше, Некротический урон увеличивается на 1д6 за каждый уровень ячейки выше 2-го.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 188
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
+  ]
+},
+{
+  id: 'grasping-ghost',
+  name: 'Хватка Призрака',
+  nameEn: 'Grasping Ghost',
+  level: '2',
+  school: 'некромантия',
+  castingTime: '1 действие',
+  range: '60 футов',
+  components: {
+    somatic: true,
+    material: 'косточка пальца и обрывок ткани'
+  },
+  duration: 'Мгновенная',
+  description: `<p>Стая парящих призрачных рук появляется и хватает цель, которую вы можете видеть в пределах дистанции. Цель должна преуспеть в спасброске Силы. Цель получает 3д8 Некротического урона при провале спасброска, или половину этого урона при успехе.</p>
+  <p>Кроме того, при провале спасброска призрачные руки захватывают цель до конца вашего следующего хода и немедленно перемещают цель на расстояние до 30 футов в выбранном вами направлении (но не вверх). В свой ход существо может использовать действие, чтобы попытаться вырваться из захвата, совершив проверку Силы или Ловкости (на свой выбор) против Сл вашего заклинания. В случае успеха захват прекращается.</p>
+  <p><strong>Накладывание более высокой ячейкой.</strong> Если вы накладываете это заклинание, используя ячейку заклинания 3-го уровня или выше, хватка призрака может выбрать целью одно дополнительное существо в пределах дистанции за каждый уровень ячейки выше 2-го.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 188
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' }
+  ]
+},
+{
+  id: 'fetid-blade',
+  name: 'Зловонный Клинок',
+  nameEn: 'Fetid Blade',
+  level: '3',
+  school: 'воплощение',
+  castingTime: '1 бонусное действие',
+  range: 'Касание',
+  components: {
+    somatic: true,
+    verbal: true,
+    material: 'капля кислоты и щепотка железной пыли'
+  },
+  duration: 'Концентрация, 1 минута',
+  description: `<p>Вы покрываете оружие, к которому прикасаетесь, кислотной субстанцией. До окончания заклинания атаки оружием, совершенные им, наносят дополнительно 2д4 урона Кислотой при попадании. Если оружие еще не является магическим, оно становится таковым на время действия заклинания.</p>
+  <p>Кроме того, существо, пораженное рукопашной атакой с использованием этого оружия, должно совершить спасбросок Телосложения. При провале спасброска оно становится Отравленным до конца следующего хода атакующего.</p>
+  <p><strong>Накладывание более высокой ячейкой.</strong> Когда вы накладываете это заклинание, используя ячейку заклинания 4-го уровня или выше, урон Кислотой увеличивается на 1д4 за каждый уровень ячейки выше 3-го.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 188
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' }
+  ]
+},
+{
+  id: 'pestilence',
+  name: 'Мор',
+  nameEn: 'Pestilence',
+  level: '3',
+  school: 'некромантия',
+  castingTime: '1 действие',
+  range: '90 футов',
+  components: {
+    somatic: true,
+    verbal: true,
+    material: 'увядший цветок'
+  },
+  duration: 'Концентрация, до 1 минуты',
+  description: `<p>Вы заражаете до трех существ, которых вы можете видеть в пределах дистанции, магической болезнью. В начале каждого хода цели она должна совершить спасбросок Телосложения. При провале спасброска существо получает 3д6 Некротического урона. Если цель преуспевает в трех таких спасбросках, заклинание для этого существа заканчивается.</p>
+  <p>Заклинание Малое восстановление, наложенное на цель, преждевременно завершает это заклинание для этого существа.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 189
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+    { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=pathogenist">Патогенист</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
+  ]
+},
+{
+  id: 'corrosive-blast',
+  name: 'Разъедающий Взрыв',
+  nameEn: 'Corrosive Blast',
+  level: '3',
+  school: 'воплощение',
+  castingTime: '1 действие',
+  range: 'На себя',
+  components: {
+    somatic: true,
+    verbal: true,
+    material: 'фиал кислоты'
+  },
+  duration: 'Мгновенная',
+  description: `<p>Из ваших рук вырывается поток едких химикатов. Каждое существо в 30-футовом конусе должно совершить спасбросок Ловкости. Существо получает 10д4 урона Кислотой при провале спасброска, или половину этого урона при успехе.</p>
+  <p>Кислота уничтожает любые предметы из органических материалов в области заклинания. Существо, убитое этим заклинанием, полностью растворяет свою плоть, оставляя после себя только разъеденный скелет.</p>
+  <p><strong>Накладывание более высокой ячейкой.</strong> Когда вы накладываете это заклинание, используя ячейку заклинания 4-го уровня или выше, урон Кислотой увеличивается на 2д4 за каждый уровень ячейки выше 3-го.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 188
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+    { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+    { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
+  ]
+},
+{
+  id: 'tranquilizing-toxin',
+  name: 'Усыпляющий Токсин',
+  nameEn: 'Tranquilizing Toxin',
+  level: '3',
+  school: 'воплощение',
+  castingTime: '1 действие',
+  range: '60 футов',
+  components: {
+    somatic: true,
+    verbal: true
+  },
+  duration: 'Мгновенная',
+  description: `<p>Одна цель, которую вы выбираете в пределах дистанции, должна совершить спасбросок Телосложения или получить 8д6 урона Ядом и получает состояние Отравленный до конца вашего следующего хода. Пока Отравлена таким образом, цель также Ошеломлена. При успешном спасброске цель получает половину урона и не Отравлена.</p>
+  <p><strong>Накладывание более высокой ячейкой.</strong> Когда вы накладываете это заклинание, используя ячейку заклинания 4-го уровня или выше, урон Ядом увеличивается на 1д6 за каждый уровень ячейки выше 3-го.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 189
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' }
+  ]
+},
+{
+  id: 'venomous-aura',
+  name: 'Ядовитая аура',
+  nameEn: 'Venomous Aura',
+  level: '3',
+  school: 'преобразование',
+  castingTime: '1 бонусное действие',
+  range: 'На себя',
+  components: {
+    somatic: true,
+    verbal: true,
+    material: 'чешуя или клыки ядовитой змеи'
+  },
+  duration: '1 минута',
+  description: `<p>Вы излучаете зловещую ауру, которая дезориентирует существ, приближающихся к вам. Любые существа, которые начинают свой ход в пределах 10 футов от вас, отравлены до начала их следующего хода.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 189
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+    { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=pathogenist">Патогенист</a>' }
+  ]
+},
+{
+  id: 'corpse-explosion',
+  name: 'Взрыв трупа',
+  nameEn: 'Corpse Explosion',
+  level: '4',
+  school: 'некромантия',
+  castingTime: 'Реакция, которую вы совершаете, когда существо, которое вы видите, умирает в пределах 120 футов от вас',
+  range: '120 футов',
+  components: {
+    somatic: true,
+    verbal: true
+  },
+  duration: 'Мгновенная',
+  description: `<p>Вы заставляете тело срабатывающего существа взорваться яростным дождем крови и разложенной плоти. Существа в пределах 10 футов от точки, центрированной на теле срабатывающего существа, получают 4д8 Некротического урона и 4д8 урона Кислотой, или половину этого урона при успешном спасброске Ловкости.</p>
+  <p><strong>Накладывание более высокой ячейкой.</strong> Если вы накладываете это заклинание, используя ячейку заклинания 5-го уровня или выше, урон увеличивается на 1д8 урона Кислотой за каждый уровень ячейки выше 4-го.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 189
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=thanaturg">Танатург</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромат</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' }
+  ]
+},
+{
+  id: 'blood-worm',
+  name: 'Кровавый червь',
+  nameEn: 'Blood Worm',
+  level: '4',
+  school: 'некромантия',
+  castingTime: '1 действие',
+  range: '30 футов',
+  components: {
+    verbal: true,
+    somatic: true,
+    material: 'банка, полная пиявок'
+    
+  },
+  duration: 'Концентрация, до 1 минуты',
+  description: `<p>Вы заражаете существо, которое вы можете видеть в пределах дистанции, магической болезнью в форме злокачественного паразита. Раз в ход, когда существо попадает по зараженной цели атакой оружием, эта атака наносит дополнительно 4д6 Некротического урона, и атакующий восстанавливает хиты, равные половине нанесенному этому Некротическому урону. Каждый раз, когда зараженная цель получает этот Некротический урон, она совершает спасбросок Телосложения против заклинания. Если спасбросок успешен, заклинание заканчивается.</p>
+  <p><strong>Накладывание более высокой ячейкой.</strong> Когда вы накладываете это заклинание, используя ячейку заклинания 5-го уровня или выше, Некротический урон увеличивается на 1д6 за каждый уровень ячейки выше 4-го.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 189
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
+    { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=pathogenist">Патогенист</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' }
+  ]
+},
+{
+  id: 'last-rites',
+  name: 'Последний обряд',
+  nameEn: 'Last Rites',
+  level: '4',
+  school: 'ограждение',
+  castingTime: '1 действие',
+  range: '60 футов',
+  components: {
+    verbal: true,
+    somatic: true,
+    material: 'маленький кусочек латуни, лепесток розы и капля святой воды'
+    
+  },
+  duration: 'Мгновенная',
+  description: `<p>Вы направляете на существо, которое вы можете видеть в пределах дистанции, луч святого света, который сияет на него сверху. Цель должна совершить спасбросок Мудрости. Цель получает 8д8 урона Излучением при провале спасброска, или половину этого урона при успехе. Это заклинание не действует на небожителей или конструктов.</p>
+  <p>Если вы выбираете целью нежить или исчадие, оно совершает спасбросок с помехой, и заклинание наносит ему максимальный урон. Если нежить или исчадие снижается до 0 хитов этим заклинанием, оно умирает, и его тело превращается в пепел.</p>  
+  <p><strong>Накладывание более высокой ячейкой.</strong> Когда вы накладываете это заклинание, используя ячейку заклинания 5-го уровня или выше, вы можете выбрать целью одно дополнительное существо в пределах 30 футов друг от друга за каждый уровень ячейки выше 5-го.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 190
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+    { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=exorcist">Экзорцист</a>' }
+  ]
+},
+{
+  id: 'summon-the-thing-with-the-writhing-tail',
+  name: 'Призыв Твари с Извивающимся Хвостом',
+  nameEn: 'Summon the Thing with the Writhing Tail',
+  level: '4',
+  school: 'вызов',
+  castingTime: '1 действие',
+  range: '90 футов',
+  components: {
+    verbal: true,
+    somatic: true,
+    material: 'клочок кошачьей шерсти и мертвая крыса'
+    
+  },
+  duration: 'Концентрация, до 1 часа',
+  description: `<p>Вы призываете Тварь с Извивающимся Хвостом. Она проявляется в незанятом пространстве, которое вы можете видеть в пределах дистанции. Эта телесная форма использует статблок ниже. Существо исчезает, когда его хиты падают до 0 или когда заклинание заканчивается.</p>
+  <p>Существо является союзником вам и вашим спутникам. В бою существо разделяет вашу инициативу, но ходит сразу после вас. Оно подчиняется вашим словесным командам (действие не требуется). Если вы не даете никаких команд, оно совершает действие Уклонение и использует свое движение, чтобы избежать опасности.</p>  
+  <p><strong>Накладывание более высокой ячейкой.</strong> Когда вы накладываете это заклинание, используя ячейку заклинания 5-го уровня или выше, используйте более высокий уровень везде, где в статблоке появляется уровень заклинания.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 190
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+    { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' },
+    { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
+    { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' }
+  ]
+},
+{
+  id: 'corrupting-spores',
+  name: 'Разлагающие Споры',
+  nameEn: 'Corrupting Spores',
+  level: '4',
+  school: 'некромантия',
+  castingTime: '1 бонусное действие',
+  range: '120 футов',
+  components: {
+    verbal: true,
+    somatic: true,
+    material: 'сушеный гриб'
+    
+  },
+  duration: 'Концентрация, до 1 минуты',
+  description: `<p>Небольшой участок из трех ядовитых грибов магически вырастает в 5-футовом квадрате, который вы можете видеть в пределах дистанции. Грибы испускают токсичные споры, и любое существо, которое начинает свой ход в пределах 10 футов от участка грибов, должно совершить спасбросок Телосложения. При провале спасброска существо получает 1д8 урона Ядом за каждый гриб на участке и отравлено до начала своего следующего хода.</p>
+  <p>До окончания заклинания вы можете использовать бонусное действие в свой ход, чтобы заставить дополнительный гриб вырасти на участке.</p>  
+  <p><strong>Накладывание более высокой ячейкой.</strong> Когда вы накладываете это заклинание, используя ячейку заклинания 5-го уровня или выше, один дополнительный гриб вырастает с начальным участком за каждый уровень ячейки выше 4-го.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 190
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+    { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
+  ]
+},
+{
+  id: 'acid-rain',
+  name: 'Кислотный Дождь',
+  nameEn: 'Acid Rain',
+  level: '5',
+  school: 'вызов',
+  castingTime: '1 действие',
+  range: '150 футов',
+  components: {
+    verbal: true,
+    somatic: true,
+    material: 'щепотка серы и молотого угля'
+    
+  },
+  duration: 'Концентрация, до 1 минуты',
+  description: `<p>До окончания заклинания кислотный дождь падает в цилиндре высотой 40 футов с радиусом 40 футов, центрированном на точке, которую вы выбираете в пределах дистанции. Область слабо освещена, и открытое пламя в области гаснет.</p>
+  <p>Химические лужи накапливаются на земле в области, делая ее трудной местностью. Когда существо входит в область заклинания впервые за ход или начинает там свой ход, оно получает 3д6 урона Кислотой и должно совершить спасбросок Ловкости. При провале спасброска оно падает ничком в лужи, получая дополнительно 3д6 урона Кислотой.</p>  
+  <p><strong>Накладывание более высокой ячейкой.</strong> Когда вы накладываете это заклинание, используя ячейку заклинания 6-го уровня или выше, урон Кислотой увеличивается на 1д6 за каждый уровень ячейки выше 5-го.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 191
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' }
+  ]
+},
+{
+  id: 'nerve-gas',
+  name: 'Нервный газ',
+  nameEn: 'Nerve Gas',
+  level: '5',
+  school: 'некромантия',
+  castingTime: '1 действие',
+  range: '120 футов',
+  components: {
+    verbal: true,
+    somatic: true,
+    material: 'образцы фосфата и хлора, смешанные с каплей чистого спирта'
+    
+  },
+  duration: 'Концентрация, до 10 минут',
+  description: `<p>Вы создаете 10-футовую сферу ядовитого тумана, центрированную на точке, которую вы выбираете в пределах дистанции. Туман огибает углы. Он длится в течение всего времени действия или пока сильный ветер не рассеет туман, завершая заклинание. Область тумана Сильно заслонена.</p>
+  <p>Когда существо входит в область заклинания впервые за ход или начинает там свой ход, это существо должно совершить спасбросок Интеллекта. При провале спасброска существо получает 3д6 Психического урона и получает состояние Ошеломлённый до начала своего следующего хода. При успешном спасброске существо получает половину урона и не получает состояние. Существа подвергаются воздействию, даже если они задерживают дыхание или им не нужно дышать.</p>  
+  <p><strong>Накладывание более высокой ячейкой.</strong> Если вы накладываете это заклинание, используя ячейку заклинания 6-го уровня или выше, психический урон увеличивается на 1д6 за каждый уровень ячейки выше 5-го.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 191
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=thanaturg">Танатург</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' }
+  ]
+},
+{
+  id: 'septic-shock',
+  name: 'Септический шок',
+  nameEn: 'Septic Shock',
+  level: '5',
+  school: 'некромантия',
+  castingTime: '1 действие',
+  range: '150 футов',
+  components: {
+    verbal: true,
+    somatic: true,
+    material: 'кусок гнилой печени'
+    
+  },
+  duration: 'Мгновенная',
+  description: `<p>Выберите существо, которое вы можете видеть в пределах дистанции, у которого не все Хиты. Вы заражаете раны цели гнилостными бактериями.</p>
+  <p>Цель должна совершить спасбросок Телосложения. Если у нее осталось менее половины Максимальных хитов, она совершает спасбросок с Помехой. При провале спасброска цель получает 10д8 Некротического урона и 1 Степень истощения. При успешном спасброске она получает половину урона и не получает уровней истощения.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 192
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=mutagenist">Мутагенист</a>' }
+  ]
+},
+{
+  id: 'toxic-barrage',
+  name: 'Ядовитый Залп',
+  nameEn: 'Toxic Barrage',
+  level: '3',
+  school: 'вызов',
+  castingTime: '1 действие',
+  range: '120 футов',
+  components: {
+    verbal: true,
+    somatic: true,
+    material: 'четыре мухомора'
+    
+  },
+  duration: 'Мгновенная',
+  description: `<p>Вы создаете четыре луча чистого яда и бросаете их в цели в пределах дистанции. Вы можете направить их на одну цель или на несколько.</p>
+  <p>Совершите дальнобойную атаку заклинанием для каждого луча. При попадании цель получает 3д6 урона Ядом. Если цель поражена одним или несколькими из этих лучей, она должна совершить спасбросок Телосложения. При провале спасброска цель Отравлена на 1 минуту. Пока отравлена таким образом, цель может повторять спасбросок в конце каждого своего хода. При успехе она больше не Отравлена.</p>
+  <p><strong>Накладывание более высокой ячейкой.</strong> Когда вы накладываете это заклинание, используя ячейку заклинания 4-го уровня или выше, вы создаете один дополнительный луч за каждый уровень ячейки выше 3-го.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 192
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
+    { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' }
+  ]
+},
+{
+  id: 'mephitic-vapors',
+  name: 'Зловонные Испарения',
+  nameEn: 'Mephitic Vapors',
+  level: '6',
+  school: 'вызов',
+  castingTime: '1 действие',
+  range: '120 футов',
+  components: {
+    verbal: true,
+    somatic: true,
+    material: 'фиал хлора'
+    
+  },
+  duration: 'Концентрация, до 10 минут',
+  description: `<p>Вы обливаете область радиусом 20 футов, центрированную на точке, которую вы можете видеть в пределах дистанции, едкой слизью, которая остается на время действия заклинания. Область становится Труднопроходимой, и любое существо, полностью находящееся в области, ослеплено и не может совершать Реакции.</p>
+  <p>Существо, которое начинает свой ход в области, должно преуспеть в спасброске Телосложения или получить 2д8 урона Ядом и 2д8 урона Кислотой и получить 1 Степень истощения.</p>
+  <p><strong>Накладывание более высокой ячейкой.</strong> Если вы накладываете это заклинание, используя ячейку заклинания 7-го уровня или выше, урон увеличивается на 1д8 урона Ядом и 1д8 урона Кислотой за каждый уровень ячейки выше 6-го.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 192
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+    { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' }
+  ]
+},
+{
+  id: 'vile-necrosis',
+  name: 'Мерзкий Некроз',
+  nameEn: 'Vile Necrosis',
+  level: '6',
+  school: 'некромантия',
+  castingTime: '1 действие',
+  range: '120 футов',
+  components: {
+    verbal: true,
+    somatic: true,
+    material: 'фиал свернувшейся крови'
+    
+  },
+  duration: 'Мгновенная',
+  description: `<p>Вы указываете пальцем на существо в пределах дистанции, проецируя на него бледный зеленый луч ослабляющей энергии. Совершите дальнобойную атаку заклинанием против цели. При попадании цель получает 12д6 Некротического урона и становится ослабленной. Пока ослаблена этим заклинанием, цель наносит половину урона атаками оружием и заклинаниями.</p>
+  <p>Ослабленная цель может совершать спасбросок Телосложения в конце каждого своего хода. При успешном спасброске слабость прекращается.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 192
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' }
+  ]
+},
+{
+  id: 'miasma',
+  name: 'Миазма',
+  nameEn: 'Miasma',
+  level: '7',
+  school: 'воплощение',
+  castingTime: '1 действие',
+  range: '120 футов',
+  components: {
+    verbal: true,
+    somatic: true,
+    material: 'свежесобранная трупная лилия'
+    
+  },
+  duration: 'Концентрация, до 1 минуты',
+  description: `<p>Вы создаете стену из болезненных, желтовато-зеленых, ядовитых испарений на твердой поверхности в пределах дистанции. Вы можете сделать стену до 60 футов длиной, 20 футов высотой и 1 фут толщиной, или кольцевую стену до 20 футов в диаметре, 20 футов высотой и 1 фут толщиной. Стена непрозрачна и длится в течение всего времени действия.</p>
+  <p>Когда стена появляется, каждое существо в ее области должно совершить спасбросок Ловкости. При провале спасброска существо получает 10д4 урона Кислотой, или половину этого урона при успехе.</p>
+  <p>Одна сторона стены, выбранная вами при накладывании заклинания, испускает ядовитые испарения. Она наносит 8д8 урона Ядом каждому существу, которое заканчивает свой ход в пределах 30 футов от этой стороны или внутри стены. Существо получает такой же урон, когда впервые за ход входит в стену. Другая сторона стены не наносит урона.</p>
+  <p>Существо, получившее урон Ядом от стены, должно совершить спасбросок Телосложения или стать Отравленным на время действия заклинания.</p>
+  <p><strong>Накладывание более высокой ячейкой.</strong> Когда вы накладываете это заклинание, используя ячейку заклинания 8-го уровня или выше, урон Ядом увеличивается на 2д8 за каждый уровень ячейки выше 7-го.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 193
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' }
+  ]
+},
+{
+  id: 'grievous-wounds',
+  name: 'Тяжёлые Раны',
+  nameEn: 'Grievous Wounds',
+  level: '7',
+  school: 'некромантия',
+  castingTime: '1 действие',
+  range: '120 футов',
+  components: {
+    verbal: true,
+    somatic: true,
+    material: 'игла и несколько швов'
+    
+  },
+  duration: 'Концентрация, до 1 минуты',
+  description: `<p>Выберите существо, которое вы можете видеть в пределах дистанции. Вы мгновенно лишаете физиологию цели всякой устойчивости, так что простая царапина может стать ужасной травмой. До конца вашего следующего хода цель теряет любые Сопротивления или Иммунитеты к урону, становится уязвимой ко всему урону и совершает все свои спасброски с Помехой.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 193
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' }
+  ]
+},
+{
+  id: 'breath-of-nightshade',
+  name: 'Дыхание Сумрачника',
+  nameEn: 'Breath of Nightshade',
+  level: '8',
+  school: 'вызов',
+  castingTime: '1 действие',
+  range: 'На себя',
+  components: {
+    verbal: true,
+    somatic: true,
+    material: 'пара цветков смертельной белладонны'
+    
+  },
+  duration: 'Концентрация, до 1 минуты',
+  description: `<p>Вы выдыхаете 60-футовый конус смертельного яда. Каждое существо в области, когда вы накладываете заклинание, должно совершить спасбросок Телосложения. При провале спасброска существо становится Отравленным на 1 час. Пока отравлено этим заклинанием, существо Парализовано</p>
+  <p>Заклинание заканчивается для затронутого существа, если оно получает какой-либо урон.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 193
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Бард</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' }
+  ]
+},
+{
+  id: 'plague-wind',
+  name: 'Чумной Ветер',
+  nameEn: 'Plague Wind',
+  level: '8',
+  school: 'вызов',
+  castingTime: '1 действие',
+  range: 'На себя',
+  components: {
+    verbal: true,
+    somatic: true,
+    material: 'слизь вурдалака'
+    
+  },
+  duration: 'Мгновенная',
+  description: `<p>Вы призываете клубящийся ветер пожирающей плоть болезни и мучительных, кипятящих кровь испарений, который несется по области, исходящей от вас, в 120-футовом конусе. Существа в области должны совершить спасбросок Телосложения. При провале спасброска существо получает 5д8 урона Ядом и 5д8 Некротического урона, или половину этого урона при успехе. После получения этого урона любое затронутое существо с 25 или менее оставшимися хитами немедленно умирает и превращается в выветренный скелет, так как его плоть и мягкие ткани сдуваются, как пепел.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 193
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+    { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' }
+  ]
+},
+{
+  id: 'touch-of-death',
+  name: 'Касание Смерти',
+  nameEn: 'Touch of Death',
+  level: '9',
+  school: 'некромантия',
+  castingTime: '1 действие',
+  range: 'Касание',
+  components: {
+    verbal: true,
+    somatic: true,
+    material: 'палец ведьмы'
+    
+  },
+  duration: 'Мгновенная',
+  description: `<p>Совершите рукопашную атаку заклинанием против цели в пределах 5 футов от вас. При попадании цель получает 200 урона Ядом. Этот урон игнорирует любое Сопротивление или Иммунитет к урону Ядом, которые есть у существа, и не может быть уменьшен или предотвращен каким-либо образом.</p>
+  <p>Мощный яд остается в теле цели и тянет ее к смерти. Цель, хиты которой снижены до нуля этим уроном Ядом, автоматически проваливает спасброски от смерти, пока не закончит Продолжительный отдых. Заклинание Исцеление или Высшее восстановление, наложенное на цель, также завершает этот эффект.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 193
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+    { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+    { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' },
+    { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' }
+  ]
+},
+{
+  id: 'pandemic',
+  name: 'Пандемия',
+  nameEn: 'Pandemic',
+  level: '9',
+  school: 'вызов',
+  castingTime: '1 действие',
+  range: '60 футов',
+  components: {
+    verbal: true,
+    somatic: true,
+    material: 'зловонный труп чумной крысы'
+    
+  },
+  duration: 'Мгновенная',
+  description: `<p>Вы заражаете одно существо, которое вы можете видеть в пределах дистанции, смертельной и крайне заразной болезнью, которая длится до тех пор, пока не будет излечена Высшим восстановлением, Исцелением или Желанием. Другие заклинания и магические эффекты, которые удаляют болезни, не могут излечить инфекцию, вызванную этим заклинанием.</p>
+  <p>Будучи зараженным, существо должно совершать спасбросок Телосложения в начале каждого своего хода. При провале спасброска оно получает 10д8 Некротического урона и становится Недееспособным до начала своего следующего хода. При успешном спасброске оно получает половину урона и не становится Недееспособным. Зараженное существо должно совершать спасбросок в начале каждого своего хода, пока не умрет или не будет излечено.</p>
+  <p>Существо, которое начинает свой ход в пределах 10 футов от существа, зараженного этим заклинанием, должно совершить спасбросок Телосложения. При провале спасброска это существо заражается инфекцией.</p>
+  <p>Когда вы накладываете заклинание, вы можете выбрать себя и до восьми других существ, чтобы они не были подвержены инфекции, вызванной этим накладыванием заклинания.</p>`,
+  source: {
+    book: 'SCGtD\`14',
+    page: 193
+  },
+  sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+    { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' }
+  ]
+},
+{
   id: 'armor-of-agathys',
   name: 'Доспех Агатиса',
   nameEn: 'Armor of Agathys',
@@ -1991,7 +3138,7 @@ export const spells: Spell[] = [
   },
   duration: '1 час',
   description: `<p>Вас покрывает магический защитный иней. Вы получаете 5 Временных хитов. Когда существо попадает по вам броском рукопашной атаки, пока заклинание действует, оно получает 5 урона Холодом. Заклинание заканчивается преждевременно, если у вас не остаётся Временных хитов.</p>
-  <p><strong>Используя ячейку заклинания большего уровня.</strong> И урон Холодом, и получаемые Временные хиты увеличиваются на 5 за каждый уровень ячейки выше 1-го.</p>`,
+  <p><strong>Накладывание более высокой ячейкой.</strong> И урон Холодом, и получаемые Временные хиты увеличиваются на 5 за каждый уровень ячейки выше 1-го.</p>`,
   source: {
     book: 'PHB\'24',
     page: 243
@@ -2018,7 +3165,7 @@ export const spells: Spell[] = [
   },
   duration: 'Мгновенная',
   description: `<p>Вы взываете к мощи Хадара, Тёмного Голода, и выпускаете плети тёмной энергии. Каждое существо в исходящей из вас 10-радиус-футовой Эманации должно совершить спасбросок Силы: при провале оно получает 2д6 Некротического урона и не может совершать Реакции до начала своего следующего хода, а при успехе только получает половину этого урона.</p>
-  <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон увеличивается на 1д6 за каждый уровень ячейки выше 1-го.</p>`,
+  <p><strong>Накладывание более высокой ячейкой.</strong> Урон увеличивается на 1д6 за каждый уровень ячейки выше 1-го.</p>`,
   source: {
     book: 'PHB\'24',
     page: 243
@@ -2044,7 +3191,7 @@ export const spells: Spell[] = [
   },
   duration: 'Концентрация, вплоть до 1 минуты',
   description: `<p>Выберите до трёх существ из видимых вами в пределах дистанции. Каждое из существ должно совершить спасбросок Харизмы: при провале этого спасброска цель вычитает 1д4 из всех бросков атаки и спасбросков, совершенных до окончания действия заклинания.</p>
-  <p><strong>Используя ячейку заклинания большего уровня.</strong> Вы можете нацелить заклинание на одно дополнительное существо за каждый уровень ячейки выше 1-го.</p>`,
+  <p><strong>Накладывание более высокой ячейкой.</strong> Вы можете нацелить заклинание на одно дополнительное существо за каждый уровень ячейки выше 1-го.</p>`,
   source: {
     book: 'PHB\'24',
     page: 245
@@ -2117,6 +3264,7 @@ export const spells: Spell[] = [
   sources: [
     { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
     { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=exorcist">Экзорцист</a>' },
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
     { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=life">Домен Жизни</a>' },
@@ -2142,7 +3290,7 @@ export const spells: Spell[] = [
   duration: 'Мгновенная',
   description: `<p>Вы выстреливаете пламенной вуалью: каждое существо в 15-футовом Конусе должно совершить спасбросок Ловкости, получая 3д6 урона Огнём при провале или половину этого урона при успехе.</p>
   <p>Воспламеняющиеся объекты в этом Конусе начинают гореть, если их никто не несёт и не носит.</p>
-  <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон увеличивается на 1д6 за каждый уровень ячейки выше 1-го.</p>`,
+  <p><strong>Накладывание более высокой ячейкой.</strong> Урон увеличивается на 1д6 за каждый уровень ячейки выше 1-го.</p>`,
   source: {
     book: 'PHB\'24',
     page: 248
@@ -2150,6 +3298,7 @@ export const spells: Spell[] = [
   sources: [
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=chemist">Химик</a>' },
     { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
     { type: 'subclass', name: '<a href="/classes/druid?subclass=wildfire">Круг Дикого Огня</a>' },
     { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a> (Засушливая земля)' },
@@ -2282,7 +3431,7 @@ export const spells: Spell[] = [
   },
   duration: '1 час',
   description: `<p>Один Гуманоид, видимый вами в пределах дистанции, совершает спасбросок Мудрости. Гуманоид совершает его с Преимуществом, если вы или ваши союзники сражаетесь с ним. При провале спасброска цель получает состояние Очарованный до окончания действия заклинания или пока вы или ваш союзник не нанесёте ему урон. Очарованное этим заклинанием существо Дружелюбно к вам. Когда заклинание заканчивается, цель знает, что вы очаровывали её.</p>
-  <p><strong>Используя ячейку заклинания большего уровня.</strong> Вы можете нацелить заклинание на одно дополнительное существо за каждый уровень ячейки выше 1-го.</p>`,
+  <p><strong>Накладывание более высокой ячейкой.</strong> Вы можете нацелить заклинание на одно дополнительное существо за каждый уровень ячейки выше 1-го.</p>`,
   source: {
     book: 'PHB\'24',
     page: 249
@@ -2293,6 +3442,7 @@ export const spells: Spell[] = [
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=alienist">Алиенист</a>' },
     { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/bard?subclass=glamour">Коллегия Очарования</a>' },
@@ -2328,7 +3478,7 @@ export const spells: Spell[] = [
   duration: 'Мгновенная',
   description: `<p>Вы метаете шар энергии в цель в пределах дистанции. Выберите тип урона: Звук, Кислота, Огонь, Холод, Электричество или Яд, затем совершите дальнобойную атаку заклинанием по цели. При попадании цель получает 3д8 урона выбранного типа.</p>
   <p>Если вы выбрасываете одинаковые числа на двух или более костях, шар перескакивает на другую цель в пределах 30 футов от предыдущей на ваш выбор. Совершите по этой цели новый бросок атаки и новый бросок урона: при этом шар не может перескочить вновь, если вы не сотворяли заклинание с ячейкой 2-го уровня или выше.</p>
-  <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон увеличивается на 1д8 за каждый уровень ячейки выше 1-го. Количество раз, когда шар может перескочить на новую цель, равно уровню ячейки, но каждое существо может быть выбрано целью только один раз за сотворение заклинания.</p>`,
+  <p><strong>Накладывание более высокой ячейкой.</strong> Урон увеличивается на 1д8 за каждый уровень ячейки выше 1-го. Количество раз, когда шар может перескочить на новую цель, равно уровню ячейки, но каждое существо может быть выбрано целью только один раз за сотворение заклинания.</p>`,
   source: {
     book: 'PHB\'24',
     page: 249
@@ -2402,7 +3552,7 @@ export const spells: Spell[] = [
   <p><strong>Беги.</strong> Цель проводит свой ход, удаляясь от вас самым быстрым доступным способом.</p>
   <p><strong>Падай.</strong> Цель получает состояние Опрокинутый, а затем заканчивает свой ход.</p>
   <p><strong>Замри.</strong> В свой ход цель не двигается и не совершает ни действий, ни Бонусных действий.</p>
-  <p><strong>Используя ячейку заклинания большего уровня.</strong> Вы можете воздействовать на одно дополнительное существо за каждый уровень ячейки выше 1-го.</p>`,
+  <p><strong>Накладывание более высокой ячейкой.</strong> Вы можете воздействовать на одно дополнительное существо за каждый уровень ячейки выше 1-го.</p>`,
   source: {
     book: 'PHB\'24',
     page: 251
@@ -2462,7 +3612,7 @@ export const spells: Spell[] = [
   nameEn: 'Comprehend Languages',
   level: '1',
   school: 'прорицание',
-  castingTime: '1 действие или ритуал',
+  castingTime: 'Действие или ритуал',
   range: 'На себя',
   components: {
     verbal: true,
@@ -2476,6 +3626,7 @@ export const spells: Spell[] = [
     page: 252
   },
   sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
     { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
@@ -2514,12 +3665,13 @@ export const spells: Spell[] = [
   description: `<p>Вы создаёте один из следующих эффектов:</p>
   <p><strong>Создание воды.</strong> Вы создаёте до 10 галлонов (~38 литров) чистой воды в открытом контейнере в пределах дистанции. Вы можете создать эту воду не в контейнере, а пролить её дождём в 30-футовом Кубе в пределах дистанции, погашая все незащищённые огни.</p>
   <p><strong>Уничтожение воды.</strong> Вы уничтожаете до 10 галлонов (~38 литров) воды в открытом контейнере в пределах дистанции. Вместо этого вы можете уничтожить туман в 30-футовом Кубе в пределах дистанции.</p>
-  <p><strong>Используя ячейку заклинания большего уровня.</strong> За каждый уровень ячейки выше 1-го вы создаёте или уничтожаете на 10 галлонов воды больше, а длина ребра Куба увеличивается на 5 футов.</p>`,
+  <p><strong>Накладывание более высокой ячейкой.</strong> За каждый уровень ячейки выше 1-го вы создаёте или уничтожаете на 10 галлонов воды больше, а длина ребра Куба увеличивается на 5 футов.</p>`,
   source: {
     book: 'PHB\'24',
     page: 258
   },
   sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
     { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
@@ -2546,14 +3698,14 @@ export const spells: Spell[] = [
   },
   duration: 'Мгновенная',
   description: `<p>Существо, которого вы касаетесь, восстанавливает Хиты в количестве, равном 2д8 + ваш модификатор заклинательной характеристики.</p>
-  <p><strong>Используя ячейку заклинания большего уровня.</strong> Лечение увеличивается на 2д8 за каждый уровень ячейки выше 1-го.</p>`,
-  
+  <p><strong>Накладывание более высокой ячейкой.</strong> Лечение увеличивается на 2д8 за каждый уровень ячейки выше 1-го.</p>`,
   source: {
     book: 'PHB\'24',
     page: 259
   },
   sources: [
-      { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
+    { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
     { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
@@ -2567,7 +3719,7 @@ export const spells: Spell[] = [
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=life">Домен Жизни</a>' },
     { type: 'background', name: '<a href="/backgrounds/witherbloom%20student/">Студент Визерблума</a>' },
     { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
-    { type: 'feat', name: '<a href="/feats/gift-of-metallic-dragon//">Дар металлического дракона</a>' },
+    { type: 'feat', name: '<a href="/feats/gift-of-metallic-dragon/">Дар металлического дракона</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
   ]
@@ -2770,7 +3922,7 @@ export const spells: Spell[] = [
     somatic: true
   },
   duration: 'Концентрация, до 10 минут',
-  description: `<p>Вы вызываете духов со Стихийных планов, которые кружат вокруг вас в радиусе 15 футов на протяжении действия заклинания. Пока заклинание активно, любая ваша атака наносит дополнительно 2д8 урона при попадании по существу, находящемуся в пределах этого радиуса. Этот урон может быть кислотой, холодом, огнём или электричеством (вы выбираете тип урона при выполнении атаки). Кроме того, земля в пределах радиуса действия заклинания становится труднопроходимой местностью для ваших врагов.</p>
+  description: `<p>Вы вызываете духов со Стихийных планов, которые кружат вокруг вас в радиусе 15 футов на протяжении действия заклинания. Пока заклинание активно, любая ваша атака наносит дополнительно 2д8 урона при попадании по существу, находящемуся в пределах этого радиуса. Этот урон может быть кислотой, холодом, огнём или электричеством (вы выбираете тип урона при выполнении атаки). Кроме того, земля в пределах радиуса действия заклинания становится Труднопроходимой местностью для ваших врагов.</p>
   <p><strong>Накладывание более высокой ячейкой.</strong> Урон увеличивается на 2д8 за каждый уровень ячейки выше 4.</p>`,
   
   source: {
@@ -2862,7 +4014,7 @@ export const spells: Spell[] = [
   },
   duration: 'Мгновенная',
   description: `<p>Град падает в цилиндре радиусом 20 футов и высотой 40 футов, центрированном на точке в пределах дистанции. Каждое существо в цилиндре должно совершить спасбросок Ловкости. Существо получает 2д10 дробящего урона и 4д6 урона холодом при провале или половину этого урона при успехе.
-  <p>Град превращает землю в цилиндре в труднопроходимую местность до конца вашего следующего хода.</p>
+  <p>Град превращает землю в цилиндре в Труднопроходимую местность до конца вашего следующего хода.</p>
   <p><strong>Накладывание более высокой ячейкой.</strong> Дробящий урон увеличивается на 1д10 за каждый уровень ячейки выше 4.</p>`,
   
   source: {
@@ -2873,6 +4025,7 @@ export const spells: Spell[] = [
     { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=chemist">Химик</a>' },
     { type: 'subclass', name: '<a href="/classes/artificer?subclass=artillerist">Артиллерист</a>' },
     { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
@@ -2933,8 +4086,10 @@ export const spells: Spell[] = [
     page: 261
   },
   sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
     { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
     { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=thanaturg">Танатург</a>' },
     { type: 'subclass', name: '<a href="/classes/artificer?subclass=reanimator">Реаниматор</a>' },
     { type: 'subclass', name: '<a href="/classes/artificer?subclass=alchemist">Алхимик</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=death">Домен Смерти</a>' },
@@ -2977,6 +4132,7 @@ export const spells: Spell[] = [
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=exorcist">Экзорцист</a>' },
     { type: 'subclass', name: '<a href="/classes/artificer?subclass=cartographer">Картограф</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=abjurer">Оградитель</a>' },
     { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
@@ -3111,11 +4267,13 @@ export const spells: Spell[] = [
     page: 321
   },
   sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
     { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=mutagenist">Мутагенист</a>' },
     { type: 'subclass', name: '<a href="/classes/paladin?subclass=conquest">Клятва Завоевания</a>' },
     { type: 'subclass', name: '<a href="/classes/paladin?subclass=redemption">Клятва Искупления</a>' },
     { type: 'subclass', name: '<a href="/classes/paladin?subclass=ancients">Клятва Древних</a>' },
@@ -3180,6 +4338,7 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=alienist">Алиенист</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=knowledge">Домен Знаний</a>' },
     { type: 'subclass', name: '<a href="/classes/cleric?subclass=light">Домен Света</a>' },
@@ -3206,7 +4365,7 @@ export const spells: Spell[] = [
     material: 'гриб'
   },
   duration: '24 часа',
-  description: `<p>Вы изменяете природную местность в пределах 150-футового куба на другую природную местность по вашему выбору. Таким образом, поле или дорогу можно заставить выглядеть как болото, холм, расселину или другую труднопроходимую или непроходимую местность. Пруд можно сделать похожим на травянистую лужайку, обрыв — на пологий склон, а усыпанный камнями овраг — на широкую и ровную дорогу. Искусственные сооружения, снаряжение и существа в пределах области не изменяются.</p>
+  description: `<p>Вы изменяете природную местность в пределах 150-футового куба на другую природную местность по вашему выбору. Таким образом, поле или дорогу можно заставить выглядеть как болото, холм, расселину или другую Труднопроходимую или непроходимую местность. Пруд можно сделать похожим на травянистую лужайку, обрыв — на пологий склон, а усыпанный камнями овраг — на широкую и ровную дорогу. Искусственные сооружения, снаряжение и существа в пределах области не изменяются.</p>
   <p>Тактильные характеристики местности остаются неизменными, поэтому существа, входящие в эту область, вероятно, заметят иллюзию. Если разница не очевидна на ощупь, то существо, исследующее иллюзию, может выполнить действие изучение, чтобы совершить проверку Интеллекта (Расследование) против Сл. вашего заклинания, чтобы развеять её. Если существо обнаруживает, что местность иллюзорная, то оно видит расплывчатое изображение, наложенное на реальный ландшафт.</p>`,
   
   source: {
@@ -3376,6 +4535,7 @@ export const spells: Spell[] = [
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=alienist">Алиенист</a>' },
     { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/ranger?subclass=fey-wanderer">Фейский странник</a>' },
@@ -3479,10 +4639,12 @@ export const spells: Spell[] = [
     page: 306
   },
   sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
     { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=mutagenist">Мутагенист</a>' },
     { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
     { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
@@ -3496,7 +4658,7 @@ export const spells: Spell[] = [
   nameEn: 'Divination',
   level: '4',
   school: 'прорицание',
-  castingTime: '1 действие или ритуал',
+  castingTime: 'Действие или ритуал',
   range: 'На себя',
   components: {
     verbal: true,
@@ -3660,7 +4822,7 @@ export const spells: Spell[] = [
     material: 'кожаный ремешок'
   },
   duration: '1 час',
-  description: `<p>Вы касаетесь согласного существа. На время действия заклинания передвижение цели не зависит от труднопроходимой местности, а заклинания и другие магические эффекты не могут уменьшить скорость цели или наложить на неё состояние парализованный или опутанный. Цель также получает скорость плавания, равную её обычной скорости.</p>
+  description: `<p>Вы касаетесь согласного существа. На время действия заклинания передвижение цели не зависит от Труднопроходимой местности, а заклинания и другие магические эффекты не могут уменьшить скорость цели или наложить на неё состояние парализованный или опутанный. Цель также получает скорость плавания, равную её обычной скорости.</p>
   <p>Кроме того, цель может потратить 5 футов перемещения, чтобы автоматически освободиться от немагических оков, такие как кандалы или состояние схваченный от другого существа.</p>
   <p><strong>Накладывание более высокой ячейкой.</strong> Вы можете выбрать 1 дополнительное существо за каждый уровень ячейки выше 4.</p>`,
   
@@ -3669,6 +4831,7 @@ export const spells: Spell[] = [
     page: 277
   },
   sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
     { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
     { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
@@ -3713,6 +4876,7 @@ export const spells: Spell[] = [
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=chemist">Химик</a>' },
     { type: 'subclass', name: '<a href="/classes/artificer?subclass=artillerist">Артиллерист</a>' },
     { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
@@ -3776,10 +4940,12 @@ export const spells: Spell[] = [
     page: 247
   },
   sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+    { type: 'subclass', name: '<a href="/classes/apothecary?subclass=pathogenist">Патогенист</a>' },
     { type: 'subclass', name: '<a href="/classes/artificer?subclass=reanimator">Реаниматор</a>' },
     { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
     { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
@@ -3836,7 +5002,7 @@ export const spells: Spell[] = [
     material: 'щупальце'
   },
   duration: 'Концентрация, до 1 минуты',
-  description: `<p>Чёрные извивающиеся щупальца заполняют квадрат на полу с длиной стороны 20 футов, который вы видите в пределах дистанции. Во время длительности заклинания эти щупальца делают местность труднопроходимой.</p>
+  description: `<p>Чёрные извивающиеся щупальца заполняют квадрат на полу с длиной стороны 20 футов, который вы видите в пределах дистанции. Во время длительности заклинания эти щупальца делают местность Труднопроходимой.</p>
   <p>Каждое существо в квадрате совершает спасбросок Ловкости, получая 3д6 урона ядом и состояние опутанный до окончания длительности заклинания при неудачном спасброске. Существо также должно совершить этот спасбросок, когда перемещается в область квадрата или завершает свой ход в нём. Существо совершает этот спасбросок только один раз за ход.</p>
   <p>Опутанное щупальцами существо может действием совершить проверку Силы (Атлетика) против Сл. ваших заклинаний, заканчивая состояние опутанный на себе при успехе.</p>`,
   
@@ -3845,6 +5011,7 @@ export const spells: Spell[] = [
     page: 270
   },
   sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=aberrant">Аберрантный Разум</a>' },
     { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
@@ -3931,7 +5098,7 @@ export const spells: Spell[] = [
   <ul><li>Вы получаете 10 временных хитов.</li>
   <li>Вы совершаете с Преимуществом спасброски Телосложения.</li>
   <li>Вы совершаете броски атаки, основанные на Ловкости и Мудрости, с Преимуществом.</li>
-  <li>Земля, на которой вы находитесь, в радиусе 15 футов от вас становится труднопроходимой местностью для врагов.</li>
+  <li>Земля, на которой вы находитесь, в радиусе 15 футов от вас становится Труднопроходимой местностью для врагов.</li>
   </ul></p>`,
   source: {
     book: 'XGE\'14',
@@ -4066,7 +5233,7 @@ export const spells: Spell[] = [
     somatic: true
   },
   duration: 'Концентрация, до 1 минуты',
-  description: `<p>В указанной вами точке в пределах дистанции заклинания возникает сфера завихряющегося воздуха радиусом 20 футов. Сфера существует, пока действует заклинание. Все существа, оказавшиеся внутри сферы в момент появления или оканчивающие свой ход внутри сферы, должны совершить спасбросок Силы, иначе получат 2д6 дробящего урона. Пространство сферы считается труднопроходимой местностью.</p>
+  description: `<p>В указанной вами точке в пределах дистанции заклинания возникает сфера завихряющегося воздуха радиусом 20 футов. Сфера существует, пока действует заклинание. Все существа, оказавшиеся внутри сферы в момент появления или оканчивающие свой ход внутри сферы, должны совершить спасбросок Силы, иначе получат 2д6 дробящего урона. Пространство сферы считается Труднопроходимой местностью.</p>
   <p>Пока действует заклинание, вы можете бонусным действием вызвать разряд молнии, который устремится из центра сферы к выбранному вами существу в пределах 60 футов от центра сферы. Совершите дальнобойную атаку заклинанием. Атака совершается с Преимуществом, если цель находится внутри сферы. При попадании цель получает 4д6 урона электричеством.</p>
   <p>Существа в пределах 30 футов от сферы совершают с Помехой проверки Мудрости (Восприятие), связанные со слухом.</p>
   <p><strong>Накладывание более высокой ячейкой.</strong> Если вы накладываете это заклинание, используя ячейку 5-го уровня или выше, то урон каждого эффекта увеличивается на 1д6 за каждый уровень ячейки выше 4-го.</p>`,
@@ -4218,6 +5385,7 @@ export const spells: Spell[] = [
     page: 305
   },
   sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
@@ -4333,6 +5501,7 @@ export const spells: Spell[] = [
     page: 269
   },
   sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
     { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
@@ -4364,6 +5533,7 @@ export const spells: Spell[] = [
     page: 273
   },
   sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
@@ -4420,6 +5590,7 @@ export const spells: Spell[] = [
     page: 276
   },
   sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
     { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
     { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
@@ -4522,7 +5693,7 @@ export const spells: Spell[] = [
     somatic: true
   },
   duration: '10 дней',
-  description: `<p>Вы изменяете ландшафт на площади до 1 квадратной мили, заставляя его выглядеть, звучать, пахнуть и даже ощущаться как другой вид местности. Открытые поля или дорогу можно заставить походить на болото, холм, ущелье или другой сложнопроходимый или непроходимый ландшафт. Пруд может выглядеть как травянистая лужайка, обрыв как пологий склон, а покрытый камнями овраг как широкая и гладкая дорога. Аналогично, вы можете изменить внешний вид строений или добавить их там, где их нет. Заклинание не скрывает, не маскирует и не добавляет существ. Иллюзия включает аудиальные, визуальные, тактильные и обонятельные элементы, поэтому она может превратить открытую местность в труднопроходимую, или наоборот, или иным образом затруднить передвижение по территории. Любой элемент иллюзорного ландшафта, например, камень или палка, который будет удалён из зоны действия заклинания, немедленно исчезает. Существа с истинным зрением видят сквозь иллюзию истинную форму местности; однако все остальные элементы иллюзии остаются, поэтому, хотя существо осведомлено о присутствии иллюзии, оно всё равно может физически взаимодействовать с ней.</p>`,
+  description: `<p>Вы изменяете ландшафт на площади до 1 квадратной мили, заставляя его выглядеть, звучать, пахнуть и даже ощущаться как другой вид местности. Открытые поля или дорогу можно заставить походить на болото, холм, ущелье или другой сложнопроходимый или непроходимый ландшафт. Пруд может выглядеть как травянистая лужайка, обрыв как пологий склон, а покрытый камнями овраг как широкая и гладкая дорога. Аналогично, вы можете изменить внешний вид строений или добавить их там, где их нет. Заклинание не скрывает, не маскирует и не добавляет существ. Иллюзия включает аудиальные, визуальные, тактильные и обонятельные элементы, поэтому она может превратить открытую местность в Труднопроходимую, или наоборот, или иным образом затруднить передвижение по территории. Любой элемент иллюзорного ландшафта, например, камень или палка, который будет удалён из зоны действия заклинания, немедленно исчезает. Существа с истинным зрением видят сквозь иллюзию истинную форму местности; однако все остальные элементы иллюзии остаются, поэтому, хотя существо осведомлено о присутствии иллюзии, оно всё равно может физически взаимодействовать с ней.</p>`,
   
   source: {
     book: 'PHB\'24',
@@ -4559,6 +5730,7 @@ export const spells: Spell[] = [
     page: 312
   },
   sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
     { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
     { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
@@ -4585,6 +5757,7 @@ export const spells: Spell[] = [
     page: 311
   },
   sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
     { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
     { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
@@ -4757,6 +5930,7 @@ export const spells: Spell[] = [
     page: 307
   },
   sources: [
+    { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
     { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
     { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
     { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
@@ -4777,7 +5951,7 @@ export const spells: Spell[] = [
     somatic: true
   },
   duration: 'До рассеивания или активациия',
-  description: `<p>Вы рисуете губительный знак на поверхности, например, на участке пола или стены, или внутри предмета, который можно закрыть, например, книги или сундука,. Знак может покрывать площадь не более 10 футов в диаметре. Если вы выбираете предмет, то его нельзя перемещать, если он будет перемещён более чем на 10 футов от места наложения заклинания, то знак разрушается и заклинание заканчивается, не будучи активированным. Знак почти незаметен и требует успешной проверки Внимательности, Мудрость, против Сл. спасброска вашего заклинания, чтобы его заметить. Когда вы чертите знак, вы устанавливаете условие его активации и выбираете, какой эффект символ несёт: смерть, разногласие, страх, боль, сон или ошеломление. Каждый эффект описан ниже. Условие активации. Вы решаете, что активирует знак, когда накладываете заклинание. Для знаков, начерченных на поверхности, распространёнными условиями активации являются прикосновение к знаку, наступание на него, удаление предмета, покрывающего его, или приближение на определённое расстояние. Для знаков, начерченных внутри предмета, распространённые условия активации включают открытие предмета или видимость знака. Вы можете уточнить условие активации, чтобы только существа определённых типов могли его активировать, например, знак можно настроить на воздействие только на аберрации,. Вы также можете установить условия, при которых существа не активируют знак, например, если они произнесут определённый пароль. После активации знак светится, заполняя сферу радиусом 60 футов тусклым светом на 10 минут, после чего заклинание заканчивается. Существо становится целью эффекта знака при его активации, когда впервые за ход входит в сферу или заканчивает свой ход в ней. Существо может стать целью только один раз за ход.</p>
+  description: `<p>Вы рисуете губительный знак на поверхности, например, на участке пола или стены, или внутри предмета, который можно закрыть, например, книги или сундука.Знак может покрывать площадь не более 10 футов в диаметре. Если вы выбираете предмет, то его нельзя перемещать, если он будет перемещён более чем на 10 футов от места наложения заклинания, то знак разрушается и заклинание заканчивается, не будучи активированным. Знак почти незаметен и требует успешной проверки Внимательности, Мудрость, против Сл. спасброска вашего заклинания, чтобы его заметить. Когда вы чертите знак, вы устанавливаете условие его активации и выбираете, какой эффект символ несёт: смерть, разногласие, страх, боль, сон или ошеломление. Каждый эффект описан ниже. Условие активации. Вы решаете, что активирует знак, когда накладываете заклинание. Для знаков, начерченных на поверхности, распространёнными условиями активации являются прикосновение к знаку, наступание на него, удаление предмета, покрывающего его, или приближение на определённое расстояние. Для знаков, начерченных внутри предмета, распространённые условия активации включают открытие предмета или видимость знака. Вы можете уточнить условие активации, чтобы только существа определённых типов могли его активировать, например, знак можно настроить на воздействие только на аберрации.Вы также можете установить условия, при которых существа не активируют знак, например, если они произнесут определённый пароль. После активации знак светится, заполняя сферу радиусом 60 футов тусклым светом на 10 минут, после чего заклинание заканчивается. Существо становится целью эффекта знака при его активации, когда впервые за ход входит в сферу или заканчивает свой ход в ней. Существо может стать целью только один раз за ход.</p>
   <p> Смерть. Каждая цель совершает спасбросок Телосложения, получая 10д10 урона некротической энергией при провале или половину этого урона при успехе.</p>
   <p> Разногласие. Каждая цель совершает спасбросок Мудрости. При провале цель спорит с другими существами в течение 1 минуты. В это время она не способна вести осмысленные разговоры и имеет Помеху на броски атаки и проверки характеристик.</p>
   <p> Страх. Каждая цель должна преуспеть в спасброске Мудрости или получить состояние испуганный на 1 минуту. Пока цель испугана, она должна удаляться на 30 футов от знака в каждый свой ход, если это возможно.</p>
@@ -4815,7 +5989,7 @@ export const spells: Spell[] = [
     description: `<p>Выберите кучу костей или труп Гуманоида Среднего или Маленького размера в пределах дистанции. Цель становится Нежитью: скелетом, если вы выбирали кости, или зомби, если вы выбрали труп.</p>
     <p>В каждый ваш ход вы можете Бонусным действием мысленно отдать приказ созданному вами этим заклинанием существу, если оно находится в пределах 60 футов от вас (если вы контролируете несколько существ, вы можете отдать один и тот же приказ одновременно любому количеству из них ). Вы решаете, какое действие совершит это существо, и куда оно переместится в следующем ходу, или вы можете отдать общий приказ — например, охранять комнату или коридор. Если вы не отдадите команду, существо будет совершать действие Уклонение и перемещаться только для того, чтобы избежать вреда. Получив приказ, существо продолжает его выполнять, пока задача не будет выполнена.</p>
     <p>Существо находится под вашим контролем 24 часа, после чего перестаёт исполнять отданные вами приказы. Чтобы продлить контроль ещё на 24 часа, вы должны до окончания текущего 24-часового периода снова сотворить на него это заклинание. Такое использование заклинания не оживляет новое существо, а продлевает контроль над уже созданными существами, количеством не более четырёх.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Вы оживляете или продлеваете контроль над двумя дополнительными Нежитями за каждый уровень ячейки выше 3-го. Для каждого создаваемого существа требуется отдельная куча костей или труп.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> Вы оживляете или продлеваете контроль над двумя дополнительными Нежитями за каждый уровень ячейки выше 3-го. Для каждого создаваемого существа требуется отдельная куча костей или труп.</p>`,
     source: {
       book: 'PHB\'24',
       page: 240
@@ -4861,7 +6035,8 @@ export const spells: Spell[] = [
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' }
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -4891,7 +6066,8 @@ export const spells: Spell[] = [
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' }
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -4968,12 +6144,13 @@ export const spells: Spell[] = [
     <li>Цель совершает с Помехой броски атаки против вас.</li>
     <li>В сражении цель должна в начале каждого своего хода совершать спасбросок Мудрости, при провале она вынуждена в этот ход совершить действие Уклонение.</li>
     <li>Если вы наносите цели урон броском атаки или заклинанием, она получает 1д8 дополнительного Некротического урона.</li></ul></p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> При сотворении заклинания c ячейкой 4-го уровня вы можете поддерживать Концентрацию вплоть 10 минут, с ячейкой заклинаний 5-го уровня или выше заклинание не требует Концентрации, а длительность становится равна 8 часам (с ячейкой 5-го или 6-го уровня) или 24 часам (с ячейкой 7-го или 8-го уровня), с ячейкой 9-го уровня заклинание действует, пока не будет рассеяно.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> При сотворении заклинания c ячейкой 4-го уровня вы можете поддерживать Концентрацию вплоть 10 минут, с ячейкой заклинаний 5-го уровня или выше заклинание не требует Концентрации, а длительность становится равна 8 часам (с ячейкой 5-го или 6-го уровня) или 24 часам (с ячейкой 7-го или 8-го уровня), с ячейкой 9-го уровня заклинание действует, пока не будет рассеяно.</p>`,
     source: {
       book: 'PHB\'24',
       page: 246
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
@@ -4997,7 +6174,7 @@ export const spells: Spell[] = [
     },
     duration: '1 минута',
     description: `<p>Цель этой атаки получает 3д8 дополнительного урона Излучением и состояние Ослеплённый на время действия заклинания. В конце каждого своего хода цель с этим состоянием совершает спасбросок Телосложения, при успехе оканчивая на себе это заклинание.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Дополнительный урон увеличивается на 1д8 за каждый уровень ячейки выше 3-го.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> Дополнительный урон увеличивается на 1д8 за каждый уровень ячейки выше 3-го.</p>`,
     source: {
       book: 'PHB\'24',
       page: 247
@@ -5023,7 +6200,7 @@ export const spells: Spell[] = [
     <p>Сотворив это заклинание, выберите видимую вами точку под тучей, из тучи в эту точку бьёт разряд молнии. Каждое существо в пределах 5 футов от этой точки должно совершить спасброски Ловкости, получая 3д10 урона Электричеством при провале или половину этого урона при успехе.</p>
     <p>Пока заклинание действует, в каждый ваш ход вы можете действием Магия вызывать из тучи новый разряд молнии, в ту же или другую точку.</p>
     <p>Если в момент сотворения заклинания вы находитесь под открытым небом во время грозы, заклинание не создаёт новую тучу, а даёт вам контроль над этой грозой. В такой ситуации урон от заклинания увеличивается на 1д10.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон увеличивается на 1д10 за каждый уровень ячейки выше 3-го.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> Урон увеличивается на 1д10 за каждый уровень ячейки выше 3-го.</p>`,
     source: {
       book: 'PHB\'24',
       page: 248
@@ -5071,7 +6248,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/barbarian?subclass=ancestral-guardian">Путь Предка-хранителя</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=diviner">Покровитель Великий древний</a>' },
-      { type: 'background', name: '<a href="/backgrounds/azorius%20functionary/">Функционер Азориусов</a>' }
+      { type: 'background', name: '<a href="/backgrounds/azorius%20functionary/">Функционер Азориусов</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -5090,7 +6268,7 @@ export const spells: Spell[] = [
     description: `<p>Вы призываете духов природы, появляющихся в виде Большой стаи неосязаемых призрачных животных в видимом вами в пределах дистанции незанятом пространстве. Стая присутствует в течение длительности заклинания, вы выбираете животную форму духов: например, волки, змеи или птицы.</p>
     <p>Пока вы находитесь в пределах 5 футов от стаи, вы совершаете с Преимуществом спасброски Силы, когда в свой ход вы перемещаетесь, можете также переместить стаю на расстояние до 30 футов в видимое вами незанятое пространство.</p>
     <p>Всякий раз, когда стая перемещается в пределах 10 футов от видимого вами существа, и всякий раз, когда видимое вами существо входит в пространство в пределах 10 футов от стаи или заканчивает там свой ход, вы можете заставить это существо сделать спасбросок Ловкости. При провале спасброска существо получает 3д10 Рубящего урона. Существо совершает этот спасбросок только один раз за ход.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон увеличивается на 1д10 за каждый уровень ячейки выше 3-го.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> Урон увеличивается на 1д10 за каждый уровень ячейки выше 3-го.</p>`,
     source: {
       book: 'PHB\'24',
       page: 254
@@ -5118,7 +6296,7 @@ export const spells: Spell[] = [
     },
     duration: 'Мгновенная',
     description: `<p>Вы взмахиваете оружием, используемым для сотворения заклинания, и призываете оружие такого же вида (или боеприпасы, подходящие этому оружию), летящее вперёд и затем исчезающее. Выберите видимых вами существ в 60-футовом Конусе. Каждое выбранное существо должно совершить спасбросок Ловкости, получая 5д8 Силового урона при провале или половину этого урона при успехе.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон увеличивается на 1д8 за каждый уровень ячейки выше 3-го.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> Урон увеличивается на 1д8 за каждый уровень ячейки выше 3-го.</p>`,
     source: {
       book: 'PHB\'24',
       page: 254
@@ -5150,6 +6328,7 @@ export const spells: Spell[] = [
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=exorcist">Экзорцист</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=abjurer">Оградитель</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
@@ -5157,7 +6336,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/paladin?subclass=redemption">Клятва Искупления</a>' },
       { type: 'subclass', name: '<a href="/classes/paladin?subclass=watchers">Клятва Смотрителей</a>' },
       { type: 'background', name: '<a href="/backgrounds/gruul%20anarch/">Анарх Груулов</a>' },
-      { type: 'background', name: '<a href="/backgrounds/azorius%20functionary/">Функционер Азориусов</a>' }
+      { type: 'background', name: '<a href="/backgrounds/azorius%20functionary/">Функционер Азориусов</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -5212,7 +6392,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=light">Домен Света</a>' },
-      { type: 'background', name: '<a href="/backgrounds/silverquill%20student/">Студент Сильверквилла</a>' }
+      { type: 'background', name: '<a href="/backgrounds/silverquill%20student/">Студент Сильверквилла</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -5241,7 +6422,8 @@ export const spells: Spell[] = [
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' }
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -5258,7 +6440,7 @@ export const spells: Spell[] = [
       material: 'кусочек обсидиана'
     },
     duration: 'Мгновенная',
-    description: `<p>Выберите точку на поверхности земли, видимую в пределах дистанции. В этой точке из поверхности вырывается фонтан земли и камня. Все существа в кубе с длиной ребра 20 футов с центром на этой точке должны совершить спасбросок Ловкости. При провале существо получает 3д12 дробящего урона, а при успехе — половину этого урона. Кроме того, земля в области действия заклинания становится труднопроходимой местностью, пока её не расчистят. Расчистка квадрата с длиной стороны 5 футов вручную займёт не менее 1 минуты.</p>
+    description: `<p>Выберите точку на поверхности земли, видимую в пределах дистанции. В этой точке из поверхности вырывается фонтан земли и камня. Все существа в кубе с длиной ребра 20 футов с центром на этой точке должны совершить спасбросок Ловкости. При провале существо получает 3д12 дробящего урона, а при успехе — половину этого урона. Кроме того, земля в области действия заклинания становится Труднопроходимой местностью, пока её не расчистят. Расчистка квадрата с длиной стороны 5 футов вручную займёт не менее 1 минуты.</p>
     <p><strong>Накладывание более высокой ячейкой.</strong> Если вы накладываете это заклинание, используя ячейку 4-го уровня или выше, то урон увеличивается на 1д12 за каждый уровень ячейки выше 3-го.</p>`,
     source: {
       book: 'XGE\'14',
@@ -5270,7 +6452,8 @@ export const spells: Spell[] = [
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' }
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
 
     ]
   },
@@ -5295,6 +6478,7 @@ export const spells: Spell[] = [
       page: 271
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
@@ -5305,7 +6489,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=draconic">Драконья кровь</a>' },
       { type: 'subclass', name: '<a href="/classes/ranger?subclass=gloom-stalker">Сумрачный охотник</a>' },
       { type: 'subclass', name: '<a href="/classes/paladin?subclass=conquest">Клятва Завоевания</a>' },
-      { type: 'background', name: '<a href="/backgrounds/rakdos%20cultist/">Культист Ракдосов</a>' }
+      { type: 'background', name: '<a href="/backgrounds/rakdos%20cultist/">Культист Ракдосов</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -5314,7 +6499,7 @@ export const spells: Spell[] = [
     nameEn: 'Feign Death',
     level: '3',
     school: 'некромантия',
-    castingTime: '1 действие или ритуал',
+    castingTime: 'Действие или ритуал',
     range: 'Касание',
     components: {
       verbal: true,
@@ -5356,7 +6541,7 @@ export const spells: Spell[] = [
     duration: 'Мгновенная',
     description: `<p>Яркая вспышка летит от вас в точку в пределах дистанции по вашему выбору, взрываясь там с гулким рёвом 20-радиус-футовой Сферой. Каждое существо, находящееся в этой области, должно совершить спасбросок Ловкости, получая 8д6 урона Огнём при провале или половину этого урона при успехе.</p>
     <p>Находящиеся в области Сферы воспламеняющиеся объекты, которые никто не несёт и не носит, начинают гореть.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон увеличивается на 1д6 за каждый уровень ячейки выше 3-го.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> Урон увеличивается на 1д6 за каждый уровень ячейки выше 3-го.</p>`,
     source: {
       book: 'PHB\'24',
       page: 274
@@ -5364,6 +6549,7 @@ export const spells: Spell[] = [
     sources: [
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=chemist">Химик</a>' },
       { type: 'subclass', name: '<a href="/classes/artificer?subclass=artillerist">Артиллерист</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
@@ -5372,7 +6558,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=light">Домен Света</a>' },
       { type: 'subclass', name: '<a href="/classes/warlock?subclass=fiend">Покровитель Исчадие</a>' },
-      { type: 'subclass', name: '<a href="/classes/warlock?subclass=genie">Покровитель Гений (ифрит)</a>' }
+      { type: 'subclass', name: '<a href="/classes/warlock?subclass=genie">Покровитель Гений (ифрит)</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -5392,12 +6579,13 @@ export const spells: Spell[] = [
     description: `<p>Cогласное существо, которого вы касаетесь, вместе со всем, что оно несёт и носит, перевоплощается в туманное облако на время действия заклинания. Заклинание оканчивается, если Хиты цели опускаются до 0 или если цель действием Магия окончит его на себе.</p>
     <p>Единственным способом перемещения существа в этой форме становится Скорость полёта 10 футов (может парить). Цель может входить в пространство других существ и оставаться там. Цель получает Сопротивление Дробящему, Колющему и Рубящему урону и Иммунитет состоянию Опрокинутый. Цель совершает с Преимуществом спасброски Силы, Ловкости и Телосложения. Цель может проходить через небольшие отверстия и узкие щели, но жидкости для неё считаются твёрдыми поверхностями.</p>
     <p>Цель не может говорить и манипулировать объектами, и все объекты, которые она несла или носила, нельзя уронить, использовать и вообще как-либо с ними взаимодействовать. Цель не может атаковать и сотворять заклинания.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Вы можете нацелить заклинание на одно дополнительное существо за каждый уровень ячейки выше 3-го.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> Вы можете нацелить заклинание на одно дополнительное существо за каждый уровень ячейки выше 3-го.</p>`,
     source: {
       book: 'PHB\'24',
       page: 277
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
@@ -5409,7 +6597,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/ranger?subclass=swarmkeeper">Хранитель роя</a>' },
       { type: 'background', name: '<a href="/backgrounds/dimir%20operative/">Оперативник Димиров</a>' },
-      { type: 'background', name: '<a href="/backgrounds/simic%20scientist/">Учёный Симиков</a>' }
+      { type: 'background', name: '<a href="/backgrounds/simic%20scientist/">Учёный Симиков</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -5432,6 +6621,7 @@ export const spells: Spell[] = [
       page: 261
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=grave">Домен Упокоения</a>' },
@@ -5451,7 +6641,7 @@ export const spells: Spell[] = [
     nameEn: 'Detect Magic',
     level: '1',
     school: 'прорицание',
-    castingTime: '1 действие или ритуал',
+    castingTime: 'Действие или ритуал',
     range: 'На себя',
     components: {
       verbal: true,
@@ -5465,6 +6655,7 @@ export const spells: Spell[] = [
       page: 262
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
@@ -5500,7 +6691,7 @@ export const spells: Spell[] = [
     nameEn: 'Detect Poison and Disease',
     level: '1',
     school: 'прорицание',
-    castingTime: '1 действие или ритуал',
+    castingTime: 'Действие или ритуал',
     range: 'На себя',
     components: {
       verbal: true,
@@ -5514,6 +6705,7 @@ export const spells: Spell[] = [
       page: 262
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
@@ -5694,7 +6886,7 @@ export const spells: Spell[] = [
       somatic: true
     },
     duration: 'Концентрация, до 1 минуты',
-    description: `<p>Из земли в пределах дистанции на площади квадрата с длиной стороны в 20 футов вырастают хваткие растения. На время действия заклинания эти растения превращают землю в указанной области в труднопроходимую местность. Они исчезают, когда действие заклинания заканчивается.</p>
+    description: `<p>Из земли в пределах дистанции на площади квадрата с длиной стороны в 20 футов вырастают хваткие растения. На время действия заклинания эти растения превращают землю в указанной области в Труднопроходимую местность. Они исчезают, когда действие заклинания заканчивается.</p>
     <p>Каждое существо (кроме вас) в указанной области при наложении заклинания должно успешно совершить спасбросок Силы, иначе оно получает состояние опутанный до окончания действия заклинания. Опутанное существо может совершить действие, чтобы выполнить проверку Силы (Атлетика) против сложности спасброска вашего заклинания. В случае успеха оно освобождается от хватки растений и больше не находится под состоянием опутанный.</p>`,
     source: {
       book: 'PHB\'24',
@@ -5804,9 +6996,11 @@ export const spells: Spell[] = [
       page: 271
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=thanaturg">Танатург</a>' },
       { type: 'subclass', name: '<a href="/classes/artificer?subclass=reanimator">Реаниматор</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллягия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
@@ -5830,7 +7024,7 @@ export const spells: Spell[] = [
     nameEn: 'Feather Fall',
     level: '1',
     school: 'преобразование',
-    castingTime: '1 реакция, совершаемая вами, когда вы или существо в пределах 60 футов от вас начинаете падать',
+    castingTime: 'Реакция, совершаемая вами, когда вы или существо в пределах 60 футов от вас начинаете падать',
     range: '60 футов',
     components: {
       verbal: true,
@@ -5843,6 +7037,7 @@ export const spells: Spell[] = [
       page: 271
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
@@ -5915,6 +7110,7 @@ export const spells: Spell[] = [
       page: 276
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
       { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
@@ -5978,16 +7174,18 @@ export const spells: Spell[] = [
       material: 'кусочек свиного сала или масло'
     },
     duration: '1 минута',
-    description: `<p>Несгораемый жир покрывает землю в 10-футовом квадрате с центром в точке в пределах дистанции, и превращает её в труднопроходимую местность на время действия.</p>
+    description: `<p>Несгораемый жир покрывает землю в 10-футовом квадрате с центром в точке в пределах дистанции, и превращает её в Труднопроходимую местность на время действия.</p>
 <p>Когда жир появляется, все существа стоящие в этой области, должны преуспеть в спасброске Ловкости или получить состояние лежащий ничком. Существо, входящее в область или заканчивающее свой ход в ней, также должно преуспеть в этом спасброске или упасть ничком.</p>`,
     source: {
       book: 'PHB\'24',
       page: 280
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=chemist">Химик</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллягия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
@@ -6074,6 +7272,7 @@ export const spells: Spell[] = [
       page: 284
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
@@ -6261,6 +7460,7 @@ export const spells: Spell[] = [
       page: 287
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
@@ -6295,6 +7495,7 @@ export const spells: Spell[] = [
       page: 288
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
@@ -6332,6 +7533,8 @@ export const spells: Spell[] = [
     },
     sources: [
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=thanaturg">Танатург</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=pathogenist">Патогенист</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
@@ -6366,11 +7569,13 @@ export const spells: Spell[] = [
       page: 290
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
       { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=mutagenist">Мутагенист</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
@@ -6512,6 +7717,7 @@ export const spells: Spell[] = [
       { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=exorcist">Экзорцист</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
@@ -6534,7 +7740,7 @@ export const spells: Spell[] = [
     nameEn: 'Purify Food and Drink',
     level: '1',
     school: 'преобразование',
-    castingTime: '1 действие или ритуал',
+    castingTime: 'Действие или ритуал',
     range: '10 футов',
     components: {
       verbal: true,
@@ -6547,6 +7753,7 @@ export const spells: Spell[] = [
       page: 310
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
@@ -6555,7 +7762,6 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
       { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
       { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
-      { type: 'feat', name: '<a href="/feats/rune-shaper/">Ваятель рун</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'other', name: 'Договор гримуара' }
     ]
@@ -6750,6 +7956,7 @@ export const spells: Spell[] = [
       page: 317
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
@@ -6792,9 +7999,11 @@ export const spells: Spell[] = [
       page: 331
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=alienist">Алиенист</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=enchanter">Очарователь</a>' },
@@ -6814,7 +8023,7 @@ export const spells: Spell[] = [
     nameEn: 'Tenser’s Floating Disk',
     level: '1',
     school: 'вызов',
-    castingTime: '1 действие или ритуал',
+    castingTime: 'Действие или ритуал',
     range: '30 футов',
     components: {
       verbal: true,
@@ -6830,6 +8039,7 @@ export const spells: Spell[] = [
       page: 332
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
@@ -6914,7 +8124,7 @@ export const spells: Spell[] = [
     nameEn: 'Unseen Servant',
     level: '1',
     school: 'вызов',
-    castingTime: '1 действие или ритуал',
+    castingTime: 'Действие или ритуал',
     range: 'На себя',
     components: {
       verbal: true,
@@ -6930,6 +8140,7 @@ export const spells: Spell[] = [
       page: 336
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
@@ -7019,7 +8230,7 @@ export const spells: Spell[] = [
       somatic: true
     },
     duration: 'Мгновенная',
-    description: `<p>Вы сотрясаете землю в пределах дистанции. Все существа, кроме вас, в этой области должны совершить спасбросок Ловкости. При провале существо получает 1д6 дробящего урона и сбивается с ног. Если поверхность представляет собой рыхлую землю или камень, то область воздействия становится труднопроходимой местностью до тех пор, пока её не расчистят. Каждая область диаметром 5 футов требует как минимум 1 минуту на расчистку вручную.</p>
+    description: `<p>Вы сотрясаете землю в пределах дистанции. Все существа, кроме вас, в этой области должны совершить спасбросок Ловкости. При провале существо получает 1д6 дробящего урона и сбивается с ног. Если поверхность представляет собой рыхлую землю или камень, то область воздействия становится Труднопроходимой местностью до тех пор, пока её не расчистят. Каждая область диаметром 5 футов требует как минимум 1 минуту на расчистку вручную.</p>
 <p><strong>Накладывание более высокой ячейкой.</strong> Если вы накладываете это заклинание, используя ячейку 2-го уровня или выше, то урон увеличивается на 1д6 за каждый уровень ячейки выше 1-го.</p>`,
     source: {
       book: 'XGE\'14',
@@ -7110,7 +8321,7 @@ export const spells: Spell[] = [
     nameEn: 'Silvery Barbs',
     level: '1',
     school: 'очарование',
-    castingTime: '1 реакция, совершаемая вами, когда видимое вами в пределах 60 футов от вас существо преуспевает в броске атаки, проверке характеристики или спасброске',
+    castingTime: 'Реакция, совершаемая вами, когда видимое вами в пределах 60 футов от вас существо преуспевает в броске атаки, проверке характеристики или спасброске',
     range: '60 футов',
     components: {
       verbal: true
@@ -7251,7 +8462,7 @@ export const spells: Spell[] = [
     duration: 'Концентрация, вплоть до 1 минуты',
     description: `<p>Вы открываете врата в Дальний Предел, населённое неописуемыми кошмарами место: появляется 20-футовая Сфера с центром на точке в пределах дистанции, полная Темнотой и существующая, пока действует заклинание. Эта область — Труднопроходимая область, полная какофонией неясных шёпотов и хлюпающих шумов, слышимых в пределах 30 футов от Сферы. Свет, магический или немагический, не может осветить эту область, и существа, полностью находящиеся в ней, имеют состояние Ослеплённый.</p>
     <p>Каждое существо, начинающее ход в этой области, получает 2д6 урона Холодом. Каждое существо, заканчивающее ход в этой области, должно преуспеть в спасброске Ловкости или получить 2д6 урона Кислотой от потусторонних щупалец.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон Холодом или урон Кислотой (на ваш выбор) увеличивается на 1д6 за каждый уровень ячейки выше 3-го.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> Урон Холодом или урон Кислотой (на ваш выбор) увеличивается на 1д6 за каждый уровень ячейки выше 3-го.</p>`,
     source: {
       book: 'PHB\'24',
       page: 286
@@ -7283,17 +8494,20 @@ export const spells: Spell[] = [
       page: 287
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=alienist">Алиенист</a>' },
       { type: 'subclass', name: '<a href="/classes/artificer?subclass=armorer">Бронник</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=illusionist">Иллюзионист</a>' },
       { type: 'subclass', name: '<a href="/classes/paladin?subclass=redemption">Клятва Искупления</a>' },
-      { type: 'subclass', name: '<a href="/classes/cleric?subclass=trickery">Домен Обмана</a>' }
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=trickery">Домен Обмана</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -7372,7 +8586,7 @@ export const spells: Spell[] = [
     duration: 'Мгновенная',
     description: `<p>Когда вы попадаете или промахиваетесь этой атакой, используемое вами оружие или боеприпас превращаются в разряд молнии. Цель атаки не получает урон или иных эффектов от этой атаки, вместо этого цель получает 4д8 урона Электричеством при попадании или половину этого урона при промахе. После этого каждое существо в пределах 10 футов от цели должно совершить спасбросок Ловкости, получая 2д8 урона Электричеством при провале или половину этого урона при успехе.</p>
     <p>После этого используемое оружие или боеприпас вновь принимает обычную форму.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон обоих эффектов заклинания увеличивается на 1д8 за каждый уровень ячейки выше 3-го.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> Урон обоих эффектов заклинания увеличивается на 1д8 за каждый уровень ячейки выше 3-го.</p>`,
     source: {
       book: 'PHB\'24',
       page: 292
@@ -7396,7 +8610,7 @@ export const spells: Spell[] = [
     },
     duration: 'Мгновенная',
     description: `<p>Разряд молнии ударяет в Линии длиной 100 футов и шириной 5 футов, исходящей от вас в выбранном вами направлении. Каждое существо в Линии должно совершить спасбросок Ловкости, получая 8д6 урона Электричеством при провале или половину этого урона при успехе.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон увеличивается на 1д6 за каждый уровень ячейки выше 3-го.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> Урон увеличивается на 1д6 за каждый уровень ячейки выше 3-го.</p>`,
     source: {
       book: 'PHB\'24',
       page: 292
@@ -7404,13 +8618,15 @@ export const spells: Spell[] = [
     sources: [
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=thanaturg">Танатург</a>' },
       { type: 'subclass', name: '<a href="/classes/artificer?subclass=reanimator">Реаниматор</a>' },
       { type: 'subclass', name: '<a href="/classes/artificer?subclass=armorer">Бронник</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/warlock?subclass=fathomless">Покровитель Бездонный</a>' },
-      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' }
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -7433,12 +8649,13 @@ export const spells: Spell[] = [
     <li>Существо совершает с Помехой броски атаки по целям, находящимся в Цилиндре.</li>
     <li>Находящиеся в Цилиндре цели не могут быть одержимы или получить от существа состояние Испуганный или Очарованный.</li></ul></p>
     <p>При сотворении этого заклинания вы можете обратить его магию: в таком случае существа выбранных типов не смогут покинуть Цилиндр, а защищены будут цели, находящиеся снаружи.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Длительность увеличивается на 1 час за каждый уровень ячейки выше 3-го.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> Длительность увеличивается на 1 час за каждый уровень ячейки выше 3-го.</p>`,
     source: {
       book: 'PHB\'24',
       page: 293
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
@@ -7469,7 +8686,7 @@ export const spells: Spell[] = [
     description: `<p>Вы создаёте образ объекта, существа или другого видимого явления, размерами не выходящий за рамки 20-футового Куба. Образ появляется в точке, которую вы видите в пределах дистанции, и существует, пока действует заклинание. Образ выглядит настоящим, включая звук, запах и температуру, соответствующие образу, но не может наносить урон или накладывать состояния.</p>
     <p>Пока расстояние между вами и образом не превышает дистанцию, вы можете действием Магия заставить образ переместиться в любое другое место в пределах дистанции. Пока образ меняет местоположение, вы можете изменять его вид, чтобы перемещение выглядело естественным. Например, если вы создаёте образ существа и перемещаете его, вы можете изменять образ, чтобы казалось, что оно идёт. Точно так же вы можете заставить иллюзию издавать в разное время различные звуки — например, таким образом иллюзия может даже принимать участие в беседе.</p>
     <p>Физическое взаимодействие с образом даёт понять, что это иллюзия, потому что сквозь него всё проходит. Существо, исследующее образ действием Изучение, может определить, что это иллюзия, преуспев в проверке Интеллекта (Расследование) против вашей Сл спасброска заклинаний. Если существо распознаёт иллюзию, оно может видеть сквозь неё, как и все прочие сенсорные эффекты иллюзии для этого существа тоже притупляются.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Заклинание не требует Концентрации и длится, пока не будет рассеяно, при использовании ячейки 4-го уровня или выше.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> Заклинание не требует Концентрации и длится, пока не будет рассеяно, при использовании ячейки 4-го уровня или выше.</p>`,
     source: {
       book: 'PHB\'24',
       page: 295
@@ -7479,10 +8696,12 @@ export const spells: Spell[] = [
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=alienist">Алиенист</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-      { type: 'subclass', name: '<a href="/classes/wizard?subclass=illusionist">Иллюзионист</a>' }
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=illusionist">Иллюзионист</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -7498,12 +8717,13 @@ export const spells: Spell[] = [
     },
     duration: 'Мгновенная',
     description: `<p>Выберите до шести существ, видимых вами в пределах дистанции, каждое из этих существ восстанавливает Хиты в количестве, равном 2д4 + ваш модификатор заклинательной характеристики.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Лечение увеличивается на 1д4 за каждый уровень ячейки выше 3-го.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> Лечение увеличивается на 1д4 за каждый уровень ячейки выше 3-го.</p>`,
     source: {
       book: 'PHB\'24',
       page: 296
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'subclass', name: '<a href="/classes/artificer?subclass=alchemist">Алхимик</a>' },
@@ -7519,7 +8739,7 @@ export const spells: Spell[] = [
     nameEn: 'Meld into Stone',
     level: '3',
     school: 'преобразование',
-    castingTime: '1 действие или ритуал',
+    castingTime: 'Действие или ритуал',
     range: 'Касание',
     components: {
       verbal: true,
@@ -7563,12 +8783,14 @@ export const spells: Spell[] = [
       page: 161
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-      { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' }
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -7685,6 +8907,7 @@ export const spells: Spell[] = [
       page: 312
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
@@ -7718,6 +8941,7 @@ export const spells: Spell[] = [
       page: 314
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
@@ -7787,6 +9011,7 @@ export const spells: Spell[] = [
       page: 318
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
@@ -7795,7 +9020,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-      { type: 'subclass', name: '<a href="/classes/cleric?subclass=order">Домен Порядка</a>' }
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=order">Домен Порядка</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -7819,6 +9045,7 @@ export const spells: Spell[] = [
       page: 318
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
@@ -7881,13 +9108,14 @@ export const spells: Spell[] = [
     description: `<p>Пока действует заклинание, охранные духи кружатся вокруг вас 15-радиус-футовой Эманацией. Если ваше мировоззрение Доброе или Нейтральное, духи выглядят как ангелы или феи (на ваш выбор), если ваше мировоззрение Злое, они выглядят исчадиями.</p>
     <p>При сотворении заклинания вы определяете, на каких существ оно не будет действовать. Скорость всех прочих существ в этой Эманации снижена вдвое, и когда Эманация перемещается на пространство существа или когда существо входит в Эманацию или когда существо заканчивает в ней свой ход, это существо должно совершить спасбросок Мудрости. При провале существо получает 3д8 урона Излучением (если ваше мировоззрение Доброе или Нейтральное) или 3д8 Некротического урона (если ваше мировоззрение Злое). При успехе существо получает только половину этого урона. Существо может совершать этот спасбросок только раз за ход.</p>
     <p>Заклинание не позволяет растениям извлекать корни из земли и перемещаться, но они могут свободно двигать ветвями, побегами и стеблями.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон увеличивается на 1д8 за каждый уровень ячейки выше 3-го.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> Урон увеличивается на 1д8 за каждый уровень ячейки выше 3-го.</p>`,
     source: {
       book: 'PHB\'24',
       page: 319
     },
     sources: [
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=exorcist">Экзорцист</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
       { type: 'subclass', name: '<a href="/classes/paladin?subclass=crown">Клятва Короны</a>' },
@@ -7951,15 +9179,18 @@ export const spells: Spell[] = [
       page: 321
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=chemist">Химик</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-      { type: 'subclass', name: '<a href="/classes/warlock?subclass=fiend">Покровитель Исчадие</a>' }
+      { type: 'subclass', name: '<a href="/classes/warlock?subclass=fiend">Покровитель Исчадие</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -8008,7 +9239,7 @@ export const spells: Spell[] = [
       material: 'сосуд с кровью Гуманоида, убитого за последние 24 часа'
     },
     duration: 'Концентрация, вплоть до 1 часа',
-    description: `<p>Вы произносите инфернальные слова, призывая демонов из хаоса Бездны. Бросьте к6, чтобы определить, что именно появится.</p>
+    description: `<p>Вы произносите инфернальные слова, призывая демонов из хаоса Бездны. Бросьте д6, чтобы определить, что именно появится.</p>
     <p>
       <ul>
         <li>1-2 — 2 демона с показателем опасности 1 или меньше.</li>
@@ -8123,7 +9354,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-      { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' }
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -8152,7 +9384,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-      { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' }
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -8184,7 +9417,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=diviner">Прорицатель</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
-      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' }
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -8201,12 +9435,13 @@ export const spells: Spell[] = [
     },
     duration: 'Концентрация, вплоть до 1 минуты',
     description: `<p>Касание вашей окутанной тенями руки может вытягивать жизненные силы у других, залечивая ваши раны. Совершите рукопашную атаку заклинанием по существу в пределах вашей досягаемости. При попадании цель получает 3д6 Некротического урона, а вы восстанавливаете Хиты в количестве, равном половине нанесённого Некротического урона.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон увеличивается на 1д6 за каждый уровень ячейки выше 3-го.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> Урон увеличивается на 1д6 за каждый уровень ячейки выше 3-го.</p>`,
     source: {
       book: 'PHB\'24',
       page: 337
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
@@ -8216,7 +9451,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=grave">Домен Упокоения</a>' },
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=lunar">Лунное чародейство</a>' },
-      { type: 'background', name: '<a href="/backgrounds/witherbloom%20student/">Студент Визерблума</a>' }
+      { type: 'background', name: '<a href="/backgrounds/witherbloom%20student/">Студент Визерблума</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -8260,7 +9496,7 @@ export const spells: Spell[] = [
       material: 'капля воды'
     },
     duration: 'Концентрация, вплоть до 10 минут',
-    description: `<p>Вы создаёте стену воды в точке, которую можете видеть, в пределах дистанции. Точка должна располагаться на земле. Стена может быть длиной до 30 футов, высотой до 10 футов и толщиной до 1 фута. В качестве альтернативы, вы можете создать кольцо диаметром до 20 футов, высотой до 20 футов и толщиной до 1 фута. Стена существует, пока действует заклинание. Стена считается труднопроходимой местностью.</p>
+    description: `<p>Вы создаёте стену воды в точке, которую можете видеть, в пределах дистанции. Точка должна располагаться на земле. Стена может быть длиной до 30 футов, высотой до 10 футов и толщиной до 1 фута. В качестве альтернативы, вы можете создать кольцо диаметром до 20 футов, высотой до 20 футов и толщиной до 1 фута. Стена существует, пока действует заклинание. Стена считается Труднопроходимой местностью.</p>
     <p>Все атаки дальнобойным оружием, траектория которых проходит через пространство стены, совершаются с Помехой. Огненный урон от эффектов, которые прошли через стену, уменьшается вдвое. Заклинания, которые причиняют урон холодом, при прохождении через стену замораживают ту область стены, сквозь которую прошли (минимум секция площадью 5×5 футов). Каждая замёрзшая секция площадью 5×5 футов имеет КД 5 и 15 хитов. Если хиты секции уменьшаются до 0, она разрушается. Разрушенные секции стены не заполняются водой повторно.</p>`,
     source: {
       book: 'XGE\'14',
@@ -8273,7 +9509,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-      { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' }
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -8313,7 +9550,7 @@ export const spells: Spell[] = [
     nameEn: 'Water Breathing',
     level: '3',
     school: 'преобразование',
-    castingTime: '1 действие или ритуал',
+    castingTime: 'Действие или ритуал',
     range: '30 футов',
     components: {
       verbal: true,
@@ -8327,16 +9564,19 @@ export const spells: Spell[] = [
       page: 340
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
       { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=mutagenist">Мутагенист</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/druid?subclass=sea">Круг Моря</a>' },
       { type: 'background', name: '<a href="/backgrounds/simic%20scientist/">Учёный Симиков</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' },
       { type: 'other', name: 'Дар глубин' }
     ]
   },
@@ -8388,12 +9628,13 @@ export const spells: Spell[] = [
     },
     duration: 'Мгновенная',
     description: `<p>Выберите одно существо, объект или магический эффект в пределах дистанции. Все действующие заклинания 3-го уровня или ниже на цели оканчиваются. Для каждого заклинания 4-го уровня или выше совершите проверку вашей заклинательной характеристики (Сл равна 10 + уровень этого заклинания), при успехе это заклинание оканчивается.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Вы автоматически оканчиваете на цели эффекты заклинаний, уровень которых не выше уровня использованной ячейки.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> Вы автоматически оканчиваете на цели эффекты заклинаний, уровень которых не выше уровня использованной ячейки.</p>`,
     source: {
       book: 'PHB\'24',
       page: 264
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
@@ -8413,7 +9654,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/ranger?subclass=fey-wanderer">Фейский странник</a>' },
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=lunar">Лунное чародейство</a>' },
       { type: 'subclass', name: '<a href="/classes/paladin?subclass=devotion">Клятва Преданности</a>' },
-      { type: 'feat', name: '<a href="/feats/drow-high-magic/">Высшая магия дроу</a>' }
+      { type: 'feat', name: '<a href="/feats/drow-high-magic/">Высшая магия дроу</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -8435,6 +9677,7 @@ export const spells: Spell[] = [
       page: 309
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
@@ -8449,7 +9692,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=forge">Домен Кузни</a>' },
       { type: 'subclass', name: '<a href="/classes/paladin?subclass=glory">Клятва Славы</a>' },
       { type: 'subclass', name: '<a href="/classes/paladin?subclass=vengeance">Клятва Мести</a>' },
-      { type: 'subclass', name: '<a href="/classes/paladin?subclass=ancients">Клятва Древних</a>' }
+      { type: 'subclass', name: '<a href="/classes/paladin?subclass=ancients">Клятва Древних</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -8466,7 +9710,7 @@ export const spells: Spell[] = [
     },
     duration: 'Концентрация, вплоть до 1 часа',
     description: `<p>Немагическое оружие, которого вы касаетесь, становится магическим. Выберите один из следующих видов урона: Звук, Кислота, Огонь, Холод или Электричество. Пока заклинание действует, оружие получает бонус +1 к броскам атаки и при попадании наносит 1д4 дополнительного урона выбранного типа.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> При использовании ячейки 5-го или 6-го уровней бонус к броскам атаки увеличивается до +2, а дополнительный урон — до 2д4. При использовании ячейки 7-го уровня или выше бонус к броскам атаки увеличивается до +3, а дополнительный урон — до 3д4.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> При использовании ячейки 5-го или 6-го уровней бонус к броскам атаки увеличивается до +2, а дополнительный урон — до 2д4. При использовании ячейки 7-го уровня или выше бонус к броскам атаки увеличивается до +3, а дополнительный урон — до 3д4.</p>`,
     source: {
       book: 'PHB\'24',
       page: 309
@@ -8480,7 +9724,7 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=forge">Домен Кузни</a>' },
       { type: 'subclass', name: 'Покровитель' },
       { type: 'subclass', name: '<a href="/classes/paladin?subclass=vengeance">Клятва Мести</a>' },
-      { type: 'subclass', name: 'Клятва Ведьмовского клинки' }
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Покровитель Ведьмовской клинок</a>' }
     ]
   },
   {
@@ -8503,11 +9747,13 @@ export const spells: Spell[] = [
       page: 312
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
       { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
       { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=thanaturg">Танатург</a>' },
       { type: 'subclass', name: '<a href="/classes/druid?subclass=wildfire">Круг Дикого Огня</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
@@ -8544,8 +9790,9 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
       { type: 'subclass', name: '<a href="/classes/warlock?subclass=archfey">Покровитель Архифея</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-      { type: 'subclass', name: 'Клятва Ведьмовского клинки' }
+      { type: 'subclass', name: '<a href="/classes/warlock?subclass=hexblade">Мистический рыцарь</a>' },
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Покровитель Ведьмовской клинок</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -8596,9 +9843,11 @@ export const spells: Spell[] = [
       page: 284
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=mutagenist">Мутагенист</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
@@ -8607,7 +9856,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/paladin?subclass=vengeance">Клятва Мести</a>' },
       { type: 'background', name: '<a href="/backgrounds/prismari%20student/">Студент Призмари</a>' },
       { type: 'background', name: '<a href="/backgrounds/quandrix%20student/">Студент Квандрикса</a>' },
-      { type: 'background', name: '<a href="/backgrounds/rakdos%20cultist/">Культист Ракдосов</a>' }
+      { type: 'background', name: '<a href="/backgrounds/rakdos%20cultist/">Культист Ракдосов</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -8625,7 +9875,7 @@ export const spells: Spell[] = [
     },
     duration: 'Концентрация, вплоть до 10 минут',
     description: `<p>Вы касаетесь согласного существа. Пока заклинание действует, цель обладает Скоростью полёта 60 футов и может парить. Когда заклинание заканчивается, цель падает, если ещё находится в полёте и не может остановить падение.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Вы можете нацелить заклинание на одно дополнительное существо за каждый уровень ячейки выше 3-го.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> Вы можете нацелить заклинание на одно дополнительное существо за каждый уровень ячейки выше 3-го.</p>`,
     source: {
       book: 'PHB\'24',
       page: 276
@@ -8638,7 +9888,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=draconic">Драконья кровь</a>' },
-      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' }
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -8667,7 +9918,8 @@ export const spells: Spell[] = [
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' }
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -8698,7 +9950,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' }
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -8724,12 +9977,13 @@ export const spells: Spell[] = [
     <p><strong>Взрывная руна.</strong> Когда эта руна срабатывает, она испускает магическую энергию 20-радиус-футовой Сферой с центром на руне. Каждое существо в этой области должно совершить спасбросок Ловкости, получая 5д8 урона Звуком, Кислотой, Огнём, Холодом или Электричеством при провале или половину этого урона при успехе (вы выбираете тип урона при начертании руны).</p>
     <p><strong>Руна заклинания.</strong> Вы можете сохранить в руне подготовленное вами заклинание 3-го уровня или ниже, сотворяя его в процессе начертания руны. Заклинание должно нацеливаться на одно существо или область. Эффект этого сохранённого заклинания, сотворённого таким образом, не вступает в силу немедленно.</p>
     <p>Эффект сохранённого заклинания вступает в силу, когда срабатывает руна. Если заклинание нацеливается на существо, то целью становится существо, вызвавшее срабатывание руны. Если заклинание воздействует на область, то центр этой области будет на этом существе. Если заклинание призывает Враждебных существ или создает вредоносные объекты или ловушки, они появляются как можно ближе к нарушителю и атакуют его. Если заклинание требует Концентрации, оно длится до максимума своей длительности.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон взрывной руны увеличивается на 1д8 за каждый уровень ячейки выше 3-го. Если вы создаёте руну заклинания, вы можете сохранить в ней заклинание, уровнем не превышающее уровень ячейки, использованной для сотворения Охранной руны.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> Урон взрывной руны увеличивается на 1д8 за каждый уровень ячейки выше 3-го. Если вы создаёте руну заклинания, вы можете сохранить в ней заклинание, уровнем не превышающее уровень ячейки, использованной для сотворения Охранной руны.</p>`,
     source: {
       book: 'PHB\'24',
       page: 156
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
@@ -8769,7 +10023,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=abjurer">Оградитель</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' }
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -8827,6 +10082,7 @@ export const spells: Spell[] = [
       page: 243
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
@@ -8855,6 +10111,7 @@ export const spells: Spell[] = [
       page: 276
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
@@ -8973,6 +10230,7 @@ export const spells: Spell[] = [
       page: 296
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' }
     ]
@@ -9075,6 +10333,7 @@ export const spells: Spell[] = [
       page: 306
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
@@ -9256,6 +10515,7 @@ export const spells: Spell[] = [
       page: 334
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
@@ -9290,6 +10550,7 @@ export const spells: Spell[] = [
       page: 335
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
@@ -9319,6 +10580,7 @@ export const spells: Spell[] = [
       page: 336
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' }
@@ -9632,90 +10894,94 @@ export const spells: Spell[] = [
           </tr>
           <tr>
             <td>32</td>
-            <td>Минотавр</td>
+            <td>Люпин</td>
           </tr>
           <tr>
             <td>33</td>
-            <td>Орк</td>
+            <td>Минотавр</td>
           </tr>
           <tr>
             <td>34</td>
-            <td>Плазмоид</td>
+            <td>Орк</td>
           </tr>
           <tr>
             <td>35</td>
-            <td>Полуорк</td>
+            <td>Плазмоид</td>
           </tr>
           <tr>
             <td>36</td>
-            <td>Полурослик</td>
+            <td>Полуорк</td>
           </tr>
           <tr>
             <td>37</td>
-            <td>Полуэльф</td>
+            <td>Полурослик</td>
           </tr>
           <tr>
             <td>38</td>
-            <td>Сатир</td>
+            <td>Полуэльф</td>
           </tr>
           <tr>
             <td>39</td>
-            <td>Своё происхождение</td>
+            <td>Сатир</td>
           </tr>
           <tr>
             <td>40</td>
-            <td>Совлин</td>
+            <td>Своё происхождение</td>
           </tr>
           <tr>
             <td>41</td>
-            <td>Табакси</td>
+            <td>Совлин</td>
           </tr>
           <tr>
             <td>42</td>
-            <td>Тифлинг</td>
+            <td>Табакси</td>
           </tr>
           <tr>
             <td>43</td>
-            <td>Тортл</td>
+            <td>Тифлинг</td>
           </tr>
           <tr>
             <td>44</td>
-            <td>Три-крин</td>
+            <td>Тортл</td>
           </tr>
           <tr>
             <td>45</td>
-            <td>Тритон</td>
+            <td>Три-крин</td>
           </tr>
           <tr>
             <td>46</td>
-            <td>Фирболг</td>
+            <td>Тритон</td>
           </tr>
           <tr>
             <td>47</td>
-            <td>Фэйри</td>
+            <td>Фирболг</td>
           </tr>
           <tr>
             <td>48</td>
-            <td>Хадози</td>
+            <td>Фэйри</td>
           </tr>
           <tr>
             <td>49</td>
-            <td>Хобгоблин</td>
+            <td>Хадози</td>
           </tr>
           <tr>
             <td>50</td>
-            <td>Человек</td>
+            <td>Хобгоблин</td>
           </tr>
           <tr>
             <td>51</td>
-            <td>Шифтер</td>
+            <td>Человек</td>
           </tr>
           <tr>
             <td>52</td>
-            <td>Эльф</td>
+            <td>Шифтер</td>
           </tr>
           <tr>
             <td>53</td>
+            <td>Эльф</td>
+          </tr>
+          <tr>
+            <td>54</td>
             <td>Юань-ти</td>
           </tr>
         </tbody>
@@ -9728,7 +10994,8 @@ export const spells: Spell[] = [
       page: 311
     },
     sources: [
-      { type: 'class', name: '<a href="/classes/druid">Друид</a>' }
+      { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=mutagenist">Мутагенист</a>' }
     ]
   },
   {
@@ -9904,6 +11171,7 @@ export const spells: Spell[] = [
       page: 242
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
@@ -9933,6 +11201,7 @@ export const spells: Spell[] = [
       page: 245
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
@@ -9962,6 +11231,7 @@ export const spells: Spell[] = [
       page: 251
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=necromancer">Некромант</a>' }
@@ -10123,12 +11393,13 @@ export const spells: Spell[] = [
     description: `<p>Одно видимое вами в пределах дистанции существо должно преуспеть в спасброске Мудрости, иначе получит состояние Очарованный на время действия заклинания. Если вы или ваши союзники сражаются с ним, оно совершает спасбросок с Преимуществом. Каждый раз, когда цель получает урон, она повторяет спасбросок, при успехе оканчивая на себе это заклинание.</p>
     <p>Вы обладаете телепатической связью с этим Очарованным существом, пока вы оба находитесь на одном плане бытия. В ваш ход вы можете отдавать ему приказы через эту связь (действий не требуется), такие как "Атакуй это существо", "Иди туда" или "Принеси тот объект". В свой ход цель изо всех сил пытается выполнить приказ. Если она выполняет приказ и не получает от вас дальнейших указаний, оно действует на своё усмотрение, в первую очередь защищая себя.</p>
     <p>Вы можете приказать цели совершить Реакцию, но вы должны делать это своей Реакцией.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Концентрация может длиться вплоть до 8 часов с ячейкой 9-го уровня.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> Концентрация может длиться вплоть до 8 часов с ячейкой 9-го уровня.</p>`,
     source: {
       book: 'PHB\'24',
       page: 265
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
@@ -10397,6 +11668,7 @@ export const spells: Spell[] = [
       page: 306
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
@@ -10539,6 +11811,7 @@ export const spells: Spell[] = [
       page: 150
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
@@ -10611,6 +11884,7 @@ export const spells: Spell[] = [
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=mutagenist">Мутагенист</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/druid?subclass=moon">Круг Луны</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
@@ -10619,7 +11893,7 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=lunar">Лунное чародейство</a>' },
       { type: 'subclass', name: '<a href="/classes/ranger?subclass=hollow-warden">Страж Пустоты</a>' },
       { type: 'background', name: '<a href="/backgrounds/simic%20scientist/">Учёный Симиков</a>' },
-      { type: 'feat', name: '<a href="/feats/adept-of-the-white-robes/">Адепт Белых одежд</a>' }
+      { type: 'feat', name: '<a href="/feats/adept-of-the-red-robes/">Адепт Красных одежд</a>' }
     ]
   },
   {
@@ -10628,7 +11902,7 @@ export const spells: Spell[] = [
     nameEn: 'Animal Messenger',
     level: '2',
     school: 'очарование',
-    castingTime: '1 действие или ритуал',
+    castingTime: 'Действие или ритуал',
     range: '30 футов',
     components: {
       verbal: true,
@@ -10697,7 +11971,7 @@ export const spells: Spell[] = [
     },
     duration: 'Мгновенная',
     description: `<p>Вы зачерпываете собственной жизненной силы, чтобы исцелиться. Бросьте одну или две из ваших непотраченных Костей хитов, вы восстанавливаете Хиты в количестве, равном результату этого броска + модификатор вашей заклинательной характеристики, после чего эти Кости хитов тратятся.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Максимальное число непотраченных Костей хитов, которые вы можете бросить, увеличивается на 2 за каждый уровень ячейки выше 2-го.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> Максимальное число непотраченных Костей хитов, которые вы можете бросить, увеличивается на 2 за каждый уровень ячейки выше 2-го.</p>`,
     source: {
       book: 'PHB\'24',
       page: 242
@@ -10709,7 +11983,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=abjurer">Оградитель</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' }
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'feat', name: '<a href="/feats/adept-of-the-white-robes/">Адепт Белых одежд</a>' }
     ]
   },
   {
@@ -10809,7 +12084,7 @@ export const spells: Spell[] = [
     nameEn: 'Beast Sense',
     level: '2',
     school: 'прорицание',
-    castingTime: '1 действие или ритуал',
+    castingTime: 'Действие или ритуал',
     range: 'Касание',
     components: {
       somatic: true
@@ -10842,16 +12117,18 @@ export const spells: Spell[] = [
     },
     duration: '1 минута',
     description: `<p>Одно существо, видимое вами в пределах дистанции, должно преуспеть в спасброске Телосложения, иначе получит состояние Ослеплённый или Оглохший (по вашему выбору) на время действия заклинания. В конце каждого своего хода цель повторяет спасбросок, при успехе оканчивая на себе эффект заклинания.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Вы можете нацелить заклинание на одно дополнительное существо за каждый уровень ячейки выше 2-го.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> Вы можете нацелить заклинание на одно дополнительное существо за каждый уровень ячейки выше 2-го.</p>`,
     source: {
       book: 'PHB\'24',
       page: 248
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=pathogenist">Патогенист</a>' },
       { type: 'subclass', name: '<a href="/classes/artificer?subclass=reanimator">Реаниматор</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/druid?subclass=spore">Круг спор</a>' },
@@ -10861,7 +12138,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=lunar">Лунное чародейство</a>' },
       { type: 'subclass', name: '<a href="/classes/warlock?subclass=undead">Покровитель Нежить</a>' },
-      { type: 'subclass', name: '<a href="/classes/warlock?subclass=undying">Покровитель Бессмертный</a>' }
+      { type: 'subclass', name: '<a href="/classes/warlock?subclass=undying">Покровитель Бессмертный</a>' },
+      { type: 'feat', name: '<a href="/feats/adept-of-the-red-robes/">Адепт Красных одежд</a>' }
     ]
   },
   {
@@ -10984,7 +12262,7 @@ export const spells: Spell[] = [
     description: `
     <p>Вы призываете крутящиеся кинжалы в области 5-футового Куба с центром в точке в пределах дистанции. Каждое существо в этой области получает 4д4 Рубящего урона. Существо также получает этот урон, если входит в этот Куб, если заканчивает в нём ход или если Куб перемещается в пространство этого существа. Каждое существо может получать урон от этого заклинания только раз в ход.</p>
     <p>В ваши последующие ходы вы можете действием Магия телепортировать Куб на расстояние вплоть до 30 футов.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон увеличивается на 2д4 за каждый уровень ячейки выше 2-го.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> Урон увеличивается на 2д4 за каждый уровень ячейки выше 2-го.</p>`,
     source: {
       book: 'PHB\'24',
       page: 251
@@ -11049,7 +12327,7 @@ export const spells: Spell[] = [
     description: `
     <p>Вы прикасаетесь к немагическим боеприпасам — до четырёх Стрел или Болтов — и втыкаете их в землю в вашем пространстве. Пока заклинание действует, боеприпасы не могут быть извлечены физически, и всякий раз, когда существо, отличное от вас, впервые за ход входит в пространство в пределах 30 футов от боеприпасов или заканчивает там свой ход, один боеприпас взлетает вверх и атакует его. Существо должно преуспеть в спасброске Ловкости, иначе получит 2д4 Колющего урона. Затем этот боеприпас уничтожается. Заклинание заканчивается, когда кончаются воткнутые вами боеприпасы.</p>
     <p>При сотворении этого заклинания вы можете указать любое количество существ, которых это заклинание будет игнорировать.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Количество боеприпасов, которые вы можете воткнуть при сотворении этого заклинания, увеличивается на два за каждый уровень ячейки выше 2-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong> Количество боеприпасов, которые вы можете воткнуть при сотворении этого заклинания, увеличивается на два за каждый уровень ячейки выше 2-го.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -11196,6 +12474,7 @@ export const spells: Spell[] = [
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=alienist">Алиенист</a>' },
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=aberrant">Аберрантный разум</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
@@ -11204,8 +12483,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=diviner">Покровитель Великий древний</a>' },
       { type: 'species', name: '<a href="/races/gith/">Гит</a> (гитцерай)' },
       { type: 'species', name: '<a href="/races/tiefling/">Тифлинг</a> Диспатера' },
-      { type: 'feat', name: '<a href="/feats/adept-of-the-red-robes/">Адепт Красных одежд</a>' },
       { type: 'background', name: '<a href="/backgrounds/dimir%20operative/">Оперативник Димиров</a>' },
+      { type: 'feat', name: '<a href="/feats/adept-of-the-red-robes/">Адепт Красных одежд</a>' },
       { type: 'feat', name: '<a href="/feats/adept-of-the-white-robes/">Адепт Белых одежд</a>' },
       { type: 'feat', name: '<a href="/feats/telepathic/">Телепат</a>' }
     ]
@@ -11226,7 +12505,7 @@ export const spells: Spell[] = [
     duration: 'Концентрация, вплоть до 1 минуты',
     description: `
     <p>Вы касаетесь одного согласного существа и выбираете тип урона: Кислота, Огонь, Холод, Электричество или Яд. Пока заклинание действует, цель может действием Магия выдыхать 15-футовый Конус, каждое существо в области воздействия должно совершить спасбросок Ловкости, получая 3д6 урона выбранного типа при провале или половину этого урона при успехе.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон увеличивается на 1д6 за каждый уровень ячейки выше 2-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong> Урон увеличивается на 1д6 за каждый уровень ячейки выше 2-го.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -11300,7 +12579,8 @@ export const spells: Spell[] = [
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' }
+      { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
+      { type: 'feat', name: '<a href="/feats/adept-of-the-red-robes/">Адепт Красных одежд</a>' }
     ]
   },
   {
@@ -11328,6 +12608,7 @@ export const spells: Spell[] = [
       page: 268
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
@@ -11390,7 +12671,7 @@ export const spells: Spell[] = [
     <p>Скакун выглядит как животное Большого размера, которое можно оседлать, на ваш выбор — например, лошадь, верблюд, лютый волк или олень. При каждом сотворении заклинания вы выбираете тип существа скакуна: Исчадие, Небожитель или Фея, выбранный тип определяет некоторые особенности блока статистики.</p>
     <p><strong>Сражение.</strong> Скакун — союзник вам и вашим союзникам. В бою он разделяет значение вашей Инициативы, и, если вы оседлали его, то действует как управляемый скакун (см. правила Сражения верхом). Если у вас есть состояние Недееспособный, скакун совершает свой ход немедленно после вашего и действует по своему усмотрению, сосредотачиваясь на вашей защите.</p>
     <p><strong>Исчезновение скакуна.</strong> Скакун исчезает, если его Хиты опускаются до 0 или если вы умираете. При исчезновении скакун оставляет всё несомое и носимое им. Если вы сотворяете это заклинание вновь, вы решаете, призываете вы нового скакуна или того, что исчез.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Там, где блок статистики ссылается на уровень заклинания, используйте уровень ячейки заклинаний.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong> Там, где блок статистики ссылается на уровень заклинания, используйте уровень ячейки заклинаний.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -11448,7 +12729,7 @@ export const spells: Spell[] = [
     <p>Вы создаёте в свободной руке горящий клинок. Этот клинок существует, пока действует заклинание, размерами и формой он аналогичен скимитару. Если вы выпустите клинок из рук, он исчезает, но вы можете вернуть его в руку Бонусным действием.</p>
     <p>Действием Магия вы можете совершить рукопашную атаку заклинанием с использованием этого клинка. При попадании цель получает урон Огнём, равный 3д6 + ваш модификатор заклинательной характеристики.</p>
     <p>Горящий клинок испускает Яркий свет в радиусе 10 футов и Тусклый свет ещё на 10 футов.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон увеличивается на 1д6 за каждый уровень ячейки выше 2-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong> Урон увеличивается на 1д6 за каждый уровень ячейки выше 2-го.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -11480,7 +12761,7 @@ export const spells: Spell[] = [
     <p>Вы создаёте шар из огня диаметром 5 футов, существующий, пока действует заклинание, в незанятом пространстве на полу в пределах дистанции. Каждое существо, заканчивающее свой ход в пределах 5 футов от шара, должно совершить спасбросок Ловкости, получая 2д6 урона Огнём при провале или половину этого урона при успехе.</p>
     <p>Бонусным действием вы можете переместить шар на расстояние вплоть до 30 футов, катя его по полу. Если вы перемещаете шар в пространство, занятое существом, это существо тоже должно совершить вышеописанный спасбросок, и шар прекращает перемещение до конца этого хода.</p>
     <p>Когда вы перемещаете шар, вы можете поднимать его над препятствиями до 5 футов в высоту и перепрыгивать им ямы шириной до 10 футов. Воспламеняемые объекты, которые никто не несёт и не носит, начинают гореть после соприкосновения с шаром, и шар испускает Яркий свет в радиусе 20 футов и Тусклый свет ещё на 20 футов.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон увеличивается на 1д6 за каждый уровень ячейки выше 2-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong> Урон увеличивается на 1д6 за каждый уровень ячейки выше 2-го.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -11490,6 +12771,7 @@ export const spells: Spell[] = [
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=chemist">Химик</a>' },
       { type: 'subclass', name: '<a href="/classes/artificer?subclass=alchemist">Алхимик</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/druid?subclass=wildfire">Круг Дикого Огня</a>' },
@@ -11506,7 +12788,7 @@ export const spells: Spell[] = [
     nameEn: 'Gentle Repose',
     level: '2',
     school: 'некромантия',
-    castingTime: '1 действие или ритуал',
+    castingTime: 'Действие или ритуал',
     range: 'Касание',
     components: {
       verbal: true,
@@ -11523,9 +12805,11 @@ export const spells: Spell[] = [
       page: 278
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=thanaturg">Танатург</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/druid?subclass=spore">Круг спор</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
@@ -11582,7 +12866,7 @@ export const spells: Spell[] = [
     nameEn: 'Water Walk',
     level: '3',
     school: 'преобразование',
-    castingTime: '1 действие или ритуал',
+    castingTime: 'Действие или ритуал',
     range: '30 футов',
     components: {
       verbal: true,
@@ -11609,7 +12893,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/warlock?subclass=fathomless">Покровитель Бездонный</a>' },
       { type: 'subclass', name: '<a href="/classes/warlock?subclass=genie">Покровитель Гений</a> (Джинн)' },
       { type: 'species', name: '<a href="/races/aarakokra/">Ааракокра</a>' },
-      { type: 'species', name: '<a href="/races/triton/">Тритон</a>' }
+      { type: 'species', name: '<a href="/races/triton/">Тритон</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -11690,13 +12975,14 @@ export const spells: Spell[] = [
     duration: 'Концентрация, вплоть до 1 минуты',
     description: `
     <p>Выберите Гуманоида, которого видите в пределах дистанции. Цель должна преуспеть в спасброске Мудрости, иначе получит состояние Парализованный на время действия заклинания. В конце каждого своего хода цель повторяет этот спасбросок, при успехе оканчивая на себе это заклинание.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Вы можете нацелить заклинание на одного дополнительного Гуманоида за каждый уровень заклинания выше 2-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong> Вы можете нацелить заклинание на одного дополнительного Гуманоида за каждый уровень заклинания выше 2-го.</p>
     `,
     source: {
       book: 'PHB\'24',
       page: 284
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
@@ -11730,7 +13016,7 @@ export const spells: Spell[] = [
     },
     duration: 'Концентрация, вплоть до 1 часа',
     description: `<p>Вы касаетесь существа и накладываете на него состояние Невидимый на время действия заклинания. Заклинание оканчивается преждевременно немедленно после того, как цель совершит бросок атаки, нанесёт урон или сотворит заклинание.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Вы можете нацелить заклинание на одно дополнительное существо за каждый уровень ячейки выше 2-го.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong> Вы можете нацелить заклинание на одно дополнительное существо за каждый уровень ячейки выше 2-го.</p>`,
     source: {
       book: 'PHB\'24',
       page: 289
@@ -11770,7 +13056,7 @@ export const spells: Spell[] = [
     <p><ul>
     <li>Ваша скорость ходьбы увеличивается на 10 футов.</li>
     <li>Вы не провоцируете атаки.</li>
-    <li>Вы можете перемещаться сквозь других существ, и они не считаются для вас труднопроходимой местностью. Если вы оканчиваете свой ход в пространстве другого существа, то вас выталкивает в последнее занимаемое вами свободное пространство и вы получаете 1д8 урона силовым полем.</li>
+    <li>Вы можете перемещаться сквозь других существ, и они не считаются для вас Труднопроходимой местностью. Если вы оканчиваете свой ход в пространстве другого существа, то вас выталкивает в последнее занимаемое вами свободное пространство и вы получаете 1д8 урона силовым полем.</li>
     <p></ul>`,
     source: {
       book: 'SCC\'14', 
@@ -11784,7 +13070,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
-      { type: 'background', name: '<a href="/backgrounds/prismari%20student/">Студент Призмари</a>' }
+      { type: 'background', name: '<a href="/backgrounds/prismari%20student/">Студент Призмари</a>' },
+      { type: 'feat', name: '<a href="/feats/adept-of-the-red-robes/">Адепт Красных одежд</a>' }
     ]
   },
   {
@@ -11840,6 +13127,7 @@ export const spells: Spell[] = [
       page: 291
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
@@ -11899,7 +13187,7 @@ export const spells: Spell[] = [
     nameEn: 'Locate Animals or Plants',
     level: '2',
     school: 'прорицание',
-    castingTime: '1 действие или ритуал',
+    castingTime: 'Действие или ритуал',
     range: 'На себя',
     components: {
       verbal: true,
@@ -12010,7 +13298,7 @@ export const spells: Spell[] = [
     duration: '1 час',
     description: `
     <p>Вы касаетесь немагического оружия. Пока заклинание активно, это оружие становится магическим оружием с бонусом +1 к броскам атаки и урона. Заклинание заканчивается раньше времени, если вы сотворяете его снова.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Бонус к броскам атаки и урона увеличивается до +2 с ячейкой 3-го, 4-го или 5-го уровня и до +3 с ячейкой 6-го уровня или выше</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong> Бонус к броскам атаки и урона увеличивается до +2 с ячейкой 3-го, 4-го или 5-го уровня и до +3 с ячейкой 6-го уровня или выше</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -12081,7 +13369,7 @@ export const spells: Spell[] = [
     duration: 'Мгновенная',
     description: `
    <p>Мерцающая зелёная стрела летит к цели в пределах дистанции, разлетаясь брызгами кислоты. Совершите дальнобойную атаку заклинанием по цели, при попадании она получает 4д4 урона Кислотой от атаки и ещё 2д4 урона Кислотой в конце своего следующего хода. При промахе стрела лишь обрызгивает цель кислотой: она получает только половину урона от атаки.</p>
-   <p><strong>Используя ячейку заклинания большего уровня.</strong> И урон от атаки, и последующий урон увеличиваются на 1д4 за каждый уровень ячейки выше 2-го.</p>
+   <p><strong>Накладывание более высокой ячейкой.</strong> И урон от атаки, и последующий урон увеличиваются на 1д4 за каждый уровень ячейки выше 2-го.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -12089,6 +13377,7 @@ export const spells: Spell[] = [
     },
     sources: [
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=chemist">Химик</a>' },
       { type: 'subclass', name: '<a href="/classes/artificer?subclass=alchemist">Алхимик</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
@@ -12110,7 +13399,7 @@ export const spells: Spell[] = [
     duration: 'Концентрация, вплоть до 1 часа',
     description: `
    <p>Вы вгоняете шип псионической энергии в разум одного видимого вами в пределах дистанции существа. Цель совершает спасбросок Мудрости, получая 3д8 Психического урона при провале или половину этого урона при успехе. При провале спасброска вы также знаете местоположение цели, пока заклинание действует, а вы и цель находитесь на одном плане бытия. Пока вы знаете местоположение цели, цель не может быть спрятана от вас и не получает Преимуществ состояния Невидимый против вас, даже если у неё есть такое состояние.</p>
-   <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон увеличивается на 1д8 за каждый уровень ячейки выше 2-го.</p>
+   <p><strong>Накладывание более высокой ячейкой.</strong> Урон увеличивается на 1д8 за каждый уровень ячейки выше 2-го.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -12143,7 +13432,7 @@ export const spells: Spell[] = [
     duration: '1 минута',
     description: `
     <p>Три иллюзорных копии вас появляется в вашем пространстве. Пока заклинание действует, эти отражения перемещаются с вами и копируют ваши движения, так что невозможно понять, кто из вас настоящий.</p>
-    <p>Пока заклинание действует, каждый раз, когда существо попадает по вам броском атаки, бросьте к6 за каждое оставшееся отражение. Если хотя бы на одной кости выпало «3» или больше, атака приходится по одному из отражений, и это отражение уничтожается. Отражения не могут получать урон иным способом и невосприимчивы к любым другим эффектам. Заклинание заканчивается, когда уничтожаются все три отражения.</p>
+    <p>Пока заклинание действует, каждый раз, когда существо попадает по вам броском атаки, бросьте д6 за каждое оставшееся отражение. Если хотя бы на одной кости выпало «3» или больше, атака приходится по одному из отражений, и это отражение уничтожается. Отражения не могут получать урон иным способом и невосприимчивы к любым другим эффектам. Заклинание заканчивается, когда уничтожаются все три отражения.</p>
     <p>Это заклинание не имеет эффекта на существ с состоянием Ослеплённый, со Слепым зрением или Истинным зрением.</p>
     `,
     source: {
@@ -12273,7 +13562,7 @@ export const spells: Spell[] = [
 
     <tr>
       <td>4</td>
-      <td>Капли патоки начинают парить в кубе, превращая его в труднопроходимую местность до начала вашего следующего хода.</td>
+      <td>Капли патоки начинают парить в кубе, превращая его в Труднопроходимую местность до начала вашего следующего хода.</td>
     </tr>
 
   </table>
@@ -12413,7 +13702,7 @@ export const spells: Spell[] = [
     duration: 'Мгновенная',
     description: `
     <p>Выберите до пяти существ в пределах дистанции, если выбранное существо остаётся в пределах дистанции всё время сотворения заклинания, то оно получает Преимущества Короткого отдыха и восстанавливает 2д8 Хитов. Получив Преимущества этого заклинания, существо не может получить их снова, пока не завершит Долгий отдых.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Лечение увеличивается на 1д8 за каждый уровень ячейки выше 2-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong> Лечение увеличивается на 1д8 за каждый уровень ячейки выше 2-го.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -12448,6 +13737,7 @@ export const spells: Spell[] = [
       page: 310
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
@@ -12515,6 +13805,7 @@ export const spells: Spell[] = [
       page: 311
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
@@ -12534,7 +13825,7 @@ export const spells: Spell[] = [
     level: '2',
     school: 'воплощение',
     castingTime: '1 действие',
-    range: 'На себя (30-футовый конус)',
+    range: 'На себя',
     components: {
       somatic: true,
       material: 'флакон с талой водой'
@@ -12605,7 +13896,7 @@ export const spells: Spell[] = [
     duration: 'Мгновенная',
     description: `
     <p>Вы метаете три огненных луча. Вы можете метать их как в одну цель в пределах дистанции, так и в несколько. Совершите дальнобойную атаку заклинанием для каждого луча, при попадании цель получает 2д6 урона Огнём.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Вы создаёте по одному дополнительному лучу за каждый уровень ячейки выше 2-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong> Вы создаёте по одному дополнительному лучу за каждый уровень ячейки выше 2-го.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -12648,6 +13939,7 @@ export const spells: Spell[] = [
       page: 314
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
@@ -12714,7 +14006,7 @@ export const spells: Spell[] = [
     description: `
     <p>Из точки, выбранной вами в пределах дистанции, исходит громкий звук. Каждое существо, находящееся в 10-радиус-футовой Сфере с центром в этой точке, должно совершить спасбросок Телосложения, получая 3д8 урона Звуком при провале или половину этого урона при успехе. Конструкты совершают этот спасбросок с Помехой.</p>
     <p>Немагические объекты в области воздействия, которые никто не несёт и не носит, тоже получают этот урон.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон увеличивается на 1д8 за каждый уровень ячейки выше 2-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong> Урон увеличивается на 1д8 за каждый уровень ячейки выше 2-го.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -12749,7 +14041,7 @@ export const spells: Spell[] = [
     duration: 'Концентрация, вплоть до 1 минуты',
     description: `
     <p>Цель этой атаки получает 2д6 дополнительного урона Излучением. Пока заклинание действует, цель испускает Тусклый свет в радиусе 5 футов, броски атаки по нему совершаются с Преимуществом, и оно не получает Преимуществ от состояния Невидимый.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон увеличивается на 1д6 за каждый уровень ячейки выше 2-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong> Урон увеличивается на 1д6 за каждый уровень ячейки выше 2-го.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -12769,7 +14061,7 @@ export const spells: Spell[] = [
     nameEn: 'Silence',
     level: '2',
     school: 'иллюзия',
-    castingTime: '1 действие или ритуал',
+    castingTime: 'Действие или ритуал',
     range: '120 футов',
     components: {
       verbal: true,
@@ -12784,6 +14076,7 @@ export const spells: Spell[] = [
       page: 316
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
@@ -12800,7 +14093,7 @@ export const spells: Spell[] = [
     nameEn: 'Skywrite',
     level: '2',
     school: 'преобразование',
-    castingTime: '1 действие или ритуал',
+    castingTime: 'Действие или ритуал',
     range: 'В пределах видимости',
     components: {
       verbal: true,
@@ -12872,13 +14165,14 @@ export const spells: Spell[] = [
     duration: 'Концентрация, вплоть до 1 часа',
     description: `
     <p>Пока действует заклинание, согласное существо, которого вы коснулись, обладает способностью перемещаться вверх, вниз и вдоль вертикальных поверхностей и по потолкам, при этом не задействуя свои руки. Цель также обладает Скоростью лазания, равной её Скорости.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Вы можете нацелить заклинание на одно дополнительное существо за каждый уровень ячейки выше 2-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong> Вы можете нацелить заклинание на одно дополнительное существо за каждый уровень ячейки выше 2-го.</p>
     `,
     source: {
       book: 'PHB\'24',
       page: 319
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
@@ -12920,7 +14214,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=life">Домен Жизни</a>' },
       { type: 'subclass', name: '<a href="/classes/paladin?subclass=conquest">Клятва Завоевания</a>' },
-      { type: 'subclass', name: '<a href="/classes/cleric?subclass=war">Домен Войны</a>' }
+      { type: 'subclass', name: '<a href="/classes/cleric?subclass=war">Домен Войны</a>' },
+      { type: 'feat', name: '<a href="/feats/adept-of-the-red-robes/">Адепт Красных одежд</a>' }
     ]
   },
   {
@@ -12939,7 +14234,7 @@ export const spells: Spell[] = [
     description: `
     <p>Вы создаёте парящую призрачную силу, выглядящую как оружие по вашему выбору и существующую, пока действует заклинание. Эта сила появляется в пространстве в пределах дистанции на ваш выбор, и вы можете совершить одну рукопашную атаку заклинанием по существу в пределах 5 футов от неё. При попадании цель атаки получает Силовой урон, равный 1д8 + ваш модификатор заклинательной характеристики.</p>
     <p>Бонусным действием в ваши cледующие ходы вы можете переместить силу на расстояние вплоть до 20 футов и повторить атаку по существу, находящемуся в пределах 5 футов от неё.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон увеличивается на 1д8 за каждый уровень ячейки выше 2-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong> Урон увеличивается на 1д8 за каждый уровень ячейки выше 2-го.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -12947,6 +14242,7 @@ export const spells: Spell[] = [
     },
     sources: [
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=exorcist">Экзорцист</a>' },
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=nature">Домен Природы</a>' },
@@ -13012,6 +14308,7 @@ export const spells: Spell[] = [
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=alienist">Алиенист</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
@@ -13039,7 +14336,7 @@ export const spells: Spell[] = [
     description: `
     <p>Вы призываете духа зверя. Он появляется в видимом вами в пределах дистанции незанятом пространстве и использует блок статистики Духа зверя. При сотворении заклинания выберите среду обитания зверя: Воздух, Землю или Воду. Дух принимает облик обитающего в выбранной среде животного на ваш выбор. Среда обитания определяет некоторые особенности духа, описанные в блоке статистики. Существо исчезает, когда его Хиты опускаются до 0 или когда заклинание заканчивается.</p>
     <p>Это существо — союзник вам и вашим союзникам. В бою оно имеет то же значение Инициативы, что и вы, и ходит сразу после вас. Оно подчиняется вашим словесным командам (от вас действий не требуется). Если вы ничего не приказываете, оно применяет действие Уклонение и перемещается так, чтобы избегать опасности.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Там, где блок статистики ссылается на уровень заклинания, используйте уровень ячейки заклинаний.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong> Там, где блок статистики ссылается на уровень заклинания, используйте уровень ячейки заклинаний.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -13165,7 +14462,7 @@ export const spells: Spell[] = [
     <p><ul>
     <li>Все существа в области действия, включая вас, становятся оглохшими.</li>
     <li>Гасит все незащищённые источники огня размером с факел и меньше.</li>
-    <li>Для всех существ, кроме вас, область считается труднопроходимой местностью.</li>
+    <li>Для всех существ, кроме вас, область считается Труднопроходимой местностью.</li>
     <li>Броски атаки для атак дальнобойным оружием совершаются с Помехой, если атака исходит из области ветра или заходит в неё.</li>
     <li>Препятствует распространению пара, газов и тумана, которые могут быть развеяны сильным ветром.</li>
     </ul></p>
@@ -13245,6 +14542,7 @@ export const spells: Spell[] = [
       page: 340
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
@@ -13314,6 +14612,7 @@ export const spells: Spell[] = [
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=exorcist">Экзорцист</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
       { type: 'subclass', name: '<a href="/classes/paladin?subclass=devotion">Клятва Преданности</a>' },
@@ -13340,7 +14639,7 @@ export const spells: Spell[] = [
     <p>По вашему приказу оживают предметы. Выберите находящиеся в пределах дистанции немагические объекты Огромного размера или меньше, которые никто не несёт и не носит. Максимальное число объектов равно вашему модификатору заклинательной характеристики, причём объекты Среднего размера или меньше считаются за один объект, объекты Большого размера за два, а Огромного размера — за три.</p>
     <p>Каждый выбранный объект оживает, выпускает ножки и становится Конструктом, использующим блок статистики Оживлённого объекта, это существо находится под вашим контролем, пока действует заклинание или пока его Хиты не будут опущены до 0. Каждое оживлённое вами этим заклинанием существо — союзник вам и вашим союзникам. В бою оно имеет то же значение Инициативы, что и вы, и ходит сразу после вас.</p>
     <p>Пока заклинание действует, Бонусным действием вы можете мысленно отдать приказ одному из созданных вами этим заклинанием существ, если оно находится в пределах 500 футов от вас (если под вашим контролем находится несколько существ, вы можете приказывать одновременно любому количеству из них, все они получат один приказ). Если вы ничего не приказываете, оживлённое существо применяет действие Уклонение и перемещается так, чтобы избегать опасности. Когда Хиты существа падают до 0, оно возвращается в форму изначального объекта, и весь оставшийся урон наносится этому объекту.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong>Урон Мощного удара существ увеличивается на 1д4 (Средний размер или меньше), на 1д6 (Большой размер) или на 1д12 (Огромный размер) за каждый уровень ячейки выше 5-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong>Урон Мощного удара существ увеличивается на 1д4 (Средний размер или меньше), на 1д6 (Большой размер) или на 1д12 (Огромный размер) за каждый уровень ячейки выше 5-го.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -13351,6 +14650,7 @@ export const spells: Spell[] = [
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=alienist">Алиенист</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=forge">Домен Кузни</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
       { type: 'background', name: '<a href="/backgrounds/izzet%20engineer/">Инженер Иззетов</a>' }
@@ -13378,6 +14678,7 @@ export const spells: Spell[] = [
       page: 241
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
       { type: 'subclass', name: '<a href="/classes/artificer?subclass=reanimator">Реаниматор</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=death">Домен Смерти</a>' },
@@ -13460,7 +14761,7 @@ export const spells: Spell[] = [
     <p><strong>Могучая длань.</strong>Рука пытается толкнуть существо Огромного размера или меньше, находящееся в пределах 5 футов от неё. Цель должна преуспеть в спасброске Силы, иначе рука толкает цель на расстояние не большее, чем количество футов, равное 5 плюс ваш модификатор заклинательной характеристики, умноженный на 5. Рука перемещается вместе с целью, оставаясь в пределах 5 футов от неё.</p>
     <p><strong>Сжимающая длань.</strong>Рука пытается схватить существо Огромного размера или меньше, находящееся в пределах 5 футов от неё. Цель должна преуспеть в спасброске Ловкости, иначе получит состояние Схваченный (Сл высвобождения от захвата равна вашей Сл спасброска заклинаний). Пока рука держит цель в захвате, Бонусным действием вы можете сдавить цель рукой, нанося Дробящий урон, равный 4д6 + ваш модификатор заклинательной характеристики.</p>
     <p><strong>Преграждающая длань.</strong>Рука предоставляет вам Укрытие наполовину от атак и иных эффектов, исходящих из её пространства или проходящих через него. Кроме того, её пространство для ваших врагов считается Труднопроходимой местностью.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong>Урон Сжатого кулака увеличивается на 2д8, а урон Сжимающей длани увеличивается на 2д6 за каждый уровень ячейки выше 5-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong>Урон Сжатого кулака увеличивается на 2д8, а урон Сжимающей длани увеличивается на 2д6 за каждый уровень ячейки выше 5-го.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -13543,7 +14844,7 @@ export const spells: Spell[] = [
     nameEn: 'Commune with Nature',
     level: '5',
     school: 'прорицание',
-    castingTime: '1 действие или ритуал',
+    castingTime: 'Действие или ритуал',
     range: 'На себя',
     components: {
       verbal: true,
@@ -13590,7 +14891,7 @@ export const spells: Spell[] = [
     duration: 'Мгновенная',
     description: `
     <p>Вы выпускаете волну холодного воздуха. Каждое существо в исходящем от вас 60-футовом Конусе должно совершить спасбросок Телосложения, получая 8д8 урона Холодом при провале или половину этого урона при успехе. Убитые этим заклинанием существа становятся замороженными статуями и могут растаять.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong>Урон увеличивается на 1д8 за каждый уровень ячейки выше 5-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong>Урон увеличивается на 1д8 за каждый уровень ячейки выше 5-го.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -13599,6 +14900,7 @@ export const spells: Spell[] = [
     sources: [
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=chemist">Химик</a>' },
       { type: 'subclass', name: '<a href="/classes/artificer?subclass=artillerist">Артиллерист</a>' },
       { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
@@ -13624,7 +14926,7 @@ export const spells: Spell[] = [
     description: `
     <p>Вы вызываете Большого неосязаемого духа со Стихийных планов, который появляется в незанятом пространстве в пределах дистанции. Выберите стихию духа, что определяет и его тип урона: воздух (Электричество), вода (Холод), земля (Звук) или огонь (Огонь). Дух присутствует, пока действует заклинание.</p>
     <p>Всякий раз, когда видимое вами существо входит в пространство духа или начинает свой ход в пределах 5 футов от духа, вы можете заставить это существо совершить спасбросок Ловкости, если дух не держит какое-то существо Опутанным. При провале цель получает 8д8 урона соответствующего стихии духа типа и состояние Опутанный до окончания заклинания. В начале каждого из своих ходов Опутанная таким образом цель повторяет спасбросок. При провале цель получает 4д8 урона соответствующего стихии духа типа. При успехе цель теряет состояние Опутанный.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong>Урон увеличивается на 1д8 за каждый уровень ячейки выше 5-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong>Урон увеличивается на 1д8 за каждый уровень ячейки выше 5-го.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -13671,7 +14973,7 @@ export const spells: Spell[] = [
     nameEn: 'Contact Other Plane',
     level: '5',
     school: 'прорицание',
-    castingTime: '1 действие или ритуал',
+    castingTime: 'Действие или ритуал',
     range: 'На себя',
     components: {
       verbal: true
@@ -13686,6 +14988,7 @@ export const spells: Spell[] = [
       page: 255
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=diviner">Прорицатель</a>' }
@@ -13716,6 +15019,7 @@ export const spells: Spell[] = [
     sources: [
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=pathogenist">Патогенист</a>' },
       { type: 'subclass', name: '<a href="/classes/druid?subclass=spore">Круг спор</a>' },
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
       { type: 'subclass', name: '<a href="/classes/paladin?subclass=oathbreaker">Клятвопреступник</a>' },
@@ -13828,7 +15132,7 @@ export const spells: Spell[] = [
         <td>1 минута</td>
       </tr>
     </table>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong>Длина ребра Куба увеличивается на 5 футов за каждый уровень ячейки выше 5-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong>Длина ребра Куба увеличивается на 5 футов за каждый уровень ячейки выше 5-го.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -13956,6 +15260,7 @@ export const spells: Spell[] = [
     sources: [
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=exorcist">Экзорцист</a>' },
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=grave">Домен Упокоения</a>' }
     ]
@@ -13977,7 +15282,7 @@ export const spells: Spell[] = [
     <p>Выберите одного Гуманоида в пределах дистанции. Он должен преуспеть в спасброске Мудрости, иначе получит состояние Очарованный на время действия заклинания. Цель совершает этот спасбросок с Преимуществом, если вы или ваши союзники сражаетесь с ним. Каждый раз, когда цель получает урон, она повторяет спасбросок, при успехе оканчивая на себе этот эффект.</p>
     <p>Пока вы и Очарованная цель находитесь на одном плане бытия, между вами и целью существует телепатическая связь. В ваш ход вы можете отдавать приказы цели через эту связь (действий не требуется), такие как «атакуй вон то существо», «беги туда» или «принеси вот это». В свой ход цель в меру своих сил пытается выполнить приказ, если приказ выполнен, и она не получает от вас дальнейших указаний, она будет действовать на своё усмотрение, в первую очередь сосредотачиваясь на самозащите.</p>
     <p>Вы можете отдать цели приказ как-либо использовать её Реакцию, но такой приказ затрачивает вашу собственную Реакцию.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong>Вы можете поддерживать Концентрацию вплоть до 10 минут при использовании ячейки 6-го уровня, вплоть до 1 часа с ячейкой 7-го уровня и вплоть до 8 часов с ячейкой 8-го или 9-го уровня.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong>Вы можете поддерживать Концентрацию вплоть до 10 минут при использовании ячейки 6-го уровня, вплоть до 1 часа с ячейкой 7-го уровня и вплоть до 8 часов с ячейкой 8-го или 9-го уровня.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -14100,7 +15405,7 @@ export const spells: Spell[] = [
     duration: 'Мгновенная',
     description: `
     <p>С рёвом опускается вертикальная колонна сияющего пламени. Каждое существо в Цилиндре радиусом 10 футов и высотой 40 футов с центром в точке в пределах дистанции должно совершить спасбросок Ловкости, получая при провале 5д6 урона Огнём и 5д6 урона Излучением, а при успехе только половину этого урона.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong>Урон Огнём и урон Излучением увеличиваются на 1д6 за каждый уровень ячейки выше 5-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong>Урон Огнём и урон Излучением увеличиваются на 1д6 за каждый уровень ячейки выше 5-го.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -14108,6 +15413,7 @@ export const spells: Spell[] = [
     },
     sources: [
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=exorcist">Экзорцист</a>' },
       { type: 'subclass', name: '<a href="/classes/druid?subclass=wildfire">Круг Дикого Огня</a>' },
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=light">Домен Света</a>' },
@@ -14136,7 +15442,7 @@ export const spells: Spell[] = [
     <p>Пока у существа есть это состояние, оно получает 5д10 Психического урона, если делает что-либо, прямо противоречащее отданной вами команде. Оно может получать этот урон только раз в день.</p>
     <p>Вы можете отдать любую команду, если она не однозначно самоубийственна. Заклинание оканчивается, если вы отдаёте такую команду.</p>
     <p>Заклинания Снятие проклятия, Высшее восстановление или Желание оканчивают заклинание.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong>Заклинание длится 365 дней, если вы используете ячейку 7-го или 8-го уровня. Если вы используете ячейку 9-го уровня, заклинание длится, пока не будет окончено одним из упомянутых выше заклинаний.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong>Заклинание длится 365 дней, если вы используете ячейку 7-го или 8-го уровня. Если вы используете ячейку 9-го уровня, заклинание длится, пока не будет окончено одним из упомянутых выше заклинаний.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -14184,6 +15490,7 @@ export const spells: Spell[] = [
       page: 281
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
@@ -14252,13 +15559,14 @@ export const spells: Spell[] = [
     duration: 'Концентрация, вплоть до 1 минуты',
     description: `
     <p>Выберите существо, которое видите в пределах дистанции. Цель должна преуспеть в спасброске Мудрости, иначе получит состояние Парализованный на время действия заклинания. В конце каждого своего хода цель повторяет этот спасбросок, при успехе оканчивая на себе это заклинание.</p>
-    <p><strong>Используя ячейку заклинания большего уровня. </strong>Вы можете нацелить заклинание на одно дополнительное существо за каждый уровень заклинания выше 5-го.</p>
+    <p><strong>Накладывание более высокой ячейкой </strong>Вы можете нацелить заклинание на одно дополнительное существо за каждый уровень заклинания выше 5-го.</p>
     `,
     source: {
       book: 'PHB\'24',
       page: 285
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
@@ -14376,7 +15684,7 @@ export const spells: Spell[] = [
     description: `
     <p>На время действия заклинания рой саранчи заполняет 20-футовую Сферу с центром на выбранной вами в пределах дистанции точке. Эта область Слабо заслонена и Труднопроходима.</p>
     <p>Когда рой появляется, каждое существо в области воздействия совершает спасбросок Телосложения, получая 4д10 Колющего урона при провале или половину этого урона при успехе. Существо также совершает этот спасбросок, когда в первый раз за ход входит в эту Сферу или когда заканчивает в ней свой ход. Существо совершает этот спасбросок только раз в ход.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong>Урон увеличивается на 1д10 за каждый уровень ячейки выше 5-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong>Урон увеличивается на 1д10 за каждый уровень ячейки выше 5-го.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -14386,6 +15694,7 @@ export const spells: Spell[] = [
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=pathogenist">Патогенист</a>' },
       { type: 'subclass', name: '<a href="/classes/druid?subclass=land">Круг Земли</a>' },
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
       { type: 'subclass', name: '<a href="/classes/warlock?subclass=fiend">Покровитель Исчадие</a>' },
@@ -14412,7 +15721,7 @@ export const spells: Spell[] = [
     description: `
     <p>Вы выпускаете бурю сияющего света и яростного грома в Цилиндре радиусом 10 футов и 40 футов высотой с центром на видимой вами в пределах дистанции точки. Существа в этом Цилиндре имеют состояния Ослеплённый и Оглохший и не могут сотворять заклинания с Вербальным компонентом.</p>
     <p>Когда этот шторм появляется, каждое существо в области воздействия должно совершить спасбросок Телосложения, получая 2д10 урона Излучением и 2д10 урона Звуком при провале или половину этого урона при успехе. Существо также совершает этот спасбросок, когда впервые за ход входит в область воздействия или когда заканчивает в ней свой ход. Существо совершает этот спасбросок только раз за ход.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong>И урон Излучением, и урон Звуком увеличиваются на 1д10 за каждый уровень ячейки выше 5-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong>И урон Излучением, и урон Звуком увеличиваются на 1д10 за каждый уровень ячейки выше 5-го.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -14475,13 +15784,14 @@ export const spells: Spell[] = [
     duration: 'Мгновенная',
     description: `
     <p>Волна целительной энергии исходит из выбранной вами в пределах дистанции точки. Выберите до шести существ в 30-радиус-футовой Сфере с центром на этой точке, каждая цель восстанавливает Хиты в количестве, равном 5д8 + ваш модификатор заклинательной характеристики.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong>Лечение увеличивается на 1д8 за каждый уровень ячейки выше 5-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong>Лечение увеличивается на 1д8 за каждый уровень ячейки выше 5-го.</p>
     `,
     source: {
       book: 'PHB\'24',
       page: 296
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
@@ -14542,7 +15852,7 @@ export const spells: Spell[] = [
     <p>Вы должны рассказать цели, как изменяются её воспоминания, и она должна понимать используемый при этом язык, чтобы изменения воспоминаний закрепились. Её сознание само заполнит пробелы в деталях вашего описания. Если заклинание оканчивается до того как вы закончите описывать новые воспоминания, воспоминания существа не будет изменены. В противном случае изменения вступают в силу по окончанию действия заклинания.</p>
     <p>Изменённая память не обязательно будет влиять на поведение существа, например — если новые воспоминания противоречит его наклонностям, мировоззрению или вере. Нелогичная изменённая память, такая как ложные воспоминания о том, как существу нравится купаться в кислоте, отбрасываются, как дурной сон. Мастер может посчитать, что изменённые воспоминания слишком абсурдны, чтобы влиять на существо.</p>
     <p>Сотворённые на цель заклинание Снятие проклятия или Высшее восстановление восстанавливают настоящие воспоминания цели.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong>Вы можете изменить воспоминания о событиях, произошедших до 7 дней назад (6-й уровень ячейки), до 30 дней назад (7-й уровень), до 1 года назад (8-й уровень), или в любой момент в жизни существа (9-й уровень).</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong>Вы можете изменить воспоминания о событиях, произошедших до 7 дней назад (6-й уровень ячейки), до 30 дней назад (7-й уровень), до 1 года назад (8-й уровень), или в любой момент в жизни существа (9-й уровень).</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -14551,6 +15861,7 @@ export const spells: Spell[] = [
     sources: [
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=alienist">Алиенист</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=enchanter">Очарователь</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=diviner">Покровитель Великий древний</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=trickery">Домен Обмана</a>' },
@@ -14631,7 +15942,7 @@ export const spells: Spell[] = [
     description: `
     <p>Вы пытаетесь подчинить Исчадие, Небожителя, Фею или Элементаля. Существо должно находиться в пределах дистанции в течение всего времени сотворения заклинания (обычно для этого существо призывается в центр обращённого Магического круга). В конце сотворения заклинания цель должна совершить спасбросок Харизмы, при провале она обязана служить вам, пока действует заклинание. Если существо было призвано или создано другим заклинанием, то длительность того заклинания увеличивается до длительности Планарных уз.</p>
     <p>Подчинённое существо должно изо всех сил выполнять ваши команды. Вы можете приказать ему сопровождать вас в приключении, охранять место или передать послание. Если оно Враждебно вам, оно будет пытаться выворачивать ваши формулировки так, чтобы следовать собственным целям. Если существо полностью выполняет ваши приказы до того, как заклинание оканчивается, и вы с ним находитесь на одном плане бытия, оно отправляется к вам, чтобы сообщить о выполнении приказов. Если вы находитесь на разных планах, оно возвращается к месту, где вы подчинили его, и остаётся там, пока заклинание не окончится.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong>Длительность увеличивается до 10 дней с ячейкой 6-го уровня, до 30 дней с ячейкой 7-го уровня, до 180 дней с ячейкой 8-го уровня и до 366 дней с ячейкой 9-го уровня.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong>Длительность увеличивается до 10 дней с ячейкой 6-го уровня, до 30 дней с ячейкой 7-го уровня, до 180 дней с ячейкой 8-го уровня и до 366 дней с ячейкой 9-го уровня.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -14654,7 +15965,7 @@ export const spells: Spell[] = [
     nameEn: 'Rary’s Telepathic Bond',
     level: '5',
     school: 'прорицание',
-    castingTime: '1 действие или ритуал',
+    castingTime: 'Действие или ритуал',
     range: '30 футов',
     components: {
       verbal: true,
@@ -14671,6 +15982,7 @@ export const spells: Spell[] = [
       page: 311
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=aberrant">Аберрантный разум</a>' },
@@ -14748,6 +16060,7 @@ export const spells: Spell[] = [
       page: 313
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
@@ -14870,7 +16183,7 @@ export const spells: Spell[] = [
     description: `
     <p>Вы призываете духа Небожителя. Он появляется в видимом вами в пределах дистанции незанятом пространстве и использует блок статистики Духа небожителя. При сотворении заклинания выберите тип духа: Защитник или Мститель. Выбранный тип определяет некоторые особенности духа, описанные в блоке статистики. Существо исчезает, когда его Хиты опускаются до 0 или когда заклинание заканчивается.</p>
     <p>Это существо — союзник вам и вашим союзникам. В бою оно имеет то же значение Инициативы, что и вы, и ходит сразу после вас. Оно подчиняется вашим словесным командам (от вас действий не требуется). Если вы ничего не приказываете, оно применяет действие Уклонение и перемещается так, чтобы избегать опасности.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong>Там, где блок статистики ссылается на уровень заклинания, используйте уровень ячейки заклинаний.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong>Там, где блок статистики ссылается на уровень заклинания, используйте уровень ячейки заклинаний.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -14900,7 +16213,7 @@ export const spells: Spell[] = [
     description: `
     <p>Вы призываете духа Дракона. Он появляется в видимом вами в пределах дистанции незанятом пространстве и использует блок статистики Духа дракона. Существо исчезает, когда его Хиты опускаются до 0 или когда заклинание заканчивается.</p>
     <p>Это существо — союзник вам и вашим союзникам. В бою оно имеет то же значение Инициативы, что и вы, и ходит сразу после вас. Оно подчиняется вашим словесным командам (от вас действий не требуется). Если вы ничего не приказываете, оно применяет действие Уклонение и перемещается так, чтобы избегать опасности.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong>Там, где блок статистики ссылается на уровень заклинания, используйте уровень ячейки заклинаний.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong>Там, где блок статистики ссылается на уровень заклинания, используйте уровень ячейки заклинаний.</p>
     `,
     source: {
       book: 'PHB\'24',
@@ -15000,6 +16313,7 @@ export const spells: Spell[] = [
       page: 332
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
@@ -15150,7 +16464,7 @@ export const spells: Spell[] = [
     duration: 'Концентрация, вплоть до 1 минуты',
     description: `
     <p>Вы взываете к духам природы, чтобы обратить их против ваших врагов. Выберите точку, которую вы можете видеть в пределах дистанции. Духи оживляют деревья, камни и травы в кубе с длиной ребра в 60 футов с центром в этой точке на все время действия заклинания.</p>
-    <p><strong>Травы и подлесок.</strong>Любая область земли в кубе, покрытая травой или подлеском, является труднопроходимой местностью для ваших врагов.</p>
+    <p><strong>Травы и подлесок.</strong>Любая область земли в кубе, покрытая травой или подлеском, является Труднопроходимой местностью для ваших врагов.</p>
     <p><strong>Деревья.</strong>В начале каждого вашего хода каждый из ваших врагов в пределах 10 футов от любого дерева внутри куба должен преуспеть в спасброске Ловкости, иначе получит 4д6 рубящего урона от хлещущих его ветвей.</p>
     <p><strong>Корни и лозы.</strong>В конце каждого вашего хода одно существо по вашему выбору, которое находится на земле внутри куба, должно преуспеть в спасброске Силы, иначе станет опутанным до тех пор, пока заклинание не закончится. Опутанное существо может действием совершить проверку Силы (Атлетика) против Сл спасброска от ваших заклинаний, оканчивая на себе эффект заклинания при успехе.</p>
     <p><strong>Камни.</strong>Бонусным действием в свой ход вы можете призвать камень внутри куба, чтобы запустить его в существо, которое вы можете видеть внутри куба. Совершите дальнобойную атаку заклинанием против этой цели. При попадании цель получает 3д8 немагического дробящего урона и должна преуспеть в спасброске Силы, иначе будет сбита с ног.</p>
@@ -15239,13 +16553,14 @@ export const spells: Spell[] = [
     duration: 'Концентрация, вплоть до 1 часа',
     description: `
     <p>Вы касаетесь существа и выбираете Силу, Ловкость, Интеллект, Мудрость или Харизму. Пока заклинание действует, цель совершает с Преимуществом проверки выбранной характеристики.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Вы можете нацелить заклинание на одно дополнительное существо за каждый уровень заклинания выше 2-го. Для каждой цели вы можете выбирать разные характеристики.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong> Вы можете нацелить заклинание на одно дополнительное существо за каждый уровень заклинания выше 2-го. Для каждой цели вы можете выбирать разные характеристики.</p>
     `,
     source: {
       book: 'PHB\'24',
       page: 340
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
@@ -15253,6 +16568,7 @@ export const spells: Spell[] = [
       { type: 'class', name: '<a href="/classes/ranger">Следопыт</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=mutagenist">Мутагенист</a>' },
       { type: 'subclass', name: '<a href="/classes/artificer?subclass=reanimator">Реаниматор</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=transmuter">Преобразователь</a>' },
@@ -15281,15 +16597,17 @@ export const spells: Spell[] = [
     <p>Вы создаете 20-футовую Сферу жёлто-зелёного тумана с центром на выбранной вами в пределах дистанции точке. Туман существует, пока действует заклинание, или пока сильный ветер (такой, как созданный заклинанием Порыв ветра) его не развеет, окончив заклинание. Область Сферы — Сильно заслонённая местность.</p>
     <p>Каждое существо в Сфере должно совершить спасбросок Телосложения, получая 5д8 урона Ядом при провале или половину этого урона при успехе. Существо также совершает этот спасбросок, когда Сфера перемещается в его пространство, когда оно входит в Сферу или когда заканчивает свой ход в Сфере. Существо совершает этот спасбросок только раз за ход.</p>
     <p>Облако перемещается на 10 футов прочь от вас в начале каждого вашего хода.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон увеличивается на 1д8 за каждый уровень ячейки выше 5-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong> Урон увеличивается на 1д8 за каждый уровень ячейки выше 5-го.</p>
     `,
     source: {
       book: 'PHB\'24',
       page: 343
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=chemist">Химик</a>' },
       { type: 'subclass', name: '<a href="/classes/artificer?subclass=alchemist">Алхимик</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=conjurer">Вызыватель</a>' },
       { type: 'subclass', name: '<a href="/classes/druid?subclass=spore">Круг спор</a>' },
@@ -15314,7 +16632,7 @@ export const spells: Spell[] = [
     duration: 'Мгновенная',
     description: `
     <p>Вы высвобождаете поток сияющего пламени. Совершите дальнобойную атаку заклинанием по цели в пределах дистанции; при этом цель не получает Преимуществ Укрытия наполовину и Укрытия на три четверти. При попадании цель получает 2д10 урона Излучением.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Вы высвобождаете по одному дополнительному потоку за каждый уровень ячейки выше 1-го и можете направлять их в одну цель или в разные. На каждый поток совершается отдельный бросок атаки.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong> Вы высвобождаете по одному дополнительному потоку за каждый уровень ячейки выше 1-го и можете направлять их в одну цель или в разные. На каждый поток совершается отдельный бросок атаки.</p>
     `,
     source: {
       book: 'FRHoF\'24',
@@ -15349,7 +16667,7 @@ export const spells: Spell[] = [
     description: `
     <p>Вы метаете дезориентирующую магическую энергию в одно существо в пределах дистанции. Цель совершает спасбросок Телосложения; Конструкты и Нежить автоматически преуспевают в этом спасброске.</p>
     <p>При провале цель получает 2д4 Силового урона, её Скорость уменьшается вдвое до начала вашего следующего хода, а в свой следующий ход она может совершить только действие или только бонусное действие, но не то и другое. При успехе цель только получает половину Силового урона.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон увеличивается на 2д4 за каждый уровень ячейки выше 1-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong> Урон увеличивается на 2д4 за каждый уровень ячейки выше 1-го.</p>
     `,
     source: {
       book: 'FRHoF\'24',
@@ -15436,7 +16754,7 @@ export const spells: Spell[] = [
     nameEn: 'Derian’s Dutiful Homunculi',
     level: '2',
     school: 'вызов',
-    castingTime: '1 действие или ритуал',
+    castingTime: 'Действие или ритуал',
     range: 'На себя',
     components: {
       verbal: true,
@@ -15482,7 +16800,7 @@ export const spells: Spell[] = [
     <p>Пока заклинание действует, вы обладаете следующими Преимуществами:</p>
     <p>Лазание. Вы получаете Скорость лазания, равную вашей Скорости.</p>
     <p>Ядовитый укус. Действием Магия вы можете совершить дальнобойную атаку заклинанием этой змеёй по одному существу в пределах 50 футов. При попадании цель получает 1д6 Силового урона и состояние Отравленный до начала вашего следующего хода. Пока существо Отравлено таким образом, оно также считается Недееспособным.</p>
-    <p>Используя ячейку заклинания большего уровня. За каждый уровень ячейки выше 3-го количество получаемых вами от этого заклинания Временных хитов увеличивается на 5, а урон Ядовитого укуса на 1д6.</p>
+    <p>Накладывание более высокой ячейкой За каждый уровень ячейки выше 3-го количество получаемых вами от этого заклинания Временных хитов увеличивается на 5, а урон Ядовитого укуса на 1д6.</p>
     `,
     source: {
       book: 'FRHoF\'24',
@@ -15517,7 +16835,7 @@ export const spells: Spell[] = [
     <p>Заводная сила. Цель совершает спасбросок Ловкости, получая 3д6 Силового урона при провале или половину этого урона при успехе.</p>
     <p>Оберег порядка. Цель получает Временные хиты в количестве, равном 1д6 + ваш модификатор заклинательной характеристики.</p>
     <p>Когда в ваш ход вы перемещаетесь, можете также переместить духов на расстояние вплоть до 30 футов в видимое вами незанятое пространство.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон и количество Временных хитов увеличиваются на 1д6 за каждый уровень ячейки выше 3-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong> Урон и количество Временных хитов увеличиваются на 1д6 за каждый уровень ячейки выше 3-го.</p>
     `,
     source: {
       book: 'FRHoF\'24',
@@ -15525,7 +16843,7 @@ export const spells: Spell[] = [
     },
     sources: [
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
-      { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
+      { type: 'class', name: '<a href="/classes/artificer">Артефактор</a>' },
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
@@ -15548,7 +16866,7 @@ export const spells: Spell[] = [
     duration: 'Мгновенная',
     description: `
     <p>Серебристая энергия вырывается из вас Линией 120 футов длиной и 5 футов шириной. Каждое выбранное вами в области Линии существо совершает спасбросок Силы. При провале существо получает 3д10 Силового урона и состояние Опрокинутый, а при успехе только половину этого урона.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон увеличивается на 1д10 за каждый уровень ячейки выше 3-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong> Урон увеличивается на 1д10 за каждый уровень ячейки выше 3-го.</p>
     `,
     source: {
       book: 'FRHoF\'24',
@@ -15562,7 +16880,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
       { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
-      { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' }
+      { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -15581,7 +16900,7 @@ export const spells: Spell[] = [
     description: `
     <p>Оглушительные раскаты звуков заполняют исходящую от вас 10-футовую Эманацию на время действия заклинания. Каждый раз, когда Эманация входит в пространство существа, когда существо входит в Эманацию, и когда существо заканчивает в ней свой ход, это существо совершает спасбросок Телосложения. При провале существо получает 3д6 урона Звуком и состояние Оглохший до начала вашего следующего хода, а при успехе только половину этого урона. Каждое существо совершает этот спасбросок только раз в ход. Когда вы сотворяете это заклинание, можете указать существ, на которых заклинание действовать не будет.</p>
     <p>Кроме того, вы обладаете Сопротивлением урону Звуком, а дальнобойные броски атак по вам совершаются с Помехой.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон увеличивается на 1д6 за каждый уровень ячейки выше 3-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong> Урон увеличивается на 1д6 за каждый уровень ячейки выше 3-го.</p>
     `,
     source: {
       book: 'FRHoF\'24',
@@ -15594,7 +16913,8 @@ export const spells: Spell[] = [
       { type: 'subclass', name: '<a href="/classes/rogue?subclass=arcane-trickster">Мистический ловкач</a>' },
       { type: 'subclass', name: '<a href="/classes/fighter?subclass=eldritch-knight">Мистический рыцарь</a>' },
       { type: 'subclass', name: '<a href="/classes/bard?subclass=lore">Коллегия Знания</a>' },
-      { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' }
+      { type: 'subclass', name: '<a href="/classes/wizard?subclass=evoker">Воплотитель</a>' },
+      { type: 'feat', name: '<a href="/feats/genie-magic/">Магия гениев</a>' }
     ]
   },
   {
@@ -15614,7 +16934,7 @@ export const spells: Spell[] = [
     <p>Вы создаёте столп чаропламени в виде Цилиндра радиусом 20 футов и высотой 20 футов с центром в точке в пределах дистанции. Область этого цилиндра залита Ярким светом, и каждое существо, находящееся в области, когда она появляется, совершает спасбросок Телосложения, получая 4д10 урона Излучением при провале или половину этого урона при успехе. Существо также совершает этот спасбросок, когда впервые за ход входит в область воздействия или заканчивает там свой ход. Существо совершает этот спасбросок только раз в ход.</p>
     <p>Кроме того, каждый раз, когда существо в Цилиндре сотворяет заклинание, оно совершает спасбросок Телосложения; при провале это заклинание развеивается без эффекта, а действие, бонусное действие или Реакция, использованные при его сотворении, теряются. Если заклинание сотворялось с ячейкой заклинаний, ячейка не тратится.</p>
     <p>Когда вы сотворяете это заклинание, вы можете указать существ, на которых заклинание действовать не будет.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Урон увеличивается на 1д10 за каждый уровень ячейки выше 4-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong> Урон увеличивается на 1д10 за каждый уровень ячейки выше 4-го.</p>
     `,
     source: {
       book: 'FRHoF\'24',
@@ -15673,7 +16993,7 @@ export const spells: Spell[] = [
     description: `
     <p>Вы защищаетесь от разрушительной энергии, снижая получаемый урон на число, равное 4д6 + ваш модификатор заклинательной характеристики.</p>
     <p>Если этот урон наносился существом в пределах дистанции, вы можете заставить это существо совершить спасбросок Телосложения; оно получает 4д6 Силового урона при провале или половину этого урона при успехе.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Снижение получаемого вами урона и Силовой урон увеличиваются на 1д6 за каждый уровень ячейки выше 4-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong> Снижение получаемого вами урона и Силовой урон увеличиваются на 1д6 за каждый уровень ячейки выше 4-го.</p>
     `,
     source: {
       book: 'FRHoF\'24',
@@ -15772,7 +17092,7 @@ export const spells: Spell[] = [
     <p><strong>Поглощение энергии.</strong> Когда вы получаете урон Звуком, Кислотой, Огнём, Холодом или Электричеством, вы можете Реакцией потратить одну сферу, получая Сопротивление этому типу урона до начала вашего следующего хода.</p>
     <p><strong>Взрыв энергии.</strong> Бонусным действием вы метаете одну сферу по цели в пределах 120 футов от вас: совершите дальнобойную атаку заклинанием. При попадании цель получает 3д6 урона Звуком, Кислотой, Огнём, Холодом или Электричеством (на ваш выбор). Вне зависимости от того, попала ли сфера, она тратится.</p>
     <p>Заклинание оканчивается раньше, если у вас не остаётся сфер.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong> Количество сфер увеличивается на 1 за каждый уровень ячейки выше 6-го.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong> Количество сфер увеличивается на 1 за каждый уровень ячейки выше 6-го.</p>
     `,
     source: {
       book: 'FRHoF\'24',
@@ -15914,7 +17234,7 @@ export const spells: Spell[] = [
       material: 'позолоченный половник стоимостью 500+ зм'
     },
     duration: '10 минут',
-    description: `<p>Вы призываете котёл на ножках, наполненный бурлящей жидкостью. Котёл появляется в незанятом месте на земле в пределах 5 футов от вас и существует в течение длительности заклинания. Котёл не может быть перемещен и исчезает, когда заклинание заканчивается, вместе с бурлящей жидкостью внутри него. Жидкость в котле дублирует свойства обычного или необычного зелья на ваш выбор ,например, зелья лечения,. Бонусным действием вы или ваш союзник можете достать из котла 1 такое зелье. Зелье будет находиться в фиале, который исчезнет, когда зелье будет выпито. Котёл может создать количество таких зелий, равное вашему модификатору заклинательной характеристики (минимум 1). Когда последнее из этих зелий будет вынуто из котла, котёл исчезает и заклинание заканчивается. Зелья, полученные из котла и не использованные, исчезают, когда вы снова накладываете это заклинание.</p>`,
+    description: `<p>Вы призываете котёл на ножках, наполненный бурлящей жидкостью. Котёл появляется в незанятом месте на земле в пределах 5 футов от вас и существует в течение длительности заклинания. Котёл не может быть перемещен и исчезает, когда заклинание заканчивается, вместе с бурлящей жидкостью внутри него. Жидкость в котле дублирует свойства обычного или необычного зелья на ваш выбор, например, зелья лечения.Бонусным действием вы или ваш союзник можете достать из котла 1 такое зелье. Зелье будет находиться в фиале, который исчезнет, когда зелье будет выпито. Котёл может создать количество таких зелий, равное вашему модификатору заклинательной характеристики (минимум 1). Когда последнее из этих зелий будет вынуто из котла, котёл исчезает и заклинание заканчивается. Зелья, полученные из котла и не использованные, исчезают, когда вы снова накладываете это заклинание.</p>`,
     
     source: {
       book: 'PHB\'24',
@@ -15941,7 +17261,7 @@ export const spells: Spell[] = [
       material: 'драгоценный камень, кристалл или реликварий стоимостью 500+ зм'
     },
     duration: 'Пока не рассеется',
-    description: `<p>Ваше тело впадает в кататоническое состояние, когда ваша душа покидает его и перемещается в контейнер, который вы использовали в качестве материального компонента заклинания. Пока ваша душа находится в контейнере, вы осознаёте своё окружение так, как если бы находились в пространстве контейнера. Вы не можете перемещаться или совершать реакции. Единственное действие, которое вы можете предпринять, это проецировать свою душу на расстояние до 100 футов от контейнера, чтобы вернуться в своё тело ,окончив этим заклинание, либо попытаться сделать одержимым другого гуманоида. Вы можете попытаться сделать другого видимого вами в пределах 100 футов от вас гуманоида одержимым вами. Существо, защищённое заклинанием Защита от зла и добра или Магический круг, невозможно сделать одержимым. Цель совершает спасбросок Харизмы. При провале ваша душа входит в тело цели, а душа цели оказывается запертой в контейнере. В случае успешного спасброска цель сопротивляется вашим попыткам сделать её тело одержимым и вы не можете попытаться сделать это снова в течение 24 часов. Когда вы делаете тело существа одержимым вами, то вы управляете им. Ваши хиты, кость хитов, Сила, Ловкость, Телосложение, Скорость и чувства заменяются характеристиками существа. В остальном вы сохраняете свои игровые характеристики. Тем временем душа одержимого существа может воспринимать окружающий мир из контейнера, используя свои собственные органы чувств, но не может двигаться и недееспособна. Во время одержимости телом вы можете совершить действие магия, чтобы вернуться из тела хозяина в контейнер, если он находится в пределах 100 футов от вас, возвращая душу существа в её тело. Если тело хозяина умирает, пока вы находитесь в нём, то существо умирает и вы совершаете спасбросок Харизмы против сложности вашего собственного заклинания. При успехе вы возвращаетесь в контейнер, если он находится в пределах 100 футов от вас. В противном случае вы умираете. Если контейнер уничтожен или заклинание заканчивается, то ваша душа возвращается в ваше тело. Если ваше тело находится на расстоянии более 100 футов от вас или если оно мертво, то вы умираете. Если душа другого существа находится в контейнере в момент его разрушения, то душа этого существа возвращается в её тело, если оно живо и находится в пределах 100 футов. В противном случае существо умирает. Когда заклинание заканчивается, контейнер уничтожается.</p>`,
+    description: `<p>Ваше тело впадает в кататоническое состояние, когда ваша душа покидает его и перемещается в контейнер, который вы использовали в качестве материального компонента заклинания. Пока ваша душа находится в контейнере, вы осознаёте своё окружение так, как если бы находились в пространстве контейнера. Вы не можете перемещаться или совершать реакции. Единственное действие, которое вы можете предпринять, это проецировать свою душу на расстояние до 100 футов от контейнера, чтобы вернуться в своё тело, окончив этим заклинание, либо попытаться сделать одержимым другого гуманоида. Вы можете попытаться сделать другого видимого вами в пределах 100 футов от вас гуманоида одержимым вами. Существо, защищённое заклинанием Защита от зла и добра или Магический круг, невозможно сделать одержимым. Цель совершает спасбросок Харизмы. При провале ваша душа входит в тело цели, а душа цели оказывается запертой в контейнере. В случае успешного спасброска цель сопротивляется вашим попыткам сделать её тело одержимым и вы не можете попытаться сделать это снова в течение 24 часов. Когда вы делаете тело существа одержимым вами, то вы управляете им. Ваши хиты, кость хитов, Сила, Ловкость, Телосложение, Скорость и чувства заменяются характеристиками существа. В остальном вы сохраняете свои игровые характеристики. Тем временем душа одержимого существа может воспринимать окружающий мир из контейнера, используя свои собственные органы чувств, но не может двигаться и недееспособна. Во время одержимости телом вы можете совершить действие магия, чтобы вернуться из тела хозяина в контейнер, если он находится в пределах 100 футов от вас, возвращая душу существа в её тело. Если тело хозяина умирает, пока вы находитесь в нём, то существо умирает и вы совершаете спасбросок Харизмы против сложности вашего собственного заклинания. При успехе вы возвращаетесь в контейнер, если он находится в пределах 100 футов от вас. В противном случае вы умираете. Если контейнер уничтожен или заклинание заканчивается, то ваша душа возвращается в ваше тело. Если ваше тело находится на расстоянии более 100 футов от вас или если оно мертво, то вы умираете. Если душа другого существа находится в контейнере в момент его разрушения, то душа этого существа возвращается в её тело, если оно живо и находится в пределах 100 футов. В противном случае существо умирает. Когда заклинание заканчивается, контейнер уничтожается.</p>`,
     
     source: {
       book: 'PHB\'24',
@@ -16043,7 +17363,7 @@ export const spells: Spell[] = [
       material: 'пыльца изумруда стоимостью 25+ зм'
     },
     duration: 'До развеивания',
-    description: `<p>Вы создаёте иллюзию предмета, существа или другого видимого явления в пределах дистанции, которая активируется при наступлении определённого условия. До этого момента иллюзия остаётся незаметной. Размер иллюзии не должен превышать 30-футовый куб и при накладывании заклинания вы решаете, как иллюзия будет себя вести и какие звуки издавать. Этот запрограммированный сценарий может длиться до 5 минут. Когда происходит указанное вами событие, иллюзия становится видимой и выполняет заранее определённые действия. После завершения представления иллюзия исчезает и остаётся в неактивном состоянии на 10 минут, после чего её можно активировать снова. Условие может быть настолько общим или детализированным, насколько вы захотите, но оно должно основываться на визуальных или звуковых явлениях, происходящих в пределах 30 футов от области действия заклинания. Например, вы можете создать иллюзию самого себя, которая появится и предупредит тех, кто попытается открыть заминированную дверь. Физическое взаимодействие с изображением раскрывает его иллюзорную природу, так как через него можно пройти. Существо, использующее действие изучение для анализа изображения, может определить, что это иллюзия, успешно пройдя проверку Интеллекта ,Расследование, против Сл. спасброска вашего заклинания. Если существо распознаёт иллюзию, то оно может видеть сквозь изображение, а любые издаваемые им звуки будут казаться приглушёнными.</p>`,
+    description: `<p>Вы создаёте иллюзию предмета, существа или другого видимого явления в пределах дистанции, которая активируется при наступлении определённого условия. До этого момента иллюзия остаётся незаметной. Размер иллюзии не должен превышать 30-футовый куб и при накладывании заклинания вы решаете, как иллюзия будет себя вести и какие звуки издавать. Этот запрограммированный сценарий может длиться до 5 минут. Когда происходит указанное вами событие, иллюзия становится видимой и выполняет заранее определённые действия. После завершения представления иллюзия исчезает и остаётся в неактивном состоянии на 10 минут, после чего её можно активировать снова. Условие может быть настолько общим или детализированным, насколько вы захотите, но оно должно основываться на визуальных или звуковых явлениях, происходящих в пределах 30 футов от области действия заклинания. Например, вы можете создать иллюзию самого себя, которая появится и предупредит тех, кто попытается открыть заминированную дверь. Физическое взаимодействие с изображением раскрывает его иллюзорную природу, так как через него можно пройти. Существо, использующее действие изучение для анализа изображения, может определить, что это иллюзия, успешно пройдя проверку Интеллекта (Расследование) против Сл. спасброска вашего заклинания. Если существо распознаёт иллюзию, то оно может видеть сквозь изображение, а любые издаваемые им звуки будут казаться приглушёнными.</p>`,
     
     source: {
       book: 'PHB\'24',
@@ -16070,7 +17390,7 @@ export const spells: Spell[] = [
       material: 'рубиновая пыль стоимостью 1000+ зм'
     },
     duration: '1 день',
-    description: `<p>Вы создаёте защиту от магического перемещения, которая охватывает до 40000 квадратных футов площади на высоте до 30 футов над полом. Во время длительности заклинания существа не могут телепортироваться в область или использовать порталы ,например, созданные заклинанием Врата, чтобы войти в неё. Заклинание защищает область от межпланарного перемещения, и, следовательно, предотвращает доступ существ в область через Астральный план, Эфирный план, Страну фей, Царство теней или с помощью заклинания Уход в иной план. Кроме того, заклинание наносит урон определённым типам существ, которые вы выбираете при его наложении. Выберите 1 или несколько из следующих типов: аберрации, небожители, элементали, феи, исчадия и нежить. Когда существо выбранного типа впервые за ход входит в область действия заклинания или заканчивает там свой ход, оно получает 5д10 урона излучением или некротической энергией ,по вашему выбору при наложении заклинания,. Вы можете назначить пароль при наложении заклинания. Существо, которое произносит пароль, входя в область, не получает урона от заклинания. Область действия заклинания не может перекрывать область действия другого заклинания Запрет. Если вы накладываете Запрет каждый день в течение 30 дней в одном и том же месте, то заклинание действует до тех пор, пока не будет рассеяно, и материальные компоненты расходуются при последнем наложении.</p>`,
+    description: `<p>Вы создаёте защиту от магического перемещения, которая охватывает до 40000 квадратных футов площади на высоте до 30 футов над полом. Во время длительности заклинания существа не могут телепортироваться в область или использовать порталы, например, созданные заклинанием Врата, чтобы войти в неё. Заклинание защищает область от межпланарного перемещения, и, следовательно, предотвращает доступ существ в область через Астральный план, Эфирный план, Страну фей, Царство теней или с помощью заклинания Уход в иной план. Кроме того, заклинание наносит урон определённым типам существ, которые вы выбираете при его наложении. Выберите 1 или несколько из следующих типов: аберрации, небожители, элементали, феи, исчадия и нежить. Когда существо выбранного типа впервые за ход входит в область действия заклинания или заканчивает там свой ход, оно получает 5д10 урона излучением или некротической энергией, по вашему выбору при наложении заклинания.Вы можете назначить пароль при наложении заклинания. Существо, которое произносит пароль, входя в область, не получает урона от заклинания. Область действия заклинания не может перекрывать область действия другого заклинания Запрет. Если вы накладываете Запрет каждый день в течение 30 дней в одном и том же месте, то заклинание действует до тех пор, пока не будет рассеяно, и материальные компоненты расходуются при последнем наложении.</p>`,
     
     source: {
       book: 'PHB\'24',
@@ -16102,6 +17422,7 @@ export const spells: Spell[] = [
       page: 276
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
@@ -16133,6 +17454,7 @@ export const spells: Spell[] = [
       page: 284
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
@@ -16160,6 +17482,7 @@ export const spells: Spell[] = [
       page: 250
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
@@ -16180,7 +17503,7 @@ export const spells: Spell[] = [
       somatic: true
     },
     duration: 'Концентрация, до 10 минут',
-    description: `<p>Вы создаёте связанные порталы для телепортации. Выберите две точки на земле, которые вы видите, одну в пределах 10 футов от себя, и вторую в пределах дистанции. В каждой точке открывается круглый портал, который остаётся на время длительности. Порталы представляют собой двумерные светящиеся кольца, заполненные туманом, который блокирует видимость. Они парят в нескольких дюймах над землёй и расположены перпендикулярно ей. Каждый портал открыт только с одной стороны ,вы выбираете, с какой,. Всё, что входит в открытую сторону портала, выходит из открытой стороны другого портала, как если бы эти два пространства находились рядом друг с другом. Вы можете изменить направление открытых сторон бонусным действием.</p>`,
+    description: `<p>Вы создаёте связанные порталы для телепортации. Выберите две точки на земле, которые вы видите, одну в пределах 10 футов от себя, и вторую в пределах дистанции. В каждой точке открывается круглый портал, который остаётся на время длительности. Порталы представляют собой двумерные светящиеся кольца, заполненные туманом, который блокирует видимость. Они парят в нескольких дюймах над землёй и расположены перпендикулярно ей. Каждый портал открыт только с одной стороны, вы выбираете, с какой.Всё, что входит в открытую сторону портала, выходит из открытой стороны другого портала, как если бы эти два пространства находились рядом друг с другом. Вы можете изменить направление открытых сторон бонусным действием.</p>`,
     
     source: {
       book: 'PHB\'24',
@@ -16233,7 +17556,7 @@ export const spells: Spell[] = [
     },
     duration: '24 часа',
     description: `<p>Вы внушаете курс действий описанный не более чем в 25 словах, 12 или меньшему числу существ, которых вы видите в пределах дистанции и которые могут слышать и понимать вас. Внушение должно звучать как достижимое и не включать ничего, что явно причинит урон любой из целей или их союзникам. Например, вы можете сказать: «Пройдите к деревне по той дороге и помогите местным жителям собирать урожай до заката». Или вы можете сказать: «Сейчас не время для насилия. Бросьте оружие и танцуйте! Прекратите через час». Каждая цель должна преуспеть в спасброске Мудрости, иначе она получает состояние очарованный на время действия заклинания или пока вы или ваши союзники не нанесёте урон цели. Каждая очарованная цель следует внушению в меру своих способностей. Внушённая деятельность может продолжаться в течение всей длительности, но если внушённая деятельность может быть завершена за более короткое время, то заклинание заканчивается для цели по её завершении.</p>
-    <p><strong>Накладывание более высокой ячейкой.</strong>Длительность увеличивается при использовании ячейки 7 уровня ,10 дней, 8 уровня ,30 дней, или 9 уровня ,366 дней,.</p>`,
+    <p><strong>Накладывание более высокой ячейкой.</strong>Длительность увеличивается при использовании ячейки 7 уровня, 10 дней, 8 уровня, 30 дней, или 9 уровня, 366 дней,.</p>`,
     
     source: {
       book: 'PHB\'24',
@@ -16268,6 +17591,7 @@ export const spells: Spell[] = [
       page: 275
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
       { type: 'class', name: '<a href="/classes/druid">Друид</a>' },
@@ -16317,7 +17641,7 @@ export const spells: Spell[] = [
       material: 'миниатюрная кристальная сфера'
     },
     duration: 'Мгновенная',
-    description: `<p>Ледяной шар летит от вас к точке по вашему выбору в пределах дистанции, где взрывается, образуя сферу радиусом 60 футов. Каждое существо в этой области должно совершить спасбросок Телосложения. При провале оно получает 10д6 урона холодом, при успехе половину этого урона. Если шар ударяется о водоём, то он замораживает воду на глубину до 6 дюймов и площадь квадрата со сторой 30 футов. Этот лёд сохраняется в течение 1 минуты. Существа, которые плавали на поверхности воды в момент замерзания, оказываются пойманными в ловушку и получают состояние опутанный. Существо, оказавшееся в ловушке, может совершить действие, чтобы совершить проверку Силы ,Атлетика, против Сл. ваших заклинаний для высвобождения. Вы можете воздержаться от запуска шара сразу после завершения наложения заклинания. Если вы так поступите, то в вашей руке появится шар размером со снаряд для пращи, холодный на ощупь. В любой момент вы или существо, которому вы передали шар, можете бросить его ,на расстояние до 40 футов, или метнуть его с помощью пращи ,на обычную дистанцию пращи,. Он разбивается при ударе, вызывая тот же эффект, что и обычное наложение заклинания. Вы также можете просто положить шар, не разбивая его. Если шар не разобьётся в течение 1 минуты, то он взрывается</p>
+    description: `<p>Ледяной шар летит от вас к точке по вашему выбору в пределах дистанции, где взрывается, образуя сферу радиусом 60 футов. Каждое существо в этой области должно совершить спасбросок Телосложения. При провале оно получает 10д6 урона холодом, при успехе половину этого урона. Если шар ударяется о водоём, то он замораживает воду на глубину до 6 дюймов и площадь квадрата со сторой 30 футов. Этот лёд сохраняется в течение 1 минуты. Существа, которые плавали на поверхности воды в момент замерзания, оказываются пойманными в ловушку и получают состояние опутанный. Существо, оказавшееся в ловушке, может совершить действие, чтобы совершить проверку Силы, Атлетика, против Сл. ваших заклинаний для высвобождения. Вы можете воздержаться от запуска шара сразу после завершения наложения заклинания. Если вы так поступите, то в вашей руке появится шар размером со снаряд для пращи, холодный на ощупь. В любой момент вы или существо, которому вы передали шар, можете бросить его, на расстояние до 40 футов, или метнуть его с помощью пращи, на обычную дистанцию пращи.Он разбивается при ударе, вызывая тот же эффект, что и обычное наложение заклинания. Вы также можете просто положить шар, не разбивая его. Если шар не разобьётся в течение 1 минуты, то он взрывается</p>
     <p><strong>Накладывание более высокой ячейкой.</strong>Урон увеличивается на 1д6 за каждый уровень ячейки выше 6.</p>`,
     
     source: {
@@ -16344,7 +17668,7 @@ export const spells: Spell[] = [
       somatic: true
     },
     duration: 'Мгновенная',
-    description: `<p>Вы просите внеземное существо о помощи. Это существо должно быть вам известно: бог, принц демонов или другое существо космического масштаба. Это существо посылает небожителя, элементаля или исчадие, верного ему, чтобы помочь вам, вызывая существо в незанятое пространство в пределах дистанции. Если вы знаете имя конкретного существа, то вы можете назвать его при наложении этого заклинания, чтобы запросить это существо, хотя вы можете получить другое существо по выбору Мастера. Когда существо появляется, оно не обязано вести себя определённым образом. Вы можете попросить его выполнить услугу за плату, но оно не обязано это делать. Запрашиваемая задача может варьироваться от простой ,перенести вас через пропасть или помочь в бою, до сложной ,шпионить за вашими врагами или защищать вас во время похода в подземелье,. Вы должны быть в состоянии общаться с существом, чтобы договориться о его услугах. Оплата может принимать различные формы. Небожитель может потребовать пожертвования золота или магических предметов для храма, а исчадие может потребовать жертвоприношение существа или сокровища в дар. Некоторые существа могут обменивать свои услуги на ваши услуги. Задача, которую можно измерить в минутах, требует оплаты, эквивалентной 100 зм за минуту. Задача, измеряемая часами, требует 1 000 зм за час. А задача, измеряемая днями ,до 10 дней, требует 10000 зм за день. Мастер может скорректировать эти суммы в зависимости от обстоятельств, при которых вы накладываете заклинание. Если задача соответствует характеру существа, то оплата может быть уменьшена вдвое или даже отменена. Безопасные задачи обычно требуют только половины предложенной оплаты, тогда как особенно опасные задачи могут потребовать больших пожертвований. Существа редко принимают задачи, которые кажутся самоубийственными. После выполнения задачи или по истечении согласованного срока службы существо возвращается на свой родной план, если возможно, отчитавшись перед вами. Если вы не смогли договориться о цене за услуги существа, то оно немедленно возвращается на свой родной план.</p>`,
+    description: `<p>Вы просите внеземное существо о помощи. Это существо должно быть вам известно: бог, принц демонов или другое существо космического масштаба. Это существо посылает небожителя, элементаля или исчадие, верного ему, чтобы помочь вам, вызывая существо в незанятое пространство в пределах дистанции. Если вы знаете имя конкретного существа, то вы можете назвать его при наложении этого заклинания, чтобы запросить это существо, хотя вы можете получить другое существо по выбору Мастера. Когда существо появляется, оно не обязано вести себя определённым образом. Вы можете попросить его выполнить услугу за плату, но оно не обязано это делать. Запрашиваемая задача может варьироваться от простой, перенести вас через пропасть или помочь в бою, до сложной, шпионить за вашими врагами или защищать вас во время похода в подземелье.Вы должны быть в состоянии общаться с существом, чтобы договориться о его услугах. Оплата может принимать различные формы. Небожитель может потребовать пожертвования золота или магических предметов для храма, а исчадие может потребовать жертвоприношение существа или сокровища в дар. Некоторые существа могут обменивать свои услуги на ваши услуги. Задача, которую можно измерить в минутах, требует оплаты, эквивалентной 100 зм за минуту. Задача, измеряемая часами, требует 1 000 зм за час. А задача, измеряемая днями, до 10 дней, требует 10000 зм за день. Мастер может скорректировать эти суммы в зависимости от обстоятельств, при которых вы накладываете заклинание. Если задача соответствует характеру существа, то оплата может быть уменьшена вдвое или даже отменена. Безопасные задачи обычно требуют только половины предложенной оплаты, тогда как особенно опасные задачи могут потребовать больших пожертвований. Существа редко принимают задачи, которые кажутся самоубийственными. После выполнения задачи или по истечении согласованного срока службы существо возвращается на свой родной план, если возможно, отчитавшись перед вами. Если вы не смогли договориться о цене за услуги существа, то оно немедленно возвращается на свой родной план.</p>`,
     
     source: {
       book: 'PHB\'24',
@@ -16369,7 +17693,7 @@ export const spells: Spell[] = [
       material: 'флакон стоимостью 600+ зм с кровью'
     },
     duration: 'Концентрация, до 1 часа',
-    description: `<p>Вы призываете дух исчадия. Он появляется в незанятом пространстве в пределах видимой дистанции и использует статблок Дух исчадия. При накладывании заклинания выберите: демон, дьявол или юголот. Дух — это существо в виде исчадия выбранного типа, что определяет некоторые детали его статблока. Существо исчезает, когда его хиты достигают 0 или когда заклинание заканчивается. Существо является союзником для вас и ваших союзников. В бою оно действует сразу после вас, но имеет ваш порядок инициативы. Оно подчиняется вашим вербальным командам ,вам не требуется тратить действия,. Если вы не отдаёте команд, то оно использует действие уклонение и перемещается, чтобы избегать опасности.</p>
+    description: `<p>Вы призываете дух исчадия. Он появляется в незанятом пространстве в пределах видимой дистанции и использует статблок Дух исчадия. При накладывании заклинания выберите: демон, дьявол или юголот. Дух — это существо в виде исчадия выбранного типа, что определяет некоторые детали его статблока. Существо исчезает, когда его хиты достигают 0 или когда заклинание заканчивается. Существо является союзником для вас и ваших союзников. В бою оно действует сразу после вас, но имеет ваш порядок инициативы. Оно подчиняется вашим вербальным командам, вам не требуется тратить действия.Если вы не отдаёте команд, то оно использует действие уклонение и перемещается, чтобы избегать опасности.</p>
     <p><strong>Накладывание более высокой ячейкой.</strong>Используйте уровень ячейки для параметра «уровень заклинания» в статблоке.</p>`,
     
     source: {
@@ -16430,6 +17754,7 @@ export const spells: Spell[] = [
       page: 283
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'subclass', name: '<a href="/classes/sorcerer?subclass=divine-soul">Божественная душа</a>' },
     ]
@@ -16448,7 +17773,7 @@ export const spells: Spell[] = [
       material: 'инкрустировання драгоценными камнями статуэтка вас стоимостью 1500+ зм'
     },
     duration: '10 дней',
-    description: `<p>Выберите заклинание 5 уровня или ниже, которое вы можете накладывать, имеющее время накладывания действие и способное нацеливаться на вас. Вы накладываете это заклинание ,называемое условным заклинанием, одновременно с заклинанием Предосторожность, расходуя ячейки заклинаний для обоих, но условное заклинание не вступает в силу. Вместо этого оно вступает в силу, когда происходит определенный триггер. Вы описываете этот триггер при накладывании 2 заклинаний. Например, заклинание Предосторожность с заклинанием Подводное дыхание может предусматривать, что заклинание Подводное дыхание вступает в силу, когда вы погружаетесь в воду или другую похожую жидкость. Условное заклинание вступает в силу сразу после того, как триггер срабатывает впервые, независимо от вашего желания, после чего заклинание Предосторожность заканчивается. Условное заклинание действует только на вас, даже если оно обычно может быть направлено на других. Вы можете использовать только 1 заклинание Предосторожность одновременно. Если вы снова накладываете это заклинание, то эффект другого заклинания Предосторожность на вас прекращается. Также Предосторожность заканчивается, если вы перестанете нести или носить материальный компонент этого заклинания.</p>`,
+    description: `<p>Выберите заклинание 5 уровня или ниже, которое вы можете накладывать, имеющее время накладывания действие и способное нацеливаться на вас. Вы накладываете это заклинание, называемое условным заклинанием, одновременно с заклинанием Предосторожность, расходуя ячейки заклинаний для обоих, но условное заклинание не вступает в силу. Вместо этого оно вступает в силу, когда происходит определенный триггер. Вы описываете этот триггер при накладывании 2 заклинаний. Например, заклинание Предосторожность с заклинанием Подводное дыхание может предусматривать, что заклинание Подводное дыхание вступает в силу, когда вы погружаетесь в воду или другую похожую жидкость. Условное заклинание вступает в силу сразу после того, как триггер срабатывает впервые, независимо от вашего желания, после чего заклинание Предосторожность заканчивается. Условное заклинание действует только на вас, даже если оно обычно может быть направлено на других. Вы можете использовать только 1 заклинание Предосторожность одновременно. Если вы снова накладываете это заклинание, то эффект другого заклинания Предосторожность на вас прекращается. Также Предосторожность заканчивается, если вы перестанете нести или носить материальный компонент этого заклинания.</p>`,
     
     source: {
       book: 'PHB\'24',
@@ -16505,6 +17830,7 @@ export const spells: Spell[] = [
       page: 263
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
@@ -16523,7 +17849,7 @@ export const spells: Spell[] = [
       verbal: true
     },
     duration: 'Мгновенная',
-    description: `<p>Вы и до 5 согласных существ в пределах 5 футов от вас мгновенно перемещаетесь в ранее назначенное святилище. Вы и любые существа, которые телепортируются с вами, появляетесь на ближайшем незанятом пространстве к месту, которое вы указали при подготовке своего святилища ,см. ниже,. Если вы накладываете это заклинание, не подготовив сначала святилище, оно не оказывает никакого эффекта. Вы должны назначить местоположение, например, храм, в качестве святилища, наложив это заклинание там.</p>`,
+    description: `<p>Вы и до 5 согласных существ в пределах 5 футов от вас мгновенно перемещаетесь в ранее назначенное святилище. Вы и любые существа, которые телепортируются с вами, появляетесь на ближайшем незанятом пространстве к месту, которое вы указали при подготовке своего святилища, см. ниже.Если вы накладываете это заклинание, не подготовив сначала святилище, оно не оказывает никакого эффекта. Вы должны назначить местоположение, например, храм, в качестве святилища, наложив это заклинание там.</p>`,
     
     source: {
       book: 'PHB\'24',
@@ -16578,7 +17904,7 @@ export const spells: Spell[] = [
       material: 'по 1 черному ониксу стоимостью 150+ зм на каждый труп'
     },
     duration: 'Мгновенная',
-    description: `<p>Вы можете накладывать это заклинание только ночью. Выберите до 3 трупов гуманоидов среднего или маленького размера в пределах дистанции. Все трупы становятся упырями под вашим контролем ,см. статблок в Бестиарии,. В каждый свой ход вы можете бонусным действием мысленно приказать любому существу, оживлённому этим заклинанием, если оно находится в пределах 120 футов от вас ,если вы контролируете несколько существ, то вы можете отдавать один и тот же приказ любому количеству из них одновременно,. Вы решаете, какое действие совершит это существо, и куда оно переместится в свой следующий ход, или вы можете отдать общий приказ, например, охранять конкретную комнату или коридор. Если вы не отдадите команду, то существо выполняет действие уклонение и перемещается только для того, чтобы избежать вреда. Получив приказ, существо продолжает его выполнять, пока задача не будет завершена. Существо находится под вашим контролем 24 часа, после чего перестаёт слушаться приказов. Для поддержания контроля ещё на 24 часа вы должны наложить это заклинание на него ещё раз до окончания 24-часового периода. Такое наложение заклинания только поддерживает контроль над уже созданными существами, количество которых не может быть больше 3, и не оживляет новых.</p>
+    description: `<p>Вы можете накладывать это заклинание только ночью. Выберите до 3 трупов гуманоидов среднего или маленького размера в пределах дистанции. Все трупы становятся упырями под вашим контролем, см. статблок в Бестиарии.В каждый свой ход вы можете бонусным действием мысленно приказать любому существу, оживлённому этим заклинанием, если оно находится в пределах 120 футов от вас, если вы контролируете несколько существ, то вы можете отдавать один и тот же приказ любому количеству из них одновременно.Вы решаете, какое действие совершит это существо, и куда оно переместится в свой следующий ход, или вы можете отдать общий приказ, например, охранять конкретную комнату или коридор. Если вы не отдадите команду, то существо выполняет действие уклонение и перемещается только для того, чтобы избежать вреда. Получив приказ, существо продолжает его выполнять, пока задача не будет завершена. Существо находится под вашим контролем 24 часа, после чего перестаёт слушаться приказов. Для поддержания контроля ещё на 24 часа вы должны наложить это заклинание на него ещё раз до окончания 24-часового периода. Такое наложение заклинания только поддерживает контроль над уже созданными существами, количество которых не может быть больше 3, и не оживляет новых.</p>
     <p><strong>Накладывание более высокой ячейкой.</strong>Если вы накладываете это заклинание, используя ячейку 7 уровня, то вы оживляете или продлеваете контроль над 4 упырями. Если вы накладываете это заклинание, используя ячейку 8 уровня, вы оживляете или продлеваете контроль над 5 упырями или 2 вурдалаками или умертвиями. Если вы накладываете это заклинание, используя ячейку 9 уровня, вы оживляете или продлеваете контроль над 6 упырями, 3 вурдалаками или умертвиями, или 2 мумиями. Смотрите Бестиарий для их статблоков.</p>`,
     
     source: {
@@ -16586,6 +17912,7 @@ export const spells: Spell[] = [
       page: 258
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
@@ -16606,7 +17933,7 @@ export const spells: Spell[] = [
       material: 'кусок кварца'
     },
     duration: 'Концентрация, до 10 минут',
-    description: `<p>Вы создаёте стену льда на твёрдой поверхности в пределах дистанции. Вы можете сформировать её в виде полусферического купола или сферы с радиусом до 10 футов, либо создать плоскую поверхность, состоящую из десяти панелей размером 10 на 10 футов. Каждая панель должна соприкасаться с другой. В любой форме стена имеет толщину 1 фут и существует в течение длительности заклинания. Если стена возникает в пространстве существа, то оно отталкивается на одну из сторон стены ,вы выбираете сторону, и совершает спасбросок Ловкости. При провале существо получает 10д6 урона холодом, а при успехе половину этого урона. Стена является объектом, который можно повредить и тем самым пробить. У неё 12 КД и 30 хитов на каждую 10 футовую секцию. Она имеет иммунитет к урону холодом, ядом и психической энергией, а также уязвимость к урону огнём. Сведение 10 футовой секции стены к 0 хитам разрушает её и оставляет за собой слой холодного воздуха в том месте, где находилась стена. Существо, которое впервые за ход проходит через этот слой холодного воздуха, должно совершить спасбросок Телосложения, получая 5д6 урона холодом при провале или половину этого урона при успехе.</p>
+    description: `<p>Вы создаёте стену льда на твёрдой поверхности в пределах дистанции. Вы можете сформировать её в виде полусферического купола или сферы с радиусом до 10 футов, либо создать плоскую поверхность, состоящую из десяти панелей размером 10 на 10 футов. Каждая панель должна соприкасаться с другой. В любой форме стена имеет толщину 1 фут и существует в течение длительности заклинания. Если стена возникает в пространстве существа, то оно отталкивается на одну из сторон стены, вы выбираете сторону, и совершает спасбросок Ловкости. При провале существо получает 10д6 урона холодом, а при успехе половину этого урона. Стена является объектом, который можно повредить и тем самым пробить. У неё 12 КД и 30 хитов на каждую 10 футовую секцию. Она имеет иммунитет к урону холодом, ядом и психической энергией, а также уязвимость к урону огнём. Сведение 10 футовой секции стены к 0 хитам разрушает её и оставляет за собой слой холодного воздуха в том месте, где находилась стена. Существо, которое впервые за ход проходит через этот слой холодного воздуха, должно совершить спасбросок Телосложения, получая 5д6 урона холодом при провале или половину этого урона при успехе.</p>
     <p><strong>Накладывание более высокой ячейкой.</strong>Урон, наносимый стеной при её появлении, увеличивается на 2д6, а урон от прохождения через слой холодного воздуха увеличивается на 1д6 за каждый уровень ячейки выше 6.</p>`,
     
     source: {
@@ -16632,7 +17959,7 @@ export const spells: Spell[] = [
       somatic: true
     },
     duration: 'Концентрация, до 10 минут',
-    description: `<p>Вы создаёте стену из крутящихся бритвенноострых клинков из магической энергии. Стена появляется в пределах дистанции и существует на протяжении длительности заклинания. Вы можете создать прямую стену длиной 100 футов, высотой 20 футов и толщиной 5 футов, или закольцованную стену диаметром 60 футов, высотой 20 футов и толщиной 5 футов. Стена предоставляет существам, находящимся за ней, укрытие на три четверти, и её пространство является труднопроходимой местностью. Любое существо в пространстве стены совершает спасбросок Ловкости, получая 6д10 урона силовым полем при провале или половину этого урона при успехе. Существо также совершает этот спасбросок, если входит в пространство стены или заканчивает в нём свой ход. Однако существо совершает этот спасбросок только 1 раз за ход.</p>`,
+    description: `<p>Вы создаёте стену из крутящихся бритвенноострых клинков из магической энергии. Стена появляется в пределах дистанции и существует на протяжении длительности заклинания. Вы можете создать прямую стену длиной 100 футов, высотой 20 футов и толщиной 5 футов, или закольцованную стену диаметром 60 футов, высотой 20 футов и толщиной 5 футов. Стена предоставляет существам, находящимся за ней, укрытие на три четверти, и её пространство является Труднопроходимой местностью. Любое существо в пространстве стены совершает спасбросок Ловкости, получая 6д10 урона силовым полем при провале или половину этого урона при успехе. Существо также совершает этот спасбросок, если входит в пространство стены или заканчивает в нём свой ход. Однако существо совершает этот спасбросок только 1 раз за ход.</p>`,
     
     source: {
       book: 'PHB\'24',
@@ -16690,6 +18017,7 @@ export const spells: Spell[] = [
       page: 279
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
@@ -16742,6 +18070,7 @@ export const spells: Spell[] = [
       page: 249
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/wizard">Волшебник</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=magic">Домен Магии</a>' },
@@ -16754,7 +18083,7 @@ export const spells: Spell[] = [
     nameEn: 'Soul cage',
     level: '6',
     school: 'некромантия',
-    castingTime: '1 реакция, совершаемая вами, когда вы видите, как в пределах 60 футов от вас умирает Гуманоид',
+    castingTime: 'Реакция, совершаемая вами, когда вы видите, как в пределах 60 футов от вас умирает Гуманоид',
     range: '60 футов',
     components: {
       verbal: true,
@@ -16762,7 +18091,7 @@ export const spells: Spell[] = [
       material: 'крошечная серебряная клетка стоимостью 100 зм'
     },
     duration: '8 часов',
-    description: `<p>Это заклинание захватывает душу Гуманоида, когда он умирает, и запирает её внутри крошечной клетки, которую вы используете в качестве материального компонента. Украденная душа остаётся внутри клетки до тех пор, пока заклинание не закончится или пока вы не уничтожите клетку, что также окончит заклинание. Пока у вас есть душа внутри клетки, вы можете использовать её любым из способов, описанных ниже. Вы можете использовать захваченную душу до шести раз. Как только вы используете душу в шестой раз, она высвобождается, и заклинание заканчивается. Пока душа находится в клетке, мёртвый Гуманоид, которому она принадлежит, не может быть возрождён. Кража жизни. Вы можете бонусным действием впитать жизненную силу души и восстановить себе 2д8 хитов. Вопрос душе. Вы задаёте душе вопрос ,действие не требуется, и получаете короткий телепатический ответ, который можете понять независимо от используемого языка. Душа знает только то, что она знала при жизни, но она должна отвечать вам максимально правдиво, ничего не скрывая. Ответ должен состоять не более чем из одного-двух предложений и может звучать загадочно. Заимствование опыта. Вы можете бонусным действием усилить себя жизненным опытом души, чтобы совершить свой следующий бросок атаки, проверку характеристик или спасбросок с Преимуществом. Если вы не используете это Преимущество до начала своего следующего хода, оно будет потеряно. Глаза мертвеца. Вы можете использовать действие, чтобы назвать место, которое Гуманоид видел при жизни, что создаст в этом месте невидимый сенсор, если оно находится на одном плане существования с вами. Сенсор остаётся до тех пор, пока вы удерживаете концентрацию, вплоть до 10 минут ,как если бы вы концентрировались на заклинании,. Вы можете видеть и слышать с помощью этого сенсора, как будто бы вы сами находитесь в том месте и используете свои собственные органы чувств. Существо, которое может видеть сенсор ,например, если оно использует видение невидимого или истинное зрение, видит полупрозрачный образ истерзанного Гуманоида, чью душу вы заперли в клетке.</p>`,
+    description: `<p>Это заклинание захватывает душу Гуманоида, когда он умирает, и запирает её внутри крошечной клетки, которую вы используете в качестве материального компонента. Украденная душа остаётся внутри клетки до тех пор, пока заклинание не закончится или пока вы не уничтожите клетку, что также окончит заклинание. Пока у вас есть душа внутри клетки, вы можете использовать её любым из способов, описанных ниже. Вы можете использовать захваченную душу до шести раз. Как только вы используете душу в шестой раз, она высвобождается, и заклинание заканчивается. Пока душа находится в клетке, мёртвый Гуманоид, которому она принадлежит, не может быть возрождён. Кража жизни. Вы можете бонусным действием впитать жизненную силу души и восстановить себе 2д8 хитов. Вопрос душе. Вы задаёте душе вопрос, действие не требуется, и получаете короткий телепатический ответ, который можете понять независимо от используемого языка. Душа знает только то, что она знала при жизни, но она должна отвечать вам максимально правдиво, ничего не скрывая. Ответ должен состоять не более чем из одного-двух предложений и может звучать загадочно. Заимствование опыта. Вы можете бонусным действием усилить себя жизненным опытом души, чтобы совершить свой следующий бросок атаки, проверку характеристик или спасбросок с Преимуществом. Если вы не используете это Преимущество до начала своего следующего хода, оно будет потеряно. Глаза мертвеца. Вы можете использовать действие, чтобы назвать место, которое Гуманоид видел при жизни, что создаст в этом месте невидимый сенсор, если оно находится на одном плане существования с вами. Сенсор остаётся до тех пор, пока вы удерживаете концентрацию, вплоть до 10 минут, как если бы вы концентрировались на заклинании.Вы можете видеть и слышать с помощью этого сенсора, как будто бы вы сами находитесь в том месте и используете свои собственные органы чувств. Существо, которое может видеть сенсор, например, если оно использует видение невидимого или истинное зрение, видит полупрозрачный образ истерзанного Гуманоида, чью душу вы заперли в клетке.</p>`,
     
     source: {
       book: 'XGE\'14',
@@ -16788,7 +18117,7 @@ export const spells: Spell[] = [
       somatic: true
     },
     duration: 'Мгновенная',
-    description: `<p>Это заклинание захватывает душу Гуманоида, когда он умирает, и запирает её внутри крошечной клетки, которую вы используете в качестве материального компонента. Украденная душа остаётся внутри клетки до тех пор, пока заклинание не закончится или пока вы не уничтожите клетку, что также окончит заклинание. Пока у вас есть душа внутри клетки, вы можете использовать её любым из способов, описанных ниже. Вы можете использовать захваченную душу до шести раз. Как только вы используете душу в шестой раз, она высвобождается, и заклинание заканчивается. Пока душа находится в клетке, мёртвый Гуманоид, которому она принадлежит, не может быть возрождён. Кража жизни. Вы можете бонусным действием впитать жизненную силу души и восстановить себе 2д8 хитов. Вопрос душе. Вы задаёте душе вопрос ,действие не требуется, и получаете короткий телепатический ответ, который можете понять независимо от используемого языка. Душа знает только то, что она знала при жизни, но она должна отвечать вам максимально правдиво, ничего не скрывая. Ответ должен состоять не более чем из одного-двух предложений и может звучать загадочно. Заимствование опыта. Вы можете бонусным действием усилить себя жизненным опытом души, чтобы совершить свой следующий бросок атаки, проверку характеристик или спасбросок с Преимуществом. Если вы не используете это Преимущество до начала своего следующего хода, оно будет потеряно. Глаза мертвеца. Вы можете использовать действие, чтобы назвать место, которое Гуманоид видел при жизни, что создаст в этом месте невидимый сенсор, если оно находится на одном плане существования с вами. Сенсор остаётся до тех пор, пока вы удерживаете концентрацию, вплоть до 10 минут ,как если бы вы концентрировались на заклинании,. Вы можете видеть и слышать с помощью этого сенсора, как будто бы вы сами находитесь в том месте и используете свои собственные органы чувств. Существо, которое может видеть сенсор ,например, если оно использует видение невидимого или истинное зрение, видит полупрозрачный образ истерзанного Гуманоида, чью душу вы заперли в клетке.</p>
+    description: `<p>Это заклинание захватывает душу Гуманоида, когда он умирает, и запирает её внутри крошечной клетки, которую вы используете в качестве материального компонента. Украденная душа остаётся внутри клетки до тех пор, пока заклинание не закончится или пока вы не уничтожите клетку, что также окончит заклинание. Пока у вас есть душа внутри клетки, вы можете использовать её любым из способов, описанных ниже. Вы можете использовать захваченную душу до шести раз. Как только вы используете душу в шестой раз, она высвобождается, и заклинание заканчивается. Пока душа находится в клетке, мёртвый Гуманоид, которому она принадлежит, не может быть возрождён. Кража жизни. Вы можете бонусным действием впитать жизненную силу души и восстановить себе 2д8 хитов. Вопрос душе. Вы задаёте душе вопрос, действие не требуется, и получаете короткий телепатический ответ, который можете понять независимо от используемого языка. Душа знает только то, что она знала при жизни, но она должна отвечать вам максимально правдиво, ничего не скрывая. Ответ должен состоять не более чем из одного-двух предложений и может звучать загадочно. Заимствование опыта. Вы можете бонусным действием усилить себя жизненным опытом души, чтобы совершить свой следующий бросок атаки, проверку характеристик или спасбросок с Преимуществом. Если вы не используете это Преимущество до начала своего следующего хода, оно будет потеряно. Глаза мертвеца. Вы можете использовать действие, чтобы назвать место, которое Гуманоид видел при жизни, что создаст в этом месте невидимый сенсор, если оно находится на одном плане существования с вами. Сенсор остаётся до тех пор, пока вы удерживаете концентрацию, вплоть до 10 минут, как если бы вы концентрировались на заклинании.Вы можете видеть и слышать с помощью этого сенсора, как будто бы вы сами находитесь в том месте и используете свои собственные органы чувств. Существо, которое может видеть сенсор, например, если оно использует видение невидимого или истинное зрение, видит полупрозрачный образ истерзанного Гуманоида, чью душу вы заперли в клетке.</p>
     <p><strong>Накладывание более высокой ячейкой.</strong>Если вы накладываете это заклинание, используя ячейку 7-го уровня или выше, вы можете создать два дополнительных столба за каждый уровень ячейки выше 6-го.</p>`,
     
     source: {
@@ -16888,7 +18217,7 @@ export const spells: Spell[] = [
       material: 'Глина, пепел и корень мандрагоры, расходуемые заклинанием, и кинжал с инкрустированными драгоценными камнями стоимостью не менее 1000 зм'
     },
     duration: 'Мгновенная',
-    description: `<p>Произнося замысловатое заклинание, вы режете себя кинжалом, украшенным драгоценными камнями, и получаете 2д4 колющего урона, который никак не может быть уменьшен. Затем вы капаете свою кровь на другие компоненты заклинания и прикасаетесь к ним, превращая их в особого Конструкта, называемого гомункулом ,homunculus,. Это ваш преданный спутник, и он умирает, если умираете вы. Каждый раз, когда вы заканчиваете продолжительный отдых, вы можете потратить до половины своих Костей Хитов, если гомункул находится на том же плане существования, что и вы. Когда вы это делаете, бросьте каждую Кость Хитов и добавьте к ней свой модификатор Телосложения. Максимум ваших хитов понижается на получившуюся сумму, а максимум хитов гомункула вместе с текущим количеством хитов увеличивается на это же значение. Этот процесс не может понизить ваши хиты ниже 1, и этот обмен хитами между вами и гомункулом заканчивается после того как вы завершите следующий продолжительный отдых. До этого момента понижение максимума ваших хитов не может быть убрано никаким другим образом, кроме смерти гомункула. Вы можете иметь только одного гомункула в каждый момент времени. Если вы накладываете это заклинание, пока ваш гомункул жив, заклинание проваливается.</p>`,
+    description: `<p>Произнося замысловатое заклинание, вы режете себя кинжалом, украшенным драгоценными камнями, и получаете 2д4 колющего урона, который никак не может быть уменьшен. Затем вы капаете свою кровь на другие компоненты заклинания и прикасаетесь к ним, превращая их в особого Конструкта, называемого гомункулом, homunculus.Это ваш преданный спутник, и он умирает, если умираете вы. Каждый раз, когда вы заканчиваете продолжительный отдых, вы можете потратить до половины своих Костей Хитов, если гомункул находится на том же плане существования, что и вы. Когда вы это делаете, бросьте каждую Кость Хитов и добавьте к ней свой модификатор Телосложения. Максимум ваших хитов понижается на получившуюся сумму, а максимум хитов гомункула вместе с текущим количеством хитов увеличивается на это же значение. Этот процесс не может понизить ваши хиты ниже 1, и этот обмен хитами между вами и гомункулом заканчивается после того как вы завершите следующий продолжительный отдых. До этого момента понижение максимума ваших хитов не может быть убрано никаким другим образом, кроме смерти гомункула. Вы можете иметь только одного гомункула в каждый момент времени. Если вы накладываете это заклинание, пока ваш гомункул жив, заклинание проваливается.</p>`,
     
     source: {
       book: 'XGE\'14',
@@ -16915,7 +18244,7 @@ export const spells: Spell[] = [
       material: 'покрытая платиной чешуя Дракона, стоимостью не менее 500 зм'
     },
     duration: 'Концентрация, вплоть до 1 минуты',
-    description: `<p>Вы создаёте поле серебристого света, окружающее существо по вашему выбору в пределах дистанции ,включая себя,. Поле испускает тусклый свет в радиусе 5 футов. Находясь в поле, существо получает следующие Преимущества: Укрытие. Существо получает укрытие на половину. Сопротивление урону. Существо получает сопротивление урону кислотой, огнём, холодом, электричеством и ядом. Увёртливость. Если существо попадает под действие эффекта, который позволяет ему совершить спасбросок Ловкости, чтобы получить только половину урона, вместо этого существо не получает никакого урона вовсе, если спасбросок был успешен, и только половину урона, если он был провален. Бонусным действием в последующие ходы вы можете переместить поле к другому существу находящемуся в 60 футах от поля.</p>`,
+    description: `<p>Вы создаёте поле серебристого света, окружающее существо по вашему выбору в пределах дистанции, включая себя. Поле испускает тусклый свет в радиусе 5 футов. Находясь в поле, существо получает следующие Преимущества: Укрытие. Существо получает укрытие на половину. Сопротивление урону. Существо получает сопротивление урону кислотой, огнём, холодом, электричеством и ядом. Увёртливость. Если существо попадает под действие эффекта, который позволяет ему совершить спасбросок Ловкости, чтобы получить только половину урона, вместо этого существо не получает никакого урона вовсе, если спасбросок был успешен, и только половину урона, если он был провален. Бонусным действием в последующие ходы вы можете переместить поле к другому существу находящемуся в 60 футах от поля.</p>`,
     
     source: {
       book: 'FTD\'14',
@@ -17016,7 +18345,7 @@ export const spells: Spell[] = [
     <p><ul>
     <li>Вы получаете сопротивление дробящему, колющему и рубящему урону от немагического оружия.</li>
     <li>Вы можете действием вызвать небольшое землетрясение в радиусе 15 футов с центром на вас. Другие существа в этой области должны преуспеть в спасброске Ловкости, иначе будут сбиты с ног.</li>
-    <li>Вы можете передвигаться по труднопроходимой местности, состоящей из земли или камня, не тратя дополнительное перемещение. Вы можете проходить сквозь твёрдую землю или камень так, словно это воздух, не разрушая их, однако не можете закончить там перемещение. Если вы заканчиваете перемещение, находясь внутри земли или камня, вас выталкивает в ближайшее свободное пространство, заклинание заканчивается, и вы становитесь ошеломлённым до конца своего следующего хода.</li>
+    <li>Вы можете передвигаться по Труднопроходимой местности, состоящей из земли или камня, не тратя дополнительное перемещение. Вы можете проходить сквозь твёрдую землю или камень так, словно это воздух, не разрушая их, однако не можете закончить там перемещение. Если вы заканчиваете перемещение, находясь внутри земли или камня, вас выталкивает в ближайшее свободное пространство, заклинание заканчивается, и вы становитесь ошеломлённым до конца своего следующего хода.</li>
     </ul></p>
     `,
     source: {
@@ -17049,8 +18378,8 @@ export const spells: Spell[] = [
     <p>Пока действует заклинание, ваше тело покрывается инеем, и вы получаете следующие Преимущества:</p>
     <p><ul>
     <li>Вы получаете иммунитет к урону холодом, а также сопротивление урону огнём.</li>
-    <li>Вы можете передвигаться по труднопроходимой местности, состоящей из льда или снега, не тратя дополнительное перемещение.</li>
-    <li>Земля в радиусе 10 футов вокруг вас покрывается льдом и является труднопроходимой местностью для всех существ, кроме вас. Эта область перемещается вместе с вами.</li>
+    <li>Вы можете передвигаться по Труднопроходимой местности, состоящей из льда или снега, не тратя дополнительное перемещение.</li>
+    <li>Земля в радиусе 10 футов вокруг вас покрывается льдом и является Труднопроходимой местностью для всех существ, кроме вас. Эта область перемещается вместе с вами.</li>
     <li>Вы можете действием создать 15-футовый конус морозного ветра, исходящий из вашей руки в выбранном направлении. Все существа в конусе должны совершить спасбросок Телосложения, получая 4д6 урона холодом при провале или половину этого урона при успехе. Скорость существа, провалившего спасбросок, снижается вдвое до начала вашего следующего хода.</li>
     </ul></p>
     `,
@@ -17118,7 +18447,7 @@ export const spells: Spell[] = [
     description: `
     <p>Вы призываете духов природы для защиты области на открытом воздухе или под землёй. Эта область может быть кубом с длиной ребра от 30 до 90 футов. Здания и другие сооружения исключаются из этой области. Если вы накладываете это заклинание в одном и том же месте каждый день в течение года, заклинание длится до тех пор, пока не будет рассеяно.</p>
     <p>Заклинание создает следующие эффекты в пределах области. Когда вы накладываете это заклинание, вы можете указать существ как друзей, которые будут невосприимчивы к эффектам заклинания. Вы также можете указать кодовое слово, которое, при произношении, делает говорящего невосприимчивым к этим эффектам.</p>
-    <p>Вся защищённая область источает магию. Рассеивание магии [Dispel magic], наложенное на область, при успехе удаляет только один из нижеследующих эффектов, а не всю область. Заклинатель выбирает, какой эффект окончить. Только когда все эффекты окончены, заклинание рассеивается.</p>
+    <p>Вся защищённая область источает магию. Рассеивание магии, наложенное на область, при успехе удаляет только один из нижеследующих эффектов, а не всю область. Заклинатель выбирает, какой эффект окончить. Только когда все эффекты окончены, заклинание рассеивается.</p>
     <p><strong>Непроглядный туман.</strong>Вы можете заполнить любое количество квадратов с длиной ребра 5 футов на земле густым туманом, делая их сильно заслонённой областью. Туман достигает 10 футов в высоту. Кроме того, каждый фут движения через туман стоит 2 дополнительных фута. Для существа, невосприимчивого к данному эффекту, туман ничего не скрывает и выглядит как лёгкая дымка с песчинками зеленого света, плавающими в воздухе.</p>
     <p><strong>Цепкий подлесок.</strong>Вы можете заполнить любое количество квадратов с длиной ребра 5 футов на земле, которые не заполнены туманом, цепкими сорняками и лозой, как если бы они были созданы заклинанием Опутывание. Для существа, невосприимчивого к данному эффекту, сорняки и лоза ощущаются мягкими и меняют свою форму, чтобы служить временными сидениями или постелями.</p>
     <p><strong>Хранители рощи.</strong>Вы можете оживить до четырех деревьев в этой области, заставляя их выкорчевать себя из земли. Эти деревья имеют блок статистики пробуждённого дерева [awakened tree], за исключением того, что они не могут говорить, и их кора покрыта друидическими символами. Если любое существо, не иммунное к этому эффекту, заходит в защищаемую область, хранители рощи сражаются, пока не прогонят или не убьют вторженцев. Хранители рощи также подчиняются устным командам (действие не требуется), которые вы произносите в этой области. Если вы не даёте им команд, и в области нет незваных гостей, хранители рощи бездействуют. Хранители рощи не могут покинуть охраняемую область. Когда заклинание оканчивается, магия, оживляющая их, исчезает, и деревья снова укореняются, если это возможно.</p>
@@ -17163,9 +18492,11 @@ export const spells: Spell[] = [
       page: 154
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/cleric">Жрец</a>' },
       { type: 'class', name: '<a href="/classes/paladin">Паладин</a>' },
+      { type: 'subclass', name: '<a href="/classes/apothecary?subclass=thanaturg">Танатург</a>' },
       { type: 'subclass', name: '<a href="/classes/artificer?subclass=reanimator">Реаниматор</a>' },
       { type: 'subclass', name: '<a href="/classes/artificer?subclass=alchemist">Алхимик</a>' },
       { type: 'subclass', name: '<a href="/classes/cleric?subclass=grave">Домен Упокоения</a>' },
@@ -17189,7 +18520,7 @@ export const spells: Spell[] = [
     description: `
     <p>Вы призываете особого гомункула в незанятое пространство в пределах дистанции. Гомункул использует этот блок статистики. Если существует гомункул, призванный вами этим заклинанием, он заменяется новым. Вы выбираете, как будет выглядеть гомункул, будь то механическая птица, флакон с крыльями или миниатюрный живой котёл.</p>
     <p><strong>Сражение.</strong>Это существо — союзник вам и вашим союзникам. В бою оно имеет то же значение Инициативы, что и вы, и ходит сразу после вас. Оно подчиняется вашим словесным командам (от вас действий не требуется). Если вы ничего не приказываете, оно применяет действие Уклонение и перемещается так, чтобы избегать опасности.</p>
-    <p><strong>Используя ячейку заклинания большего уровня.</strong>Там, где блок статистики ссылается на уровень заклинания, используйте уровень ячейки заклинаний.</p>
+    <p><strong>Накладывание более высокой ячейкой.</strong>Там, где блок статистики ссылается на уровень заклинания, используйте уровень ячейки заклинаний.</p>
     `,
     source: {
       book: 'EFA',
@@ -17331,6 +18662,7 @@ export const spells: Spell[] = [
       page: 270
     },
     sources: [
+      { type: 'class', name: '<a href="/classes/apothecary">Апотекарий</a>' },
       { type: 'class', name: '<a href="/classes/bard">Бард</a>' },
       { type: 'class', name: '<a href="/classes/sorcerer">Чародей</a>' },
       { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
@@ -17390,7 +18722,7 @@ export const spells: Spell[] = [
     <p>Храм препятствует существам тех видов, которые вы выбираете, когда накладываете это заклинание. Выберите один или несколько из следующих видов: Исчадия, Небожители, Нежить, Феи или Элементали. Если существо выбранного типа пытается войти в храм, оно должно совершить спасбросок Харизмы. При провале оно не может войти в храм в течение 24 часов. Даже если существо сумело войти в храм, магия этого места является для него Помехой, всякий раз, когда оно совершает бросок атаки, проверку характеристики или спасбросок внутри храма, существо должно бросить д4 и вычесть получившееся число из его броска д20.</p>
     <p>Кроме того, сенсоры, созданные заклинаниями школы Прорицания, не могут появиться внутри храма, а существа внутри него не могут быть целями заклинаний этой школы.</p>
     <p>Наконец, всякий раз, когда какое-либо существо в храме восстанавливает хиты заклинанием 1 уровня или выше, оно дополнительно восстанавливает хиты в количестве, равном вашему модификатору Мудрости (минимум 1 хит).</p>
-    <p>Храм сделан из светонепроницаемого магического поля, которое простирается на Эфирный план, тем самым блокируя межпланарное перемещение внутрь храма. Также ничто не может проникнуть в храм физическим путём. Он не может быть развеян рассеиванием магии [dispel magic], и преграда магии [antimagic field] не оказывает на него никакого эффекта. Заклинание распад [disintegrate] мгновенно разрушает храм.</p>
+    <p>Храм сделан из светонепроницаемого магического поля, которое простирается на Эфирный план, тем самым блокируя межпланарное перемещение внутрь храма. Также ничто не может проникнуть в храм физическим путём. Он не может быть развеян Рассеиванием магии, и Поле антимагии не оказывает на него никакого эффекта. Заклинание Распад мгновенно разрушает храм.</p>
     <p>Накладывание этого заклинания на одно и то же место каждый день в течение года делает этот эффект постоянным.</p>
     `,
     source: {

@@ -11,5 +11,6 @@ export const SPELL_LIMITS: Record<string, {
   wizard: { cantrips: 3, level1: 6, prepared: 4 },
   paladin: { cantrips: 0, level1: 2 },
   ranger: { cantrips: 0, level1: 2 },
-  artificer: { cantrips: 2, level1: 2 }
+  artificer: { cantrips: 2, level1: 2 },
+  apothecary: { cantrips: 2, level1: 2, prepared: 2 }
 };

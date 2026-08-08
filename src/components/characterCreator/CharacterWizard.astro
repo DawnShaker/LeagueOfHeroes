@@ -31,12 +31,14 @@ import {
   MUSICAL_INSTRUMENTS,
   GAMING_SETS,
   OTHER_TOOLS,
+  TRANSPORT_TOOLS,
   ALL_TOOLS,
   STANDARD_LANGUAGES,
   RARE_LANGUAGES
 } from './config/proficiencies.ts';
 import { EQUIPMENT_PACK_CONTENTS } from './config/equipmentPacks.ts';
 import { SPELL_LIMITS } from './config/spellLimits.ts';
+import { CLASS_SPELL_NAME_OVERRIDES } from './config/classSpellOverrides.ts';
 import { SKILL_ALIASES, CLASS_SKILL_OPTIONS } from './config/skills.ts';
 import { GENERIC_BACKGROUND_CHARACTERISTICS } from './config/backgroundCharacteristics.ts';
 import { EQUIPMENT_NAME_ALIASES, PACKAGED_EQUIPMENT_NAMES } from './config/equipmentAliases.ts';
@@ -173,6 +175,37 @@ const bloodCurseOptions = [...BLOOD_CURSE_OPTIONS];
 
 const classFeatureOptions = buildClassFeatureOptions(fightingStyleOptions);
 
+const apothecaryClass = classOptions.find((item: any) => item.id === 'apothecary');
+const esotericTheories = apothecaryClass?.features?.find((feature: any) =>
+  /эзотерическ.*теори/i.test(String(feature?.name || ''))
+);
+const firstLevelTheories = (esotericTheories?.collapsible || [])
+  .filter((theory: any) => !/требования\s*:/i.test(String(theory?.description || '')))
+  .map((theory: any, index: number) => ({
+    id: `apothecary-theory-${index + 1}`,
+    name: theory.title,
+    description: theory.description,
+    exportDescription: theory.description,
+    href: '/classes/apothecary#feature-эзотерические-теории-1',
+    effects: theory.title === 'Боевой медик'
+      ? [
+          { type: 'weaponProficiency', categories: ['Воинское оружие'] },
+          { type: 'armorTraining', categories: ['Щиты'] }
+        ]
+      : []
+  }));
+
+if (firstLevelTheories.length) {
+  classFeatureOptions.apothecary = [{
+    id: 'esoteric-theory',
+    name: 'Эзотерическая теория',
+    count: 1,
+    description: 'Выберите одну эзотерическую теорию, доступную Апотекарию на 1 уровне.',
+    href: '/classes/apothecary#feature-эзотерические-теории-1',
+    options: firstLevelTheories
+  }];
+}
+
 const roll20RowsByName = buildRoll20RowsByName(
   allRoll20SpellsTemplate,
   normalizeSpellName
@@ -183,6 +216,7 @@ const roll20RowsByName = buildRoll20RowsByName(
 const classSpellOptions = buildClassSpellOptions({
   classOptions,
   spells,
+  classSpellNameOverrides: CLASS_SPELL_NAME_OVERRIDES,
   normalizeSpellLevel,
   normalizeSpellName,
   spellBelongsToClass,
@@ -220,6 +254,8 @@ const creatorOptions = {
   allSkills: [...ALL_SKILLS],
   allTools: [...ALL_TOOLS],
   artisanTools: [...ARTISAN_TOOLS],
+  musicalTools: [...MUSICAL_INSTRUMENTS],
+  transportTools: [...TRANSPORT_TOOLS],
   standardLanguages: [...STANDARD_LANGUAGES],
   rareLanguages: [...RARE_LANGUAGES]
 };
@@ -445,6 +481,9 @@ const creatorOptions = {
 
   function saveState() {
     getStateModule().saveState(STORAGE_KEY, state);
+    window.dispatchEvent(new CustomEvent('loh:character-state-changed', {
+      detail: { state: structuredClone(state) }
+    }));
   }
 
   function isCoreElfSpecies(species) {
@@ -595,6 +634,7 @@ const creatorOptions = {
         title: 'Астральное знание',
         speciesLabel,
         skillCount: 1,
+        skillSelectionStep: 'skills',
         flexibleCount: 1,
         description: 'После каждого продолжительного отдыха выберите один навык и одно оружие или инструмент. Владения действуют до окончания следующего продолжительного отдыха.'
       };
@@ -617,6 +657,7 @@ const creatorOptions = {
   function adaptiveSpeciesClassFeatureChoicesComplete() {
     const config = adaptiveSpeciesProficiencyConfig();
     if (!config) return true;
+    if (config.skillSelectionStep === 'skills') return true;
     const skillCount = (state.choices['species:adaptiveSkill'] || []).filter(Boolean).length;
     return skillCount === config.skillCount;
   }
@@ -663,6 +704,9 @@ const creatorOptions = {
     const selectedWeapons = selectedFlexible.filter((value) => value.startsWith('Оружие: '));
     const selectedTools = selectedFlexible.filter((value) => value.startsWith('Инструмент: '));
     const flexibleOptions = ADAPTIVE_WEAPONS.map((name) => `Оружие: ${name}`);
+    const skillIsSelectedHere = config.skillSelectionStep !== 'skills';
+    const selectedHereCount = selectedFlexible.length + (skillIsSelectedHere && selectedSkill ? 1 : 0);
+    const choicesHereCount = config.flexibleCount + (skillIsSelectedHere ? config.skillCount : 0);
     return `
       <section class="class-feature-group adaptive-species-feature">
         <div class="class-feature-summary">
@@ -671,15 +715,15 @@ const creatorOptions = {
             <h3>${escapeHtml(config.title)}: временные владения</h3>
             <p>${escapeHtml(config.description)}</p>
           </div>
-          <strong>${(selectedSkill ? 1 : 0) + selectedFlexible.length}/${config.skillCount + config.flexibleCount}</strong>
+          <strong>${selectedHereCount}/${choicesHereCount}</strong>
         </div>
         <div class="class-feature-table-wrap adaptive-species-fields">
           <div class="faith-oath-recommendation">
             <strong>Почему этот выбор находится здесь</strong>
-            <small>Оружие выбирается здесь, а оставшиеся ${Math.max(0, config.flexibleCount - selectedWeapons.length)} из ${config.flexibleCount} владений — на шаге «Инструменты». Эти владения даёт особенность вида «${escapeHtml(config.title)}», и после продолжительного отдыха их можно заменить.</small>
+            <small>Оружие выбирается здесь, а оставшиеся ${Math.max(0, config.flexibleCount - selectedWeapons.length)} из ${config.flexibleCount} владений — на шаге «Инструменты». ${config.skillSelectionStep === 'skills' ? 'Временный навык выбирается на шаге «Навыки». ' : ''}Эти владения даёт особенность вида «${escapeHtml(config.title)}», и после продолжительного отдыха их можно заменить.</small>
           </div>
           <div class="custom-lineage-choices">
-            ${config.skillCount ? `
+            ${config.skillCount && config.skillSelectionStep !== 'skills' ? `
               <label class="variant-field">
                 <span>Временный навык — выберите ${config.skillCount}</span>
                 <select id="adaptive-species-skill">
@@ -989,10 +1033,11 @@ const creatorOptions = {
   }
 
   const CLASS_FORGE_THEMES = {
+    apothecary: { primary: '#84cc16', light: '#d9f99d', deep: '#3f6212', symbol: '⚗', aura: 'craft' },
     artificer: { primary: '#38bdf8', light: '#bae6fd', deep: '#075985', symbol: '⚙', aura: 'craft' },
     bard: { primary: '#e879f9', light: '#f5d0fe', deep: '#86198f', symbol: '♪', aura: 'grace' },
     barbarian: { primary: '#f97316', light: '#fed7aa', deep: '#9a3412', symbol: 'ᚱ', aura: 'martial' },
-    fighter: { primary: '#94a3b8', light: '#e2e8f0', deep: '#334155', symbol: '⚔', aura: 'martial' },
+    fighter: { primary: '#4f8fcf', light: '#b9dcff', deep: '#17365d', symbol: '⚔', aura: 'martial' },
     wizard: { primary: '#818cf8', light: '#c7d2fe', deep: '#3730a3', symbol: '✧', aura: 'arcane' },
     druid: { primary: '#4ade80', light: '#bbf7d0', deep: '#166534', symbol: '❧', aura: 'primal' },
     cleric: { primary: '#facc15', light: '#fef08a', deep: '#a16207', symbol: '✦', aura: 'divine' },
@@ -1015,6 +1060,7 @@ const creatorOptions = {
   };
 
   const FORGE_CLASS_ALIASES = [
+    [/апотекар|apothecary/, 'apothecary'],
     [/артефактор|artificer/, 'artificer'],
     [/бард|bard/, 'bard'],
     [/варвар|barbarian/, 'barbarian'],
@@ -1131,11 +1177,6 @@ const creatorOptions = {
       const theme = classForgeTheme({ id: card.dataset.classId });
       card.style.setProperty('--choice-accent', theme.primary);
       card.style.setProperty('--choice-accent-light', theme.light);
-    });
-    $$('.species-card').forEach((card) => {
-      const theme = speciesForgeTheme({ id: card.dataset.speciesId });
-      card.style.setProperty('--choice-accent', theme.color);
-      card.style.setProperty('--choice-accent-light', theme.glow);
     });
   }
 
@@ -1420,9 +1461,9 @@ const creatorOptions = {
     centaur: [20, 100],
     changeling: [18, 100],
     'custom lineage': [1, 1000],
-    fairy: [1, 100],
+    fairy: [20, 100],
     firbolg: [30, 500],
-    harengon: [1, 100],
+    harengon: [20, 100],
     gith: [18, 100],
     hobgoblin: [20, 100],
     kenku: [12, 60],
@@ -1637,7 +1678,7 @@ const creatorOptions = {
                   rawSizeData.sizeOptions?.length
                     ? `
                       <label class="size-select">
-                        <span>Размер существа</span>
+                        <span>Выберите размер существа</span>
                         <select id="size-select">
                           ${rawSizeData.sizeOptions
                             .map(
@@ -1650,6 +1691,7 @@ const creatorOptions = {
                             )
                             .join('')}
                         </select>
+                        <small>Размер влияет на рост, вес и параметры персонажа.</small>
                       </label>
                     `
                     : ''
@@ -2596,6 +2638,34 @@ const creatorOptions = {
 
   function selectedClassFeatureOption(groupId) {
     return state.choices[`classFeature:${groupId}`]?.[0] || null;
+  }
+
+  function selectedClassFeatureOptionRecord(groupId) {
+    const selectedId = selectedClassFeatureOption(groupId);
+    const group = getClassFeatureGroups().find((item) => item.id === groupId);
+    return group?.options?.find((option) => option.id === selectedId) || null;
+  }
+
+  function hasApothecaryTheory(theoryName) {
+    const selectedTheory = selectedClassFeatureOptionRecord('esoteric-theory');
+    return String(selectedTheory?.name || '').trim() === theoryName;
+  }
+
+  function bedsideMannersSkills() {
+    return hasApothecaryTheory('Прикроватные манеры')
+      ? ['Проницательность', 'Убеждение']
+      : [];
+  }
+
+  function bedsideMannersExpertiseSkills() {
+    const selectedWithoutTheory = new Set([
+      ...(state.choices['class:skills'] || []),
+      ...(state.choices['background:skills'] || []),
+      ...(state.choices['species:skill'] || []),
+      ...(state.choices['species:adaptiveSkill'] || []),
+      ...(state.choices['feat:skills'] || [])
+    ]);
+    return bedsideMannersSkills().filter((skill) => selectedWithoutTheory.has(skill));
   }
 
   function fullAlignmentName(value) {
@@ -3984,7 +4054,7 @@ const creatorOptions = {
   function classSpellcastingAbility(characterClass) {
     const identity = `${characterClass?.id || ''} ${characterClass?.name || ''} ${characterClass?.nameEn || ''}`
       .toLocaleLowerCase('ru');
-    if (/wizard|artificer|волшебник|артефактор|артификатор|изобретатель/.test(identity)) return 'Интеллект';
+    if (/wizard|artificer|apothecary|волшебник|артефактор|артификатор|изобретатель|апотекар/.test(identity)) return 'Интеллект';
     if (/cleric|druid|ranger|жрец|друид|следопыт/.test(identity)) return 'Мудрость';
     if (/bard|sorcerer|warlock|paladin|бард|чародей|колдун|паладин/.test(identity)) return 'Харизма';
     return '';
@@ -4243,6 +4313,24 @@ const creatorOptions = {
     const background = findBackground();
     const className = findClass()?.name || 'Класс';
     let classOptions = withSpellAvailability(classSpellOptions[state.class] || [], `Класс: ${className}`);
+    const selectedTheory = selectedClassFeatureOptionRecord('esoteric-theory');
+    const selectedTheoryName = String(selectedTheory?.name || '').trim();
+    const theorySpellNames = selectedTheoryName === 'Лабораторный ассистент'
+      ? ['Поиск фамильяра']
+      : selectedTheoryName === 'Медицинский лексикон'
+        ? ['Понимание языков', 'Обнаружение болезней и яда']
+        : selectedTheoryName === 'Сортировка'
+          ? ['Уход за умирающим']
+          : [];
+    const theorySpellIds = new Set(
+      theorySpellNames
+        .map((name) => spellByName(name, name === 'Уход за умирающим' ? 'cantrip' : '1')?.id)
+        .filter(Boolean)
+    );
+    // Автоматически полученные теорией заклинания не занимают обычные выборы
+    // Апотекария. Убираем их из выбираемого списка класса и показываем ниже
+    // отдельным фиксированным источником.
+    classOptions = classOptions.filter((spell) => !theorySpellIds.has(spell.id));
     const backgroundSpellPrerequisite = String(background?.spellTable?.prerequisite || '')
       .toLocaleLowerCase('ru')
       .replace(/ё/g, 'е');
@@ -4279,6 +4367,28 @@ const creatorOptions = {
         spellLabel: label,
         fixed: withSpellAvailability(speciesSource.fixed || [], label),
         options: withSpellAvailability(speciesSource.options || [], label)
+      });
+    }
+
+    if (selectedTheoryName && theorySpellNames.length) {
+      const fixed = uniqueSpells(withSpellAvailability(
+        theorySpellNames.map((name) => spellByName(name, name === 'Уход за умирающим' ? 'cantrip' : '1')),
+        `Эзотерическая теория: ${selectedTheoryName}`
+      ));
+      const descriptions = {
+        'Лабораторный ассистент': '«Поиск фамильяра» изучен и всегда подготовлен. Он не учитывается в количестве подготовленных заклинаний Апотекария.',
+        'Медицинский лексикон': '«Понимание языков» и «Обнаружение болезней и яда» можно сотворять без траты ячеек заклинаний.',
+        'Сортировка': '«Уход за умирающим» изучен автоматически. При его сотворении можно выбрать ещё одно существо в пределах действия.'
+      };
+      if (fixed.length) sources.push({
+        id: `class-feature-apothecary-theory-${selectedTheory?.id || 'selected'}`,
+        category: 'Эзотерическая теория',
+        title: selectedTheoryName,
+        spellLabel: `Эзотерическая теория: ${selectedTheoryName}`,
+        description: descriptions[selectedTheoryName] || '',
+        limits: { cantrip: 0, level1: 0 },
+        fixed,
+        options: []
       });
     }
 
@@ -4335,14 +4445,27 @@ const creatorOptions = {
     const invocation = selectedClassFeatureOption('eldritch-invocation');
     if (invocation === 'pact-of-the-tome') {
       const allSpellOptions = uniqueSpells(Object.values(classSpellOptions).flat());
+      const pactTomeOptions = allSpellOptions
+        .filter((spell) =>
+          spell.level === 'cantrip'
+          || (
+            spell.level === '1'
+            && /ритуал/i.test(String(spell.castingTime || ''))
+          )
+        )
+        .map((spell) => spell.level === '1'
+          ? { ...spell, choiceLabel: 'Ритуальное заклинание' }
+          : spell
+        );
       sources.push({
         id: 'class-feature-pact-tome',
         category: 'Умение класса',
         title: 'Договор гримуара',
         spellLabel: 'Умение класса: Договор гримуара',
-        description: 'Выберите 3 заговора и 2 ритуальных заклинания 1 уровня для Книги теней.',
+        description: 'Выберите 3 заговора и 2 заклинания 1 уровня с меткой «Ритуальное заклинание» из списка любого класса. Уже подготовленные заклинания выбрать нельзя.',
         limits: { cantrip: 3, level1: 2 },
-        options: allSpellOptions
+        level1Title: 'Ритуальные заклинания 1 уровня',
+        options: pactTomeOptions
       });
     }
     if (invocation === 'pact-of-the-chain') {
@@ -4509,14 +4632,38 @@ const creatorOptions = {
     const normalizedSpeciesId = String(species?.id || '').toLocaleLowerCase('ru');
     const normalizedSpeciesName = String(species?.name || '').toLocaleLowerCase('ru').replace(/ё/g, 'е');
     const singleSpeciesSkillChoice =
-      ['changeling', 'kender', 'centaur', 'kobold', 'leonin', 'lupin', 'tortle', 'elf', 'vedalken', 'horavar', 'half-elf-horavar'].includes(normalizedSpeciesId)
-      || /(?:изменяющ|чейнджлинг|кендер|кентавр|кобольд|леонин|люпин|тортл|ведалкен|хоравар|полуэльф.*хоравар|^эльф$)/i.test(normalizedSpeciesName);
+      ['kender', 'centaur', 'kobold', 'leonin', 'lupin', 'tortle', 'elf', 'vedalken', 'horavar', 'half-elf-horavar'].includes(normalizedSpeciesId)
+      || /(?:кендер|кентавр|кобольд|леонин|люпин|тортл|ведалкен|хоравар|полуэльф.*хоравар|^эльф$)/i.test(normalizedSpeciesName);
 
     if (singleSpeciesSkillChoice) {
       speciesCount = 1;
       // Для этих видов доступны только навыки, прямо перечисленные в их
       // особенности. Это также не даёт базовому эльфу выбирать любой навык.
       speciesAllowed = speciesMatches;
+      speciesFixed = [];
+    }
+
+    // «Инстинкты чейнджлинга» дают два навыка на выбор из закрытого списка.
+    // Изменяющийся не должен наследовать общее правило видов с одним навыком.
+    if (normalizedSpeciesId === 'changeling' || /(?:изменяющ|чейнджлинг)/i.test(normalizedSpeciesName)) {
+      speciesCount = 2;
+      speciesAllowed = ['Запугивание', 'Обман', 'Проницательность', 'Выступление', 'Убеждение'];
+      speciesFixed = [];
+    }
+
+    // «Обострённые чувства» эладрина всегда дают владение одним из этих
+    // трёх навыков. Явное правило не зависит от распознавания текста черты.
+    const normalizedVariantId = String(variant?.id || '').toLocaleLowerCase('ru');
+    const normalizedVariantName = `${variant?.name || ''} ${variant?.nameEn || ''}`
+      .toLocaleLowerCase('ru')
+      .replace(/ё/g, 'е');
+    const isEladrinVariant = normalizedVariantId === 'elf-eladrin'
+      || /(?:^|-)eladrin$/.test(normalizedVariantId)
+      || /(?:эладрин|eladrin)/i.test(normalizedVariantName);
+
+    if (isEladrinVariant) {
+      speciesCount = 1;
+      speciesAllowed = ['Проницательность', 'Восприятие', 'Выживание'];
       speciesFixed = [];
     }
 
@@ -4543,7 +4690,9 @@ const creatorOptions = {
       speciesFixed = [];
     }
 
-    if (elfTranceChoiceVariant(variant)) {
+    // Выбор временного владения от «Транса» не должен затирать постоянный
+    // навык эладрина от «Обострённых чувств».
+    if (elfTranceChoiceVariant(variant) && !isEladrinVariant) {
       const choosesSkill =
         (state.choices['species:elfTranceProficiencyType'] || [])[0] === 'skill';
       speciesCount = choosesSkill ? 1 : 0;
@@ -4560,11 +4709,19 @@ const creatorOptions = {
     }
 
     const adaptiveProficiencies = adaptiveSpeciesProficiencyConfig(species, variant);
+    let speciesSkillKey = 'species:skill';
     if (adaptiveProficiencies?.skillCount) {
-      const selectedSkill = (state.choices['species:adaptiveSkill'] || [])[0];
-      speciesCount = selectedSkill ? 1 : 0;
-      speciesAllowed = selectedSkill ? [selectedSkill] : [];
-      speciesFixed = selectedSkill ? [selectedSkill] : [];
+      if (adaptiveProficiencies.skillSelectionStep === 'skills') {
+        speciesSkillKey = 'species:adaptiveSkill';
+        speciesCount = adaptiveProficiencies.skillCount;
+        speciesAllowed = [...creatorOptions.allSkills];
+        speciesFixed = [];
+      } else {
+        const selectedSkill = (state.choices['species:adaptiveSkill'] || [])[0];
+        speciesCount = selectedSkill ? 1 : 0;
+        speciesAllowed = selectedSkill ? [selectedSkill] : [];
+        speciesFixed = selectedSkill ? [selectedSkill] : [];
+      }
     }
 
     const classMatches = skillsMentioned(classDescription);
@@ -4587,7 +4744,10 @@ const creatorOptions = {
       explicitClassOptions = CLASS_SKILL_OPTIONS.bloodhunter;
     }
 
-    const classAllowed = Array.isArray(explicitClassOptions) ? [...explicitClassOptions] : classMatches;
+    const baseClassAllowed = Array.isArray(explicitClassOptions) ? [...explicitClassOptions] : classMatches;
+    const classAllowed = hasApothecaryTheory('Прикроватные манеры')
+      ? [...new Set([...baseClassAllowed, 'Проницательность', 'Убеждение'])]
+      : baseClassAllowed;
     const backgroundAllowed = isCustomBackground()
       ? [...creatorOptions.allSkills]
       : skillsMentioned(backgroundDescription);
@@ -4595,7 +4755,7 @@ const creatorOptions = {
     return {
       class: { key: 'class:skills', count: classCount, allowed: classAllowed, fixed: [] },
       background: { key: 'background:skills', count: isCustomBackground() ? 2 : backgroundCount, allowed: backgroundAllowed.length ? backgroundAllowed : (backgroundCount ? creatorOptions.allSkills : []), fixed: [] },
-      species: { key: 'species:skill', count: speciesCount, allowed: speciesAllowed, fixed: speciesFixed },
+      species: { key: speciesSkillKey, count: speciesCount, allowed: speciesAllowed, fixed: speciesFixed },
       feat: getFeatSkillConfiguration()
     };
   }
@@ -4650,12 +4810,23 @@ const creatorOptions = {
         const item = config[source];
         const selected = (state.choices[item.key] || []).includes(skill);
         const fixed = (item.fixed || []).includes(skill);
-        const fixedElsewhere = fixedByAnySource.has(skill) && !fixed;
-        const available = item.allowed.includes(skill) && item.count > 0 && !fixedElsewhere;
+        const selectedElsewhereSource = sources.find(([otherSource]) =>
+          otherSource !== source
+          && (state.choices[config[otherSource].key] || []).includes(skill)
+        );
+        const selectedElsewhere = Boolean(selectedElsewhereSource);
+        const available = item.allowed.includes(skill) && item.count > 0;
         if (!available) {
           return '<td class="skill-unavailable"><span class="skill-unavailable-mark" aria-hidden="true">—</span></td>';
         }
-        return `<td><input class="skill-source-check" type="checkbox" data-skill-source="${source}" value="${escapeHtml(skill)}" ${selected ? 'checked' : ''} ${fixed ? 'disabled data-fixed-skill="true" title="Получено автоматически"' : ''} aria-label="${escapeHtml(skillDisplayName(skill))}: ${source}"></td>`;
+        const elsewhereLabel = selectedElsewhereSource?.[1] || 'другого источника';
+        const disabled = fixed || selectedElsewhere;
+        const title = fixed
+          ? 'Получено автоматически'
+          : selectedElsewhere
+            ? `Уже выбрано от источника «${elsewhereLabel}»`
+            : '';
+        return `<td class="${selectedElsewhere ? 'skill-selected-elsewhere' : ''}"><input class="skill-source-check ${selectedElsewhere ? 'is-selected-elsewhere' : ''}" type="checkbox" data-skill-source="${source}" value="${escapeHtml(skill)}" ${selected ? 'checked' : ''} ${disabled ? 'disabled' : ''} ${fixed ? 'data-fixed-skill="true"' : ''} ${title ? `title="${escapeHtml(title)}"` : ''} aria-label="${escapeHtml(skillDisplayName(skill))}: ${source}"></td>`;
       }).join('');
       return `<tr><td class="skill-name">${escapeHtml(skillDisplayName(skill))}</td>${cells}</tr>`;
     }).join('');
@@ -4674,9 +4845,15 @@ const creatorOptions = {
       : '';
     const adaptiveConfig = adaptiveSpeciesProficiencyConfig();
     const adaptiveInfo = adaptiveConfig?.skillCount
-      ? `Особенность вида «${adaptiveConfig.title}»: навык ${skillDisplayName((state.choices['species:adaptiveSkill'] || [])[0])} выбран на шаге 3.1. Это временное владение можно заменить после продолжительного отдыха.`
+      ? adaptiveConfig.skillSelectionStep === 'skills'
+        ? `${adaptiveConfig.speciesLabel || 'Выбранный вид'} может выбрать 1 временный навык. Эти владения даёт особенность вида «${adaptiveConfig.title}», и после продолжительного отдыха их можно заменить.`
+        : `Особенность вида «${adaptiveConfig.title}»: навык ${skillDisplayName((state.choices['species:adaptiveSkill'] || [])[0])} выбран на шаге 3.1. Это временное владение можно заменить после продолжительного отдыха.`
       : '';
-    const skillsInfo = [skilledInfo, adaptiveInfo].filter(Boolean).join(' ');
+    const bedsideExpertise = bedsideMannersExpertiseSkills();
+    const bedsideInfo = hasApothecaryTheory('Прикроватные манеры')
+      ? `Вы уже владеете навыками «Проницательность» и «Убеждение» благодаря эзотерической теории «Прикроватные манеры». Если выберете один из этих навыков ещё раз в таблице ниже, он получит Компетентность, а следующим шагом откроется страница «Компетентность»${bedsideExpertise.length ? `. Сейчас Компетентность получают: ${bedsideExpertise.map(skillDisplayName).join(', ')}` : ''}.`
+      : '';
+    const skillsInfo = [skilledInfo, adaptiveInfo, bedsideInfo].filter(Boolean).join(' ');
     warning.textContent = message || skillsInfo;
     warning.hidden = !(message || skillsInfo);
     warning.classList.toggle('is-info', !message && Boolean(skillsInfo));
@@ -4732,7 +4909,11 @@ const creatorOptions = {
       ...(state.choices['class:skills'] || []),
       ...(state.choices['background:skills'] || []),
       ...(state.choices['species:skill'] || []),
-      ...(state.choices['feat:skills'] || [])
+      ...(adaptiveSpeciesProficiencyConfig()?.skillSelectionStep === 'skills'
+        ? state.choices['species:adaptiveSkill'] || []
+        : []),
+      ...(state.choices['feat:skills'] || []),
+      ...bedsideMannersSkills()
     ])];
   }
 
@@ -4741,10 +4922,12 @@ const creatorOptions = {
     const classId = String(characterClass?.id || state.class || '').toLocaleLowerCase('ru');
     const className = `${characterClass?.name || ''} ${characterClass?.nameEn || ''}`.toLocaleLowerCase('ru');
     const isRogue = classId === 'rogue' || classId === 'плут' || /(?:^|\\s)плут(?:$|\\s)|rogue/.test(className);
+    const fixed = bedsideMannersExpertiseSkills();
     return {
       key: 'class:expertise',
       count: isRogue ? 2 : 0,
-      allowed: isRogue ? getKnownSkills() : []
+      allowed: isRogue ? getKnownSkills().filter((skill) => !fixed.includes(skill)) : [],
+      fixed
     };
   }
 
@@ -4759,7 +4942,7 @@ const creatorOptions = {
     const current = Array.isArray(state.choices[config.key]) ? state.choices[config.key] : [];
     state.choices[config.key] = current.filter((skill) => config.allowed.includes(skill)).slice(0, config.count);
 
-    const hasChoice = config.count > 0;
+    const hasChoice = config.count > 0 || config.fixed.length > 0;
     empty.hidden = hasChoice;
     root.hidden = !hasChoice;
     summary.hidden = !hasChoice;
@@ -4770,18 +4953,26 @@ const creatorOptions = {
       return;
     }
 
-    summary.innerHTML = `<span>Компетентность</span><strong>${state.choices[config.key].length}/${config.count}</strong>`;
-    root.innerHTML = config.allowed.map((skill) => {
+    summary.innerHTML = `<span>Компетентность</span><strong>${state.choices[config.key].length + config.fixed.length}/${config.count + config.fixed.length}</strong>`;
+    const fixedCards = config.fixed.map((skill) => `<label class="expertise-option is-selected is-fixed">
+      <input type="checkbox" checked disabled>
+      <span><strong>${escapeHtml(skillDisplayName(skill))}</strong><small>Автоматически: эзотерическая теория «Прикроватные манеры» и повторное владение навыком</small></span>
+    </label>`).join('');
+    const selectableCards = config.allowed.map((skill) => {
       const checked = state.choices[config.key].includes(skill);
       const recommended = ['Ловкость рук', 'Скрытность'].includes(skill);
       return `<label class="expertise-option ${checked ? 'is-selected' : ''}">
         <input type="checkbox" data-expertise-skill value="${escapeHtml(skill)}" ${checked ? 'checked' : ''}>
         <span><strong>${escapeHtml(skillDisplayName(skill))}</strong>${recommended ? '<small>Рекомендуется плуту</small>' : '<small>Навык, которым вы владеете</small>'}</span>
       </label>`;
-    }).join('') || '<p class="expertise-no-skills">Сначала выберите навыки, которыми владеет персонаж.</p>';
+    }).join('');
+    root.innerHTML = fixedCards + selectableCards || '<p class="expertise-no-skills">Сначала выберите навыки, которыми владеет персонаж.</p>';
 
-    warning.textContent = message;
-    warning.hidden = !message;
+    const theoryMessage = config.fixed.length
+      ? `Компетентность получена автоматически: ${config.fixed.map(skillDisplayName).join(', ')}. Эти навыки были выбраны повторно при наличии владения от теории «Прикроватные манеры».`
+      : '';
+    warning.textContent = message || theoryMessage;
+    warning.hidden = !(message || theoryMessage);
 
     $$('[data-expertise-skill]').forEach((input) => input.addEventListener('change', () => {
       const selected = state.choices[config.key] || [];
@@ -4860,8 +5051,39 @@ const creatorOptions = {
     };
   }
 
-  const musicalToolNames = ['Виола','Волынка','Барабан','Лира','Лютня','Рожок','Свирель','Флейта','Цимбалы','Шалмей'];
+  const musicalToolNames = [...creatorOptions.musicalTools];
   const gamingToolNames = ['Драконьи шахматы','Игральные карты','Кости','Ставка трёх драконов'];
+  const apothecarySpecialToolNames = ['Набор травника', 'Набор отравителя', 'Инструменты алхимика'];
+
+  function isApothecaryClassSelected() {
+    return /^(apothecary|апотекарий)$/i.test(
+      String(findClass()?.id || findClass()?.name || '').trim()
+    );
+  }
+
+  function isArtificerClassSelected() {
+    return /^(artificer|артефактор|артифактор|изобретатель)$/i.test(
+      String(findClass()?.id || findClass()?.name || '').trim()
+    );
+  }
+
+  function isValidApothecaryToolPair(values) {
+    const selected = [...new Set(values || [])];
+    if (selected.length < 2) return true;
+    if (selected.length > 2) return false;
+    return selected.some((tool) => creatorOptions.artisanTools.includes(tool))
+      && selected.some((tool) => apothecarySpecialToolNames.includes(tool));
+  }
+
+  function normalizeApothecaryToolChoices(values) {
+    const normalized = [];
+    for (const value of [...new Set(values || [])]) {
+      const candidate = [...normalized, value];
+      if (candidate.length <= 1 || isValidApothecaryToolPair(candidate)) normalized.push(value);
+      if (normalized.length === 2) break;
+    }
+    return normalized;
+  }
 
   function clientToolOptionsFromDescription(value) {
     const text = String(value ?? '').toLocaleLowerCase('ru');
@@ -4915,7 +5137,10 @@ const creatorOptions = {
       if (source === 'class' && /^(rogue|плут)$/i.test(String(characterClass?.id || characterClass?.name || ''))) {
         if (!parsed.fixed.includes('Воровской жаргон')) parsed.fixed.push('Воровской жаргон');
         parsed.bonusChoices = Math.max(parsed.bonusChoices, 1);
-        parsed.unlockedRare = [...new Set([...parsed.unlockedRare, ...creatorOptions.rareLanguages])];
+        // «Воровской жаргон» плут знает автоматически, но дополнительный язык
+        // от класса выбирается только из списка обычных языков. Редкие языки
+        // могут быть открыты лишь другим источником: видом, предысторией или чертой.
+        parsed.unlockedRare = [];
       }
       if (source === 'species') {
         const identity = `${findSpecies()?.id || ''} ${findSpecies()?.name || ''} ${findSpecies()?.nameEn || ''}`
@@ -5066,6 +5291,18 @@ const creatorOptions = {
         allowed = [...new Set([...fixed, ...creatorOptions.artisanTools])];
       }
 
+      // Апотекарий получает два разных типа владения: один инструмент
+      // ремесленника и один из трёх медицинско-алхимических наборов.
+      // Инструменты алхимика входят сразу в обе категории.
+      if (source === 'class' && isApothecaryClassSelected()) {
+        fixed = [];
+        count = 2;
+        allowed = [...new Set([
+          ...creatorOptions.artisanTools,
+          ...apothecarySpecialToolNames
+        ])];
+      }
+
       // Монах выбирает владение одним инструментом ремесленника
       // или одним музыкальным инструментом. Этот выбор затем используется
       // и в его готовом стартовом наборе.
@@ -5120,15 +5357,12 @@ const creatorOptions = {
     }
 
     const allowedLanguages = [...allStandard, ...rareSourceMap.keys()].filter((language) => !fixedLanguages.includes(language));
-    const selected = Array.isArray(state.choices[selectedKey]) ? state.choices[selectedKey] : [];
+    // Миграция старых черновиков после исправления названия языка.
+    const selected = Array.isArray(state.choices[selectedKey])
+      ? state.choices[selectedKey].map((language) => language === 'Язык жестов Общего' ? 'Общий язык жестов' : language)
+      : [];
     const selectedAllowed = [...new Set(selected.filter((language) => allowedLanguages.includes(language)))];
-    const rogueLanguageChoice = (config.class?.fixed || []).includes('Воровской жаргон');
-    state.choices[selectedKey] = rogueLanguageChoice
-      ? [
-          ...selectedAllowed.filter((language) => !creatorOptions.rareLanguages.includes(language)),
-          ...selectedAllowed.filter((language) => creatorOptions.rareLanguages.includes(language)).slice(0, 1)
-        ].slice(0, selectableLimit)
-      : selectedAllowed.slice(0, selectableLimit);
+    state.choices[selectedKey] = selectedAllowed.slice(0, selectableLimit);
     state.choices[fixedKey] = fixedLanguages;
 
     for (const source of sources) state.choices[`${source}:languages`] = [];
@@ -5165,14 +5399,6 @@ const creatorOptions = {
       const value = input.value;
       const current = state.choices[selectedKey] || [];
       if (input.checked) {
-        if (
-          rogueLanguageChoice
-          && creatorOptions.rareLanguages.includes(value)
-          && current.some((language) => creatorOptions.rareLanguages.includes(language))
-        ) {
-          renderLanguagesTable('Плут может выбрать не больше одного редкого языка за счёт «Воровского жаргона».');
-          return;
-        }
         if (current.length >= selectableLimit) {
           renderLanguagesTable(`Уже известно максимальное количество языков: ${totalKnownLimit}.`);
           return;
@@ -5190,7 +5416,21 @@ const creatorOptions = {
     const body = $('#tools-table-body');
     const summary = $('#tools-summary');
     const warning = $('#tools-warning');
+    const classNote = $('#tools-class-note');
     if (!body || !summary || !warning) return;
+
+    if (classNote) {
+      const hasClassToolNote = isApothecaryClassSelected() || isArtificerClassSelected();
+      classNote.hidden = !hasClassToolNote;
+      classNote.innerHTML = isApothecaryClassSelected() ? `
+        <strong>Владения инструментами Апотекария</strong>
+        <p>Выберите <b>один инструмент ремесленника</b> и ещё <b>один инструмент</b> из списка: набор травника, набор отравителя или инструменты алхимика.</p>
+        <p>Инструменты алхимика считаются инструментами ремесленника и входят в оба списка. Поэтому вместе с ними можно выбрать как другой инструмент ремесленника, так и набор травника или набор отравителя.</p>
+      ` : isArtificerClassSelected() ? `
+        <strong>Владения инструментами Артефактора</strong>
+        <p>Вы автоматически владеете <b>Воровскими инструментами</b> и <b>Инструментами ремонтника</b>. Дополнительно выберите <b>один инструмент ремесленника</b>.</p>
+      ` : '';
+    }
 
     const config = getToolConfiguration();
     const sources = [['class','Класс'],['background','Предыстория'],['species','Вид'],['feat','Черта']];
@@ -5200,11 +5440,14 @@ const creatorOptions = {
       const item = config[source];
       const fixed = Array.isArray(item.fixed) ? item.fixed : [];
       const current = Array.isArray(state.choices[item.key]) ? state.choices[item.key] : [];
-      const selectable = current.filter((value) =>
+      let selectable = current.filter((value) =>
         item.allowed.includes(value)
         && !fixed.includes(value)
         && !(fixedByAnySource.has(value) && !fixed.includes(value))
       );
+      if (source === 'class' && isApothecaryClassSelected()) {
+        selectable = normalizeApothecaryToolChoices(selectable);
+      }
       state.choices[item.key] = source === 'feat' && skilledSharedChoiceLimit() > 0
         ? [...fixed, ...selectable].slice(0, skilledSharedChoiceLimit())
         : [...fixed, ...selectable].slice(0, item.count);
@@ -5227,15 +5470,59 @@ const creatorOptions = {
         ${source === 'feat' && sharedLimit ? `<small>Навыки: ${skilledSkillCount} · Инструменты: ${skilledToolCount}</small>` : ''}
       </div>`;
     }).join('');
-    body.innerHTML = creatorOptions.allTools.map((option) => `<tr><td class="choice-name">${escapeHtml(option)}</td>${sources.map(([source]) => {
-      const item=config[source];
-      const fixed=(item.fixed||[]).includes(option);
-      const selectedElsewhere=sources.some(([otherSource])=>otherSource!==source&&(state.choices[config[otherSource].key]||[]).includes(option));
-      const available=item.count>0&&item.allowed.includes(option)&&(!selectedElsewhere||fixed);
-      const checked=(state.choices[item.key]||[]).includes(option);
-      const sharedLimitReached = source === 'feat' && skilledLimit > 0 && skilledTotal >= skilledLimit && !checked;
-      return available ? `<td><input type="checkbox" data-tools-source="${source}" value="${escapeHtml(option)}" ${checked?'checked':''} ${(fixed || sharedLimitReached) ? 'disabled' : ''} ${fixed?'data-fixed-tool="true"':''} ${sharedLimitReached?'title="Все выборы «Одарённого» уже потрачены"':''}></td>` : '<td class="choice-unavailable">—</td>';
-    }).join('')}</tr>`).join('');
+    const renderToolRow = (option) => `<tr><td class="choice-name">${escapeHtml(option)}</td>${sources.map(([source]) => {
+        const item=config[source];
+        const fixed=(item.fixed||[]).includes(option);
+        const selectedElsewhereSource=sources.find(([otherSource])=>otherSource!==source&&(state.choices[config[otherSource].key]||[]).includes(option));
+        const selectedElsewhere=Boolean(selectedElsewhereSource);
+        const selectedForSource=state.choices[item.key]||[];
+        const checked=selectedForSource.includes(option);
+        // Как в таблице навыков: допустимый для источника чекбокс остаётся
+        // видимым после достижения лимита. Обработчик ниже отклонит выбор и
+        // покажет объяснение, но таблица не будет превращаться в прочерки.
+        const available=item.count>0&&item.allowed.includes(option);
+        const sharedLimitReached = source === 'feat' && skilledLimit > 0 && skilledTotal >= skilledLimit && !checked;
+        const disabled=fixed||selectedElsewhere||sharedLimitReached;
+        const elsewhereLabel=selectedElsewhereSource?.[1]||'другого источника';
+        const title=fixed
+          ? 'Получено автоматически'
+          : selectedElsewhere
+            ? `Уже выбрано от источника «${elsewhereLabel}»`
+            : sharedLimitReached
+              ? 'Все выборы «Одарённого» уже потрачены'
+              : '';
+        return available ? `<td class="${selectedElsewhere?'choice-selected-elsewhere':''}"><input class="${selectedElsewhere?'is-selected-elsewhere':''}" type="checkbox" data-tools-source="${source}" value="${escapeHtml(option)}" ${checked?'checked':''} ${disabled?'disabled':''} ${fixed?'data-fixed-tool="true"':''} ${title?`title="${escapeHtml(title)}"`:''}></td>` : '<td class="choice-unavailable">—</td>';
+      }).join('')}</tr>`;
+    const artisanToolRows = creatorOptions.allTools
+      .filter((option) => creatorOptions.artisanTools.includes(option))
+      .map(renderToolRow)
+      .join('');
+    const musicalToolRows = creatorOptions.allTools
+      .filter((option) => creatorOptions.musicalTools.includes(option))
+      .map(renderToolRow)
+      .join('');
+    const transportToolRows = creatorOptions.allTools
+      .filter((option) => creatorOptions.transportTools.includes(option))
+      .map(renderToolRow)
+      .join('');
+    const otherToolRows = creatorOptions.allTools
+      .filter((option) =>
+        !creatorOptions.artisanTools.includes(option)
+        && !creatorOptions.musicalTools.includes(option)
+        && !creatorOptions.transportTools.includes(option)
+      )
+      .map(renderToolRow)
+      .join('');
+    body.innerHTML = `
+      <tr class="tool-group-row"><td colspan="5">Ремесленные инструменты</td></tr>
+      ${artisanToolRows}
+      <tr class="tool-group-row"><td colspan="5">Музыкальные инструменты</td></tr>
+      ${musicalToolRows}
+      <tr class="tool-group-row"><td colspan="5">Другие инструменты</td></tr>
+      ${otherToolRows}
+      <tr class="tool-group-row"><td colspan="5">Транспорт</td></tr>
+      ${transportToolRows}
+    `;
 
     const skilledInfo = skilledLimit > 0
       ? skilledRemaining > 0
@@ -5261,13 +5548,8 @@ const creatorOptions = {
     $$('[data-tools-source]').forEach((input) => input.addEventListener('change', () => {
       const source=input.dataset.toolsSource, value=input.value, item=config[source];
       if (input.dataset.fixedTool === 'true') return;
-      for (const [otherSource] of sources) {
-        const other=config[otherSource];
-        if ((other.fixed || []).includes(value)) continue;
-        state.choices[other.key]=(state.choices[other.key]||[]).filter((entry)=>entry!==value);
-      }
+      const selected=(state.choices[item.key]||[]).filter((entry)=>entry!==value);
       if (input.checked) {
-        const selected=state.choices[item.key]||[];
         if (source === 'feat' && skilledSharedChoiceLimit() > 0) {
           if (skilledSharedSelectedCount() >= skilledSharedChoiceLimit()) {
             renderToolsTable(`Черта «Одарённый» уже дала ${skilledSharedChoiceLimit()} владения навыками или инструментами.`);
@@ -5277,6 +5559,22 @@ const creatorOptions = {
           renderToolsTable(`Для источника уже выбрано максимальное количество.`);
           return;
         }
+        if (source === 'class' && isApothecaryClassSelected() && !isValidApothecaryToolPair([...selected, value])) {
+          const selectedArtisan = selected.some((tool) => creatorOptions.artisanTools.includes(tool));
+          renderToolsTable(selectedArtisan
+            ? 'Апотекарий уже выбрал инструмент ремесленника. Вторым владением выберите набор травника, набор отравителя или инструменты алхимика.'
+            : 'Апотекарий уже выбрал специальный набор. Вторым владением выберите инструмент ремесленника.');
+          return;
+        }
+      }
+      // Переносим владение между источниками только после успешной проверки,
+      // чтобы отклонённый выбор не удалял прежнее владение.
+      for (const [otherSource] of sources) {
+        const other=config[otherSource];
+        if ((other.fixed || []).includes(value)) continue;
+        state.choices[other.key]=(state.choices[other.key]||[]).filter((entry)=>entry!==value);
+      }
+      if (input.checked) {
         state.choices[item.key]=[...selected,value];
       }
       if (source === 'class' && /^(monk|монах)$/i.test(String(findClass()?.id || findClass()?.name || '').trim())) {
@@ -6082,7 +6380,7 @@ const creatorOptions = {
       const level1Section = hasLevel1 ? `
         <section class="spell-section">
           <div class="spell-section-heading">
-            <div><span>Магия первого круга</span><h4>Заклинания 1 уровня</h4></div>
+            <div><span>Магия первого круга</span><h4>${escapeHtml(source.level1Title || 'Заклинания 1 уровня')}</h4></div>
             <strong>${selected.level1.length}/${source.limits.level1}</strong>
           </div>
           <div class="spell-grid" data-spell-scroll="${escapeHtml(`${source.id}:level1`)}">${cards(source, 'level1', '1', query)}</div>
@@ -6282,7 +6580,8 @@ const creatorOptions = {
       );
     }
     if (step === 'expertise') {
-      return Boolean(state.class) && getExpertiseConfiguration().count > 0;
+      const expertise = getExpertiseConfiguration();
+      return Boolean(state.class) && (expertise.count > 0 || expertise.fixed.length > 0);
     }
     return true;
   }
@@ -6413,14 +6712,15 @@ const creatorOptions = {
     const species = findSpecies(), variant = findVariant(species), characterClass = findClass(), background = findBackground();
     const labels = {strength:'СИЛ',dexterity:'ЛОВ',constitution:'ТЕЛ',intelligence:'ИНТ',wisdom:'МДР',charisma:'ХАР'};
     const languages = [...new Set([...(state.choices['languages:fixed'] || ['Общий']), ...(state.choices['languages:selected'] || [])])];
-    const skills = [...(state.choices['class:skills'] || []), ...(state.choices['background:skills'] || []), ...(state.choices['species:skill'] || []), ...(state.choices['feat:skills'] || [])];
+    const skills = [...new Set([...(state.choices['class:skills'] || []), ...(state.choices['background:skills'] || []), ...(state.choices['species:skill'] || []), ...(state.choices['species:adaptiveSkill'] || []), ...(state.choices['feat:skills'] || []), ...bedsideMannersSkills()])];
     const root = $('#final-sheet'); if (!root) return;
     const resources = ensureSpeciesResourceState();
     const resourceSection = resources.length ? `<section class="final-resource-section">
       <div class="final-resource-heading"><div><span>Особенности вида</span><h4>Использования и отдых</h4></div><div><button type="button" data-rest-type="short">Короткий отдых</button><button type="button" data-rest-type="long">Продолжительный отдых</button></div></div>
       <div class="final-resource-grid">${resources.map((resource) => `<article><div><strong>${escapeHtml(resource.name)}</strong><small>Восстановление: ${resource.rest === 'short' ? 'короткий или продолжительный отдых' : 'продолжительный отдых'}</small></div><div class="resource-counter"><button type="button" data-resource-action="spend" data-resource-id="${escapeHtml(resource.id)}" ${state.resources[resource.id] <= 0 ? 'disabled' : ''}>−</button><strong>${state.resources[resource.id]}/${resource.maximum}</strong><button type="button" data-resource-action="restore" data-resource-id="${escapeHtml(resource.id)}" ${state.resources[resource.id] >= resource.maximum ? 'disabled' : ''}>+</button></div></article>`).join('')}</div>
     </section>` : '';
-    root.innerHTML = `<div class="final-identity"><span>Персонаж 1 уровня</span><h3>${escapeHtml(state.name || 'Безымянный герой')}</h3><p>${escapeHtml([[species?.name, variant?.name].filter(Boolean).join(' — '), characterClass?.name, background?.name].filter(Boolean).join(' · ') || 'Выбор не завершён')}</p></div><div class="final-stats">${abilityKeys.map((key) => `<div><span>${labels[key]}</span><strong>${totalScore(key)}</strong><small>${formatModifier(modifier(totalScore(key)))}</small></div>`).join('')}</div>${resourceSection}<div class="final-details"><p><strong>Сезон Эладрина:</strong> ${escapeHtml(ELADRIN_SEASONS[selectedEladrinSeason()]?.name || '—')}</p><p><strong>Драконий предок:</strong> ${escapeHtml((state.choices['species:dragonAncestry'] || [])[0] || '—')}</p><p><strong>Заклинательная характеристика вида:</strong> ${escapeHtml((state.choices['species:spellAbility'] || [])[0] || '—')}</p><p><strong>Заговор вида:</strong> ${escapeHtml((state.choices['species:cantrip'] || [])[0] || '—')}</p><p><strong>Временный навык вида:</strong> ${escapeHtml((state.choices['species:adaptiveSkill'] || [])[0] || '—')}</p><p><strong>Временные владения вида:</strong> ${escapeHtml((state.choices['species:adaptiveProficiencies'] || []).join(', ') || '—')}</p><p><strong>Рост и вес:</strong> ${state.physique.heightInches ? `${Math.floor(state.physique.heightInches/12)}′ ${state.physique.heightInches%12}″ · ${state.physique.weightPounds} фун.` : '—'}</p><p><strong>Мировоззрение:</strong> ${escapeHtml(ALIGNMENTS[state.alignment] || '—')}</p><p><strong>Языки:</strong> ${escapeHtml([...new Set(languages)].join(', '))}</p><p><strong>Навыки:</strong> ${escapeHtml(skills.map(skillDisplayName).join(', ') || '—')}</p><p><strong>Компетентность:</strong> ${escapeHtml((state.choices['class:expertise'] || []).map(skillDisplayName).join(', ') || '—')}</p><p><strong>Черта происхождения:</strong> ${escapeHtml(selectedOriginFeats().map((feat) => feat.name).join(', ') || '—')}</p><p><strong>Выборы класса:</strong> ${escapeHtml(getClassFeatureGroups().flatMap((group) => (state.choices[`classFeature:${group.id}`] || []).map((id) => group.options.find((option) => option.id === id)?.name || id)).join(', ') || '—')}</p><p><strong>Заговоры:</strong> ${escapeHtml(getClassSpells().filter((spell) => state.spells.cantrips.includes(spell.id)).map((spell) => spell.name).join(', ') || '—')}</p><p><strong>Заклинания 1 уровня:</strong> ${escapeHtml(getClassSpells().filter((spell) => state.spells.level1.includes(spell.id)).map((spell) => spell.name).join(', ') || '—')}</p><p><strong>Черты характера:</strong> ${escapeHtml((state.choices['background:traits'] || []).join(' / ') || '—')}</p><p><strong>Идеал:</strong> ${escapeHtml(state.choices['background:ideal']?.[0] || '—')}</p><p><strong>Привязанность:</strong> ${escapeHtml(state.choices['background:bond']?.[0] || '—')}</p><p><strong>Слабость:</strong> ${escapeHtml(state.choices['background:flaw']?.[0] || '—')}</p></div>`;
+    const summaryExpertise = [...new Set([...(state.choices['class:expertise'] || []), ...bedsideMannersExpertiseSkills()])];
+    root.innerHTML = `<div class="final-identity"><span>Персонаж 1 уровня</span><h3>${escapeHtml(state.name || 'Безымянный герой')}</h3><p>${escapeHtml([[species?.name, variant?.name].filter(Boolean).join(' — '), characterClass?.name, background?.name].filter(Boolean).join(' · ') || 'Выбор не завершён')}</p></div><div class="final-stats">${abilityKeys.map((key) => `<div><span>${labels[key]}</span><strong>${totalScore(key)}</strong><small>${formatModifier(modifier(totalScore(key)))}</small></div>`).join('')}</div>${resourceSection}<div class="final-details"><p><strong>Сезон Эладрина:</strong> ${escapeHtml(ELADRIN_SEASONS[selectedEladrinSeason()]?.name || '—')}</p><p><strong>Драконий предок:</strong> ${escapeHtml((state.choices['species:dragonAncestry'] || [])[0] || '—')}</p><p><strong>Заклинательная характеристика вида:</strong> ${escapeHtml((state.choices['species:spellAbility'] || [])[0] || '—')}</p><p><strong>Заговор вида:</strong> ${escapeHtml((state.choices['species:cantrip'] || [])[0] || '—')}</p><p><strong>Временный навык вида:</strong> ${escapeHtml((state.choices['species:adaptiveSkill'] || [])[0] || '—')}</p><p><strong>Временные владения вида:</strong> ${escapeHtml((state.choices['species:adaptiveProficiencies'] || []).join(', ') || '—')}</p><p><strong>Рост и вес:</strong> ${state.physique.heightInches ? `${Math.floor(state.physique.heightInches/12)}′ ${state.physique.heightInches%12}″ · ${state.physique.weightPounds} фун.` : '—'}</p><p><strong>Мировоззрение:</strong> ${escapeHtml(ALIGNMENTS[state.alignment] || '—')}</p><p><strong>Языки:</strong> ${escapeHtml([...new Set(languages)].join(', '))}</p><p><strong>Навыки:</strong> ${escapeHtml(skills.map(skillDisplayName).join(', ') || '—')}</p><p><strong>Компетентность:</strong> ${escapeHtml(summaryExpertise.map(skillDisplayName).join(', ') || '—')}</p><p><strong>Черта происхождения:</strong> ${escapeHtml(selectedOriginFeats().map((feat) => feat.name).join(', ') || '—')}</p><p><strong>Выборы класса:</strong> ${escapeHtml(getClassFeatureGroups().flatMap((group) => (state.choices[`classFeature:${group.id}`] || []).map((id) => group.options.find((option) => option.id === id)?.name || id)).join(', ') || '—')}</p><p><strong>Заговоры:</strong> ${escapeHtml(getClassSpells().filter((spell) => state.spells.cantrips.includes(spell.id)).map((spell) => spell.name).join(', ') || '—')}</p><p><strong>Заклинания 1 уровня:</strong> ${escapeHtml(getClassSpells().filter((spell) => state.spells.level1.includes(spell.id)).map((spell) => spell.name).join(', ') || '—')}</p><p><strong>Черты характера:</strong> ${escapeHtml((state.choices['background:traits'] || []).join(' / ') || '—')}</p><p><strong>Идеал:</strong> ${escapeHtml(state.choices['background:ideal']?.[0] || '—')}</p><p><strong>Привязанность:</strong> ${escapeHtml(state.choices['background:bond']?.[0] || '—')}</p><p><strong>Слабость:</strong> ${escapeHtml(state.choices['background:flaw']?.[0] || '—')}</p></div>`;
     bindSummaryResourceControls();
   }
 
@@ -6792,7 +7092,13 @@ const creatorOptions = {
   }));
   $('#edit-character')?.addEventListener('click', () => showStep(1));
   function safeFileName(value) {
-    return (String(value || 'character').trim().replace(/[^a-zа-яё0-9_-]+/gi, '-') || 'character');
+    return (
+      String(value || 'character')
+        .trim()
+        .replace(/[<>:"/\\|?*\u0000-\u001f]+/g, '-')
+        .replace(/[. ]+$/g, '')
+      || 'character'
+    );
   }
 
   function downloadJson(payload, suffix = '') {
@@ -6805,6 +7111,77 @@ const creatorOptions = {
     link.click();
     link.remove();
     setTimeout(() => URL.revokeObjectURL(url), 0);
+  }
+
+  function ageDescription(value) {
+    const age = Number(value);
+    if (!Number.isFinite(age) || age <= 0) return 'не указан';
+    const lastTwo = age % 100;
+    const last = age % 10;
+    const unit = lastTwo >= 11 && lastTwo <= 14
+      ? 'лет'
+      : last === 1
+        ? 'год'
+        : last >= 2 && last <= 4
+          ? 'года'
+          : 'лет';
+    return `${age} ${unit}`;
+  }
+
+  function createCharacterDescription() {
+    const species = findSpecies();
+    const variant = findVariant(species);
+    const characterClass = findClass();
+    const background = findBackground();
+    const name = String(state.name || 'Безымянный герой').trim() || 'Безымянный герой';
+    const speciesName = [species?.name, variant?.name].filter(Boolean).join(' — ') || 'не указана';
+    const traits = (state.choices['background:traits'] || [])
+      .map((value) => String(value || '').trim())
+      .filter(Boolean)
+      .join(' ');
+    const ideal = String(state.choices['background:ideal']?.[0] || '').trim();
+    const bond = String(state.choices['background:bond']?.[0] || '').trim();
+    const flaw = String(state.choices['background:flaw']?.[0] || '').trim();
+    const backstory = String(state.profile?.backstory || '').trim();
+
+    return `(День 00, на пороге гильдии появляется ${name}.
+
+1) Раса: ${speciesName}
+
+2) Класс: ${characterClass?.name || 'не указан'}
+
+3) Предыстория: ${background?.name || 'не указана'}
+
+4) Возраст: ${ageDescription(state.profile?.age)}
+
+5) Мировоззрение: ${ALIGNMENTS[state.alignment] || 'не указано'}
+
+6) Кратко о характере:
+
+**Черта характера** - ${traits || 'не указана'}
+**Идеал** - ${ideal || 'не указан'}
+**Привязанность** - ${bond || 'не указана'}
+**Слабость** - ${flaw || 'не указана'}
+
+7) Краткая предыстория: ${backstory || 'отсутствует.'}
+
+8) Токен персонажа: )`;
+  }
+
+  async function copyText(value) {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(value);
+      return;
+    }
+    const field = document.createElement('textarea');
+    field.value = value;
+    field.style.position = 'fixed';
+    field.style.opacity = '0';
+    document.body.appendChild(field);
+    field.select();
+    const copied = document.execCommand('copy');
+    field.remove();
+    if (!copied) throw new Error('Браузер не разрешил доступ к буферу обмена.');
   }
 
   function createDraftPayload() {
@@ -6916,18 +7293,39 @@ const creatorOptions = {
     });
   }
 
+  window.LeagueCharacterCreator = {
+    getState: () => structuredClone(state),
+    createDraftPayload,
+    buildRoll20Payload
+  };
+
   $('#download-draft')?.addEventListener('click', () => {
     downloadJson(createDraftPayload(), '-draft');
   });
 
   $('#download-roll20')?.addEventListener('click', () => {
     try {
-      downloadJson(buildRoll20Payload(), '-roll20');
+      downloadJson(buildRoll20Payload());
     } catch (error) {
       console.error(error);
       const details = error instanceof Error ? `\n\n${error.message}` : '';
       alert(`Не удалось подготовить файл Roll20.${details}`);
     }
+  });
+
+  $('#copy-character-description')?.addEventListener('click', async (event) => {
+    const button = event.currentTarget;
+    const originalText = button.textContent || 'Копировать описание';
+    try {
+      await copyText(createCharacterDescription());
+      button.textContent = 'Описание скопировано ✓';
+    } catch (error) {
+      console.error(error);
+      button.textContent = 'Не удалось скопировать';
+    }
+    window.setTimeout(() => {
+      button.textContent = originalText;
+    }, 1800);
   });
 
   function resetTransientInterfaceState() {
@@ -7469,6 +7867,19 @@ const creatorOptions = {
     gap: 0.45rem;
   }
 
+  .size-select {
+    position: relative;
+    padding: 1rem;
+    border: 2px solid color-mix(in srgb, var(--wizard-gold) 66%, var(--card-border));
+    border-radius: 0.78rem;
+    background:
+      radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--wizard-gold) 16%, transparent), transparent 44%),
+      color-mix(in srgb, var(--wizard-gold) 7%, var(--background));
+    box-shadow:
+      0 0 0 3px color-mix(in srgb, var(--wizard-gold) 8%, transparent),
+      0 10px 24px rgba(0, 0, 0, 0.14);
+  }
+
   .variant-field > span,
   .size-select > span {
     font-size: 0.76rem;
@@ -7476,6 +7887,12 @@ const creatorOptions = {
     letter-spacing: 0.08em;
     text-transform: uppercase;
     opacity: 0.68;
+  }
+
+  .size-select > span {
+    color: var(--wizard-gold-light);
+    font-size: 0.82rem;
+    opacity: 1;
   }
 
   .variant-field select,
@@ -7487,6 +7904,33 @@ const creatorOptions = {
     background: var(--background);
     color: var(--text);
     font: inherit;
+  }
+
+  .size-select select {
+    min-height: 3rem;
+    padding: 0.78rem 2.6rem 0.78rem 1rem;
+    border: 2px solid var(--wizard-gold);
+    background: color-mix(in srgb, var(--card-bg) 88%, var(--wizard-gold));
+    color: var(--wizard-gold-light);
+    font-size: 1.08rem;
+    font-weight: 800;
+    cursor: pointer;
+    outline: none;
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--wizard-gold) 16%, transparent);
+  }
+
+  .size-select select:hover,
+  .size-select select:focus-visible {
+    border-color: var(--wizard-gold-light);
+    box-shadow:
+      0 0 0 3px color-mix(in srgb, var(--wizard-gold) 20%, transparent),
+      inset 0 0 0 1px color-mix(in srgb, var(--wizard-gold) 20%, transparent);
+  }
+
+  .size-select small {
+    color: color-mix(in srgb, var(--text) 72%, transparent);
+    font-size: 0.78rem;
+    line-height: 1.35;
   }
 
   .content-section {
@@ -7813,6 +8257,12 @@ const creatorOptions = {
     scrollbar-gutter: stable;
     scrollbar-width: thin;
     scrollbar-color: color-mix(in srgb, var(--wizard-gold) 45%, var(--card-border)) transparent;
+  }
+
+  @media (min-width: 1180px) {
+    .class-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
   }
 
   .class-grid::-webkit-scrollbar {

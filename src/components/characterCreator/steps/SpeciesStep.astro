@@ -159,9 +159,16 @@ const { speciesOptions } = Astro.props;
     scrollbar-gutter: stable;
   }
 
+  @media (min-width: 1180px) {
+    .species-grid {
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+    }
+  }
+
   .species-card {
-    --choice-accent: var(--forge-secondary, var(--wizard-gold));
-    --choice-accent-light: var(--forge-secondary-glow, var(--wizard-gold-light));
+    /* Названия всех видов используют единое исходное золотое оформление. */
+    --choice-accent: #d2a754;
+    --choice-accent-light: #f1d38f;
     position: relative;
     display: grid;
     grid-template-rows: 112px minmax(38px, auto);

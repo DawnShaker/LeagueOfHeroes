@@ -15,8 +15,8 @@ export const ARTISAN_TOOLS = [
 ] as const;
 
 export const MUSICAL_INSTRUMENTS = [
-  'Виола', 'Волынка', 'Барабан', 'Лира', 'Лютня', 'Рожок',
-  'Свирель', 'Флейта', 'Цимбалы', 'Шалмей'
+  'Волынка', 'Барабан', 'Цимбалы', 'Флейта', 'Рожок', 'Лютня',
+  'Лира', 'Свирель', 'Шалмей', 'Виола', 'Яртинг', 'Цитра', 'Бандура'
 ] as const;
 
 export const GAMING_SETS = [
@@ -25,7 +25,10 @@ export const GAMING_SETS = [
 
 export const OTHER_TOOLS = [
   'Воровские инструменты', 'Инструменты навигатора', 'Набор для грима',
-  'Набор для фальсификации', 'Набор травника', 'Набор отравителя',
+  'Набор для фальсификации', 'Набор травника', 'Набор отравителя'
+] as const;
+
+export const TRANSPORT_TOOLS = [
   'Транспорт: наземный', 'Транспорт: водный'
 ] as const;
 
@@ -33,12 +36,13 @@ export const ALL_TOOLS = [
   ...ARTISAN_TOOLS,
   ...MUSICAL_INSTRUMENTS,
   ...GAMING_SETS,
-  ...OTHER_TOOLS
+  ...OTHER_TOOLS,
+  ...TRANSPORT_TOOLS
 ] as const;
 
 export const STANDARD_LANGUAGES = [
   'Общий', 'Дварфский', 'Эльфийский', 'Великаний', 'Гномий',
-  'Гоблинский', 'Полуросликов', 'Орочий', 'Драконий', 'Язык жестов Общего'
+  'Гоблинский', 'Полуросликов', 'Орочий', 'Драконий', 'Общий язык жестов'
 ] as const;
 
 export const RARE_LANGUAGES = [

@@ -1,12 +1,12 @@
 <section class="auth-shell" aria-labelledby="test-auth-title">
   <div class="auth-copy">
     <span class="eyebrow">Закрытое тестирование</span>
-    <h1 id="test-auth-title">Личный кабинет Лиги героев</h1>
-    <p>Один Discord-профиль — несколько игровых режимов. Мастер сможет в любой момент переключиться в кабинет игрока без повторного входа.</p>
+    <h1 id="test-auth-title">Вход в инструменты Лиги героев</h1>
+    <p>Войдите через Discord, чтобы пользоваться закрытыми инструментами сайта.</p>
     <ul>
-      <li>Игрок — персонажи, игры и приглашения.</li>
-      <li>Мастер — кампании, группы и инструменты ведущего.</li>
-      <li>Администратор — пользователи, роли и состояние теста.</li>
+      <li>Создайте персонажа по шагам.</li>
+      <li>Экспортируйте готовый файл для Roll20.</li>
+      <li>Личный кабинет пока остаётся в разработке.</li>
     </ul>
   </div>
 
@@ -35,6 +35,11 @@
     status.hidden = false;
   }
 
+  function requestedPage() {
+    const next = new URLSearchParams(window.location.search).get('next') || '/tools/character-creator/';
+    return next.startsWith('/') && !next.startsWith('//') ? next : '/tools/character-creator/';
+  }
+
   async function initializeLogin() {
     if (!isTestAccountConfigured || !testAccountSupabase) {
       if (button) button.disabled = true;
@@ -44,7 +49,7 @@
 
     const { data } = await testAccountSupabase.auth.getSession();
     if (data.session) {
-      window.location.replace('/test/cabinet/');
+      window.location.replace(requestedPage());
     }
   }
 
@@ -58,7 +63,9 @@
       ? window.open('about:blank', 'loh-discord-auth')
       : null;
 
-    const redirectTo = new URL('/test/auth/callback/', window.location.origin).toString();
+    const callbackUrl = new URL('/test/auth/callback/', window.location.origin);
+    callbackUrl.searchParams.set('next', requestedPage());
+    const redirectTo = callbackUrl.toString();
     const { data, error } = await testAccountSupabase.auth.signInWithOAuth({
       provider: 'discord',
       options: {

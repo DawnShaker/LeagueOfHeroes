@@ -2,7 +2,7 @@
   <div class="callback-spinner" aria-hidden="true"></div>
   <span class="eyebrow">Discord OAuth</span>
   <h1>Завершаем вход</h1>
-  <p id="callback-status">Проверяем профиль и создаём личный кабинет…</p>
+  <p id="callback-status">Проверяем профиль и открываем выбранный инструмент…</p>
   <a id="callback-retry" href="/test/auth/" hidden>Вернуться ко входу</a>
 </section>
 
@@ -15,6 +15,11 @@
   function fail(message: string) {
     if (status) status.textContent = message;
     if (retry) retry.hidden = false;
+  }
+
+  function requestedPage() {
+    const next = new URLSearchParams(window.location.search).get('next') || '/tools/character-creator/';
+    return next.startsWith('/') && !next.startsWith('//') ? next : '/tools/character-creator/';
   }
 
   async function finishDiscordLogin() {
@@ -41,7 +46,7 @@
       return;
     }
 
-    window.location.replace('/test/cabinet/');
+    window.location.replace(requestedPage());
   }
 
   finishDiscordLogin();
@@ -56,4 +61,3 @@
   a { color: #f1cf76; font-weight: 800; }
   @keyframes spin { to { transform: rotate(360deg); } }
 </style>
-
