@@ -1026,9 +1026,7 @@ const creatorOptions = {
       skills: (state.choices['background:skills'] || []).join(', '),
       tools: (state.choices['background:tools'] || []).join(', '),
       languageText: '',
-      feat: background.feat,
-      feature: String(custom.feature || '').trim(),
-      featureDescription: String(custom.featureDescription || '').trim()
+      feat: background.feat
     };
   }
 
@@ -2473,6 +2471,54 @@ const creatorOptions = {
     return [...options.values()];
   }
 
+  function originFeatEligibility(feat) {
+    const requirements = Array.isArray(feat?.requirements)
+      ? feat.requirements.filter(Boolean)
+      : [];
+    if (!requirements.length) return true;
+
+    const background = findBackground();
+    const characterClass = findClass();
+    const backgroundId = String(background?.id || state.background || '').toLocaleLowerCase('ru');
+    const classId = String(characterClass?.id || state.class || '').toLocaleLowerCase('ru');
+    const classWeapons = (characterClass?.proficiencies?.weapons || [])
+      .map((weapon) => String(weapon || ''))
+      .join(' ')
+      .toLocaleLowerCase('ru');
+    const hasBackground = (...ids) => ids.includes(backgroundId);
+
+    switch (String(feat?.id || '')) {
+      case 'squire-of-solamnia':
+        return ['fighter', 'paladin'].includes(classId)
+          || hasBackground('knight of solamnia');
+      case 'strike-of-the-giants':
+        return /воинск.*оруж/.test(classWeapons)
+          || hasBackground('giantfoundling');
+      case 'initiate-of-high-sorcery':
+        return hasBackground('mage of high sorcery');
+      case 'scion-of-the-outer-planes':
+        return hasBackground('gate warden');
+      case 'rune-shaper':
+        return hasBackground('rune carver');
+      case 'strixhaven-initiate':
+        return hasBackground(
+          'witherbloom student',
+          'quandrix student',
+          'lorehold student',
+          'prismari student',
+          'silverquill student'
+        );
+      case 'vampire-hunter':
+        return hasBackground('vampire survivor');
+      case 'vampires-plaything':
+        return hasBackground('vampire devotee');
+      case 'spellfire-spark':
+        return hasBackground('spellfire-initiate');
+      default:
+        return true;
+    }
+  }
+
   function getClassFeatureGroups() {
     const characterClass = findClass();
     const classId = String(characterClass?.id || state.class || '').toLocaleLowerCase('ru');
@@ -3392,6 +3438,15 @@ const creatorOptions = {
       : [];
     const speciesSelected = speciesBonusFeat ? (state.choices['species:originFeat'] || []).slice(0, 1) : [];
 
+    if (backgroundSelected[0]) {
+      const selectedFeat = allResolvedFeatOptions.find((feat) => feat.id === backgroundSelected[0]);
+      if (!selectedFeat || !originFeatEligibility(selectedFeat)) backgroundSelected.length = 0;
+    }
+    if (speciesSelected[0]) {
+      const selectedFeat = allResolvedFeatOptions.find((feat) => feat.id === speciesSelected[0]);
+      if (!selectedFeat || !originFeatEligibility(selectedFeat)) speciesSelected.length = 0;
+    }
+
     // Старые сохранения могли содержать одну и ту же неповторяемую черту
     // одновременно от предыстории и от вида. Сохраняем выбор предыстории,
     // а конфликтующий дополнительный выбор сбрасываем.
@@ -3436,7 +3491,8 @@ const creatorOptions = {
     const tableFeatOptions = Array.from(new Map([
       ...backgroundFeatOptions,
       ...(speciesBonusFeat && !customLineage ? featOptions : [])
-    ].map((feat) => [feat.id, feat])).values());
+    ].map((feat) => [feat.id, feat])).values())
+      .filter((feat) => originFeatEligibility(feat));
     body.innerHTML = tableFeatOptions.map((feat) => {
       const fromBackground = backgroundSelected.includes(feat.id);
       const fromSpecies = speciesSelected.includes(feat.id);
@@ -3469,6 +3525,7 @@ const creatorOptions = {
       };
       const originFeatIds = new Set(featOptions.map((feat) => feat.id));
       const options = allSelectableFeatOptions.filter((feat) => {
+        if (feat.type === 'origin' && !originFeatEligibility(feat)) return false;
         const haystack = `${feat.name || ''} ${feat.nameEn || ''} ${normalizeRequirements(feat.requirements)}`.toLocaleLowerCase('ru');
         return !query || haystack.includes(query);
       });
@@ -3501,6 +3558,12 @@ const creatorOptions = {
       const key = source === 'species' ? 'species:originFeat' : 'background:originFeat';
       const otherKey = source === 'species' ? 'background:originFeat' : 'species:originFeat';
       const current = state.choices[key]?.[0] || '';
+      const feat = allResolvedFeatOptions.find((item) => item.id === value);
+
+      if (!feat || !originFeatEligibility(feat)) {
+        renderOriginFeats('Эта черта недоступна: необходимые условия не выполнены.');
+        return;
+      }
 
       if ((state.choices[otherKey] || []).includes(value) && !isRepeatableOriginFeat(value)) {
         renderOriginFeats('Одну и ту же черту нельзя выбрать дважды. Исключение: «Одарённый» и «Посвящённый в магию».');
@@ -3562,8 +3625,10 @@ const creatorOptions = {
     if (!container) return;
     const magicEntries = selectedOriginFeatEntries().filter((entry) => entry.id === 'magic-initiate');
     const scionEntries = selectedOriginFeatEntries().filter((entry) => entry.id === 'scion-of-the-outer-planes');
+    const giantStrikeEntries = selectedOriginFeatEntries().filter((entry) => entry.id === 'strike-of-the-giants');
     const activeMagicSources = new Set(magicEntries.map((entry) => entry.source));
     const activeScionSources = new Set(scionEntries.map((entry) => entry.source));
+    const activeGiantStrikeSources = new Set(giantStrikeEntries.map((entry) => entry.source));
     ['background', 'species'].forEach((source) => {
       if (!activeMagicSources.has(source)) {
         delete state.choices[`feat:${source}:magic-list`];
@@ -3573,8 +3638,11 @@ const creatorOptions = {
         delete state.choices[`feat:${source}:scion-plane`];
         delete state.choices[`feat:${source}:scion-spell-ability`];
       }
+      if (!activeGiantStrikeSources.has(source)) {
+        delete state.choices[`feat:${source}:giant-strike`];
+      }
     });
-    if (!magicEntries.length && !scionEntries.length) {
+    if (!magicEntries.length && !scionEntries.length && !giantStrikeEntries.length) {
       container.innerHTML = '';
       return;
     }
@@ -3624,6 +3692,19 @@ const creatorOptions = {
         source: `Черта: ${entry.feat.name} (${sourceNames[entry.source]})`
       });
     }
+    for (const entry of giantStrikeEntries) {
+      choices.push({
+        id: `feat:${entry.source}:giant-strike`,
+        title: 'Преимущество великана',
+        description: 'Выберите один удар. Выбранный вариант определяет дополнительный урон и эффект черты.',
+        count: 1,
+        options: GIANT_STRIKE_OPTIONS.map((strike) => ({
+          value: strike.value,
+          label: `${strike.label} — ${strike.summary}`
+        })),
+        source: `Черта: ${entry.feat.name} (${sourceNames[entry.source]})`
+      });
+    }
     renderBackgroundChoiceCards(container, choices);
   }
 
@@ -3647,7 +3728,11 @@ const creatorOptions = {
       (state.choices[`feat:${entry.source}:scion-plane`] || []).length === 1
       && (state.choices[`feat:${entry.source}:scion-spell-ability`] || []).length === 1
     );
-    return magicComplete && scionComplete;
+    const giantStrikeEntries = selectedOriginFeatEntries().filter((entry) => entry.id === 'strike-of-the-giants');
+    const giantStrikeComplete = giantStrikeEntries.every((entry) =>
+      (state.choices[`feat:${entry.source}:giant-strike`] || []).length === 1
+    );
+    return magicComplete && scionComplete && giantStrikeComplete;
   }
 
   function renderBackgroundChoiceCards(container, choices) {
@@ -3910,8 +3995,6 @@ const creatorOptions = {
             <div class="custom-background-grid">
               <label><span>Название *</span><input data-custom-background-field="name" value="${escapeHtml(custom.name || '')}" placeholder="Например, Хранитель руин"></label>
               <label class="custom-background-wide"><span>Описание *</span><textarea data-custom-background-field="description" rows="4" placeholder="Кем герой был до начала приключений?">${escapeHtml(custom.description || '')}</textarea></label>
-              <label><span>Название особенности *</span><input data-custom-background-field="feature" value="${escapeHtml(custom.feature || '')}" placeholder="Например, Знаток руин"></label>
-              <label class="custom-background-wide"><span>Описание особенности *</span><textarea data-custom-background-field="featureDescription" rows="3" placeholder="Как прошлое героя помогает ему во время приключений?">${escapeHtml(custom.featureDescription || '')}</textarea></label>
               <label><span>Черта характера 1 *</span><small>Привычка, манера речи или заметная особенность поведения.</small><textarea data-custom-background-field="trait1" rows="2" placeholder="Например: всегда ищу смешную сторону происходящего">${escapeHtml(custom.trait1 || '')}</textarea></label>
               <label><span>Черта характера 2 *</span><small>Вторая отличительная черта должна дополнять образ героя.</small><textarea data-custom-background-field="trait2" rows="2" placeholder="Например: записываю каждую услышанную легенду">${escapeHtml(custom.trait2 || '')}</textarea></label>
               <label><span>Идеал *</span><small>Главный принцип, которым герой руководствуется в решениях.</small><textarea data-custom-background-field="ideal" rows="2" placeholder="Например: свобода важнее безопасности">${escapeHtml(custom.ideal || '')}</textarea></label>
@@ -4138,6 +4221,15 @@ const creatorOptions = {
     { value: 'good', label: 'Добрый', resistance: 'Излучение', cantrip: 'Священное пламя' },
     { value: 'lawful', label: 'Законный', resistance: 'Силовое поле', cantrip: 'Наставление' },
     { value: 'outlands', label: 'Внешние земли', resistance: 'Психическая энергия', cantrip: 'Волшебная рука' }
+  ];
+
+  const GIANT_STRIKE_OPTIONS = [
+    { value: 'hill', label: 'Холмовой удар', summary: '1д6 урона оружия; спасбросок Силы или цель сбита с ног' },
+    { value: 'stone', label: 'Каменный удар', summary: '1д6 силового урона; спасбросок Силы или отталкивание на 10 футов' },
+    { value: 'frost', label: 'Ледяной удар', summary: '1д6 урона холодом; спасбросок Телосложения или скорость становится 0' },
+    { value: 'fire', label: 'Огненный удар', summary: '1д10 урона огнём' },
+    { value: 'cloud', label: 'Облачный удар', summary: '1д4 урона звуком; спасбросок Мудрости или вы невидимы для цели' },
+    { value: 'storm', label: 'Штормовой удар', summary: '1д6 урона электричеством; спасбросок Телосложения или Помеха на атаки' }
   ];
 
   function ensureSpellSourceState() {
@@ -5146,7 +5238,7 @@ const creatorOptions = {
         const identity = `${findSpecies()?.id || ''} ${findSpecies()?.name || ''} ${findSpecies()?.nameEn || ''}`
           .toLocaleLowerCase('ru')
           .replace(/ё/g, 'е');
-        if (/kenku|кенку|locathah|локат/.test(identity)) {
+        if (/locathah|локат/.test(identity)) {
           parsed.bonusChoices = Math.max(parsed.bonusChoices, 1);
         }
       }
@@ -6485,7 +6577,7 @@ const creatorOptions = {
     if (!state.background) return false;
     if (isCustomBackground()) {
       const custom = getCustomBackground();
-      return ['name', 'description', 'feature', 'featureDescription', 'trait1', 'trait2', 'ideal', 'bond', 'flaw']
+      return ['name', 'description', 'trait1', 'trait2', 'ideal', 'bond', 'flaw']
         .every((key) => String(custom[key] || '').trim());
     }
     return (state.choices['background:traits'] || []).length === 2
@@ -6995,10 +7087,10 @@ const creatorOptions = {
 
     if (steps[state.step] === 'background' && isCustomBackground()) {
       const custom = getCustomBackground();
-      const requiredText = ['name', 'description', 'feature', 'featureDescription', 'trait1', 'trait2', 'ideal', 'bond', 'flaw'];
+      const requiredText = ['name', 'description', 'trait1', 'trait2', 'ideal', 'bond', 'flaw'];
       const complete = requiredText.every((key) => String(custom[key] || '').trim());
       if (!complete) {
-        alert('Заполните письменные поля своей предыстории: название, описание, особенность и личностные характеристики.');
+        alert('Заполните письменные поля своей предыстории: название, описание и личностные характеристики.');
         return;
       }
     }
@@ -7013,6 +7105,14 @@ const creatorOptions = {
       );
       if (incompleteScion) {
         alert('Для черты «Наследник внешних планов» выберите план и заклинательную характеристику.');
+        return;
+      }
+      const incompleteGiantStrike = selectedOriginFeatEntries().find((entry) =>
+        entry.id === 'strike-of-the-giants'
+        && (state.choices[`feat:${entry.source}:giant-strike`] || []).length !== 1
+      );
+      if (incompleteGiantStrike) {
+        alert('Для черты «Удар великанов» выберите одно преимущество великана.');
         return;
       }
       const needsBackgroundFeat = backgroundGrantsOriginFeat();

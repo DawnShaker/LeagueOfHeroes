@@ -56,6 +56,9 @@ export function buildFeatOptions(featsData: any[]) {
       id: item.id,
       name: item.name,
       nameEn: item.nameEn,
+      requirements: Array.isArray(item.requirements)
+        ? item.requirements
+        : [],
       effects: item.effects ?? []
     }));
 }

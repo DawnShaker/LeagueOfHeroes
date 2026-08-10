@@ -54,7 +54,8 @@
     const normalizedClassId = String(characterClass?.id || state.class || '').toLocaleLowerCase('en');
     const isRangerClass = normalizedClassId === 'ranger';
     const isApothecaryClass = normalizedClassId === 'apothecary';
-    const usesCustomClass = isRangerClass || isApothecaryClass;
+    const isBloodHunterClass = normalizedClassId === 'bloodhunter';
+    const usesCustomClass = isRangerClass || isApothecaryClass || isBloodHunterClass;
     const baseSpeciesName = species?.name || species?.nameEn || state.species || '';
     const variantSpeciesName = variant?.name || variant?.nameEn || '';
     const speciesName = [baseSpeciesName, variantSpeciesName].filter(Boolean).join(' — ');
@@ -163,6 +164,21 @@
         && (state.choices?.['species:customLineageFeature'] || [])[0] !== 'darkvision'
       ) return 0;
 
+      // У базовых эльфов дальность задаётся происхождением: у дроу она
+      // увеличивается до 120 футов, у всех остальных эльфов остаётся 60.
+      // Не полагаемся здесь только на текст карточек — часть вариантов
+      // заменяет описание происхождения и из-за этого Token Editor мог
+      // получить пустое или устаревшее значение.
+      const normalizedSpeciesIdentity = speciesIdentity
+        .toLocaleLowerCase('ru')
+        .replace(/ё/g, 'е');
+      if (/(?:^|\s|[-_])(?:elf|эльф)(?:$|\s|[-_])/.test(normalizedSpeciesIdentity)) {
+        const variantIdentity = `${variant?.id || ''} ${variant?.name || ''} ${variant?.nameEn || ''}`
+          .toLocaleLowerCase('ru')
+          .replace(/ё/g, 'е');
+        return /(?:^|\s|[-_])(?:drow|дроу)(?:$|\s|[-_])/.test(variantIdentity) ? 120 : 60;
+      }
+
       return effectiveSpeciesAbilities.reduce((maximum, feature) => {
         const text = `${feature?.title || feature?.name || ''} ${feature?.description || ''}`
           .toLocaleLowerCase('ru')
@@ -202,6 +218,14 @@
       good: { name: 'Добрый', resistance: 'Излучение', cantrip: 'Священное пламя' },
       lawful: { name: 'Законный', resistance: 'Силовое поле', cantrip: 'Наставление' },
       outlands: { name: 'Внешние земли', resistance: 'Психическая энергия', cantrip: 'Волшебная рука' }
+    };
+    const giantStrikeDetails = {
+      hill: 'Холмовой удар — дополнительно 1д6 урона того же вида, что и урон оружием; спасбросок Силы или цель сбита с ног.',
+      stone: 'Каменный удар — дополнительно 1д6 силового урона; спасбросок Силы или цель оттолкнута на 10 футов.',
+      frost: 'Ледяной удар — дополнительно 1д6 урона холодом; спасбросок Телосложения или скорость цели становится 0.',
+      fire: 'Огненный удар — дополнительно 1д10 урона огнём.',
+      cloud: 'Облачный удар — дополнительно 1д4 урона звуком; спасбросок Мудрости или вы становитесь невидимым для цели.',
+      storm: 'Штормовой удар — дополнительно 1д6 урона электричеством; спасбросок Телосложения или цель совершает атаки с Помехой.'
     };
     const strixhavenCollegeDetails = {
       lorehold: {
@@ -885,6 +909,23 @@
       upsert('lvl1_slots_expended', '0');
     }
 
+    // Кровавого охотника нет среди встроенных классов листа Roll20.
+    // Экспортируем его как пользовательский класс с костью хитов d10,
+    // без ячеек заклинаний и с его классовыми спасбросками.
+    if (isBloodHunterClass) {
+      upsert('custom_class', '1');
+      upsert('cust_classname', className || 'Кровавый охотник');
+      upsert('cust_hitdietype', '10');
+      upsert('cust_strength_save_prof', '0');
+      upsert('cust_dexterity_save_prof', '(@{pb})');
+      upsert('cust_constitution_save_prof', '0');
+      upsert('cust_intelligence_save_prof', '(@{pb})');
+      upsert('cust_wisdom_save_prof', '0');
+      upsert('cust_charisma_save_prof', '0');
+      upsert('cust_spellslots', 'none');
+      upsert('cust_spellcasting_ability', '@{intelligence_mod}+');
+    }
+
     // Поддерживаем поля разных версий листа D&D 5E by Roll20.
     upsert('subclass', subclassName);
     upsert('subclass_display', subclassName);
@@ -1303,6 +1344,17 @@
     effectiveSpeciesAbilities.forEach((feature) => {
       const featureName = feature?.title || feature?.name || 'Особенность вида';
       const featureDescription = feature?.description || '';
+      const normalizedFeatureName = String(featureName)
+        .toLocaleLowerCase('ru')
+        .replace(/ё/g, 'е')
+        .trim();
+      const isElfSpecies = /(?:^|\s|[-_])(?:elf|эльф)(?:$|\s|[-_])/.test(
+        speciesIdentity.toLocaleLowerCase('ru').replace(/ё/g, 'е')
+      );
+      // Эта карточка нужна только в конструкторе для объяснения выбора
+      // происхождения. В Roll20 выбранное происхождение экспортируется
+      // отдельной полноценной чертой, поэтому общую инструкцию не дублируем.
+      if (isElfSpecies && normalizedFeatureName === 'происхождения эльфов') return;
       addTrait(featureName, featureDescription, 'Раса', speciesName);
       collectRestResource(featureName, featureDescription, speciesName);
     });
@@ -1351,6 +1403,9 @@
             `Заклинательная характеристика: ${state.choices[`feat:${originFeatEntry.source}:scion-spell-ability`]?.[0] || 'не выбрана'}.`
           ]
         : [];
+      const giantStrike = originFeat.id === 'strike-of-the-giants'
+        ? giantStrikeDetails[state.choices[`feat:${originFeatEntry.source}:giant-strike`]?.[0]]
+        : '';
       const strixhavenCantrips = originFeat.id === 'strixhaven-initiate'
         ? selectedSpellNamesForSource('feat-strixhaven', 'cantrip')
         : [];
@@ -1380,6 +1435,7 @@
         [
           ...magicInitiateDetails,
           ...scionDetails,
+          giantStrike ? `Выбранное преимущество: ${giantStrike}` : '',
           strixhavenSelection,
           ...traitEffects,
           selectedCollegeDescription
@@ -1531,8 +1587,11 @@
       const text = stripHtml(spell?.description || '')
         .replace(/\u00a0/g, ' ')
         .replace(/(\d+)\s*[дd]\s*(\d+)/gi, '$1d$2');
-      const diceMatch = text.match(/\b(\d+d\d+(?:\s*[+-]\s*\d+)?)\b(?=[^.!?\n]{0,120}\bурон)/i)
-        || text.match(/\bурон[^.!?\n]{0,120}?\b(\d+d\d+(?:\s*[+-]\s*\d+)?)\b/i);
+      // JavaScript `\b` понимает только латинские word-символы, поэтому
+      // граница перед кириллическим словом «урон» никогда не совпадала.
+      // Из-за этого новые русскоязычные заклинания оставались SPELLCARD.
+      const diceMatch = text.match(/\b(\d+d\d+(?:\s*[+-]\s*\d+)?)\b(?=[^.!?\n]{0,120}урон)/i)
+        || text.match(/урон[^.!?\n]{0,120}?\b(\d+d\d+(?:\s*[+-]\s*\d+)?)\b/i);
       if (!diceMatch) return null;
 
       const dice = String(diceMatch[1] || '').replace(/\s+/g, '');
@@ -1559,18 +1618,18 @@
       const damageType = damageTypes.find(([pattern]) => pattern.test(damageSentence))?.[1] || '';
 
       const lower = text.toLocaleLowerCase('ru');
-      const attackType = /дальнобойн\w*\s+атак\w*\s+заклинанием/i.test(lower)
+      const attackType = /(?:дальнобойн[а-яё]*\s+атак[а-яё]*\s+заклинанием|атак[а-яё]*\s+заклинанием\s+дальн[а-яё]*\s+бо[а-яё]*|дальн[а-яё]*\s+атак[а-яё]*\s+заклинанием)/i.test(lower)
         ? 'Ranged'
-        : /рукопашн\w*\s+атак\w*\s+заклинанием/i.test(lower)
+        : /(?:рукопашн[а-яё]*\s+атак[а-яё]*\s+заклинанием|атак[а-яё]*\s+заклинанием\s+ближн[а-яё]*\s+бо[а-яё]*)/i.test(lower)
           ? 'Melee'
           : '';
       const saveAbilities = [
-        [/спасброс\w*\s+силы/i, 'Strength', 'STR'],
-        [/спасброс\w*\s+ловкости/i, 'Dexterity', 'DEX'],
-        [/спасброс\w*\s+телосложения/i, 'Constitution', 'CON'],
-        [/спасброс\w*\s+интеллекта/i, 'Intelligence', 'INT'],
-        [/спасброс\w*\s+мудрости/i, 'Wisdom', 'WIS'],
-        [/спасброс\w*\s+харизмы/i, 'Charisma', 'CHA']
+        [/спасброс[а-яё]*\s+силы/i, 'Strength', 'STR'],
+        [/спасброс[а-яё]*\s+ловкости/i, 'Dexterity', 'DEX'],
+        [/спасброс[а-яё]*\s+телосложения/i, 'Constitution', 'CON'],
+        [/спасброс[а-яё]*\s+интеллекта/i, 'Intelligence', 'INT'],
+        [/спасброс[а-яё]*\s+мудрости/i, 'Wisdom', 'WIS'],
+        [/спасброс[а-яё]*\s+харизмы/i, 'Charisma', 'CHA']
       ];
       const save = saveAbilities.find(([pattern]) => pattern.test(lower));
       const die = dice.match(/d(\d+)/i)?.[1] || '';
@@ -1582,7 +1641,7 @@
         attackType,
         saveAbility: save?.[1] || '',
         saveShort: save?.[2] || '',
-        saveEffect: /половин\w*\s+урон/i.test(lower)
+        saveEffect: /половин[а-яё]*\s+урон/i.test(lower)
           ? 'Половина урона при успехе'
           : 'Нет урона при успехе'
       };
@@ -1649,7 +1708,10 @@
         } else if (field === 'spellattack' && inferredDamage) {
           current = inferredDamage.attackType || 'None';
         } else if (field === 'spellsave' && inferredDamage) {
-          current = inferredDamage.saveShort;
+          // В карточке заклинания Roll20 ожидает полное английское имя
+          // характеристики (Dexterity, Constitution и т. п.), как в
+          // all-spells.json. Сокращения DEX/CON поле не распознаёт.
+          current = inferredDamage.saveAbility;
         } else if (field === 'spelldamage' && inferredDamage) {
           current = inferredDamage.dice;
         } else if (field === 'spelldamagetype' && inferredDamage) {
@@ -1880,7 +1942,7 @@
       if (inferredDamage) {
         fallbackFields.spelloutput = 'ATTACK';
         fallbackFields.spellattack = inferredDamage.attackType || 'None';
-        fallbackFields.spellsave = inferredDamage.saveShort;
+        fallbackFields.spellsave = inferredDamage.saveAbility;
         fallbackFields.spelldamage = inferredDamage.dice;
         fallbackFields.spelldamagetype = inferredDamage.damageType;
         if (section === 'cantrip') fallbackFields.spell_damage_progression = 'Cantrip Dice';
@@ -1925,14 +1987,16 @@
     }
     if (exportedSpellCount) {
       upsert('tab', 'spells');
-      upsert('caster_level', isRangerClass ? '0' : '1');
       const firstLevel = Array.isArray(characterClass?.levels)
         ? characterClass.levels.find((level) => Number(level?.level) === 1)
         : null;
-      const slots = firstLevel?.spellSlots?.[1]
+      const slots = Number(firstLevel?.spellSlots?.[1]
         ?? firstLevel?.numOfSpellSlots
-        ?? (state.class === 'warlock' || isApothecaryClass ? 1 : 2);
-      upsert('lvl1_slots_total', String(slots));
+        ?? 0);
+      const classHasSpellSlots = slots > 0;
+      upsert('caster_level', classHasSpellSlots && !isRangerClass ? '1' : '0');
+      upsert('lvl1_slots_total', classHasSpellSlots ? String(slots) : '0');
+      if (!classHasSpellSlots) upsert('lvl1_slots_mod', '0');
       const castingAbilityMap = { wizard: 'intelligence', artificer: 'intelligence', apothecary: 'intelligence', cleric: 'wisdom', druid: 'wisdom', ranger: 'wisdom', bard: 'charisma', sorcerer: 'charisma', warlock: 'charisma', paladin: 'charisma' };
       const castingAbility = castingAbilityMap[state.class] || '';
       if (castingAbility) {

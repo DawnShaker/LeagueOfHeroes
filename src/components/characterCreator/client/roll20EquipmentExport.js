@@ -237,22 +237,29 @@
     const damageType = damageTypeFromDescription(description);
     if (!damageMatch || !damageType) return null;
 
-    let ability = '@{strength_mod}';
-    if (/модификатор\s+телосложен/i.test(description)) ability = '@{constitution_mod}';
-    else if (/модификатор\s+ловкост/i.test(description)) ability = '@{dexterity_mod}';
+    let damageAbility = '@{strength_mod}';
+    if (/модификатор\s+телосложен/i.test(description)) damageAbility = '@{constitution_mod}';
+    else if (/модификатор\s+ловкост/i.test(description)) damageAbility = '@{dexterity_mod}';
+
+    // Укус дампира является способом нанести урон Безоружным ударом:
+    // бросок атаки по-прежнему использует Силу, а особое правило вида
+    // заменяет только модификатор урона на Телосложение.
+    const isDhampirBite = /(?:укус\s+вампира|vampiric\s+bite)/i.test(name);
+    const attackAbility = isDhampirBite ? '@{strength_mod}' : damageAbility;
 
     return {
       name,
       damage: damageMatch[1],
       damageType,
-      ability,
+      attackAbility,
+      damageAbility,
       range: '5'
     };
   }
 
   function addNaturalAttack(payload, attack) {
     const attackRowId = createRoll20Id();
-    const { name, damage, damageType, ability, range } = attack;
+    const { name, damage, damageType, attackAbility, damageAbility, range } = attack;
 
     addRepeatingRow(payload, 'attack', attackRowId, {
       'options-flag': '0',
@@ -261,8 +268,8 @@
       dmgbase: damage,
       dmgtype: damageType,
       atkrange: range,
-      atkattr_base: ability,
-      dmgattr: ability,
+      atkattr_base: attackAbility,
+      dmgattr: damageAbility,
       atkmagic: '',
       atkdmgtype: `${damage} ${damageType}`,
       atkbonus: '+2',
