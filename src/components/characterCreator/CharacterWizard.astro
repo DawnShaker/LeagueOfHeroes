@@ -4619,8 +4619,26 @@ const creatorOptions = {
       sources.push({id:'feat-high-sorcery',category:'Черта',title:'Посвящённый в Высшее волшебство',spellLabel:'Черта: Посвящённый в Высшее волшебство',description:'Выберите 1 заговор волшебника и 2 заклинания выбранной луны.',limits:{cantrip:1,level1:2},options:uniqueSpells([...(classSpellOptions.wizard||[]).filter((s)=>s.level==='cantrip'),...lunar.map((n)=>spellByName(n,'1'))])});
     }
     if (hasFeat('rune-shaper')) {
-      const runeNames=['Маскировка','Опутывание','Цветной шарик','Псевдожизнь','Приказ','Усыпление','Сглаз','Лечение ран'];
-      sources.push({id:'feat-rune-shaper',category:'Черта',title:'Ваятель рун',spellLabel:'Черта: Ваятель рун',description:'Понимание языков известно автоматически; выберите 1 руническое заклинание.',limits:{cantrip:0,level1:1},fixed:uniqueSpells([spellByName('Понимание языков','1')]),options:uniqueSpells(runeNames.map((n)=>spellByName(n,'1')))});
+      const runeSpells = [
+        ['Враг', 'Маскировка'],
+        ['Гора', 'Опутывание'],
+        ['Дракон', 'Цветной шарик'],
+        ['Друг', 'Разговор с животными'],
+        ['Огонь', 'Огненные ладони'],
+        ['Облако', 'Туманное облако'],
+        ['Камень', 'Убежище'],
+        ['Король', 'Приказ'],
+        ['Путешествие', 'Скороход'],
+        ['Смерть', 'Нанесение ран'],
+        ['Холм', 'Чудо-ягоды'],
+        ['Холод', 'Доспех Агатиса'],
+        ['Шторм', 'Волна грома']
+      ];
+      const runeSpellOptions = runeSpells.map(([rune, spellName]) => {
+        const spell = spellByName(spellName, '1');
+        return spell ? { ...spell, choiceLabel: `Руна «${rune}»` } : null;
+      });
+      sources.push({id:'feat-rune-shaper',category:'Черта',title:'Ваятель рун',spellLabel:'Черта: Ваятель рун',description:'Понимание языков известно автоматически; выберите 1 руну и связанное с ней заклинание.',limits:{cantrip:0,level1:1},fixed:uniqueSpells([spellByName('Понимание языков','1')]),options:uniqueSpells(runeSpellOptions)});
     }
     if (hasFeat('strixhaven-initiate')) {
       const bgName=String(background?.name||'');
