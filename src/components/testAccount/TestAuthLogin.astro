@@ -23,7 +23,11 @@
 </section>
 
 <script>
-  import { isTestAccountConfigured, testAccountSupabase } from '../../utils/testAccount';
+  import {
+    isLocalAuthBypassEnabled,
+    isTestAccountConfigured,
+    testAccountSupabase
+  } from '../../utils/testAccount';
 
   const button = document.querySelector<HTMLButtonElement>('#discord-sign-in');
   const status = document.querySelector<HTMLElement>('#auth-status');
@@ -41,6 +45,11 @@
   }
 
   async function initializeLogin() {
+    if (isLocalAuthBypassEnabled) {
+      window.location.replace(requestedPage());
+      return;
+    }
+
     if (!isTestAccountConfigured || !testAccountSupabase) {
       if (button) button.disabled = true;
       showStatus('Авторизация ещё не подключена: добавьте PUBLIC_SUPABASE_URL и PUBLIC_SUPABASE_ANON_KEY.', 'error');

@@ -24,6 +24,20 @@ export const testAccountSupabase: SupabaseClient | null = isTestAccountConfigure
     })
   : null;
 
+/**
+ * Разрешает проверять закрытый конструктор без Discord только на dev-сервере.
+ * `import.meta.env.DEV` становится false в Netlify-сборке, поэтому одного
+ * подменённого hostname недостаточно, чтобы включить обход в продакшене.
+ */
+export const isLocalAuthBypassEnabled = (() => {
+  if (!import.meta.env.DEV || typeof window === 'undefined') return false;
+  const hostname = window.location.hostname.toLocaleLowerCase('en');
+  return hostname === 'localhost'
+    || hostname === '127.0.0.1'
+    || hostname === '[::1]'
+    || hostname.endsWith('.webcontainer.io');
+})();
+
 export function normalizeAccountRole(value: unknown): AccountRole {
   if (value === 'admin') return 'admin';
   if (value === 'master' || value === 'gm') return 'master';

@@ -825,9 +825,10 @@ const creatorOptions = {
       name: 'Лесной гном',
       nameEn: 'Forest Gnome',
       lore: 'Лесные гномы связаны с иллюзиями и магией животных.',
+      replacesAbilities: ['Гномье происхождение'],
       abilities: [
         {
-          title: 'Гномье происхождение — Лесной гном',
+          title: 'Гномье происхождение (Лесной гном)',
           description: 'Вы знаете заговор Малая иллюзия. Вы также всегда имеете подготовленное заклинание Разговор с животными. Вы можете накладывать его без траты ячейки заклинаний количество раз, равное вашему бонусу мастерства, и восстанавливаете все использования после продолжительного отдыха. Вы также можете накладывать это заклинание, используя имеющиеся ячейки заклинаний.'
         }
       ]
@@ -838,9 +839,10 @@ const creatorOptions = {
       name: 'Скальный гном',
       nameEn: 'Rock Gnome',
       lore: 'Скальные гномы сочетают магию с изобретательностью и создают крошечные механические устройства.',
+      replacesAbilities: ['Гномье происхождение'],
       abilities: [
         {
-          title: 'Гномье происхождение — Скальный гном',
+          title: 'Гномье происхождение (Скальный гном)',
           description: 'Вы знаете заговоры Починка и Фокусы. Кроме того, вы можете потратить 10 минут на наложение заклинания Фокусы, чтобы создать крошечное механическое устройство. Одновременно у вас может быть до трёх таких устройств.'
         }
       ]
@@ -2660,28 +2662,6 @@ const creatorOptions = {
     });
   }
 
-  function getSelectedClassFeatureEffects() {
-    const effects = [];
-    for (const group of getClassFeatureGroups()) {
-      const selected = state.choices[`classFeature:${group.id}`] || [];
-      for (const optionId of selected) {
-        const option = group.options.find((item) => item.id === optionId);
-        if (Array.isArray(option?.effects)) effects.push(...option.effects);
-      }
-    }
-    return effects;
-  }
-
-  function getClassFeatureEffects(type) {
-    return getSelectedClassFeatureEffects().filter((effect) => effect.type === type);
-  }
-
-  function classFeatureExtraCantrips(spellList) {
-    return getClassFeatureEffects('extraCantrip')
-      .filter((effect) => !effect.spellList || effect.spellList === spellList)
-      .reduce((sum, effect) => sum + Number(effect.count || 0), 0);
-  }
-
   function selectedClassFeatureOption(groupId) {
     return state.choices[`classFeature:${groupId}`]?.[0] || null;
   }
@@ -4307,6 +4287,25 @@ const creatorOptions = {
 
     const speciesName = `${species.id || ''} ${species.name || ''} ${species.nameEn || ''}`;
     const isTiefling = /tiefling|тифлинг/i.test(speciesName);
+    const isHexblood = /hexblood|ведьмовская\s+кровь/i.test(speciesName);
+
+    if (isHexblood) {
+      const fixed = uniqueSpells([
+        spellByName('Маскировка', '1'),
+        spellByName('Сглаз', '1')
+      ]);
+      if (fixed.length) {
+        return {
+          id: 'species-hexblood-magic',
+          category: 'Вид',
+          title: 'Ведьмовская кровь — Ведьмовская магия',
+          description: `«Маскировка» и «Сглаз» всегда подготовлены. Каждое можно один раз наложить без траты ячейки. Заклинательная характеристика: ${(state.choices['species:spellAbility'] || [])[0] || 'не выбрана'}.`,
+          limits: { cantrip: 0, level1: 0 },
+          fixed,
+          options: []
+        };
+      }
+    }
 
     if (isCoreElfSpecies(species) && isCoreElfVariant(variant)) {
       const lineageCantripName = {
@@ -4422,7 +4421,7 @@ const creatorOptions = {
     ensureSpellSourceState();
     const sources = [];
     const rawBase = classSpellLimits[state.class] || { cantrips:0, level1:0 };
-    const base = { ...rawBase, cantrips: Number(rawBase.cantrips || 0) + classFeatureExtraCantrips(state.class) };
+    const base = { ...rawBase };
     const background = findBackground();
     const className = findClass()?.name || 'Класс';
     let classOptions = withSpellAvailability(classSpellOptions[state.class] || [], `Класс: ${className}`);
@@ -4440,10 +4439,20 @@ const creatorOptions = {
         .map((name) => spellByName(name, name === 'Уход за умирающим' ? 'cantrip' : '1')?.id)
         .filter(Boolean)
     );
+    const rangerHuntersMark = state.class === 'ranger'
+      ? spellByName('Метка охотника', '1')
+      : null;
+    const druidSpeakWithAnimals = state.class === 'druid'
+      ? spellByName('Разговор с животными', '1')
+      : null;
     // Автоматически полученные теорией заклинания не занимают обычные выборы
     // Апотекария. Убираем их из выбираемого списка класса и показываем ниже
     // отдельным фиксированным источником.
-    classOptions = classOptions.filter((spell) => !theorySpellIds.has(spell.id));
+    classOptions = classOptions.filter((spell) =>
+      !theorySpellIds.has(spell.id)
+      && spell.id !== rangerHuntersMark?.id
+      && spell.id !== druidSpeakWithAnimals?.id
+    );
     const backgroundSpellPrerequisite = String(background?.spellTable?.prerequisite || '')
       .toLocaleLowerCase('ru')
       .replace(/ё/g, 'е');
@@ -4471,6 +4480,61 @@ const creatorOptions = {
           : 'Заклинания, доступные выбранному классу на 1 уровне.',
       limits:{cantrip:Number(base.cantrips||0), level1:Number(base.level1||0)}, options:classOptions
     });
+
+    if (rangerHuntersMark) {
+      const sourceLabel = 'Умение класса: Избранный враг';
+      sources.push({
+        id: 'class-feature-ranger-favored-enemy',
+        category: 'Умение класса',
+        title: 'Избранный враг',
+        spellLabel: sourceLabel,
+        description: '«Метка охотника» всегда подготовлена и не учитывается в количестве подготовленных заклинаний следопыта. На 1 уровне её можно наложить дважды без траты ячейки.',
+        limits: { cantrip: 0, level1: 0 },
+        fixed: uniqueSpells(withSpellAvailability([rangerHuntersMark], sourceLabel)),
+        options: []
+      });
+    }
+
+    if (druidSpeakWithAnimals) {
+      const sourceLabel = 'Умение класса: Друидический язык';
+      sources.push({
+        id: 'class-feature-druidic-language',
+        category: 'Умение класса',
+        title: 'Друидический язык',
+        spellLabel: sourceLabel,
+        description: '«Разговор с животными» всегда подготовлен и не учитывается в четырёх подготовленных заклинаниях друида 1 уровня.',
+        limits: { cantrip: 0, level1: 0 },
+        fixed: uniqueSpells(withSpellAvailability([druidSpeakWithAnimals], sourceLabel)),
+        options: []
+      });
+    }
+
+    const extraCantripSources = getClassFeatureGroups().flatMap((group) => {
+      const selectedIds = state.choices[`classFeature:${group.id}`] || [];
+      return group.options
+        .filter((option) => selectedIds.includes(option.id))
+        .flatMap((option) => (option.effects || [])
+          .filter((effect) => effect.type === 'extraCantrip' && (!effect.spellList || effect.spellList === state.class))
+          .map((effect, effectIndex) => ({ group, option, effect, effectIndex }))
+        );
+    });
+    for (const { group, option, effect, effectIndex } of extraCantripSources) {
+      const spellList = effect.spellList || state.class;
+      const sourceLabel = `Умение класса: ${group.name} — ${option.name}`;
+      sources.push({
+        id: `class-feature-extra-cantrip-${group.id}-${option.id}-${effectIndex}`,
+        category: 'Умение класса',
+        title: `${group.name} — ${option.name}`,
+        spellLabel: sourceLabel,
+        description: option.exportDescription || option.description || option.detail || 'Выберите дополнительный заговор, полученный от умения класса.',
+        limits: { cantrip: Number(effect.count || 0), level1: 0 },
+        fixed: [],
+        options: uniqueSpells(withSpellAvailability(
+          (classSpellOptions[spellList] || []).filter((spell) => spell.level === 'cantrip'),
+          sourceLabel
+        ))
+      });
+    }
 
     const speciesSource = getSpeciesSpellSource();
     if (speciesSource) {
@@ -4572,7 +4636,7 @@ const creatorOptions = {
       sources.push({id:'feat-strixhaven',category:'Черта',title:`Поступивший в Стриксхейвен${college?` (${college})`:''}`,spellLabel:`Предыстория: ${background?.name || (college ? `Студент ${college}` : 'Стриксхейвен')}`,description:'Выберите 2 заговора факультета и 1 заклинание 1 уровня из разрешённых списков.',limits:{cantrip:2,level1:1},options:uniqueSpells(opts)});
     }
     const invocation = selectedClassFeatureOption('eldritch-invocation');
-    if (invocation === 'pact-of-the-tome') {
+    if (invocation?.id === 'pact-of-the-tome') {
       const allSpellOptions = uniqueSpells(Object.values(classSpellOptions).flat());
       const pactTomeOptions = allSpellOptions
         .filter((spell) =>
@@ -5271,6 +5335,9 @@ const creatorOptions = {
         // могут быть открыты лишь другим источником: видом, предысторией или чертой.
         parsed.unlockedRare = [];
       }
+      if (source === 'class' && /^(druid|друид)$/i.test(String(characterClass?.id || characterClass?.name || ''))) {
+        if (!parsed.fixed.includes('Друидический')) parsed.fixed.push('Друидический');
+      }
       if (source === 'species') {
         const identity = `${findSpecies()?.id || ''} ${findSpecies()?.name || ''} ${findSpecies()?.nameEn || ''}`
           .toLocaleLowerCase('ru')
@@ -5411,6 +5478,25 @@ const creatorOptions = {
         allowed = [...creatorOptions.artisanTools];
       }
 
+      // «Посвящённый в артефакторство» даёт ровно один инструмент
+      // ремесленника. Общий текстовый парсер может принять встречающиеся в
+      // описании числительные (заговор, заклинание и инструмент) за несколько
+      // отдельных выборов, поэтому для этой черты задаём лимит явно.
+      if (source === 'feat') {
+        const selectedFeatEntries = selectedOriginFeatEntries();
+        const hasArtificerInitiate = selectedFeatEntries.some((entry) => entry.id === 'artificer-initiate');
+        const hasOtherToolFeat = selectedFeatEntries.some((entry) => {
+          if (entry.id === 'artificer-initiate') return false;
+          const featText = `${entry?.feat?.name || ''} ${(entry?.feat?.effects || []).join(' ')}`;
+          return /инструмент|набор для|игров(?:ой|ого) набор|транспорт/i.test(featText);
+        });
+        if (hasArtificerInitiate && !hasOtherToolFeat) {
+          count = 1;
+          allowed = [...creatorOptions.artisanTools];
+          fixed = [];
+        }
+      }
+
       if (source === 'feat' && skilledSharedChoiceLimit() > 0) {
         count = Math.max(count, skilledSharedChoiceLimit());
         allowed = [...new Set([...allowed, ...creatorOptions.allTools])];
@@ -5464,7 +5550,8 @@ const creatorOptions = {
     const bonusChoices = ['class','background','species','feat']
       .reduce((sum, source) => sum + Math.max(0, Number(config[source].bonusChoices || 0)), 0);
     const thievesCantIsExtra = (config.class?.fixed || []).includes('Воровской жаргон') ? 1 : 0;
-    return Math.max(3 + bonusChoices + thievesCantIsExtra, fixedLanguages.length);
+    const druidicIsExtra = (config.class?.fixed || []).includes('Друидический') ? 1 : 0;
+    return Math.max(3 + bonusChoices + thievesCantIsExtra + druidicIsExtra, fixedLanguages.length);
   }
 
   function renderLanguagesTable(message = '') {
@@ -6406,6 +6493,23 @@ const creatorOptions = {
     nonCaster.hidden = !!sources.length;
     if (!sources.length) return;
 
+    // В старых сохранениях дополнительный заговор «Мага»/«Чудотворца»
+    // лежал в общем источнике класса. Переносим выбор в новый отдельный
+    // источник, чтобы сохранить персонажа и правильно подписать экспорт.
+    const classSource = sources.find((source) => source.id === 'class');
+    const savedClassSpells = state.spells.sources.class;
+    if (classSource && savedClassSpells) {
+      for (const source of sources.filter((item) => item.id.startsWith('class-feature-extra-cantrip-'))) {
+        const target = state.spells.sources[source.id] || { cantrip: [], level1: [] };
+        const overflow = (savedClassSpells.cantrip || []).slice(Number(classSource.limits.cantrip || 0));
+        if (!(target.cantrip || []).length && overflow.length) {
+          target.cantrip = overflow.slice(0, Number(source.limits.cantrip || 0));
+          savedClassSpells.cantrip = (savedClassSpells.cantrip || []).slice(0, Number(classSource.limits.cantrip || 0));
+          state.spells.sources[source.id] = target;
+        }
+      }
+    }
+
     for (const source of sources) {
       const existing = state.spells.sources[source.id] || { cantrip: [], level1: [] };
       existing.cantrip = (existing.cantrip || []).filter((id) =>
@@ -6843,7 +6947,11 @@ const creatorOptions = {
   function renderSummary() {
     const species = findSpecies(), variant = findVariant(species), characterClass = findClass(), background = findBackground();
     const labels = {strength:'СИЛ',dexterity:'ЛОВ',constitution:'ТЕЛ',intelligence:'ИНТ',wisdom:'МДР',charisma:'ХАР'};
-    const languages = [...new Set([...(state.choices['languages:fixed'] || ['Общий']), ...(state.choices['languages:selected'] || [])])];
+    const languages = [...new Set([
+      ...(state.choices['languages:fixed'] || ['Общий']),
+      ...(state.choices['languages:selected'] || []),
+      state.class === 'druid' ? 'Друидический' : ''
+    ].filter(Boolean))];
     const skills = [...new Set([...(state.choices['class:skills'] || []), ...(state.choices['background:skills'] || []), ...(state.choices['species:skill'] || []), ...(state.choices['species:adaptiveSkill'] || []), ...(state.choices['feat:skills'] || []), ...bedsideMannersSkills()])];
     const root = $('#final-sheet'); if (!root) return;
     const resources = ensureSpeciesResourceState();

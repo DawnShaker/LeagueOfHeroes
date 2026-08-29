@@ -96,12 +96,23 @@ const classOptions = classes
 </Layout>
 
 <script>
-  import { isTestAccountConfigured, testAccountSupabase } from '../../utils/testAccount';
+  import {
+    isLocalAuthBypassEnabled,
+    isTestAccountConfigured,
+    testAccountSupabase
+  } from '../../utils/testAccount';
 
   const protectedContent = document.querySelector<HTMLElement>('#protected-character-creator');
   const status = document.querySelector<HTMLElement>('#creator-auth-status');
 
   async function requireRegistration() {
+    if (isLocalAuthBypassEnabled) {
+      if (status) status.remove();
+      if (protectedContent) protectedContent.hidden = false;
+      document.documentElement.dataset.authMode = 'local-test-bypass';
+      return;
+    }
+
     if (!isTestAccountConfigured || !testAccountSupabase) {
       if (status) status.textContent = 'Авторизация пока не настроена.';
       return;
