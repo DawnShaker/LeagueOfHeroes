@@ -1345,6 +1345,12 @@
       if (classId === 'ranger' && normalizedName.includes('избранный враг')) {
         return Number(firstClassLevel?.favoredEnemy || 2);
       }
+      if (classId === 'paladin' && normalizedName.includes('возложение рук')) {
+        // На первом уровне запас «Возложения рук» равен 5 хитам.
+        // Формула класса — уровень паладина × 5; конструктор сейчас
+        // создаёт персонажа первого уровня.
+        return Math.max(1, Number(firstClassLevel?.level || 1)) * 5;
+      }
       if (classId === 'sorcerer' && normalizedName === 'врожденное чародейство') {
         return 2;
       }
@@ -1767,6 +1773,29 @@
         : { description: text, higherLevels: '' };
     }
 
+    function inferHigherLevelDamage(higherLevels, spellLevel) {
+      // `spellhldie` в листе Roll20 означает дополнительный урон за каждый
+      // уровень ячейки выше базового. Улучшение заговоров от уровня персонажа
+      // обрабатывается отдельно через `spell_damage_progression`.
+      if (spellLevel === 'cantrip') return null;
+
+      const text = String(higherLevels || '')
+        .replace(/\u00a0/g, ' ')
+        .replace(/(\d+)\s*[дкd]\s*(\d+)/gi, '$1d$2');
+      if (!/урон/i.test(text)) return null;
+
+      const damageSentence = text
+        .split(/(?<=[.!?])\s+|\n+/)
+        .find((sentence) => /урон/i.test(sentence) && /\d+d\d+/i.test(sentence));
+      const diceMatch = String(damageSentence || text).match(/\b(\d+)d(\d+)\b/i);
+      if (!diceMatch) return null;
+
+      return {
+        count: diceMatch[1],
+        die: `d${diceMatch[2]}`
+      };
+    }
+
     function inferSpellDamageProfile(spell) {
       const text = stripHtml(spell?.description || '')
         .replace(/\u00a0/g, ' ')
@@ -1858,6 +1887,7 @@
         .filter(Boolean);
       const healingSpell = /^(?:лечение ран|лечащее слово)$/i.test(String(spell.name || '').trim());
       const spellText = splitSpellDescription(spell.description || '');
+      const higherLevelDamage = inferHigherLevelDamage(spellText.higherLevels, spell.level);
       let inferredDamage = inferSpellDamageProfile(spell);
       const declaredAttack = normalizedSourceAttributes.find((attribute) =>
         attribute.field === 'spellattack'
@@ -1925,6 +1955,12 @@
           current = spellText.description;
         } else if (field === 'spellathigherlevels' && spellText.higherLevels) {
           current = spellText.higherLevels;
+        } else if (!healingSpell && field === 'spellhldie' && higherLevelDamage) {
+          current = higherLevelDamage.count;
+        } else if (!healingSpell && field === 'spellhldietype' && higherLevelDamage) {
+          current = higherLevelDamage.die;
+        } else if (!healingSpell && field === 'spellhlbonus' && higherLevelDamage) {
+          current = '0';
         } else if (healingSpell && field === 'spelldmgmod') {
           current = 'Yes';
         } else if (healingSpell && field === 'spellhealing') {
@@ -2001,6 +2037,12 @@
         if (section === 'cantrip' && inferredDamage.die) {
           fallbackFields.spell_damage_progression = 'Cantrip Dice';
         }
+      }
+
+      if (!healingSpell && higherLevelDamage) {
+        fallbackFields.spellhldie = higherLevelDamage.count;
+        fallbackFields.spellhldietype = higherLevelDamage.die;
+        fallbackFields.spellhlbonus = '0';
       }
 
       Object.entries(fallbackFields).forEach(([field, current]) => {
