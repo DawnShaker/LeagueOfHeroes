@@ -9,7 +9,12 @@
     "start": "astro dev",
     "build": "astro build",
     "check": "astro check",
+    "check:books": "astro check --tsconfig tsconfig.books.json",
+    "test:books": "node --experimental-strip-types --test src/utils/bookSearch.test.ts",
     "typecheck": "tsc --noEmit",
+    "test:master-rules": "node --experimental-strip-types --test src/utils/masterRules.test.ts src/utils/masterRuleFiles.test.ts",
+    "test:materials": "node --experimental-strip-types --test src/utils/materialCatalog.test.ts",
+    "test:exploration": "node --experimental-strip-types --test src/utils/exploration.test.ts",
     "preview": "astro preview",
     "astro": "astro"
   },

@@ -28,7 +28,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 227
     },
     table: ['Ar'],
@@ -45,7 +45,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 227
     },
     table: ['Ar'],
@@ -62,7 +62,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 227
     },
     table: ['I'],
@@ -79,7 +79,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 228
     },
     table: ['A'],
@@ -96,7 +96,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 241
     },
     table: ['A'],
@@ -113,11 +113,11 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 213
     },
     table: ['A'],
-    description: `<p>Держа этот веер, вы можете использовать заклинание Порыв ветра Порыв ветра (Сл спасброска 13). За каждое повторное применение до следующего рассвета существует накопительный 20% шанс, что веер не сработает и превратится в бесполезные немагические лоскуты.</p>`,
+    description: `<p>Держа этот веер, вы можете использовать заклинание Порыв ветра (Сл спасброска 13). За каждое повторное применение до следующего рассвета существует накопительный 20% шанс, что веер не сработает и превратится в бесполезные немагические лоскуты.</p>`,
     baseAnalog: '—',
     craftingTools: [12]
   },
@@ -130,7 +130,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 301
     },
     table: ['A','I'],
@@ -147,7 +147,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 259
     },
     table: ['A'],
@@ -164,7 +164,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 320
     },
     table: ['A','R'],
@@ -182,7 +182,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'заклинателем',
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 322
     },
     table: ['A'],
@@ -199,7 +199,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 322
     },
     table: ['A','I'],
@@ -216,7 +216,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 320
     },
     table: ['A'],
@@ -233,7 +233,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 265
     },
     table: ['A','I'],
@@ -250,7 +250,7 @@ export const magicItems: MagicItem[] = [
     attunement: false ,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 249
     },
     table: ['A','I'],
@@ -267,7 +267,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 278
     },
     table: ['Ar', 'R'],
@@ -285,7 +285,7 @@ export const magicItems: MagicItem[] = [
     rarity: 'Uncommon',
     attunementRequirement: 'заклинателем',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 284
     },
     table: ['A', 'R'],
@@ -302,7 +302,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 240
     },
     table: ['I'],
@@ -319,7 +319,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 287
     },
     table: ['A','R'],
@@ -336,7 +336,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 289
     },
     table: ['Ar'],
@@ -353,7 +353,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 187
     },
     table: ['A'],
@@ -370,7 +370,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 289
     },
     table: ['A','I'],
@@ -387,7 +387,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 289
     },
     table: ['A','R'],
@@ -404,7 +404,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 288
     },
     table: ['A','I'],
@@ -421,7 +421,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 288
     },
     table: ['A'],
@@ -438,7 +438,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 264
     },
     table: ['A'],
@@ -455,7 +455,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 312
     },
     table: ['I'],
@@ -473,7 +473,7 @@ export const magicItems: MagicItem[] = [
     rarity: 'Uncommon',
     attunementRequirement: 'заклинателем',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 257
     },
     table: ['A'],
@@ -490,7 +490,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 303
     },
     table: ['A','R'],
@@ -507,7 +507,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 249
     },
     table: ['A'],
@@ -525,7 +525,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 189
     },
     table: ['Ar'],
@@ -542,7 +542,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 293
     },
     table: ['A'],
@@ -559,7 +559,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 295
     },
     table: ['I'],
@@ -576,7 +576,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 293
     },
     table: ['I'],
@@ -593,7 +593,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 296
     },
     table: ['I'],
@@ -610,7 +610,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 296
     },
     table: ['R'],
@@ -627,7 +627,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 325
     },
     table: ['A'],
@@ -644,7 +644,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 285
     },
     table: ['A'],
@@ -661,7 +661,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 275
     },
     table: ['R'],
@@ -679,7 +679,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'друидом или следопытом',
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 280
     },
     table: ['I','R'],
@@ -696,7 +696,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 283
     },
     table: ['A','I'],
@@ -713,7 +713,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 284
     },
     table: ['R'],
@@ -730,7 +730,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 284
     },
     table: ['A','R'],
@@ -747,7 +747,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 278
     },
     table: ['A'],
@@ -764,7 +764,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 275
     },
     table: ['Ar'],
@@ -781,7 +781,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 206
     },
     table: ['Ar'],
@@ -798,7 +798,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 279
     },
     table: ['A','Ar'],
@@ -815,7 +815,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 240
     },
     table: ['Ar'],
@@ -832,7 +832,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 270
     },
     table: ['A','I'],
@@ -849,7 +849,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 265
     },
     table: ['I'],
@@ -866,7 +866,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 244
     },
     table: ['A'],
@@ -883,7 +883,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 280
     },
     table: ['A'],
@@ -900,7 +900,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 324
     },
     table: ['Ar'],
@@ -917,7 +917,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 261
     },
     table: ['A'],
@@ -935,7 +935,7 @@ export const magicItems: MagicItem[] = [
     rarity: 'Uncommon',
     attunementRequirement: 'заклинателем',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 261
     },
     table: ['I'],
@@ -952,7 +952,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 261
     },
     table: ['A'],
@@ -969,7 +969,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 254
     },
     table: ['A','I'],
@@ -986,7 +986,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 254
     },
     table: ['I'],
@@ -1003,7 +1003,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 265
     },
     table: ['I'],
@@ -1020,7 +1020,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 265
     },
     table: ['I'],
@@ -1037,7 +1037,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 245
     },
     table: ['A','I'],
@@ -1054,7 +1054,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 245
     },
     table: ['A','I'],
@@ -1072,7 +1072,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: ', значение Интеллекта 13 или выше',
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 268
     },
     table: ['A'],
@@ -1089,7 +1089,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 241
     },
     table: ['A','I'],
@@ -1107,7 +1107,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 255
     },
     table: ['A','I'],
@@ -1124,7 +1124,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 255
     },
     table: ['A','I'],
@@ -1141,7 +1141,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 255
     },
     table: ['A','I'],
@@ -1158,7 +1158,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 310
     },
     table: ['A','R'],
@@ -1175,7 +1175,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 311
     },
     table: ['A','R'],
@@ -1193,7 +1193,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: ', значение Силы 13 или выше',
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 264
     },
     table: ['Ar'],
@@ -1210,7 +1210,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 240
     },
     table: ['I'],
@@ -1227,7 +1227,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 285
     },
     table: ['I'],
@@ -1244,7 +1244,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 285
     },
     table: ['I'],
@@ -1261,7 +1261,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 199
     },
     table: ['A', 'Ar'],
@@ -1278,7 +1278,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 234
     },
     table: ['A'],
@@ -1298,7 +1298,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 234
     },
     table: ['A','I'],
@@ -1315,7 +1315,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 232
     },
     table: ['A'],
@@ -1332,7 +1332,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 317
     },
     table: ['Ar'],
@@ -1349,7 +1349,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 304
     },
     table: ['A'],
@@ -1366,7 +1366,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 275
     },
     table: ['A','I'],
@@ -1383,7 +1383,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 242
     },
     table: ['A','I'],
@@ -1400,7 +1400,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 268
     },
     table: ['A','I'],
@@ -1417,7 +1417,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 268
     },
     table: ['A'],
@@ -1434,7 +1434,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 303
     },
     table: ['Ar'],
@@ -1451,7 +1451,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 266
     },
     table: ['A'],
@@ -1468,7 +1468,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 239
     },
     table: ['I'],
@@ -1485,7 +1485,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 244
     },
     table: ['I'],
@@ -1502,7 +1502,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 228
     },
     table: ['A','I'],
@@ -1519,7 +1519,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 228
     },
     table: ['A','I'],
@@ -1536,7 +1536,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 228
     },
     table: ['A','I'],
@@ -1554,7 +1554,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'заклинателем',
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 322
     },
     table: ['A','R'],
@@ -1572,7 +1572,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'заклинателем',
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 322
     },
     table: ['A','R'],
@@ -1590,7 +1590,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'заклинателем',
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 322
     },
     table: ['A','R'],
@@ -1607,7 +1607,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 320
     },
     table: ['Ar','R'],
@@ -1624,7 +1624,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 320
     },
     table: ['Ar','R'],
@@ -1641,7 +1641,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Legendary',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 320
     },
     table: ['Ar','R'],
@@ -1659,7 +1659,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'колдуном',
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 301
     },
     table: ['A'],
@@ -1677,7 +1677,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'колдуном',
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 301
     },
     table: ['A'],
@@ -1695,7 +1695,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'колдуном',
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 301
     },
     table: ['A'],
@@ -1712,7 +1712,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['Ar','I'],
@@ -1729,7 +1729,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['Ar','I'],
@@ -1746,7 +1746,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['Ar','I'],
@@ -1763,7 +1763,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['Ar','I'],
@@ -1780,7 +1780,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['Ar','I'],
@@ -1797,7 +1797,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['Ar','I'],
@@ -1814,7 +1814,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Legendary',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['Ar','I'],
@@ -1831,7 +1831,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Legendary',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['Ar','I'],
@@ -1848,7 +1848,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Legendary',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['Ar','I'],
@@ -1865,7 +1865,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['Ar'],
@@ -1882,7 +1882,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['Ar'],
@@ -1899,7 +1899,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['Ar'],
@@ -1916,7 +1916,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['Ar'],
@@ -1933,7 +1933,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['Ar'],
@@ -1950,7 +1950,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['Ar'],
@@ -1967,7 +1967,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Legendary',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['Ar'],
@@ -1984,7 +1984,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Legendary',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['Ar'],
@@ -2001,7 +2001,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Legendary',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['Ar'],
@@ -2019,7 +2019,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'заклинателем',
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['A','R'],
@@ -2037,7 +2037,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'заклинателем',
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['A','R'],
@@ -2055,7 +2055,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'заклинателем',
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['A','R'],
@@ -2073,7 +2073,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'заклинателем',
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['A','R'],
@@ -2091,7 +2091,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'заклинателем',
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['A','R'],
@@ -2109,7 +2109,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'заклинателем',
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['A','R'],
@@ -2127,7 +2127,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'заклинателем',
     rarity: 'Legendary',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['A','R'],
@@ -2145,7 +2145,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'заклинателем',
     rarity: 'Legendary',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['A','R'],
@@ -2163,7 +2163,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'заклинателем',
     rarity: 'Legendary',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 258
     },
     table: ['A','R'],
@@ -2180,7 +2180,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 288
     },
     table: ['Ar', 'A'],
@@ -2197,7 +2197,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 288
     },
     table: ['Ar', 'A'],
@@ -2214,7 +2214,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 288
     },
     table: ['Ar', 'A'],
@@ -2231,7 +2231,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 288
     },
     table: ['Ar', 'A'],
@@ -2248,7 +2248,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Legendary',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 288
     },
     table: ['Ar', 'A'],
@@ -2265,7 +2265,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 288
     },
     table: ['I','R'],
@@ -2282,7 +2282,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 288
     },
     table: ['I','R'],
@@ -2299,7 +2299,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 288
     },
     table: ['I','R'],
@@ -2316,7 +2316,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 288
     },
     table: ['I','R'],
@@ -2334,7 +2334,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'бардом',
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 272
     },
     table: ['I'],
@@ -2352,7 +2352,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'бардом',
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 272
     },
     table: ['I'],
@@ -2370,7 +2370,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'бардом',
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 272
     },
     table: ['I'],
@@ -2388,7 +2388,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'бардом',
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 272
     },
     table: ['I'],
@@ -2406,7 +2406,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'бардом',
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 272
     },
     table: ['I'],
@@ -2424,7 +2424,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'бардом',
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 272
     },
     table: ['I'],
@@ -2442,7 +2442,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'бардом',
     rarity: 'Legendary',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 272
     },
     table: ['I'],
@@ -2459,7 +2459,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 273
     },
     table: ['I'],
@@ -2477,7 +2477,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 273
     },
     table: ['Ar'],
@@ -2495,7 +2495,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 273
     },
     table: ['R','A'],
@@ -2513,7 +2513,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 273
     },
     table: ['R'],
@@ -2531,7 +2531,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 273
     },
     table: ['A'],
@@ -2549,7 +2549,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 273
     },
     table: ['I'],
@@ -2567,7 +2567,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 273
     },
     table: ['A'],
@@ -2585,7 +2585,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 273
     },
     table: ['R'],
@@ -2603,7 +2603,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 273
     },
     table: ['A'],
@@ -2621,7 +2621,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 273
     },
     table: ['A'],
@@ -2639,7 +2639,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 273
     },
     table: ['Ar'],
@@ -2657,7 +2657,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Legendary',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 273
     },
     table: ['A'],
@@ -2675,7 +2675,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Legendary',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 273
     },
     table: ['A'],
@@ -2693,7 +2693,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Legendary',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 273
     },
     table: ['A'],
@@ -2711,7 +2711,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 325
     },
     table: ['Ar'],
@@ -2728,7 +2728,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 325
     },
     table: ['Ar'],
@@ -2745,7 +2745,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 325
     },
     table: ['Ar'],
@@ -2762,7 +2762,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 324
     },
     table: ['Ar'],
@@ -2779,7 +2779,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 324
     },
     table: ['Ar'],
@@ -2796,7 +2796,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 324
     },
     table: ['Ar'],
@@ -2813,7 +2813,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 290
     },
     table: ['A','I'],
@@ -2831,7 +2831,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 290
     },
     table: ['A','I'],
@@ -2849,7 +2849,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 290
     },
     table: ['A','I'],
@@ -2867,7 +2867,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 290
     },
     table: ['A','I'],
@@ -2885,7 +2885,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 290
     },
     table: ['A','I'],
@@ -2903,7 +2903,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 290
     },
     table: ['A','I'],
@@ -2922,7 +2922,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: ', значение Силы 13 или выше',
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 236
     },
     table: ['Ar'],
@@ -2940,7 +2940,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: ', значение Силы 13 или выше',
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 236
     },
     table: ['Ar'],
@@ -2958,7 +2958,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: ', значение Силы 13 или выше',
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 236
     },
     table: ['Ar'],
@@ -2976,7 +2976,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: ', значение Силы 13 или выше',
     rarity: 'Legendary',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 236
     },
     table: ['Ar'],
@@ -2994,7 +2994,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: ', значение Силы 13 или выше',
     rarity: 'Legendary',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 236
     },
     table: ['Ar'],
@@ -3011,7 +3011,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 270
     },
     table: ['Ar'],
@@ -3029,7 +3029,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 270
     },
     table: ['Ar','R'],
@@ -3047,7 +3047,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 270
     },
     table: ['Ar','R'],
@@ -3065,7 +3065,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Legendary',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 270
     },
     table: ['Ar','R'],
@@ -3083,7 +3083,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 305
     },
     table: ['A','R'],
@@ -3101,7 +3101,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 305
     },
     table: ['A','R'],
@@ -3119,7 +3119,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 305
     },
     table: ['A','R'],
@@ -3137,7 +3137,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 305
     },
     table: ['A','R'],
@@ -3155,7 +3155,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 305
     },
     table: ['A','R'],
@@ -3173,7 +3173,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 305
     },
     table: ['A','R'],
@@ -3191,7 +3191,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 305
     },
     table: ['A','R'],
@@ -3209,7 +3209,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 305
     },
     table: ['A','R'],
@@ -3227,7 +3227,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 305
     },
     table: ['A','R'],
@@ -3245,7 +3245,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Legendary',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 305
     },
     table: ['A','R'],
@@ -3263,7 +3263,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 261
     },
     table: ['A'],
@@ -3282,7 +3282,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 261
     },
     table: ['A'],
@@ -3300,7 +3300,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 261
     },
     table: ['A'],
@@ -3318,7 +3318,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 261
     },
     table: ['A'],
@@ -3336,7 +3336,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 261
     },
     table: ['A'],
@@ -3354,7 +3354,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 261
     },
     table: ['A'],
@@ -3372,7 +3372,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 261
     },
     table: ['A'],
@@ -3390,7 +3390,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 261
     },
     table: ['A'],
@@ -3408,7 +3408,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 261
     },
     table: ['A'],
@@ -3426,7 +3426,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 303
     },
     table: ['Ar'],
@@ -3443,7 +3443,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 303
     },
     table: ['Ar'],
@@ -3460,7 +3460,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 303
     },
     table: ['Ar'],
@@ -3478,7 +3478,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'колдуном',
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 248
     },
     table: ['A'],
@@ -3495,7 +3495,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 235
     },
     table: ['A','I'],
@@ -3512,7 +3512,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 235
     },
     table: ['A','I'],
@@ -3529,7 +3529,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 321
     },
     table: ['A','I'],
@@ -3546,7 +3546,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 315
     },
     table: ['A','I'],
@@ -3563,7 +3563,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 289
     },
     table: ['A','R'],
@@ -3580,7 +3580,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 319
     },
     table: ['A','I'],
@@ -3597,7 +3597,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 243
     },
     table: ['Ar'],
@@ -3614,7 +3614,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 305
     },
     table: ['Ar','R'],
@@ -3631,7 +3631,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 259
     },
     table: ['A','I'],
@@ -3648,7 +3648,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 321
     },
     table: ['A','I'],
@@ -3665,7 +3665,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 321
     },
     table: ['A','I'],
@@ -3682,7 +3682,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 257
     },
     table: ['A'],
@@ -3699,7 +3699,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 271
     },
     table: ['A','I'],
@@ -3716,7 +3716,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 271
     },
     table: ['A','I'],
@@ -3733,7 +3733,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 314
     },
     table: ['Ar','I'],
@@ -3750,7 +3750,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 243
     },
     table: ['I'],
@@ -3767,7 +3767,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 315
     },
     table: ['A','I'],
@@ -3784,7 +3784,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 245
     },
     table: ['I'],
@@ -3801,7 +3801,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 296
     },
     table: ['A'],
@@ -3818,7 +3818,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 318
     },
     table: ['Ar','I'],
@@ -3835,7 +3835,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 280
     },
     table: ['Ar','I'],
@@ -3852,7 +3852,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 284
     },
     table: ['A','I'],
@@ -3869,7 +3869,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 307
     },
     table: ['A','I'],
@@ -3886,7 +3886,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 306
     },
     table: ['A','R'],
@@ -3903,7 +3903,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 308
     },
     table: ['A','R'],
@@ -3920,7 +3920,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 290
     },
     table: ['A','I'],
@@ -3937,7 +3937,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 244
     },
     table: ['A'],
@@ -3954,7 +3954,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 245
     },
     table: ['A', 'I'],
@@ -3971,7 +3971,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 270
     },
     table: ['A','I'],
@@ -3988,7 +3988,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 257
     },
     table: ['I'],
@@ -4005,7 +4005,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 230
     },
     table: ['Ar'],
@@ -4022,7 +4022,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 242
     },
     table: ['A','I'],
@@ -4039,7 +4039,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 304
     },
     table: ['Ar'],
@@ -4056,7 +4056,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 286
     },
     table: ['I'],
@@ -4073,7 +4073,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 256
     },
     table: ['R', 'I'],
@@ -4090,7 +4090,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 302
     },
     table: ['A','I'],
@@ -4107,7 +4107,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 284
     },
     table: ['A','I'],
@@ -4124,7 +4124,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 283
     },
     table: ['A','I'],
@@ -4141,7 +4141,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 280
     },
     table: ['A','I'],
@@ -4158,7 +4158,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 318
     },
     table: ['Ar','I'],
@@ -4175,7 +4175,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 285
     },
     table: ['A','I'],
@@ -4192,7 +4192,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 269
     },
     table: ['A','I'],
@@ -4209,7 +4209,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 286
     },
     table: ['I'],
@@ -4226,7 +4226,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 254
     },
     table: ['Ar'],
@@ -4244,7 +4244,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'волшебником',
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 267
     },
     table: ['A'],
@@ -4261,7 +4261,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 267
     },
     table: ['A'],
@@ -4278,7 +4278,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 303
     },
     table: ['Ar','R'],
@@ -4296,7 +4296,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'волшебником',
     rarity: 'Uncommon',
     source: {
-      book: 'TCE',
+      book: 'TCE14',
       page: 120
     },
     description: `<p>Держа в руках эту книгу в кожаном переплёте, вы можете использовать её в качестве заклинательной фокусировки для ваших заклинаний волшебника, а также получаете бонус +1 к броскам атаки и Сл спасбросков ваших заклинаний волшебника.</p><p>Вы можете использовать эту книгу как книгу заклинаний. Кроме того, когда вы используете умение "Магическое восстановление", вы можете увеличить суммарный уровень ячеек заклинаний, которые вы восстанавливаете, на 1.</p>`,
@@ -4313,7 +4313,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'волшебником',
     rarity: 'Rare',
     source: {
-      book: 'TCE',
+      book: 'TCE14',
       page: 120
     },
     description: `<p>Держа в руках эту книгу в кожаном переплёте, вы можете использовать её в качестве заклинательной фокусировки для ваших заклинаний волшебника, а также получаете бонус +2 к броскам атаки и Сл спасбросков ваших заклинаний волшебника.</p><p>Вы можете использовать эту книгу как книгу заклинаний. Кроме того, когда вы используете умение "Магическое восстановление", вы можете увеличить суммарный уровень ячеек заклинаний, которые вы восстанавливаете, на 1.</p>`,
@@ -4330,7 +4330,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'волшебником',
     rarity: 'Very Rare',
     source: {
-      book: 'TCE',
+      book: 'TCE14',
       page: 120
     },
     description: `<p>Держа в руках эту книгу в кожаном переплёте, вы можете использовать её в качестве заклинательной фокусировки для ваших заклинаний волшебника, а также получаете бонус +3 к броскам атаки и Сл спасбросков ваших заклинаний волшебника.</p><p>Вы можете использовать эту книгу как книгу заклинаний. Кроме того, когда вы используете умение "Магическое восстановление", вы можете увеличить суммарный уровень ячеек заклинаний, которые вы восстанавливаете, на 1.</p>`,
@@ -4347,7 +4347,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'чародеем',
     rarity: 'Uncommon',
     source: {
-      book: 'TCE',
+      book: 'TCE14',
       page: 122
     },
     description: `<p>Чтобы настроиться на этот сосуд, вы должны поместить в него несколько капель своей крови. Сосуд нельзя открыть, пока вы настроены на него. Если ваша настройка на сосуд заканчивается, содержащаяся в нем кровь превращается в пепел. Вы можете использовать флакон в качестве заклинательной фокусировки для ваших заклинаний, пока носите или держите его. Также вы получаете бонус +1 к броскам атаки заклинаний и Сл спасбросков ваших заклинаний чародея.</p><p>Кроме того, когда вы тратите Кость Хитов, чтобы восстановить хиты, пока флакон при вас, вы можете восстановить 5 единиц чародейства. Это свойство флакона не может быть использовано вновь до следующего рассвета.</p>`,
@@ -4364,7 +4364,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'чародеем',
     rarity: 'Rare',
     source: {
-      book: 'TCE',
+      book: 'TCE14',
       page: 122
     },
     description: `<p>Чтобы настроиться на этот сосуд, вы должны поместить в него несколько капель своей крови. Сосуд нельзя открыть, пока вы настроены на него. Если ваша настройка на сосуд заканчивается, содержащаяся в нем кровь превращается в пепел. Вы можете использовать флакон в качестве заклинательной фокусировки для ваших заклинаний, пока носите или держите его. Также вы получаете бонус +2 к броскам атаки заклинаний и Сл спасбросков ваших заклинаний чародея.</p><p>Кроме того, когда вы тратите Кость Хитов, чтобы восстановить хиты, пока флакон при вас, вы можете восстановить 5 единиц чародейства. Это свойство флакона не может быть использовано вновь до следующего рассвета.</p>`,
@@ -4381,7 +4381,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'чародеем',
     rarity: 'Very Rare',
     source: {
-      book: 'TCE',
+      book: 'TCE14',
       page: 122
     },
     description: `<p>Чтобы настроиться на этот сосуд, вы должны поместить в него несколько капель своей крови. Сосуд нельзя открыть, пока вы настроены на него. Если ваша настройка на сосуд заканчивается, содержащаяся в нем кровь превращается в пепел. Вы можете использовать флакон в качестве заклинательной фокусировки для ваших заклинаний, пока носите или держите его. Также вы получаете бонус +3 к броскам атаки заклинаний и Сл спасбросков ваших заклинаний чародея.</p><p>Кроме того, когда вы тратите Кость Хитов, чтобы восстановить хиты, пока флакон при вас, вы можете восстановить 5 единиц чародейства. Это свойство флакона не может быть использовано вновь до следующего рассвета.</p>`,
@@ -4398,7 +4398,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'жрецом или паладином',
     rarity: 'Uncommon',
     source: {
-      book: 'TCE',
+      book: 'TCE14',
       page: 119
     },
     description: `<p>На этом амулете изображен символ божества в виде инкрустированных драгоценных камней или металлов. Пока вы носите этот священный символ, вы получаете бонус +1 к броскам атаки заклинаниями и Сл спасбросков ваших заклинаний жреца или паладина.</p><p>Пока вы носите этот амулет, вы можете использовать умение "Божественный канал" без затрат использований. Это свойство не может быть использовано вновь до следующего рассвета.</p>`,
@@ -4415,7 +4415,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'жрецом или паладином',
     rarity: 'Rare',
     source: {
-      book: 'TCE',
+      book: 'TCE14',
       page: 119
     },
     description: `<p>На этом амулете изображен символ божества в виде инкрустированных драгоценных камней или металлов. Пока вы носите этот священный символ, вы получаете бонус +2 к броскам атаки заклинаниями и Сл спасбросков ваших заклинаний жреца или паладина.</p><p>Пока вы носите этот амулет, вы можете использовать умение "Божественный канал" без затрат использований. Это свойство не может быть использовано вновь до следующего рассвета.</p>`,
@@ -4432,7 +4432,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'жрецом или паладином',
     rarity: 'Very Rare',
     source: {
-      book: 'TCE',
+      book: 'TCE14',
       page: 119
     },
     description: `<p>На этом амулете изображен символ божества в виде инкрустированных драгоценных камней или металлов. Пока вы носите этот священный символ, вы получаете бонус +3 к броскам атаки заклинаниями и Сл спасбросков ваших заклинаний жреца или паладина.</p><p>Пока вы носите этот амулет, вы можете использовать умение "Божественный канал" без затрат использований. Это свойство не может быть использовано вновь до следующего рассвета.</p>`,
@@ -4449,7 +4449,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'бардом',
     rarity: 'Uncommon',
     source: {
-      book: 'TCE',
+      book: 'TCE14',
       page: 134
     },
     description: `<p>Держа этот барабан, вы получаете бонус +1 к броскам атаки заклинанием и Сл спасбросков против ваших заклинаний барда.</p><p>Действием вы можете сыграть на барабане, чтобы восстановить одну кость бардовского вдохновения. Это свойство барабана не может быть использовано вновь до следующего рассвета.</p>`,
@@ -4466,7 +4466,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'бардом',
     rarity: 'Rare',
     source: {
-      book: 'TCE',
+      book: 'TCE14',
       page: 134
     },
     description: `<p>Держа этот барабан, вы получаете бонус +2 к броскам атаки заклинанием и Сл спасбросков против ваших заклинаний барда.</p><p>Действием вы можете сыграть на барабане, чтобы восстановить одну кость бардовского вдохновения. Это свойство барабана не может быть использовано вновь до следующего рассвета.</p>`,
@@ -4483,7 +4483,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'бардом',
     rarity: 'Very Rare',
     source: {
-      book: 'TCE',
+      book: 'TCE14',
       page: 134
     },
     description: `<p>Держа этот барабан, вы получаете бонус +3 к броскам атаки заклинанием и Сл спасбросков против ваших заклинаний барда.</p><p>Действием вы можете сыграть на барабане, чтобы восстановить одну кость бардовского вдохновения. Это свойство барабана не может быть использовано вновь до следующего рассвета.</p>`,
@@ -4500,7 +4500,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'друидом или следопытом',
     rarity: 'Uncommon',
     source: {
-      book: 'TCE',
+      book: 'TCE14',
       page: 133
     },
     description: `<p>Этот серп с серебряным лезвием мягко мерцает в лунном свете. Держа это магическое оружие, вы получаете бонус +1 к броскам атаки и урона, совершаемым с его помощью, и получаете бонус +1 к броскам атаки заклинанием и Сл спасбросков против ваших заклинаний друида и следопыта. Кроме того, вы можете использовать серп в качестве заклинательной фокусировки для ваших заклинаний друида и следопыта.</p><p>Когда вы накладываете заклинание, восстанавливающее хиты, вы можете бросить д4 и добавить результат броска к количеству восстановленных хитов при условии, что держите серп.</p>`,
@@ -4517,7 +4517,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'друидом или следопытом',
     rarity: 'Rare',
     source: {
-      book: 'TCE',
+      book: 'TCE14',
       page: 133
     },
     description: `<p>Этот серп с серебряным лезвием мягко мерцает в лунном свете. Держа это магическое оружие, вы получаете бонус +2 к броскам атаки и урона, совершаемым с его помощью, и получаете бонус +2 к броскам атаки заклинанием и Сл спасбросков против ваших заклинаний друида и следопыта. Кроме того, вы можете использовать серп в качестве заклинательной фокусировки для ваших заклинаний друида и следопыта.</p><p>Когда вы накладываете заклинание, восстанавливающее хиты, вы можете бросить д4 и добавить результат броска к количеству восстановленных хитов при условии, что держите серп.</p>`,
@@ -4534,7 +4534,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'друидом или следопытом',
     rarity: 'Very Rare',
     source: {
-      book: 'TCE',
+      book: 'TCE14',
       page: 133
     },
     description: `<p>Этот серп с серебряным лезвием мягко мерцает в лунном свете. Держа это магическое оружие, вы получаете бонус +3 к броскам атаки и урона, совершаемым с его помощью, и получаете бонус +3 к броскам атаки заклинанием и Сл спасбросков против ваших заклинаний друида и следопыта. Кроме того, вы можете использовать серп в качестве заклинательной фокусировки для ваших заклинаний друида и следопыта.</p><p>Когда вы накладываете заклинание, восстанавливающее хиты, вы можете бросить д4 и добавить результат броска к количеству восстановленных хитов при условии, что держите серп.</p>`,
@@ -4551,7 +4551,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'монахом',
     rarity: 'Uncommon',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 23
     },
     description: `<p>Этот изящный пояс с мелкими деталями изготовлен из драконьей кожи.</p><p>Пока вы носите этот пояс, вы получаете бонус +1 к Сл спасброска духа.</p><p>Кроме того, вы можете действием восстановить очки духа, равные результату броска вашей кости Боевых искусств. Вы не можете повторно использовать это свойство пояса до следующего рассвета.</p>`,
@@ -4568,7 +4568,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'монахом',
     rarity: 'Rare',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 23
     },
     description: `<p>Этот изящный пояс с мелкими деталями изготовлен из драконьей кожи.</p><p>Пока вы носите этот пояс, вы получаете бонус +2 к Сл спасброска духа.</p><p>Кроме того, вы можете действием восстановить очки духа, равные результату броска вашей кости Боевых искусств. Вы не можете повторно использовать это свойство пояса до следующего рассвета.</p>`,
@@ -4585,7 +4585,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'монахом',
     rarity: 'Very Rare',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 23
     },
     description: `<p>Этот изящный пояс с мелкими деталями изготовлен из драконьей кожи.</p><p>Пока вы носите этот пояс, вы получаете бонус +3 к Сл спасброска духа.</p><p>Кроме того, вы можете действием восстановить очки духа, равные результату броска вашей кости Боевых искусств. Вы не можете повторно использовать это свойство пояса до следующего рассвета.</p>`,
@@ -4602,7 +4602,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: ', значение Телосложения 13 или выше',
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 228
     },
     table: ['R'],
@@ -4619,7 +4619,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 276
     },
     table: ['Ar','R'],
@@ -4636,7 +4636,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 276
     },
     table: ['Ar','R'],
@@ -4653,7 +4653,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 276
     },
     table: ['Ar','R'],
@@ -4670,7 +4670,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 234
     },
     table: ['A'],
@@ -4687,7 +4687,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 301
     },
     table: ['I'],
@@ -4705,7 +4705,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'заклинателем',
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 320
     },
     table: ['A'],
@@ -4724,7 +4724,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'заклинателем',
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 319
     },
     table: ['I'],
@@ -4743,7 +4743,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'заклинателем',
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 319
     },
     table: ['A'],
@@ -4762,7 +4762,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'заклинателем',
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 321
     },
     table: ['R'],
@@ -4780,7 +4780,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 318
     },
     table: ['A'],
@@ -4802,7 +4802,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 322
     },
     table: ['A'],
@@ -4840,7 +4840,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 231
     },
     table: ['Ar'],
@@ -4869,7 +4869,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 231
     },
     table: ['Ar','R'],
@@ -4886,7 +4886,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 231
     },
     table: ['A','R'],
@@ -4903,7 +4903,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 301
     },
     table: ['A'],
@@ -4920,7 +4920,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 316
     },
     table: ['Ar','R'],
@@ -4937,7 +4937,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 274
     },
     table: ['A'],
@@ -4954,7 +4954,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 318
     },
     table: ['Ar'],
@@ -4971,7 +4971,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 287
     },
     table: ['A','I'],
@@ -4988,7 +4988,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 288
     },
     table: ['A','Ar'],
@@ -5005,7 +5005,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 288
     },
     table: ['A'],
@@ -5022,7 +5022,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 288
     },
     table: ['A','Ar'],
@@ -5039,7 +5039,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 287
     },
     table: ['A','I'],
@@ -5056,7 +5056,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 288
     },
     table: ['A'],
@@ -5073,7 +5073,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 287
     },
     table: ['A'],
@@ -5090,7 +5090,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 243
     },
     table: ['A','R'],
@@ -5107,7 +5107,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 264
     },
    table: ['A'],
@@ -5124,7 +5124,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 312
     },
     table: ['A','R'],
@@ -5141,7 +5141,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 248
     },
     table: ['Ar'],
@@ -5160,7 +5160,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 244
     },
     table: ['A','I'],
@@ -5177,7 +5177,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 292
     },
     table: ['R'],
@@ -5194,7 +5194,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 294
     },
     table: ['Ar'],
@@ -5211,7 +5211,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 293
     },
     table: ['A'],
@@ -5228,7 +5228,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 296
     },
     table: ['A'],
@@ -5245,7 +5245,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 293
     },
     table: ['I'],
@@ -5262,7 +5262,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 294
     },
     table: ['R'],
@@ -5292,7 +5292,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 296
     },
     table: ['Ar'],
@@ -5309,7 +5309,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 293
     },
     table: ['I'],
@@ -5326,7 +5326,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 295
     },
     table: ['A','R'],
@@ -5343,7 +5343,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 264
     },
     table: ['I'],
@@ -5360,7 +5360,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 324
     },
     table: ['A'],
@@ -5377,7 +5377,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 247
     },
     table: ['A'],
@@ -5402,7 +5402,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 246
     },
     table: ['A'],
@@ -5427,7 +5427,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 231
     },
     table: ['Ar'],
@@ -5444,7 +5444,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 297
     },
     table: ['A'],
@@ -5461,7 +5461,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 276
     },
     table: ['A'],
@@ -5478,7 +5478,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 282
     },
     table: ['A'],
@@ -5495,7 +5495,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 282
     },
     table: ['A', 'Ar'],
@@ -5512,7 +5512,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 284
     },
     table: ['R'],
@@ -5529,7 +5529,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 314
     },
     table: ['Ar'],
@@ -5546,7 +5546,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 314
     },
     table: ['Ar'],
@@ -5563,7 +5563,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 241
     },
     table: ['A'],
@@ -5581,7 +5581,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'жрецом, друидом или паладином',
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 281
     },
     table: ['R'],
@@ -5606,7 +5606,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 280
     },
     table: ['A'],
@@ -5623,7 +5623,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 254
     },
     table: ['I'],
@@ -5640,7 +5640,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 245
     },
     table: ['A'],
@@ -5657,7 +5657,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 286
     },
     table: ['A','I'],
@@ -5674,7 +5674,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 244
     },
     table: ['A'],
@@ -5691,7 +5691,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 242
     },
     table: ['A'],
@@ -5708,7 +5708,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 270
     },
     table: ['A','I'],
@@ -5725,7 +5725,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 312
     },
     table: ['A','R'],
@@ -5743,7 +5743,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'друидом',
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 311
     },
     table: ['R'],
@@ -5772,7 +5772,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'бардом, друидом или жрецом',
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 308
     },
     table: ['I','R'],
@@ -5796,7 +5796,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'бардом, волшебником, друидом, жрецом, колдуном или чародеем',
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 307
     },
     table: ['A','R'],
@@ -5814,7 +5814,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'бардом, волшебником, друидом, жрецом, колдуном или чародеем',
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 308
     },
     table: ['A','R'],
@@ -5836,7 +5836,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 235
     },
     table: ['I'],
@@ -5853,7 +5853,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 270
     },
     table: ['A','R'],
@@ -5870,7 +5870,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 239
     },
     table: ['I'],
@@ -5887,7 +5887,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 240
     },
     table: ['I'],
@@ -5904,7 +5904,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 302
     },
     table: ['A'],
@@ -5938,7 +5938,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 263
     },
     table: ['A','I'],
@@ -5955,7 +5955,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 312
     },
     table: ['A'],
@@ -5972,7 +5972,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 236
     },
     table: ['A'],
@@ -5989,7 +5989,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 264
     },
     table: ['A'],
@@ -6006,7 +6006,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 264
     },
     table: ['Ar'],
@@ -6023,7 +6023,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 269
     },
     table: ['A','I'],
@@ -6040,7 +6040,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 240
     },
     table: ['A','R'],
@@ -6057,7 +6057,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 268
     },
     table: ['A'],
@@ -6074,7 +6074,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 304
     },
     table: ['Ar'],
@@ -6091,7 +6091,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 257
     },
     table: ['R'],
@@ -6108,7 +6108,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 257
     },
     table: ['Ar'],
@@ -6125,7 +6125,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 263
     },
     table: ['Ar'],
@@ -6142,7 +6142,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 150
     },
     table: ['A'],
@@ -6166,7 +6166,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 228
     },
     table: ['Ar'],
@@ -6199,7 +6199,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 228
     },
     table: ['A'],
@@ -6221,7 +6221,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 256
     },
     table: ['A'],
@@ -6238,7 +6238,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 281
     },
     table: ['A'],
@@ -6255,7 +6255,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 281
     },
     table: ['A'],
@@ -6277,7 +6277,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'дварфом или существом, настроенным на <a href="/magic-items/belt-of-dwarvenkind">Пояс дварфов</a>',
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 256
     },
     table: ['A'],
@@ -6294,7 +6294,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 252
     },
     table: ['A'],
@@ -6311,7 +6311,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 254
     },
     table: ['A'],
@@ -6342,7 +6342,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 299
     },
     table: ['R'],
@@ -6361,7 +6361,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 301
     },
     table: ['A'],
@@ -6380,7 +6380,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 299
     },
     table: ['A'],
@@ -6400,7 +6400,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 288
     },
     table: ['A'],
@@ -6417,7 +6417,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 288
     },
     table: ['A'],
@@ -6435,7 +6435,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 289
     },
     table: ['A','R'],
@@ -6453,7 +6453,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 287
     },
     table: ['A','I'],
@@ -6470,7 +6470,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 289
     },
     table: ['A','I'],
@@ -6488,7 +6488,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 289
     },
     table: ['A'],
@@ -6512,7 +6512,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 242
     },
     table: ['A','I'],
@@ -6537,7 +6537,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 294
     },
     table: ['A'],
@@ -6567,7 +6567,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'друидом или колдуном',
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 243
     },
     table: ['A','R'],
@@ -6587,7 +6587,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 243
     },
     table: ['Ar'],
@@ -6604,7 +6604,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 282
     },
     table: ['Ar'],
@@ -6623,7 +6623,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 243
     },
     table: ['Ar','I'],
@@ -6641,7 +6641,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 297
     },
     table: ['A'],
@@ -6660,7 +6660,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 297
     },
     table: ['A'],
@@ -6677,7 +6677,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 282
     },
     table: ['Ar','A'],
@@ -6696,7 +6696,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 314
     },
     table: ['Ar'],
@@ -6714,7 +6714,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 236
     },
     table: ['Ar'],
@@ -6733,7 +6733,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 229
     },
     table: ['Ar'],
@@ -6750,7 +6750,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 244
     },
     table: ['A'],
@@ -6770,7 +6770,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 270
     },
     table: ['A','I'],
@@ -6788,7 +6788,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 291
     },
     table: ['Ar'],
@@ -6811,7 +6811,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 311
     },
     table: ['A','R'],
@@ -6834,7 +6834,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'волшебником, друидом, колдуном или чародеем',
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 308
     },
     table: ['A','R'],
@@ -6860,7 +6860,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'волшебником, друидом, колдуном или чародеем',
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 307
     },
     table: ['A','R'],
@@ -6885,7 +6885,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'волшебником, колдуном или чародеем',
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 308
     },
     table: ['A'],
@@ -6916,7 +6916,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 309
     },
     table: ['R'],
@@ -6934,7 +6934,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 241
     },
     table: ['R'],
@@ -6971,7 +6971,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 302
     },
     table: ['Ar'],
@@ -6988,7 +6988,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 306
     },
     table: ['R'],
@@ -7010,7 +7010,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 278
     },
     table: ['I'],
@@ -7028,7 +7028,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 277
     },
     table: ['Ar'],
@@ -7046,7 +7046,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 277
     },
     table: ['R'],
@@ -7064,7 +7064,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 317
     },
     table: ['I'],
@@ -7082,7 +7082,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 317
     },
     table: ['R'],
@@ -7100,7 +7100,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 317
     },
     table: ['A'],
@@ -7118,7 +7118,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 277
     },
     table: ['A'],
@@ -7137,7 +7137,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 277
     },
     table: ['A','I'],
@@ -7157,7 +7157,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 248
     },
     table: ['A','Ar'],
@@ -7175,7 +7175,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 259
     },
     table: ['Ar'],
@@ -7193,7 +7193,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 245
     },
     table: ['A'],
@@ -7210,7 +7210,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 281
     },
     table: ['A','I'],
@@ -7231,7 +7231,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 268
     },
     table: ['A'],
@@ -7254,7 +7254,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'волшебником',
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 266
     },
     table: ['A'],
@@ -7286,7 +7286,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 304
     },
     table: ['Ar'],
@@ -7306,7 +7306,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 305
     },
     table: ['Ar'],
@@ -7323,7 +7323,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 257
     },
     table: ['Ar'],
@@ -7344,7 +7344,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 294
     },
     table: ['A'],
@@ -7361,7 +7361,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 295
     },
     table: ['A'],
@@ -7378,7 +7378,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'BGDIA',
+      book: 'BGDIA14',
       page: 223
     },
     description: `<p>Это оружие выковано из адского железа и пронизано прожилками адского огня, которые испускают тусклый свет в радиусе 5 футов.</p>
@@ -7395,7 +7395,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'BGDIA',
+      book: 'BGDIA14',
       page: 224
     },
     description: `<p>Инфернальная головоломка представляет собой кубический контейнер с размером стороны от 5 до 6 дюймов, состоящий из герметичных, взаимосвязанных частей, изготовленных из материалов, найденных в Девяти Преисподних. Большинство этих головоломок сделаны из адского железа, хотя некоторые вырезаны из кости или рогов. Инфернальные головоломки используются для защиты дьявольских контрактов, подписанных между дьяволами и смертными, даже после того, как условия этих контрактов выполнены. Пустая инфернальная головоломка весит 3 фунта, независимо от материалов, используемых для её изготовления.</p>
@@ -7413,7 +7413,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'BGDIA',
+      book: 'BGDIA14',
       page: 225
     },
     description: `<p>Отчеканенные из адского железа, монеты души около 5 дюймов в ширину и около дюйма толщиной. Каждая монета весит 1/3 фунта, и на ней начертаны инфернальные письмена и заклинание, которое магически связывает одну душу с монетой. Поскольку каждая монета души имеет уникальную душу, заключенную в ней, у каждой из них есть история. Одна могла быть заключена из-за невыполнения сделки, в то время как другая могла стать жертвой проклятия ночной карги.</p>
@@ -7438,7 +7438,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'BGDIA',
+      book: 'BGDIA14',
       page: 223
     },
     description: `<p>Пока на вас надеты обе эти стальные перчатки, любое немагическое оружие, которое вы держите в одной перчатке, считается магическим оружием.</p>
@@ -7455,7 +7455,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'BGDIA',
+      book: 'BGDIA14',
       page: 223
     },
     description: `<p>Это выкованное в аду боевое знамя, сделано из адского железа и снабжено маленькой, не открывающейся клеткой, содержащей квазита [quasit]. Захваченный квазит недееспособен, а его клетка имеет КД 19, 10 хитов и иммунна ко всем видам урона, кроме урона силовым полем. Если квазита убивают или каким-то образом освобождают, он исчезает в облаке дыма, а в клетке появляется новый, при условии, что клетка цела.</p>
@@ -7473,7 +7473,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'существом, которое может говорить на инфернальном языке',
     rarity: 'Very Rare',
     source: {
-      book: 'BGDIA',
+      book: 'BGDIA14',
       page: 223
     },
     description: `<p>Этот громоздкий, шлем без глазниц создан для исчадия преисподней, но магическим образом изменяется, чтобы соответствовать головам других владельцев.</p>
@@ -7492,7 +7492,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'COS',
+      book: 'COS14',
       page: 221
     },
     description: `<p>Каван был беспощадным вождём, чьё племя веками жило в Горах Балинок, задолго до прибытия Страда фон Заровича. Хотя он был весьма жив, Кавану были присущи некоторые черты, присущие вампирам: он спал днём и охотился ночью, он пил кровь своих жертв, и он жил под землёй. В бою он использовал копьё измазанное кровью. Это было первое кровавое копьё – оружие, что пило кровь тех, кого оно убивало, и передавало жизнь его носителю, наделяя его силами, чтобы сражаться дальше.</p>
@@ -7509,7 +7509,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'COS',
+      book: 'COS14',
       page: 221
     },
     description: `<p>Любая отравленная жидкость, вылитая в этот кувшин, немедленно превращается в то же количество сладкого вина. Более того, существо, держащее кувшин за ручку, может приказать кувшину наполниться, создав 1 галлон вина, после чего кувшин больше не может производить вино до следующего рассвета.</p>`,
@@ -7525,7 +7525,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'COS',
+      book: 'COS14',
       page: 221
     },
     description: `<p>Созданный из ветви древа Галтиас, посох Галтиас – это пористый отрез чёрного дерева. Его зло заставляет зверей явно чувствовать себя некомфортно в пределах 30 футов от него. Посох имеет 10 зарядов и восполняет 1д6+4 потраченных зарядов на закате каждого дня.</p>
@@ -7545,15 +7545,15 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'друидом, чародеем, колдуном или волшебником',
     rarity: 'Very Rare',
     source: {
-      book: 'COS',
+      book: 'COS14',
       page: 187
     },
     description: `<p>Пока вы держите этот посох, у вас есть сопротивление урону холодом.</p>
     <p>Посох имеет 10 зарядов. Удерживая этот посох, вы можете Действием потратить 1 или несколько его зарядов, чтобы сотворить из него одно из следующих заклинаний, используя Сл спасброска ваших заклинаний:</p>
-    <p>конус холода (5 зарядов),</p>
-    <p>облако тумана (1 заряд),</p>
-    <p>град (4 заряда),</p>
-    <p>ледяная стена (4 заряда).</p>
+    <p>Конус холода (5 зарядов),</p>
+    <p>Облако тумана (1 заряд),</p>
+    <p>Град (4 заряда),</p>
+    <p>Ледяная стена (4 заряда).</p>
     <p>Посох восстанавливает 1д6 + 4 израсходованных заряда ежедневно на рассвете. Если вы израсходуете последний заряд, бросьте д20. При выпадении "1" посох превращается в воду и уничтожается.</p>
     <p>На этом посохе запечатлен фрагмент личности умершего волшебника. Первый персонаж, прикоснувшийся к посоху, получает следующую Слабость: "Я жажду власти больше всего на свете и сделаю все, чтобы получить ее еще больше". Эта слабость превосходит любую противоречивую ей черту личности.</p>`,
     baseAnalog: '<a href="/items/staff">Посох</a>',
@@ -7569,7 +7569,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'заклинателем',
     rarity: 'Common',
     source: {
-      book: 'DMG',
+      book: 'DMG24',
       page: 302
     },
     table: ['A', 'R'],
@@ -7586,7 +7586,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'FRHoF',
+      book: 'FRHoF24',
       page: 132
     },
     description: `<p>Пока крышка этого кольца открыта, оно горит пламенем, не требующим топлива и не дающим тепла. Пламя испускает Яркий свет в радиусе 20 футов и Тусклый свет ещё на 20 футов. Бонусным действием вы можете закрыть крышку, гася пламя, или открыть её снова.</p>`,
@@ -7602,7 +7602,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'IDRotF',
+      book: 'IDRotF14',
       page: 314
     },
     description: `<p>Этот закрытый фонарь способен гореть в течение 6 часов на 1 пинте масла, распространяя яркий свет в радиусе 30 футов и тусклый свет в радиусе ещё 30 футов.</p>
@@ -7639,7 +7639,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'IDRotF',
+      book: 'IDRotF14',
       page: 316
     },
     description: `<p>Этот 3-дюймовый куб из твердой серы генерирует достаточно сухого тепла, чтобы поддерживать в пределах 15 футов от него температуру на уровне 95 градусов по Фаренгейту (35 градусов по Цельсию).`,
@@ -7655,7 +7655,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'IDRotF',
+      book: 'IDRotF14',
       page: 315
     },
     description: `<p>Этот кристалл наделяет вас телепатией до тех пор, пока вы остаетесь настроенными на него. Кристалл также светится изнутри пурпурным светом, пока вы настроены на него. Чем выше ваш Интеллект, тем сильнее интенсивность света и тем шире диапазон телепатии (см. таблицу Свойств пси-кристалла).</p>
@@ -7685,7 +7685,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'IDRotF',
+      book: 'IDRotF14',
       page: 314
     },
     description: `<p>Этот котёл сделан из толстой меди, позеленевшей от времени. Он имеет 4 фута в ширину, диаметр отверстия 3½ фута, весит 50 фунтов и может вместить до 30 галлонов жидкости. На его выпуклых боках выбиты изображения сатиров и нимф, отдыхающих с черпаками в руках. Котел имеет крышку и боковые ручки. Он стоит на пяти маленьких когтистых лапках, которые не дают ему опрокинуться.</p>
@@ -7703,7 +7703,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'IDRotF',
+      book: 'IDRotF14',
       page: 315
     },
     description: `<p>К этому крошечному серебряному рыболовному крючку прикреплено маленькое золотое перышко. Чтобы он функционировал, пернатый крючок должен быть привязан к концу лески и погружен в достаточное количество воды, заполняемое по крайней мере 10-футовый куб. В конце каждого часа непрерывного погружения бросайте д6. При выпадении 6, на крючке появляется извивающаяся 6-дюймовая магическая рыба. Цвет и свойства магической рыбы определяются броском по таблице "Крючок рыбацкого восторга". Как только крючок призывает рыбу, он не сможет сделать это снова до следующего рассвета.</p>
@@ -7733,7 +7733,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'EFA',
+      book: 'EFA24',
       page: 112
     },
     description: `<p>Этот предмет невозможно купить или скрафтить, его возможно получить только способностью Артефактора "Реплики магических предметов".</p>
@@ -7751,7 +7751,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'заклинателем',
     rarity: 'Uncommon',
     source: {
-      book: 'EFA',
+      book: 'EFA24',
       page: 112
     },
     description: `<p>Этот предмет невозможно купить или скрафтить, его возможно получить только способностью Артефактора "Реплики магических предметов".</p>
@@ -7768,7 +7768,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'EFA',
+      book: 'EFA24',
       page: 112
     },
     description: `<p>Этот предмет невозможно купить или скрафтить, его возможно получить только способностью Артефактора "Реплики магических предметов".</p>
@@ -7786,7 +7786,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'EFA',
+      book: 'EFA24',
       page: 112
     },
     description: `<p>Этот предмет невозможно купить или скрафтить, его возможно получить только способностью Артефактора "Реплики магических предметов".</p>
@@ -7804,7 +7804,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'EFA',
+      book: 'EFA24',
       page: 112
     },
     description: `<p>Этот предмет невозможно купить или скрафтить, его возможно получить только способностью Артефактора "Реплики магических предметов".</p>
@@ -7821,7 +7821,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'EFA',
+      book: 'EFA24',
       page: 112
     },
     description: `<p>Этот предмет невозможно купить или скрафтить, его возможно получить только способностью Артефактора "Реплики магических предметов".</p>
@@ -7838,7 +7838,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'EFA',
+      book: 'EFA24',
       page: 112
     },
     description: `<p>Этот предмет невозможно купить или скрафтить, его возможно получить только способностью Артефактора "Реплики магических предметов".</p>
@@ -7855,7 +7855,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'EFA',
+      book: 'EFA24',
       page: 112
     },
     description: `<p>Этот предмет невозможно купить или скрафтить, его возможно получить только способностью Артефактора "Реплики магических предметов".</p>
@@ -7874,7 +7874,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'артефактором',
     rarity: 'Uncommon',
     source: {
-      book: 'TCE',
+      book: 'TCE14',
       page: 119
     },
     description: `<p>Эта простая отвёртка может трансформироваться в различные инструменты: действием вы можете коснуться её и превратить в любой тип инструментов ремесленника по вашему выбору. В какие бы инструменты отвёртка ни превращалась, вы имеете владение этим инструментом.</p>
@@ -7893,7 +7893,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'артефактором',
     rarity: 'Rare',
     source: {
-      book: 'TCE',
+      book: 'TCE14',
       page: 119
     },
     description: `<p>Эта простая отвёртка может трансформироваться в различные инструменты: действием вы можете коснуться её и превратить в любой тип инструментов ремесленника по вашему выбору. В какие бы инструменты отвёртка ни превращалась, вы имеете владение этим инструментом.</p>
@@ -7912,7 +7912,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'артефактором',
     rarity: 'Very Rare',
     source: {
-      book: 'TCE',
+      book: 'TCE14',
       page: 119
     },
     description: `<p>Эта простая отвёртка может трансформироваться в различные инструменты: действием вы можете коснуться её и превратить в любой тип инструментов ремесленника по вашему выбору. В какие бы инструменты отвёртка ни превращалась, вы имеете владение этим инструментом.</p>
@@ -7930,7 +7930,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'PotA',
+      book: 'PotA14',
       page: 222
     },
     description: `<p>В этой бутылке содержится дыхание воздушного элементаля. Проглотив его, вы можете либо выдох­нуть его, либо удержать в себе. В первом случае вы создаёте эффект, подобный заклинанию Порыв ветра. Во втором случае вы можете в течение 1 часа обходиться без дыхания. При желании вы можете окончить этот эффект преждевременно (например, если захотите что-нибудь сказать), но эффект выдоха уже не сработает.</p>`,
@@ -7946,7 +7946,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'WBtW',
+      book: 'WBtW14',
       page: 212
     },
     description: `<p>Когда вы выпиваете это зелье, вы получаете Преимущество на одну проверку характеристики, бросок атаки или спасбросок по вашему выбору, которые вы совершаете в течение следующего часа.</p>
@@ -7963,7 +7963,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'PaBTSO',
+      book: 'PaBTSO14',
       page: 219
     },
     description: `<p>Когда вы выпиваете это зелье, в течение 1 часа вы совершаете с Преимуществом спасброски, совершаемые для избегания или снятия с себя эффекта очарования или ошеломления.</p>
@@ -7980,7 +7980,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'EGtW',
+      book: 'EGTW14',
       page: 268
     },
     description: `<p>В течение 1 минуты после того как вы выпили это зелье, впервые, когда вы используете заклинание 4-го уровня или ниже, наносящее урон, вместо того чтобы бросать кости для определения нанесённого урона, вы можете использовать максимально возможный результат для каждой кости.</p>
@@ -7997,7 +7997,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Legendary',
     source: {
-      book: 'SKT',
+      book: 'SKT14',
       page: 236
     },
     description: `<p>Это зелье бледнобелого цвета создано из языка гигантского моллюска и едко пахнет чем-то, напоминающим гнилые водоросли. Впрочем, оно сладковатое на вкус.</p>
@@ -8016,7 +8016,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Very Rare',
     source: {
-      book: 'EGtW',
+      book: 'EGTW14',
       page: 268
     },
     description: `<p>Когда вы выпиваете это прозрачное зелье, вы получаете две Частицы Возможностей, каждая из которых выглядит как Крошечный сероватый шарик энергии, который парит вокруг вас, оставаясь в пределах 1 фута от вас все время. Частица существует в течение 8 часов или до тех пор, пока не будет использована.</p>
@@ -8036,7 +8036,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'Кованым',
     rarity: 'Common',
     source: {
-      book: 'ERLW',
+      book: 'ERLW14',
       page: 276
     },
     description: `<p>Наручный клинок — это магическое оружие, прикрепляющееся к вашей руке. Его нельзя отделить от вас, пока вы настроены на него. Чтобы настроиться на этот предмет, вы должны держать его на предплечье в течение всего периода настройки.</p>
@@ -8053,7 +8053,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'ERLW',
+      book: 'ERLW14',
       page: 276
     },
     description: `<p>Очищающий камень представляет собой сферу диаметром 1 фут (30 сантиметров), на которой выгравированы волшебные символы. При прикосновении к камню вы можете действием его активировать и удалить пятна и грязь с вашей одежды и тела.</p>
@@ -8070,7 +8070,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'ERLW',
+      book: 'ERLW14',
       page: 277
     },
     description: `<p>Чароткань — это одежда, пропитанная безвредной иллюзорной магией. Во время ношения обычного варианта этой одежды вы можете бонусным действием создать на ткани движущийся иллюзорный узор.</p>`,
@@ -8086,7 +8086,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'ERLW',
+      book: 'ERLW14',
       page: 277
     },
     description: `<p>Этот фонарь типа "бычий глаз" содержит драконий осколок Эберрона, который испускает свет, сравнимый с тем, который создает заклинание вечный огонь [continual flame]. Вечно горящий фонарь испускает свет в 120-футовом конусе; ближайшие 60 футов — это яркий свет, а дальние 60 футов — тусклый свет.</p>`,
@@ -8102,7 +8102,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'ERLW',
+      book: 'ERLW14',
       page: 277
     },
     description: `<p>На этом маленьком металлическом диске выгравировано изображение пера. Когда вы падаете по крайней мере на 20 футов, а жетон находится при вас, то скорость падения уменьшается до 60 футов в раунд и вы не получаете никакого урона от падения. Магия всех жетонов, что на вас, исчезает сразу после того, как вы приземляетесь, после чего каждый ваш диск становится немагическим.</p>`,
@@ -8118,7 +8118,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'ERLW',
+      book: 'ERLW14',
       page: 279
     },
     description: `<p>При создании костюма из изменяющейся ткани, в него может быть встроено до пяти различных нарядов. Пока вы облачены в эту одежду, вы можете бонусным действием произнести командное слово, чтобы превратить ваш наряд в другой из встроенных нарядов по вашему выбору. Независимо от внешнего вида, наряд не может быть ничем кроме одежды. Хоть он может дублировать внешний вид другой магической одежды, он не приобретает её магических свойств.</p>`,
@@ -8134,7 +8134,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Common',
     source: {
-      book: 'ERLW',
+      book: 'ERLW14',
       page: 279
     },
     description: `<p>Этот отполированный драконий осколок Эберрона помещается в руке и хранит информацию, подобно книге. Осколок может вместить эквивалент одной книги длиной не более 320 страниц. Осколок может быть создан пустым или уже заполненным информацией. Когда осколок создаётся, создатель может установить пароль, который должен быть произнесён, чтобы получить доступ к хранящейся внутри информации.</p>
@@ -8153,7 +8153,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'Кованым',
     rarity: 'Common',
     source: {
-      book: 'ERLW',
+      book: 'ERLW14',
       page: 279
     },
     description: `<p>Ножны волшебной палочки встраиваются в вашу руку, даруя вам следующие Преимущества:</p>
@@ -8175,7 +8175,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Common',
     source: {
-      book: 'ERLW',
+      book: 'ERLW14',
       page: 277
     },
     description: `<p>Пропитанная древесная фокусировка — это жезл, посох или палочка, вырезанные из дерева и наполненные экстрапланарной энергией. Если вы заклинатель, то вы можете использовать этот предмет в качестве заклинательной фокусировки.</p>
@@ -8202,7 +8202,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Common',
     source: {
-      book: 'ERLW',
+      book: 'ERLW14',
       page: 278
     },
     description: `<p>Защитная сфера — это полированный сферический кусок кристалла или камня, связанный с одним из планов существования.</p>
@@ -8229,7 +8229,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'ERLW',
+      book: 'ERLW14',
       page: 278
     },
     description: `<p>Данный предмет малораспространён, поэтому его невозможно сделать или купить, только лишь получить в приключениях.</p>
@@ -8255,7 +8255,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'ERLW',
+      book: 'ERLW14',
       page: 277
     },
     description: `<p>Чароткань — это одежда, пропитанная безвредной иллюзорной магией. Во время ношения обычного варианта этой одежды вы можете бонусным действием создать на ткани движущийся иллюзорный узор.</p>
@@ -8274,7 +8274,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'существом, у которого отсутствует рука или запястье',
     rarity: 'Uncommon',
     source: {
-      book: 'ERLW',
+      book: 'ERLW14',
       page: 276
     },
     description: `<p>Этот протез был разработан изобретателями дома Каннит. Чтобы настроиться на этот предмет, вы должны прикрепить его к руке на запястье, локтю или плечу, после чего протез волшебным образом преобразуется в копию заменяемой конечности.</p>
@@ -8296,11 +8296,11 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'ERLW',
+      book: 'ERLW14',
       page: 279
     },
     description: `<p>Эти металлические узелки были созданы в ответ на использование ядовитых газов на полях сражений Последней войны. Когда вы настраиваетесь на эти легкие, они заменяют легкие в вашей груди, которые исчезают. Вентилируемые легкие позволяют вам нормально дышать, даже в антимагическом поле, и их дыхательная функция не может быть подавлена магией. Вне антимагического поля или любых других эффектов, подавляющих магию, эти легкие позволяют вам нормально дышать в любой среде (включая вакуум), и вы получаете Преимущество на спасброски совершаемые против опасных газов, таких как те, которые создаются заклинаниями Облако смерти, Зловонное облако, вдыхаемыми ядами и газового оружия дыхания.</p>
-    <p>Действием вы можете использовать эти легкие, чтобы выдохнуть порыв ветра, как если бы вы наложили заклинание порыв ветра [gust of wind] (Сл спасброска 15) без затрат материальных компонентов. Это свойство легких не может быть использовано снова до следующего рассвета.</p>
+    <p>Действием вы можете использовать эти легкие, чтобы выдохнуть порыв ветра, как если бы вы наложили заклинание Порыв ветра (Сл спасброска 15) без затрат материальных компонентов. Это свойство легких не может быть использовано снова до следующего рассвета.</p>
     <p>Если ваша настройка на вентилируемые легкие заканчивается, ваши первоначальные легкие появляются вновь.</p>`,
     baseAnalog: '—',
     craftingTools: [12]
@@ -8314,7 +8314,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'ERLW',
+      book: 'ERLW14',
       page: 277
     },
     description: `<p>Данный предмет малораспространён, поэтому его невозможно сделать или купить, только лишь получить в приключениях.</p>
@@ -8333,7 +8333,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'ERLW',
+      book: 'ERLW14',
       page: 276
     },
     description: `<p>Данный предмет малораспространён, поэтому его невозможно сделать или купить, только лишь получить в приключениях.</p>
@@ -8352,7 +8352,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'ERLW',
+      book: 'ERLW14',
       page: 276
     },
     description: `<p>Данный предмет малораспространён, поэтому его невозможно сделать или купить, только лишь получить в приключениях.</p>
@@ -8372,7 +8372,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'ERLW',
+      book: 'ERLW14',
       page: 278
     },
     description: `<p>Данный предмет малораспространён, поэтому его невозможно сделать или купить, только лишь получить в приключениях.</p>
@@ -8393,7 +8393,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'PaBTSO',
+      book: 'PaBTSO14',
       page: 278
     },
     description: `<p>Рассекатель - это боевой топор +1, который наносит максимальный урон, когда владелец атакует растение или предмет, сделанный из дерева.</p>`,
@@ -8409,7 +8409,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'PaBTSO',
+      book: 'PaBTSO14',
       page: 72
     },
     description: `<p>Эта булава +1 была сделана для жреца Латандера, бога рассвета. Навершие булавы имеет форму солнечных лучей и сделано из латуни. Названная Светоносной, эта булава светится как факел, когда этого захочет владелец. Когда булава светится, она наносит Нежити дополнительно 1д6 урона излучением.</p>`,
@@ -8425,7 +8425,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'PaBTSO',
+      book: 'PaBTSO14',
       page: 72
     },
     description: `<p>Это кольцо имеет 6 зарядов. Пока вы носите его, вы можете потратить 1 из его зарядов, чтобы в течение 1 минуты ваш голос был четко слышен всем существам в радиусе 1 мили от вас, независимо от постороннего шума. Магическая тишина, 1 фут камня, 1 дюйм обычного металла, тонкий лист свинца или 3 фута дерева блокируют эту проекцию. Если вы проецируете свой голос, говоря на языке, который слушающие существа не понимают, вы можете заставить существ понять, что вы говорите. Вы должны видеть существ, чтобы они могли понять. Кольцо восстанавливает 1д6 израсходованных зарядов ежедневно на рассвете.</p>`,
@@ -8441,7 +8441,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'PaBTSO',
+      book: 'PaBTSO14',
       page: 219
     },
     description: `<p>Эта пара лёгких бронзовых наручей отделана мягким пурпурным бархатом и украшена выгравированными закрученными узорами.</p>
@@ -8458,7 +8458,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'PaBTSO',
+      book: 'PaBTSO14',
       page: 72
     },
     description: `<p>На этой кирасе +1 изображен золотой дракон. Созданная для героя Невервинтера, человека по имени Тергон, она позволяет владельцу совершать с Преимуществом спасброски против дыхания существ, имеющих тип Дракон.</p>`,
@@ -8474,7 +8474,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'PaBTSO',
+      book: 'PaBTSO14',
       page: 217
     },
     description: `<p>Металлическое лезвие этой секиры украшено резными изображениями обезглавленных свежевателей разума. Вы получаете бонус +1 к броскам атаки и урона, совершённых этой секирой.</p>
@@ -8491,7 +8491,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'PaBTSO',
+      book: 'PaBTSO14',
       page: 217
     },
     description: `<p>Рукоять этой боевой кирки инкрустирована измельченными перламутровыми камнями, которые придают оружию слабое свечение. Вы получаете бонус +1 к броскам атаки и урона, сделанным с помощью этой боевой кирки.</p>
@@ -8508,7 +8508,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'PaBTSO',
+      book: 'PaBTSO14',
       page: 220
     },
     description: `<p>Этот тонкий полый посох сделан из стекла, но прочен, как дуб. Он весит 3 фунта. Пока вы держите посох, вы получаете бонус +1 к вашему Классу Доспеха.</p>
@@ -8526,7 +8526,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'PaBTSO',
+      book: 'PaBTSO14',
       page: 220
     },
     description: `<p>Навершие этого магического посоха имеет форму паука. Он наносит дополнительный 1д6 урона ядом при попадании, когда используется для атаки оружием.</p>
@@ -8544,7 +8544,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'PaBTSO',
+      book: 'PaBTSO14',
       page: 217
     },
     description: `<p>По краю этой серовато-фиолетовой накидки серебряной нитью вышиты древние руны.</p>
@@ -8568,7 +8568,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'PaBTSO',
+      book: 'PaBTSO14',
       page: 217
     },
     description: `<p>Эта мягкая фиолетовая шапочка украшена вышивкой в виде извилин мозга.</p>
@@ -8586,7 +8586,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'PaBTSO',
+      book: 'PaBTSO14',
       page: 218
     },
     description: `<p>Пока вы носите эту адамантиновую корону, вы совершаете спасброски Интеллекта, Мудрости и Харизмы с Преимуществом, а также вы получаете сопротивление урону психической энергией.</p>`,
@@ -8603,7 +8603,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'заклинателем',
     rarity: 'Uncommon',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 26
     },
     description: `<p>Обычно этот предмет имеет на себе изображения крыльев, когтей, зубов или чешуи драконов</p>
@@ -8621,7 +8621,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'заклинателем',
     rarity: 'Rare',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 26
     },
     description: `<p>Обычно этот предмет имеет на себе изображения крыльев, когтей, зубов или чешуи драконов.</p>
@@ -8644,7 +8644,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'заклинателем',
     rarity: 'Very Rare',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 26
     },
     description: `<p>Обычно этот предмет имеет на себе изображения крыльев, когтей, зубов или чешуи драконов.</p>
@@ -8673,7 +8673,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'заклинателем',
     rarity: 'Legendary',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 26
     },
     description: `<p>Обычно этот предмет имеет на себе изображения крыльев, когтей, зубов или чешуи драконов.</p>
@@ -8703,7 +8703,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 27
     },
     description: `<p>Скорее всего этот орнамент сделан из чешуи, зуба, когтя дракона, или содержит на себе изображения в этих вещах.</p>
@@ -8720,7 +8720,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 27
     },
     description: `<p>Скорее всего этот орнамент сделан из чешуи, зуба, когтя дракона, или содержит на себе изображения в этих вещах.</p>
@@ -8737,7 +8737,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 27
     },
     description: `<p>Скорее всего этот орнамент сделан из чешуи, зуба, когтя дракона, или содержит на себе изображения в этих вещах.</p>
@@ -8755,7 +8755,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Legendary',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 27
     },
     description: `<p>Скорее всего этот орнамент сделан из чешуи, зуба, когтя дракона, или содержит на себе изображения в этих вещах.</p>
@@ -8774,7 +8774,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 27
     },
     description: `<p>Это оружие декорировано головами драконов, когтями, крыльями, чешуей или дуквами Драконьего алфавита. Когда он находится в сокровищнице дракона, он поглощает энергию оружия дыхания и наносит урон данного типа с его особыми свойствами.</p>
@@ -8791,7 +8791,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 27
     },
     description: `<p>Это оружие декорировано головами драконов, когтями, крыльями, чешуей или дуквами Драконьего алфавита. Когда он находится в сокровищнице дракона, он поглощает энергию оружия дыхания и наносит урон данного типа с его особыми свойствами.</p>
@@ -8809,7 +8809,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 27
     },
     description: `<p>Это оружие декорировано головами драконов, когтями, крыльями, чешуей или дуквами Драконьего алфавита. Когда он находится в сокровищнице дракона, он поглощает энергию оружия дыхания и наносит урон данного типа с его особыми свойствами.</p>
@@ -8828,7 +8828,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Legendary',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 27
     },
     description: `<p>Это оружие декорировано головами драконов, когтями, крыльями, чешуей или дуквами Драконьего алфавита. Когда он находится в сокровищнице дракона, он поглощает энергию оружия дыхания и наносит урон данного типа с его особыми свойствами.</p>
@@ -8847,7 +8847,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Uncommon',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 25
     },
     description: `<p>Этот сосуд может быть пузырьком с зельем, рогом для питья или другим контейнером, предназначенным для питья.</p>
@@ -8864,7 +8864,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 25
     },
     description: `<p>Этот сосуд может быть пузырьком с зельем, рогом для питья или другим контейнером, предназначенным для питья.</p>
@@ -8881,7 +8881,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 25
     },
     description: `<p>Этот сосуд может быть пузырьком с зельем, рогом для питья или другим контейнером, предназначенным для питья.</p>
@@ -8898,7 +8898,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Legendary',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 25
     },
     description: `<p>Этот сосуд может быть пузырьком с зельем, рогом для питья или другим контейнером, предназначенным для питья.</p>
@@ -8915,7 +8915,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Legendary',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 24
     },
     description: `<p>Это зелье выглядит как жидкое золото, с плавающим в нём чешуйкой цветного, самочцетного или металлического дракона. Когда вы выпиваете это зелье, вы превращаетесь во взрослого дракона того же вида, что и дракон, чья чешуя плавала в зелье. Трансформация длиться 1 час. Любое снаряжение, которое вы носите или несёте, сливается с вашей новой формой или падает (по вашему выбору). На протяжении всего этого времени вы используете игровую характеристику взрослого дракона вместо своей собственной, но вы сохраняете свои языки, индивидуальность и воспоминания. Вы не можете использовать "Смену формы" дракона, его легендарные действия и действия логова.</p>`,
@@ -8931,7 +8931,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 24
     },
     description: `<p>Это перо с изумрудным наконечником, не требующее чернил для письма. Держа это перо, вы можете неограниченно накладывать Иллюзорные письмена, без использования материвальных компонентов.</p>`,
@@ -8947,7 +8947,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 23
     },
     description: `<p>Плечи этого магического лука имеют форму крыльев дракона, а само оружие пропитано силой дыхания цветного, самоцветного или металлического дракона. Когда вы попадаете по существу атакой совершенной этим магическим луком, цель дополнительно получает 1д6 урона того же типа, что и дыхание находящееся в луке - звуком, излучением, кислотой, некротикой, огнём, психикой, силовым полем, холодом, электричеством или ядом.</p>
@@ -8965,7 +8965,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Rare',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 22
     },
     description: `<p>Клинок этого магического меча сделан из рога или хребта хрустального дракона. Когда вы попадаете по существу атакой, совершённой этим мечом, цель получает 1д8 дополнителього урона изучением.</p>
@@ -8983,7 +8983,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 22
     },
     description: `<p>Этот кусок аметиста размером с кулак наделён способностью аметистового дракона преодолевать гравитацию. Пока вы несёте или носите магнетит, вы получаете Преимущество на спасброски Силы.</p>
@@ -9003,7 +9003,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Very Rare',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 24
     },
     description: `<p>Этот кристаллический синий щит изготовлен из чешуи сапфирового дракона и создан для того, чтобы помочь искоренять влияние аберраций. Пока щит экипирован, вы получаете сопротивление урону психикой и звуком. Кроме того, когда вы получаете урон от существа, которое находится в 5 футах от вас, вы можете использовать свою реакцию, чтобы нанести этому существу 2д6 урона звуком.</p>
@@ -9020,7 +9020,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Legendary',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 23
     },
     description: `<p>Драконье копьё — это известное оружие, выкованное из редкого металла с помощью артефактов, связанных с Бахамутом.</p>
@@ -9038,7 +9038,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Legendary',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 24
     },
     description: `<p>Этот шарф изготовлен из прочной ткани и покрыт чешуёй платинового цвета. Действием вы можете снять чешуйку с шарфа и произнести командное слово. Когда вы делаете это, выберите один из следующих эффектов:</p>
@@ -9058,7 +9058,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Legendary',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 24
     },
     description: `<p>Пока вы держите этот драгоценный камень, вы можете использовать его в качестве заклинательной фокусировки. Драгоценный камень имеет 3 заряда и восстанавливает все израсходованные заряды ежедневно на рассвете. Когда вы накладываете заклинание, удерживая этот драгоценный камень, вы можете потратить до 3 зарядов, чтобы игнорировать материальные компоненты этого заклинания, стоимостью до 500 ЗМ за каждый израсходованный заряд.</p>
@@ -9075,7 +9075,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Legendary',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 23
     },
     description: `<p>Эта золотая статуэтка вырезана в виде канарейки и достаточно мала, чтобы поместиться в кармане. Если вы Действием произнесёте командное слово и бросите статуэтку на расстояние до 60 футов, статуэтка становиться живым существом в одной из двух форм (по вашему выбору). Если пространство, в котором существо должно появиться, занято другими существами или предметом, или если для этого существа просто нет пространства, статуэтка не становится существом.</p>
@@ -9095,7 +9095,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Legendary',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 23
     },
     description: `<p>Это магическое дальнобойное оружие напоминает мушкет, но вместо каких-либо боеприпасов у него внутри находится светящаяся желтая чешуя топазового дракона.</p>
@@ -9113,7 +9113,7 @@ export const magicItems: MagicItem[] = [
     attunement: true,
     rarity: 'Legendary',
     source: {
-      book: 'FTD',
+      book: 'FTD14',
       page: 23
     },
     description: `<p>Этот магический цеп сделан по образу Тиамат, с пятью зазубренными головами, выполненными в форме пяти голов различных цветных драконов. Вы получаете бонус +3 к броскам атаки и урона, совершенным с помощью этого цепа. Когда вы попадаете по существу этим магическим оружием, цель дополнительно получает 5д4 урона урона одним выбранным вами типом: Кислота, Огонь, Холод, Электричество или Яд.</p>
@@ -9131,7 +9131,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Uncommon',
     source: {
-      book: 'HotDQ',
+      book: 'HotDQ14',
       page: 94
     },
     description: `<p>Самоцветы на эмблеме Культа Дракона загораются пурпурным, когда вы вступаете в схватку, усиливая ваши Безоружные удары или Природное оружие.</p>
@@ -9148,7 +9148,7 @@ export const magicItems: MagicItem[] = [
     attunement: false,
     rarity: 'Rare',
     source: {
-      book: 'SDW',
+      book: 'SDW14',
       page: 0
     },
     description: `<p>Это магическая булава +2, именуемая "Костесчитатель". Всякий раз, когда этим оружием уничтожается нежить, в кармане владельца появляется одна серебряная монета.</p>`,
@@ -9165,7 +9165,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'апотекарием или колдуном',
     rarity: 'Rare',
     source: {
-      book: 'MoDK',
+      book: 'MoDK24',
       page: 389
     },
     description: `<p>Эта книга странных медицинских знаний, наполненная диаграммами, изображающими людей с чужеродными чертами, написана чернилами, похожими на кровь монстров, смешанными с драконьей пылью, а затем выгравирована на пергаментных страницах, сделанных из кожи аберрации. Рукопись переплетена в чешуйчатую обложку.</p>
@@ -9184,7 +9184,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'апотекарием или колдуном',
     rarity: 'Very Rare',
     source: {
-      book: 'MoDK',
+      book: 'MoDK24',
       page: 389
     },
     description: `<p>Эта книга странных медицинских знаний, наполненная диаграммами, изображающими людей с чужеродными чертами, написана чернилами, похожими на кровь монстров, смешанными с драконьей пылью, а затем выгравирована на пергаментных страницах, сделанных из кожи аберрации. Рукопись переплетена в чешуйчатую обложку.</p>
@@ -9203,7 +9203,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'апотекарием или колдуном',
     rarity: 'Legendary',
     source: {
-      book: 'MoDK',
+      book: 'MoDK24',
       page: 389
     },
     description: `<p>Эта книга странных медицинских знаний, наполненная диаграммами, изображающими людей с чужеродными чертами, написана чернилами, похожими на кровь монстров, смешанными с драконьей пылью, а затем выгравирована на пергаментных страницах, сделанных из кожи аберрации. Рукопись переплетена в чешуйчатую обложку.</p>
@@ -9222,7 +9222,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'следопытом',
     rarity: 'Rare',
     source: {
-      book: 'MoDK',
+      book: 'MoDK24',
       page: 390
     },
     description: `<p>Это оружие вырезано из коры, внутри него находится магический сок, а украшено листьями магических растений. Рукоятки и древки обмотаны волосами существа из мира фей. Это магическое оружие направляет природную магию, заключенную в стихиях природы.</p>
@@ -9241,7 +9241,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'следопытом',
     rarity: 'Very Rare',
     source: {
-      book: 'MoDK',
+      book: 'MoDK24',
       page: 390
     },
     description: `<p>Это оружие вырезано из коры, внутри него находится магический сок, а украшено листьями магических растений. Рукоятки и древки обмотаны волосами существа из мира фей. Это магическое оружие направляет природную магию, заключенную в стихиях природы.</p>
@@ -9260,7 +9260,7 @@ export const magicItems: MagicItem[] = [
     attunementRequirement: 'следопытом',
     rarity: 'Legendary',
     source: {
-      book: 'MoDK',
+      book: 'MoDK24',
       page: 390
     },
     description: `<p>Это оружие вырезано из коры, внутри него находится магический сок, а украшено листьями магических растений. Рукоятки и древки обмотаны волосами существа из мира фей. Это магическое оружие направляет природную магию, заключенную в стихиях природы.</p>

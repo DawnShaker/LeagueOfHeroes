@@ -1,5 +1,7 @@
 import type { Spell } from '../../types/spell';
 
+import { spellStatBlocks } from '../creatures/references.ts';
+
 export const spells: Spell[] = [
   {
     id: 'acid-splash',
@@ -41,7 +43,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
-      { type: 'other', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -79,7 +81,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
       { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'other', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -116,7 +118,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
       { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'other', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -155,7 +157,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
       { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'other', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
 
     ]
   },
@@ -206,7 +208,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/scion-of-the-outer-planes/">Наследник внешних планов</a>' },
       { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
       { type: 'feat', name: '<a href="/feats/telekinetic/">Телекинетик</a>' },
-      { type: 'other', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -246,7 +248,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
       { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'other', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -285,7 +287,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
       { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'other', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -328,7 +330,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'feat', name: '<a href="/feats/scion-of-the-outer-planes/">Наследник внешних планов</a>' },
       { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
-      { type: 'other', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -372,7 +374,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'feat', name: '<a href="/feats/scion-of-the-outer-planes/">Наследник внешних планов</a>' },
       { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
-      { type: 'other', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -416,7 +418,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
       { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
       { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
-      { type: 'other', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -460,7 +462,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
       { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'other', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -490,7 +492,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
       { type: 'feat', name: '<a href="/feats/blessed-warrior/">Благословлённый воин</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'other', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -530,7 +532,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
       { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'other', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -556,7 +558,7 @@ export const spells: Spell[] = [
       { type: 'background', name: '<a href="/backgrounds/rakdos%20cultist/">Культист Ракдосов</a>' },
       { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'other', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -595,7 +597,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
       { type: 'feat', name: '<a href="/feats/blessed-warrior/">Благословлённый воин</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'other', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -639,7 +641,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
       { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'other', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -672,7 +674,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
       { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'other', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -712,7 +714,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
       { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'other', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -750,7 +752,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
       { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'other', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -782,7 +784,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
       { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'other', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -820,7 +822,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -845,7 +847,7 @@ export const spells: Spell[] = [
   sources: [
     { type: 'class', name: '<a href="/classes/warlock">Колдун</a>' },
     { type: 'subclass', name: '<a href="/classes/apothecary?subclass=alienist">Алиенист</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -893,7 +895,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -917,7 +919,7 @@ export const spells: Spell[] = [
   },
   sources: [
     { type: 'background', name: '<a href="/backgrounds/dimir%20operative/">Оперативник Димиров</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -962,7 +964,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1004,7 +1006,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1050,7 +1052,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'other', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1091,7 +1093,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1132,7 +1134,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/scion-of-the-outer-planes/">Наследник внешних планов</a>' },
     { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1175,7 +1177,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1220,7 +1222,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1269,7 +1271,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/light-bringer/">Несущий свет</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1307,7 +1309,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1340,7 +1342,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
     { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1388,7 +1390,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1436,7 +1438,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
     { type: 'feat', name: '<a href="/feats/eldrith-warrior/">Мистический боец</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1476,7 +1478,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/eldrith-warrior/">Мистический боец</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1520,7 +1522,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/eldrith-warrior/">Мистический боец</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'feat', name: '<a href="/feats/scion-of-the-outer-planes/">Наследник внешних планов</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1564,7 +1566,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1612,7 +1614,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1661,7 +1663,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
     { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
     { type: 'feat', name: '<a href="/feats/eldrith-warrior/">Мистический боец</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1691,7 +1693,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1725,7 +1727,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1761,7 +1763,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
     { type: 'feat', name: '<a href="/feats/blessed-warrior/">Благословлённый воин</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1795,7 +1797,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/scion-of-the-outer-planes/">Наследник внешних планов</a>' },
     { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1842,7 +1844,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1873,7 +1875,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/druidic-warrior/">Воин-друид</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1918,7 +1920,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
     { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1961,7 +1963,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
     { type: 'feat', name: '<a href="/feats/artificer-initiate/">Посвящённый в артефакторство</a>' },
     { type: 'feat', name: '<a href="/feats/wood-elf-magic/">Магия лесных эльфов</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -1989,7 +1991,7 @@ export const spells: Spell[] = [
     { type: 'species', name: '<a href="/races/kobold/">Кобольд</a>' },
     { type: 'feat', name: '<a href="/feats/aberrant-dragonmark/">Искажённая метка дракона</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -2060,7 +2062,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/ritual%20caster/">Ритуальный заклинатель</a>' },
     { type: 'feat', name: '<a href="/feats/rune-shaper/">Ваятель рун</a>' },
     { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -2097,7 +2099,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/ritual%20caster/">Ритуальный заклинатель</a>' },
     { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -3413,7 +3415,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/ritual%20caster/">Ритуальный заклинатель</a>' },
     { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
     { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -3644,7 +3646,7 @@ export const spells: Spell[] = [
     { type: 'feat', name: '<a href="/feats/ritual%20caster/">Ритуальный заклинатель</a>' },
     { type: 'feat', name: '<a href="/feats/rune-shaper/">Ваятель рун</a>' },
     { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
-    { type: 'other', name: 'Договор гримуара' }
+    { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
   ]
 },
 {
@@ -6682,7 +6684,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/ritual%20caster/">Ритуальный заклинатель</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
-      { type: 'other', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -6718,7 +6720,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/ritual%20caster/">Ритуальный заклинатель</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
-      { type: 'other', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -7086,7 +7088,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/strixhaven-mascot/">Талисман Стриксхейвена</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
       { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
-      { type: 'other', name: 'Договор гримуара' },
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' },
       { type: 'other', name: 'Договор цепи' }
     ]
   },
@@ -7509,7 +7511,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/ritual%20caster/">Ритуальный заклинатель</a>' },
       { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'feat', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -7763,7 +7765,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
       { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'other', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -7804,7 +7806,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
       { type: 'feat', name: '<a href="/feats/initiate-of-high-sorcery/">Посвящённый в Высшее волшебство</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'other', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -8049,7 +8051,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/ritual%20caster/">Ритуальный заклинатель</a>' },
       { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'feat', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -8115,7 +8117,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
       { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'feat', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -8153,7 +8155,7 @@ export const spells: Spell[] = [
       { type: 'feat', name: '<a href="/feats/divinely-favored/">Любимец богов</a>' },
       { type: 'feat', name: '<a href="/feats/strixhaven-initiate/">Поступивший в Стриксхейвен</a>' },
       { type: 'feat', name: '<a href="/feats/magic-initiate/">Посвящённый в магию</a>' },
-      { type: 'feat', name: 'Договор гримуара' }
+      { type: 'other', name: '<a href="/classes/warlock?featurePart=Договор%20гримуара#feature-таинственные-воззвания-1">Договор гримуара</a>' }
     ]
   },
   {
@@ -18888,3 +18890,11 @@ export const spells: Spell[] = [
     ]
   }
 ];
+
+// Keep the public catalog declaration above; enrich the same records after loading.
+for (const spell of spells) {
+  const blocks = spellStatBlocks[spell.id];
+  if (!blocks) continue;
+  spell.statBlockIds = blocks.ids;
+  spell.statBlockNote = blocks.note;
+}

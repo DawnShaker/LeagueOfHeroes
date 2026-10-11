@@ -30,10 +30,10 @@ alter table public.user_profiles add column if not exists character_slots intege
 alter table public.user_profiles alter column role set default 'player';
 update public.user_profiles set role = 'player' where role = 'user';
 update public.user_profiles set role = 'master' where role = 'gm';
-update public.user_profiles set role = 'player' where role not in ('player', 'master', 'admin');
+update public.user_profiles set role = 'player' where role not in ('player', 'test_master', 'master', 'admin');
 alter table public.user_profiles drop constraint if exists user_profiles_role_check;
 alter table public.user_profiles
-  add constraint user_profiles_role_check check (role in ('player', 'master', 'admin'));
+  add constraint user_profiles_role_check check (role in ('player', 'test_master', 'master', 'admin'));
 alter table public.user_profiles drop constraint if exists user_profiles_character_slots_check;
 alter table public.user_profiles
   add constraint user_profiles_character_slots_check check (character_slots between 1 and 100);
