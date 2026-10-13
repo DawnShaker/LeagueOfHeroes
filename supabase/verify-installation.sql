@@ -2,6 +2,17 @@
 -- Все значения в единственной строке результата должны быть true.
 
 select
+  to_regclass('public.team_workspaces') is not null as has_team_workspaces,
+  to_regprocedure('public.team_is_master(uuid)') is not null as has_team_master_role_check,
+  coalesce(has_function_privilege('service_role',to_regprocedure('public.team_is_master(uuid)'),'EXECUTE'),false) as team_service_can_check_role,
+  to_regclass('public.team_cards') is not null as has_team_cards,
+  to_regclass('public.team_notifications') is not null as has_team_notifications,
+  to_regprocedure('public.team_create_workspace(text,text)') is not null as has_team_create_workspace,
+  to_regprocedure('public.team_claim_notifications()') is not null as has_team_claim_notifications,
+  to_regprocedure('public.team_finish_notification(uuid,uuid,text)') is not null as has_team_finish_notification,
+  coalesce(has_function_privilege('service_role',to_regprocedure('public.team_claim_notifications()'),'EXECUTE'),false) as team_service_can_claim,
+  coalesce(has_function_privilege('service_role',to_regprocedure('public.team_finish_notification(uuid,uuid,text)'),'EXECUTE'),false) as team_service_can_finish,
+  coalesce(not has_function_privilege('authenticated',to_regprocedure('public.team_claim_notifications()'),'EXECUTE'),false) as team_worker_is_private,
   to_regclass('public.user_profiles') is not null as has_user_profiles,
   exists (
     select 1 from pg_constraint

@@ -11,6 +11,7 @@ import CreatureDisclosure from '../../components/creatures/CreatureDisclosure.as
 import { companions } from '../../data/creatures/companions';
 import { resolveFeatureCreatures } from '../../utils/creature';
 import ClassFeatureContent from '../../components/classes/ClassFeatureContent.astro';
+//import SubclassArtwork from '../../components/classes/SubclassArtwork.astro';
 import { featureAnchor } from '../../utils/classPage';
 import { classSummaries } from '../../data/classPresentation';
 import { getPublishedMaterial } from '../../data/materials';
@@ -90,6 +91,7 @@ const attachedCreatures = resolveFeatureCreatures([...new Set([
     </section>
 
     <div class="class-basics" id="basics">
+      <!--{classData.subclasses.filter(subclass => subclass.artwork).map(subclass => <SubclassArtwork subclass={subclass} />)}--->
       <div class="basic-info">
         <h2>Основные характеристики</h2>
         <dl>

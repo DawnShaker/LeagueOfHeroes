@@ -23,6 +23,10 @@ export interface Subclass {
   nameEn: string;
   description: string;
   features: ClassFeature[];
+  artwork?: {
+    src: string;
+    alt: string;
+  };
   spellcasting?: SubclassSpellcastingLevel[];
 }
 

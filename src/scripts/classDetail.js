@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const featureCount = document.getElementById('feature-count');
     const featuresContainer = document.getElementById('features-container');
     const featureTemplate = document.getElementById('feature-template');
+    const classBasics = document.getElementById('basics');
+    const subclassArtworks = Array.from(document.querySelectorAll('[data-subclass-art]'));
     const subclassIds = classData.subclasses.map(subclass => subclass.id);
     const storage = {
       get(key) { try { return localStorage.getItem(key); } catch { return null; } },
@@ -1073,6 +1075,12 @@ document.addEventListener('DOMContentLoaded', () => {
       subclassTitle.textContent = subclass ? `${subclass.name} [${subclass.nameEn}]` : '';
       firstLevel.textContent = subclass?.features.length ? `Первые умения подкласса: ${Math.min(...subclass.features.map(feature => feature.level))} уровень` : '';
       document.querySelectorAll('[data-subclass-material]').forEach(panel => { panel.hidden = panel.dataset.subclassMaterial !== currentSubclass; });
+      let hasArtwork = false;
+      subclassArtworks.forEach(artwork => {
+        artwork.hidden = artwork.dataset.subclassArt !== currentSubclass;
+        if (!artwork.hidden) hasArtwork = true;
+      });
+      classBasics.classList.toggle('has-subclass-art', hasArtwork);
       classLore.innerHTML = subclass ? subclass.description.split('\n').filter(Boolean).map(paragraph => `<p>${paragraph}</p>`).join('') : '';
       document.title = subclass ? `${subclass.name} — ${classData.name} | League of Heroes 5.5E` : `${classData.name} | League of Heroes 5.5E`;
       if (historyMode !== 'none') {

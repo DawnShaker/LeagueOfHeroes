@@ -14,6 +14,13 @@
 .class-detail :is(#overview, #subclass-panel, #basics, #equipment, #progression, #features-container, .feature, .subclass-fallback, .collapsible-item) { scroll-margin-top: 5.5rem; }
 .class-detail :is(.class-description, .basic-info, .proficiencies, .multiclass-info, .equipment, .feature) { min-width: 0; border-radius: 0.75rem; }
 .class-detail .class-basics { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.class-detail .class-basics.has-subclass-art { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); align-items: start; }
+.class-detail .has-subclass-art .basic-info { grid-column: 1; grid-row: 1; }
+.class-detail .has-subclass-art .proficiencies { grid-column: 1; grid-row: 2; }
+.class-detail .has-subclass-art .multiclass-info { grid-column: 1 / -1; grid-row: 3; }
+.class-detail .subclass-artwork { grid-column: 2; grid-row: 1 / 3; align-self: center; min-width: 0; margin: 0; text-align: center; }
+.class-detail .subclass-artwork img { display: block; width: 100%; max-width: 400px; height: auto; object-fit: contain; margin: 0 auto; }
+.class-detail .subclass-artwork figcaption { margin-top: 0.75rem; font-size: 0.8125rem; color: var(--text); }
 .class-detail .class-basics dl { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); font-size: 0.875rem; line-height: 1.5; }
 .class-detail .class-basics dd { min-width: 0; overflow-wrap: anywhere; }
 .class-detail .class-basics ul, .class-detail .equipment ul { padding-left: 1.25rem; }
@@ -57,6 +64,9 @@
 }
 @media (max-width: 760px) {
   .class-detail .class-basics, .class-detail .subclass-cards { grid-template-columns: minmax(0, 1fr); }
+  .class-detail .class-basics.has-subclass-art { grid-template-columns: minmax(0, 1fr); }
+  .class-detail .has-subclass-art > :is(.subclass-artwork, .basic-info, .proficiencies, .multiclass-info) { grid-column: 1; grid-row: auto; }
+  .class-detail .subclass-artwork img { max-width: 220px; }
   .class-detail :is(.class-description, .basic-info, .proficiencies, .multiclass-info, .equipment, .feature) { padding: 1rem; }
   .class-detail .class-basics dl { grid-template-columns: minmax(0, 1fr); gap: 0.25rem; }
   .class-detail .class-basics dd { margin-bottom: 0.75rem; }
