@@ -8,6 +8,8 @@ select
   to_regclass('public.team_cards') is not null as has_team_cards,
   to_regclass('public.team_notifications') is not null as has_team_notifications,
   to_regprocedure('public.team_create_workspace(text,text)') is not null as has_team_create_workspace,
+  to_regprocedure('public.team_delete_list(uuid,uuid)') is not null as has_team_delete_list,
+  coalesce(has_function_privilege('authenticated',to_regprocedure('public.team_delete_list(uuid,uuid)'),'EXECUTE'),false) as team_members_can_call_delete_list,
   to_regprocedure('public.team_claim_notifications()') is not null as has_team_claim_notifications,
   to_regprocedure('public.team_finish_notification(uuid,uuid,text)') is not null as has_team_finish_notification,
   coalesce(has_function_privilege('service_role',to_regprocedure('public.team_claim_notifications()'),'EXECUTE'),false) as team_service_can_claim,

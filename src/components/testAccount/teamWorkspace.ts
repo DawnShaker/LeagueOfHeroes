@@ -28,6 +28,7 @@ interface Comment {
   created_at: string;
 }
 interface Activity {
+  id?: number | string;
   workspace_id: string;
   card_id: string | null;
   actor_id: string;
@@ -87,9 +88,13 @@ export async function initializeTeamWorkspace(
     loading = false;
   let month = new Date();
   month.setDate(1);
+  let activity: Activity[] = [],
+    activityHasMore = false,
+    deletingListId = "";
   const dialog = el<HTMLDialogElement>("tw-card-dialog");
   const form = el<HTMLFormElement>("tw-card-form");
   const createDialog = el<HTMLDialogElement>("tw-create-dialog");
+  const deleteListDialog = el<HTMLDialogElement>("tw-delete-list-dialog");
   const input = (name: string) =>
     form.elements.namedItem(name) as
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
@@ -185,7 +190,7 @@ export async function initializeTeamWorkspace(
         b.setAttribute("aria-pressed", String(b.dataset.twView === view)),
       );
     el("tw-filters").hidden = view !== "board" && view !== "calendar";
-    el("tw-add-card").hidden = !canWrite();
+    el("tw-add-card").hidden = !canWrite() || !lists.length;
     el("tw-add-list").hidden = !canWrite() || view !== "board";
     const filtered = filterTeamCards(
       cards,
@@ -196,7 +201,7 @@ export async function initializeTeamWorkspace(
     el("tw-board").innerHTML = lists
       .map(
         (l) =>
-          `<div class="tw-column" data-list="${esc(l.id)}"><h3><span>${esc(l.title)} <small>${filtered.filter((c) => c.list_id === l.id).length}</small></span>${canWrite() ? `<button type="button" data-rename-list="${esc(l.id)}" aria-label="Переименовать список ${esc(l.title)}">✎</button>` : ""}</h3>${filtered
+          `<div class="tw-column" data-list="${esc(l.id)}"><h3><span>${esc(l.title)} <small>${filtered.filter((c) => c.list_id === l.id).length}</small></span><span class="tw-list-actions">${canWrite() ? `<button type="button" data-rename-list="${esc(l.id)}" aria-label="Переименовать список ${esc(l.title)}">✎</button>` : ""}${canManage() ? `<button type="button" data-delete-list="${esc(l.id)}" aria-label="Удалить список ${esc(l.title)}">Удалить</button>` : ""}</span></h3>${filtered
             .filter((c) => c.list_id === l.id)
             .map(cardHtml)
             .join(
@@ -305,21 +310,9 @@ export async function initializeTeamWorkspace(
         .join("");
     assignee.value = previous;
     render();
-    let activity: Activity[];
-    if (local)
-      activity = store.activity
-        .filter((a) => a.workspace_id === workspaceId)
-        .slice(0, 100);
-    else {
-      const result = await client!
-        .from("team_activity")
-        .select("*")
-        .eq("workspace_id", workspaceId)
-        .order("created_at", { ascending: false })
-        .limit(100);
-      check(result);
-      activity = result.data || [];
-    }
+    await loadActivity();
+  }
+  function renderActivity() {
     el("tw-activity-list").innerHTML =
       activity
         .map(
@@ -327,9 +320,55 @@ export async function initializeTeamWorkspace(
             `<div class="tw-log"><time>${esc(date(a.created_at))}</time> · ${esc(name(a.actor_id))}<p>${esc(a.detail)}</p>${a.card_id ? `<button type="button" data-card="${esc(a.card_id)}">Открыть карточку</button>` : ""}</div>`,
         )
         .join("") || '<p class="tw-muted">Изменений пока нет.</p>';
+    el("tw-activity-count").textContent = activity.length
+      ? `Показано изменений: ${activity.length}${activityHasMore ? ". Доступны более ранние записи." : ". Это вся история."}`
+      : "";
+    el("tw-activity-more").hidden = !activityHasMore;
+  }
+  async function loadActivity() {
+    if (local)
+      activity = store.activity
+        .filter((a) => a.workspace_id === workspaceId)
+        .slice(0, 11);
+    else {
+      const result = await client!
+        .from("team_activity")
+        .select("*")
+        .eq("workspace_id", workspaceId)
+        .order("id", { ascending: false })
+        .limit(11);
+      check(result);
+      activity = result.data || [];
+    }
+    activityHasMore = activity.length > 10;
+    activity = activity.slice(0, 10);
+    renderActivity();
+  }
+  async function showRemainingActivity() {
+    if (local) {
+      activity = store.activity.filter((a) => a.workspace_id === workspaceId);
+      activityHasMore = false;
+      renderActivity();
+      return;
+    }
+    // Cursor pagination keeps new changes from shifting or duplicating older rows.
+    while (activityHasMore) {
+      const result = await client!
+        .from("team_activity")
+        .select("*")
+        .eq("workspace_id", workspaceId)
+        .lt("id", activity[activity.length - 1].id!)
+        .order("id", { ascending: false })
+        .limit(500);
+      check(result);
+      const page: Activity[] = result.data || [];
+      activity.push(...page);
+      activityHasMore = page.length === 500;
+      renderActivity();
+    }
   }
   async function refresh() {
-    if (loading || busy || dialog.open) return;
+    if (loading || busy || dialog.open || deleteListDialog.open) return;
     loading = true;
     root!.setAttribute("aria-busy", "true");
     try {
@@ -702,9 +741,108 @@ export async function initializeTeamWorkspace(
     await loadWorkspace();
   }
   el("tw-add-list").addEventListener("click", () => void action(addList));
+  el("tw-activity-more").addEventListener("click", async () => {
+    if (busy || loading) return;
+    const button = el<HTMLButtonElement>("tw-activity-more");
+    message("");
+    button.disabled = true;
+    button.textContent = "Загрузка истории…";
+    try {
+      await action(showRemainingActivity);
+    } finally {
+      button.disabled = false;
+      button.textContent = "Показать остальные изменения";
+    }
+  });
+  function openDeleteList(listId: string) {
+    if (!canManage() || busy || loading) return;
+    const list = lists.find((l) => l.id === listId);
+    if (!list) return;
+    const count = cards.filter((c) => c.list_id === list.id).length;
+    const destinations = lists.filter((l) => l.id !== list.id);
+    if (count && !destinations.length) {
+      message(
+        "В списке есть карточки. Сначала создайте другой список для их переноса.",
+        true,
+      );
+      return;
+    }
+    deletingListId = list.id;
+    el("tw-delete-list-title").textContent = `Удалить список «${list.title}»?`;
+    el("tw-delete-list-notice").textContent = count
+      ? `Карточек в списке, включая архив: ${count}. Выберите список для переноса.`
+      : "Список пуст. Если коллега добавит карточки перед удалением, потребуется выбрать список для переноса.";
+    const destination = el<HTMLSelectElement>("tw-delete-list-destination");
+    destination.innerHTML =
+      `<option value="">${count ? "Выберите список" : "Без переноса (только пустой список)"}</option>` +
+      destinations
+        .map((l) => `<option value="${esc(l.id)}">${esc(l.title)}</option>`)
+        .join("");
+    destination.required = count > 0;
+    el("tw-delete-list-error").hidden = true;
+    deleteListDialog.showModal();
+  }
+  el("tw-cancel-delete-list").addEventListener("click", () =>
+    deleteListDialog.close(),
+  );
+  el("tw-delete-list-form").addEventListener("submit", (event) => {
+    event.preventDefault();
+    void action(async () => {
+      if (!canManage())
+        throw new Error(
+          "Удалять списки может только руководитель или администратор.",
+        );
+      const list = lists.find((l) => l.id === deletingListId);
+      if (!list) throw new Error("Список уже удалён. Обновите доску.");
+      const moveTo = el<HTMLSelectElement>("tw-delete-list-destination").value;
+      if (local) {
+        const moving = store.cards.filter((c) => c.list_id === list.id);
+        const destination = lists.find(
+          (l) => l.id === moveTo && l.id !== list.id,
+        );
+        if (moveTo && !destination)
+          throw new Error("Выберите другой список этого пространства.");
+        if (moving.length && !destination)
+          throw new Error(
+            "Для удаления списка с карточками выберите список для переноса.",
+          );
+        let position = Math.max(
+          -1,
+          ...store.cards
+            .filter((c) => c.list_id === moveTo)
+            .map((c) => c.position),
+        );
+        moving.sort(
+          (a, b) => a.position - b.position || a.id.localeCompare(b.id),
+        );
+        for (const card of moving) {
+          card.list_id = moveTo;
+          card.position = ++position;
+          card.revision++;
+          card.updated_at = new Date().toISOString();
+          audit(`Перемещена карточка: ${card.title}`, card.id);
+        }
+        store.lists = store.lists.filter((l) => l.id !== list.id);
+        audit(
+          `Удалён список: ${list.title}${moving.length ? `. Карточки (${moving.length}) перенесены в «${destination!.title}».` : ""}`,
+        );
+        persist();
+      } else {
+        check(
+          await client!.rpc("team_delete_list", {
+            p_list: list.id,
+            p_move_to: moveTo || null,
+          }),
+        );
+      }
+      deleteListDialog.close();
+      await loadWorkspace();
+      message("Список удалён.");
+    }, "tw-delete-list-error");
+  });
   root.addEventListener("click", (event) => {
     const target = (event.target as HTMLElement).closest<HTMLElement>(
-      "[data-card],[data-add-to],[data-rename-list],[data-remove-member]",
+      "[data-card],[data-add-to],[data-rename-list],[data-delete-list],[data-remove-member]",
     );
     if (!target) return;
     if (target.dataset.card) {
@@ -712,6 +850,7 @@ export async function initializeTeamWorkspace(
       if (card) void openCard(card);
     }
     if (target.dataset.addTo) void openCard(null, target.dataset.addTo);
+    if (target.dataset.deleteList) openDeleteList(target.dataset.deleteList);
     if (target.dataset.renameList)
       void action(async () => {
         if (!canWrite()) return;

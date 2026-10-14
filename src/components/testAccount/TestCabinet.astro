@@ -144,6 +144,7 @@ const { requestedMode = 'auto' } = Astro.props;
   } from '../../utils/testAccount';
   import { initializeMasterWorkspace } from './masterWorkspace';
   import { initializeTeamWorkspace } from './teamWorkspace';
+  import { saveAccountRole } from '../../utils/adminRoles';
 
   const root = document.querySelector<HTMLElement>('#test-cabinet');
   const loading = document.querySelector<HTMLElement>('#cabinet-loading');
@@ -372,8 +373,8 @@ const { requestedMode = 'auto' } = Astro.props;
     }
   }
 
-  async function loadAdminUsers() {
-    if (currentRole !== 'admin') return;
+  async function loadAdminUsers(): Promise<boolean> {
+    if (currentRole !== 'admin') return false;
     const body = document.querySelector<HTMLElement>('#admin-users-body');
     const status = document.querySelector<HTMLElement>('#admin-status');
     if (status) status.hidden = true;
@@ -384,16 +385,17 @@ const { requestedMode = 'auto' } = Astro.props;
       : await testAccountSupabase?.from('user_profiles')
         .select('id,email,discord_id,display_name,avatar_url,role,character_slots,created_at')
         .order('created_at', { ascending: false });
-    if (!result) return;
+    if (!result) return false;
     const { data, error } = result;
 
     if (error) {
       if (body) body.innerHTML = '<tr><td colspan="5">Не удалось загрузить пользователей.</td></tr>';
       if (status) {
         status.textContent = error.message;
+        status.dataset.kind = 'error';
         status.hidden = false;
       }
-      return;
+      return false;
     }
 
     const users = data || [];
@@ -437,18 +439,21 @@ const { requestedMode = 'auto' } = Astro.props;
       select.addEventListener('change', async () => {
         const profileId = select.dataset.adminRole;
         if (!profileId || !testAccountSupabase) return;
+        const previousRole = normalizeAccountRole(users.find(profile => profile.id === profileId)?.role);
+        const requestedRole = select.value as AccountRole;
         select.disabled = true;
-        const { error: updateError } = await testAccountSupabase
-          .from('user_profiles')
-          .update({ role: select.value })
-          .eq('id', profileId);
-        select.disabled = false;
-        if (status) {
-          status.textContent = updateError ? updateError.message : 'Роль обновлена.';
-          status.dataset.kind = updateError ? 'error' : 'success';
-          status.hidden = false;
+        showInlineStatus('#admin-status', 'Сохраняем роль…');
+        try {
+          const savedRole = await saveAccountRole(testAccountSupabase, profileId, requestedRole);
+          if (await loadAdminUsers()) {
+            showInlineStatus('#admin-status', `Роль сохранена: ${roleLabel(savedRole)}.`);
+          }
+        } catch (error) {
+          select.value = previousRole;
+          showInlineStatus('#admin-status', error instanceof Error ? error.message : String(error), 'error');
+        } finally {
+          select.disabled = false;
         }
-        if (!updateError) await loadAdminUsers();
       });
     });
 
@@ -472,6 +477,7 @@ const { requestedMode = 'auto' } = Astro.props;
         if (!updateError && profileId === currentUserId) currentCharacterSlots = slots;
       });
     });
+    return true;
   }
 
   function initializeLocalPlayer() {
