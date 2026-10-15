@@ -2,7 +2,7 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
 export const accountRoles = ['player', 'test_master', 'master', 'admin'] as const;
 export type AccountRole = typeof accountRoles[number];
-export type AccountMode = AccountRole;
+export type AccountMode = AccountRole | 'team';
 export const accountRoleLabels: Record<AccountRole, string> = {
   player: 'Игрок', test_master: 'Тестовый мастер', master: 'Мастер', admin: 'Администратор'
 };
@@ -67,8 +67,8 @@ export function normalizeAccountRole(value: unknown): AccountRole {
 }
 
 export function availableAccountModes(role: AccountRole): AccountMode[] {
-  if (role === 'admin') return [...accountRoles];
-  if (role === 'master') return ['player', 'test_master', 'master'];
+  if (role === 'admin') return [...accountRoles, 'team'];
+  if (role === 'master') return ['player', 'test_master', 'master', 'team'];
   if (role === 'test_master') return ['player', 'test_master'];
   return ['player'];
 }

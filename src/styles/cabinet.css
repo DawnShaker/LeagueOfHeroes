@@ -1,0 +1,190 @@
+
+#test-cabinet .local-preview-notice { margin: 0 0 1.5rem; padding: 1rem 1.2rem; border: 1px solid var(--account-gold); border-radius: 12px; background: rgba(226, 180, 72, .08); color: var(--account-gold); line-height: 1.6; }
+#test-cabinet .cabinet-loading,
+#test-cabinet .cabinet-error { display: grid; justify-items: center; gap: 1rem; padding: 5rem 1rem; text-align: center; }
+#test-cabinet .loader { width: 48px; height: 48px; border: 4px solid rgba(182,154,255,.2); border-top-color: var(--primary); border-radius: 50%; animation: spin .8s linear infinite; }
+#test-cabinet .cabinet-error h1 { color: var(--primary); font: 800 clamp(2rem, 6vw, 3.5rem) Georgia, serif; }
+#test-cabinet .cabinet-error p { max-width: 650px; color: var(--account-muted); line-height: 1.6; }
+#test-cabinet .cabinet-error a { color: var(--account-gold); font-weight: 900; }
+#test-cabinet .profile-header { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; margin-bottom: 1rem; padding: 1.2rem; border: 1px solid var(--account-border); border-radius: 20px; background: var(--account-panel); }
+#test-cabinet .profile-person,
+#test-cabinet .profile-actions { display: flex; align-items: center; gap: 1rem; }
+#test-cabinet .profile-person img { width: 70px; height: 70px; border: 2px solid rgba(226,180,72,.55); border-radius: 18px; object-fit: cover; }
+#test-cabinet .profile-person h1 { margin: .28rem 0 .1rem; color: var(--primary); font: 800 clamp(1.6rem, 4vw, 2.3rem) Georgia, serif; }
+#test-cabinet .profile-person p { color: var(--account-muted); font-size: .85rem; }
+#test-cabinet .role-badge { color: var(--account-gold); font-size: .68rem; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
+#test-cabinet .profile-actions { align-items: stretch; }
+#test-cabinet .mode-switcher { display: flex; gap: .35rem; padding: .3rem; border: 1px solid var(--account-border); border-radius: 12px; background: var(--account-field); }
+#test-cabinet .mode-switcher a { display: grid; place-items: center; min-height: 38px; padding: .5rem .8rem; border-radius: 8px; color: var(--account-muted); text-decoration: none; font-weight: 800; }
+#test-cabinet .mode-switcher a:hover,
+#test-cabinet .mode-switcher a.is-active { color: #10182a; background: var(--account-gold-bg); }
+#test-cabinet .ghost-button { padding: .65rem .9rem; border: 1px solid var(--account-border); border-radius: 10px; color: var(--account-text); background: transparent; cursor: pointer; font-weight: 800; }
+#test-cabinet .ghost-button:hover { border-color: var(--primary); color: var(--link-hover); }
+#test-cabinet .mode-description { margin-bottom: 1.25rem; padding: .8rem 1rem; border-left: 3px solid var(--primary); color: var(--account-muted); background: rgba(155,116,255,.08); }
+#test-cabinet .dashboard-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+#test-cabinet .dashboard-card { min-width: 0; padding: 1.25rem; border: 1px solid var(--account-border); border-radius: 18px; background: var(--account-panel); }
+#test-cabinet .dashboard-card-featured { border-color: rgba(226,180,72,.38); background: var(--account-panel); }
+#test-cabinet .dashboard-card > span,
+#test-cabinet .admin-heading span { color: var(--account-gold); font-size: .68rem; font-weight: 900; letter-spacing: .15em; text-transform: uppercase; }
+#test-cabinet .dashboard-card h2 { margin: .55rem 0 .65rem; color: var(--account-gold); font: 800 1.4rem Georgia, serif; }
+#test-cabinet .dashboard-card p { color: var(--account-muted); line-height: 1.55; }
+#test-cabinet .dashboard-card a { display: inline-block; margin-top: 1rem; color: var(--primary); font-weight: 900; text-decoration: none; }
+#test-cabinet .primary-button { margin-top: 1rem; padding: .75rem 1rem; border: 0; border-radius: 10px; color: #11192a; background: var(--account-gold-bg); cursor: pointer; font-weight: 900; }
+#test-cabinet .primary-button:disabled { opacity: .55; cursor: not-allowed; }
+#test-cabinet .slot-summary { display: block; margin-top: .8rem; color: var(--account-gold); }
+#test-cabinet .featured-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .65rem; margin-top: 1rem; }
+#test-cabinet .featured-actions .primary-button { margin-top: 0; }
+#test-cabinet .character-library-card,
+#test-cabinet .extension-card { grid-column: 1 / -1; }
+#test-cabinet .extension-card:focus { outline: 2px solid var(--primary); outline-offset: 4px; }
+#test-cabinet .character-list,
+#test-cabinet .sync-token-list { display: grid; gap: .65rem; margin-top: 1rem; }
+#test-cabinet .character-row,
+#test-cabinet .sync-token-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .85rem; border: 1px solid var(--account-border); border-radius: 12px; background: var(--account-field); }
+#test-cabinet .character-row > div:first-child,
+#test-cabinet .sync-token-row > div:first-child { display: grid; gap: .22rem; min-width: 0; }
+#test-cabinet .character-row strong,
+#test-cabinet .sync-token-row strong { color: var(--primary); }
+#test-cabinet .character-row small,
+#test-cabinet .sync-token-row small { overflow: hidden; color: var(--account-muted); text-overflow: ellipsis; white-space: nowrap; }
+#test-cabinet .character-row-actions { display: flex; align-items: center; gap: .45rem; flex: none; }
+#test-cabinet .character-row-actions a,
+#test-cabinet .character-row-actions button,
+#test-cabinet .sync-token-row button { margin: 0; padding: .5rem .65rem; border: 1px solid var(--account-border); border-radius: 8px; color: var(--account-text); background: transparent; cursor: pointer; font: inherit; font-weight: 800; text-decoration: none; }
+#test-cabinet .character-row-actions button,
+#test-cabinet .sync-token-row button { color: var(--account-error); }
+#test-cabinet .extension-actions,
+#test-cabinet .token-result > div { display: flex; gap: .55rem; margin-top: .8rem; }
+#test-cabinet .extension-download { margin-top: .8rem; }
+#test-cabinet .extension-actions input,
+#test-cabinet .token-result input { min-width: 0; flex: 1; padding: .7rem; border: 1px solid var(--account-border); border-radius: 9px; color: var(--account-text); background: var(--account-field); }
+#test-cabinet .token-result { margin-top: 1rem; padding: .85rem; border: 1px solid var(--account-border); border-radius: 12px; background: rgba(226,180,72,.08); }
+#test-cabinet .token-result label { color: var(--account-gold); font-size: .82rem; font-weight: 800; }
+#test-cabinet .sync-token-row.is-revoked { opacity: .55; }
+#test-cabinet .inline-status { margin-top: .75rem; color: var(--account-success); }
+#test-cabinet .inline-status[data-kind="error"] { color: var(--account-error); }
+#test-cabinet .empty-value,
+#test-cabinet .success-value { display: block; margin-top: 1rem; color: var(--account-muted); }
+#test-cabinet .success-value { color: var(--account-success); }
+#test-cabinet .card-links { display: grid; gap: .2rem; }
+#test-cabinet .disabled-action { margin-top: 1rem; padding: .7rem; border: 1px solid var(--account-border); border-radius: 9px; color: var(--account-muted); background: var(--account-field); }
+#test-cabinet .admin-dashboard { display: grid; gap: 1rem; }
+#test-cabinet .admin-stats { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: .7rem; }
+#test-cabinet .admin-stats div { padding: 1rem; border: 1px solid var(--account-border); border-radius: 14px; background: var(--account-panel); }
+#test-cabinet .admin-stats span { display: block; color: var(--account-muted); font-size: .78rem; }
+#test-cabinet .admin-stats strong { display: block; margin-top: .25rem; color: var(--account-gold); font: 800 1.8rem Georgia, serif; }
+#test-cabinet .admin-users-card { overflow: hidden; }
+#test-cabinet .admin-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+#test-cabinet .admin-help { margin-bottom: 1rem; }
+#test-cabinet .admin-table-wrap { overflow-x: auto; border: 1px solid var(--account-border); border-radius: 12px; }
+#test-cabinet .admin-table-wrap table { width: 100%; border-collapse: collapse; min-width: 720px; }
+#test-cabinet .admin-table-wrap th,
+#test-cabinet .admin-table-wrap td { padding: .8rem; border-bottom: 1px solid var(--account-border); text-align: left; }
+#test-cabinet .admin-table-wrap th { color: var(--account-gold); background: var(--account-field); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
+#test-cabinet .admin-table-wrap td { color: var(--account-text); }
+#test-cabinet .admin-user { display: flex; align-items: center; gap: .65rem; }
+#test-cabinet .admin-user img { width: 36px; height: 36px; border-radius: 9px; object-fit: cover; }
+#test-cabinet .admin-user span { display: grid; }
+#test-cabinet .admin-user small { color: var(--account-muted); }
+#test-cabinet .admin-table-wrap td select { min-width: 150px; padding: .45rem; border: 1px solid var(--account-border); border-radius: 8px; color: var(--account-text); background: var(--account-field); }
+#test-cabinet .slot-input { width: 86px; padding: .45rem; border: 1px solid var(--account-border); border-radius: 8px; color: var(--account-text); background: var(--account-field); }
+#test-cabinet .admin-table-wrap code { color: var(--account-muted); }
+@media (max-width: 760px) {
+#test-cabinet .character-row,
+#test-cabinet .sync-token-row,
+#test-cabinet .extension-actions,
+#test-cabinet .token-result > div { align-items: stretch; flex-direction: column; }
+#test-cabinet .character-row-actions { align-items: stretch; }
+#test-cabinet .character-row-actions a,
+#test-cabinet .character-row-actions button { flex: 1; text-align: center; }
+}
+#test-cabinet .inline-status { margin-top: 1rem; color: var(--account-success); }
+#test-cabinet .inline-status[data-kind="error"] { color: var(--account-error); }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (max-width: 900px) {
+#test-cabinet .profile-header,
+#test-cabinet .profile-actions { align-items: stretch; flex-direction: column; }
+#test-cabinet .dashboard-grid { grid-template-columns: 1fr; }
+#test-cabinet .admin-stats { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 520px) {
+#test-cabinet .profile-person { align-items: flex-start; }
+#test-cabinet .mode-switcher { overflow-x: auto; }
+#test-cabinet .mode-switcher a { white-space: nowrap; }
+}
+
+/* Account styles also cover rows rendered by JavaScript. Keep all selectors
+ inside the cabinet so reference articles and tool dialogs retain their styles. */
+#test-cabinet .profile-header { flex-wrap: wrap; }
+#test-cabinet .profile-person { min-width: 0; }
+#test-cabinet .profile-person > div { min-width: 0; }
+#test-cabinet .profile-person h1,
+#test-cabinet .profile-person p { overflow-wrap: anywhere; }
+#test-cabinet .profile-actions { flex-wrap: wrap; min-width: 0; max-width: 100%; }
+#test-cabinet .mode-switcher { position: relative; min-width: 0; max-width: 100%; overflow-x: auto; scrollbar-width: thin; }
+#test-cabinet .mode-switcher a { flex-shrink: 0; white-space: nowrap; }
+#test-cabinet :is(button, a, summary, input, select):focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+#test-cabinet button:disabled { cursor: not-allowed; opacity: .6; }
+#test-cabinet button[aria-busy="true"] { cursor: wait; }
+#test-cabinet summary { cursor: pointer; color: var(--primary); font-weight: 700; padding: .65rem 0; }
+#test-cabinet .profile-settings { position: relative; align-self: center; }
+#test-cabinet .profile-settings[open] { flex-basis: 100%; padding: 1rem; border: 1px solid var(--account-border); border-radius: 12px; }
+#test-cabinet .profile-settings h2 { font-size: 1.1rem; }
+#test-cabinet .dashboard-grid { grid-template-columns: minmax(0, 1fr); }
+#test-cabinet .slot-help { margin-bottom: 0; }
+#test-cabinet .featured-actions a { margin-top: 0; text-decoration: none; }
+#test-cabinet .character-row small { white-space: normal; overflow-wrap: anywhere; line-height: 1.5; }
+#test-cabinet .character-row strong { overflow-wrap: anywhere; }
+#test-cabinet .character-row-actions .character-open { background: var(--account-gold-bg); border-color: var(--account-gold-bg); color: #11192a; }
+#test-cabinet .character-more { position: relative; }
+#test-cabinet .character-more summary { padding: .6rem .75rem; }
+#test-cabinet .character-more button { position: absolute; right: 0; top: 100%; min-width: 180px; z-index: 2; background: var(--account-panel); box-shadow: 0 4px 14px #0003; }
+#test-cabinet .extension-card { scroll-margin-top: 90px; }
+#test-cabinet .extension-steps { display: grid; gap: 1.2rem; padding-left: 1.6rem; }
+#test-cabinet .extension-steps li::marker { color: var(--account-gold); font-weight: 800; }
+#test-cabinet .extension-steps p { margin: .5rem 0; }
+#test-cabinet .extension-steps a { display: block; margin-top: .5rem; }
+#test-cabinet .connection-state { padding: .8rem; border-left: 3px solid var(--account-gold); background: var(--account-field); }
+#test-cabinet .admin-filters { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; }
+#test-cabinet .admin-filters label { display: grid; gap: .4rem; color: var(--account-muted); }
+#test-cabinet .admin-filters label:first-child { flex: 1; min-width: min(100%, 240px); }
+#test-cabinet .admin-filters input,
+#test-cabinet .admin-filters select { min-width: 0; width: 100%; padding: .7rem; border: 1px solid var(--account-border); border-radius: 9px; color: var(--account-text); background: var(--account-field); }
+#test-cabinet .admin-stats button { text-align: left; padding: 1rem; border: 1px solid var(--account-border); border-radius: 14px; background: var(--account-panel); cursor: pointer; }
+#test-cabinet .admin-stats button[aria-pressed="true"] { border-color: var(--account-gold); }
+#test-cabinet .admin-stats button span { font-size: .78rem; }
+#test-cabinet .admin-save-help { font-size: .85rem; }
+#test-cabinet .admin-user { min-width: 140px; }
+#test-cabinet .admin-user span { min-width: 0; overflow-wrap: anywhere; }
+#test-cabinet .admin-user img { flex-shrink: 0; }
+#test-cabinet .admin-table-wrap code { overflow-wrap: anywhere; }
+#test-cabinet .admin-table-wrap td { vertical-align: top; }
+#test-cabinet .admin-row-actions { min-width: 185px; }
+#test-cabinet .admin-row-actions > div { display: flex; flex-wrap: wrap; gap: .4rem; }
+#test-cabinet .admin-row-actions button { margin: 0; padding: .55rem .65rem; }
+#test-cabinet .field-help,
+#test-cabinet .row-status { display: block; font-size: .78rem; line-height: 1.5; margin-top: .5rem; }
+#test-cabinet .field-help { color: var(--account-muted); max-width: 180px; }
+#test-cabinet .row-status { max-width: 260px; }
+#test-cabinet [aria-invalid="true"] { border-color: var(--account-error); }
+#test-cabinet .admin-pagination { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .7rem; margin-top: 1rem; }
+#test-cabinet .admin-pagination span { color: var(--account-muted); font-size: .85rem; }
+@media (max-width: 760px) {
+#test-cabinet .admin-table-wrap { border: 0; overflow: visible; }
+#test-cabinet .admin-table-wrap table { display: block; min-width: 0; }
+#test-cabinet .admin-table-wrap thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+#test-cabinet .admin-table-wrap tbody { display: grid; gap: 1rem; }
+#test-cabinet .admin-table-wrap tr { display: grid; gap: .7rem; padding: 1rem; border: 1px solid var(--account-border); border-radius: 12px; background: var(--account-field); }
+#test-cabinet .admin-table-wrap td { display: grid; min-width: 0; padding: 0; border: 0; }
+#test-cabinet .admin-table-wrap td[data-label]::before { content: attr(data-label); display: block; margin-bottom: .3rem; color: var(--account-muted); font-size: .75rem; }
+#test-cabinet .admin-table-wrap td select { width: 100%; min-width: 0; min-height: 44px; }
+#test-cabinet .slot-input { width: 100%; min-height: 44px; }
+#test-cabinet .field-help,
+#test-cabinet .row-status { max-width: 100%; }
+#test-cabinet .character-row-actions { align-items: center; }
+#test-cabinet .character-more { flex: 0; }
+#test-cabinet .admin-heading { flex-wrap: wrap; }
+}
+@media (prefers-reduced-motion: reduce) {
+#test-cabinet .loader { animation: none; }
+}

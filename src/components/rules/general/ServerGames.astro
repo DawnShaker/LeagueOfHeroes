@@ -1,0 +1,30 @@
+---
+import { SERVER_GAME_LOCATION_RULE } from '../../../data/serverRules';
+---
+
+<section class="rules-section" id="games-on-server">
+  <h2>Проведение игр на сервере</h2>
+  <div class="content">
+    <p>{SERVER_GAME_LOCATION_RULE}</p>
+    <p><a href="/guides/rpg-master">Руководство Мастера НРИ →</a></p>
+  </div>
+</section>
+
+<style>
+  .rules-section {
+    margin-bottom: 2rem;
+    scroll-margin-top: 6rem;
+  }
+
+  .content {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+</style>

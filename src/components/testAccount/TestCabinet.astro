@@ -1,13 +1,17 @@
 ---
 import MasterWorkspace from './MasterWorkspace.astro';
 import TeamWorkspace from './TeamWorkspace.astro';
+import '../../styles/cabinet.css';
 import type { AccountMode } from '../../utils/testAccount';
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
 
 interface Props {
   requestedMode?: 'auto' | AccountMode;
 }
 
 const { requestedMode = 'auto' } = Astro.props;
+const extensionAvailable = existsSync(resolve('public/downloads/league-roll20-sync.zip'));
 ---
 
 <section id="test-cabinet" class="cabinet-shell" data-requested-mode={requestedMode}>
@@ -24,7 +28,7 @@ const { requestedMode = 'auto' } = Astro.props;
 
   <div id="cabinet-content" hidden>
     <p id="local-account-preview-notice" class="local-preview-notice" role="status" hidden>
-      Локальная разработка: профиль администратора без входа через Discord. Доступны режимы игрока, тестового мастера, мастера и администратора. Правки правил сохраняются в этом браузере; облачные данные и управление настоящими пользователями доступны после авторизации на сайте.
+      Локальная разработка: профиль администратора без входа через Discord. Доступны режимы игрока, тестового мастера, мастера и администратора, а также вкладка «Команда». Правки правил сохраняются в этом браузере; облачные данные и управление настоящими пользователями доступны после авторизации на сайте.
     </p>
     <header class="profile-header">
       <div class="profile-person">
@@ -37,61 +41,60 @@ const { requestedMode = 'auto' } = Astro.props;
       </div>
       <div class="profile-actions">
         <nav id="mode-switcher" class="mode-switcher" aria-label="Режим личного кабинета"></nav>
+        <details class="profile-settings">
+          <summary>Профиль</summary>
+          <h2 id="player-profile-title">Discord подключён</h2>
+          <p id="player-profile-description">Имя и аватар обновляются при следующем входе через Discord.</p>
+          <strong id="player-profile-status" class="success-value">Активен</strong>
+        </details>
         <button id="account-sign-out" class="ghost-button" type="button">Выйти</button>
       </div>
     </header>
 
     <div id="mode-description" class="mode-description"></div>
 
-    <TeamWorkspace />
+    <section id="team-dashboard" hidden>
+      {requestedMode === 'team' && <TeamWorkspace />}
+    </section>
 
     <section id="player-dashboard" class="dashboard-grid" hidden>
-      <article class="dashboard-card dashboard-card-featured">
-        <span>Персонажи</span>
-        <h2>Мои герои</h2>
-        <p>Продолжите сохранённого персонажа или создайте нового героя в конструкторе.</p>
-        <strong id="character-slot-summary" class="slot-summary">Слоты персонажей: —</strong>
+      <article class="dashboard-card dashboard-card-featured character-library-card">
+        <div class="admin-heading">
+          <div><span>Персонажи</span><h2>Мои герои</h2></div>
+          <button id="refresh-characters" class="ghost-button" type="button">Обновить</button>
+        </div>
+        <p>Откройте своего героя или создайте нового. Персонажи сохраняются в вашем аккаунте.</p>
+        <strong id="character-slot-summary" class="slot-summary" role="status">Слоты персонажей: —</strong>
+        <p id="character-slot-help" class="slot-help" hidden>Все слоты заняты. Для увеличения лимита обратитесь к администратору Лиги в Discord.</p>
         <div class="featured-actions">
           <button id="create-character" class="primary-button" type="button">Создать персонажа</button>
-              <button id="open-extension-settings" class="ghost-button" type="button">Подключить расширение Roll20</button>
+          <a class="ghost-button" href="#roll20-extension-card">Настроить Roll20</a>
         </div>
+        <div id="character-status" class="inline-status" role="status" aria-live="polite" hidden></div>
+        <div id="character-list" class="character-list" aria-busy="true"><p class="empty-value">Загрузка персонажей…</p></div>
       </article>
       <article class="dashboard-card">
         <span>Игры</span>
         <h2>Мои кампании</h2>
-        <p>Здесь появятся приглашения от мастеров и расписание ближайших игр.</p>
-        <strong class="empty-value">Пока нет кампаний</strong>
-      </article>
-      <article class="dashboard-card">
-        <span>Профиль</span>
-        <h2 id="player-profile-title">Discord подключён</h2>
-        <p id="player-profile-description">Имя и аватар синхронизируются при следующем входе через Discord.</p>
-        <strong id="player-profile-status" class="success-value">Активен</strong>
-      </article>
-      <article class="dashboard-card character-library-card">
-        <div class="admin-heading">
-          <div>
-            <span>Облачное хранилище</span>
-            <h2>Персонажи Лиги</h2>
-          </div>
-          <button id="refresh-characters" class="ghost-button" type="button">Обновить</button>
-        </div>
-        <p>JSON конструктора и готовый экспорт Roll20 сохраняются в Supabase.</p>
-        <div id="character-list" class="character-list">
-          <div class="empty-value">Загрузка персонажей…</div>
-        </div>
-        <div id="character-status" class="inline-status" hidden></div>
+        <p>Расписание и приглашения в кабинете пока недоступны. Договаривайтесь об играх с мастерами в Discord Лиги.</p>
+        <strong class="empty-value">Раздел пока недоступен</strong>
       </article>
       <article id="roll20-extension-card" class="dashboard-card extension-card" tabindex="-1">
         <span>Roll20</span>
-        <h2>Расширение Лиги и ключ доступа</h2>
-        <p>Установите расширение, затем подключите его одной кнопкой. Адрес Supabase, публичный ключ и личный ключ синхронизации будут переданы автоматически.</p>
-        <div class="extension-actions">
-          <button id="connect-extension" class="primary-button" type="button">Подключить расширение</button>
-        </div>
-        <a class="extension-download" href="/downloads/league-roll20-sync.zip" download>Скачать расширение для Chrome / Яндекс Браузера</a>
+        <h2>Подключение к Roll20</h2>
+        <p>Расширение переносит персонажа в Roll20 и синхронизирует его игровые данные.</p>
+        <ol class="extension-steps">
+          <li><strong>Скачайте расширение</strong>{extensionAvailable
+            ? <a class="extension-download" href="/downloads/league-roll20-sync.zip" download>Скачать для Chrome / Яндекс Браузера</a>
+            : <p>Архив расширения пока недоступен. Если расширение уже установлено, перейдите к подключению.</p>}</li>
+          <li><strong>Установите</strong><p>Распакуйте архив. На странице расширений браузера включите режим разработчика и загрузите распакованную папку.</p></li>
+          <li><strong>Подключите аккаунт</strong><p>Нажмите кнопку ниже, затем обновите открытую страницу Roll20.</p><button id="connect-extension" class="primary-button" type="button">Подключить расширение</button></li>
+        </ol>
+        <div class="connection-summary"><p id="extension-connection-state" class="connection-state" role="status" aria-live="polite">Проверяем подключения…</p><button id="refresh-connections" class="ghost-button" type="button">Проверить доступ</button></div>
+        <details><summary>Управление доступом</summary><p>Отзыв ключа отключает использующее его расширение. Для повторного подключения создайте новое соединение кнопкой выше.</p>
         <div id="sync-token-list" class="sync-token-list"></div>
-        <div id="extension-status" class="inline-status" hidden></div>
+        </details>
+        <div id="extension-status" class="inline-status" role="status" aria-live="polite" hidden></div>
       </article>
     </section>
 
@@ -113,14 +116,20 @@ const { requestedMode = 'auto' } = Astro.props;
           </div>
           <button id="refresh-users" class="ghost-button" type="button">Обновить</button>
         </div>
-        <p class="admin-help">Тестовый мастер сохраняет кабинет игрока и читает доступные ему мастерские правила. Мастер получает полный мастерский режим, администратор — все четыре режима. Роль тестового мастера назначается по запросу в Discord; роль мастера — после тестовой игры.</p>
+        <details class="admin-help"><summary>Права ролей</summary><p>Игрок управляет своими героями. Тестовый мастер также читает руководство по тестовой игре; роль назначается по запросу в Discord. Мастер получает полный справочник и вкладку «Команда» после успешной тестовой игры. Администратор дополнительно управляет пользователями. Собственную роль меняет другой администратор.</p></details>
+        <div class="admin-filters">
+          <label>Поиск пользователя<input id="admin-search" type="search" placeholder="Имя, Discord ID или email" /></label>
+          <label>Роль<select id="admin-role-filter"><option value="">Все роли</option><option value="player">Игрок</option><option value="test_master">Тестовый мастер</option><option value="master">Мастер</option><option value="admin">Администратор</option></select></label>
+        </div>
+        <p class="admin-save-help">Измените роль или лимит и нажмите «Сохранить» в строке пользователя. Допустимый лимит — от 1 до 100 слотов.</p>
+        <div id="admin-status" class="inline-status" role="status" aria-live="polite" hidden></div>
         <div class="admin-table-wrap">
-          <table>
-            <thead><tr><th>Пользователь</th><th>Discord ID</th><th>Роль</th><th>Слоты героев</th><th>Создан</th></tr></thead>
+          <table aria-label="Пользователи Лиги">
+            <thead><tr><th scope="col">Пользователь</th><th scope="col">Discord ID</th><th scope="col">Роль</th><th scope="col">Слоты героев</th><th scope="col">Создан</th><th scope="col">Изменения</th></tr></thead>
             <tbody id="admin-users-body"></tbody>
           </table>
         </div>
-        <div id="admin-status" class="inline-status" hidden></div>
+        <nav class="admin-pagination" aria-label="Страницы пользователей"><button id="admin-prev" class="ghost-button" type="button" disabled>← Назад</button><span id="admin-page-summary" role="status" aria-live="polite"></span><button id="admin-next" class="ghost-button" type="button" disabled>Далее →</button></nav>
       </article>
     </section>
   </div>
@@ -144,7 +153,7 @@ const { requestedMode = 'auto' } = Astro.props;
   } from '../../utils/testAccount';
   import { initializeMasterWorkspace } from './masterWorkspace';
   import { initializeTeamWorkspace } from './teamWorkspace';
-  import { saveAccountRole } from '../../utils/adminRoles';
+  import { initializeAdminWorkspace } from './adminWorkspace';
 
   const root = document.querySelector<HTMLElement>('#test-cabinet');
   const loading = document.querySelector<HTMLElement>('#cabinet-loading');
@@ -163,16 +172,26 @@ const { requestedMode = 'auto' } = Astro.props;
     if (errorPanel) errorPanel.hidden = false;
   }
 
-  function roleLabel(role: AccountRole) {
-    return accountRoleLabels[role];
+  function roleLabel(role: AccountMode) {
+    return role === 'team' ? 'Команда' : accountRoleLabels[role];
+  }
+
+  function redirectTeamLink(mode: AccountMode) {
+    const url = new URL(window.location.href);
+    if (mode !== 'team' && availableAccountModes(currentRole).includes('team') && (url.searchParams.has('workspace') || url.searchParams.has('card'))) {
+      window.location.replace(accountModePath('team') + url.search + url.hash);
+      return true;
+    }
+    return false;
   }
 
   function modeDescription(mode: AccountMode) {
     return ({
-      player: 'Личный режим игрока: персонажи, приглашения и участие в кампаниях.',
+      player: 'Ваши персонажи и подключение к Roll20.',
       test_master: 'Режим тестового мастера: руководство по тестовой игре и доступные вашей роли правила открытого стола.',
       master: 'Режим мастера: правила открытого стола, подготовка игр и мастерские инструменты.',
-      admin: 'Режим администратора: пользователи, роли и контроль тестового контура.'
+      admin: 'Пользователи, роли и лимиты персонажей.',
+      team: 'Рабочие пространства совета мастеров и администрации: задачи, встречи и решения.'
     })[mode];
   }
 
@@ -187,14 +206,22 @@ const { requestedMode = 'auto' } = Astro.props;
   }
 
   function showMode(mode: AccountMode) {
-    for (const candidate of accountRoles) {
+    for (const candidate of [...accountRoles, 'team']) {
       const panel = document.querySelector<HTMLElement>(`#${candidate}-dashboard`);
       if (panel) panel.hidden = candidate !== mode;
     }
     const description = document.querySelector<HTMLElement>('#mode-description');
     if (description) description.textContent = modeDescription(mode);
     window.localStorage.setItem(accountModeStorageKey, mode);
+    requestAnimationFrame(alignActiveMode);
   }
+
+  function alignActiveMode() {
+    const switcher = document.querySelector<HTMLElement>('#mode-switcher');
+    const active = switcher?.querySelector<HTMLElement>('[aria-current="page"]');
+    if (switcher && active) switcher.scrollLeft = active.offsetLeft - (switcher.clientWidth - active.offsetWidth) / 2;
+  }
+  window.addEventListener('resize', alignActiveMode);
 
   function formatDate(value: string | null) {
     if (!value) return '—';
@@ -221,6 +248,11 @@ const { requestedMode = 'auto' } = Astro.props;
     element.hidden = false;
   }
 
+  function clearInlineStatus(selector: string) {
+    const element = document.querySelector<HTMLElement>(selector);
+    if (element) { element.hidden = true; element.textContent = ''; }
+  }
+
   async function createCharacter() {
     if (isLocalAuthBypassEnabled) {
       window.location.assign(creatorPath);
@@ -229,8 +261,9 @@ const { requestedMode = 'auto' } = Astro.props;
     if (!testAccountSupabase || !currentUserId) return;
     const button = document.querySelector<HTMLButtonElement>('#create-character');
     if (button) button.disabled = true;
-    const { data, error } = await testAccountSupabase
-      .rpc('create_character', { character_name: 'Безымянный герой' });
+    clearInlineStatus('#character-status');
+    const { data, error } = await testAccountSupabase.rpc('create_character', { character_name: 'Безымянный герой' })
+      .then(result => result, () => ({ data: null, error: { message: 'Не удалось связаться с сервером. Повторите создание персонажа.' } }));
     if (button) button.disabled = false;
     if (error || !data) {
       const message = error?.message?.includes('Character slot limit reached')
@@ -245,31 +278,47 @@ const { requestedMode = 'auto' } = Astro.props;
   async function deleteCharacter(characterId: string, characterName: string) {
     if (!testAccountSupabase) return;
     if (!window.confirm(`Удалить персонажа «${characterName}»? Это действие нельзя отменить.`)) return;
-    const { error } = await testAccountSupabase.from('characters').delete().eq('id', characterId);
-    if (error) {
-      showInlineStatus('#character-status', error.message, 'error');
-      return;
+    const button = document.querySelector<HTMLButtonElement>(`[data-delete-character="${CSS.escape(characterId)}"]`);
+    if (button?.disabled) return;
+    if (button) button.disabled = true;
+    try {
+      const { error } = await testAccountSupabase.from('characters').delete().eq('id', characterId);
+      if (error) throw error;
+      await loadCharacters();
+      showInlineStatus('#character-status', `Персонаж «${characterName}» удалён.`);
+    } catch {
+      showInlineStatus('#character-status', 'Не удалось удалить персонажа. Проверьте подключение и повторите действие.', 'error');
+    } finally {
+      if (button) button.disabled = false;
     }
-    await loadCharacters();
   }
 
   async function loadCharacters() {
     if (!testAccountSupabase || !currentUserId) return;
     const list = document.querySelector<HTMLElement>('#character-list');
+    const refresh = document.querySelector<HTMLButtonElement>('#refresh-characters');
+    clearInlineStatus('#character-status');
+    list?.setAttribute('aria-busy', 'true');
+    if (refresh) refresh.disabled = true;
     if (list) list.innerHTML = '<div class="empty-value">Загрузка персонажей…</div>';
     const { data, error } = await testAccountSupabase
       .from('characters')
       .select('id,name,summary,revision,created_at,updated_at')
-      .order('updated_at', { ascending: false });
+      .order('updated_at', { ascending: false })
+      .then(result => result, () => ({ data: null, error: { message: 'Проверьте подключение и нажмите «Обновить».' } }));
+    list?.setAttribute('aria-busy', 'false');
+    if (refresh) refresh.disabled = false;
     if (error) {
       if (list) list.innerHTML = '<div class="empty-value">Не удалось загрузить персонажей.</div>';
       showInlineStatus('#character-status', error.message, 'error');
       return;
     }
-    const characters = data || [];
+    const characters: { id: string; name: string; summary: Record<string, unknown> | null; revision: number; updated_at: string | null }[] = data || [];
     const slotSummary = document.querySelector<HTMLElement>('#character-slot-summary');
     const createButton = document.querySelector<HTMLButtonElement>('#create-character');
     const hasFreeSlot = characters.length < currentCharacterSlots;
+    const slotHelp = document.querySelector<HTMLElement>('#character-slot-help');
+    if (slotHelp) slotHelp.hidden = hasFreeSlot;
     if (slotSummary) slotSummary.textContent = `Слоты персонажей: ${characters.length}/${currentCharacterSlots}`;
     if (createButton) {
       createButton.disabled = !hasFreeSlot;
@@ -283,8 +332,8 @@ const { requestedMode = 'auto' } = Astro.props;
         return `<article class="character-row">
           <div><strong>${escapeText(character.name || 'Безымянный герой')}</strong><small>${escapeText(details)} · версия ${escapeText(character.revision || 1)} · ${escapeText(formatDate(character.updated_at))}</small></div>
           <div class="character-row-actions">
-            <a href="${creatorPath}?character=${encodeURIComponent(character.id)}">Открыть</a>
-            <button type="button" data-delete-character="${escapeText(character.id)}" data-character-name="${escapeText(character.name || 'Безымянный герой')}">Удалить</button>
+            <a class="character-open" href="${creatorPath}?character=${encodeURIComponent(character.id)}">Открыть</a>
+            <details class="character-more"><summary aria-label="Другие действия с персонажем ${escapeText(character.name || 'Безымянный герой')}">Ещё</summary><button type="button" data-delete-character="${escapeText(character.id)}" data-character-name="${escapeText(character.name || 'Безымянный герой')}">Удалить персонажа</button></details>
           </div>
         </article>`;
       }).join('') : '<div class="empty-value">Героев пока нет. Создайте первого персонажа.</div>';
@@ -297,16 +346,27 @@ const { requestedMode = 'auto' } = Astro.props;
   async function loadSyncTokens() {
     if (!testAccountSupabase || !currentUserId) return;
     const list = document.querySelector<HTMLElement>('#sync-token-list');
+    const connection = document.querySelector<HTMLElement>('#extension-connection-state');
+    const refresh = document.querySelector<HTMLButtonElement>('#refresh-connections');
+    if (refresh) refresh.disabled = true;
     const { data, error } = await testAccountSupabase
       .from('character_sync_tokens')
       .select('id,label,created_at,last_used_at,revoked_at')
-      .order('created_at', { ascending: false });
+      .order('created_at', { ascending: false })
+      .then(result => result, () => ({ data: null, error: { message: 'Не удалось проверить подключения. Повторите попытку.' } }));
+    if (refresh) refresh.disabled = false;
     if (!list) return;
     if (error) {
       list.innerHTML = `<div class="empty-value">${escapeText(error.message)}</div>`;
+      if (connection) connection.textContent = 'Не удалось проверить подключения.';
       return;
     }
-    const tokens = data || [];
+    const tokens: { id: string; label: string; created_at: string; last_used_at: string | null; revoked_at: string | null }[] = data || [];
+    const active = tokens.filter(token => !token.revoked_at);
+    if (connection) connection.textContent = active.some(token => token.last_used_at)
+      ? 'Есть активный ключ, который использовался расширением. Текущая связь с Roll20 не проверяется.'
+      : active.length ? 'Ключ доступа создан. Использование расширением ещё не подтверждено.' : 'Активных подключений нет.';
+    if (connection) connection.dataset.connected = String(active.length > 0);
     list.innerHTML = tokens.length ? tokens.map((token) => `<div class="sync-token-row ${token.revoked_at ? 'is-revoked' : ''}">
       <div><strong>${escapeText(token.label)}</strong><small>${token.revoked_at ? 'Отозван' : token.last_used_at ? `Использован ${formatDate(token.last_used_at)}` : `Создан ${formatDate(token.created_at)}`}</small></div>
       ${token.revoked_at ? '' : `<button type="button" data-revoke-token="${escapeText(token.id)}">Отозвать</button>`}
@@ -314,8 +374,16 @@ const { requestedMode = 'auto' } = Astro.props;
     document.querySelectorAll<HTMLButtonElement>('[data-revoke-token]').forEach((button) => {
       button.addEventListener('click', async () => {
         if (!testAccountSupabase || !button.dataset.revokeToken) return;
-        await testAccountSupabase.rpc('revoke_character_sync_token', { sync_token_id: button.dataset.revokeToken });
-        await loadSyncTokens();
+        if (!window.confirm('Отозвать ключ? Расширение, использующее этот ключ, потеряет доступ к персонажам.')) return;
+        button.disabled = true;
+        try {
+          const { error } = await testAccountSupabase.rpc('revoke_character_sync_token', { sync_token_id: button.dataset.revokeToken });
+          if (error) throw error;
+          await loadSyncTokens();
+          showInlineStatus('#extension-status', 'Ключ отозван. Доступ использовавшего его расширения отключён.');
+        } catch {
+          showInlineStatus('#extension-status', 'Не удалось отозвать ключ. Проверьте подключение и повторите действие.', 'error');
+        } finally { button.disabled = false; }
       });
     });
   }
@@ -328,9 +396,11 @@ const { requestedMode = 'auto' } = Astro.props;
       showInlineStatus('#extension-status', 'На сайте не настроены публичные параметры Supabase.', 'error');
       return;
     }
+    if (button?.disabled) return;
     if (button) button.disabled = true;
     showInlineStatus('#extension-status', 'Создаём защищённое подключение…');
-    const { data, error } = await testAccountSupabase.rpc('create_character_sync_token', { token_label: 'Браузерное расширение' });
+    const { data, error } = await testAccountSupabase.rpc('create_character_sync_token', { token_label: 'Браузерное расширение' })
+      .then(result => result, () => ({ data: null, error: { message: 'Не удалось связаться с сервером. Повторите подключение.' } }));
     const record = Array.isArray(data) ? data[0] : data;
     if (error || !record?.token) {
       if (button) button.disabled = false;
@@ -365,119 +435,13 @@ const { requestedMode = 'auto' } = Astro.props;
       });
       showInlineStatus('#extension-status', 'Расширение подключено. Обновите открытую страницу Roll20.', 'success');
     } catch (connectionError) {
-      await testAccountSupabase.rpc('revoke_character_sync_token', { sync_token_id: record.id });
-      showInlineStatus('#extension-status', connectionError instanceof Error ? connectionError.message : String(connectionError), 'error');
+      const { error: revokeError } = await testAccountSupabase.rpc('revoke_character_sync_token', { sync_token_id: record.id })
+        .then(result => result, () => ({ error: { message: 'Сервер недоступен' } }));
+      showInlineStatus('#extension-status', `${connectionError instanceof Error ? connectionError.message : String(connectionError)}${revokeError ? ' Не удалось отозвать созданный ключ. Повторите отзыв в разделе «Управление доступом».' : ''}`, 'error');
     } finally {
       if (button) button.disabled = false;
       await loadSyncTokens();
     }
-  }
-
-  async function loadAdminUsers(): Promise<boolean> {
-    if (currentRole !== 'admin') return false;
-    const body = document.querySelector<HTMLElement>('#admin-users-body');
-    const status = document.querySelector<HTMLElement>('#admin-status');
-    if (status) status.hidden = true;
-    if (body) body.innerHTML = '<tr><td colspan="5">Загрузка пользователей…</td></tr>';
-
-    const result = isLocalAuthBypassEnabled
-      ? { data: [localAccountPreviewProfile], error: null }
-      : await testAccountSupabase?.from('user_profiles')
-        .select('id,email,discord_id,display_name,avatar_url,role,character_slots,created_at')
-        .order('created_at', { ascending: false });
-    if (!result) return false;
-    const { data, error } = result;
-
-    if (error) {
-      if (body) body.innerHTML = '<tr><td colspan="5">Не удалось загрузить пользователей.</td></tr>';
-      if (status) {
-        status.textContent = error.message;
-        status.dataset.kind = 'error';
-        status.hidden = false;
-      }
-      return false;
-    }
-
-    const users = data || [];
-    if (body) {
-      body.innerHTML = users.map((profile) => `
-        <tr>
-          <td>
-            <span class="admin-user">
-              ${profile.avatar_url ? `<img src="${escapeText(profile.avatar_url)}" alt="">` : ''}
-              <span><strong>${escapeText(profile.display_name || profile.email || 'Без имени')}</strong><small>${escapeText(profile.email || (isLocalAuthBypassEnabled ? 'Локальный профиль' : 'Discord OAuth'))}</small></span>
-            </span>
-          </td>
-          <td><code>${escapeText(profile.discord_id || '—')}</code></td>
-          <td>
-            <select data-admin-role="${escapeText(profile.id)}" ${profile.id === currentUserId ? 'disabled title="Собственную роль изменяет другой администратор"' : ''}>
-              ${accountRoles.map((role) => `<option value="${role}" ${normalizeAccountRole(profile.role) === role ? 'selected' : ''}>${roleLabel(role)}</option>`).join('')}
-            </select>
-          </td>
-          <td><input class="slot-input" type="number" min="1" max="100" value="${escapeText(profile.character_slots || 1)}" data-character-slots="${escapeText(profile.id)}" aria-label="Количество слотов персонажей" ${isLocalAuthBypassEnabled ? 'disabled title="В локальном просмотре облачные слоты не изменяются"' : ''}></td>
-          <td>${formatDate(profile.created_at)}</td>
-        </tr>
-      `).join('');
-    }
-
-    const counts = users.reduce((result, profile) => {
-      result[normalizeAccountRole(profile.role)] += 1;
-      return result;
-    }, { player: 0, test_master: 0, master: 0, admin: 0 } as Record<AccountRole, number>);
-    const stats = document.querySelector<HTMLElement>('#admin-stats');
-    if (stats) {
-      stats.innerHTML = `
-        <div><span>Всего</span><strong>${users.length}</strong></div>
-        <div><span>Игроки</span><strong>${counts.player}</strong></div>
-        <div><span>Тестовые мастера</span><strong>${counts.test_master}</strong></div>
-        <div><span>Мастера</span><strong>${counts.master}</strong></div>
-        <div><span>Администраторы</span><strong>${counts.admin}</strong></div>
-      `;
-    }
-
-    document.querySelectorAll<HTMLSelectElement>('[data-admin-role]').forEach((select) => {
-      select.addEventListener('change', async () => {
-        const profileId = select.dataset.adminRole;
-        if (!profileId || !testAccountSupabase) return;
-        const previousRole = normalizeAccountRole(users.find(profile => profile.id === profileId)?.role);
-        const requestedRole = select.value as AccountRole;
-        select.disabled = true;
-        showInlineStatus('#admin-status', 'Сохраняем роль…');
-        try {
-          const savedRole = await saveAccountRole(testAccountSupabase, profileId, requestedRole);
-          if (await loadAdminUsers()) {
-            showInlineStatus('#admin-status', `Роль сохранена: ${roleLabel(savedRole)}.`);
-          }
-        } catch (error) {
-          select.value = previousRole;
-          showInlineStatus('#admin-status', error instanceof Error ? error.message : String(error), 'error');
-        } finally {
-          select.disabled = false;
-        }
-      });
-    });
-
-    document.querySelectorAll<HTMLInputElement>('[data-character-slots]').forEach((input) => {
-      input.addEventListener('change', async () => {
-        const profileId = input.dataset.characterSlots;
-        if (!profileId || !testAccountSupabase) return;
-        const slots = Math.max(1, Math.min(100, Number.parseInt(input.value, 10) || 1));
-        input.value = String(slots);
-        input.disabled = true;
-        const { error: updateError } = await testAccountSupabase
-          .from('user_profiles')
-          .update({ character_slots: slots })
-          .eq('id', profileId);
-        input.disabled = false;
-        if (status) {
-          status.textContent = updateError ? updateError.message : `Лимит изменён: ${slots}.`;
-          status.dataset.kind = updateError ? 'error' : 'success';
-          status.hidden = false;
-        }
-        if (!updateError && profileId === currentUserId) currentCharacterSlots = slots;
-      });
-    });
-    return true;
   }
 
   function initializeLocalPlayer() {
@@ -489,11 +453,14 @@ const { requestedMode = 'auto' } = Astro.props;
     const profileStatus = document.querySelector<HTMLElement>('#player-profile-status');
     if (slotSummary) slotSummary.textContent = 'Локальный конструктор без облачного сохранения';
     if (characterList) characterList.innerHTML = '<div class="empty-value">Облачные персонажи доступны после входа через Discord на сайте. Конструктор и экспорт можно проверить локально.</div>';
+    characterList?.setAttribute('aria-busy', 'false');
+    const connection = document.querySelector<HTMLElement>('#extension-connection-state');
+    if (connection) connection.textContent = 'Подключение доступно после входа через Discord на сайте.';
     if (tokenList) tokenList.innerHTML = '<div class="empty-value">Ключи синхронизации доступны после авторизации на сайте.</div>';
     if (profileHeading) profileHeading.textContent = 'Локальный профиль';
     if (profileDescription) profileDescription.textContent = 'Для локальной разработки используется профиль администратора.';
     if (profileStatus) profileStatus.textContent = 'Обход авторизации';
-    for (const id of ['refresh-characters', 'connect-extension']) {
+    for (const id of ['refresh-characters', 'connect-extension', 'refresh-connections']) {
       const button = document.querySelector<HTMLButtonElement>(`#${id}`);
       if (button) {
         button.disabled = true;
@@ -508,6 +475,7 @@ const { requestedMode = 'auto' } = Astro.props;
       currentRole = localAccountPreviewProfile.role;
       currentCharacterSlots = localAccountPreviewProfile.character_slots;
       const mode = requestedMode === 'auto' ? defaultAccountMode(currentRole) : requestedMode;
+      if (redirectTeamLink(mode)) return;
       if (requestedMode === 'auto') {
         window.location.replace(accountModePath(mode) + window.location.search + window.location.hash);
         return;
@@ -527,9 +495,9 @@ const { requestedMode = 'auto' } = Astro.props;
       showMode(mode);
       if (loading) loading.hidden = true;
       if (content) content.hidden = false;
-      await initializeTeamWorkspace(currentUserId, currentRole);
-      if (mode === 'admin') await loadAdminUsers();
-      if (mode === 'player') initializeLocalPlayer();
+      if (mode === 'team') await initializeTeamWorkspace(currentUserId, currentRole);
+      if (mode === 'admin') await initializeAdminWorkspace(currentUserId, slots => { currentCharacterSlots = slots; });
+      initializeLocalPlayer();
       if (mode === 'master' || mode === 'test_master') await initializeMasterWorkspace(currentUserId, mode === 'test_master' ? 'test_master' : currentRole);
       return;
     }
@@ -540,7 +508,7 @@ const { requestedMode = 'auto' } = Astro.props;
 
     const { data: sessionData } = await testAccountSupabase.auth.getSession();
     if (!sessionData.session) {
-      const next = encodeURIComponent(window.location.pathname);
+      const next = encodeURIComponent(window.location.pathname + window.location.search + window.location.hash);
       window.location.replace(`/test/auth/?next=${next}`);
       return;
     }
@@ -566,6 +534,7 @@ const { requestedMode = 'auto' } = Astro.props;
       window.location.replace(accountModePath(defaultAccountMode(currentRole)) + window.location.search + window.location.hash);
       return;
     }
+    if (redirectTeamLink(mode)) return;
     if ((mode === 'master' || mode === 'test_master') && !user.identities?.some(identity => identity.provider === 'discord')
       && user.app_metadata?.provider !== 'discord' && !user.app_metadata?.providers?.includes('discord')) {
       showError('Для кабинета мастера нужен вход через Discord.');
@@ -599,11 +568,11 @@ const { requestedMode = 'auto' } = Astro.props;
     showMode(mode);
     if (loading) loading.hidden = true;
     if (content) content.hidden = false;
-    await initializeTeamWorkspace(user.id, currentRole);
+    if (mode === 'team') await initializeTeamWorkspace(user.id, currentRole);
     if (mode === 'player') {
       await Promise.all([loadCharacters(), loadSyncTokens()]);
     }
-    if (mode === 'admin') await loadAdminUsers();
+    if (mode === 'admin') await initializeAdminWorkspace(currentUserId, slots => { currentCharacterSlots = slots; });
     if (mode === 'master' || mode === 'test_master') await initializeMasterWorkspace(user.id, mode === 'test_master' ? 'test_master' : currentRole);
   }
 
@@ -618,108 +587,9 @@ const { requestedMode = 'auto' } = Astro.props;
     window.location.replace('/test/auth/');
   });
 
-  document.querySelector('#refresh-users')?.addEventListener('click', loadAdminUsers);
   document.querySelector('#create-character')?.addEventListener('click', createCharacter);
   document.querySelector('#refresh-characters')?.addEventListener('click', loadCharacters);
   document.querySelector('#connect-extension')?.addEventListener('click', connectExtension);
-  document.querySelector('#open-extension-settings')?.addEventListener('click', () => {
-    const card = document.querySelector<HTMLElement>('#roll20-extension-card');
-    card?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    window.setTimeout(() => document.querySelector<HTMLButtonElement>('#connect-extension')?.focus(), 450);
-  });
+  document.querySelector('#refresh-connections')?.addEventListener('click', loadSyncTokens);
   initializeCabinet().catch(() => showError('Не удалось загрузить кабинет. Проверьте соединение и попробуйте снова.'));
 </script>
-
-<style>
-  .local-preview-notice { margin: 0 0 1.5rem; padding: 1rem 1.2rem; border: 1px solid var(--account-gold); border-radius: 12px; background: rgba(226, 180, 72, .08); color: var(--account-gold); line-height: 1.6; }
-  .cabinet-loading, .cabinet-error { display: grid; justify-items: center; gap: 1rem; padding: 5rem 1rem; text-align: center; }
-  .loader { width: 48px; height: 48px; border: 4px solid rgba(182,154,255,.2); border-top-color: var(--primary); border-radius: 50%; animation: spin .8s linear infinite; }
-  .cabinet-error h1 { color: var(--primary); font: 800 clamp(2rem, 6vw, 3.5rem) Georgia, serif; }
-  .cabinet-error p { max-width: 650px; color: var(--account-muted); line-height: 1.6; }
-  .cabinet-error a { color: var(--account-gold); font-weight: 900; }
-  .profile-header { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; margin-bottom: 1rem; padding: 1.2rem; border: 1px solid var(--account-border); border-radius: 20px; background: var(--account-panel); }
-  .profile-person, .profile-actions { display: flex; align-items: center; gap: 1rem; }
-  .profile-person img { width: 70px; height: 70px; border: 2px solid rgba(226,180,72,.55); border-radius: 18px; object-fit: cover; }
-  .profile-person h1 { margin: .28rem 0 .1rem; color: var(--primary); font: 800 clamp(1.6rem, 4vw, 2.3rem) Georgia, serif; }
-  .profile-person p { color: var(--account-muted); font-size: .85rem; }
-  .role-badge { color: var(--account-gold); font-size: .68rem; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
-  .profile-actions { align-items: stretch; }
-  .mode-switcher { display: flex; gap: .35rem; padding: .3rem; border: 1px solid var(--account-border); border-radius: 12px; background: var(--account-field); }
-  .mode-switcher :global(a) { display: grid; place-items: center; min-height: 38px; padding: .5rem .8rem; border-radius: 8px; color: var(--account-muted); text-decoration: none; font-weight: 800; }
-  .mode-switcher :global(a:hover), .mode-switcher :global(a.is-active) { color: #10182a; background: var(--account-gold-bg); }
-  .ghost-button { padding: .65rem .9rem; border: 1px solid var(--account-border); border-radius: 10px; color: var(--account-text); background: transparent; cursor: pointer; font-weight: 800; }
-  .ghost-button:hover { border-color: var(--primary); color: var(--link-hover); }
-  .mode-description { margin-bottom: 1.25rem; padding: .8rem 1rem; border-left: 3px solid var(--primary); color: var(--account-muted); background: rgba(155,116,255,.08); }
-  .dashboard-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
-  .dashboard-card { min-width: 0; padding: 1.25rem; border: 1px solid var(--account-border); border-radius: 18px; background: var(--account-panel); }
-  .dashboard-card-featured { border-color: rgba(226,180,72,.38); background: var(--account-panel); }
-  .dashboard-card > span, .admin-heading span { color: var(--account-gold); font-size: .68rem; font-weight: 900; letter-spacing: .15em; text-transform: uppercase; }
-  .dashboard-card h2 { margin: .55rem 0 .65rem; color: var(--account-gold); font: 800 1.4rem Georgia, serif; }
-  .dashboard-card p { color: var(--account-muted); line-height: 1.55; }
-  .dashboard-card a { display: inline-block; margin-top: 1rem; color: var(--primary); font-weight: 900; text-decoration: none; }
-  .primary-button { margin-top: 1rem; padding: .75rem 1rem; border: 0; border-radius: 10px; color: #11192a; background: var(--account-gold-bg); cursor: pointer; font-weight: 900; }
-  .primary-button:disabled { opacity: .55; cursor: wait; }
-  .slot-summary { display: block; margin-top: .8rem; color: var(--account-gold); }
-  .featured-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .65rem; margin-top: 1rem; }
-  .featured-actions .primary-button { margin-top: 0; }
-  .character-library-card, .extension-card { grid-column: 1 / -1; }
-  .extension-card:focus { outline: 2px solid var(--primary); outline-offset: 4px; }
-  .character-list, .sync-token-list { display: grid; gap: .65rem; margin-top: 1rem; }
-  .character-row, .sync-token-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .85rem; border: 1px solid var(--account-border); border-radius: 12px; background: var(--account-field); }
-  .character-row > div:first-child, .sync-token-row > div:first-child { display: grid; gap: .22rem; min-width: 0; }
-  .character-row strong, .sync-token-row strong { color: var(--primary); }
-  .character-row small, .sync-token-row small { overflow: hidden; color: var(--account-muted); text-overflow: ellipsis; white-space: nowrap; }
-  .character-row-actions { display: flex; align-items: center; gap: .45rem; flex: none; }
-  .character-row-actions :global(a), .character-row-actions button, .sync-token-row button { margin: 0; padding: .5rem .65rem; border: 1px solid var(--account-border); border-radius: 8px; color: var(--account-text); background: transparent; cursor: pointer; font: inherit; font-weight: 800; text-decoration: none; }
-  .character-row-actions button, .sync-token-row button { color: var(--account-error); }
-  .extension-actions, .token-result > div { display: flex; gap: .55rem; margin-top: .8rem; }
-  .extension-download { margin-top: .8rem; }
-  .extension-actions input, .token-result input { min-width: 0; flex: 1; padding: .7rem; border: 1px solid var(--account-border); border-radius: 9px; color: var(--account-text); background: var(--account-field); }
-  .token-result { margin-top: 1rem; padding: .85rem; border: 1px solid var(--account-border); border-radius: 12px; background: rgba(226,180,72,.08); }
-  .token-result label { color: var(--account-gold); font-size: .82rem; font-weight: 800; }
-  .sync-token-row.is-revoked { opacity: .55; }
-  .inline-status { margin-top: .75rem; color: var(--account-success); }
-  .inline-status[data-kind="error"] { color: var(--account-error); }
-  .empty-value, .success-value { display: block; margin-top: 1rem; color: var(--account-muted); }
-  .success-value { color: var(--account-success); }
-  .card-links { display: grid; gap: .2rem; }
-  .disabled-action { margin-top: 1rem; padding: .7rem; border: 1px solid var(--account-border); border-radius: 9px; color: var(--account-muted); background: var(--account-field); }
-  .admin-dashboard { display: grid; gap: 1rem; }
-  .admin-stats { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: .7rem; }
-  .admin-stats :global(div) { padding: 1rem; border: 1px solid var(--account-border); border-radius: 14px; background: var(--account-panel); }
-  .admin-stats :global(span) { display: block; color: var(--account-muted); font-size: .78rem; }
-  .admin-stats :global(strong) { display: block; margin-top: .25rem; color: var(--account-gold); font: 800 1.8rem Georgia, serif; }
-  .admin-users-card { overflow: hidden; }
-  .admin-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-  .admin-help { margin-bottom: 1rem; }
-  .admin-table-wrap { overflow-x: auto; border: 1px solid var(--account-border); border-radius: 12px; }
-  table { width: 100%; border-collapse: collapse; min-width: 720px; }
-  th, td { padding: .8rem; border-bottom: 1px solid var(--account-border); text-align: left; }
-  th { color: var(--account-gold); background: var(--account-field); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
-  td { color: var(--account-text); }
-  .admin-user { display: flex; align-items: center; gap: .65rem; }
-  .admin-user :global(img) { width: 36px; height: 36px; border-radius: 9px; object-fit: cover; }
-  .admin-user :global(span) { display: grid; }
-  .admin-user :global(small) { color: var(--account-muted); }
-  td select { min-width: 150px; padding: .45rem; border: 1px solid var(--account-border); border-radius: 8px; color: var(--account-text); background: var(--account-field); }
-  .slot-input { width: 86px; padding: .45rem; border: 1px solid var(--account-border); border-radius: 8px; color: var(--account-text); background: var(--account-field); }
-  code { color: var(--account-muted); }
-  @media (max-width: 760px) {
-    .character-row, .sync-token-row, .extension-actions, .token-result > div { align-items: stretch; flex-direction: column; }
-    .character-row-actions { align-items: stretch; }
-    .character-row-actions :global(a), .character-row-actions button { flex: 1; text-align: center; }
-  }
-  .inline-status { margin-top: 1rem; color: var(--account-success); }
-  .inline-status[data-kind="error"] { color: var(--account-error); }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  @media (max-width: 900px) {
-    .profile-header, .profile-actions { align-items: stretch; flex-direction: column; }
-    .dashboard-grid { grid-template-columns: 1fr; }
-    .admin-stats { grid-template-columns: repeat(2, minmax(0,1fr)); }
-  }
-  @media (max-width: 520px) {
-    .profile-person { align-items: flex-start; }
-    .mode-switcher { overflow-x: auto; }
-    .mode-switcher :global(a) { white-space: nowrap; }
-  }
-</style>

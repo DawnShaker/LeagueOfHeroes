@@ -6,13 +6,17 @@ export async function saveAccountRole(
   client: SupabaseClient,
   profileId: string,
   role: AccountRole,
+  characterSlots?: number,
 ): Promise<AccountRole> {
+  if (characterSlots !== undefined && (!Number.isInteger(characterSlots) || characterSlots < 1 || characterSlots > 100)) {
+    throw new Error("Укажите целое количество слотов от 1 до 100.");
+  }
   const { data, error } = await client
     .from("user_profiles")
-    .update({ role })
+    .update(characterSlots === undefined ? { role } : { role, character_slots: characterSlots })
     .eq("id", profileId)
-    .select("id,role")
-    .maybeSingle();
+    .select(characterSlots === undefined ? "id,role" : "id,role,character_slots")
+    .maybeSingle<{ id: string; role: AccountRole; character_slots?: number }>();
 
   if (error) {
     if (
@@ -35,6 +39,9 @@ export async function saveAccountRole(
     throw new Error(
       "База не сохранила выбранную роль. Обновите список пользователей и проверьте настройки базы.",
     );
+  }
+  if (characterSlots !== undefined && data.character_slots !== characterSlots) {
+    throw new Error("База не сохранила выбранный лимит слотов. Обновите список и проверьте права администратора.");
   }
   return data.role;
 }

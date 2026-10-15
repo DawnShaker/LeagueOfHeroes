@@ -24,8 +24,9 @@ import Downtime from '../../pages/rules/downtime-activities.astro';
 import Bastions from '../../pages/bastions.astro';
 import FAQ from '../../pages/faq.astro';
 import CharacterGuide from '../../pages/character-guide.astro';
+import RpgMasterGuide from '../../pages/guides/rpg-master.astro';
 
-// Deliberate public allowlist. Never import cabinet, master rules or drafts here.
+// Deliberate public allowlist. Never import cabinet, private master rules or drafts here.
 const publicPages = [
   { page: GeneralRules, url: '/general-rules', title: 'Основные правила Лиги' },
   { page: EquipmentRules, url: '/rules/equipment', title: 'Снаряжение: таблицы и правила Лиги' },
@@ -36,6 +37,7 @@ const publicPages = [
   { page: Bastions, url: '/bastions', title: 'Бастионы' },
   { page: FAQ, url: '/faq', title: 'Частые вопросы' },
   { page: CharacterGuide, url: '/character-guide', title: 'Создание персонажа' },
+  { page: RpgMasterGuide, url: '/guides/rpg-master', title: 'Руководство Мастера НРИ' },
 ];
 const bookDefinitions = Object.values(import.meta.glob<Book>('../books/*/book.json', { eager: true, import: 'default' }));
 function sourceFields(raw?: string): Pick<SearchEntry, 'source' | 'edition' | 'aliases'> {

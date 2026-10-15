@@ -30,6 +30,7 @@ export const toolsLinks = [
 export const guideLinks = [
   { href: '/discord', label: 'Наш Discord' },
   { href: '/guides/entro', label: 'Бот Энтро' },
+  { href: '/guides/rpg-master', label: 'Руководство Мастера НРИ' },
   //{ href: '/character-guide', label: 'Создание персонажа' },
   { href: '/ordinator', label: 'Проверка персонажа' }
 ];
