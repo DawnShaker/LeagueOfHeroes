@@ -79,7 +79,9 @@ export async function initializeTeamWorkspace(
   let workspaces: TeamWorkspace[] = [],
     members: TeamMember[] = [],
     lists: TeamList[] = [],
-    cards: TeamCard[] = [];
+    cards: TeamCard[] = [],
+    exportWorkspaces: TeamWorkspace[] = [],
+    exportLists: TeamList[] = [];
   let workspaceId = "",
     view = "board",
     selected: TeamCard | null = null,
@@ -95,6 +97,7 @@ export async function initializeTeamWorkspace(
   const form = el<HTMLFormElement>("tw-card-form");
   const createDialog = el<HTMLDialogElement>("tw-create-dialog");
   const deleteListDialog = el<HTMLDialogElement>("tw-delete-list-dialog");
+  const exportDialog = el<HTMLDialogElement>("tw-export-dialog");
   const input = (name: string) =>
     form.elements.namedItem(name) as
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
@@ -177,6 +180,7 @@ export async function initializeTeamWorkspace(
   }
   function render() {
     const exists = Boolean(workspaceId);
+    el("tw-export").hidden = workspaces.length === 0;
     el("tw-empty").hidden = exists;
     el("tw-content").hidden = !exists;
     if (!exists) return;
@@ -741,6 +745,240 @@ export async function initializeTeamWorkspace(
     await loadWorkspace();
   }
   el("tw-add-list").addEventListener("click", () => void action(addList));
+  function updateExportSelection() {
+    const listChecks = Array.from(
+      root.querySelectorAll<HTMLInputElement>("[data-export-list]"),
+    );
+    const selectedLists = listChecks.filter((input) => input.checked);
+    for (const workspace of exportWorkspaces) {
+      const parent = root.querySelector<HTMLInputElement>(
+        `[data-export-workspace="${CSS.escape(workspace.id)}"]`,
+      );
+      if (!parent) continue;
+      const children = listChecks.filter(
+        (input) => input.dataset.workspaceId === workspace.id,
+      );
+      parent.checked =
+        children.length === 0 || children.every((input) => input.checked);
+      parent.indeterminate =
+        children.some((input) => input.checked) && !parent.checked;
+    }
+    const selectedWorkspaceIds = new Set(
+      selectedLists.map((input) => input.dataset.workspaceId),
+    );
+    el("tw-export-count").textContent =
+      `Выбрано рабочих пространств: ${selectedWorkspaceIds.size}; списков: ${selectedLists.length}.`;
+    el<HTMLButtonElement>("tw-export-download").disabled =
+      selectedLists.length === 0;
+  }
+  function renderExportOptions() {
+    const options = el("tw-export-options");
+    options.innerHTML = exportWorkspaces
+      .map((workspace) => {
+        const workspaceLists = exportLists.filter(
+          (list) => list.workspace_id === workspace.id,
+        );
+        return `<fieldset class="tw-export-workspace"><legend><label class="tw-check"><input type="checkbox" data-export-workspace="${esc(workspace.id)}" checked />${esc(workspace.title)}</label></legend>${
+          workspaceLists.length
+            ? `<div class="tw-export-list-options">${workspaceLists
+                .map(
+                  (list) =>
+                    `<label class="tw-check"><input type="checkbox" data-export-list="${esc(list.id)}" data-workspace-id="${esc(workspace.id)}" checked />${esc(list.title)}</label>`,
+                )
+                .join("")}</div>`
+            : '<p class="tw-muted">В этом пространстве пока нет списков.</p>'
+        }</fieldset>`;
+      })
+      .join("");
+    el<HTMLButtonElement>("tw-export-all").disabled = exportLists.length === 0;
+    el<HTMLButtonElement>("tw-export-none").disabled = exportLists.length === 0;
+    updateExportSelection();
+  }
+  async function loadExportOptions() {
+    if (local) {
+      exportWorkspaces = store.workspaces.map((workspace) => ({
+        ...workspace,
+      }));
+      exportLists = store.lists.map((list) => ({ ...list }));
+    } else {
+      exportWorkspaces = [];
+      exportLists = [];
+      const pageSize = 500;
+      for (let offset = 0; ; offset += pageSize) {
+        const result = await client!
+          .from("team_workspaces")
+          .select("*")
+          .order("created_at")
+          .order("id")
+          .range(offset, offset + pageSize - 1);
+        check(result);
+        const page: TeamWorkspace[] = result.data || [];
+        exportWorkspaces.push(...page);
+        if (page.length < pageSize) break;
+      }
+      const workspaceIds = exportWorkspaces.map((workspace) => workspace.id);
+      for (let index = 0; index < workspaceIds.length; index += 100) {
+        const batch = workspaceIds.slice(index, index + 100);
+        for (let offset = 0; ; offset += pageSize) {
+          const result = await client!
+            .from("team_lists")
+            .select("id,workspace_id,title,position")
+            .in("workspace_id", batch)
+            .order("workspace_id")
+            .order("position")
+            .order("id")
+            .range(offset, offset + pageSize - 1);
+          check(result);
+          const page: TeamList[] = result.data || [];
+          exportLists.push(...page);
+          if (page.length < pageSize) break;
+        }
+      }
+    }
+    renderExportOptions();
+    el("tw-export-progress").textContent = exportWorkspaces.length
+      ? "Отметьте пространства или отдельные списки."
+      : "Нет доступных рабочих пространств.";
+  }
+  async function buildExport() {
+    const selectedListIds = Array.from(
+      root.querySelectorAll<HTMLInputElement>("[data-export-list]:checked"),
+    ).map((input) => input.dataset.exportList!);
+    if (!selectedListIds.length)
+      throw new Error("Выберите хотя бы один список.");
+    const selectedLists = exportLists.filter((list) =>
+      selectedListIds.includes(list.id),
+    );
+    const selectedWorkspaceIds = new Set(
+      selectedLists.map((list) => list.workspace_id),
+    );
+    const selectedWorkspaces = exportWorkspaces.filter((workspace) =>
+      selectedWorkspaceIds.has(workspace.id),
+    );
+    let exportedCards: TeamCard[] = [];
+    let comments: Comment[] = [];
+    el("tw-export-progress").textContent = "Загружаем карточки…";
+    if (local) {
+      exportedCards = store.cards.filter((card) =>
+        selectedListIds.includes(card.list_id),
+      );
+      comments = store.comments.filter((comment) =>
+        exportedCards.some((card) => card.id === comment.card_id),
+      );
+    } else {
+      const pageSize = 500;
+      for (let index = 0; index < selectedListIds.length; index += 100) {
+        const batch = selectedListIds.slice(index, index + 100);
+        for (let offset = 0; ; offset += pageSize) {
+          const result = await client!
+            .from("team_cards")
+            .select("*")
+            .in("list_id", batch)
+            .order("workspace_id")
+            .order("list_id")
+            .order("position")
+            .order("id")
+            .range(offset, offset + pageSize - 1);
+          check(result);
+          const page: TeamCard[] = result.data || [];
+          exportedCards.push(...page);
+          if (page.length < pageSize) break;
+        }
+      }
+      el("tw-export-progress").textContent =
+        `Загружаем обсуждения карточек: ${exportedCards.length}…`;
+      for (let index = 0; index < exportedCards.length; index += 100) {
+        const ids = exportedCards
+          .slice(index, index + 100)
+          .map((card) => card.id);
+        for (let offset = 0; ; offset += pageSize) {
+          const result = await client!
+            .from("team_comments")
+            .select("*")
+            .in("card_id", ids)
+            .order("created_at")
+            .order("id")
+            .range(offset, offset + pageSize - 1);
+          check(result);
+          const page: Comment[] = result.data || [];
+          comments.push(...page);
+          if (page.length < pageSize) break;
+        }
+      }
+    }
+    const commentsByCard = new Map<string, Comment[]>();
+    for (const comment of comments) {
+      const cardComments = commentsByCard.get(comment.card_id) || [];
+      cardComments.push(comment);
+      commentsByCard.set(comment.card_id, cardComments);
+    }
+    const payload = {
+      format: "league-team-workspaces-export",
+      exported_at: new Date().toISOString(),
+      workspaces: selectedWorkspaces,
+      lists: selectedLists,
+      cards: exportedCards.map((card) => ({
+        ...card,
+        comments: commentsByCard.get(card.id) || [],
+      })),
+    };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], {
+      type: "application/json;charset=utf-8",
+    });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = `rabochie-prostranstva-${new Date().toISOString().slice(0, 10)}.json`;
+    anchor.click();
+    anchor.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 60_000);
+    el("tw-export-progress").textContent =
+      `Файл сформирован. Карточек: ${exportedCards.length}; комментариев: ${comments.length}.`;
+    exportDialog.close();
+    message(`Экспорт готов: ${exportedCards.length} карточек.`);
+  }
+  el("tw-export").addEventListener(
+    "click",
+    () =>
+      void action(async () => {
+        exportDialog.showModal();
+        el("tw-export-options").textContent = "Загружаем список пространств…";
+        el<HTMLButtonElement>("tw-export-download").disabled = true;
+        el("tw-export-error").hidden = true;
+        await loadExportOptions();
+      }, "tw-export-error"),
+  );
+  el("tw-cancel-export").addEventListener("click", () => exportDialog.close());
+  el("tw-export-form").addEventListener("submit", (event) => {
+    event.preventDefault();
+    void action(buildExport, "tw-export-error");
+  });
+  el("tw-export-options").addEventListener("change", (event) => {
+    const input = (event.target as HTMLElement).closest<HTMLInputElement>(
+      "[data-export-workspace],[data-export-list]",
+    );
+    if (!input) return;
+    if (input.dataset.exportWorkspace) {
+      root
+        .querySelectorAll<HTMLInputElement>(
+          `[data-workspace-id="${CSS.escape(input.dataset.exportWorkspace)}"]`,
+        )
+        .forEach((list) => (list.checked = input.checked));
+    }
+    updateExportSelection();
+  });
+  el("tw-export-all").addEventListener("click", () => {
+    root
+      .querySelectorAll<HTMLInputElement>("[data-export-list]")
+      .forEach((input) => (input.checked = true));
+    updateExportSelection();
+  });
+  el("tw-export-none").addEventListener("click", () => {
+    root
+      .querySelectorAll<HTMLInputElement>("[data-export-list]")
+      .forEach((input) => (input.checked = false));
+    updateExportSelection();
+  });
   el("tw-activity-more").addEventListener("click", async () => {
     if (busy || loading) return;
     const button = el<HTMLButtonElement>("tw-activity-more");

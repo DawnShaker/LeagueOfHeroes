@@ -50,6 +50,12 @@
 .tw-assignees { display: flex; flex-wrap: wrap; gap: .6rem; }
 .tw-stack { display: grid; gap: .7rem; margin: 1rem 0; }
 .tw-member, .tw-log, .tw-comment { border-bottom: 1px solid var(--account-border); padding: .8rem 0; overflow-wrap: anywhere; }
+.tw-export-options { max-height: min(55vh, 520px); overflow-y: auto; border: 1px solid var(--account-border); border-radius: 10px; padding: .5rem .9rem; }
+.tw-export-workspace { border-bottom: 1px solid var(--account-border); padding: .4rem 0; }
+.tw-export-workspace:last-child { border-bottom: 0; }
+.tw-export-workspace legend { width: 100%; font-weight: 600; }
+.tw-export-workspace > legend .tw-check { margin: .35rem 0; }
+.tw-export-list-options { padding-left: 1.25rem; }
 .tw-member { display: flex; gap: .7rem; justify-content: space-between; flex-wrap: wrap; align-items: center; }
 .tw-comment p { white-space: pre-wrap; }
 .tw-log time, .tw-comment small { color: var(--account-muted); font-size: .75rem; }
