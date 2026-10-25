@@ -48,6 +48,11 @@ const roleLabels = {
   editor: "Редактор",
   observer: "Наблюдатель",
 };
+const priorityLabels = {
+  p1: "1П · Первая важность",
+  p2: "2П · Вторая важность",
+  p3: "3П · Третья важность",
+} as const;
 
 export async function initializeTeamWorkspace(
   userId: string,
@@ -174,9 +179,10 @@ export async function initializeTeamWorkspace(
     }
   }
   function cardHtml(card: TeamCard) {
+    const priority = card.priority || "p2";
     const overdue =
       !card.completed && card.due_at && Date.parse(card.due_at) < Date.now();
-    return `<button type="button" class="tw-card ${card.completed ? "is-completed" : ""}" data-card="${esc(card.id)}" draggable="${canWrite() && !card.archived}">${card.labels.map((l) => `<span class="tw-tag">${esc(l)}</span>`).join("")}<strong>${card.kind === "event" ? "◷ " : card.completed ? "✓ " : ""}${esc(card.title)}</strong>${card.due_at ? `<small class="${overdue ? "tw-overdue" : ""}">${overdue ? "Просрочено · " : ""}${esc(date(card.due_at))}</small>` : ""}${card.assignees.length ? `<small>${card.assignees.map((id) => esc(name(id))).join(", ")}</small>` : ""}${card.checklist.length ? `<small>☑ ${card.checklist.filter((i) => i.done).length}/${card.checklist.length}</small>` : ""}</button>`;
+    return `<button type="button" class="tw-card ${card.completed ? "is-completed" : ""}" data-card="${esc(card.id)}" draggable="${canWrite() && !card.archived}">${card.labels.map((l) => `<span class="tw-tag">${esc(l)}</span>`).join("")}<span class="tw-priority tw-priority-${priority}" title="${priorityLabels[priority]}">${priority.toUpperCase()}</span><strong>${card.kind === "event" ? "◷ " : card.completed ? "✓ " : ""}${esc(card.title)}</strong>${card.due_at ? `<small class="${overdue ? "tw-overdue" : ""}">${overdue ? "Просрочено · " : ""}${esc(date(card.due_at))}</small>` : ""}${card.assignees.length ? `<small>${card.assignees.map((id) => esc(name(id))).join(", ")}</small>` : ""}${card.checklist.length ? `<small>☑ ${card.checklist.filter((i) => i.done).length}/${card.checklist.length}</small>` : ""}</button>`;
   }
   function render() {
     const exists = Boolean(workspaceId);
@@ -201,6 +207,9 @@ export async function initializeTeamWorkspace(
       el<HTMLInputElement>("tw-search").value,
       el<HTMLSelectElement>("tw-assignee").value,
       el<HTMLSelectElement>("tw-filter").value,
+      Date.now(),
+      el<HTMLSelectElement>("tw-priority-filter").value as
+        TeamCard["priority"] | "all",
     );
     el("tw-board").innerHTML = lists
       .map(
@@ -434,6 +443,7 @@ export async function initializeTeamWorkspace(
     input("list_id").innerHTML = lists
       .map((l) => `<option value="${esc(l.id)}">${esc(l.title)}</option>`)
       .join("");
+    input("priority").value = card?.priority || "p2";
     for (const key of ["title", "description", "kind", "list_id"])
       input(key).value =
         card?.[key] ||
@@ -564,6 +574,7 @@ export async function initializeTeamWorkspace(
         title: input("title").value.trim(),
         description: input("description").value,
         kind: input("kind").value as "task" | "event",
+        priority: input("priority").value as TeamCard["priority"],
         list_id: input("list_id").value,
         starts_at: input("starts_at").value
           ? new Date(input("starts_at").value).toISOString()
@@ -705,7 +716,12 @@ export async function initializeTeamWorkspace(
         await loadWorkspace();
       }),
   );
-  for (const id of ["tw-search", "tw-assignee", "tw-filter"])
+  for (const id of [
+    "tw-search",
+    "tw-assignee",
+    "tw-filter",
+    "tw-priority-filter",
+  ])
     el(id).addEventListener(id === "tw-search" ? "input" : "change", render);
   root.querySelectorAll<HTMLElement>("[data-tw-view]").forEach((b) =>
     b.addEventListener("click", () => {

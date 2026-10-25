@@ -1,6 +1,13 @@
 [
     { "id": "preset-1", "thumb": "/images/borders/preset1.svg", "url": "/images/borders/preset1.svg" },
     { "id": "preset-2", "thumb": "/images/borders/preset2.svg", "url": "/images/borders/preset2.svg" },
-    { "id": "preset-3", "thumb": "/images/borders/preset3.svg", "url": "/images/borders/preset3.svg" }
+    { "id": "preset-3", "thumb": "/images/borders/preset3.svg", "url": "/images/borders/preset3.svg" },
+    { "id": "preset-4", "thumb": "/images/borders/preset4.svg", "url": "/images/borders/preset4.svg" },
+    { "id": "preset-5", "thumb": "/images/borders/preset5.svg", "url": "/images/borders/preset5.svg" },
+    { "id": "preset-6", "thumb": "/images/borders/preset6.svg", "url": "/images/borders/preset6.svg" },
+    { "id": "preset-7", "thumb": "/images/borders/preset7.svg", "url": "/images/borders/preset7.svg" },
+    { "id": "preset-8", "thumb": "/images/borders/preset8.svg", "url": "/images/borders/preset8.svg" },
+    { "id": "preset-9", "thumb": "/images/borders/preset9.svg", "url": "/images/borders/preset9.svg" },
+    { "id": "preset-10", "thumb": "/images/borders/preset10.svg", "url": "/images/borders/preset10.svg" }
   ]
   

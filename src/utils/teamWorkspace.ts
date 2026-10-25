@@ -33,6 +33,7 @@ export interface TeamCard {
   title: string;
   description: string;
   kind: "task" | "event";
+  priority: "p1" | "p2" | "p3";
   assignees: string[];
   labels: string[];
   checklist: CheckItem[];
@@ -79,6 +80,7 @@ export function filterTeamCards(
   assignee: string,
   status: string,
   now = Date.now(),
+  priority: TeamCard["priority"] | "all" = "all",
 ): TeamCard[] {
   const needle = query.trim().toLocaleLowerCase("ru");
   return cards.filter(
@@ -90,6 +92,7 @@ export function filterTeamCards(
           .toLocaleLowerCase("ru")
           .includes(needle)) &&
       (!assignee || c.assignees.includes(assignee)) &&
+      (priority === "all" || (c.priority || "p2") === priority) &&
       (status !== "completed" || c.completed) &&
       (status !== "active" || !c.completed) &&
       (status !== "overdue" ||
@@ -102,6 +105,7 @@ export function validateTeamCard(
   card: Pick<
     TeamCard,
     | "title"
+    | "priority"
     | "labels"
     | "checklist"
     | "starts_at"
@@ -111,6 +115,8 @@ export function validateTeamCard(
 ): void {
   if (!card.title.trim() || card.title.trim().length > 180)
     throw new Error("Название: от 1 до 180 символов.");
+  if (!["p1", "p2", "p3"].includes(card.priority))
+    throw new Error("Выберите приоритет задачи.");
   if (card.labels.length > 10 || card.labels.some((l) => !l || l.length > 40))
     throw new Error("До 10 меток, каждая — до 40 символов.");
   if (

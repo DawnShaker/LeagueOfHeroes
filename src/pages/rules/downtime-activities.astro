@@ -13,6 +13,8 @@ import Resting from '../../components/rules/downtime/Resting.astro';
 import Thievery from '../../components/rules/downtime/Thievery.astro';
 import Research from '../../components/rules/downtime/Research.astro';
 import Labor from '../../components/rules/downtime/Labor.astro';
+import Tutoring from '../../components/rules/downtime/Tutoring.astro';
+import PetTraining from '../../components/rules/downtime/PetTraining.astro';
 import {craftingActivities} from '../../data/downtime/activities';
 ---
 
@@ -76,12 +78,14 @@ import {craftingActivities} from '../../data/downtime/activities';
       <Gambling />
       <Thievery />
       <Labor />
+      <!--<Tutoring />-->
     </ActivityCategory>
 
     <ActivityCategory
       title="Обучение"
       description="Изучение новых навыков и способностей.">
       <Training />
+      <!--<PetTraining />-->
     </ActivityCategory>
 
     <ActivityCategory

@@ -5,6 +5,13 @@ const borders = [
   { id: 'preset-1', name: 'Круглая', image: '/images/borders/preset1.svg' },
   { id: 'preset-2', name: 'Двойная', image: '/images/borders/preset2.svg' },
   { id: 'preset-3', name: 'Декоративная', image: '/images/borders/preset3.svg' },
+  { id: 'preset-4', name: 'Стальная', image: '/images/borders/preset4.svg' },
+  { id: 'preset-5', name: 'Руническая', image: '/images/borders/preset5.svg' },
+  { id: 'preset-6', name: 'Пламенная', image: '/images/borders/preset6.svg' },
+  { id: 'preset-7', name: 'Лесная', image: '/images/borders/preset7.svg' },
+  { id: 'preset-8', name: 'Некромантская', image: '/images/borders/preset8.svg' },
+  { id: 'preset-9', name: 'Золотая', image: '/images/borders/preset9.svg' },
+  { id: 'preset-10', name: 'Тактическая', image: '/images/borders/preset10.svg' },
 ];
 ---
 
@@ -18,7 +25,7 @@ const borders = [
       </div>
     </div>
     <div class="token-canvas-wrap" id="token-drop-zone">
-      <canvas id="token-canvas" width="512" height="512" tabindex="0" aria-label="Предпросмотр токена. Перемещайте портрет мышью, касанием или клавишами со стрелками." aria-describedby="token-canvas-help">Для редактирования токена нужен браузер с поддержкой Canvas.</canvas>
+      <canvas id="token-canvas" width="512" height="512" tabindex="0" aria-label="Предпросмотр токена. Перетаскивайте портрет; Ctrl и Shift с мышью меняют масштаб и поворот. Alt перетаскивает рамку." aria-describedby="token-canvas-help">Для редактирования токена нужен браузер с поддержкой Canvas.</canvas>
       <div class="token-empty" id="token-empty">
         <span class="token-empty-icon" aria-hidden="true">＋</span>
         <strong>Добавьте портрет персонажа</strong>
@@ -28,7 +35,7 @@ const borders = [
       </div>
       <div class="token-drop-hint" aria-hidden="true">Отпустите файл, чтобы загрузить портрет</div>
     </div>
-    <p id="token-canvas-help" class="token-help">Перетащите портрет, чтобы выбрать кадр. Стрелки — сдвиг, Shift + стрелки — большой шаг.</p>
+    <p id="token-canvas-help" class="token-help">Перетаскивайте портрет для кадрирования. Ctrl + перетаскивание меняет масштаб, Shift + перетаскивание — поворот; Alt + перетаскивание двигает рамку. Колесо мыши с Ctrl или Shift тоже меняет масштаб или поворот.</p>
     <div class="token-feedback">
       <p id="token-status" role="status" aria-live="polite">Выберите изображение, чтобы начать.</p>
       <p id="token-error" role="alert" hidden></p>
@@ -57,6 +64,10 @@ const borders = [
           <div class="token-field-heading"><label for="token-rotation">Поворот</label><div class="token-number"><input id="token-rotation-number" type="number" min="-180" max="180" step="1" value="0" aria-label="Поворот в градусах" /><span aria-hidden="true">°</span></div></div>
           <input id="token-rotation" type="range" min="-180" max="180" step="1" value="0" aria-label="Поворот" />
           <button type="button" class="token-text-button" id="token-reset-rotation">Сбросить поворот</button>
+        </div>
+        <div class="token-field">
+          <div class="token-field-heading"><label for="token-size">Размер токена</label><div class="token-number"><input id="token-size-number" type="number" min="25" max="100" step="1" value="100" aria-label="Размер токена в процентах" /><span aria-hidden="true">%</span></div></div>
+          <input id="token-size" type="range" min="25" max="100" step="1" value="100" aria-label="Размер токена" />
         </div>
         <div class="token-action-grid">
           <button type="button" id="token-center">По центру</button>
@@ -88,7 +99,33 @@ const borders = [
         <label id="token-recolor-label" class="token-check" hidden><input id="token-recolor" type="checkbox" /> Перекрасить SVG</label>
         <p class="token-help">PNG или SVG до 5 МБ. Нужна рамка с прозрачным центром; круглое окно портрета — 400 px в макете 512 × 512.</p>
       </div>
-      <label class="token-color-field" id="token-border-color-label" hidden><span>Цвет рамки</span><input id="token-border-color" type="color" value="#ffffff" /></label>
+      <fieldset id="token-frame-controls" disabled>
+        <legend>Положение и размер рамки</legend>
+        <div class="token-field"><div class="token-field-heading"><label for="token-frame-scale">Масштаб</label><div class="token-number"><input id="token-frame-scale-number" type="number" min="25" max="200" step="1" value="100" aria-label="Масштаб рамки в процентах" /><span aria-hidden="true">%</span></div></div><input id="token-frame-scale" type="range" min="25" max="200" step="1" value="100" aria-label="Масштаб рамки" /></div>
+        <div class="token-field"><div class="token-field-heading"><label for="token-frame-rotation">Поворот</label><div class="token-number"><input id="token-frame-rotation-number" type="number" min="-180" max="180" step="1" value="0" aria-label="Поворот рамки в градусах" /><span aria-hidden="true">°</span></div></div><input id="token-frame-rotation" type="range" min="-180" max="180" step="1" value="0" aria-label="Поворот рамки" /></div>
+        <div class="token-field"><div class="token-field-heading"><label for="token-frame-x">Смещение по горизонтали</label><div class="token-number"><input id="token-frame-x-number" type="number" min="-128" max="128" step="1" value="0" aria-label="Смещение рамки по горизонтали" /><span aria-hidden="true">px</span></div></div><input id="token-frame-x" type="range" min="-128" max="128" step="1" value="0" aria-label="Смещение рамки по горизонтали" /></div>
+        <div class="token-field"><div class="token-field-heading"><label for="token-frame-y">Смещение по вертикали</label><div class="token-number"><input id="token-frame-y-number" type="number" min="-128" max="128" step="1" value="0" aria-label="Смещение рамки по вертикали" /><span aria-hidden="true">px</span></div></div><input id="token-frame-y" type="range" min="-128" max="128" step="1" value="0" aria-label="Смещение рамки по вертикали" /></div>
+        <button type="button" class="token-text-button" id="token-reset-frame">Сбросить рамку</button>
+      </fieldset>
+      <div id="token-frame-fill" hidden>
+        <div class="token-field"><label for="token-border-fill-mode">Заливка рамки</label><select id="token-border-fill-mode"><option value="solid">Сплошной цвет</option><option value="gradient">Градиент</option><option value="texture">Текстура</option><option value="original">Исходные цвета</option></select></div>
+        <label class="token-color-field" id="token-border-color-label"><span>Цвет рамки</span><input id="token-border-color" type="color" value="#ffffff" /></label>
+        <div id="token-gradient-controls" hidden>
+          <div id="token-gradient-stops" class="token-gradient-stops">
+            {Array.from({ length: 5 }, (_, index) => <label class="token-color-field" data-gradient-stop={index} hidden><span>Цвет {index + 1}</span><input id={`token-gradient-color-${index}`} type="color" value={index === 0 ? '#ffffff' : '#64748b'} /></label>)}
+          </div>
+          <div class="token-inline-actions"><button type="button" id="token-gradient-add">Добавить цвет</button><button type="button" id="token-gradient-remove">Убрать цвет</button></div>
+          <div class="token-field"><div class="token-field-heading"><label for="token-gradient-angle">Направление</label><span id="token-gradient-angle-value" class="token-muted">0°</span></div><input id="token-gradient-angle" type="range" min="0" max="360" step="1" value="0" aria-label="Направление градиента" /></div>
+        </div>
+        <div id="token-texture-controls" hidden>
+          <div class="token-field"><label for="token-texture-kind">Тип текстуры</label><select id="token-texture-kind"><option value="stone">Камень</option><option value="noise">Шум</option><option value="stripes">Полосы</option><option value="dots">Точки</option><option value="scales">Чешуя</option></select></div>
+          <canvas id="token-texture-preview" width="256" height="112" aria-label="Предпросмотр генерируемой текстуры"></canvas>
+          <div class="token-field"><div class="token-field-heading"><label for="token-texture-scale">Размер узора</label><span id="token-texture-scale-value" class="token-muted">32</span></div><input id="token-texture-scale" type="range" min="8" max="80" step="1" value="32" aria-label="Размер узора текстуры" /></div>
+          <div class="token-field"><div class="token-field-heading"><label for="token-texture-contrast">Контраст</label><span id="token-texture-contrast-value" class="token-muted">55%</span></div><input id="token-texture-contrast" type="range" min="0" max="100" step="1" value="55" aria-label="Контраст текстуры" /></div>
+          <div class="token-field"><div class="token-field-heading"><label for="token-texture-x">Смещение текстуры по горизонтали</label><span id="token-texture-x-value" class="token-muted">0 px</span></div><input id="token-texture-x" type="range" min="-128" max="128" step="1" value="0" aria-label="Смещение текстуры по горизонтали относительно рамки" /></div>
+          <div class="token-field"><div class="token-field-heading"><label for="token-texture-y">Смещение текстуры по вертикали</label><span id="token-texture-y-value" class="token-muted">0 px</span></div><input id="token-texture-y" type="range" min="-128" max="128" step="1" value="0" aria-label="Смещение текстуры по вертикали относительно рамки" /></div>
+        </div>
+      </div>
       <div class="token-field">
         <label for="token-background">Фон внутри токена</label>
         <select id="token-background"><option value="transparent">Прозрачный</option><option value="color">Цветной</option></select>
