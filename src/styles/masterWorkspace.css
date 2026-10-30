@@ -62,6 +62,17 @@
 .mw-sidebar-tools a:hover { color: var(--mw-gold); }
 .mw-tools-link { display: flex; align-items: center; gap: .5rem; padding: 0; border: 0; color: var(--mw-gold); background: transparent; text-align: left; line-height: 1.5; font-size: .8rem; }
 .mw-sidebar-note { margin: 1.5rem .7rem .1rem; color: var(--mw-muted); font-size: .7rem; line-height: 1.65; }
+.mw-study-route { margin-bottom: 1.4rem; padding: 1rem; border: 1px solid var(--mw-border); border-radius: 12px; background: var(--mw-field); }
+.mw-study-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .7rem; }
+.mw-study-heading h3 { margin: 0 0 .35rem; color: var(--mw-heading); font-size: 1rem; }
+.mw-study-heading p { margin: 0; color: var(--mw-muted); font-size: .77rem; line-height: 1.6; }
+.mw-study-heading > a { color: var(--mw-purple); font-size: .8rem; text-underline-offset: 3px; }
+.mw-study-route ol { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(135px, 100%), 1fr)); gap: .5rem; list-style: none; padding: 0; margin: .85rem 0 0; }
+.mw-study-route li { min-width: 0; }
+.mw-study-route li a { display: flex; align-items: center; gap: .45rem; height: 100%; min-height: 44px; padding: .55rem; color: var(--mw-text); border: 1px solid var(--mw-border); border-radius: 8px; text-decoration: none; font-size: .78rem; line-height: 1.5; overflow-wrap: anywhere; }
+.mw-study-route li a span { flex: 0 0 auto; color: var(--mw-muted); font-weight: 750; }
+.mw-study-route a:hover { color: var(--mw-purple); border-color: var(--mw-purple); }
+.mw-study-route a[aria-current] { color: var(--mw-gold); background: var(--mw-button-bg); font-weight: 750; text-decoration: underline; text-underline-offset: 3px; }
 .mw-main { min-width: 0; scroll-margin-top: 100px; }
 .mw-library-toolbar { display: flex; gap: .6rem; }
 .mw-search { display: flex; align-items: center; flex: 1; min-width: 0; gap: .6rem; padding: .2rem .8rem; background: var(--mw-field); border: 1px solid var(--mw-border); border-radius: 10px; }

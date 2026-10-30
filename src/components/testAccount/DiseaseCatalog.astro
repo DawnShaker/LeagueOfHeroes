@@ -1,0 +1,77 @@
+---
+import { diseaseEntries } from '../../data/diseases';
+import { diseaseRules } from '../../data/diseaseRules';
+import { materialLabels } from '../../utils/diseaseCatalog';
+import '../../styles/diseaseCatalog.css';
+
+const options = (key: 'transmissionTags' | 'impactTags' | 'treatmentTags' | 'progressionTags') =>
+  [...new Set(diseaseEntries.flatMap(e => e[key]))].sort((a,b) => a.localeCompare(b,'ru'));
+const groups = [...new Set(diseaseEntries.map(e => e.sourceGroup))];
+---
+
+<div id="disease-catalog-loading" class="dw-access" role="status">Проверяем доступ к мастерской…</div>
+<div id="disease-catalog-error" class="dw-access" role="alert" hidden></div>
+
+<section id="disease-catalog-root" class="dw" aria-busy="true" hidden>
+  <header class="dw-heading">
+    <div><a href="/test/cabinet/master/" class="dw-back">← Мастерская панель</a><p class="dw-eyebrow">Лига Героев · Инструменты мастера</p><h1>Болезни и заражения</h1><p>Подберите угрозу для истории. Проследите за её развитием.</p></div>
+    <div class="dw-heading-stat"><strong>{diseaseEntries.length}</strong><span>записей каталога<br />7 исходных разделов</span></div>
+  </header>
+  <nav class="dw-tabs" role="tablist" aria-label="Раздел болезней">
+    <button id="dw-tab-catalog" type="button" role="tab" aria-selected="true" aria-controls="dw-catalog" data-tab="catalog">Каталог <span>{diseaseEntries.length}</span></button>
+    <button id="dw-tab-tracker" type="button" role="tab" aria-selected="false" aria-controls="dw-tracker" tabindex="-1" data-tab="tracker">Персонажи и заражения <span id="dw-active-count">0</span></button>
+    <button id="dw-tab-rules" type="button" role="tab" aria-selected="false" aria-controls="dw-rules" tabindex="-1" data-tab="rules">Правила и помощь</button>
+  </nav>
+  <div id="dw-notice" class="dw-notice" role="status" aria-live="polite" hidden></div>
+  <div id="dw-storage-warning" class="dw-warning" role="alert" hidden></div>
+  <section id="dw-catalog" role="tabpanel" aria-labelledby="dw-tab-catalog">
+    <div class="dw-catalog-top">
+      <label class="dw-search"><span class="dw-sr-only">Поиск по каталогу</span><input id="disease-search" type="search" placeholder="Название, симптом, заражение или лечение…" autocomplete="off" /><kbd>/</kbd></label>
+      <label class="dw-check"><input id="dw-favorites" type="checkbox" /> Только избранное</label>
+    </div>
+    <div class="dw-catalog-layout">
+      <aside class="dw-filters" aria-label="Фильтры каталога">
+        <div class="dw-section-title"><h2>Подобрать болезнь</h2><button id="disease-reset-filters" type="button" class="dw-link">Сбросить</button></div>
+        <label>Заражение<select id="disease-transmission-filter"><option value="all">Любое</option>{options('transmissionTags').map(t => <option value={t}>{t}</option>)}</select></label>
+        <label>Последствия<select id="disease-impact-filter"><option value="all">Любые</option>{options('impactTags').map(t => <option value={t}>{t}</option>)}</select></label>
+        <label>Время до проявления<select id="dw-pace"><option value="all">Любое</option>{['Часы и ходы','Дни','Недели и дольше','Не определён'].map(t => <option value={t}>{t}</option>)}</select></label>
+        <label>Лечение<select id="dw-treatment"><option value="all">Любое</option>{options('treatmentTags').map(t => <option value={t}>{t}</option>)}</select></label>
+        <details class="dw-more-filters"><summary>Тип, источник и прогрессия</summary><div>
+          <label>Тип материала<select id="dw-kind"><option value="all">Все типы</option>{Object.entries(materialLabels).map(([id,label]) => <option value={id}>{label}</option>)}</select></label>
+          <label>Исходный раздел<select id="disease-group-filter"><option value="all">Все разделы</option>{groups.map(g => <option value={g}>{g}</option>)}</select></label>
+          <label>Прогрессия<select id="disease-progression-filter"><option value="all">Любая</option>{options('progressionTags').map(t => <option value={t}>{t}</option>)}</select></label>
+          <label>Профиль учёта<select id="dw-readiness"><option value="all">Все записи</option><option value="prepared">Есть подготовленный профиль</option><option value="review">Нужно решение мастера</option></select></label>
+        </div></details>
+        <p class="dw-muted dw-small">Авторский каталог из разных систем. Исходные описания сохранены; наличие профиля учёта не подтверждает официальный источник.</p>
+      </aside>
+      <div class="dw-results">
+        <div class="dw-results-top"><p id="disease-result-count" role="status" aria-live="polite"></p><label><span class="dw-sr-only">Порядок записей</span><select id="disease-sort"><option value="family">По семействам</option><option value="name">По названию</option><option value="source">Как в исходнике</option></select></label></div>
+        <div id="disease-list" class="dw-list"></div>
+        <p id="disease-no-results" class="dw-empty" hidden>Ничего не найдено. Измените запрос или сбросьте фильтры.</p>
+        <button id="dw-load-more" class="dw-button dw-load-more" type="button" hidden>Показать ещё</button>
+      </div>
+      <article id="dw-reader" class="dw-reader" aria-label="Карточка выбранной записи"><div class="dw-empty"><span class="dw-empty-icon" aria-hidden="true">✧</span><h2>Выберите запись</h2><p>Здесь появятся симптомы, развитие, лечение и связанные варианты.</p></div></article>
+    </div>
+  </section>
+  <section id="dw-tracker" role="tabpanel" aria-labelledby="dw-tab-tracker" hidden>
+    <div class="dw-tracker-heading"><div><p class="dw-eyebrow">Локальная игра</p><h2 id="dw-game-title">Моя игра</h2><p class="dw-muted">Имена, заражения и история хранятся только в этом браузере для вашего аккаунта.</p></div><div class="dw-actions"><button class="dw-button" id="dw-edit-game" type="button">Название игры</button><button class="dw-button" id="dw-export" type="button">Экспорт JSON</button><button class="dw-button" id="dw-import" type="button">Импорт</button><input id="dw-import-file" type="file" accept=".json,application/json" hidden /></div></div>
+    <div class="dw-clock"><div><span class="dw-eyebrow">Игровое время</span><strong id="dw-clock-value">День 1 · 00:00</strong><small>Реальные часы не продвигают игру</small></div><div class="dw-actions"><button class="dw-button" type="button" data-advance="60">+1 час</button><button class="dw-button" type="button" data-advance="1440">+1 сутки</button><button class="dw-button" id="dw-advance-custom" type="button">Другой срок</button><button class="dw-button dw-primary" id="dw-rest" type="button">Завершён отдых</button></div></div>
+    <div class="dw-tracker-layout"><aside class="dw-characters"><div class="dw-section-title"><h3>Персонажи</h3><button id="dw-add-character" type="button" class="dw-link">＋ Добавить</button></div><div id="dw-character-list"></div></aside>
+      <div class="dw-tracker-main"><section id="dw-event-queue" class="dw-event-queue" aria-label="Наступившие события" hidden></section>
+        <div class="dw-section-title"><h3 id="dw-cases-title">Заражения</h3><label class="dw-check"><input id="dw-show-archive" type="checkbox" /> Завершённые и воздействия</label></div>
+        <div id="dw-character-actions" class="dw-actions"></div><div id="dw-cases" class="dw-cases"></div><article id="dw-case-reader" class="dw-case-reader" hidden></article>
+      </div>
+    </div>
+  </section>
+  <section id="dw-rules" class="dw-rules" role="tabpanel" aria-labelledby="dw-tab-rules" hidden>
+    <div class="dw-rules-intro"><p class="dw-eyebrow">Перед игрой</p><h2>Общие правила болезней</h2><p>Рабочая авторская система из предоставленного каталога. Это homebrew, а не официальные общие правила D&amp;D 2024. Индивидуальная запись имеет приоритет; спорные детали определяет мастер.</p></div>
+    <div class="dw-rules-layout"><div class="dw-rule-list">{diseaseRules.map((rule,i) => <details class="dw-rule" open={i===0}><summary><span>{String(i+1).padStart(2,'0')}</span>{rule.title}</summary><p>{rule.body}</p></details>)}</div>
+      <aside class="dw-rules-help"><h3>Как вести игру</h3><ol><li>Создайте локального персонажа или NPC.</li><li>Откройте болезнь в каталоге и добавьте случай.</li><li>Укажите результат заражения и длительность инкубации. Для случайного срока можно один раз бросить кубы.</li><li>Выберите подходящую механику. Если правило неясно — оставьте ручное ведение.</li><li>Продвигайте игровое время и обрабатывайте очередь событий по порядку. Отдых отмечается отдельно.</li></ol><h3>Что сохраняется</h3><p>Каждый случай хранит собственную копию описания и настроек. Обновление каталога не изменяет текущие заражения. Экспорт включает персонажей, историю, время и избранное; импорт заменяет локальную игру после проверки и подтверждения.</p><h3>Последствия и лечение</h3><p>Урон, потеря максимума хитов и истощение учитываются отдельно. Излечение останавливает развитие, но не обнуляет эти значения: восстановите их по условиям болезни через коррекцию. Указание известности диагноза — локальная пометка мастера.</p><h3>Шкала стадий</h3><dl><dt>0 — Инкубация</dt><dd>До проявления общих штрафов нет, если описание не говорит иное.</dd><dt>1 — Начальная</dt><dd>Успех излечивает при общей стадийной модели.</dd><dt>2 — Тяжёлая</dt><dd>Эффекты заменяют предыдущую стадию, если не указано накопление.</dd><dt>3 — Критическая</dt><dd>Повторный провал запускает описанное осложнение.</dd></dl><h3>Безопасное сохранение</h3><p>Периодически экспортируйте JSON. Очистка данных браузера удалит локальную игру. При недоступном хранилище работа продолжается в памяти с предупреждением. Для переноса в другой браузер используйте экспорт и импорт.</p></aside>
+    </div>
+  </section>
+  <dialog id="dw-dialog" class="dw-dialog" aria-labelledby="dw-dialog-title"><form id="dw-dialog-form"><div class="dw-dialog-heading"><h2 id="dw-dialog-title"></h2><button class="dw-icon-button" type="button" id="dw-dialog-close" aria-label="Закрыть">×</button></div><div id="dw-dialog-body"></div><p id="dw-dialog-error" class="dw-form-error" role="alert" hidden></p><div class="dw-dialog-footer"><button id="dw-dialog-cancel" class="dw-button" type="button">Отмена</button><button id="dw-dialog-submit" class="dw-button dw-primary" type="submit">Сохранить</button></div></form></dialog>
+</section>
+<script>
+  import { initializeDiseaseWorkspace } from './diseaseWorkspace';
+  void initializeDiseaseWorkspace();
+</script>

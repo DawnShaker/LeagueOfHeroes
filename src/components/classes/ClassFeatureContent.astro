@@ -6,17 +6,32 @@ import { resolveFeatureCreatures } from '../../utils/creature';
 interface Props { feature: ClassFeature; prefix: string; }
 const { feature, prefix } = Astro.props;
 const paragraphs = (description: string | string[]) => Array.isArray(description) ? description : (description || '').split('\n').filter(Boolean);
+const collapsibleItems = feature.collapsible || [];
+const collapsibleGroups = collapsibleItems.some(item => item.requiredLevel !== undefined)
+  ? Array.from(collapsibleItems.reduce((groups, item) => {
+      const level = item.requiredLevel ?? 1;
+      groups.set(level, [...(groups.get(level) || []), item]);
+      return groups;
+    }, new Map<number, typeof collapsibleItems>())).map(([level, items]) => ({ level, items }))
+  : [{ level: null, items: collapsibleItems }];
+const levelLabel = (level: number) => `${level}-го`;
 ---
 <div class="feature-description">
   {paragraphs(feature.description).map(text => <p set:html={text} />)}
   {feature.statBlockNote && <p class="creature-context-note">{feature.statBlockNote}</p>}
   {resolveFeatureCreatures(feature.statBlockIds || [], companions).map(creature => <CreatureDisclosure creature={creature} prefix={prefix} staticContent />)}
-  {feature.collapsible && <div class="collapsible-content">{feature.collapsible.map((item, index) => <details class="collapsible-item">
-    <summary>{item.title}</summary><div class="collapsible-description">
-      {paragraphs(item.description).map(text => <p set:html={text} />)}
-      {item.tableData && <div class="feature-table-scroll" tabindex="0" role="region" aria-label={item.title}><table><thead><tr>{item.tableData.headers.map(header => <th scope="col">{header}</th>)}</tr></thead><tbody>{item.tableData.rows.map(row => <tr>{row.map(cell => <td set:html={cell} />)}</tr>)}</tbody></table></div>}
-      {item.statBlockNote && <p class="creature-context-note">{item.statBlockNote}</p>}
-      {resolveFeatureCreatures(item.statBlockIds || [], companions).map(creature => <CreatureDisclosure creature={creature} prefix={`${prefix}-${index}`} staticContent />)}
-    </div>
-  </details>)}</div>}
+  {feature.collapsible && <div class="collapsible-content">{collapsibleGroups.map(group => <div class="collapsible-group">
+    {group.level !== null && <h4 class="collapsible-group-title">Доступны с {levelLabel(group.level)} уровня</h4>}
+    {group.items.map(item => {
+      const index = collapsibleItems.indexOf(item);
+      return <details class="collapsible-item">
+        <summary>{item.title}</summary><div class="collapsible-description">
+          {paragraphs(item.description).map(text => <p set:html={text} />)}
+          {item.tableData && <div class="feature-table-scroll" tabindex="0" role="region" aria-label={item.title}><table><thead><tr>{item.tableData.headers.map(header => <th scope="col">{header}</th>)}</tr></thead><tbody>{item.tableData.rows.map(row => <tr>{row.map(cell => <td set:html={cell} />)}</tr>)}</tbody></table></div>}
+          {item.statBlockNote && <p class="creature-context-note">{item.statBlockNote}</p>}
+          {resolveFeatureCreatures(item.statBlockIds || [], companions).map(creature => <CreatureDisclosure creature={creature} prefix={`${prefix}-${index}`} staticContent />)}
+        </div>
+      </details>;
+    })}
+  </div>)}</div>}
 </div>

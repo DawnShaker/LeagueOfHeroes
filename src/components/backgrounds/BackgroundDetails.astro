@@ -1,0 +1,129 @@
+---
+import MaterialMetadata from '../materials/MaterialMetadata.astro';
+import type { Background } from '../../types/background';
+
+interface Props {
+  background: Background;
+  standalone?: boolean;
+}
+
+const { background, standalone = false } = Astro.props;
+const characteristicTables = [
+  { key: 'personalityTraits', title: 'Черты характера', label: 'Черта', field: 'trait' },
+  { key: 'ideals', title: 'Идеалы', label: 'Идеал', field: 'ideal' },
+  { key: 'bonds', title: 'Привязанности', label: 'Привязанность', field: 'bond' },
+  { key: 'flaws', title: 'Слабости', label: 'Слабость', field: 'flaw' },
+] as const;
+---
+
+<article class="background-details">
+  <header class="background-header">
+    <div>
+      {standalone
+        ? <h1>{background.name} <span class="name-en">[{background.nameEn}]</span></h1>
+        : <h2>{background.name} <span class="name-en">[{background.nameEn}]</span></h2>}
+      <p class="background-source">Источник: {background.sourceBook}</p>
+    </div>
+    <MaterialMetadata kind="background" id={background.id} />
+  </header>
+
+  <section class="lore" aria-label="Описание предыстории">
+    <p>{background.lore}</p>
+  </section>
+
+  <section class="proficiencies">
+    <h3>Владения и снаряжение</h3>
+    <dl>
+      <dt>Бонус характеристик</dt>
+      <dd>{background.proficiencies.abilityScores.description}</dd>
+      <dt>Черта</dt>
+      <dd>{background.proficiencies.feat}</dd>
+      <dt>Навыки</dt>
+      <dd>{background.proficiencies.skills.description}</dd>
+      <dt>Инструменты</dt>
+      <dd>{background.proficiencies.tools.description}</dd>
+      <dt>Снаряжение</dt>
+      <dd>{background.proficiencies.equipment}</dd>
+    </dl>
+  </section>
+
+  {background.spellTable && (
+    <section class="detail-section">
+      <h3>{background.spellTable.name}</h3>
+      {background.spellTable.prerequisite && <p><strong>Требование:</strong> {background.spellTable.prerequisite}</p>}
+      <p>{background.spellTable.description}</p>
+      <div class="table-scroll" tabindex="0" role="region" aria-label={`Таблица ${background.spellTable.name}`}>
+        <table>
+          <thead><tr><th>Уровень заклинаний</th><th>Заклинания</th></tr></thead>
+          <tbody>
+            {background.spellTable.spells.map(level => <tr><td>{level.level}</td><td>{level.spells.join(', ')}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      {background.spellTable.note && <p class="note">{background.spellTable.note}</p>}
+    </section>
+  )}
+
+  {background.variants && (
+    <section class="detail-section">
+      <h3>{background.variants.title}</h3>
+      {background.variants.description && <p>{background.variants.description}</p>}
+      <div class="table-scroll" tabindex="0" role="region" aria-label={`Таблица: ${background.variants.title}`}>
+        <table>
+          <thead><tr><th>к{background.variants.table.length}</th><th>Результат</th></tr></thead>
+          <tbody>{background.variants.table.map(entry => <tr><td>{entry.roll}</td><td>{entry.result}</td></tr>)}</tbody>
+        </table>
+      </div>
+    </section>
+  )}
+
+  <section class="characteristics">
+    <h3>Предлагаемые черты личности</h3>
+    <div class="characteristic-tables">
+      {characteristicTables.map(({ key, title, label, field }) => {
+        const entries = background.characteristics[key];
+        return (
+          <div class="table-scroll" tabindex="0" role="region" aria-label={title}>
+            <h4>{title}</h4>
+            <table>
+              <thead><tr><th>к{entries.length}</th><th>{label}</th></tr></thead>
+              <tbody>
+                {entries.map(entry => <tr><td>{entry.roll}</td><td>{entry[field] || '—'}</td></tr>)}
+              </tbody>
+            </table>
+          </div>
+        );
+      })}
+    </div>
+  </section>
+</article>
+
+<style>
+  .background-details { color: var(--text); }
+  .background-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+  h1, h2, h3, h4 { color: var(--primary); }
+  h1, h2 { margin: 0; font-size: 1.5rem; }
+  h3 { margin: 0 0 1rem; font-size: 1.15rem; }
+  h4 { margin: 0 0 .75rem; font-size: 1rem; }
+  .name-en { color: var(--text); opacity: .7; font-size: .75em; font-weight: 400; }
+  .background-source { margin: .35rem 0 0; opacity: .75; font-size: .9rem; }
+  .lore { line-height: 1.65; }
+  .lore p { margin-top: 0; }
+  .proficiencies, .detail-section, .characteristics { margin-top: 1.75rem; }
+  dl { display: grid; grid-template-columns: minmax(9rem, auto) 1fr; gap: .65rem 1rem; margin: 0; }
+  dt { color: var(--primary); font-weight: 600; }
+  dd { margin: 0; }
+  .characteristic-tables { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .table-scroll { min-width: 0; overflow-x: auto; margin-top: 1rem; padding: .75rem; border: 1px solid var(--card-border); border-radius: .5rem; background: var(--background); }
+  .table-scroll:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: .65rem; border: 1px solid var(--card-border); text-align: left; vertical-align: top; }
+  th { background: var(--card-bg); }
+  .note { opacity: .8; font-style: italic; }
+  @media (max-width: 700px) {
+    .background-header { flex-direction: column; }
+    .characteristic-tables { grid-template-columns: 1fr; }
+    dl { grid-template-columns: 1fr; gap: .25rem; }
+    dd { margin-bottom: .65rem; }
+  }
+</style>

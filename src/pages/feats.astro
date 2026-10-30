@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import FeatDetails from '../components/feats/FeatDetails.astro';
 import { featsData } from '../data/feats';
 
 const sortedFeats = [...featsData].sort((a, b) => 
@@ -27,19 +28,22 @@ const abilities = {
   <div class="content">
     <h1>Черты</h1>
     
+    <div class="feats-workspace" id="feats-workspace">
+      <section class="feats-list-panel" aria-label="Поиск и список черт">
     <div class="search-container">
       <div class="search-controls">
         <div class="search-input-container">
+          <label class="sr-only" for="feat-search">Поиск по названию, описанию, источнику или требованиям</label>
           <input 
-            type="text" 
+            type="search"
             id="feat-search" 
             placeholder="Поиск черт..."
             class="search-input"
           />
-          <div id="feats-counter" class="feats-counter">0/0</div>
+          <div id="feats-counter" class="feats-counter" role="status" aria-live="polite" aria-atomic="true">0/0</div>
           <button id="clear-search" class="clear-search-button" style="display: none;">×</button>
         </div>
-        <button id="filter-button" class="filter-button">
+        <button id="filter-button" class="filter-button" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="filter-popup">
           <span class="filter-icon">⚙</span>
           Фильтры
           <span id="filter-count" class="filter-count">0</span>
@@ -82,6 +86,7 @@ const abilities = {
       </div>
     </div>
 
+    <div class="feats-list-scroll">
     <div class="feats-grid">
       {sortedFeats.map(feat => {
         const reqs = feat.requirements || [];
@@ -89,14 +94,34 @@ const abilities = {
           feat.type === 'origin' ||
           (feat.type === 'general' && !reqs.every(r => /Уровень\s*4\+/i.test(String(r)) || /13\+/i.test(String(r))))
         );
+        const abilitySummary = (feat.abilityScoreIncrease || []).map(score => abilities[score]).join(', ');
         return (
-          <a href={`/feats/${feat.id}`} class="feat-card" data-feat-type={feat.type} data-abilities={feat.abilityScoreIncrease?.join(',')} data-has-extra-req={hasExtraReq ? 'true' : 'false'}>
-            <h3>{feat.name}</h3>
-            <span class="name-en">[{feat.nameEn}]</span>
+          <a href={`/feats/${encodeURIComponent(feat.id)}`} class="feat-card" data-feat-id={feat.id} data-search={[feat.name, feat.nameEn, featTypes[feat.type], feat.sourceBook, abilitySummary, ...(feat.requirements || []), feat.description, ...feat.effects].filter(Boolean).join(' ')} data-feat-type={feat.type} data-abilities={feat.abilityScoreIncrease?.join(',')} data-has-extra-req={hasExtraReq ? 'true' : 'false'}>
+            <span class="feat-card-heading"><span class="feat-card-name">{feat.name}</span><span class="name-en">{feat.nameEn}</span></span>
+            <span class="feat-card-meta">{featTypes[feat.type]}{feat.sourceBook ? ` · ${feat.sourceBook}` : ''}</span>
+            {abilitySummary && <span class="feat-card-abilities">Повышение характеристик: {abilitySummary}</span>}
+            {feat.requirements?.length > 0 && <span class="feat-card-requirements">{feat.requirements.join(', ')}</span>}
           </a>
         );
       })}
     </div>
+    <div id="feats-empty" class="feats-empty" hidden>
+      <p>Черты не найдены. Измените запрос или сбросьте фильтры.</p>
+      <button id="reset-empty-feats" class="reset-button" type="button">Сбросить поиск и фильтры</button>
+    </div>
+    </div>
+      </section>
+      <section id="feat-reading" class="feat-reading" aria-label="Подробности черты">
+        <button id="back-to-feat-list" class="mobile-back" type="button">← К списку черт</button>
+        <div id="feat-details-placeholder" class="feat-details-placeholder">
+          <span aria-hidden="true">✦</span>
+          <h2>Какую черту выберете?</h2>
+          <p>Выберите черту, чтобы посмотреть её требования и эффекты.</p>
+        </div>
+        <div id="feat-details-content" class="feat-details-content" hidden></div>
+      </section>
+    </div>
+    {sortedFeats.map(feat => <template data-feat-details={feat.id}><FeatDetails feat={feat} /></template>)}
   </div>
 </Layout>
 
@@ -313,8 +338,14 @@ const abilities = {
       if (searchTerm) params.set('search', searchTerm);
 
       const queryString = params.toString();
-      const newUrl = queryString ? `/feats?${queryString}` : '/feats';
-      window.history.replaceState({}, '', newUrl);
+      const pathParts = window.location.pathname.split('/');
+      let selectedFeatId: string | null = null;
+      if (pathParts[1] === 'feats' && pathParts[2]) {
+        try { selectedFeatId = decodeURIComponent(pathParts[2]); } catch { selectedFeatId = pathParts[2]; }
+      }
+      const basePath = selectedFeatId ? `/feats/${encodeURIComponent(selectedFeatId)}` : '/feats';
+      const newUrl = queryString ? `${basePath}?${queryString}` : basePath;
+      window.history.replaceState({ ...window.history.state, featId: selectedFeatId }, '', newUrl);
     }
 
     // Update filter count display
@@ -340,18 +371,22 @@ const abilities = {
 
     function togglePopup() {
       if (filterPopup) {
-        filterPopup.classList.toggle('show');
+        const isOpen = filterPopup.classList.toggle('show');
+        filterButton?.setAttribute('aria-expanded', String(isOpen));
+        document.getElementById('feats-workspace')?.classList.toggle('filters-open', isOpen);
       }
     }
 
     function closePopup(e: MouseEvent) {
       if (filterPopup && e.target === filterPopup) {
         filterPopup.classList.remove('show');
+        filterButton?.setAttribute('aria-expanded', 'false');
+        document.getElementById('feats-workspace')?.classList.remove('filters-open');
       }
     }
 
     function filterFeats() {
-      const searchTerm = (searchInput instanceof HTMLInputElement) ? searchInput.value.toLowerCase() : '';
+      const searchTerm = (searchInput instanceof HTMLInputElement) ? searchInput.value.trim().toLocaleLowerCase('ru') : '';
       // Build include/exclude lists from tri-state buttons
       const typeIncludes: string[] = [];
       const typeExcludes: string[] = [];
@@ -381,13 +416,12 @@ const abilities = {
       const totalCount = featCards.length;
 
       featCards.forEach(card => {
-        const name = card.querySelector('h3')?.textContent?.toLowerCase() || '';
-        const nameEn = card.querySelector('.name-en')?.textContent?.toLowerCase() || '';
+        const searchableText = card instanceof HTMLElement ? (card.dataset.search || '').toLocaleLowerCase('ru') : '';
         const type = card instanceof HTMLElement ? card.dataset.featType || '' : '';
         const abilities = card instanceof HTMLElement ? ((card.dataset.abilities || '').split(',')) : [];
 
 
-        const matchesSearch = name.includes(searchTerm) || nameEn.includes(searchTerm);
+        const matchesSearch = searchableText.includes(searchTerm);
 
         // Type matching: excludes have priority, then includes (if any includes specified)
         let matchesType = true;
@@ -413,7 +447,7 @@ const abilities = {
           if (extraState === 'exclude' && !hasExtra) isVisible = false; // want only with extra => hide those without
         }
 
-        if (card instanceof HTMLElement) card.style.display = isVisible ? 'block' : 'none';
+        if (card instanceof HTMLElement) card.style.display = isVisible ? 'grid' : 'none';
 
         if (isVisible) {
           visibleCount++;
@@ -424,6 +458,8 @@ const abilities = {
       if (featsCounter) {
         featsCounter.textContent = `${visibleCount}/${totalCount}`;
       }
+      const emptyState = document.getElementById('feats-empty');
+      if (emptyState) emptyState.toggleAttribute('hidden', visibleCount > 0);
       
       // Update clear button visibility
       if (clearSearchButton) {
@@ -495,9 +531,114 @@ const abilities = {
 
     loadFilters();
     filterFeats(); // Initial count
+    document.getElementById('reset-empty-feats')?.addEventListener('click', resetFilters);
   }
 
   document.addEventListener('DOMContentLoaded', initializeFilters);
+</script>
+
+<script>
+  function initializeFeatSelection() {
+    const workspace = document.getElementById('feats-workspace');
+    const listPanel = document.querySelector<HTMLElement>('.feats-list-panel');
+    const searchInput = document.getElementById('feat-search') as HTMLInputElement | null;
+    const detailPlaceholder = document.getElementById('feat-details-placeholder');
+    const detailContent = document.getElementById('feat-details-content');
+    const backButton = document.getElementById('back-to-feat-list');
+    const cards = Array.from(document.querySelectorAll<HTMLAnchorElement>('.feat-card'));
+    if (!workspace || !listPanel || !detailPlaceholder || !detailContent) return;
+
+    const templates = new Map<string, HTMLTemplateElement>();
+    document.querySelectorAll<HTMLTemplateElement>('template[data-feat-details]').forEach(template => {
+      const id = template.dataset.featDetails;
+      if (id) templates.set(id, template);
+    });
+    let selectedId: string | null = null;
+    let listScrollY = 0;
+    let lastSelectedId: string | null = null;
+
+    function showFeat(id: string | null, moveFocus = false) {
+      const template = id ? templates.get(id) : undefined;
+      selectedId = template ? id : null;
+      detailContent.replaceChildren();
+      detailContent.hidden = !selectedId;
+      detailPlaceholder.hidden = Boolean(selectedId);
+      workspace.classList.toggle('is-reading', Boolean(selectedId));
+      cards.forEach(card => {
+        const active = card.dataset.featId === selectedId;
+        card.classList.toggle('active', active);
+        if (active) card.setAttribute('aria-current', 'page');
+        else card.removeAttribute('aria-current');
+      });
+
+      if (!template || !selectedId) {
+        if (moveFocus) {
+          window.scrollTo({ top: listScrollY, behavior: 'instant' });
+          const lastCard = cards.find(card => card.dataset.featId === lastSelectedId);
+          (lastCard || searchInput)?.focus({ preventScroll: true });
+        }
+        return;
+      }
+
+      lastSelectedId = selectedId;
+      detailContent.append(template.content.cloneNode(true));
+      if (moveFocus && window.matchMedia('(max-width: 760px)').matches) {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        const heading = detailContent.querySelector<HTMLElement>('h2');
+        heading?.setAttribute('tabindex', '-1');
+        heading?.focus({ preventScroll: true });
+      }
+    }
+
+    function selectFeat(id: string) {
+      if (selectedId === id) return;
+      if (!selectedId) listScrollY = window.scrollY;
+      const fromList = !selectedId;
+      history.replaceState({ ...history.state, featId: selectedId, listScrollY }, '');
+      const search = window.location.search;
+      history.pushState({ featId: id, fromList, listScrollY }, '', `/feats/${encodeURIComponent(id)}${search}`);
+      showFeat(id, true);
+    }
+
+    function backToList() {
+      if (history.state?.fromList) {
+        history.back();
+        return;
+      }
+      const listUrl = `/feats${window.location.search}`;
+      history.pushState({ featId: null, listScrollY }, '', listUrl);
+      showFeat(null, true);
+    }
+
+    workspace.addEventListener('click', event => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const link = target.closest<HTMLAnchorElement>('a.feat-card');
+      if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
+      const id = link.dataset.featId;
+      if (!id) return;
+      event.preventDefault();
+      selectFeat(id);
+    });
+    backButton?.addEventListener('click', backToList);
+    window.addEventListener('popstate', event => {
+      const state = event.state as { featId?: string | null; listScrollY?: number } | null;
+      listScrollY = state?.listScrollY ?? listScrollY;
+      let id = state?.featId || null;
+      if (!id) {
+        const routeId = window.location.pathname.split('/')[2];
+        if (routeId) {
+          try { id = decodeURIComponent(routeId); } catch { id = routeId; }
+        }
+      }
+      showFeat(id, true);
+    });
+
+    history.replaceState({ ...history.state, featId: null, listScrollY: window.scrollY }, '', window.location.href);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initializeFeatSelection);
+  else initializeFeatSelection();
 </script>
 
 <style>
@@ -624,8 +765,8 @@ const abilities = {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 2001;
   }
 
   .filter-popup.show {
@@ -796,4 +937,79 @@ const abilities = {
     opacity: 0.7;
     font-size: 0.8em;
   }
+
+  .feats-workspace {
+    display: grid;
+    grid-template-columns: minmax(18rem, 25rem) minmax(0, 1fr);
+    align-items: start;
+    gap: 1.5rem;
+  }
+
+  .feats-list-panel,
+  .feat-reading {
+    min-width: 0;
+    padding: 1rem;
+    border: 1px solid var(--card-border);
+    border-radius: 0.75rem;
+    background: var(--card-bg);
+    box-shadow: var(--card-shadow);
+  }
+
+  .feats-list-panel {
+    position: sticky;
+    top: 1rem;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+  }
+
+  .feats-workspace.filters-open .feats-list-panel { z-index: 2000; }
+
+  .search-container { margin: 0 0 0.75rem; }
+  .search-controls { align-items: stretch; }
+  .search-input-container { min-width: 0; }
+  .feats-counter { z-index: 2; }
+  .feats-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+
+  .feat-card {
+    display: grid;
+    gap: 0.25rem;
+    padding: 0.75rem;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+  }
+
+  .feat-card:hover { transform: none; border-color: var(--primary); }
+  .feat-card:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+  .feat-card.active { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 10%, var(--card-bg)); }
+  .feat-card-heading { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.5rem; }
+  .feat-card-name { font-weight: 700; }
+  .feat-card-meta, .feat-card-abilities, .feat-card-requirements { font-size: 0.85rem; }
+  .feat-card-meta { color: var(--primary); }
+  .feat-card-abilities, .feat-card-requirements { opacity: 0.8; }
+  .feat-reading { min-height: 26rem; padding: clamp(1rem, 3vw, 2rem); }
+  .feat-details-placeholder { display: grid; justify-items: center; align-content: center; min-height: 22rem; text-align: center; }
+  .feat-details-placeholder[hidden] { display: none; }
+  .feat-details-placeholder > span { color: var(--primary); font-size: 2rem; }
+  .feat-details-placeholder h2 { margin: 0.75rem 0 0.25rem; color: var(--primary); }
+  .feat-details-placeholder p { max-width: 30rem; margin: 0; opacity: 0.75; }
+  .feat-details-content[hidden], .feats-empty[hidden] { display: none; }
+  .mobile-back { display: none; }
+  .feats-empty { padding: 1rem; text-align: center; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+  @media (max-width: 900px) {
+    .feats-workspace { grid-template-columns: minmax(16rem, 21rem) minmax(0, 1fr); gap: 0.75rem; }
+    .feats-list-panel { padding: 0.75rem; }
+  }
+
+  @media (max-width: 760px) {
+    .feats-workspace { display: block; }
+    .feats-list-panel { position: static; max-height: none; }
+    .feat-reading { display: none; min-height: 0; margin-top: 0.75rem; }
+    .feats-workspace.is-reading .feats-list-panel { display: none; }
+    .feats-workspace.is-reading .feat-reading { display: block; }
+    .mobile-back { display: inline-block; margin-bottom: 1rem; padding: 0.55rem 0.75rem; border: 1px solid var(--card-border); border-radius: 0.45rem; background: var(--background); color: var(--text); font: inherit; cursor: pointer; }
+    .feat-details-placeholder { min-height: 16rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) { .feat-card { transition: none; } }
 </style>

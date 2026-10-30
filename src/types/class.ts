@@ -7,6 +7,7 @@ export interface ClassFeature {
   collapsible?: {
     title: string;
     description: string;
+    requiredLevel?: number;
     statBlockIds?: string[];
     statBlockNote?: string;
     tableData?: {

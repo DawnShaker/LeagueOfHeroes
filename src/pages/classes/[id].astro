@@ -11,7 +11,7 @@ import CreatureDisclosure from '../../components/creatures/CreatureDisclosure.as
 import { companions } from '../../data/creatures/companions';
 import { resolveFeatureCreatures } from '../../utils/creature';
 import ClassFeatureContent from '../../components/classes/ClassFeatureContent.astro';
-//import SubclassArtwork from '../../components/classes/SubclassArtwork.astro';
+import SubclassArtwork from '../../components/classes/SubclassArtwork.astro';
 import { featureAnchor } from '../../utils/classPage';
 import { classSummaries } from '../../data/classPresentation';
 import { getPublishedMaterial } from '../../data/materials';
@@ -91,7 +91,7 @@ const attachedCreatures = resolveFeatureCreatures([...new Set([
     </section>
 
     <div class="class-basics" id="basics">
-      <!--{classData.subclasses.filter(subclass => subclass.artwork).map(subclass => <SubclassArtwork subclass={subclass} />)}--->
+      {classData.subclasses.filter(subclass => subclass.artwork).map(subclass => <SubclassArtwork subclass={subclass} />)}
       <div class="basic-info">
         <h2>Основные характеристики</h2>
         <dl>
@@ -461,6 +461,18 @@ const attachedCreatures = resolveFeatureCreatures([...new Set([
     margin-top: 1rem;
     border-top: 1px solid var(--card-border);
     padding-top: 1rem;
+  }
+
+  .collapsible-group + .collapsible-group {
+    margin-top: 1.25rem;
+  }
+
+  .collapsible-group-title {
+    margin: 0 0 0.5rem;
+    padding-bottom: 0.35rem;
+    color: var(--primary);
+    border-bottom: 1px solid var(--card-border);
+    font-size: 1rem;
   }
 
   .collapsible-item {

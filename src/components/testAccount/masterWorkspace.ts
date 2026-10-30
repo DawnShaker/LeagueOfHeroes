@@ -47,6 +47,7 @@ export async function initializeMasterWorkspace(userId: string, role: AccountRol
   const unsavedNotes = new Set<string>();
   const notePrefix = `loh-master-rule-note:${userId}:`;
   root.querySelectorAll<HTMLElement>('[data-mw-editor-only]').forEach(element => { element.hidden = !editable; });
+  root.querySelectorAll<HTMLElement>('[data-mw-master-only]').forEach(element => { element.hidden = role !== 'master' && role !== 'admin'; });
   el<HTMLFieldSetElement>('mw-editor-fields').disabled = !editable;
   el<HTMLInputElement>('mw-import-rules').disabled = !editable;
   el('mw-status-filter-label').hidden = role === 'test_master';
@@ -142,6 +143,11 @@ export async function initializeMasterWorkspace(userId: string, role: AccountRol
     view = next;
     draftBanner();
     el('mw-open-tools').classList.toggle('is-active', next === 'tools');
+    root!.querySelectorAll<HTMLAnchorElement>('#mw-reward-study a[data-rule-id]').forEach(link => {
+      if (next === 'reader' && link.dataset.ruleId === current?.id) {
+        link.setAttribute('aria-current', link.dataset.ruleId === 'reward-reading-guide' ? 'page' : 'step');
+      } else link.removeAttribute('aria-current');
+    });
   }
   function updateUrl(id: string | null, push = true) {
     const url = new URL(window.location.href);
@@ -408,6 +414,19 @@ export async function initializeMasterWorkspace(userId: string, role: AccountRol
   draftBanner();
 
   root.addEventListener('click', event => {
+    if (!accessible || event.defaultPrevented) return;
+    const link = (event.target as HTMLElement).closest<HTMLAnchorElement>('a[href]');
+    if (link && event.button === 0 && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey
+      && (!link.target || link.target === '_self') && !link.hasAttribute('download')) {
+      const url = new URL(link.href, window.location.href);
+      const id = url.searchParams.get('rule');
+      if (url.origin === window.location.origin && url.pathname === '/test/cabinet/master/'
+        && !url.hash && url.searchParams.get('official') !== '1' && id && rules.some(rule => rule.id === id)) {
+        event.preventDefault();
+        openRule(id);
+        return;
+      }
+    }
     const button = (event.target as HTMLElement).closest<HTMLButtonElement>('button');
     if (!button || !accessible) return;
     if (button.dataset.ruleId) openRule(button.dataset.ruleId);

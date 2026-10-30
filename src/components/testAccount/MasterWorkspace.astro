@@ -4,6 +4,16 @@ import sourceRules from '../../data/masterRules.json';
 import '../../styles/masterWorkspace.css';
 
 const catalog = validateRuleCatalog(sourceRules);
+const rewardStudySteps = [
+  ['reward-pool', 'Рассчитать пул'],
+  ['item-pool-costs', 'Оценить добычу'],
+  ['settlement-rewards', 'Проверить оплату'],
+  ['reward-delivery', 'Выдать награды'],
+  ['selling-loot', 'Продать добычу'],
+].flatMap(([id, label]) => {
+  const rule = catalog.rules.find(rule => rule.id === id);
+  return rule ? [{ id, label, title: rule.title }] : [];
+});
 ---
 
 <div id="master-workspace" class="master-workspace" aria-busy="true">
@@ -41,6 +51,7 @@ const catalog = validateRuleCatalog(sourceRules);
       <div class="mw-sidebar-tools">
         <span class="mw-sidebar-label">Подготовка игры</span>
         <button id="mw-open-tools" class="mw-tools-link" type="button"><span aria-hidden="true">⚒</span> Калькуляторы и генераторы <span aria-hidden="true">↗</span></button>
+        <a href="/test/cabinet/master/diseases/" data-mw-master-only hidden>Справочник болезней ↗</a>
         <a href="/tools/encounter-builder/" target="_blank" rel="noopener">Конструктор столкновений ↗</a>
         <a href="/tools/game-stats/" target="_blank" rel="noopener">Статистика игр ↗</a>
       </div>
@@ -48,6 +59,15 @@ const catalog = validateRuleCatalog(sourceRules);
     </aside>
 
     <div class="mw-main">
+      <nav id="mw-reward-study" class="mw-study-route" aria-labelledby="mw-study-title" data-mw-master-only hidden>
+        <div class="mw-study-heading">
+          <div><h3 id="mw-study-title">Награды: что изучить</h3><p>Пять основных шагов; дополнительные случаи — в карте темы.</p></div>
+          <a href="/test/cabinet/master/?rule=reward-reading-guide" data-rule-id="reward-reading-guide">Карта всех статей</a>
+        </div>
+        <ol>
+          {rewardStudySteps.map((step, index) => <li><a href={`/test/cabinet/master/?rule=${step.id}`} data-rule-id={step.id} title={step.title}><span aria-hidden="true">{index + 1}</span>{step.label}</a></li>)}
+        </ol>
+      </nav>
       <section id="mw-library" aria-labelledby="mw-list-title">
         <div class="mw-library-toolbar">
           <label class="mw-search"><span aria-hidden="true">⌕</span><input id="mw-search" type="search" placeholder="Найти правило, термин или фразу…" aria-label="Поиск по заголовкам и полному тексту правил" /></label>

@@ -1,129 +1,265 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import BackgroundDetails from '../components/backgrounds/BackgroundDetails.astro';
 import { backgroundsData } from '../data/backgrounds';
 
 const backgrounds = backgroundsData;
 ---
 
 <Layout title="Предыстории">
-  <div class="content">
-    <h1>Предыстории</h1>
-    
-    <div class="search-container">
-      <input 
-        type="text" 
-        id="background-search" 
-        placeholder="Поиск предысторий..."
-        class="search-input"
-      />
+  <main class="backgrounds-page">
+    <header class="page-heading">
+      <h1>Предыстории</h1>
+      <p>Найдите предысторию и просмотрите её описание, владения и предлагаемые черты личности.</p>
+    </header>
+
+    <div class="backgrounds-workspace" id="backgrounds-workspace">
+      <aside class="background-list-panel" aria-label="Поиск и список предысторий">
+        <label for="background-search">Поиск по названию, источнику или владениям</label>
+        <div class="search-wrap">
+          <input
+            type="search"
+            id="background-search"
+            placeholder="Например, Noble или PHB24"
+            autocomplete="off"
+            aria-controls="background-list"
+          />
+          <button id="clear-background-search" type="button" aria-label="Очистить поиск" hidden>×</button>
+        </div>
+        <p id="background-count" class="background-count" role="status" aria-live="polite" aria-atomic="true"></p>
+
+        <nav id="background-list" class="background-list" aria-label="Предыстории">
+          {backgrounds.map(background => {
+            const searchText = [
+              background.name,
+              background.nameEn,
+              background.sourceBook,
+              background.proficiencies.skills.description,
+              background.proficiencies.feat,
+            ].join(' ');
+            return (
+              <a
+                href={`/backgrounds/${encodeURIComponent(background.id)}`}
+                class="background-card"
+                data-background-id={background.id}
+                data-search={searchText}
+              >
+                <span class="card-heading">
+                  <span class="card-name">{background.name}</span>
+                  <span class="card-name-en">{background.nameEn}</span>
+                </span>
+                <span class="card-summary">{background.proficiencies.skills.description}</span>
+                <span class="card-source">{background.sourceBook}</span>
+              </a>
+            );
+          })}
+        </nav>
+
+        <div id="background-empty" class="background-empty" hidden>
+          <p>Предыстории не найдены. Измените запрос или очистите поиск.</p>
+          <button type="button" class="clear-empty-search">Очистить поиск</button>
+        </div>
+      </aside>
+
+      <section id="background-details" class="background-reading" aria-label="Подробности предыстории">
+        <button id="back-to-background-list" class="mobile-back" type="button">← К списку предысторий</button>
+        <div id="background-details-placeholder" class="details-placeholder">
+          <span class="placeholder-mark" aria-hidden="true">✦</span>
+          <h2>Какую предысторию выберете?</h2>
+          <p>Выберите запись в списке, чтобы посмотреть её описание и игровые особенности.</p>
+        </div>
+        <div id="background-details-content" class="background-content" hidden></div>
+      </section>
     </div>
 
-    <div class="backgrounds-grid">
-      {backgrounds.map(bg => (
-        <a href={`/backgrounds/${bg.id}`} class="background-card">
-          <div class="card-content">
-            <h2>{bg.name}</h2>
-            <span class="name-en">[{bg.nameEn}]</span>
-            <div class="source">{bg.sourceBook}</div>
-          </div>
-        </a>
-      ))}
-    </div>
-  </div>
+    {backgrounds.map(background => (
+      <template data-background-details={background.id}>
+        <BackgroundDetails background={background} />
+      </template>
+    ))}
+  </main>
 </Layout>
 
 <script>
-  function initSearch() {
-    /** @type {HTMLInputElement|null} */
-    const searchInput = document.getElementById('background-search');
-    const cards = document.querySelectorAll('.background-card');
-    
-    function filterCards() {
-      const searchTerm = (searchInput instanceof HTMLInputElement) ? searchInput.value.toLowerCase() : '';
-      
+  function initializeBackgroundCatalog() {
+    const workspace = document.getElementById('backgrounds-workspace');
+    const listPanel = document.querySelector<HTMLElement>('.background-list-panel');
+    const searchInput = document.getElementById('background-search') as HTMLInputElement | null;
+    const clearButton = document.getElementById('clear-background-search');
+    const cards = Array.from(document.querySelectorAll<HTMLAnchorElement>('.background-card'));
+    const count = document.getElementById('background-count');
+    const empty = document.getElementById('background-empty');
+    const detailsPlaceholder = document.getElementById('background-details-placeholder');
+    const detailsContent = document.getElementById('background-details-content');
+    const backButton = document.getElementById('back-to-background-list');
+    if (!workspace || !listPanel || !searchInput || !count || !empty || !detailsPlaceholder || !detailsContent) return;
+
+    const templates = new Map<string, HTMLTemplateElement>();
+    document.querySelectorAll<HTMLTemplateElement>('template[data-background-details]').forEach(template => {
+      const id = template.dataset.backgroundDetails;
+      if (id) templates.set(id, template);
+    });
+    let selectedId: string | null = null;
+    let listScrollTop = 0;
+
+    function filterBackgrounds() {
+      const query = searchInput.value.trim().toLocaleLowerCase('ru');
+      let visible = 0;
       cards.forEach(card => {
-        const name = card.querySelector('h2')?.textContent?.toLowerCase() || '';
-        const isVisible = name.includes(searchTerm);
-        if (card instanceof HTMLElement) card.style.display = isVisible ? 'block' : 'none';
+        const matches = (card.dataset.search || '').toLocaleLowerCase('ru').includes(query);
+        card.hidden = !matches;
+        if (matches) visible++;
       });
+      count.textContent = `Предыстории: ${visible} из ${cards.length}`;
+      empty.hidden = visible > 0;
+      const noResults = visible === 0;
+      const clear = document.getElementById('clear-background-search');
+      if (clear) clear.toggleAttribute('hidden', searchInput.value.length === 0);
+      if (noResults) empty.setAttribute('aria-label', 'Ничего не найдено');
+      else empty.removeAttribute('aria-label');
+      history.replaceState({ ...history.state, searchTerm: searchInput.value, listScrollTop: listPanel.scrollTop }, '');
     }
 
-    if (searchInput instanceof HTMLInputElement) searchInput.addEventListener('input', filterCards);
+    function showBackground(id: string | null, moveFocus = false) {
+      const template = id ? templates.get(id) : undefined;
+      selectedId = template ? id : null;
+      detailsContent.replaceChildren();
+      detailsContent.hidden = !selectedId;
+      detailsPlaceholder.hidden = Boolean(selectedId);
+      workspace.classList.toggle('is-reading', Boolean(selectedId));
+      cards.forEach(card => {
+        const active = card.dataset.backgroundId === selectedId;
+        card.classList.toggle('active', active);
+        if (active) card.setAttribute('aria-current', 'page');
+        else card.removeAttribute('aria-current');
+      });
+
+      if (!template || !selectedId) {
+        if (moveFocus) {
+          listPanel.scrollTop = listScrollTop;
+          const selectedCard = cards.find(card => card.dataset.backgroundId === history.state?.backgroundId);
+          (selectedCard || searchInput).focus({ preventScroll: true });
+        }
+        return;
+      }
+
+      detailsContent.append(template.content.cloneNode(true));
+      if (moveFocus && window.matchMedia('(max-width: 760px)').matches) {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        detailsContent.querySelector('h2')?.setAttribute('tabindex', '-1');
+        detailsContent.querySelector<HTMLElement>('h2')?.focus({ preventScroll: true });
+      }
+    }
+
+    function selectBackground(id: string) {
+      if (selectedId === id) return;
+      listScrollTop = listPanel.scrollTop;
+      const fromList = Boolean(history.state?.fromList || !selectedId);
+      history.replaceState({ ...history.state, searchTerm: searchInput.value, listScrollTop }, '');
+      history.pushState(
+        { backgroundId: id, fromList, searchTerm: searchInput.value, listScrollTop },
+        '',
+        `/backgrounds/${encodeURIComponent(id)}`,
+      );
+      showBackground(id, true);
+    }
+
+    function clearSelection() {
+      if (history.state?.fromList) {
+        history.back();
+        return;
+      }
+      history.pushState({ backgroundId: null, searchTerm: searchInput.value, listScrollTop }, '', '/backgrounds');
+      showBackground(null, true);
+    }
+
+    searchInput.addEventListener('input', filterBackgrounds);
+    clearButton?.addEventListener('click', () => {
+      searchInput.value = '';
+      filterBackgrounds();
+      searchInput.focus();
+    });
+    empty.querySelector('.clear-empty-search')?.addEventListener('click', () => {
+      searchInput.value = '';
+      filterBackgrounds();
+      searchInput.focus();
+    });
+    backButton?.addEventListener('click', clearSelection);
+
+    workspace.addEventListener('click', event => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const link = target.closest<HTMLAnchorElement>('a.background-card');
+      if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
+      const id = link.dataset.backgroundId;
+      if (!id) return;
+      event.preventDefault();
+      selectBackground(id);
+    });
+
+    window.addEventListener('popstate', event => {
+      const state = event.state as { backgroundId?: string | null; searchTerm?: string; listScrollTop?: number } | null;
+      listScrollTop = state?.listScrollTop ?? listScrollTop;
+      if (typeof state?.searchTerm === 'string') searchInput.value = state.searchTerm;
+      filterBackgrounds();
+      showBackground(state?.backgroundId || null, true);
+    });
+
+    history.replaceState({ ...history.state, backgroundId: null, searchTerm: searchInput.value, listScrollTop: 0 }, '', '/backgrounds');
+    filterBackgrounds();
   }
 
-  document.addEventListener('DOMContentLoaded', initSearch);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initializeBackgroundCatalog);
+  else initializeBackgroundCatalog();
 </script>
 
 <style>
-  .content {
-    max-width: 1200px;
-    margin: 0 auto;
+  .backgrounds-page { max-width: 1440px; margin: 0 auto; }
+  .page-heading { margin-bottom: 1.5rem; }
+  .page-heading h1 { margin-bottom: .5rem; }
+  .page-heading p { max-width: 55rem; margin: 0; opacity: .8; }
+  .backgrounds-workspace { display: grid; grid-template-columns: minmax(18rem, 25rem) minmax(0, 1fr); align-items: start; gap: 1.5rem; }
+  .background-list-panel, .background-reading { min-width: 0; padding: 1rem; border: 1px solid var(--card-border); border-radius: .75rem; background: var(--card-bg); box-shadow: var(--card-shadow); }
+  .background-list-panel { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow-y: auto; }
+  .background-list-panel > label { display: block; margin-bottom: .5rem; font-weight: 600; }
+  .search-wrap { position: relative; }
+  .search-wrap input { width: 100%; padding: .75rem 2.5rem .75rem .85rem; border: 1px solid var(--card-border); border-radius: .5rem; background: var(--background); color: var(--text); font: inherit; }
+  .search-wrap input:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+  #clear-background-search { position: absolute; top: 50%; right: .4rem; transform: translateY(-50%); width: 2rem; height: 2rem; border: 0; border-radius: .35rem; background: transparent; color: var(--text); font-size: 1.3rem; cursor: pointer; }
+  .background-count { margin: .65rem 0; color: var(--text); opacity: .75; font-size: .9rem; }
+  .background-list { display: grid; gap: .5rem; }
+  .background-card { display: grid; gap: .25rem; padding: .75rem; border: 1px solid var(--card-border); border-radius: .5rem; color: inherit; text-decoration: none; transition: border-color .15s ease, background-color .15s ease; }
+  .background-card:hover, .background-card:focus-visible { border-color: var(--primary); }
+  .background-card:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+  .background-card.active { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 10%, var(--card-bg)); }
+  .card-heading { display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem .5rem; }
+  .card-name { font-weight: 700; }
+  .card-name-en { opacity: .7; font-size: .85rem; }
+  .card-summary { opacity: .85; font-size: .875rem; }
+  .card-source { color: var(--primary); font-size: .8rem; }
+  .background-card[hidden] { display: none; }
+  .background-reading { min-height: 26rem; padding: clamp(1rem, 3vw, 2rem); }
+  .details-placeholder { display: grid; justify-items: center; align-content: center; min-height: 22rem; text-align: center; }
+  .details-placeholder[hidden] { display: none; }
+  .details-placeholder h2 { margin: .75rem 0 .25rem; color: var(--primary); }
+  .details-placeholder p { max-width: 30rem; margin: 0; opacity: .75; }
+  .placeholder-mark { color: var(--primary); font-size: 2rem; }
+  .mobile-back { display: none; }
+  .background-empty { padding: 1rem 0; text-align: center; }
+  .background-empty p { margin-top: 0; }
+  .clear-empty-search { padding: .5rem .75rem; border: 1px solid var(--card-border); border-radius: .4rem; background: var(--background); color: var(--text); font: inherit; cursor: pointer; }
+  @media (max-width: 900px) {
+    .backgrounds-workspace { grid-template-columns: minmax(16rem, 21rem) minmax(0, 1fr); gap: .75rem; }
+    .background-list-panel { padding: .75rem; }
   }
-
-  .search-container {
-    margin: 2rem 0;
+  @media (max-width: 760px) {
+    .backgrounds-workspace { display: block; }
+    .background-list-panel { position: static; max-height: none; }
+    .background-reading { display: none; min-height: 0; margin-top: .75rem; }
+    .backgrounds-workspace.is-reading .background-list-panel { display: none; }
+    .backgrounds-workspace.is-reading .background-reading { display: block; }
+    .mobile-back { display: inline-block; margin-bottom: 1rem; padding: .55rem .75rem; border: 1px solid var(--card-border); border-radius: .45rem; background: var(--background); color: var(--text); font: inherit; cursor: pointer; }
+    .details-placeholder { min-height: 16rem; }
   }
-
-  .search-input {
-    width: 100%;
-    max-width: 400px;
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--card-border);
-    border-radius: 0.5rem;
-    background: var(--card-bg);
-    color: var(--text);
-    font-size: 1rem;
-  }
-
-  .search-input:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 2px var(--primary-dark);
-  }
-
-  .backgrounds-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .background-card {
-    background: var(--card-bg);
-    padding: 1rem;
-    border-radius: 0.5rem;
-    box-shadow: var(--card-shadow);
-    border: 1px solid var(--card-border);
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.2s;
-    display: flex;
-    align-items: center;
-  }
-
-  .background-card:hover {
-    transform: translateY(-2px);
-  }
-
-  .card-content {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .card-content h2 {
-    margin: 0;
-    font-size: 1.1rem;
-  }
-  .name-en {
-    color: var(--text);
-    opacity: 0.7;
-    font-size: 0.8em;
-  }
-
-  .source {
-    color: var(--text);
-    opacity: 0.8;
-    font-size: 0.875rem;
-  }
-
+  @media (prefers-reduced-motion: reduce) { .background-card { transition: none; } }
 </style>

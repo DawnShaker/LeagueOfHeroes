@@ -45,12 +45,26 @@ import { crXPValues } from '../../data/encounters';
           <p id="monster-error" class="input-error" role="alert" hidden></p>
         </form>
         <div id="monster-list" class="monster-list"></div>
+        <section class="presets" aria-labelledby="presets-heading">
+          <h3 id="presets-heading">Столкновения по дням</h3>
+          <div class="input-group preset-controls">
+            <label>Название столкновения<input id="preset-name" class="text-input" maxlength="100" placeholder="Например, Засада у моста"></label>
+            <label>День<input id="preset-day" class="number-input" type="number" min="1" step="1" value="1"></label>
+            <button id="save-preset" class="add-btn" type="button">Сохранить столкновение</button>
+          </div>
+          <div class="input-group preset-controls">
+            <label>Выбрать столкновение<select id="preset-select" class="text-input"></select></label>
+            <button id="update-preset" type="button" class="add-btn">Обновить выбранное</button>
+            <button id="delete-preset" type="button" class="remove-btn">Удалить</button>
+          </div>
+          <div id="day-summary" class="day-summary" aria-live="polite"></div>
+        </section>
         <div class="encounter-info" aria-live="polite" aria-atomic="true">
           <h3>Параметры столкновения</h3>
           <p>Общая сложность: <span id="total-difficulty">Добавьте персонажей</span><span id="difficulty-multiplier"></span></p>
           <p>Общий опыт: <span id="total-xp">0</span></p>
           <p>Опыт на персонажа: <span id="xp-per-character">—</span></p>
-          <p>Опыт здесь служит для оценки столкновения. Награды Лиги определяются её правилами.</p>
+          <p>Сложность рассчитывается для выбранного столкновения. В сводке по дням показан суммарный опыт всех сохранённых столкновений; награды Лиги определяются её правилами.</p>
           <ul id="encounter-warnings" hidden></ul>
         </div>
       </section>
@@ -184,6 +198,11 @@ import { crXPValues } from '../../data/encounters';
   .encounter-info {
     margin-top: 2rem;
   }
+  .presets { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--card-border); }
+  .preset-controls { align-items: end; }
+  .day-summary { margin-top: 1rem; }
+  .day-summary h4 { margin: 1rem 0 .4rem; }
+  .day-summary p { margin: .25rem 0; }
 
   h2 {
     margin-bottom: 1rem;

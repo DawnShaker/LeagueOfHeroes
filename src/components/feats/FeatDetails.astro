@@ -1,0 +1,70 @@
+---
+import MaterialMetadata from '../materials/MaterialMetadata.astro';
+import { formatDescription } from '../../utils/featFormatting';
+import type { Feat } from '../../types/feat';
+
+interface Props {
+  feat: Feat;
+  standalone?: boolean;
+}
+
+const { feat, standalone = false } = Astro.props;
+const featTypes: Record<Feat['type'], string> = {
+  origin: 'Черта происхождения',
+  general: 'Общая черта',
+  'fighting-style': 'Черта боевого стиля',
+  epic: 'Эпическая черта',
+};
+---
+
+<article class="feat-details">
+  <header class="feat-header">
+    <div class="feat-heading">
+      {standalone
+        ? <h1>{feat.name} <span class="name-en">[{feat.nameEn}]</span></h1>
+        : <h2>{feat.name} <span class="name-en">[{feat.nameEn}]</span></h2>}
+      <p class="feat-type">{featTypes[feat.type]}</p>
+      {feat.sourceBook && <p class="feat-source">{feat.sourceBook}</p>}
+    </div>
+    <MaterialMetadata kind="feat" id={feat.id} />
+  </header>
+
+  <div class="feat-content">
+    {feat.requirements?.length > 0 && (
+      <section class="requirements">
+        <h3>Необходимые условия</h3>
+        <ul>{feat.requirements.map(requirement => <li>{requirement}</li>)}</ul>
+      </section>
+    )}
+
+    {feat.description && <section class="description" set:html={formatDescription(feat.description)} />}
+    <section class="effects">
+      {feat.effects.map(effect => <Fragment set:html={formatDescription(effect)} />)}
+    </section>
+  </div>
+</article>
+
+<style>
+  .feat-details { min-width: 0; }
+  .feat-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+  h1, h2, h3 { color: var(--primary); }
+  h1, h2 { margin: 0; font-size: 1.5rem; }
+  .name-en { color: var(--text); opacity: .7; font-size: .8em; font-weight: 400; }
+  .feat-type, .feat-source { margin: .35rem 0 0; color: var(--text); opacity: .8; }
+  .feat-source { font-size: .9rem; }
+  .feat-content { min-width: 0; }
+  .requirements { margin-bottom: 1.5rem; }
+  .requirements h3 { margin: 0 0 .75rem; font-size: 1.1rem; }
+  .requirements ul { margin: 0; padding-left: 1.5rem; }
+  .requirements li { margin-bottom: .4rem; }
+  .description { margin-bottom: 1.5rem; }
+  .effects :global(p), .description :global(p) { margin: 0 0 1rem; line-height: 1.6; }
+  .description :global(.table-container), .effects :global(.table-container) { margin: 1rem 0; overflow: auto; padding: .5rem; border: 1px solid var(--card-border); border-radius: .5rem; }
+  .description :global(table), .effects :global(table) { width: 100%; min-width: 480px; border-collapse: separate; border-spacing: 0; }
+  .description :global(th), .description :global(td), .effects :global(th), .effects :global(td) { padding: .65rem .85rem; border-bottom: 1px solid var(--card-border); text-align: left; vertical-align: top; }
+  .description :global(th), .effects :global(th) { background: var(--primary); color: #fff; }
+  @media (max-width: 700px) {
+    .feat-header { flex-direction: column; }
+    .description :global(table), .effects :global(table) { min-width: 440px; }
+  }
+</style>

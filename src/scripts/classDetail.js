@@ -835,7 +835,27 @@ document.addEventListener('DOMContentLoaded', () => {
         // helpful debugging when testing in browser
         try { console.debug('createFeatureElement: collapsible for', feature.name, feature.collapsible); } catch (e) { /* ignore */ }
 
-        feature.collapsible.forEach(item => {
+        const hasRequiredLevelGroups = feature.collapsible.some(item => Number.isInteger(item.requiredLevel));
+        const collapsibleGroups = hasRequiredLevelGroups
+          ? Array.from(feature.collapsible.reduce((groups, item) => {
+              const level = Number.isInteger(item.requiredLevel) ? item.requiredLevel : 1;
+              groups.set(level, [...(groups.get(level) || []), item]);
+              return groups;
+            }, new Map())).sort(([levelA], [levelB]) => levelA - levelB).map(([level, items]) => ({ level, items }))
+          : [{ level: null, items: feature.collapsible }];
+
+        collapsibleGroups.forEach(({ level, items }) => {
+          let groupContainer = collapsibleContent;
+          if (level !== null) {
+            groupContainer = document.createElement('div');
+            groupContainer.className = 'collapsible-group';
+            const groupTitle = document.createElement('h4');
+            groupTitle.className = 'collapsible-group-title';
+            groupTitle.textContent = `Доступны с ${level}-го уровня`;
+            groupContainer.appendChild(groupTitle);
+          }
+
+          items.forEach(item => {
           const details = document.createElement('details');
           details.className = 'collapsible-item';
           
@@ -910,7 +930,10 @@ document.addEventListener('DOMContentLoaded', () => {
           
           appendCreatureSlot(description, item);
           details.appendChild(description);
-          collapsibleContent.appendChild(details);
+          groupContainer.appendChild(details);
+          });
+
+          if (level !== null) collapsibleContent.appendChild(groupContainer);
         });
 
         descriptionContainer.appendChild(collapsibleContent);
