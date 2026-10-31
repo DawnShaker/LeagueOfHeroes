@@ -1,6 +1,7 @@
 import { diseaseEntries } from '../../data/diseases';
 import type { DiseaseMechanics, DiseaseWorkspaceStore, DueDiseaseEvent, LocalDiseaseCase } from '../../types/disease';
 import { canTrackDisease, diseaseInline, diseaseSearchText, escapeDiseaseHtml as esc, formatDuration, formatGameTime, materialLabels, normalizeDiseaseText, progressionLabels } from '../../utils/diseaseCatalog';
+import { diseaseSourceBook, diseaseSourceSummary, matchesDiseaseSource, sourceKindLabels, sourceScopeLabels, sourceStatusLabels } from '../../utils/diseaseSources';
 import { advanceDiseaseTime, applyDiseaseCheck, caseState, correctLastDiseaseEvent, createDiseaseCase, incubationMinutes, logDiseaseEvent, MAX_GAME_MINUTE, newDiseaseId, newDiseaseStore, parseDiseaseStore, pendingDiseaseEvents, requestDiseaseRest, resolveDiseaseEvent, rollDiseaseDice, validateMechanics } from '../../utils/diseaseProgression';
 import { accountModePath, defaultAccountMode, isLocalAuthBypassEnabled, isTestAccountConfigured, localAccountPreviewProfile, normalizeAccountRole, testAccountSupabase } from '../../utils/testAccount';
 const byId = new Map(diseaseEntries.map(e => [e.id, e]));
@@ -74,7 +75,7 @@ function mountWorkspace(root: HTMLElement, userId: string): void {
     let noticeTimer = 0;
     const dialog = el<HTMLDialogElement>('dw-dialog');
     const form = el<HTMLFormElement>('dw-dialog-form');
-    const filterIds: Record<string, string> = { transmission: 'disease-transmission-filter', impact: 'disease-impact-filter', pace: 'dw-pace', treatment: 'dw-treatment', kind: 'dw-kind', group: 'disease-group-filter', progression: 'disease-progression-filter', readiness: 'dw-readiness' };
+    const filterIds: Record<string, string> = { transmission: 'disease-transmission-filter', impact: 'disease-impact-filter', pace: 'dw-pace', treatment: 'dw-treatment', kind: 'dw-kind', group: 'disease-group-filter', progression: 'disease-progression-filter', readiness: 'dw-readiness', book: 'dw-book-filter', sourceEdition: 'dw-source-edition', sourceStatus: 'dw-source-status' };
     function notice(message: string, isError = false): void {
         const node = el('dw-notice');
         node.hidden = false;
@@ -220,14 +221,15 @@ function mountWorkspace(root: HTMLElement, userId: string): void {
         const matches = (key: string, field: string | string[]) => select(filterIds[key]).value === 'all' || (Array.isArray(field) ? field.includes(select(filterIds[key]).value) : field === select(filterIds[key]).value);
         const entries = diseaseEntries.filter(e => (!q || q.split(/\s+/).every(word => searchIndex.get(e.id)!.includes(word))) &&
             (!input('dw-favorites').checked || store.favorites.includes(e.id)) && matches('transmission', e.transmissionTags) && matches('impact', e.impactTags) &&
-            matches('pace', e.pace) && matches('treatment', e.treatmentTags) && matches('kind', e.kind) && matches('group', e.sourceGroup) && matches('progression', e.progressionTags) && matches('readiness', e.readiness));
+            matches('pace', e.pace) && matches('treatment', e.treatmentTags) && matches('kind', e.kind) && matches('group', e.sourceGroup) && matches('progression', e.progressionTags) && matches('readiness', e.readiness) &&
+            matchesDiseaseSource(e, { book: select('dw-book-filter').value, edition: select('dw-source-edition').value, status: select('dw-source-status').value }));
         const sort = select('disease-sort').value;
         entries.sort((a, b) => sort === 'source' ? a.index - b.index : sort === 'family' ? a.family.localeCompare(b.family, 'en') || a.index - b.index : (a.nameRu || a.name).localeCompare(b.nameRu || b.name, 'ru') || a.index - b.index);
         let family = '';
         el('disease-list').innerHTML = entries.slice(0, pageSize).map(e => {
             const group = sort === 'family' && e.family !== family ? `<p class="dw-family">${esc(e.nameRu || e.aliases[0] || e.name)}</p>` : '';
             family = e.family;
-            return `${group}<button type="button" class="dw-entry" data-entry="${e.id}" aria-pressed="${e.id === selectedEntry}"><span class="dw-entry-title">${esc(e.nameRu || e.name)}${store.favorites.includes(e.id) ? '<span aria-label="В избранном">★</span>' : ''}</span><span class="dw-entry-en">${esc(e.name)} · №${e.index}</span><span class="dw-tags">${tag(e.transmissionTags[0])}${e.infectionDc ? tag(`Сл ${e.infectionDc}`, true) : ''}${tag(e.impactTags[0])}${e.kind !== 'disease' ? tag(materialLabels[e.kind]) : ''}</span><span class="dw-entry-timing">${esc(e.incubation)} · ${esc(e.progressionTags[0])}</span></button>`;
+            return `${group}<button type="button" class="dw-entry" data-entry="${e.id}" aria-pressed="${e.id === selectedEntry}"><span class="dw-entry-title">${esc(e.nameRu || e.name)}${store.favorites.includes(e.id) ? '<span aria-label="В избранном">★</span>' : ''}</span><span class="dw-entry-en">${esc(e.name)} · №${e.index}</span><span class="dw-tags">${tag(e.transmissionTags[0])}${e.infectionDc ? tag(`Сл ${e.infectionDc}`, true) : ''}${tag(e.impactTags[0])}${e.kind !== 'disease' ? tag(materialLabels[e.kind]) : ''}</span><span class="dw-entry-timing">${esc(e.incubation)} · ${esc(e.progressionTags[0])}</span><span class="dw-source-line">${esc(diseaseSourceSummary(e))}</span></button>`;
         }).join('');
         el('disease-result-count').textContent = `${entries.length} из ${diseaseEntries.length} · показано ${Math.min(pageSize, entries.length)}`;
         el('disease-no-results').hidden = entries.length > 0;
@@ -255,7 +257,7 @@ function mountWorkspace(root: HTMLElement, userId: string): void {
             return;
         const variants = diseaseEntries.filter(v => v.id !== e.id && (v.family === e.family || e.relatedIds.includes(v.id)));
         const m = e.mechanics;
-        el('dw-reader').innerHTML = `<header class="dw-reader-header"><button type="button" class="dw-button dw-reader-mobile-back" data-action="back-list">← К результатам</button><div class="dw-tags">${tag(materialLabels[e.kind])}${tag('Авторская адаптация', true)}${tag(e.readiness === 'prepared' ? 'Есть профиль учёта' : 'Требует решения мастера')}</div><h2 tabindex="-1">${esc(e.nameRu || e.name)}</h2><span class="dw-entry-en">${esc(e.name)} · №${e.index}</span><div class="dw-actions">${canTrackDisease(e) ? button('add-case', '＋ Добавить случай', true) : ''}${button('favorite', store.favorites.includes(e.id) ? '★ В избранном' : '☆ В избранное')}${button('copy-link', 'Ссылка')}</div></header>` +
+        el('dw-reader').innerHTML = `<header class="dw-reader-header"><button type="button" class="dw-button dw-reader-mobile-back" data-action="back-list">← К результатам</button><div class="dw-tags">${tag(materialLabels[e.kind])}${tag('Авторская адаптация', true)}${tag(sourceStatusLabels[e.sourceIndex.status])}${tag(e.readiness === 'prepared' ? 'Есть профиль учёта' : 'Требует решения мастера')}</div><h2 tabindex="-1">${esc(e.nameRu || e.name)}</h2><span class="dw-entry-en">${esc(e.name)} · №${e.index}</span><div class="dw-actions">${canTrackDisease(e) ? button('add-case', '＋ Добавить случай', true) : ''}${button('favorite', store.favorites.includes(e.id) ? '★ В избранном' : '☆ В избранное')}${button('copy-link', 'Ссылка')}</div></header>` +
             section('Заражение', `<p>${diseaseInline(e.infection)}</p>`) +
             section('Проявление', `<p>Инкубация: <strong>${esc(e.incubation)}</strong></p><p class="dw-muted">Заразность до симптомов определяется описанием; если она не указана, уточните её у мастера.</p>`) +
             section('Симптомы, эффекты и триггеры', `<p>${diseaseInline(e.effects)}</p>`) +
@@ -263,7 +265,11 @@ function mountWorkspace(root: HTMLElement, userId: string): void {
             section('Лечение и исход', `<p>${diseaseInline(e.treatment)}</p>`) +
             (e.questions.length ? section('Что уточнить перед игрой', `<ul>${e.questions.map(q => `<li>${esc(q)}</li>`).join('')}</ul>`) : '') +
             (variants.length ? section('Варианты и связанные записи', `<div class="dw-actions">${variants.map(v => `<button class="dw-button" type="button" data-entry="${v.id}">${esc(v.name)}</button>`).join('')}</div>`) : '') +
-            section('Источник и адаптация', `<p>${esc(e.sourceGroup)}</p><p class="dw-muted">${esc(e.status)}. Русское название — рабочий перевод для поиска. Исходные формулировки выше сохранены; происхождение записи не подтверждено первоисточником.</p>`);
+            section('Индекс источников', `<p class="dw-muted">${esc(e.sourceIndex.note)} Проверено: ${esc(e.sourceIndex.checkedOn)}.</p>${e.sourceIndex.references.map(ref => {
+                const book = diseaseSourceBook(ref.bookId)!;
+                return `<div class="dw-source-reference"><div class="dw-tags">${tag(book.code + (book.issue ? ` №${book.issue}` : ''), true)}${tag(book.edition)}${tag(sourceKindLabels[book.kind])}</div><h4>${esc(book.title)}</h4><p>${esc(sourceStatusLabels[ref.status])} · ${esc(sourceScopeLabels[ref.scope])}</p>${ref.locator ? `<p>Место в источнике: ${esc(ref.locator)}</p>` : '<p class="dw-muted">Страница не установлена.</p>'}${ref.note ? `<p class="dw-muted">${esc(ref.note)}</p>` : ''}<a class="dw-link" href="${esc(ref.evidenceUrl)}" target="_blank" rel="noopener noreferrer">Основание привязки ↗</a></div>`;
+            }).join('')}`) +
+            section('Исходный каталог и адаптация', `<p>Заявленный раздел: ${esc(e.sourceGroup)}</p><p class="dw-muted">Статус исходного документа: ${esc(e.status)}. Русское название — рабочий перевод для поиска. Библиографические находки указаны отдельно; параметры и лечение этой авторской адаптации не проверялись по книгам.</p>`);
     }
     function caseProgress(c: LocalDiseaseCase): string {
         if (c.phase === 'incubation')

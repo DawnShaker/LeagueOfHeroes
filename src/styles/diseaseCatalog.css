@@ -52,6 +52,9 @@
 .dw-tag { display:inline-flex; border:1px solid var(--account-border); border-radius:5px; padding:.18rem .38rem; color:var(--account-muted); font-size:.62rem; font-weight:600; line-height:1.4; }
 .dw-tag-gold { color:var(--account-gold); border-color:color-mix(in srgb,var(--account-gold) 40%,var(--account-border)); }
 .dw-entry-timing { display:block; margin-top:.5rem; color:var(--account-muted); font-size:.67rem; }
+.dw-source-line { display:block; margin-top:.45rem; color:var(--account-gold); font-size:.65rem; line-height:1.6; overflow-wrap:anywhere; }
+.dw-source-reference { display:grid; gap:.45rem; padding:1rem 0; border-top:1px solid var(--account-border); margin-top:.8rem; }
+.dw-source-reference h4 { margin:0; font-size:.85rem; color:var(--account-text); line-height:1.6; overflow-wrap:anywhere; }
 .dw-reader { position:sticky; top:1rem; max-height:calc(100vh - 2rem); overflow:auto; border:1px solid var(--account-border); border-radius:16px; background:var(--account-panel); scrollbar-width:thin; }
 .dw-reader-header { padding:1.35rem; border-bottom:1px solid var(--account-border); }
 .dw-reader-header h2 { margin:.8rem 0 .35rem; color:var(--account-text); font:600 1.55rem/1.25 Georgia,serif; overflow-wrap:anywhere; }

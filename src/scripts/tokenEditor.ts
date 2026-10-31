@@ -1,23 +1,15 @@
-import { clamp, drawToken, initialFrameTransform, initialTransform, TOKEN_SIZE, tokenFilename } from '../utils/tokenEditor.ts';
+import { BUILTIN_FRAME_APERTURE, clamp, drawToken, initialFrameTransform, initialTransform, TOKEN_SIZE, tokenFilename } from '../utils/tokenEditor.ts';
 import type { FrameTransform, TokenTransform } from '../utils/tokenEditor.ts';
+import { frameResolution, normalizeBuiltinFrame, TokenFrameRenderer } from '../utils/tokenFrameRenderer.ts';
+import type { BorderFill, FramePaint, TextureKind } from '../utils/tokenFrameRenderer.ts';
 
 type Asset = { blob: Blob; name: string; image: HTMLImageElement; svg: string | null };
-type BorderFill = 'solid' | 'gradient' | 'texture' | 'original';
-type TextureKind = 'stone' | 'noise' | 'stripes' | 'dots' | 'scales';
-type State = {
+type FrameSource = { image: HTMLImageElement; apertureRadius: number };
+type State = FramePaint & {
   art: Asset | null;
   custom: Asset | null;
   border: string;
-  borderColor: string;
   recolor: boolean;
-  borderFill: BorderFill;
-  gradientColors: string[];
-  gradientAngle: number;
-  textureKind: TextureKind;
-  textureScale: number;
-  textureContrast: number;
-  textureOffsetX: number;
-  textureOffsetY: number;
   frameTransform: FrameTransform;
   tokenSize: number;
   background: 'transparent' | 'color';
@@ -73,94 +65,6 @@ function svgBlob(document: Document): Blob {
   return new Blob([new XMLSerializer().serializeToString(document.documentElement)], { type: 'image/svg+xml' });
 }
 
-function generatedTexture(kind: TextureKind, scale: number, contrast: number): HTMLCanvasElement {
-  const canvas = document.createElement('canvas');
-  canvas.width = canvas.height = TOKEN_SIZE;
-  const context = canvas.getContext('2d')!;
-  const base = context.createLinearGradient(0, 0, TOKEN_SIZE, TOKEN_SIZE);
-  base.addColorStop(0, '#1f2937');
-  base.addColorStop(1, '#9ca3af');
-  context.fillStyle = base;
-  context.fillRect(0, 0, TOKEN_SIZE, TOKEN_SIZE);
-  context.save();
-  context.globalAlpha = contrast / 100;
-  context.strokeStyle = '#f8fafc';
-  context.fillStyle = '#f8fafc';
-  context.lineWidth = Math.max(1, scale / 7);
-  if (kind === 'noise' || kind === 'stone') {
-    const resolution = clamp(Math.round(TOKEN_SIZE / scale * 8), 32, 256);
-    const noise = document.createElement('canvas');
-    noise.width = noise.height = resolution;
-    const noiseContext = noise.getContext('2d')!;
-    const pixels = noiseContext.createImageData(resolution, resolution);
-    let seed = 1987;
-    for (let index = 0; index < pixels.data.length; index += 4) {
-      seed = (seed * 1664525 + 1013904223) >>> 0;
-      const value = seed >>> 24;
-      pixels.data[index] = pixels.data[index + 1] = pixels.data[index + 2] = value;
-      pixels.data[index + 3] = 255;
-    }
-    noiseContext.putImageData(pixels, 0, 0);
-    context.globalAlpha *= kind === 'stone' ? 0.28 : 0.65;
-    context.imageSmoothingEnabled = true;
-    context.drawImage(noise, 0, 0, TOKEN_SIZE, TOKEN_SIZE);
-    if (kind === 'stone') {
-      context.globalAlpha = contrast / 100 * 0.7;
-      context.lineWidth = Math.max(1, scale / 16);
-      for (let x = -TOKEN_SIZE; x < TOKEN_SIZE * 2; x += scale * 2) {
-        context.beginPath();
-        context.moveTo(x, 0);
-        context.bezierCurveTo(x + scale, 150, x - scale, 340, x + scale * 0.5, TOKEN_SIZE);
-        context.stroke();
-      }
-    }
-  } else if (kind === 'stripes') {
-    context.translate(TOKEN_SIZE / 2, TOKEN_SIZE / 2);
-    context.rotate(-Math.PI / 4);
-    for (let offset = -TOKEN_SIZE; offset <= TOKEN_SIZE; offset += scale) {
-      context.beginPath(); context.moveTo(offset, -TOKEN_SIZE); context.lineTo(offset, TOKEN_SIZE); context.stroke();
-    }
-  } else if (kind === 'dots') {
-    for (let y = scale / 2; y < TOKEN_SIZE; y += scale) for (let x = scale / 2; x < TOKEN_SIZE; x += scale) {
-      context.beginPath(); context.arc(x, y, Math.max(1, scale / 7), 0, Math.PI * 2); context.fill();
-    }
-  } else {
-    for (let row = -1; row < TOKEN_SIZE / scale + 1; row++) {
-      const y = row * scale;
-      for (let column = -1; column < TOKEN_SIZE / scale + 1; column++) {
-        const x = column * scale + (row % 2 ? scale / 2 : 0);
-        context.beginPath(); context.arc(x, y, scale / 2, 0, Math.PI); context.stroke();
-      }
-    }
-  }
-  context.restore();
-  return canvas;
-}
-
-function fillFrame(source: CanvasImageSource, state: State, texture: HTMLCanvasElement | null): HTMLCanvasElement {
-  const canvas = document.createElement('canvas');
-  canvas.width = canvas.height = TOKEN_SIZE;
-  const context = canvas.getContext('2d')!;
-  if (state.borderFill === 'solid') {
-    context.fillStyle = state.borderColor;
-    context.fillRect(0, 0, TOKEN_SIZE, TOKEN_SIZE);
-  } else if (state.borderFill === 'gradient') {
-    const angle = state.gradientAngle * Math.PI / 180;
-    const dx = Math.cos(angle) * TOKEN_SIZE / 2;
-    const dy = Math.sin(angle) * TOKEN_SIZE / 2;
-    const gradient = context.createLinearGradient(TOKEN_SIZE / 2 - dx, TOKEN_SIZE / 2 - dy, TOKEN_SIZE / 2 + dx, TOKEN_SIZE / 2 + dy);
-    state.gradientColors.forEach((color, index) => gradient.addColorStop(index / Math.max(1, state.gradientColors.length - 1), color));
-    context.fillStyle = gradient;
-    context.fillRect(0, 0, TOKEN_SIZE, TOKEN_SIZE);
-  } else if (state.borderFill === 'texture' && texture) {
-    for (let x = -TOKEN_SIZE; x <= TOKEN_SIZE; x += TOKEN_SIZE) for (let y = -TOKEN_SIZE; y <= TOKEN_SIZE; y += TOKEN_SIZE) {
-      context.drawImage(texture, x + state.textureOffsetX, y + state.textureOffsetY);
-    }
-  }
-  context.globalCompositeOperation = 'destination-in';
-  context.drawImage(source, 0, 0, TOKEN_SIZE, TOKEN_SIZE);
-  return canvas;
-}
 
 async function readAsset(file: Blob, name: string, border = false): Promise<Asset> {
   const limit = (border ? 5 : 20) * 1024 * 1024;
@@ -222,9 +126,13 @@ async function draftTransaction(mode: IDBTransactionMode, value?: Draft): Promis
 }
 
 export function initializeTokenEditor(root: HTMLElement) {
+  const elements = new Map<string, HTMLElement>();
   const get = <T extends HTMLElement>(id: string): T => {
+    const cached = elements.get(id);
+    if (cached) return cached as T;
     const element = root.querySelector<T>(`#${id}`);
     if (!element) throw new Error(`Missing token editor element: ${id}`);
+    elements.set(id, element);
     return element;
   };
   const canvas = get<HTMLCanvasElement>('token-canvas');
@@ -267,14 +175,22 @@ export function initializeTokenEditor(root: HTMLElement) {
   const recolor = get<HTMLInputElement>('token-recolor');
   const dropZone = get('token-drop-zone');
   const retryDraft = get<HTMLButtonElement>('token-retry-draft');
+  const uploadButtons = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-upload-art]'));
+  const borderButtons = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-border]'));
+  const gradientStops = Array.from(get('token-gradient-stops').querySelectorAll<HTMLElement>('[data-gradient-stop]'), stop => ({
+    stop, input: stop.querySelector<HTMLInputElement>('input')!,
+  }));
   if (!context) { error.textContent = 'Canvas недоступен. Откройте страницу в браузере с поддержкой Canvas.'; error.hidden = false; return; }
 
   let state = emptyState();
   let history: State[] = [copyState(state)];
   let historyIndex = 0;
-  let borderImage: CanvasImageSource | null = null;
-  let textureCache: HTMLCanvasElement | null = null;
-  let textureCacheKey = '';
+  let activeFrameSource: FrameSource | null = null;
+  const frameRenderer = new TokenFrameRenderer();
+  let pendingRender: number | null = null;
+  let controlsDirty = true;
+  let transformsDirty = true;
+  let texturePreviewKey = '';
   let borderVersion = 0;
   let artVersion = 0;
   let revision = 0;
@@ -285,7 +201,8 @@ export function initializeTokenEditor(root: HTMLElement) {
   let lastClearIndex: number | null = null;
   let draftTimer: ReturnType<typeof setTimeout> | undefined;
   let saveQueue: Promise<unknown> = Promise.resolve();
-  const presets = new Map<string, Promise<string>>();
+  const presets = new Map<string, Promise<FrameSource>>();
+  const customSources = new WeakMap<Asset, Promise<FrameSource>>();
   let thumbnailAsset: Asset | null = null;
   let thumbnailUrl: string | null = null;
 
@@ -293,17 +210,48 @@ export function initializeTokenEditor(root: HTMLElement) {
   function dismissError() { error.hidden = true; error.textContent = ''; }
   function showStatus(message: string) { status.textContent = message; }
 
-  function currentTexture(): HTMLCanvasElement {
-    const key = `${state.textureKind}:${state.textureScale}:${state.textureContrast}`;
-    if (!textureCache || key !== textureCacheKey) {
-      textureCache = generatedTexture(state.textureKind, state.textureScale, state.textureContrast);
-      textureCacheKey = key;
-    }
-    return textureCache;
+  function paintedFrame(snapshot: State, size: number, source = activeFrameSource): HTMLCanvasElement | null {
+    if (snapshot.border === 'none' || !source) return null;
+    const original = snapshot.border === 'custom' && snapshot.custom?.svg && !snapshot.recolor;
+    return frameRenderer.paint(source.image, original ? { ...snapshot, borderFill: 'original' } : snapshot,
+      frameResolution(size, snapshot.tokenSize, snapshot.frameTransform));
   }
 
   function render() {
-    drawToken(context!, canvas.width, state.art?.image || null, borderImage, state.transform, state.background === 'color' ? state.backgroundColor : null, state.tokenSize, state.frameTransform);
+    controlsDirty = true;
+    scheduleRender();
+  }
+
+  function renderTransforms() {
+    transformsDirty = true;
+    scheduleRender();
+  }
+
+  function scheduleRender() {
+    if (pendingRender === null) pendingRender = requestAnimationFrame(flushRender);
+  }
+
+  function flushRender() {
+    if (pendingRender !== null) cancelAnimationFrame(pendingRender);
+    pendingRender = null;
+    drawToken(context!, canvas.width, state.art?.image || null, paintedFrame(state, canvas.width), state.transform,
+      state.background === 'color' ? state.backgroundColor : null, state.tokenSize, state.frameTransform,
+      activeFrameSource?.apertureRadius ?? BUILTIN_FRAME_APERTURE);
+    if (controlsDirty) syncControls();
+    else if (transformsDirty) syncTransforms();
+    controlsDirty = transformsDirty = false;
+  }
+
+  function syncTransforms() {
+    scale.value = scaleNumber.value = String(Math.round(state.transform.zoom));
+    rotation.value = rotationNumber.value = String(Math.round(state.transform.rotation));
+    tokenSize.value = tokenSizeNumber.value = String(Math.round(state.tokenSize));
+    for (const key of Object.keys(frameRanges) as Array<keyof typeof frameRanges>) {
+      frameRanges[key][0].value = frameRanges[key][1].value = String(Math.round(state.frameTransform[key]));
+    }
+  }
+
+  function syncControls() {
     const busy = restoring || artBusy || exporting;
     root.dataset.hasImage = String(!!state.art);
     root.setAttribute('aria-busy', String(busy || borderBusy));
@@ -316,11 +264,11 @@ export function initializeTokenEditor(root: HTMLElement) {
     redo.disabled = historyIndex === history.length - 1 || busy;
     restore.hidden = lastClearIndex !== historyIndex || historyIndex === 0;
     restore.disabled = busy;
-    root.querySelectorAll<HTMLButtonElement>('[data-upload-art]').forEach(button => {
+    uploadButtons.forEach(button => {
       button.disabled = busy;
       if (button.closest('.token-image-actions')) button.textContent = state.art ? 'Заменить изображение' : 'Выбрать изображение';
     });
-    root.querySelectorAll<HTMLButtonElement>('[data-border]').forEach(button => {
+    borderButtons.forEach(button => {
       button.setAttribute('aria-pressed', String(button.dataset.border === state.border));
       button.disabled = busy;
     });
@@ -338,18 +286,12 @@ export function initializeTokenEditor(root: HTMLElement) {
     get('token-border-color-label').hidden = state.borderFill !== 'solid';
     get('token-gradient-add').toggleAttribute('disabled', state.gradientColors.length >= 5 || busy);
     get('token-gradient-remove').toggleAttribute('disabled', state.gradientColors.length <= 2 || busy);
-    get('token-gradient-stops').querySelectorAll<HTMLElement>('[data-gradient-stop]').forEach((stop, index) => {
+    gradientStops.forEach(({ stop, input }, index) => {
       stop.hidden = index >= state.gradientColors.length;
-      const input = stop.querySelector<HTMLInputElement>('input');
-      if (input) { input.value = state.gradientColors[index] || '#ffffff'; input.disabled = busy; }
+      input.value = state.gradientColors[index] || '#ffffff'; input.disabled = busy;
     });
     get('token-bg-color-label').hidden = state.background !== 'color';
-    scale.value = scaleNumber.value = String(Math.round(state.transform.zoom));
-    rotation.value = rotationNumber.value = String(Math.round(state.transform.rotation));
-    tokenSize.value = tokenSizeNumber.value = String(Math.round(state.tokenSize));
-    for (const key of Object.keys(frameRanges) as Array<keyof typeof frameRanges>) {
-      frameRanges[key][0].value = frameRanges[key][1].value = String(Math.round(state.frameTransform[key]));
-    }
+    syncTransforms();
     borderColor.value = state.borderColor;
     borderFillMode.value = state.borderFill;
     gradientAngle.value = String(state.gradientAngle);
@@ -363,9 +305,14 @@ export function initializeTokenEditor(root: HTMLElement) {
     get('token-texture-contrast-value').textContent = `${state.textureContrast}%`;
     get('token-texture-x-value').textContent = `${state.textureOffsetX} px`;
     get('token-texture-y-value').textContent = `${state.textureOffsetY} px`;
-    if (!get('token-texture-controls').hasAttribute('hidden')) {
+    const previewKey = `${state.textureKind}:${state.textureScale}:${state.textureContrast}`;
+    if (state.borderFill === 'texture' && previewKey !== texturePreviewKey) {
       const previewContext = texturePreview.getContext('2d');
-      if (previewContext) { previewContext.clearRect(0, 0, texturePreview.width, texturePreview.height); previewContext.drawImage(currentTexture(), 0, 0, texturePreview.width, texturePreview.height); }
+      if (previewContext) {
+        previewContext.clearRect(0, 0, texturePreview.width, texturePreview.height);
+        previewContext.drawImage(frameRenderer.texture(state), 0, 0, texturePreview.width, texturePreview.height);
+        texturePreviewKey = previewKey;
+      }
     }
     background.value = state.background;
     backgroundColor.value = state.backgroundColor;
@@ -429,43 +376,57 @@ export function initializeTokenEditor(root: HTMLElement) {
     scheduleDraft();
   }
 
+  function frameSource(snapshot: State): Promise<FrameSource> {
+    if (snapshot.border === 'custom') {
+      const custom = snapshot.custom;
+      if (!custom) return Promise.reject(new Error('Выберите свою рамку.'));
+      let source = customSources.get(custom);
+      if (!source) {
+        source = (async () => {
+          // Uploaded SVG has already been sanitized by readAsset. Keep it vector for export.
+          const image = custom.svg ? await decodeImage(new Blob([custom.svg], { type: 'image/svg+xml' })) : custom.image;
+          return { image, apertureRadius: frameRenderer.apertureRadius(image) };
+        })().catch(failure => { customSources.delete(custom); throw failure; });
+        customSources.set(custom, source);
+      }
+      return source;
+    }
+    let source = presets.get(snapshot.border);
+    if (!source) {
+      const id = snapshot.border;
+      source = (async () => {
+        const response = await fetch(`/images/borders/${id.replace('-', '')}.svg`);
+        if (!response.ok) throw new Error('Не удалось загрузить рамку. Повторите выбор.');
+        const image = await decodeImage(svgBlob(normalizeBuiltinFrame(parseSvg(await response.text()))));
+        return { image, apertureRadius: BUILTIN_FRAME_APERTURE };
+      })().catch(failure => { presets.delete(id); throw failure; });
+      presets.set(id, source);
+    }
+    return source;
+  }
+
   async function updateBorder() {
     const version = ++borderVersion;
     const snapshot = copyState(state);
-    borderBusy = snapshot.border !== 'none';
-    borderImage = null;
+    if (snapshot.border === 'none') {
+      activeFrameSource = null;
+      borderBusy = false;
+      render();
+      return true;
+    }
+    borderBusy = true;
+    // Keep the last frame visible while another source is loading.
     render();
-    if (snapshot.border === 'none') return true;
     try {
-      let image: HTMLImageElement;
-      if (snapshot.border === 'custom' && snapshot.custom && (!snapshot.custom.svg || !snapshot.recolor)) {
-        image = snapshot.custom.image;
-      } else {
-        let svg: string;
-        if (snapshot.border === 'custom') {
-          if (!snapshot.custom?.svg) throw new Error('Выберите свою рамку.');
-          svg = snapshot.custom.svg;
-        } else {
-          if (!presets.has(snapshot.border)) {
-            presets.set(snapshot.border, fetch(`/images/borders/${snapshot.border.replace('-', '')}.svg`).then(async response => {
-              if (!response.ok) throw new Error('Не удалось загрузить рамку. Повторите выбор.');
-              return response.text();
-            }).catch(error => { presets.delete(snapshot.border); throw error; }));
-          }
-          svg = await presets.get(snapshot.border)!;
-        }
-        image = await decodeImage(svgBlob(parseSvg(svg)));
-      }
+      const source = await frameSource(snapshot);
       if (version !== borderVersion) return false;
-      const tintingAllowed = snapshot.border !== 'custom' || !snapshot.custom?.svg || snapshot.recolor;
-      borderImage = snapshot.borderFill === 'original' || !tintingAllowed
-        ? image
-        : fillFrame(image, snapshot, snapshot.borderFill === 'texture' ? currentTexture() : null);
+      activeFrameSource = source;
       return true;
     } catch (failure) {
       if (version !== borderVersion) return false;
       showError(failure instanceof Error ? failure.message : 'Не удалось загрузить рамку.');
       state.border = 'none';
+      activeFrameSource = null;
       return false;
     } finally {
       if (version === borderVersion) { borderBusy = false; render(); }
@@ -541,7 +502,7 @@ export function initializeTokenEditor(root: HTMLElement) {
     showStatus(direction < 0 ? 'Действие отменено.' : 'Действие повторено.');
   }
 
-  root.querySelectorAll<HTMLButtonElement>('[data-upload-art]').forEach(button => button.addEventListener('click', () => imageFile.click()));
+  uploadButtons.forEach(button => button.addEventListener('click', () => imageFile.click()));
   imageFile.addEventListener('change', () => {
     const file = imageFile.files?.[0];
     imageFile.value = '';
@@ -553,7 +514,7 @@ export function initializeTokenEditor(root: HTMLElement) {
     if (file) void loadBorder(file);
   });
   get('token-replace-border').addEventListener('click', () => borderFile.click());
-  root.querySelectorAll<HTMLButtonElement>('[data-border]').forEach(button => button.addEventListener('click', async () => {
+  borderButtons.forEach(button => button.addEventListener('click', async () => {
     const border = button.dataset.border!;
     if (border === 'custom' && !state.custom) { borderFile.click(); return; }
     dismissError();
@@ -562,32 +523,32 @@ export function initializeTokenEditor(root: HTMLElement) {
     if (await updateBorder()) { commit(); showStatus(border === 'none' ? 'Рамка убрана.' : 'Рамка выбрана.'); }
     else if (state.border === 'none') commit();
   }));
-  borderColor.addEventListener('input', () => { state.borderColor = borderColor.value; void updateBorder(); });
+  borderColor.addEventListener('input', () => { state.borderColor = borderColor.value; render(); });
   borderColor.addEventListener('change', commit);
-  borderFillMode.addEventListener('change', async () => { state.borderFill = borderFillMode.value as BorderFill; await updateBorder(); commit(); });
+  borderFillMode.addEventListener('change', () => { state.borderFill = borderFillMode.value as BorderFill; commit(); });
   for (let index = 0; index < 5; index++) {
     const color = get<HTMLInputElement>(`token-gradient-color-${index}`);
-    color.addEventListener('input', () => { state.gradientColors[index] = color.value; void updateBorder(); });
+    color.addEventListener('input', () => { state.gradientColors[index] = color.value; render(); });
     color.addEventListener('change', commit);
   }
   get('token-gradient-add').addEventListener('click', () => {
-    if (state.gradientColors.length < 5) { state.gradientColors.push(state.gradientColors[state.gradientColors.length - 1]); commit(); void updateBorder(); }
+    if (state.gradientColors.length < 5) { state.gradientColors.push(state.gradientColors[state.gradientColors.length - 1]); commit(); }
   });
   get('token-gradient-remove').addEventListener('click', () => {
-    if (state.gradientColors.length > 2) { state.gradientColors.pop(); commit(); void updateBorder(); }
+    if (state.gradientColors.length > 2) { state.gradientColors.pop(); commit(); }
   });
-  gradientAngle.addEventListener('input', () => { state.gradientAngle = Number(gradientAngle.value); render(); void updateBorder(); });
+  gradientAngle.addEventListener('input', () => { state.gradientAngle = Number(gradientAngle.value); render(); });
   gradientAngle.addEventListener('change', commit);
-  textureKind.addEventListener('change', async () => { state.textureKind = textureKind.value as TextureKind; textureCacheKey = ''; await updateBorder(); commit(); });
-  textureScale.addEventListener('input', () => { state.textureScale = Number(textureScale.value); textureCacheKey = ''; render(); void updateBorder(); });
+  textureKind.addEventListener('change', () => { state.textureKind = textureKind.value as TextureKind; commit(); });
+  textureScale.addEventListener('input', () => { state.textureScale = Number(textureScale.value); render(); });
   textureScale.addEventListener('change', commit);
-  textureContrast.addEventListener('input', () => { state.textureContrast = Number(textureContrast.value); textureCacheKey = ''; render(); void updateBorder(); });
+  textureContrast.addEventListener('input', () => { state.textureContrast = Number(textureContrast.value); render(); });
   textureContrast.addEventListener('change', commit);
-  textureOffsetX.addEventListener('input', () => { state.textureOffsetX = Number(textureOffsetX.value); void updateBorder(); });
+  textureOffsetX.addEventListener('input', () => { state.textureOffsetX = Number(textureOffsetX.value); render(); });
   textureOffsetX.addEventListener('change', commit);
-  textureOffsetY.addEventListener('input', () => { state.textureOffsetY = Number(textureOffsetY.value); void updateBorder(); });
+  textureOffsetY.addEventListener('input', () => { state.textureOffsetY = Number(textureOffsetY.value); render(); });
   textureOffsetY.addEventListener('change', commit);
-  recolor.addEventListener('change', async () => { state.recolor = recolor.checked; await updateBorder(); commit(); });
+  recolor.addEventListener('change', () => { state.recolor = recolor.checked; commit(); });
   background.addEventListener('change', () => { state.background = background.value === 'color' ? 'color' : 'transparent'; commit(); });
   backgroundColor.addEventListener('input', () => { state.backgroundColor = backgroundColor.value; render(); });
   backgroundColor.addEventListener('change', commit);
@@ -597,14 +558,14 @@ export function initializeTokenEditor(root: HTMLElement) {
   retryDraft.addEventListener('click', saveDraft);
 
   function bindTransform(range: HTMLInputElement, number: HTMLInputElement, key: 'zoom' | 'rotation', min: number, max: number) {
-    range.addEventListener('input', () => { state.transform[key] = Number(range.value); render(); });
+    range.addEventListener('input', () => { state.transform[key] = Number(range.value); renderTransforms(); });
     range.addEventListener('change', commit);
     number.addEventListener('input', () => {
       const value = number.valueAsNumber;
       if (Number.isFinite(value) && value >= min && value <= max) {
         state.transform[key] = value;
         range.value = String(value);
-        render();
+        renderTransforms();
       }
     });
     number.addEventListener('change', () => {
@@ -614,21 +575,21 @@ export function initializeTokenEditor(root: HTMLElement) {
   }
   bindTransform(scale, scaleNumber, 'zoom', 10, 500);
   bindTransform(rotation, rotationNumber, 'rotation', -180, 180);
-  tokenSize.addEventListener('input', () => { state.tokenSize = Number(tokenSize.value); render(); });
+  tokenSize.addEventListener('input', () => { state.tokenSize = Number(tokenSize.value); renderTransforms(); });
   tokenSize.addEventListener('change', commit);
   tokenSizeNumber.addEventListener('input', () => {
     const value = tokenSizeNumber.valueAsNumber;
-    if (Number.isFinite(value) && value >= 25 && value <= 100) { state.tokenSize = value; tokenSize.value = String(value); render(); }
+    if (Number.isFinite(value) && value >= 25 && value <= 100) { state.tokenSize = value; tokenSize.value = String(value); renderTransforms(); }
   });
   tokenSizeNumber.addEventListener('change', () => { state.tokenSize = clamp(Number.isFinite(tokenSizeNumber.valueAsNumber) ? tokenSizeNumber.valueAsNumber : state.tokenSize, 25, 100); commit(); });
   for (const key of Object.keys(frameRanges) as Array<keyof typeof frameRanges>) {
     const [range, number] = frameRanges[key];
     const min = Number(range.min); const max = Number(range.max);
-    range.addEventListener('input', () => { state.frameTransform[key] = Number(range.value); render(); });
+    range.addEventListener('input', () => { state.frameTransform[key] = Number(range.value); renderTransforms(); });
     range.addEventListener('change', commit);
     number.addEventListener('input', () => {
       const value = number.valueAsNumber;
-      if (Number.isFinite(value) && value >= min && value <= max) { state.frameTransform[key] = value; range.value = String(value); render(); }
+      if (Number.isFinite(value) && value >= min && value <= max) { state.frameTransform[key] = value; range.value = String(value); renderTransforms(); }
     });
     number.addEventListener('change', () => { state.frameTransform[key] = clamp(Number.isFinite(number.valueAsNumber) ? number.valueAsNumber : state.frameTransform[key], min, max); commit(); });
   }
@@ -646,7 +607,7 @@ export function initializeTokenEditor(root: HTMLElement) {
     artVersion++;
     borderVersion++;
     borderBusy = false;
-    borderImage = null;
+    activeFrameSource = null;
     state = emptyState();
     dismissError();
     commit();
@@ -687,14 +648,14 @@ export function initializeTokenEditor(root: HTMLElement) {
     } else if (drag.mode === 'image-rotate') {
       state.transform.rotation = clamp(drag.image.rotation + dx * 0.7, -180, 180);
     } else if (drag.mode === 'frame-move') {
-      state.frameTransform.x = drag.frame.x + dx;
-      state.frameTransform.y = drag.frame.y + dy;
+      state.frameTransform.x = clamp(drag.frame.x + dx, -128, 128);
+      state.frameTransform.y = clamp(drag.frame.y + dy, -128, 128);
     } else if (drag.mode === 'frame-scale') {
       state.frameTransform.scale = clamp(drag.frame.scale - dy, 25, 200);
     } else {
       state.frameTransform.rotation = clamp(drag.frame.rotation + dx * 0.7, -180, 180);
     }
-    render();
+    renderTransforms();
   });
   function stopDrag(event: PointerEvent) {
     if (!drag || drag.pointer !== event.pointerId) return;
@@ -710,7 +671,7 @@ export function initializeTokenEditor(root: HTMLElement) {
     event.preventDefault();
     if (event.ctrlKey || event.metaKey) state.transform.zoom = clamp(state.transform.zoom - event.deltaY * 0.25, 10, 500);
     else state.transform.rotation = clamp(state.transform.rotation + event.deltaY * 0.12, -180, 180);
-    render();
+    renderTransforms();
     clearTimeout(wheelCommitTimer);
     wheelCommitTimer = setTimeout(commit, 220);
   }, { passive: false });
@@ -719,8 +680,8 @@ export function initializeTokenEditor(root: HTMLElement) {
     event.preventDefault();
     const step = event.shiftKey ? 10 : 1;
     if (event.altKey && state.border !== 'none') {
-      state.frameTransform.x += event.key === 'ArrowRight' ? step : event.key === 'ArrowLeft' ? -step : 0;
-      state.frameTransform.y += event.key === 'ArrowDown' ? step : event.key === 'ArrowUp' ? -step : 0;
+      state.frameTransform.x = clamp(state.frameTransform.x + (event.key === 'ArrowRight' ? step : event.key === 'ArrowLeft' ? -step : 0), -128, 128);
+      state.frameTransform.y = clamp(state.frameTransform.y + (event.key === 'ArrowDown' ? step : event.key === 'ArrowUp' ? -step : 0), -128, 128);
       commit();
     } else changeTransform({ x: state.transform.x + (event.key === 'ArrowRight' ? step : event.key === 'ArrowLeft' ? -step : 0), y: state.transform.y + (event.key === 'ArrowDown' ? step : event.key === 'ArrowUp' ? -step : 0) });
   });
@@ -759,7 +720,7 @@ export function initializeTokenEditor(root: HTMLElement) {
   download.addEventListener('click', async () => {
     if (!state.art || artBusy || borderBusy || restoring || exporting) return;
     const snapshot = copyState(state);
-    const frame = borderImage;
+    const source = activeFrameSource;
     exporting = true;
     dismissError();
     download.textContent = 'Подготовка PNG…';
@@ -770,7 +731,9 @@ export function initializeTokenEditor(root: HTMLElement) {
       output.width = output.height = snapshot.size;
       const outputContext = output.getContext('2d');
       if (!outputContext) throw new Error('Не удалось создать PNG.');
-      drawToken(outputContext, snapshot.size, snapshot.art!.image, frame, snapshot.transform, snapshot.background === 'color' ? snapshot.backgroundColor : null, snapshot.tokenSize, snapshot.frameTransform);
+      drawToken(outputContext, snapshot.size, snapshot.art!.image, paintedFrame(snapshot, snapshot.size, source), snapshot.transform,
+        snapshot.background === 'color' ? snapshot.backgroundColor : null, snapshot.tokenSize, snapshot.frameTransform,
+        source?.apertureRadius ?? BUILTIN_FRAME_APERTURE);
       const blob = await new Promise<Blob>((resolve, reject) => output.toBlob(blob => blob ? resolve(blob) : reject(new Error('Не удалось создать PNG.')), 'image/png'));
       const url = URL.createObjectURL(blob);
       const anchor = document.createElement('a');

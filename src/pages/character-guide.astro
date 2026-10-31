@@ -4,6 +4,7 @@ import StartingWeapons from '../components/rules/equipment/StartingWeapons.astro
 import LanguageTables from '../components/characterGuide/LanguageTables.astro';
 import TrinketsTable from '../components/rules/equipment/TrinketsTable.astro';
 import RelatedMaterials from '../components/rules/RelatedMaterials.astro';
+import CharacterImageRule from '../components/rules/general/CharacterImageRule.astro';
 ---
 
 <Layout title="Создание персонажа">
@@ -16,6 +17,13 @@ import RelatedMaterials from '../components/rules/RelatedMaterials.astro';
       <p>Создание персонажа — это увлекательный процесс, в котором вы создадите своего уникального героя для приключений. Следуйте этому руководству, чтобы создать своего первого персонажа.</p>
       <p>Перед выбором проверьте <a href="/allowed-materials">разрешённые материалы, приоритет редакций и ограничения Лиги</a>.</p>
     </div>
+
+    <section class="step" id="character-image">
+      <h2>Самостоятельный образ персонажа</h2>
+      <div class="step-content">
+        <CharacterImageRule />
+      </div>
+    </section>
 
       <section class="step">
         <h2>Создание персонажа</h2>
@@ -30,6 +38,10 @@ import RelatedMaterials from '../components/rules/RelatedMaterials.astro';
           </ul>
         </div>
       </section>
+
+    <StartingWeapons />
+    <RelatedMaterials rule="starting-weapons" />
+    <p>Если у выбранного вида не указаны возраст, рост или вес, используйте <a href="/races#race-attributes">общие значения Лиги</a>.</p>
 
     <div class="steps">
       <section class="step">

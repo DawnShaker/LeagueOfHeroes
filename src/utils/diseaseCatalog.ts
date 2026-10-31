@@ -1,4 +1,5 @@
 import type { DiseaseEntry, MaterialKind, ProgressionMode } from '../types/disease';
+import { diseaseSourcesSearchText } from './diseaseSources.ts';
 export const materialLabels: Record<MaterialKind, string> = {
     disease: 'Болезнь', curse: 'Проклятие', parasite: 'Паразит', affliction: 'Недуг',
     generator: 'Генератор', track: 'Система треков', event: 'Событие', template: 'Заготовка',
@@ -17,7 +18,7 @@ export function diseaseInline(value: string): string {
 export function diseaseSearchText(e: DiseaseEntry): string {
     return normalizeDiseaseText([e.name, e.nameRu, ...e.aliases, e.sourceGroup, e.infection, e.incubation,
         e.effects, e.progression, e.treatment, e.status, materialLabels[e.kind], ...e.transmissionTags,
-        ...e.impactTags, ...e.progressionTags, ...e.treatmentTags].join(' '));
+        ...e.impactTags, ...e.progressionTags, ...e.treatmentTags, diseaseSourcesSearchText(e)].join(' '));
 }
 export function canTrackDisease(e: DiseaseEntry): boolean {
     return !['generator', 'track', 'event', 'template'].includes(e.kind);

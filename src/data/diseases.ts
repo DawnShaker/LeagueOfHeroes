@@ -50,6 +50,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-5e-2024",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "Magical Contagions / Cackle Fever",
+          "evidenceUrl": "https://studylib.net/doc/28282853/802267572-2024-dungeon-master-s-guide-scanned-cleaned-up",
+          "note": "Совпадение в оцифровке англоязычной книги; страница не установлена. В локальном разделе curses примеры отсутствуют, поэтому он не используется как доказательство этой записи."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -97,6 +112,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "monster-manual-5e-2014",
+          "status": "candidate",
+          "scope": "creature",
+          "locator": "Aboleth",
+          "evidenceUrl": "https://www.dndbeyond.com/sources/dnd/basic-rules-2014/monsters",
+          "note": "Кандидат по существу и способности из базового набора 2014. Точная книжная привязка требует сверки; название болезни может быть редакторским."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -145,6 +175,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "icewind-dale-rime-of-the-frostmaiden-5e-2014",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "233",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Arcane_blight",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -196,6 +241,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "player-s-handbook-5e-2014",
+          "status": "confirmed",
+          "scope": "spell",
+          "locator": "заклинание Contagion / «Заражение»",
+          "evidenceUrl": "/books/phb-2014-ru/spells-226/",
+          "note": "Формы заклинания версии 2014. Не переносить эту библиографическую привязку на заклинание 2024 автоматически."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -244,6 +304,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "tomb-of-annihilation-5e-2014",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "40; эррата 2021",
+          "evidenceUrl": "https://media.wizards.com/2021/dnd/downloads/ToA-Errata.pdf",
+          "note": "Официальная эррата заменяет Mad Monkey Fever на Blue Mist Fever и прямо указывает Diseases, с. 40."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -291,6 +366,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "ghosts-of-saltmarsh-5e-2014",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://dnd-wiki.org/wiki/Bluerot_%285e%29",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -342,6 +432,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-5e-2014",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "с. 258 русской версии сайта",
+          "evidenceUrl": "/books/dmg-2014-ru/section-258/",
+          "note": "Названия и описания прочитаны в русской библиотеке проекта; пагинация русского файла отличается от английского оригинала."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -389,6 +494,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "monster-manual-5e-2014",
+          "status": "candidate",
+          "scope": "creature",
+          "locator": "Death Dog",
+          "evidenceUrl": "https://www.dndbeyond.com/sources/dnd/basic-rules-2014/monsters",
+          "note": "Кандидат по существу и способности из базового набора 2014. Точная книжная привязка требует сверки; название болезни может быть редакторским."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -439,6 +559,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "monster-manual-5e-2014",
+          "status": "candidate",
+          "scope": "creature",
+          "locator": "Giant Rat",
+          "evidenceUrl": "https://www.dndbeyond.com/sources/dnd/basic-rules-2014/monsters",
+          "note": "Кандидат по существу и способности из базового набора 2014. Точная книжная привязка требует сверки; название болезни может быть редакторским."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -490,6 +625,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "player-s-handbook-5e-2014",
+          "status": "confirmed",
+          "scope": "spell",
+          "locator": "заклинание Contagion / «Заражение»",
+          "evidenceUrl": "/books/phb-2014-ru/spells-226/",
+          "note": "Формы заклинания версии 2014. Не переносить эту библиографическую привязку на заклинание 2024 автоматически."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -539,6 +689,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "player-s-handbook-5e-2014",
+          "status": "confirmed",
+          "scope": "spell",
+          "locator": "заклинание Contagion / «Заражение»",
+          "evidenceUrl": "/books/phb-2014-ru/spells-226/",
+          "note": "Формы заклинания версии 2014. Не переносить эту библиографическую привязку на заклинание 2024 автоматически."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -587,6 +752,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "explorer-s-guide-to-wildemount-5e-2014",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "глава 3, Eiselcross / Frozen Sick",
+          "evidenceUrl": "https://www.dndbeyond.com/sources/dnd/wa/frozen-sick",
+          "note": "Официальный текст приключения прямо отсылает к frigid woe в Explorer’s Guide to Wildemount."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -638,6 +818,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "player-s-handbook-5e-2014",
+          "status": "confirmed",
+          "scope": "spell",
+          "locator": "заклинание Contagion / «Заражение»",
+          "evidenceUrl": "/books/phb-2014-ru/spells-226/",
+          "note": "Формы заклинания версии 2014. Не переносить эту библиографическую привязку на заклинание 2024 автоматически."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -688,6 +883,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "monster-manual-5e-2014",
+          "status": "candidate",
+          "scope": "creature",
+          "locator": "Mummy",
+          "evidenceUrl": "https://www.dndbeyond.com/sources/dnd/basic-rules-2014/monsters",
+          "note": "Кандидат по существу и способности из базового набора 2014. Точная книжная привязка требует сверки; название болезни может быть редакторским."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -737,6 +947,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "monster-manual-5e-2014",
+          "status": "candidate",
+          "scope": "creature",
+          "locator": "Otyugh",
+          "evidenceUrl": "https://www.dndbeyond.com/sources/dnd/basic-rules-2014/monsters",
+          "note": "Кандидат по существу и способности из базового набора 2014. Точная книжная привязка требует сверки; название болезни может быть редакторским."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -783,6 +1008,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "volo-s-guide-to-monsters-5e-2014",
+          "status": "bibliography",
+          "scope": "creature",
+          "locator": "208",
+          "evidenceUrl": "https://dungeonsdragons.fandom.com/wiki/List_of_Dungeons_%26_Dragons_5th_edition_monsters",
+          "note": "Источник указан для Swarm of Rot Grubs; это не подтверждает авторскую механику заражения."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -832,6 +1072,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "player-s-handbook-5e-2014",
+          "status": "confirmed",
+          "scope": "spell",
+          "locator": "заклинание Contagion / «Заражение»",
+          "evidenceUrl": "/books/phb-2014-ru/spells-226/",
+          "note": "Формы заклинания версии 2014. Не переносить эту библиографическую привязку на заклинание 2024 автоматически."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -879,6 +1134,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-5e-2014",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "с. 258 русской версии сайта",
+          "evidenceUrl": "/books/dmg-2014-ru/section-258/",
+          "note": "Названия и описания прочитаны в русской библиотеке проекта; пагинация русского файла отличается от английского оригинала."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -925,6 +1195,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "tomb-of-annihilation-5e-2014",
+          "status": "candidate",
+          "scope": "name",
+          "locator": "40",
+          "evidenceUrl": "https://www.reddit.com/r/dndnext/comments/hn5hag/list_of_5e_diseases/",
+          "note": "Требуется сверка печатной страницы; список использован только как указатель к названиям."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -971,6 +1256,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-5e-2014",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "с. 258 русской версии сайта",
+          "evidenceUrl": "/books/dmg-2014-ru/section-258/",
+          "note": "Названия и описания прочитаны в русской библиотеке проекта; пагинация русского файла отличается от английского оригинала."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -1019,6 +1319,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "monster-manual-5e-2014",
+          "status": "candidate",
+          "scope": "creature",
+          "locator": "Red Slaad",
+          "evidenceUrl": "https://www.dndbeyond.com/sources/dnd/basic-rules-2014/monsters",
+          "note": "Кандидат по существу и способности из базового набора 2014. Точная книжная привязка требует сверки; название болезни может быть редакторским."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -1070,6 +1385,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "player-s-handbook-5e-2014",
+          "status": "confirmed",
+          "scope": "spell",
+          "locator": "заклинание Contagion / «Заражение»",
+          "evidenceUrl": "/books/phb-2014-ru/spells-226/",
+          "note": "Формы заклинания версии 2014. Не переносить эту библиографическую привязку на заклинание 2024 автоматически."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -1119,6 +1449,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "tomb-of-annihilation-5e-2014",
+          "status": "candidate",
+          "scope": "name",
+          "locator": "40",
+          "evidenceUrl": "https://www.reddit.com/r/dndnext/comments/hn5hag/list_of_5e_diseases/",
+          "note": "Требуется сверка печатной страницы; список использован только как указатель к названиям."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -1167,6 +1512,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "out-of-the-abyss-5e-2014",
+          "status": "candidate",
+          "scope": "creature",
+          "locator": "Zuggtmoy",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Zuggtmoy",
+          "note": "Кандидат по имени существа и спорам; точная способность не сверена."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -1217,6 +1577,37 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "monster-vault-threats-to-the-nentir-vale-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "14",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease59-abyssal-plague.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        },
+        {
+          "bookId": "madness-at-gardmore-abbey-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "2-27",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease59-abyssal-plague.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        },
+        {
+          "bookId": "halls-of-undermountain-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "96",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease59-abyssal-plague.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -1268,6 +1659,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "49",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease13-blinding-sickness.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -1317,6 +1723,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "monster-vault-threats-to-the-nentir-vale-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "83",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease62-blistering-corruption.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -1366,6 +1787,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "forgotten-realms-campaign-guide-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "103",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease14-brain-fluke.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -1416,6 +1852,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "elder-evils-4e",
+          "status": "candidate",
+          "scope": "name",
+          "locator": "3",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease15-brood-fever.html",
+          "note": "В указателе 4e назван Elder Evils, с. 3. Вероятно электронная конверсия 4e; не отождествлять с одноимённой печатной книгой 3.5e."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -1468,6 +1919,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "49",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease16-cackle-fever.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -1517,6 +1983,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "open-grave-secrets-of-the-undead-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "186",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease17-cemetery-rot.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -1565,6 +2046,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-magazine-4e-192",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease65-cerebral-parasites.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -1616,6 +2112,45 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "monster-manual-3-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "179",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease18-chaos-phage.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        },
+        {
+          "bookId": "the-plane-below-secrets-of-the-elemental-chaos-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "142",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease18-chaos-phage.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        },
+        {
+          "bookId": "dungeon-magazine-4e-162",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease18-chaos-phage.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        },
+        {
+          "bookId": "dungeon-magazine-4e-179",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease18-chaos-phage.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -1666,6 +2201,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "neverwinter-campaign-setting-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "220",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease64-charnel-fields-filth-fever.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -1713,6 +2263,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "the-book-of-vile-darkness-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "2-48",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease79-corporeal-instability.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -1762,6 +2327,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "neverwinter-campaign-setting-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "160",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease63-creeping-madness.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -1811,6 +2391,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "the-book-of-vile-darkness-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "2-33",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease73-deathsong.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -1863,6 +2458,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "the-book-of-vile-darkness-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "2-33",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease74-demon-fever.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -1913,6 +2523,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "the-plane-below-secrets-of-the-elemental-chaos-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "16",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease60-demon-pox.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -1963,6 +2588,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "monster-vault-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "298",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease19-dire-rat-filth-fever.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        },
+        {
+          "bookId": "dungeon-magazine-4e-182",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease19-dire-rat-filth-fever.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -2013,6 +2661,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-magazine-4e-195",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease81-dusanu-rot.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -2062,6 +2725,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "underdark-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "46",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease20-echo-madness.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -2111,6 +2789,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "the-book-of-vile-darkness-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "2-33",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease75-faceless-hate.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -2162,6 +2855,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-magazine-4e-185",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease21-feral-wererat-filth-fever.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -2212,6 +2920,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-magazine-4e-161",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease22-festering-doom.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -2263,6 +2986,37 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-magazine-4e-156",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease23-filth-fever.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        },
+        {
+          "bookId": "dungeon-magazine-4e-158",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease23-filth-fever.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        },
+        {
+          "bookId": "dungeon-magazine-4e-181",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease23-filth-fever.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -2314,6 +3068,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "eberron-campaign-guide-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "121",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease24-filth-plague.html",
+          "note": "В зеркале сокращённое название ошибочно дано как Eberron Campaign Setting. Независимый указатель One Inch Square указывает Eberron Campaign Guide с теми же страницами."
+        },
+        {
+          "bookId": "dungeon-magazine-4e-177",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease24-filth-plague.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -2364,6 +3141,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "demonomicon-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "146",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease85-flesh-warp.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -2414,6 +3206,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "mordenkainen-s-magnificent-emporium-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "114",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease70-foul-rotting.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -2465,6 +3272,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-magazine-4e-192",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease66-greater-abyssal-plague.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -2514,6 +3336,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "monster-manual-2-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "160",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease25-greater-moon-frenzy.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        },
+        {
+          "bookId": "dungeon-magazine-4e-197",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease25-greater-moon-frenzy.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -2564,6 +3409,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "monster-vault-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "233",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease26-greater-otyugh-filth-fever.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -2613,6 +3473,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-magazine-4e-185",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease27-greater-werewolf-moon-frenzy.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -2663,6 +3538,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "50",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease28-hellfever.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -2713,6 +3603,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-magazine-4e-214",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease94-lesser-abyssal-plague.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -2763,6 +3668,37 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "monster-vault-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "231",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease29-lesser-otyugh-filth-fever.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        },
+        {
+          "bookId": "dungeon-magazine-4e-183",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease29-lesser-otyugh-filth-fever.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        },
+        {
+          "bookId": "the-shadowfell-gloomwrought-and-beyond-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "E8",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease29-lesser-otyugh-filth-fever.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -2814,6 +3750,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-magazine-4e-178",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease30-lockjaw.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -2864,6 +3815,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "monster-manual-3-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "133",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease31-meenlock-corruption.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        },
+        {
+          "bookId": "dungeon-magazine-4e-190",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease31-meenlock-corruption.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -2915,6 +3889,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "the-book-of-vile-darkness-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "2-34",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease76-melting-fury.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -2967,6 +3956,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "50",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease33-mindfire.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -3017,6 +4021,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-magazine-4e-186",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease58-mistwatch-blight.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -3068,6 +4087,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-magazine-4e-156",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease34-moon-frenzy.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -3118,6 +4152,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "monster-manual-2-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "159",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease35-moon-rage.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -3168,6 +4217,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "monster-manual-2-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "158",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease36-moontusk-fever.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        },
+        {
+          "bookId": "dungeon-magazine-4e-181",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease36-moontusk-fever.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -3217,6 +4289,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "eberron-campaign-guide-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "93",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease37-mournland-affliction.html",
+          "note": "В зеркале сокращённое название ошибочно дано как Eberron Campaign Setting. Независимый указатель One Inch Square указывает Eberron Campaign Guide с теми же страницами."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -3267,6 +4354,37 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "draconomicon-metallic-dragons-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "142",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease38-mummy-rot.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        },
+        {
+          "bookId": "dungeon-master-s-guide-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "49",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease38-mummy-rot.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        },
+        {
+          "bookId": "open-grave-secrets-of-the-undead-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "95",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease38-mummy-rot.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -3317,6 +4435,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "the-book-of-vile-darkness-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "2-34",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease77-psychic-parasites.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -3368,6 +4501,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "monster-manual-3-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "167",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease41-rot-grub-infestation.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        },
+        {
+          "bookId": "the-book-of-vile-darkness-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "2-39",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease41-rot-grub-infestation.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -3420,6 +4576,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-magazine-4e-201",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease91-russet-mold-contagion.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -3470,6 +4641,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dragon-magazine-4e-376",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease42-rusty-paralysis.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -3520,6 +4706,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "the-book-of-vile-darkness-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "2-34",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease78-scarlet-plague.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -3571,6 +4772,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "demonomicon-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "69",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease82-screaming-scalepox.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -3622,6 +4838,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-2-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "206",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease43-sewer-fever.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -3673,6 +4904,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "50",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease44-shakes.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -3723,6 +4969,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "open-grave-secrets-of-the-undead-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "123",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease90-silvery-sleep.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -3772,6 +5033,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "open-grave-secrets-of-the-undead-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "180",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease45-skinrot.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -3821,6 +5097,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "monster-manual-2-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "126",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease46-slavering-canker.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -3871,6 +5162,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-magazine-4e-211",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease92-slight-filth-fever.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -3922,6 +5228,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "demonomicon-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "149",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease86-slime-lord-s-rot.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -3974,6 +5295,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "50",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease47-slimy-doom.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -4026,6 +5362,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "manual-of-the-planes-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "52",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease48-soul-rot.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -4076,6 +5427,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "monster-vault-threats-to-the-nentir-vale-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "69",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease61-spider-queen-s-curse.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -4124,6 +5490,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "dark-sun-campaign-setting-4e",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "199",
+          "evidenceUrl": "https://anyflip.com/cmjgl/pgyp/basic/151-200",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -4174,6 +5555,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "dungeon-magazine-4e-162",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "79",
+          "evidenceUrl": "https://www.image.lundo.com/rpg/dnd/Magazines/Dungeon%20%23162.pdf",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -4226,6 +5622,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "monster-manual-3-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "180",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease50-touch-of-kyuss.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        },
+        {
+          "bookId": "dungeon-magazine-4e-188",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease50-touch-of-kyuss.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -4275,6 +5694,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-magazine-4e-157",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease51-twisted-domination.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -4325,6 +5759,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "demonomicon-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "73",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease83-wastelands-sickness.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -4378,6 +5827,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "demonomicon-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "135",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease84-wasting-plague.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -4429,6 +5893,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-magazine-4e-185",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease52-wereboar-moontusk-fever.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        },
+        {
+          "bookId": "dungeon-magazine-4e-210",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease52-wereboar-moontusk-fever.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -4479,6 +5966,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "monster-vault-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "194",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease11-wererat-filth-fever.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -4530,6 +6032,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-magazine-4e-185",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease53-wereserpent-blood-rot.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -4577,6 +6094,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-magazine-4e-214",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease93-werewolf-lycanthropy.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -4627,6 +6159,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "monster-vault-4e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "195",
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease54-werewolf-moon-frenzy.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        },
+        {
+          "bookId": "dungeon-magazine-4e-185",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease54-werewolf-moon-frenzy.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -4677,6 +6232,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-magazine-4e-195",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease80-whispering-madness.html",
+          "note": "По библиографии зеркала Compendium 4e; текст печатного издания не сверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -4730,6 +6300,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "exemplars-of-evil-4e",
+          "status": "candidate",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.dyasdesigns.com/dnd4e/static-site/disease/disease56-worms-of-kyuss.html",
+          "note": "Указатель 4e ссылается на книгу 3.5e. Принадлежность этой записи к 4e не подтверждена."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -4781,6 +6366,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "book-of-vile-darkness-3-0e",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "30–32",
+          "evidenceUrl": "https://housegriffon.com/RPG/Games/DnD/dd3.x/3.0eCore/BookVileDarkness.pdf",
+          "note": "Название присутствует в книге 2002 года для 3.0e, хотя запись каталога находится в разделе 3.5e. Эта привязка не подтверждает существование отдельной версии болезни 3.5e."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -4832,6 +6432,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-3-5e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "292–293",
+          "evidenceUrl": "https://forums.giantitp.com/showsinglepost.php?p=25793235&postcount=2",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -4883,6 +6498,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "book-of-vile-darkness-3-0e",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "30–32",
+          "evidenceUrl": "https://housegriffon.com/RPG/Games/DnD/dd3.x/3.0eCore/BookVileDarkness.pdf",
+          "note": "Название присутствует в книге 2002 года для 3.0e, хотя запись каталога находится в разделе 3.5e. Эта привязка не подтверждает существование отдельной версии болезни 3.5e."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -4935,6 +6565,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-3-5e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "292–293",
+          "evidenceUrl": "https://forums.giantitp.com/showsinglepost.php?p=25793235&postcount=2",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -4987,6 +6632,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "book-of-vile-darkness-3-0e",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "30–32",
+          "evidenceUrl": "https://housegriffon.com/RPG/Games/DnD/dd3.x/3.0eCore/BookVileDarkness.pdf",
+          "note": "Название присутствует в книге 2002 года для 3.0e, хотя запись каталога находится в разделе 3.5e. Эта привязка не подтверждает существование отдельной версии болезни 3.5e."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -5040,6 +6700,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-3-5e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "292–293",
+          "evidenceUrl": "https://forums.giantitp.com/showsinglepost.php?p=25793235&postcount=2",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -5092,6 +6767,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-3-5e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "292–293",
+          "evidenceUrl": "https://forums.giantitp.com/showsinglepost.php?p=25793235&postcount=2",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -5144,6 +6834,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "book-of-vile-darkness-3-0e",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "30–32",
+          "evidenceUrl": "https://housegriffon.com/RPG/Games/DnD/dd3.x/3.0eCore/BookVileDarkness.pdf",
+          "note": "Название присутствует в книге 2002 года для 3.0e, хотя запись каталога находится в разделе 3.5e. Эта привязка не подтверждает существование отдельной версии болезни 3.5e."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -5195,6 +6900,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "book-of-vile-darkness-3-0e",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "30–32",
+          "evidenceUrl": "https://housegriffon.com/RPG/Games/DnD/dd3.x/3.0eCore/BookVileDarkness.pdf",
+          "note": "Название присутствует в книге 2002 года для 3.0e, хотя запись каталога находится в разделе 3.5e. Эта привязка не подтверждает существование отдельной версии болезни 3.5e."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -5247,6 +6967,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-3-5e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "292–293",
+          "evidenceUrl": "https://forums.giantitp.com/showsinglepost.php?p=25793235&postcount=2",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -5298,6 +7033,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "book-of-vile-darkness-3-0e",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "30–32",
+          "evidenceUrl": "https://housegriffon.com/RPG/Games/DnD/dd3.x/3.0eCore/BookVileDarkness.pdf",
+          "note": "Название присутствует в книге 2002 года для 3.0e, хотя запись каталога находится в разделе 3.5e. Эта привязка не подтверждает существование отдельной версии болезни 3.5e."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -5349,6 +7099,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "book-of-vile-darkness-3-0e",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "30–32",
+          "evidenceUrl": "https://housegriffon.com/RPG/Games/DnD/dd3.x/3.0eCore/BookVileDarkness.pdf",
+          "note": "Название присутствует в книге 2002 года для 3.0e, хотя запись каталога находится в разделе 3.5e. Эта привязка не подтверждает существование отдельной версии болезни 3.5e."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -5399,6 +7164,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "book-of-exalted-deeds-3-5e",
+          "status": "bibliography",
+          "scope": "rules",
+          "locator": "35",
+          "evidenceUrl": "https://forums.giantitp.com/showsinglepost.php?p=25793235&postcount=2",
+          "note": "Сверхъестественное affliction, действующее на злых существ; не обычная инфекционная болезнь."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -5449,6 +7229,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "book-of-vile-darkness-3-0e",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "30–32",
+          "evidenceUrl": "https://housegriffon.com/RPG/Games/DnD/dd3.x/3.0eCore/BookVileDarkness.pdf",
+          "note": "Название присутствует в книге 2002 года для 3.0e, хотя запись каталога находится в разделе 3.5e. Эта привязка не подтверждает существование отдельной версии болезни 3.5e."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -5498,6 +7293,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "book-of-vile-darkness-3-0e",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "30–32",
+          "evidenceUrl": "https://housegriffon.com/RPG/Games/DnD/dd3.x/3.0eCore/BookVileDarkness.pdf",
+          "note": "Название присутствует в книге 2002 года для 3.0e, хотя запись каталога находится в разделе 3.5e. Эта привязка не подтверждает существование отдельной версии болезни 3.5e."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -5547,6 +7357,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "book-of-vile-darkness-3-0e",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "30–32",
+          "evidenceUrl": "https://housegriffon.com/RPG/Games/DnD/dd3.x/3.0eCore/BookVileDarkness.pdf",
+          "note": "Название присутствует в книге 2002 года для 3.0e, хотя запись каталога находится в разделе 3.5e. Эта привязка не подтверждает существование отдельной версии болезни 3.5e."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -5600,6 +7425,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "book-of-vile-darkness-3-0e",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "30–32",
+          "evidenceUrl": "https://housegriffon.com/RPG/Games/DnD/dd3.x/3.0eCore/BookVileDarkness.pdf",
+          "note": "Название присутствует в книге 2002 года для 3.0e, хотя запись каталога находится в разделе 3.5e. Эта привязка не подтверждает существование отдельной версии болезни 3.5e."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -5652,6 +7492,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-3-5e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "292–293",
+          "evidenceUrl": "https://forums.giantitp.com/showsinglepost.php?p=25793235&postcount=2",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -5701,6 +7556,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "book-of-vile-darkness-3-0e",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "30–32",
+          "evidenceUrl": "https://housegriffon.com/RPG/Games/DnD/dd3.x/3.0eCore/BookVileDarkness.pdf",
+          "note": "Название присутствует в книге 2002 года для 3.0e, хотя запись каталога находится в разделе 3.5e. Эта привязка не подтверждает существование отдельной версии болезни 3.5e."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -5750,6 +7620,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-3-5e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "292–293",
+          "evidenceUrl": "https://forums.giantitp.com/showsinglepost.php?p=25793235&postcount=2",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -5799,6 +7684,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "book-of-vile-darkness-3-0e",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "30–32",
+          "evidenceUrl": "https://housegriffon.com/RPG/Games/DnD/dd3.x/3.0eCore/BookVileDarkness.pdf",
+          "note": "Название присутствует в книге 2002 года для 3.0e, хотя запись каталога находится в разделе 3.5e. Эта привязка не подтверждает существование отдельной версии болезни 3.5e."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -5849,6 +7749,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-3-5e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "292–293",
+          "evidenceUrl": "https://forums.giantitp.com/showsinglepost.php?p=25793235&postcount=2",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -5901,6 +7816,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-3-5e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "292–293",
+          "evidenceUrl": "https://forums.giantitp.com/showsinglepost.php?p=25793235&postcount=2",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -5953,6 +7883,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-3-5e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "292–293",
+          "evidenceUrl": "https://forums.giantitp.com/showsinglepost.php?p=25793235&postcount=2",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -6007,6 +7952,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "book-of-vile-darkness-3-0e",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "30–32",
+          "evidenceUrl": "https://housegriffon.com/RPG/Games/DnD/dd3.x/3.0eCore/BookVileDarkness.pdf",
+          "note": "Название присутствует в книге 2002 года для 3.0e, хотя запись каталога находится в разделе 3.5e. Эта привязка не подтверждает существование отдельной версии болезни 3.5e."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -6058,6 +8018,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "book-of-vile-darkness-3-0e",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "30–32",
+          "evidenceUrl": "https://housegriffon.com/RPG/Games/DnD/dd3.x/3.0eCore/BookVileDarkness.pdf",
+          "note": "Название присутствует в книге 2002 года для 3.0e, хотя запись каталога находится в разделе 3.5e. Эта привязка не подтверждает существование отдельной версии болезни 3.5e."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -6108,6 +8083,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "book-of-vile-darkness-3-0e",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "30–32",
+          "evidenceUrl": "https://housegriffon.com/RPG/Games/DnD/dd3.x/3.0eCore/BookVileDarkness.pdf",
+          "note": "Название присутствует в книге 2002 года для 3.0e, хотя запись каталога находится в разделе 3.5e. Эта привязка не подтверждает существование отдельной версии болезни 3.5e."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -6158,6 +8148,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "book-of-vile-darkness-3-0e",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "30–32",
+          "evidenceUrl": "https://housegriffon.com/RPG/Games/DnD/dd3.x/3.0eCore/BookVileDarkness.pdf",
+          "note": "Название присутствует в книге 2002 года для 3.0e, хотя запись каталога находится в разделе 3.5e. Эта привязка не подтверждает существование отдельной версии болезни 3.5e."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -6209,6 +8214,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-3-0e",
+          "status": "candidate",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://pdfcoffee.com/dungeon-masterx27s-guide-30-ocr-er-pdf-free.html",
+          "note": "Кандидат по стандартному набору болезней 3.0. Страница и точное совпадение каждого названия требуют сверки."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -6261,6 +8281,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-3-0e",
+          "status": "candidate",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://pdfcoffee.com/dungeon-masterx27s-guide-30-ocr-er-pdf-free.html",
+          "note": "Кандидат по стандартному набору болезней 3.0. Страница и точное совпадение каждого названия требуют сверки."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -6314,6 +8349,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-3-0e",
+          "status": "candidate",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://pdfcoffee.com/dungeon-masterx27s-guide-30-ocr-er-pdf-free.html",
+          "note": "Кандидат по стандартному набору болезней 3.0. Страница и точное совпадение каждого названия требуют сверки."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -6366,6 +8416,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-3-0e",
+          "status": "candidate",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://pdfcoffee.com/dungeon-masterx27s-guide-30-ocr-er-pdf-free.html",
+          "note": "Кандидат по стандартному набору болезней 3.0. Страница и точное совпадение каждого названия требуют сверки."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -6418,6 +8483,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-3-0e",
+          "status": "candidate",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://pdfcoffee.com/dungeon-masterx27s-guide-30-ocr-er-pdf-free.html",
+          "note": "Кандидат по стандартному набору болезней 3.0. Страница и точное совпадение каждого названия требуют сверки."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -6470,6 +8550,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-3-0e",
+          "status": "candidate",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://pdfcoffee.com/dungeon-masterx27s-guide-30-ocr-er-pdf-free.html",
+          "note": "Кандидат по стандартному набору болезней 3.0. Страница и точное совпадение каждого названия требуют сверки."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -6519,6 +8614,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-3-0e",
+          "status": "candidate",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://pdfcoffee.com/dungeon-masterx27s-guide-30-ocr-er-pdf-free.html",
+          "note": "Кандидат по стандартному набору болезней 3.0. Страница и точное совпадение каждого названия требуют сверки."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -6571,6 +8681,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-3-0e",
+          "status": "candidate",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://pdfcoffee.com/dungeon-masterx27s-guide-30-ocr-er-pdf-free.html",
+          "note": "Кандидат по стандартному набору болезней 3.0. Страница и точное совпадение каждого названия требуют сверки."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -6623,6 +8748,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-3-0e",
+          "status": "candidate",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://pdfcoffee.com/dungeon-masterx27s-guide-30-ocr-er-pdf-free.html",
+          "note": "Кандидат по стандартному набору болезней 3.0. Страница и точное совпадение каждого названия требуют сверки."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -6675,6 +8815,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "dungeon-master-s-guide-3-0e",
+          "status": "candidate",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://pdfcoffee.com/dungeon-masterx27s-guide-30-ocr-er-pdf-free.html",
+          "note": "Кандидат по стандартному набору болезней 3.0. Страница и точное совпадение каждого названия требуют сверки."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -6721,6 +8876,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "dungeon-masters-guide-ad-d-1e",
+          "status": "candidate",
+          "scope": "rules",
+          "locator": "правила болезней",
+          "evidenceUrl": "https://s3.amazonaws.com/arena-attachments/804915/348b48a0cbd967122dcb76f5cc6f5a01.pdf",
+          "note": "Кандидат для общего генератора AD&D. Конкретная таблица и страница требуют сверки."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -6770,6 +8940,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "monster-manual-ad-d-1e",
+          "status": "bibliography",
+          "scope": "creature",
+          "locator": "14",
+          "evidenceUrl": "https://rpg.stackexchange.com/questions/147377/cerebral-parasites-and-where-to-find-them",
+          "note": "В AD&D это существо-паразит, а не готовая болезнь с механикой 2024."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -6820,6 +9005,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "monstrous-compendium-ravenloft-appendix-iii-creatures-of-darkness-ad-d-2e",
+          "status": "bibliography",
+          "scope": "creature",
+          "locator": "113",
+          "evidenceUrl": "https://www.completecompendium.com/appendix/virus1/",
+          "note": "Вирусы в бестиарии Ravenloft. Книжная привязка сверена по двум указателям: Complete Compendium и AD&D 2e Wiki; печатный экземпляр не проверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -6868,6 +9068,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "the-shining-south-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "52",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Common_cold",
+          "note": "Подтверждено библиографическое упоминание простуды; конкретный исходник авторской механики не установлен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -6917,6 +9132,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "monstrous-compendium-ravenloft-appendix-iii-creatures-of-darkness-ad-d-2e",
+          "status": "bibliography",
+          "scope": "creature",
+          "locator": "113",
+          "evidenceUrl": "https://www.completecompendium.com/appendix/virus1/",
+          "note": "Вирусы в бестиарии Ravenloft. Книжная привязка сверена по двум указателям: Complete Compendium и AD&D 2e Wiki; печатный экземпляр не проверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -6967,6 +9197,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "power-of-faerun-3-5e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "93–94",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Featherlung",
+          "note": "Библиографическая привязка лора. Смешанный исходный раздел AD&D / Forgotten Realms не подтверждает редакцию механики."
+        },
+        {
+          "bookId": "forgotten-realms-campaign-setting-running-the-realms-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "23",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Featherlung",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -7017,6 +9270,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "al-qadim-cities-of-bone-campaign-guide-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "16",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Grey_Fever",
+          "note": ""
+        },
+        {
+          "bookId": "al-qadim-ruined-kingdoms-campaign-guide-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "6",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Grey_Fever",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -7066,6 +9342,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -7115,6 +9397,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -7163,6 +9451,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -7212,6 +9506,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "monstrous-compendium-ravenloft-appendix-iii-creatures-of-darkness-ad-d-2e",
+          "status": "bibliography",
+          "scope": "creature",
+          "locator": "114",
+          "evidenceUrl": "https://www.completecompendium.com/appendix/virus2/",
+          "note": "Вирусы в бестиарии Ravenloft. Книжная привязка сверена по двум указателям: Complete Compendium и AD&D 2e Wiki; печатный экземпляр не проверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -7260,6 +9569,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "monstrous-compendium-ravenloft-appendix-iii-creatures-of-darkness-ad-d-2e",
+          "status": "bibliography",
+          "scope": "creature",
+          "locator": "114",
+          "evidenceUrl": "https://www.completecompendium.com/appendix/virus2/",
+          "note": "Вирусы в бестиарии Ravenloft. Книжная привязка сверена по двум указателям: Complete Compendium и AD&D 2e Wiki; печатный экземпляр не проверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -7310,6 +9634,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "monstrous-compendium-ravenloft-appendix-iii-creatures-of-darkness-ad-d-2e",
+          "status": "bibliography",
+          "scope": "creature",
+          "locator": "115",
+          "evidenceUrl": "https://www.completecompendium.com/appendix/virus3/",
+          "note": "Вирусы в бестиарии Ravenloft. Книжная привязка сверена по двум указателям: Complete Compendium и AD&D 2e Wiki; печатный экземпляр не проверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -7361,6 +9700,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "monstrous-compendium-ravenloft-appendix-iii-creatures-of-darkness-ad-d-2e",
+          "status": "bibliography",
+          "scope": "creature",
+          "locator": "115",
+          "evidenceUrl": "https://www.completecompendium.com/appendix/virus3/",
+          "note": "Вирусы в бестиарии Ravenloft. Книжная привязка сверена по двум указателям: Complete Compendium и AD&D 2e Wiki; печатный экземпляр не проверен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -7411,6 +9765,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "power-of-faerun-3-5e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "93–94",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Shaking_fever",
+          "note": "Библиографическая привязка лора. Смешанный исходный раздел AD&D / Forgotten Realms не подтверждает редакцию механики."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -7462,6 +9831,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "power-of-faerun-3-5e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "93–94",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Shaking_plague",
+          "note": "Библиографическая привязка лора. Смешанный исходный раздел AD&D / Forgotten Realms не подтверждает редакцию механики."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -7513,6 +9897,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -7564,6 +9954,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -7613,6 +10009,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -7664,6 +10066,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "power-of-faerun-3-5e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "93–94",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Winterchill_fever",
+          "note": "Библиографическая привязка лора. Смешанный исходный раздел AD&D / Forgotten Realms не подтверждает редакцию механики."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -7713,6 +10130,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -7763,6 +10186,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -7814,6 +10243,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "calimport-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Calimport_%28sourcebook%29",
+          "note": "Историческая эпидемия упомянута в указателе книги Calimport. Страница не установлена; боевые правила каталога по этой ссылке не подтверждены."
+        },
+        {
+          "bookId": "calimport-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "20",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Alley_Plague",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -7863,6 +10315,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "calimport-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Calimport_%28sourcebook%29",
+          "note": "Историческая эпидемия упомянута в указателе книги Calimport. Страница не установлена; боевые правила каталога по этой ссылке не подтверждены."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -7914,6 +10381,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dragon-magazine-ad-d-1e-134",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "11",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Astralomitis",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -7963,6 +10445,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "neverwinter-nights-darkness-over-daggerford-d-d-3-x",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Black_rot",
+          "note": "Найден источник-видеоигра. Книжный источник и происхождение механики каталога не установлены."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -8014,6 +10511,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "power-of-faerun-3-5e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "93–94",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Blacklung_fever",
+          "note": "Библиографическая привязка лора. Смешанный исходный раздел AD&D / Forgotten Realms не подтверждает редакцию механики."
+        },
+        {
+          "bookId": "ed-greenwood-presents-elminster-s-forgotten-realms",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Ed_Greenwood_Presents_Elminster%27s_Forgotten_Realms",
+          "note": "Упоминание в книге лора; не ссылка на отдельный статблок болезни."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -8063,6 +10583,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "power-of-faerun-3-5e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "93–94",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Blacktongue",
+          "note": "Библиографическая привязка лора. Смешанный исходный раздел AD&D / Forgotten Realms не подтверждает редакцию механики."
+        },
+        {
+          "bookId": "ed-greenwood-presents-elminster-s-forgotten-realms",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Ed_Greenwood_Presents_Elminster%27s_Forgotten_Realms",
+          "note": "Упоминание в книге лора; не ссылка на отдельный статблок болезни."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -8113,6 +10656,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -8163,6 +10712,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "the-grand-history-of-the-realms-3-5e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "156",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Blush_%28plague%29",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -8213,6 +10777,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -8265,6 +10835,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -8313,6 +10889,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -8362,6 +10944,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "dungeon-masters-guide-ad-d-1e",
+          "status": "confirmed",
+          "scope": "rules",
+          "locator": "83",
+          "evidenceUrl": "https://s3.amazonaws.com/arena-attachments/804915/348b48a0cbd967122dcb76f5cc6f5a01.pdf",
+          "note": "Термин найден в Types of Insanity. Это происхождение названия / темы, а не подтверждение правил заразной болезни в каталоге."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -8413,6 +11010,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -8465,6 +11068,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -8516,6 +11125,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -8567,6 +11182,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -8617,6 +11238,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "the-shining-south-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "52",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Common_cold",
+          "note": "Подтверждено библиографическое упоминание простуды; конкретный исходник авторской механики не установлен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -8666,6 +11302,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -8718,6 +11360,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "calimport-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Calimport_%28sourcebook%29",
+          "note": "Историческая эпидемия упомянута в указателе книги Calimport. Страница не установлена; боевые правила каталога по этой ссылке не подтверждены."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -8768,6 +11425,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -8819,6 +11482,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -8868,6 +11537,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "dungeon-masters-guide-ad-d-1e",
+          "status": "confirmed",
+          "scope": "rules",
+          "locator": "83",
+          "evidenceUrl": "https://s3.amazonaws.com/arena-attachments/804915/348b48a0cbd967122dcb76f5cc6f5a01.pdf",
+          "note": "Термин найден в Types of Insanity. Это происхождение названия / темы, а не подтверждение правил заразной болезни в каталоге."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -8919,6 +11603,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -8969,6 +11659,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "dungeon-masters-guide-ad-d-1e",
+          "status": "candidate",
+          "scope": "rules",
+          "locator": "83",
+          "evidenceUrl": "https://s3.amazonaws.com/arena-attachments/804915/348b48a0cbd967122dcb76f5cc6f5a01.pdf",
+          "note": "В старой таблице есть близкая тема, но название каталога не совпадает буквально. Источник адаптации не установлен; термины не объявляются равнозначными."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -9019,6 +11724,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "calimport-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Calimport_%28sourcebook%29",
+          "note": "Историческая эпидемия упомянута в указателе книги Calimport. Страница не установлена; боевые правила каталога по этой ссылке не подтверждены."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -9068,6 +11788,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -9119,6 +11845,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -9170,6 +11902,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "the-mercenaries",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "гл. 7, с. 71",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Eating_disease",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -9220,6 +11967,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "calimport-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Calimport_%28sourcebook%29",
+          "note": "Историческая эпидемия упомянута в указателе книги Calimport. Страница не установлена; боевые правила каталога по этой ссылке не подтверждены."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -9270,6 +12032,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -9322,6 +12090,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "power-of-faerun-3-5e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "93–94",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Featherlung",
+          "note": "Библиографическая привязка лора. Смешанный исходный раздел AD&D / Forgotten Realms не подтверждает редакцию механики."
+        },
+        {
+          "bookId": "forgotten-realms-campaign-setting-running-the-realms-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "23",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Featherlung",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -9370,6 +12161,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "power-of-faerun-3-5e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "93–94",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Five_Fevers",
+          "note": "Библиографическая привязка лора. Смешанный исходный раздел AD&D / Forgotten Realms не подтверждает редакцию механики."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -9420,6 +12226,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "calimport-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Calimport_%28sourcebook%29",
+          "note": "Историческая эпидемия упомянута в указателе книги Calimport. Страница не установлена; боевые правила каталога по этой ссылке не подтверждены."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -9470,6 +12291,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "ed-greenwood-presents-elminster-s-forgotten-realms",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Ed_Greenwood_Presents_Elminster%27s_Forgotten_Realms",
+          "note": "Упоминание в книге лора; не ссылка на отдельный статблок болезни."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -9521,6 +12357,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "calimport-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Calimport_%28sourcebook%29",
+          "note": "Историческая эпидемия упомянута в указателе книги Calimport. Страница не установлена; боевые правила каталога по этой ссылке не подтверждены."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -9572,6 +12423,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -9622,6 +12479,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "oriental-adventures-3-0e",
+          "status": "bibliography",
+          "scope": "creature",
+          "locator": "163",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Gaki_fever",
+          "note": ""
+        },
+        {
+          "bookId": "monstrous-compendium-kara-tur-appendix-ad-d-2e",
+          "status": "bibliography",
+          "scope": "creature",
+          "locator": "19",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Gaki_fever",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -9671,6 +12551,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "ed-greenwood-presents-elminster-s-forgotten-realms",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Ed_Greenwood_Presents_Elminster%27s_Forgotten_Realms",
+          "note": "Упоминание в книге лора; не ссылка на отдельный статблок болезни."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -9722,6 +12617,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -9772,6 +12673,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -9822,6 +12729,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -9872,6 +12785,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -9923,6 +12842,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -9971,6 +12896,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "the-grand-history-of-the-realms-3-5e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "135",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Great_Plague_of_the_Inner_Sea",
+          "note": "Общая эпидемия из нескольких болезней; не единый статблок."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -10021,6 +12961,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "the-grand-history-of-the-realms-3-5e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "135",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Great_Plague_of_the_Inner_Sea",
+          "note": "Общая эпидемия из нескольких болезней; не единый статблок."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -10071,6 +13026,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "ed-greenwood-presents-elminster-s-forgotten-realms",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Ed_Greenwood_Presents_Elminster%27s_Forgotten_Realms",
+          "note": "Упоминание в книге лора; не ссылка на отдельный статблок болезни."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -10123,6 +13093,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "al-qadim-cities-of-bone-campaign-guide-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "16",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Grey_Fever",
+          "note": ""
+        },
+        {
+          "bookId": "al-qadim-ruined-kingdoms-campaign-guide-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "6",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Grey_Fever",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -10173,6 +13166,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "dungeon-masters-guide-ad-d-1e",
+          "status": "candidate",
+          "scope": "rules",
+          "locator": "83",
+          "evidenceUrl": "https://s3.amazonaws.com/arena-attachments/804915/348b48a0cbd967122dcb76f5cc6f5a01.pdf",
+          "note": "В старой таблице есть близкая тема, но название каталога не совпадает буквально. Источник адаптации не установлен; термины не объявляются равнозначными."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -10224,6 +13232,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -10273,6 +13287,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "ed-greenwood-presents-elminster-s-forgotten-realms",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "40",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Heartstop",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -10323,6 +13352,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "dungeon-masters-guide-ad-d-1e",
+          "status": "confirmed",
+          "scope": "rules",
+          "locator": "83",
+          "evidenceUrl": "https://s3.amazonaws.com/arena-attachments/804915/348b48a0cbd967122dcb76f5cc6f5a01.pdf",
+          "note": "Термин найден в Types of Insanity. Это происхождение названия / темы, а не подтверждение правил заразной болезни в каталоге."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -10374,6 +13418,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "calimport-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Calimport_%28sourcebook%29",
+          "note": "Историческая эпидемия упомянута в указателе книги Calimport. Страница не установлена; боевые правила каталога по этой ссылке не подтверждены."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -10423,6 +13482,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -10473,6 +13538,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -10523,6 +13594,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "dungeon-masters-guide-ad-d-1e",
+          "status": "confirmed",
+          "scope": "rules",
+          "locator": "83",
+          "evidenceUrl": "https://s3.amazonaws.com/arena-attachments/804915/348b48a0cbd967122dcb76f5cc6f5a01.pdf",
+          "note": "Термин найден в Types of Insanity. Это происхождение названия / темы, а не подтверждение правил заразной болезни в каталоге."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -10573,6 +13659,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "calimport-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Calimport_%28sourcebook%29",
+          "note": "Историческая эпидемия упомянута в указателе книги Calimport. Страница не установлена; боевые правила каталога по этой ссылке не подтверждены."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -10623,6 +13724,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -10674,6 +13781,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "underdark-3-5e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "110",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Lungrot",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -10721,6 +13843,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "ed-greenwood-presents-elminster-s-forgotten-realms",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Ed_Greenwood_Presents_Elminster%27s_Forgotten_Realms",
+          "note": "Упоминание в книге лора; не ссылка на отдельный статблок болезни."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -10772,6 +13909,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -10822,6 +13965,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "power-of-faerun-3-5e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "93–94",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Marsh_fever",
+          "note": "Библиографическая привязка лора. Смешанный исходный раздел AD&D / Forgotten Realms не подтверждает редакцию механики."
+        },
+        {
+          "bookId": "ed-greenwood-presents-elminster-s-forgotten-realms",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Ed_Greenwood_Presents_Elminster%27s_Forgotten_Realms",
+          "note": "Упоминание в книге лора; не ссылка на отдельный статблок болезни."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -10871,6 +14037,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "dungeon-masters-guide-ad-d-1e",
+          "status": "confirmed",
+          "scope": "rules",
+          "locator": "83",
+          "evidenceUrl": "https://s3.amazonaws.com/arena-attachments/804915/348b48a0cbd967122dcb76f5cc6f5a01.pdf",
+          "note": "Термин найден в Types of Insanity. Это происхождение названия / темы, а не подтверждение правил заразной болезни в каталоге."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -10921,6 +14102,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "dungeon-masters-guide-ad-d-1e",
+          "status": "candidate",
+          "scope": "rules",
+          "locator": "83",
+          "evidenceUrl": "https://s3.amazonaws.com/arena-attachments/804915/348b48a0cbd967122dcb76f5cc6f5a01.pdf",
+          "note": "В старой таблице есть близкая тема, но название каталога не совпадает буквально. Источник адаптации не установлен; термины не объявляются равнозначными."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -10971,6 +14167,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -11023,6 +14225,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -11072,6 +14280,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "calimport-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Calimport_%28sourcebook%29",
+          "note": "Историческая эпидемия упомянута в указателе книги Calimport. Страница не установлена; боевые правила каталога по этой ссылке не подтверждены."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -11124,6 +14347,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -11175,6 +14404,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -11225,6 +14460,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "dungeon-masters-guide-ad-d-1e",
+          "status": "candidate",
+          "scope": "rules",
+          "locator": "83",
+          "evidenceUrl": "https://s3.amazonaws.com/arena-attachments/804915/348b48a0cbd967122dcb76f5cc6f5a01.pdf",
+          "note": "В старой таблице есть близкая тема, но название каталога не совпадает буквально. Источник адаптации не установлен; термины не объявляются равнозначными."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -11276,6 +14526,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "forgotten-realms-campaign-guide-4e",
+          "status": "bibliography",
+          "scope": "rules",
+          "locator": "59",
+          "evidenceUrl": "https://oneinchsquare.net/2010/07/23/a-comprehensive-list-of-diseases-in-4th-edition/",
+          "note": "В указателе 4e название Pact Broken Curse. Исходный смешанный раздел не определяет его редакцию."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -11327,6 +14592,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -11377,6 +14648,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "dungeon-masters-guide-ad-d-1e",
+          "status": "confirmed",
+          "scope": "rules",
+          "locator": "83",
+          "evidenceUrl": "https://s3.amazonaws.com/arena-attachments/804915/348b48a0cbd967122dcb76f5cc6f5a01.pdf",
+          "note": "Термин найден в Types of Insanity. Это происхождение названия / темы, а не подтверждение правил заразной болезни в каталоге."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -11428,6 +14714,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -11479,6 +14771,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "six-faces-of-death-5e-2014",
+          "status": "bibliography",
+          "scope": "rules",
+          "locator": "Dragon+ №21",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Dragon%2B_21/Six_Faces_of_Death",
+          "note": "Приключение из Dragon+, а не источник AD&D. Книжный первоисточник не установлен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -11529,6 +14836,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "calimport-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "23",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Plague_of_Dragons",
+          "note": "Plague of Dragons и Dragons’ Plague — варианты имени; это не подтверждает тождество механик записей каталога."
+        },
+        {
+          "bookId": "the-vilhon-reach-dungeon-master-s-guide-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "13",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Plague_of_Dragons",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -11578,6 +14908,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "calimport-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Calimport_%28sourcebook%29",
+          "note": "Историческая эпидемия упомянута в указателе книги Calimport. Страница не установлена; боевые правила каталога по этой ссылке не подтверждены."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -11628,6 +14973,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "calimport-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Calimport_%28sourcebook%29",
+          "note": "Историческая эпидемия упомянута в указателе книги Calimport. Страница не установлена; боевые правила каталога по этой ссылке не подтверждены."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -11679,6 +15039,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -11729,6 +15095,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -11778,6 +15150,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -11829,6 +15207,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "forgotten-realms-campaign-guide-4e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "194–195",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Putrescent_Anathema",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -11879,6 +15272,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -11929,6 +15328,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -11979,6 +15384,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -12029,6 +15440,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -12080,6 +15497,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -12128,6 +15551,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -12179,6 +15608,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "baldur-s-gate-iii-d-d-5e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Penita",
+          "note": "Название встречается в видеоигре; источник механики болезни не установлен."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -12231,6 +15675,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "power-of-faerun-3-5e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "93–94",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Shaking_fever",
+          "note": "Библиографическая привязка лора. Смешанный исходный раздел AD&D / Forgotten Realms не подтверждает редакцию механики."
+        },
+        {
+          "bookId": "ed-greenwood-presents-elminster-s-forgotten-realms",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Ed_Greenwood_Presents_Elminster%27s_Forgotten_Realms",
+          "note": "Упоминание в книге лора; не ссылка на отдельный статблок болезни."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -12283,6 +15750,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -12333,6 +15806,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -12383,6 +15862,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -12433,6 +15918,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -12482,6 +15973,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "calimport-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Calimport_%28sourcebook%29",
+          "note": "Историческая эпидемия упомянута в указателе книги Calimport. Страница не установлена; боевые правила каталога по этой ссылке не подтверждены."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -12532,6 +16038,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "power-of-faerun-3-5e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "93–94",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Spotted_plague",
+          "note": "Библиографическая привязка лора. Смешанный исходный раздел AD&D / Forgotten Realms не подтверждает редакцию механики."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -12582,6 +16103,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -12631,6 +16158,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -12682,6 +16215,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -12732,6 +16271,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -12782,6 +16327,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "faiths-avatars-ad-d-2e",
+          "status": "confirmed",
+          "scope": "spell",
+          "locator": "154–155",
+          "evidenceUrl": "https://anyflip.com/cmjgl/kpbp/basic/151-194",
+          "note": "Болезнь названа в описании Cloud of Pestilence / Талоны. Параметры адаптации не сверены."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -12834,6 +16394,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "calimport-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "17",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Temples_Plague",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -12887,6 +16462,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "calimport-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "17",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Temples_Plague",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -12935,6 +16525,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "power-of-faerun-3-5e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "93–94",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Three_Plagues",
+          "note": "Библиографическая привязка лора. Смешанный исходный раздел AD&D / Forgotten Realms не подтверждает редакцию механики."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -12983,6 +16588,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "power-of-faerun-3-5e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "93–94",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Three_Plagues",
+          "note": "Библиографическая привязка лора. Смешанный исходный раздел AD&D / Forgotten Realms не подтверждает редакцию механики."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -13032,6 +16652,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "tomb-of-annihilation-5e-2014",
+          "status": "candidate",
+          "scope": "name",
+          "locator": "40",
+          "evidenceUrl": "https://www.reddit.com/r/dndnext/comments/hn5hag/list_of_5e_diseases/",
+          "note": "Требуется сверка печатной страницы; список использован только как указатель к названиям."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -13082,6 +16717,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -13128,6 +16769,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -13180,6 +16827,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -13230,6 +16883,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "neverwinter-campaign-setting-4e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "13",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Wailing_Death",
+          "note": ""
+        },
+        {
+          "bookId": "neverwinter-nights-d-d-3-0",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Wailing_Death",
+          "note": "Видеоигра — самостоятельный источник сюжета, не книга правил."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -13279,6 +16955,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "calimport-ad-d-2e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Calimport_%28sourcebook%29",
+          "note": "Историческая эпидемия упомянута в указателе книги Calimport. Страница не установлена; боевые правила каталога по этой ссылке не подтверждены."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -13332,6 +17023,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -13381,6 +17078,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "ed-greenwood-presents-elminster-s-forgotten-realms",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Ed_Greenwood_Presents_Elminster%27s_Forgotten_Realms",
+          "note": "Упоминание в книге лора; не ссылка на отдельный статблок болезни."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -13431,6 +17143,12 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "unresolved",
+      "references": [],
+      "note": "Книга не установлена. Название и смешанный исходный раздел сами по себе не подтверждают публикацию.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -13483,6 +17201,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "power-of-faerun-3-5e",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": "93–94",
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Winterchill_fever",
+          "note": "Библиографическая привязка лора. Смешанный исходный раздел AD&D / Forgotten Realms не подтверждает редакцию механики."
+        },
+        {
+          "bookId": "ed-greenwood-presents-elminster-s-forgotten-realms",
+          "status": "candidate",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://forgottenrealms.fandom.com/wiki/Ed_Greenwood_Presents_Elminster%27s_Forgotten_Realms",
+          "note": "Упоминание в книге лора; не ссылка на отдельный статблок болезни. Для Winterchill в указателе встречается вариант Windchill — требуется уточнение имени."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -13536,6 +17277,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "kobolds-of-golarion-pathfinder-1e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://www.d20pfsrd.com/gamemastering/afflictions/diseases/diseases-paizo-inc/blightburn-sickness/",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -13587,6 +17343,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "pathfinder-unchained-pathfinder-1e",
+          "status": "confirmed",
+          "scope": "rules",
+          "locator": "140",
+          "evidenceUrl": "https://pathfinder.d20srd.org/unchained/gameplay/diseaseAndPoison.html",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -13641,6 +17412,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "pathfinder-unchained-pathfinder-1e",
+          "status": "confirmed",
+          "scope": "rules",
+          "locator": "140",
+          "evidenceUrl": "https://pathfinder.d20srd.org/unchained/gameplay/diseaseAndPoison.html",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -13693,6 +17479,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "pathfinder-unchained-pathfinder-1e",
+          "status": "confirmed",
+          "scope": "rules",
+          "locator": "140",
+          "evidenceUrl": "https://pathfinder.d20srd.org/unchained/gameplay/diseaseAndPoison.html",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -13741,6 +17542,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "pathfinder-unchained-pathfinder-1e",
+          "status": "confirmed",
+          "scope": "rules",
+          "locator": "140",
+          "evidenceUrl": "https://pathfinder.d20srd.org/unchained/gameplay/diseaseAndPoison.html",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -13793,6 +17609,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "pathfinder-unchained-pathfinder-1e",
+          "status": "confirmed",
+          "scope": "rules",
+          "locator": "140",
+          "evidenceUrl": "https://pathfinder.d20srd.org/unchained/gameplay/diseaseAndPoison.html",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -13845,6 +17676,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "pathfinder-unchained-pathfinder-1e",
+          "status": "confirmed",
+          "scope": "rules",
+          "locator": "141",
+          "evidenceUrl": "https://pathfinder.d20srd.org/unchained/gameplay/diseaseAndPoison.html",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -13897,6 +17743,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "pathfinder-unchained-pathfinder-1e",
+          "status": "confirmed",
+          "scope": "rules",
+          "locator": "141",
+          "evidenceUrl": "https://pathfinder.d20srd.org/unchained/gameplay/diseaseAndPoison.html",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -13948,6 +17809,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "bestiary-pathfinder-1e",
+          "status": "candidate",
+          "scope": "creature",
+          "locator": "Ghoul / Ghast",
+          "evidenceUrl": "https://pathfinder.d20srd.org/bestiary/ghoul.html",
+          "note": "Ghast рассматривается в связи с Ghoul Fever. Отдельное имя Ghast Fever и его механика требуют проверки."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -13999,6 +17875,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "candidate",
+      "references": [
+        {
+          "bookId": "bestiary-pathfinder-1e",
+          "status": "candidate",
+          "scope": "creature",
+          "locator": "Ghoul / Ghast",
+          "evidenceUrl": "https://pathfinder.d20srd.org/bestiary/ghoul.html",
+          "note": "Ghast рассматривается в связи с Ghoul Fever. Отдельное имя Ghast Fever и его механика требуют проверки."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -14052,6 +17943,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "pathfinder-unchained-pathfinder-1e",
+          "status": "confirmed",
+          "scope": "rules",
+          "locator": "141",
+          "evidenceUrl": "https://pathfinder.d20srd.org/unchained/gameplay/diseaseAndPoison.html",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -14104,6 +18010,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "pathfinder-unchained-pathfinder-1e",
+          "status": "confirmed",
+          "scope": "rules",
+          "locator": "141",
+          "evidenceUrl": "https://pathfinder.d20srd.org/unchained/gameplay/diseaseAndPoison.html",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -14154,6 +18075,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "pathfinder-unchained-pathfinder-1e",
+          "status": "confirmed",
+          "scope": "rules",
+          "locator": "141",
+          "evidenceUrl": "https://pathfinder.d20srd.org/unchained/gameplay/diseaseAndPoison.html",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -14200,6 +18136,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "pathfinder-unchained-pathfinder-1e",
+          "status": "confirmed",
+          "scope": "rules",
+          "locator": "138–139",
+          "evidenceUrl": "https://pathfinder.d20srd.org/unchained/gameplay/diseaseAndPoison.html",
+          "note": "Общие треки, а не самостоятельные болезни."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -14246,6 +18197,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "pathfinder-unchained-pathfinder-1e",
+          "status": "confirmed",
+          "scope": "rules",
+          "locator": "138–139",
+          "evidenceUrl": "https://pathfinder.d20srd.org/unchained/gameplay/diseaseAndPoison.html",
+          "note": "Общие треки, а не самостоятельные болезни."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -14298,6 +18264,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "pathfinder-unchained-pathfinder-1e",
+          "status": "confirmed",
+          "scope": "rules",
+          "locator": "141",
+          "evidenceUrl": "https://pathfinder.d20srd.org/unchained/gameplay/diseaseAndPoison.html",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -14350,6 +18331,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "pathfinder-unchained-pathfinder-1e",
+          "status": "confirmed",
+          "scope": "rules",
+          "locator": "141",
+          "evidenceUrl": "https://pathfinder.d20srd.org/unchained/gameplay/diseaseAndPoison.html",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -14402,6 +18398,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "pathfinder-unchained-pathfinder-1e",
+          "status": "confirmed",
+          "scope": "rules",
+          "locator": "141",
+          "evidenceUrl": "https://pathfinder.d20srd.org/unchained/gameplay/diseaseAndPoison.html",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -14451,6 +18462,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "ruins-of-gauntlight-pathfinder-2e",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "44",
+          "evidenceUrl": "https://2e.aonprd.com/Diseases.aspx",
+          "note": "Pathfinder Adventure Path №163: Abomination Vaults, часть 1."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -14501,6 +18527,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "hands-of-the-devil-pathfinder-2e",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "18",
+          "evidenceUrl": "https://2e.aonprd.com/Diseases.aspx",
+          "note": "Pathfinder Adventure Path №164: Abomination Vaults, часть 2."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -14552,6 +18593,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "bestiary-pathfinder-2e",
+          "status": "bibliography",
+          "scope": "creature",
+          "locator": "169",
+          "evidenceUrl": "https://pathfinder2e.org/browse/afflictions/index.html",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -14603,6 +18659,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "bestiary-pathfinder-2e",
+          "status": "bibliography",
+          "scope": "creature",
+          "locator": "168",
+          "evidenceUrl": "https://pathfinder2e.org/browse/afflictions/index.html",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -14652,6 +18723,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "the-show-must-go-on-pathfinder-2e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": null,
+          "evidenceUrl": "https://pf2.d20pfsrd.com/disease/",
+          "note": "Pathfinder Adventure Path №151: Extinction Curse, часть 1."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -14701,6 +18787,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "gamemastery-guide-pathfinder-2e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "118",
+          "evidenceUrl": "https://pathfinder2e.org/browse/afflictions/index.html",
+          "note": "Книжное название и страница по SRD-указателю. Механика авторской адаптации отличается и не сверена."
+        },
+        {
+          "bookId": "gm-core-pathfinder-2e-remaster",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "88",
+          "evidenceUrl": "https://2e.aonprd.com/Diseases.aspx",
+          "note": "Также найдено переиздание названия в Remaster. Это не доказывает, что исходная адаптация взята из этого переиздания."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -14749,6 +18858,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "hands-of-the-devil-pathfinder-2e",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "12",
+          "evidenceUrl": "https://2e.aonprd.com/Diseases.aspx",
+          "note": "Pathfinder Adventure Path №164: Abomination Vaults, часть 2."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -14798,6 +18922,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "book-of-the-dead-pathfinder-2e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "197",
+          "evidenceUrl": "https://pathfinder2e.org/browse/afflictions/index.html",
+          "note": ""
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -14846,6 +18985,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "dreamers-of-the-nameless-spires-pathfinder-2e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "76",
+          "evidenceUrl": "https://pathfinder2e.org/browse/afflictions/index.html",
+          "note": "Pathfinder Adventure Path №189: Gatewalkers, часть 3."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -14896,6 +19050,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "treasure-vault-pathfinder-2e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "45",
+          "evidenceUrl": "https://pathfinder2e.org/browse/afflictions/index.html",
+          "note": ""
+        },
+        {
+          "bookId": "treasure-vault-remastered-pathfinder-2e-remaster",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "45",
+          "evidenceUrl": "https://2e.aonprd.com/Diseases.aspx",
+          "note": "Найдено также переиздание; первенство этой публикации не утверждается."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -14949,6 +19126,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "gamemastery-guide-pathfinder-2e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "119",
+          "evidenceUrl": "https://pathfinder2e.org/browse/afflictions/index.html",
+          "note": "Книжное название и страница по SRD-указателю. Механика авторской адаптации отличается и не сверена."
+        },
+        {
+          "bookId": "gm-core-pathfinder-2e-remaster",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "89",
+          "evidenceUrl": "https://2e.aonprd.com/Diseases.aspx",
+          "note": "Также найдено переиздание названия в Remaster. Это не доказывает, что исходная адаптация взята из этого переиздания."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -14999,6 +19199,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "gamemastery-guide-pathfinder-2e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "118",
+          "evidenceUrl": "https://pathfinder2e.org/browse/afflictions/index.html",
+          "note": "Книжное название и страница по SRD-указателю. Механика авторской адаптации отличается и не сверена."
+        },
+        {
+          "bookId": "gm-core-pathfinder-2e-remaster",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "88",
+          "evidenceUrl": "https://2e.aonprd.com/Diseases.aspx",
+          "note": "Также найдено переиздание названия в Remaster. Это не доказывает, что исходная адаптация взята из этого переиздания."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -15048,6 +19271,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "gamemastery-guide-pathfinder-2e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "118",
+          "evidenceUrl": "https://pathfinder2e.org/browse/afflictions/index.html",
+          "note": "Книжное название и страница по SRD-указателю. Механика авторской адаптации отличается и не сверена."
+        },
+        {
+          "bookId": "gm-core-pathfinder-2e-remaster",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "88",
+          "evidenceUrl": "https://2e.aonprd.com/Diseases.aspx",
+          "note": "Также найдено переиздание названия в Remaster. Это не доказывает, что исходная адаптация взята из этого переиздания."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -15097,6 +19343,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "gamemastery-guide-pathfinder-2e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "119",
+          "evidenceUrl": "https://pathfinder2e.org/browse/afflictions/index.html",
+          "note": "Книжное название и страница по SRD-указателю. Механика авторской адаптации отличается и не сверена."
+        },
+        {
+          "bookId": "gm-core-pathfinder-2e-remaster",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "89",
+          "evidenceUrl": "https://2e.aonprd.com/Diseases.aspx",
+          "note": "Также найдено переиздание названия в Remaster. Это не доказывает, что исходная адаптация взята из этого переиздания."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -15148,6 +19417,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "gamemastery-guide-pathfinder-2e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "118",
+          "evidenceUrl": "https://pathfinder2e.org/browse/afflictions/index.html",
+          "note": "Книжное название и страница по SRD-указателю. Механика авторской адаптации отличается и не сверена."
+        },
+        {
+          "bookId": "gm-core-pathfinder-2e-remaster",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "88",
+          "evidenceUrl": "https://2e.aonprd.com/Diseases.aspx",
+          "note": "Также найдено переиздание названия в Remaster. Это не доказывает, что исходная адаптация взята из этого переиздания."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -15197,6 +19489,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "gamemastery-guide-pathfinder-2e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "118",
+          "evidenceUrl": "https://pathfinder2e.org/browse/afflictions/index.html",
+          "note": "Книжное название и страница по SRD-указателю. Механика авторской адаптации отличается и не сверена."
+        },
+        {
+          "bookId": "gm-core-pathfinder-2e-remaster",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "88",
+          "evidenceUrl": "https://2e.aonprd.com/Diseases.aspx",
+          "note": "Также найдено переиздание названия в Remaster. Это не доказывает, что исходная адаптация взята из этого переиздания."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -15246,6 +19561,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "gamemastery-guide-pathfinder-2e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "119",
+          "evidenceUrl": "https://pathfinder2e.org/browse/afflictions/index.html",
+          "note": "Книжное название и страница по SRD-указателю. Механика авторской адаптации отличается и не сверена."
+        },
+        {
+          "bookId": "gm-core-pathfinder-2e-remaster",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "89",
+          "evidenceUrl": "https://2e.aonprd.com/Diseases.aspx",
+          "note": "Также найдено переиздание названия в Remaster. Это не доказывает, что исходная адаптация взята из этого переиздания."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -15297,6 +19635,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "cult-of-cinders-pathfinder-2e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "71",
+          "evidenceUrl": "https://pathfinder2e.org/browse/afflictions/index.html",
+          "note": "Pathfinder Adventure Path №146: Age of Ashes, часть 2."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -15348,6 +19701,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "gamemastery-guide-pathfinder-2e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "118",
+          "evidenceUrl": "https://pathfinder2e.org/browse/afflictions/index.html",
+          "note": "Книжное название и страница по SRD-указателю. Механика авторской адаптации отличается и не сверена."
+        },
+        {
+          "bookId": "gm-core-pathfinder-2e-remaster",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "88",
+          "evidenceUrl": "https://2e.aonprd.com/Diseases.aspx",
+          "note": "Также найдено переиздание названия в Remaster. Это не доказывает, что исходная адаптация взята из этого переиздания."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -15396,6 +19772,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "the-medusa-plague-dragonlance",
+          "status": "bibliography",
+          "scope": "lore",
+          "locator": null,
+          "evidenceUrl": "https://dragonlance.fandom.com/wiki/The_Medusa_Plague_%28Novel%29",
+          "note": "Роман Mary Kirchoff (1994), а не книга правил Pathfinder 2e. Механика окаменения в каталоге этим источником не подтверждена."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -15443,6 +19834,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "gamemastery-guide-pathfinder-2e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "119",
+          "evidenceUrl": "https://pathfinder2e.org/browse/afflictions/index.html",
+          "note": "Книжное название и страница по SRD-указателю. Механика авторской адаптации отличается и не сверена."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -15492,6 +19898,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "gamemastery-guide-pathfinder-2e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "118",
+          "evidenceUrl": "https://pathfinder2e.org/browse/afflictions/index.html",
+          "note": "Книжное название и страница по SRD-указателю. Механика авторской адаптации отличается и не сверена."
+        },
+        {
+          "bookId": "gm-core-pathfinder-2e-remaster",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "88",
+          "evidenceUrl": "https://2e.aonprd.com/Diseases.aspx",
+          "note": "Также найдено переиздание названия в Remaster. Это не доказывает, что исходная адаптация взята из этого переиздания."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -15540,6 +19969,21 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "bibliography",
+      "references": [
+        {
+          "bookId": "gamemastery-guide-pathfinder-2e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "119",
+          "evidenceUrl": "https://pathfinder2e.org/browse/afflictions/index.html",
+          "note": "Книжное название и страница по SRD-указателю. Механика авторской адаптации отличается и не сверена."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -15590,6 +20034,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "gamemastery-guide-pathfinder-2e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "118",
+          "evidenceUrl": "https://pathfinder2e.org/browse/afflictions/index.html",
+          "note": "Книжное название и страница по SRD-указателю. Механика авторской адаптации отличается и не сверена."
+        },
+        {
+          "bookId": "gm-core-pathfinder-2e-remaster",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "88",
+          "evidenceUrl": "https://2e.aonprd.com/Diseases.aspx",
+          "note": "Также найдено переиздание названия в Remaster. Это не доказывает, что исходная адаптация взята из этого переиздания."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   },
   {
@@ -15641,6 +20108,29 @@ export const diseaseEntries: DiseaseEntry[] = [
       "effectIntervalMinutes": null,
       "effectDice": null,
       "effectLabel": ""
+    },
+    "sourceIndex": {
+      "status": "confirmed",
+      "references": [
+        {
+          "bookId": "gamemastery-guide-pathfinder-2e",
+          "status": "bibliography",
+          "scope": "name",
+          "locator": "118",
+          "evidenceUrl": "https://pathfinder2e.org/browse/afflictions/index.html",
+          "note": "Книжное название и страница по SRD-указателю. Механика авторской адаптации отличается и не сверена."
+        },
+        {
+          "bookId": "gm-core-pathfinder-2e-remaster",
+          "status": "confirmed",
+          "scope": "name",
+          "locator": "88",
+          "evidenceUrl": "https://2e.aonprd.com/Diseases.aspx",
+          "note": "Также найдено переиздание названия в Remaster. Это не доказывает, что исходная адаптация взята из этого переиздания."
+        }
+      ],
+      "note": "Установлено присутствие названия или темы в источнике. Это не подтверждает происхождение и точность авторской механики каталога.",
+      "checkedOn": "2026-10-31"
     }
   }
 ];

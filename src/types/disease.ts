@@ -37,6 +37,30 @@ export interface DiseaseEntry {
     readiness: 'prepared' | 'review';
     questions: string[];
     mechanics: DiseaseMechanics;
+    sourceIndex: DiseaseSourceIndex;
+}
+export type DiseaseSourceStatus = 'confirmed' | 'bibliography' | 'candidate' | 'unresolved';
+export interface DiseaseSourceBook {
+    id: string;
+    title: string;
+    code: string;
+    edition: string;
+    kind: 'book' | 'magazine' | 'article' | 'novel' | 'game';
+    issue?: string;
+}
+export interface DiseaseSourceReference {
+    bookId: string;
+    status: Exclude<DiseaseSourceStatus, 'unresolved'>;
+    scope: 'name' | 'lore' | 'creature' | 'spell' | 'rules';
+    locator: string | null;
+    evidenceUrl: string;
+    note: string;
+}
+export interface DiseaseSourceIndex {
+    status: DiseaseSourceStatus;
+    references: DiseaseSourceReference[];
+    note: string;
+    checkedOn: string;
 }
 export interface LocalDiseaseCharacter {
     id: string;
