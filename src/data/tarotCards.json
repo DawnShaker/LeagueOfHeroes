@@ -1,0 +1,3915 @@
+[
+  {
+    "id": "aberration",
+    "name": "Аберрация",
+    "nameEn": "Aberration",
+    "description": "Бехолдер парит в захламлённой лаборатории. Карта означает противоестественное и искажение природы.",
+    "page": 15,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/01-aberration.webp",
+    "artist": "Jim Zaccaria",
+    "upright": {
+      "person": {
+        "text": "Человек с искажённым восприятием: культист, колдун Великого Древнего или просто эксцентричный вольнодумец.",
+        "referenceIds": [
+          "creature:cultist:MM",
+          "creature:warlock of the great old one:MPMM"
+        ]
+      },
+      "creature": {
+        "text": "Аберрация или существо, испорченное Дальним Пределом.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место, где нарушаются законы физики или магии.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Искажённое произведение искусства или магический предмет, созданный аберрациями.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Вторжение существ или энергии из Дальнего Предела либо глубин Подземья.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Защитник природы, например друид, противостоящий порче.",
+        "referenceIds": [
+          "creature:druid:MM"
+        ]
+      },
+      "creature": {
+        "text": "Существо, устоявшее перед порчей, или ловушка с уроном психической энергией.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Природа поглотила следы былой порчи.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Искусство о победе природы над порчей или предмет против аберраций, например кольцо защиты разума.",
+        "referenceIds": [
+          "item:ring of mind shielding:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Борьба людей или существ с влиянием аберраций.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "balance",
+    "name": "Равновесие",
+    "nameEn": "Balance",
+    "description": "Весы уравновешивают день и ночь. Карта говорит о балансе сил и его нарушении.",
+    "page": 16,
+    "classic": true,
+    "dungeonDeck": "story",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/BMT/Deck%20of%20Many%20Things/03-balance.webp",
+    "artist": "Francesca Resta",
+    "upright": {
+      "person": {
+        "text": "Беспристрастный человек, способный учитывать разные точки зрения.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Ловушка, зверь, конструкт или иной беспристрастный противник.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место равновесия цивилизации и природы, суши и воды, порядка и хаоса.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Ценность для двух соперничающих сторон или предмет с двумя равными магическими силами.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Нужно сохранить баланс сил, примирить соперников или отказаться от навязанного ложного выбора.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Предвзятый судья, намеренно отвергающий чужую точку зрения.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Небожитель, исчадие или существо, тесно связанное с определённой идеологией или мировоззрением.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Нарушенный природный или стихийный баланс с пагубными последствиями.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Предмет, ценный лишь для узкого круга или пригодный для строго одной цели.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Нечто явно переоценено или недооценено.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "beast",
+    "name": "Зверь",
+    "nameEn": "Beast",
+    "description": "Карта связывает животный мир с хищностью, жестокостью и дурным нравом людей.",
+    "page": 17,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/03-beast.webp",
+    "artist": "Abigail Larson",
+    "upright": {
+      "person": {
+        "text": "Человек, отвергающий удобства цивилизации или следующий хищным побуждениям.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Зверь, похожие на животное фея или монстр либо животное, запертое в яме.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место, где животные живут на воле.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Предмет из меха, перьев, костей или когтей; плащ летучей мыши либо посох питона, позволяющие принять звериный облик.",
+        "referenceIds": [
+          "item:cloak of the bat:DMG",
+          "item:staff of the python:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Охота на животных или нападения зверей на людей.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, яростно подавляющий «звериные» порывы в себе и окружающих.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Домашнее животное или фамильяр.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Ферма, зверинец или другое место содержания животных.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Украшенное седло, стрекало или средство управления зверями, например зелье дружбы с животными.",
+        "referenceIds": [
+          "item:potion of animal friendship:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Домашние животные выходят из повиновения.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "book",
+    "name": "Книга",
+    "nameEn": "Book",
+    "description": "Огромная книга лежит среди свитков, рядом перо и чернила. Карта означает записанную информацию.",
+    "page": 18,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/04-book.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Писатель, поэт или человек, постоянно делающий записи.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, ведущее подробный дневник или ищущее летописца своих деяний.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Скрипторий или печатная мастерская.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Ценное или волшебное перо, чернила, краски, например чудесные пигменты Нолзура.",
+        "referenceIds": [
+          "item:nolzur's marvelous pigments:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Разгадку нужно извлечь из письменных улик.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Образованный и начитанный человек.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Ловушка с письменными рунами, например охранная руна или символ.",
+        "referenceIds": [
+          "spell:glyph of warding:PHB",
+          "spell:symbol:PHB"
+        ]
+      },
+      "place": {
+        "text": "Библиотека или иное хранилище письменных знаний.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Ценная или магическая книга либо свиток.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Записанные тайны, которым следовало остаться неизвестными.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "bridge",
+    "name": "Мост",
+    "nameEn": "Bridge",
+    "description": "Под каменным мостом прячется фигура с горящими глазами. Карта означает усилия по преодолению препятствий.",
+    "page": 19,
+    "classic": false,
+    "dungeonDeck": "locations",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/05-bridge.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Посредник, помогающий разрешить обиды и недопонимание.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Координатор разных существ: например иллитид, направляющий гримлоков и троллей.",
+        "referenceIds": [
+          "creature:mind flayer:MM",
+          "creature:grimlock:MM",
+          "creature:troll:MM"
+        ]
+      },
+      "place": {
+        "text": "Мост через реку или пропасть.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение моста или средство преодоления препятствий, например сапоги ходьбы и прыжков.",
+        "referenceIds": [
+          "item:boots of striding and springing:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Давним врагам срочно нужно найти общий язык.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Участник давней вражды семей или групп.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо на мосту или под ним, требующее плату либо пожирающее путников.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Река или пропасть без моста; опасный либо разрушенный мост.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение стен, преград, лабиринта или предмет, создающий барьеры, например куб силового поля.",
+        "referenceIds": [
+          "item:cube of force:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Открытый конфликт двух семей или групп.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "campfire",
+    "name": "Костёр",
+    "nameEn": "Campfire",
+    "description": "Ночной костёр дарит безопасность и уют. Карта напоминает о необходимости отдыха.",
+    "page": 20,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/06-campfire.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Отдыхающий человек, занятый любимым делом вдали от работы.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо с долгими периодами покоя, например дракон или рептилия; ловушка, долго готовящаяся к повторному срабатыванию.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Недавно оставленный лагерь.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Умиротворяющее произведение искусства или средство безопасного отдыха, например жезл безопасности.",
+        "referenceIds": [
+          "item:rod of security:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Передышка посреди путешествия или приключения.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Измотанный человек.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, не подверженное истощению: ангел, голем, слизь или нежить; постоянно действующая опасность.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место, где невозможно отдохнуть, например круглосуточный рынок.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение лихорадочной деятельности или предмет для бдительности, например щит часового.",
+        "referenceIds": [
+          "item:sentinel shield:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Обстоятельства требуют непрерывных усилий.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "cavern",
+    "name": "Пещера",
+    "nameEn": "Cavern",
+    "description": "Огромная пещера со светящимися грибами и каменными образованиями означает исследование скрытых тайн.",
+    "page": 21,
+    "classic": false,
+    "dungeonDeck": "locations",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/07-cavern.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Любопытный собеседник, задающий глубокие вопросы и мало рассказывающий о себе.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, подражающее пещерным образованиям, например пронзатель или верёвочник.",
+        "referenceIds": [
+          "creature:piercer:MM",
+          "creature:roper:MM"
+        ]
+      },
+      "place": {
+        "text": "Пещера или огромное здание, например просторный храм.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Жеода, драгоценности или предмет с тёмным зрением, например очки ночного зрения.",
+        "referenceIds": [
+          "item:goggles of night:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Нужно разобраться в скрытых мотивах и тайнах.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, живущий настоящим и избегающий самоанализа.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, заглатывающее добычу целиком, или ловушка с обрушением потолка.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Маленькая ниша или тесная пещера.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Произведение искусства без ощущения глубины и перспективы.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Мотивы всех участников стали очевидны.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "celestial",
+    "name": "Небожитель",
+    "nameEn": "Celestial",
+    "description": "Прекрасный коатль извивается среди облаков. Карта означает небожителей и служение божественному.",
+    "page": 22,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/08-celestial.webp",
+    "artist": "Jim Zaccaria",
+    "upright": {
+      "person": {
+        "text": "Набожный человек, замечающий чудеса и божественное присутствие повсюду.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Небожитель, существо, связанное с богами, или ловушка с уроном излучением.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Верхние планы или место под их влиянием.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение небожителей, сокровище Верхних планов или созданный небожителями предмет.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Контакт Верхних планов с Материальным: сны, видения или посланцы-небожители.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, обиженный на бога или небожителя за реальный либо мнимый вред.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Падший небожитель или существо, утратившее божественную связь.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место, защищённое от небожителей и Верхних планов.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение падения небожителя или предмет для борьбы с небожителями.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Нежелательное вмешательство небожителей в жизнь смертных.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "comet",
+    "name": "Комета",
+    "nameEn": "Comet",
+    "description": "Яркая комета пересекает зимнее небо. Карта несёт грозное предостережение или разрушение.",
+    "page": 23,
+    "classic": true,
+    "dungeonDeck": "story",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/BMT/Deck%20of%20Many%20Things/12-comet.webp",
+    "artist": "Vallez Gax",
+    "upright": {
+      "person": {
+        "text": "Серьёзный пессимист, возможно вестник дурных новостей.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Дурное знамение или следы приближения страшного чудовища; явно обозначенная ловушка среди тел жертв.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Обсерватория, метеоритный кратер или место астрономического события.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Проклятое сокровище или предмет, которому суждено стать орудием разрушения.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Кризис на грани потери контроля.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Скорбящий человек или тот, кто наслаждается чужими страданиями.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Следы неистовства чудовища или мелкие существа, спасающиеся от более крупного.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Руины после давней катастрофы, возможно населённые призраками.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Сокровище, созданное бедствием, обагрённое кровью или преследуемое прежними владельцами; доброе следствие несчастья.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Затишье после катастрофы: люди приходят в себя от ужасных событий.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "construct",
+    "name": "Конструкт",
+    "nameEn": "Construct",
+    "description": "Модрон с гаечным ключом находится внутри механизма. Карта означает рукотворные вещи.",
+    "page": 24,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/10-construct.webp",
+    "artist": "Abigail Larson",
+    "upright": {
+      "person": {
+        "text": "Ремесленник, ценящий ручную работу.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Конструкт, изначально созданный для оживления, например голем, в отличие от оживлённых метлы или ковра.",
+        "referenceIds": [
+          "creature:animated broom:CM",
+          "creature:rug of smothering:MM"
+        ]
+      },
+      "place": {
+        "text": "Мастерская или художественное ателье.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Искусная вещь, особенно полезная в быту, или волшебные инструменты.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Мастер пытается оживить своё творение.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, презирающий ручной труд.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, способное разрушать здания и предметы, например осадное чудовище.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Свалка или место выброшенных вещей.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Минимально обработанный природный материал или оружие против конструктов, например булава сокрушения.",
+        "referenceIds": [
+          "item:mace of smiting:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Раскаявшийся мастер пытается уничтожить вышедшего из-под контроля конструкта.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "corpse",
+    "name": "Труп",
+    "nameEn": "Corpse",
+    "description": "Тело искателя приключений пронзено стрелами в коридоре подземелья. Карта означает разложение и нравственную порчу.",
+    "page": 25,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/11-corpse.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Злой человек с прогнившими нравственными устоями.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Зомби, иная разлагающаяся телесная нежить или заминированный труп.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Кладбище, костница или место, где оставляют гнить тела.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение мертвецов, начинающее разлагаться тело или посох увядания.",
+        "referenceIds": [
+          "item:staff of withering:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Организация полностью поражена коррупцией.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Добрый человек, не поддавшийся окружающему злу.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Слизь или грибное существо, разлагающее тела.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место обильного роста грибов на гниющей плоти.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Сокровище, оставшееся нетронутым среди гнили.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Попытка развратить уважаемую благородную организацию.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "crossroads",
+    "name": "Перекрёсток",
+    "nameEn": "Crossroads",
+    "description": "Указатель на развилке направлен в разные стороны. Предстоит трудный, но необходимый выбор.",
+    "page": 26,
+    "classic": false,
+    "dungeonDeck": "locations",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/12-crossroads.webp",
+    "artist": "Abigail Larson",
+    "upright": {
+      "person": {
+        "text": "Человек, мучающийся выбором или жалеющий о недавнем решении.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, вызывающее смятение или хаотичное поведение, например умбер-халк.",
+        "referenceIds": [
+          "creature:umber hulk:MM"
+        ]
+      },
+      "place": {
+        "text": "Перекрёсток или поселение на пересечении торговых путей.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение перекрёстка либо предмет с несколькими свойствами, например посох.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Выбор между одинаково заманчивыми или одинаково губительными вариантами.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, отказывающийся решать и полагающийся на бездействие или случай.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, мешающее действовать, например вурдалак.",
+        "referenceIds": [
+          "creature:ghoul:MM"
+        ]
+      },
+      "place": {
+        "text": "Узкий овраг или проход, ограничивающий движение.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение пересекающихся окружностей или предмет с одной ограниченной по применениям функцией, например волшебная палочка.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Последствия чьего-то отказа выбирать или действовать.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "donjon",
+    "name": "Узилище",
+    "nameEn": "Donjon",
+    "description": "Подземная лестница ведёт к тяжёлой решётчатой двери. Карта означает заточение и свободу.",
+    "page": 27,
+    "classic": true,
+    "dungeonDeck": "locations",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/BMT/Deck%20of%20Many%20Things/17-donjon.webp",
+    "artist": "Jim Zaccaria",
+    "upright": {
+      "person": {
+        "text": "Заключённый или человек, чувствующий себя в ловушке.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, хватающее добычу или заглатывающее её целиком.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Тюрьма, темница или зверинец.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Сокровище в запертом хранилище или магия связывания и заточения.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Тупик, угроза свободе или нерешительность, удерживающая всех в ожидании.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Освобождённый узник, беглец или вольнодумец, отвергающий условности.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Сбежавшее из неволи или одичавшее существо.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Вскрытая тюрьма или памятник освобождению.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Вместилище бывшего пленника: утратившая магию бутылка ифрита или пустая железная фляга.",
+        "referenceIds": [
+          "item:efreeti bottle:DMG",
+          "item:iron flask:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Нужен творческий выход из положения либо освобождение пленников.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "door",
+    "name": "Дверь",
+    "nameEn": "Door",
+    "description": "Большая деревянная дверь преграждает путь. Карта предлагает возможность перемен.",
+    "page": 28,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/14-door.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Человек, пытающийся искупить проступки и изменить жизнь.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Оборотень или иное меняющее облик существо; дверь с ловушкой.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Дверь, открытый проём или переход между местами.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Предмет, меняющий вид с разных ракурсов, или средство телепортации, например амулет планов.",
+        "referenceIds": [
+          "item:amulet of the planes:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Возможность справиться с проблемой иначе, чем прежде.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, повторяющий прежние ошибки и проступки.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, изменяющее жертв, например ликантроп или слаад.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Запертая дверь или забаррикадированный проход.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Украшенный сундук, шкатулка или противостоящий переменам предмет, например неподвижный жезл.",
+        "referenceIds": [
+          "item:immovable rod:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Снова и снова повторяющаяся ситуация.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "dragon",
+    "name": "Дракон",
+    "nameEn": "Dragon",
+    "description": "Красный дракон восседает на сокровищах в пещере. Карта означает драконов, накопительство и средоточия магии.",
+    "page": 29,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/15-dragon.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Драконорождённый, почитатель драконов, носитель драконьей магии или накопитель богатств.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Дракон или похожее существо.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Логово дракона или другого внушительного существа; место большой магической силы.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Огромное количество вещей, необязательно дорогих: медяки или дешёвые статуэтки.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Кто-то удерживает ресурсы, нужные многим.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, ненавидящий конкретного дракона или весь драконий род.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Драколич, драконья нежить, механический дракон или похожее существо.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место гибели дракона с физическим или магическим шрамом на земле.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение смерти дракона или оружие против драконов, например убийца драконов.",
+        "referenceIds": [
+          "item:dragon slayer:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Группа собирается изгнать, ограбить или убить дракона.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "elemental",
+    "name": "Элементаль",
+    "nameEn": "Elemental",
+    "description": "Голодный ксорн кормится в Подземье. Карта означает стихийных существ и сведение вещей к их сути.",
+    "page": 30,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/16-elemental.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Владеющий стихийной магией человек или карикатурно односторонняя личность.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Элементаль или существо с магией воздуха, земли, огня либо воды.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место влияния стихийных планов: пещера, гора, вулкан или река.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Искусство из стихийных материалов или средство призыва и подчинения элементалей, например кольцо власти над элементалями.",
+        "referenceIds": [
+          "item:ring of elemental command:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Силы стихийных планов прорываются в мир.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, разрываемый двумя противоположными стремлениями.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо из смеси двух стихий, например мефит, либо существа противоположных стихий.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место столкновения стихийных сил.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Предмет из нескольких стихийных материалов, изображение противостояния стихий или защита от элементалей.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "В мир проникают враждующие силы двух или нескольких стихийных планов.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "euryale",
+    "name": "Эвриала",
+    "nameEn": "Euryale",
+    "description": "Медуза со змеиным хвостом окружена цветами и травами. Карта означает зрение, проницательность и наблюдение.",
+    "page": 31,
+    "classic": true,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/BMT/Deck%20of%20Many%20Things/22-euryale.webp",
+    "artist": "Tinnel Lovitt",
+    "upright": {
+      "person": {
+        "text": "Наблюдатель, сохраняющий отстранённость.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Медуза, существо с окаменяющим взглядом или иной атакой взглядом.",
+        "referenceIds": [
+          "creature:medusa:MM"
+        ]
+      },
+      "place": {
+        "text": "Сторожевая башня, высокий мыс или другая точка хорошего обзора.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Пейзаж, гобелен или средство улучшения зрения, например очки ночного зрения.",
+        "referenceIds": [
+          "item:goggles of night:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Необходимо внимательное наблюдение, например слежка.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Назойливый человек, вмешивающийся в чужие дела.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо из камня или связанное с камнем.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место с узкими окнами, бойницами или ограниченным обзором, например подземелье.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Скульптура, самоцвет или каменный магический предмет, например статуэтка чудесной силы.",
+        "referenceIds": [
+          "item:figurine of wondrous power:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Люди не хотят видеть действительность и приписывают другим собственные чувства.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "expert",
+    "name": "Умелец",
+    "nameEn": "Expert",
+    "description": "Бард играет на инструменте. Карта означает мастерство, применённое верно или не к месту.",
+    "page": 32,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/18-expert.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Специалист с нужными навыками: бард, плут, следопыт или изобретатель.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо с умениями барда, следопыта или плута, например компетентностью в навыке.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Гильдейский зал или место обмена профессиональными знаниями.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Полезный инструмент, в том числе музыкальный.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Задача требует умелого применения практических навыков.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Самоуверенный «эксперт», от которого нет пользы.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, полагающееся на грубую силу вместо мастерства и скрытности.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место, где детей учат основам полезных умений.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Непрактичное сокровище, неудобное для ношения или показа.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Чьё-то подлинное мастерство осталось непризнанным.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "fates",
+    "name": "Судьбы",
+    "nameEn": "Fates",
+    "description": "Три сестры прядут, отмеряют и обрезают нити судьбы. Карта обращается к прошлому и последствиям решений.",
+    "page": 33,
+    "classic": true,
+    "dungeonDeck": "story",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/BMT/Deck%20of%20Many%20Things/08-fates.webp",
+    "artist": "Tinnel Lovitt",
+    "upright": {
+      "person": {
+        "text": "Человек, возможно в конце жизни, размышляющий о былых решениях и ошибках.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Сверхъестественное существо судьбы: небожитель, модрон или карга.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Зеркальный зал, тихое горное озеро, монастырь, скит или библиотека для размышлений.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Зеркало, гобелен, тканое сокровище или магия изменения судьбы.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Предначертанные события, возможно сверхъестественная награда или кара.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, стремящийся избежать уготованной судьбы.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо хаоса, например демон или слаад.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Тёмное, шумное или суетливое место, мешающее размышлять.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение бегства от судьбы или предмет, питаемый хаосом.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Несправедливость: зло вознаграждено, добро наказано.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "fey",
+    "name": "Фея",
+    "nameEn": "Fey",
+    "description": "Мерцающий пёс бежит по дикой местности. Прямая карта означает Страну Фей и причудливость, перевёрнутая — Царство Теней.",
+    "page": 34,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/20-fey.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Человек с фейским происхождением или связью со Страной Фей, колдун Архифеи либо любитель причудливого юмора.",
+        "referenceIds": [
+          "creature:warlock of the archfey:MPMM"
+        ]
+      },
+      "creature": {
+        "text": "Фея или существо, связанное со Страной Фей.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Страна Фей, проход туда или место действия фейской магии.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение Страны Фей или предмет фейской работы.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Нелепая ситуация, которую не стоит принимать слишком серьёзно.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Мрачный человек без чувства юмора или пользователь теневой магии.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо Царства Теней или преобразованное теневой энергией, например теневой дракон.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Царство Теней, проход туда или место теневой магии.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение Царства Теней или предмет с теневой магией.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Безысходное положение с малой надеждой на спасение.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "fiend",
+    "name": "Исчадие",
+    "nameEn": "Fiend",
+    "description": "Балор нападает из глубин Бездны. Карта означает исчадий и силы Нижних планов.",
+    "page": 35,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/21-fiend.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Тифлинг, колдун Исчадия, член культа или составитель пагубных договоров.",
+        "referenceIds": [
+          "creature:warlock of the fiend:MPMM"
+        ]
+      },
+      "creature": {
+        "text": "Исчадие любого вида.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Нижние планы или место под их влиянием.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение исчадий, сокровище Нижних планов или предмет работы исчадий.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Соприкосновение Нижних планов с Материальным: дьявольская сделка или демоническое разрушение.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, пострадавший от исчадия, или узник договора с ним.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Искупившееся исчадие или существо, утратившее связь с Нижними планами.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место защиты от исчадий и влияния Нижних планов.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение искупления исчадия или предмет против исчадий.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Нежелательное вмешательство исчадий в дела смертных.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "flames",
+    "name": "Пламя",
+    "nameEn": "Flames",
+    "description": "Цепной дьявол в огне угрожающе смотрит вперёд. Карта означает вражду и месть.",
+    "page": 36,
+    "classic": true,
+    "dungeonDeck": "story",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/22-flames.webp",
+    "artist": "Harry Conway",
+    "upright": {
+      "person": {
+        "text": "Человек, чья горечь и жажда мести отравляют всё вокруг.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Исчадие, мстительный призрак или ревенант, неутомимый преследователь вроде невидимого охотника.",
+        "referenceIds": [
+          "creature:ghost:MM",
+          "creature:revenant:MM",
+          "creature:invisible stalker:MM"
+        ]
+      },
+      "place": {
+        "text": "Место кровопролития или связи с Нижними планами.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Предмет ожесточённых раздоров или магический предмет Нижних планов.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Глубокая вражда затмевает рассудок; кто-то жаждет мести.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Несправедливо преследуемый человек.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, бегущее от более опасного врага.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Убежище для беженцев и беглецов.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Символ окончания войны или вражды; средство успокоения и очарования, например жезл правления.",
+        "referenceIds": [
+          "item:rod of rulership:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Несправедливое преследование или ненависть из предубеждения.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "fool",
+    "name": "Дурак",
+    "nameEn": "Fool",
+    "description": "Путник идёт по дороге, незаметно теряя вещи. Карта означает невинность.",
+    "page": 37,
+    "classic": true,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/BMT/Deck%20of%20Many%20Things/01-fool.webp",
+    "artist": "Harry Conway",
+    "upright": {
+      "person": {
+        "text": "Наивный человек, возможно ребёнок, не знающий тёмной стороны мира.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Наивный небожитель, легкомысленная фея или ловушка с очевидным способом обхода.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Детская, приют или школа.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Детский портрет, украшение для ребёнка или предмет Верхних планов.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Нужны доверие, честность и решимость поверить.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Мошенник под маской надёжного человека, обманывающий доверчивых.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Хищник, принимающий безобидный облик, или трудная для обхода ловушка.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Жестокий приют или работный дом, где утрачивают невинность.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Украденное у ребёнка сокровище или средство обмана, например шляпа маскировки.",
+        "referenceIds": [
+          "item:hat of disguise:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Интриганы манипулируют простодушным человеком.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "gem",
+    "name": "Самоцвет",
+    "nameEn": "Gem",
+    "description": "Огранённый камень в тонкой оправе манит сиянием. Карта означает огромное богатство.",
+    "page": 38,
+    "classic": true,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/BMT/Deck%20of%20Many%20Things/05-gem.webp",
+    "artist": "Tinnel Lovitt",
+    "upright": {
+      "person": {
+        "text": "Наследник или человек, разбогатевший благодаря удаче.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, связанное с богатством: дракон или ксорн; сокровище-ловушка.",
+        "referenceIds": [
+          "creature:xorn:MM"
+        ]
+      },
+      "place": {
+        "text": "Шахта или сокровищница.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Дорогое сокровище или волшебный самоцвет.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Жадность, борьба за наследство или поиски утраченных сокровищ.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, по воле случая потерявший богатство или власть.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Ловушка с приманкой-сокровищем или мимик.",
+        "referenceIds": [
+          "creature:mimic:MM"
+        ]
+      },
+      "place": {
+        "text": "Трущобы, дешёвое жильё или другое место бедности.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Мнимая драгоценность или проклятый предмет.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Попытка вернуть деньги, украденные вором или выманенные мошенником.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "giant",
+    "name": "Великан",
+    "nameEn": "Giant",
+    "description": "Голодный тролль таится на лесной поляне. Карта означает большое по размеру или по личной значимости.",
+    "page": 39,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/25-giant.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Родственник, дорогой друг, важный человек или очень высокая персона.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Великан, гигантское животное или другое большое существо.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Постройка великанов или место особой личной значимости.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Работа великанов или предмет огромной сентиментальной ценности.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Одному обстоятельству придают чрезмерное значение, забывая об остальных.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, кажущийся незначительным.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Крошечное существо, опаснее, чем можно судить по размеру.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место, разрушенное великанами.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Память о гибели великана или оружие против великанов, например убийца великанов.",
+        "referenceIds": [
+          "item:giant slayer:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Кто-то не может или не хочет признать значение ключевого обстоятельства.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "humanoid",
+    "name": "Гуманоид",
+    "nameEn": "Humanoid",
+    "description": "Кобольды ставят ловушку в пещере. Карта напоминает о сочувствии в отношениях.",
+    "page": 40,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/26-humanoid.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Человек, глубоко переживающий чужое страдание.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Оборотень, принимающий облик гуманоида, чтобы учиться у людей или направлять их к добру.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место мирного сосуществования разных народов.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Совместная работа разных мастеров, например тонкая оправа с искусно огранённым камнем, или магия взаимопонимания.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Для мирного решения необходимы сострадание и сочувствие.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, лишённый сочувствия.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Оборотень, подражающий гуманоидам ради охоты на них.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место добровольного или принудительного обособления, например монастырь или культурный анклав.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Искусство, прославляющее войну, боевой предмет или оружие против гуманоидов.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Насилие из-за отсутствия сочувствия.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "jester",
+    "name": "Шут",
+    "nameEn": "Jester",
+    "description": "Шут с посохом опирается ногой на череп. Карта связывает юмор и несчастье.",
+    "page": 41,
+    "classic": true,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/BMT/Deck%20of%20Many%20Things/14-jester.webp",
+    "artist": "Harry Conway",
+    "upright": {
+      "person": {
+        "text": "Оптимист, умеющий смеяться над собственными бедами.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, которое считают смешным: фламф, совомед или студенистый куб.",
+        "referenceIds": [
+          "creature:flumph:MM",
+          "creature:owlbear:MM",
+          "creature:gelatinous cube:MM"
+        ]
+      },
+      "place": {
+        "text": "Ярмарка, пиршественный зал или другое место развлечений.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Забавное произведение искусства или волшебная палочка чудес.",
+        "referenceIds": [
+          "item:wand of wonder:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Комическое недоразумение из-за ошибочных предположений.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, смеющийся над чужой бедой.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Гнолл, гиена или существо со зловещим смехом и жестоким юмором.",
+        "referenceIds": [
+          "creature:gnoll:MM",
+          "creature:hyena:MM"
+        ]
+      },
+      "place": {
+        "text": "Пыточная или другое место боли и жестокости.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение унижения или причиняющий боль предмет, например меч ранения.",
+        "referenceIds": [
+          "item:sword of wounding:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Беды громоздятся одна на другую: было бы смешно, если бы не было так ужасно.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "key",
+    "name": "Ключ",
+    "nameEn": "Key",
+    "description": "Металлический ключ устроен необычайно сложно. Карта означает подходящий инструмент и точное решение.",
+    "page": 42,
+    "classic": true,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/BMT/Deck%20of%20Many%20Things/02-key.webp",
+    "artist": "Tinnel Lovitt",
+    "upright": {
+      "person": {
+        "text": "Человек с необходимыми навыками или инструментами.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Враг, использующий слабости группы, либо ловушка, отключаемая только ключом.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место, доступное лишь избранным или владельцу ключа.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Предмет, нужный для преодоления преграды или врага; средство открытия сокровища, например колокольчик открывания.",
+        "referenceIds": [
+          "item:chime of opening:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Успех возможен лишь при определённом действии.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, плохо подготовленный к испытаниям.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо с уязвимостями или причудливо сложная ловушка.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Открытое и легкодоступное место.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Сокровище под замком или магия замедления.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Проблему можно успешно решить многими способами.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "knight",
+    "name": "Рыцарь",
+    "nameEn": "Knight",
+    "description": "Рыцарь из сложенных карт протягивает карточный меч. Карта означает доверие и верность.",
+    "page": 43,
+    "classic": true,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/BMT/Deck%20of%20Many%20Things/09-knight.webp",
+    "artist": "Vallez Gax",
+    "upright": {
+      "person": {
+        "text": "Надёжный человек, исполняющий обязательства.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, связанное клятвой или состоящее на службе.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Убежище, где древние обычаи защищают укрывшихся.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Память о клятве, например обручальное кольцо, либо оружие и доспехи рыцарей и паладинов.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Нужно доверять товарищам и хранить им верность.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Предатель, выдающий себя за верного друга.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Нарушивший кодекс рыцарь, например рыцарь смерти.",
+        "referenceIds": [
+          "creature:death knight:MM"
+        ]
+      },
+      "place": {
+        "text": "Место великого предательства, коварной местности или ловушек.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Скрытое проклятие или предмет, отказывающий в решающий момент.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Предательство доверия или всеобщая подозрительность.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "lance",
+    "name": "Копьё",
+    "nameEn": "Lance",
+    "description": "Украшенное драконье копьё стоит среди простого оружия. Иногда исцеление требует новой боли, как удаление заражённой ткани.",
+    "page": 44,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/30-lance.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Хирург, стражник или солдат, применяющий силу ради достойной общественной цели.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, обученное сражаться вместе со стражей или солдатами.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место хирургических операций.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Дорого доставшийся предмет или волшебное оружие.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Ради исцеления придётся причинить дополнительную боль.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Пацифист или человек, избегающий причинять вред.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Миролюбивое существо или обездвиживающая ловушка без урона.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место, где насилие запрещено.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Символ мира либо магический предмет, предотвращающий или прекращающий конфликт.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Страх любого столкновения мешает разрешить проблему.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "mage",
+    "name": "Маг",
+    "nameEn": "Mage",
+    "description": "Колдун держит чёрный кристаллический посох. Карта означает остроту ума и тайную магию.",
+    "page": 45,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/31-mage.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Чародей, колдун, волшебник или другой знаток тайной магии и специальных знаний.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо с умениями чародея, колдуна или волшебника.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место изучения тайной магии или её сильного присутствия.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Волшебная палочка, посох или книга заклинаний.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Необходимо правильно применить тайную магию.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, ошибочно приписывающий удачу своему дару или талисману.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, сопротивляющееся магии или подавляющее её.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место магической катастрофы, антимагического поля или дикой магии.",
+        "referenceIds": [
+          "spell:antimagic field:PHB",
+          "table:wild magic surge:PHB"
+        ]
+      },
+      "treasure": {
+        "text": "Созданное магией искусство или непредсказуемый предмет, например волшебная палочка чудес.",
+        "referenceIds": [
+          "item:wand of wonder:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Последствия неверно применённой или вышедшей из-под контроля магии.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "map",
+    "name": "Карта",
+    "nameEn": "Map",
+    "description": "Крестик отмечает цель на карте сокровищ. Карта даёт направление к цели поисков.",
+    "page": 46,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/32-map.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Проводник, показывающий верный путь.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, выслеживающее по запаху.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Тропа или дорога.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Ценная карта, украшенный глобус, редкий атлас или указывающий направление предмет.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Лучше воспользоваться помощью проводника.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, намеренно сбивающий с пути.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Заманивающее путников существо, например блуждающий огонёк.",
+        "referenceIds": [
+          "creature:will-o'-wisp:MM"
+        ]
+      },
+      "place": {
+        "text": "Демиплан, место вне обычных карт или за потайной дверью.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Сокровище другого плана или доступ во внепространственное пространство, например переносная дыра.",
+        "referenceIds": [
+          "item:portable hole:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Нет проводника и указаний, куда двигаться.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "maze",
+    "name": "Лабиринт",
+    "nameEn": "Maze",
+    "description": "Несчастные заперты в невозможном лабиринте из карт. Карта означает потерянность.",
+    "page": 47,
+    "classic": false,
+    "dungeonDeck": "locations",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/33-maze.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Человек, потерявший направление в жизни, или собеседник, долго не переходящий к сути.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Минотавр или существо, охотящееся либо заточённое в лабиринте.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Лабиринт, лес или пустыня, где легко заблудиться.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение растерянности или магия дезориентации.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Запутанная ситуация, в которой трудно увидеть все действующие факторы.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, ищущий собственный путь вопреки ожиданиям семьи и общества.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо с непредсказуемым поведением.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Простой лабиринт для размышлений, укромные уголки или пещера с единственным выходом.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Произведение искусства с узором лабиринта.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Поиск пропавшего человека или вещи.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "mine",
+    "name": "Шахта",
+    "nameEn": "Mine",
+    "description": "У входа в шахту стоит добротная кирка. Карта означает ценности под землёй.",
+    "page": 48,
+    "classic": false,
+    "dungeonDeck": null,
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/34-mine.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Шахтёр или археолог.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Роющее существо, ищущее добычу в земле, например гигантская ласка.",
+        "referenceIds": [
+          "creature:giant weasel:MM"
+        ]
+      },
+      "place": {
+        "text": "Шахта, раскоп или другое место выемки грунта.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Руда, самоцветы или выкопанное из земли сокровище.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Выкопано нечто, чему следовало остаться погребённым.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Садовник, могильщик или другой человек, помещающий вещи в землю.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Подземный хищник, охотящийся на поверхности, например анкхег или булей.",
+        "referenceIds": [
+          "creature:ankheg:MM",
+          "creature:bulette:MM"
+        ]
+      },
+      "place": {
+        "text": "Место, провалившееся под землю либо погребённое оползнем.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Сокровище, зарытое в земле.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Извлечение чего-то погребённого.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "monstrosity",
+    "name": "Монстр",
+    "nameEn": "Monstrosity",
+    "description": "Совомед сидит на солнечной поляне. Знакомое может стать странным и угрожающим.",
+    "page": 49,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/35-monstrosity.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Знакомый человек, чьё поведение внезапно стало опасным.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Монстр, похожий на обычное животное или человека: ускользающий зверь или двойник.",
+        "referenceIds": [
+          "creature:displacer beast:MM",
+          "creature:doppelganger:MM"
+        ]
+      },
+      "place": {
+        "text": "Знакомое место, ставшее опасным.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение монстра или предмет с его когтями, мехом либо перьями.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Кто-то или что-то становится чудовищным буквально или нравственно.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Странный или пугающий, но дружелюбный и полезный человек.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Монстр — возможный союзник, например гиппогриф.",
+        "referenceIds": [
+          "creature:hippogriff:MM"
+        ]
+      },
+      "place": {
+        "text": "Убежище в незнакомой или опасной местности.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Чучело монстра или магический предмет против монстров.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Кажущееся чудовищным оказывается безобидным.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "moon",
+    "name": "Луна",
+    "nameEn": "Moon",
+    "description": "Огромный полумесяц висит в осеннем небе. Карта означает скрытый потенциал.",
+    "page": 50,
+    "classic": true,
+    "dungeonDeck": "story",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/BMT/Deck%20of%20Many%20Things/11-moon.webp",
+    "artist": "Vallez Gax",
+    "upright": {
+      "person": {
+        "text": "Хорошие качества человека скрыты за одной раздражающей чертой.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Ликантроп или существо, кажущееся предметом до нападения, например горгулья.",
+        "referenceIds": [
+          "creature:gargoyle:MM"
+        ]
+      },
+      "place": {
+        "text": "Тайная комната, скрытое местностью место или здание, внутри большее, чем снаружи.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Скрытая ценность или волшебный предмет, похожий на бесполезную вещь.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Нуждается в расследовании и сложнее, чем кажется.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, кажущийся умелым, но всё проваливающий.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Слабое существо, отпугивающее врагов грозным обликом.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Впечатляющий фасад скрывает убогий запущенный интерьер.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Переоценённая вещь или обычный предмет, выдаваемый за волшебный.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Предложение слишком хорошо, чтобы быть правдой, и действительно ложно.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "ooze",
+    "name": "Слизь",
+    "nameEn": "Ooze",
+    "description": "Студенистый куб несёт внутри вещи по сводчатому коллектору. Незаметное может оказаться важным.",
+    "page": 51,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/37-ooze.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Скромный тихий человек со скрытой силой или тайным знанием.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Слизь, неприметное существо или неожиданно простая ловушка.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Скромное место с неожиданным уютом или значением.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Некрасивое, но ценное сокровище, например грубое украшение с дорогими камнями.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Важное обстоятельство пропустили из-за его обыденности.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Скромный человек, совершенно не справляющийся с положением.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Неожиданно разумная и любопытная слизь, умеющая общаться, либо труднообнаружимая опасная ловушка.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Скромное место, которому нечего предложить.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение слизи или её уничтожения; защита вроде кольца сопротивления кислоте.",
+        "referenceIds": [
+          "item:ring of acid resistance:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Множество переплетённых мелочей чрезмерно усложняет проблему.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "path",
+    "name": "Путь",
+    "nameEn": "Path",
+    "description": "Тропа петляет среди диких земель, в тенях скрываются опасности. Нужно держаться плана и помнить о цели.",
+    "page": 52,
+    "classic": false,
+    "dungeonDeck": "locations",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/38-path.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Целеустремлённый человек с чётким планом.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, упорно преследующее цель, либо комната-ловушка с единственным безопасным маршрутом.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Дорога или тропа.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение пути, хрустальный шар либо свиток 6-го уровня с заклинанием «Поиск пути».",
+        "referenceIds": [
+          "item:crystal ball:DMG",
+          "item:spell scroll (6th level):DMG",
+          "spell:find the path:PHB"
+        ]
+      },
+      "situation": {
+        "text": "Нужно неотступно следовать к цели.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек без цели, не знающий, как её выбрать.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, реагирующее без плана: инстинктивно или в замешательстве.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Бездорожье или труднопроходимый подземный комплекс.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Абстрактное искусство или защита от прорицания, например амулет защиты от обнаружения и поиска.",
+        "referenceIds": [
+          "item:amulet of proof against detection and location:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Череда отвлечений уводит от важной цели.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "pit",
+    "name": "Яма",
+    "nameEn": "Pit",
+    "description": "В земле зияет глубокая яма с шипами. Карта означает падение, утрату положения или богатства.",
+    "page": 53,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/39-pit.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Человек, потерявший состояние, общественный статус или расположение.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Ловчая яма или падальщик на её дне.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Яма или обрыв с угрозой падения.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение катастрофического падения или кольцо падения пёрышком.",
+        "referenceIds": [
+          "item:ring of feather falling:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Чьё-то падение в глазах общества.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек в шатком положении накануне краха.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, падающее на добычу сверху, например пронзатель.",
+        "referenceIds": [
+          "creature:piercer:MM"
+        ]
+      },
+      "place": {
+        "text": "Заброшенный дворец или особняк разорившегося владельца.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение полёта, предмет из перьев, крылатые сапоги или плащ летучей мыши.",
+        "referenceIds": [
+          "item:winged boots:DMG",
+          "item:cloak of the bat:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Заговор с целью низвергнуть богатую или влиятельную персону.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "plant",
+    "name": "Растение",
+    "nameEn": "Plant",
+    "description": "Миконид выпускает облако спор. Карта означает рост и природную жизнь.",
+    "page": 54,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/40-plant.webp",
+    "artist": "Joanna Barnum",
+    "upright": {
+      "person": {
+        "text": "Человек, живущий среди дикой растительности.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Растительное существо или помощник буйного роста растений.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Нетронутое место с дикой растительностью.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Резьба по дереву, предмет с листьями или средство неконтролируемого роста, например мешок бобов.",
+        "referenceIds": [
+          "item:bag of beans:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Необычайно быстрый, возможно сверхъестественный рост выходит из-под контроля.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Тихий садовник или земледелец, предпочитающий растения людям.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Искусственно оживлённое культурное растение: пробуждённое дерево или куст.",
+        "referenceIds": [
+          "creature:awakened tree:MM",
+          "creature:awakened shrub:MM"
+        ]
+      },
+      "place": {
+        "text": "Тщательно ухоженный сад со стрижеными растениями.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Украшенный террариум, фигурное растение или посох леса, управляющий растительностью.",
+        "referenceIds": [
+          "item:staff of the woodlands:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Противостояние голодающего края и края с обильным урожаем.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "priest",
+    "name": "Жрец",
+    "nameEn": "Priest",
+    "description": "Жрец держит тяжёлую булаву. Карта означает мудрость, проницательность, близость к божеству и божественную магию.",
+    "page": 55,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/41-priest.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Набожный человек, жрец, друид или паладин.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо с умениями жреца, друида или паладина.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Храм, святилище или место, посвящённое божеству либо силам природы.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Посох лечения, святой мститель или ценные храмовые принадлежности.",
+        "referenceIds": [
+          "item:staff of healing:DMG",
+          "item:holy avenger:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Нужны благочестие или верное применение божественной магии.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Приверженец ложного бога или недостойного дела.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Демон или другое враждебное богам существо.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Оставленное либо обращённое к мирским нуждам святилище.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Идол вымышленного бога или повелителя демонов.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Последствия нечестия или ошибочного фанатизма.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "prisoner",
+    "name": "Узник",
+    "nameEn": "Prisoner",
+    "description": "Плут просит выпустить его из сырой камеры. Карта означает спрятанное и запертое.",
+    "page": 56,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/42-prisoner.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Пленник или человек, связанный чужими ожиданиями.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, запертое ради безопасности окружающих.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место, где вещи прячут от доступа и памяти.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Надёжно спрятанная ценность или вместилище существа, например камень элементаля либо железная фляга.",
+        "referenceIds": [
+          "item:elemental gem:DMG",
+          "item:iron flask:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Попытки сделать человека, вещь или сведения недоступными.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, отвергающий общественные нормы и ожидания.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, хватающее, заглатывающее или иным способом пленяющее добычу.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место публичного показа кого-то или чего-то.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Публично выставленная ценность, например регалии правителя.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Кража выставленной вещи или освобождение человека, показываемого публике.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "puzzle",
+    "name": "Головоломка",
+    "nameEn": "Puzzle",
+    "description": "Светящаяся изнутри шкатулка-головоломка парит в воздухе. Карта означает интеллект и стратегию.",
+    "page": 57,
+    "classic": true,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/BMT/Deck%20of%20Many%20Things/04-puzzle.webp",
+    "artist": "Tinnel Lovitt",
+    "upright": {
+      "person": {
+        "text": "Любитель загадок, острот и игры слов.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Умный тактик либо ловушка, обходящаяся решением загадки.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место с тайными дверями и другими секретами.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Сокровище с неочевидным назначением или ценностью.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Сложная ситуация со множеством взаимосвязанных факторов.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Прямолинейный человек, понимающий всё буквально.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, предпочитающее честный ближний бой и грубую силу.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место с простым симметричным планом.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Монеты или сокровище с очевидной общепризнанной ценой.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Всё именно так, как кажется.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "ring",
+    "name": "Кольцо",
+    "nameEn": "Ring",
+    "description": "Изумрудное кольцо светится в украшенной шкатулке. Карта означает обещание и честь его исполнения.",
+    "page": 58,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/44-ring.webp",
+    "artist": "Abigail Larson",
+    "upright": {
+      "person": {
+        "text": "Человек, неукоснительно верный обещанию.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, обещавшее кому-то служить.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Храм, суд или другое место принесения клятв.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Драгоценное или волшебное кольцо.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Чьё-то обещание усложняет ситуацию.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, тяготящийся поспешной или вынужденной клятвой.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Невольный слуга, например невидимый охотник.",
+        "referenceIds": [
+          "creature:invisible stalker:MM"
+        ]
+      },
+      "place": {
+        "text": "Место, где легендарного героя принудили к губительной клятве.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Браслет или волшебные наручи.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Попытка отречься от клятвы.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "rogue",
+    "name": "Плут",
+    "nameEn": "Rogue",
+    "description": "Кенку с кинжалом поджидает в тени. Карта означает вероломство и обман.",
+    "page": 59,
+    "classic": true,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/BMT/Deck%20of%20Many%20Things/06-rogue.webp",
+    "artist": "Harry Conway",
+    "upright": {
+      "person": {
+        "text": "Обманщик со зловещей тайной, ставящий свои цели выше дружбы и верности.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Опасный враг, нападающий внезапно или из темноты.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Прикрытие преступного дела или логово чудовища.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Предмет со смертельным секретом: кольцо с отравленной иглой, кинжал яда или проклятая вещь.",
+        "referenceIds": [
+          "item:dagger of venom:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Ситуация основана на предательстве или ведёт к нему.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Добрый человек в преступной организации, отчаянно ищущий выход.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, принуждённое служить злодеям.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Островок сострадания среди насилия.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Сокровище под грязью или в нечистом месте.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Добрые люди внутри злой организации, возможно пытающиеся подорвать её изнутри.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "ruin",
+    "name": "Разорение",
+    "nameEn": "Ruin",
+    "description": "Меч и корона рассыпаются в пепел. Карта напоминает о неизбежном распаде и опасности привязанности к вещам.",
+    "page": 60,
+    "classic": true,
+    "dungeonDeck": "locations",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/BMT/Deck%20of%20Many%20Things/16-ruin.webp",
+    "artist": "Andrea Sipl",
+    "upright": {
+      "person": {
+        "text": "Аскет, отказавшийся от материальных привязанностей.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, разрушающее снаряжение: ржавник или чёрная слизь.",
+        "referenceIds": [
+          "creature:rust monster:MM",
+          "creature:black pudding:MM"
+        ]
+      },
+      "place": {
+        "text": "Руины или убежище аскетов.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Сломанное или требующее ремонта сокровище.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Медленное разрушение вещей или отношений.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, чрезмерно привязанный к вещам, необязательно богатый.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Конструкт, особенно оживлённый предмет.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Склад, оружейная или другое хранилище.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Ценные товары, добротное снаряжение или документ на собственность.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Производство или перевозка товаров для продажи.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "sage",
+    "name": "Мудрец",
+    "nameEn": "Sage",
+    "description": "Разум мудреца полон редких знаний, добытых исследованиями. Карта означает доброжелательный совет.",
+    "page": 61,
+    "classic": true,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/BMT/Deck%20of%20Many%20Things/07-sage.webp",
+    "artist": "Joanna Barnum",
+    "upright": {
+      "person": {
+        "text": "Человек, дающий полезный совет в трудной ситуации.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Полезное существо, ведущее к безопасности или цели.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Библиотека, университет или другое место знаний.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Ценная или волшебная книга, свиток либо разумный предмет с полезными советами.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Возможность дать ценный совет по знакомому вопросу.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек с добрыми намерениями и плохими советами.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, ведущее в опасность или ловушку.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Здание с конструктивными изъянами, угрожающими обрушением.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Неисправное устройство, ценное деталями, или разумный предмет с ошибочными доброжелательными советами.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Возможность советовать о предмете, в котором ничего не понимаешь.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "shield",
+    "name": "Щит",
+    "nameEn": "Shield",
+    "description": "Круглый щит лежит в казарме под рукой. Карта напоминает о защите.",
+    "page": 62,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/48-shield.webp",
+    "artist": "Joanna Barnum",
+    "upright": {
+      "person": {
+        "text": "Заботливый родственник, часовой, стражник или телохранитель.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Сторожевой пёс, щитовой страж или защитная ловушка против вторжения.",
+        "referenceIds": [
+          "creature:shield guardian:MM"
+        ]
+      },
+      "place": {
+        "text": "Крепость, стена замка или другое укрепление.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Ценный или волшебный щит.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Нужно защитить тех, кто сам себя защитить не может.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Замкнутый человек, ограждающий себя от физической и душевной боли.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо с тяжёлой бронёй.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Скит или убежище для уединения одного человека.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Ценный или волшебный доспех.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Кто-то эгоистично защищает себя, пренебрегая другими.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "ship",
+    "name": "Корабль",
+    "nameEn": "Ship",
+    "description": "Трёхмачтовый корабль с фигурой коатля идёт в море. Карта означает долгое путешествие, необязательно морское.",
+    "page": 63,
+    "classic": false,
+    "dungeonDeck": "story",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/49-ship.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Моряк, паломник, кочевник или другой постоянный путешественник.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо с огромной охотничьей территорией или дальними миграциями.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Порт, гавань, караван-сарай или иной узел путешествий.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение кораблей и странствий либо средство путешествия, например складная лодка.",
+        "referenceIds": [
+          "item:folding boat:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Необходимость отправиться в путь или события в дороге.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, мечтающий о странствиях, но почти не покидавший дом.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, редко покидающее логово и более сильное внутри него.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Изолированное место, где почти не бывает путников.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Предмет, всё ещё принадлежащий создателю, либо средство против магического перемещения, например пространственные кандалы.",
+        "referenceIds": [
+          "item:dimensional shackles:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Кто-то не может или не хочет путешествовать.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "skull",
+    "name": "Череп",
+    "nameEn": "Skull",
+    "description": "Череп виден из вихря одежд скелетной фигуры. Смерть всеобща, и каждый встречает её один.",
+    "page": 64,
+    "classic": true,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/BMT/Deck%20of%20Many%20Things/19-skull.webp",
+    "artist": "Alex Dos Diaz",
+    "upright": {
+      "person": {
+        "text": "Человек перед близкой смертью или обладатель некромантии.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Нежить или ловушка с уроном некротической энергией.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место одиночества или недавней смерти.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Погребальные принадлежности или предмет с некромантией.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Чья-то жизнь под угрозой.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, ищущий спасения от неизбежной смерти, или вернувшийся из мёртвых.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Бессмертное или нестареющее существо: ангел, исчадие или нага.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Кладбище или место собрания мёртвых.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение спасения от смерти, амулет затягивания ран или скарабей защиты.",
+        "referenceIds": [
+          "item:periapt of wound closure:DMG",
+          "item:scarab of protection:DMG"
+        ]
+      },
+      "situation": {
+        "text": "На кону множество жизней.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "staff",
+    "name": "Посох",
+    "nameEn": "Staff",
+    "description": "Изящный чёрный посох ждёт хозяина у стены. Карта означает поддержку и помощь.",
+    "page": 65,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/51-staff.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Человек, предлагающий материальную, телесную или душевную поддержку.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Ездовое животное, следопыт или другой союзник.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место, где находят помощь, например библиотека или таверна.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Волшебный посох, драгоценная трость или вспомогательное приспособление для ходьбы.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Группа или организация предлагает необходимую поддержку.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек в отчаянной нужде.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, беспомощное без носителя или тела, которым оно овладевает.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место внезапной беды, например пожара или наводнения.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Предмет, которому нужен ремонт для восстановления цены или магии.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Группа людей нуждается в чужой помощи.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "stairway",
+    "name": "Лестница",
+    "nameEn": "Stairway",
+    "description": "Винтовая лестница ведёт вверх и вниз; нижняя часть темна и захламлена. Карта означает изменение трудности.",
+    "page": 66,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/52-stairway.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Человек, всё усложняющий и мешающий делу.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Враг, становящийся сильнее в ходе боя, например чёрная слизь или гидра.",
+        "referenceIds": [
+          "creature:black pudding:MM",
+          "creature:hydra:MM"
+        ]
+      },
+      "place": {
+        "text": "Подвал или нижний уровень подземелья, куда спускаются по лестнице.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Сложное в изготовлении сокровище или камень Йоун мастерства, помогающий справляться с трудностями.",
+        "referenceIds": [
+          "item:ioun stone, mastery:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Всё сложнее и опаснее, чем кажется.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Дружелюбный помощник, облегчающий работу.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, с которым сначала трудно, но по ходу боя становится легче.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Чердак или верхний уровень подземелья, куда поднимаются по лестнице.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Простое и изящное сокровище.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Всё гораздо проще, чем кажется.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "star",
+    "name": "Звезда",
+    "nameEn": "Star",
+    "description": "Яркая звезда сияет весенним вечером. Природные способности соединяются с обучением.",
+    "page": 67,
+    "classic": true,
+    "dungeonDeck": "story",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/BMT/Deck%20of%20Many%20Things/13-star.webp",
+    "artist": "Vallez Gax",
+    "upright": {
+      "person": {
+        "text": "Человек, целенаправленно развивающий навык или привычку.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, улучшившее себя обучением, либо ловушка, требующая совместной работы.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Университет, гимнастический зал или другое место учёбы и тренировки.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Произведение, показывающее мастерство автора, или предмет, дающий владение.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Успех зависит от практики и подготовки.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Одарённый человек, которому не хватает терпения учиться.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, полагающееся на природные силы, возможно без владения навыками и спасбросками.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место нетронутой природной красоты.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Руда, необработанные самоцветы или предмет, повышающий характеристику.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Последствия отказа тренироваться и учиться.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "statue",
+    "name": "Статуя",
+    "nameEn": "Statue",
+    "description": "Статуя богини Истус предлагает первоначальную Колоду многих вещей. Карта напоминает о прошлом.",
+    "page": 68,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/54-statue.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Человек, гордящийся знаменитым предком.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Древнее существо — участник важного исторического события.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Парк или площадь вокруг статуи.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Ценная статуэтка или скульптура, например статуэтка чудесной силы.",
+        "referenceIds": [
+          "item:figurine of wondrous power:DMG"
+        ]
+      },
+      "situation": {
+        "text": "События поразительно напоминают важный исторический эпизод.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек в тени великого предка.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, цепляющееся за былую славу, например штормовой великан или иллитид; мимик под видом статуи либо статуя-ловушка.",
+        "referenceIds": [
+          "creature:storm giant:MM",
+          "creature:mind flayer:MM",
+          "creature:mimic:MM"
+        ]
+      },
+      "place": {
+        "text": "Грандиозные руины древней цивилизации.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Подражание более известному и дорогому произведению.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Попытка повторить прошлое или восстановить павшую империю.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": [
+      "item:deck of many things:DMG"
+    ]
+  },
+  {
+    "id": "sun",
+    "name": "Солнце",
+    "nameEn": "Sun",
+    "description": "Солнце пылает в летнем небе. Карта несёт надежду — обоснованную или обманчивую.",
+    "page": 69,
+    "classic": true,
+    "dungeonDeck": "story",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/BMT/Deck%20of%20Many%20Things/10-sun.webp",
+    "artist": "Vallez Gax",
+    "upright": {
+      "person": {
+        "text": "Невозмутимый оптимист, верящий в победу добра и преодоление препятствий.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Ангел или другое воплощение добра и надежды.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Оплот надежды среди отчаяния: храм у кладбища или восстанавливаемый после бедствия город.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Священная ценность доброго божества или защитный магический предмет.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Даже в тяжёлом положении сохраняется надежда.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Наивный оптимист, повторяющий пустые утешения.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Доброжелательное, но слишком слабое для реальной помощи существо, например фламф или пикси.",
+        "referenceIds": [
+          "creature:flumph:MM",
+          "creature:pixie:MM"
+        ]
+      },
+      "place": {
+        "text": "Осквернённый храм, где грязь и порча скрыли следы святости.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Осквернённая святыня или священный магический предмет.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Идеалистичный оптимизм мешает реагировать на настоящую угрозу.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "talons",
+    "name": "Когти",
+    "nameEn": "Talons",
+    "description": "Когтистая рука тянется к изумрудному кольцу, и оно рассыпается. Карта означает алчность и хищный голод.",
+    "page": 70,
+    "classic": true,
+    "dungeonDeck": "story",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/BMT/Deck%20of%20Many%20Things/21-talons.webp",
+    "artist": "Abigail Larson",
+    "upright": {
+      "person": {
+        "text": "Человек, наживающий богатство или власть за чужой счёт.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Хищник, охотящийся на людей или медленно вытягивающий жизнь, например вампир.",
+        "referenceIds": [
+          "creature:vampire:MM"
+        ]
+      },
+      "place": {
+        "text": "Место, где богатые пользуются трудом бедных.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Гордость коллекционера или цель ограбления.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Алчность движет событиями.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Жертва кабального долга или чудовища, медленно вытягивающего жизнь.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, на которое охотятся ради частей тела или сокровищ.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Трущобы или работный дом угнетаемых бедняков.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Сокровище, украденное у законного владельца.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Отчаянные действия жертвы чужой жадности.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "tavern",
+    "name": "Таверна",
+    "nameEn": "Tavern",
+    "description": "Искатели приключений едят и смеются в шумной таверне. Карта означает радость дружеского общества.",
+    "page": 71,
+    "classic": false,
+    "dungeonDeck": "locations",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/57-tavern.webp",
+    "artist": "Joanna Barnum",
+    "upright": {
+      "person": {
+        "text": "Общительный любитель историй и хорошей компании.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Общественное существо, путешествующее стаей.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Таверна, ресторан или другое место совместной трапезы.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Драгоценный кубок или предмет для еды и питья.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Таверная драка.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, отравляющий радость приятного общества.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Паразит, вампир или похититель жизненных сил; ловушка, разделяющая попавшихся.",
+        "referenceIds": [
+          "creature:vampire:MM"
+        ]
+      },
+      "place": {
+        "text": "Заброшенное место прежних встреч.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Кубок со следами крови или остатками яда.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Попытка массового убийства собравшихся на трапезу.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "temple",
+    "name": "Храм",
+    "nameEn": "Temple",
+    "description": "Храм приглашает в спокойное святилище. Карта означает утешение в ритуале и общении с божественным.",
+    "page": 72,
+    "classic": false,
+    "dungeonDeck": "locations",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/58-temple.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Набожный человек, постоянно совершающий обряды ради божественного благоволения.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Хранитель храма: небожитель, конструкт или нага-страж.",
+        "referenceIds": [
+          "creature:guardian naga:MM"
+        ]
+      },
+      "place": {
+        "text": "Храм, святилище или другое место поклонения.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Ценный ритуальный предмет, подсвечник, жертвенный нож или свеча призыва.",
+        "referenceIds": [
+          "item:candle of invocation:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Нужно обратиться к божественной силе или духовным властям.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Суеверный человек, постоянно отвращающий зло обрядами.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, насылающее проклятия: фомор, ракшас или мумия.",
+        "referenceIds": [
+          "creature:fomorian:MM",
+          "creature:rakshasa:MM",
+          "creature:mummy:MM"
+        ]
+      },
+      "place": {
+        "text": "Место преступности, порока и нечестия.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Суеверный оберег от зла, например скарабей защиты.",
+        "referenceIds": [
+          "item:scarab of protection:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Суеверный страх перед проклятиями и неудачей.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "throne",
+    "name": "Трон",
+    "nameEn": "Throne",
+    "description": "Корона и церемониальный меч лежат у роскошного трона. Карта означает светскую власть.",
+    "page": 73,
+    "classic": true,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/BMT/Deck%20of%20Many%20Things/15-throne.webp",
+    "artist": "Andrea Sipl",
+    "upright": {
+      "person": {
+        "text": "Властный человек, ожидающий повиновения.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Вождь своего вида или существо с магией влияния и приказов.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Дворец, кабинет градоначальника или другое место власти.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Регалии правителя или жезл правления.",
+        "referenceIds": [
+          "item:rod of rulership:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Спор о законном праве на власть.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, возмущённый навязанной ему властью.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, служащее против воли.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Граница владений или рубеж соперничающих государств.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Искусство сопротивления тирании или защита от сковывания, например кольцо свободы действий.",
+        "referenceIds": [
+          "item:ring of free action:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Восстание против правителя или властной фигуры.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "tomb",
+    "name": "Гробница",
+    "nameEn": "Tomb",
+    "description": "В погребальной камере стоит простой каменный саркофаг. Карта означает погребённые тайны и забытое.",
+    "page": 74,
+    "classic": false,
+    "dungeonDeck": "locations",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/60-tomb.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Человек с тайной или провалом в памяти.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Мумия, умертвие или другая нежить в собственной гробнице.",
+        "referenceIds": [
+          "creature:mummy:MM",
+          "creature:wight:MM"
+        ]
+      },
+      "place": {
+        "text": "Гробница, особенно забытая.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Ценное или магическое погребальное сокровище.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Положение, о котором никто не хочет говорить или даже признавать его существование.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, пытающийся искупить страшную тайну прошлого.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Бестелесная нежить, не привязанная к могиле и телу, например призрак или спектр.",
+        "referenceIds": [
+          "creature:wraith:MM",
+          "creature:specter:MM"
+        ]
+      },
+      "place": {
+        "text": "Пустой мемориал без захоронения.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение умершего таким, каким он был при жизни.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Недавно раскрытая погребённая тайна.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "tower",
+    "name": "Башня",
+    "nameEn": "Tower",
+    "description": "Чёрная башня возвышается над пустошью. Карта означает изоляцию.",
+    "page": 75,
+    "classic": false,
+    "dungeonDeck": "locations",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/61-tower.webp",
+    "artist": "Abigail Larson",
+    "upright": {
+      "person": {
+        "text": "Человек, предпочитающий одиночество.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо-затворник.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Удалённая башня или другое уединённое место.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение одиночества или изолированного места; мгновенная крепость Даэрна либо похожий предмет.",
+        "referenceIds": [
+          "item:daern's instant fortress:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Нужны сведения или помощь затворника.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Отчаянно одинокий человек, жаждущий близости.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, ищущее сородичей, или ловушка против одной цели.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Библиотека или монастырь со строгим молчанием, мешающим общению.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Произведение, выражающее глубокое одиночество автора.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Последствия одиночества или скуки.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "tree",
+    "name": "Дерево",
+    "nameEn": "Tree",
+    "description": "Дерево проломило стену крепости и отвоевало её часть. Карта означает упорство в трудных обстоятельствах.",
+    "page": 76,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/62-tree.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Волевой человек, не сдающийся в неблагоприятных условиях.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, процветающее во враждебной среде.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Неожиданная растительность: городской парк или дерево на голой скале.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Алмазы, жемчуг, драгоценная древесина или амулет здоровья, укрепляющий выносливость.",
+        "referenceIds": [
+          "item:amulet of health:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Небольшой форпост или одиночка сдерживает превосходящие силы.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, едва держащийся в тяжёлых условиях.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, вытесненное из привычной среды и борющееся за выживание.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место, очищенное от растительности.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Предмет из древесины поражённого молнией дерева.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Подавляющая угроза небольшому форпосту или одиночке.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "undead",
+    "name": "Нежить",
+    "nameEn": "Undead",
+    "description": "Лич призывает души мёртвых. Карта означает то, что отказывается умирать: нежить, старые обиды и незавершённые дела.",
+    "page": 77,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/63-undead.webp",
+    "artist": "Abigail Larson",
+    "upright": {
+      "person": {
+        "text": "Человек, чрезмерно долго хранящий обиду.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Призрак, ревенант или другая нежить, движимая местью или незавершённым делом.",
+        "referenceIds": [
+          "creature:ghost:MM",
+          "creature:revenant:MM"
+        ]
+      },
+      "place": {
+        "text": "Место, преследуемое памятью о страшном событии или настоящими призраками.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение мёртвых, костяной предмет или магия, созданная нежитью либо для неё.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Кто-то не позволяет прошлому остаться в прошлом.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Человек, слишком легко всё прощающий и не требующий ответственности.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Нежить, мечтающая прекратить бесконечное мучительное существование.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Место, жители которого забыли важные события прошлого.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Изображение уничтожения нежити или оружие против неё, например булава разрушения.",
+        "referenceIds": [
+          "item:mace of disruption:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Помилованный преступник продолжает прежние злодеяния.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "void",
+    "name": "Пустота",
+    "nameEn": "Void",
+    "description": "Бесконечная пустота закручивается к всепоглощающей дыре. Карта предвещает катастрофу.",
+    "page": 78,
+    "classic": true,
+    "dungeonDeck": "story",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/BMT/Deck%20of%20Many%20Things/18-void.webp",
+    "artist": "Alex Dos Diaz",
+    "upright": {
+      "person": {
+        "text": "Человек в плену отчаяния.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Исчадие или нежить, угрожающие уничтожить тело и душу; ловушка без простого выхода.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Глубины земли, воды или космоса с недостатком света и воздуха.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Произведение отчаяния или печали либо сфера аннигиляции.",
+        "referenceIds": [
+          "item:sphere of annihilation:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Кажется, нет хорошего исхода и даже шанса выжить.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Потерявший всё человек, которому остаётся лишь подниматься.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Скелет, зомби или иной остаток живого; сломанная неработающая ловушка.",
+        "referenceIds": [
+          "creature:skeleton:MM",
+          "creature:zombie:MM"
+        ]
+      },
+      "place": {
+        "text": "Место массовой гибели, страшной битвы или резни.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Обещанное, но отсутствующее сокровище: пустой сундук или разграбленное хранилище.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Немногие выжившие после катастрофы решают, как жить дальше.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "warrior",
+    "name": "Воин",
+    "nameEn": "Warrior",
+    "description": "Варвар держит секиру. Карта означает физическую силу и боевую выучку.",
+    "page": 79,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/65-warrior.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Обученный боец или ветеран: варвар, воин или монах.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо с умениями варвара, воина или монаха.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Учебный двор или форт подготовки бойцов.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Ценное или волшебное оружие либо доспех.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Нужно умело применить физическую силу.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Задира, запугивающий окружающих силой.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Существо, полагающееся на грубую силу, или ловушка, из которой можно вырваться силой.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Суровая среда, где выживают лишь физически сильные.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Прямолинейное, лишённое тонкости произведение искусства.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Запугивание или вымогательство.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  },
+  {
+    "id": "well",
+    "name": "Колодец",
+    "nameEn": "Well",
+    "description": "Каменный колодец стоит среди полевых цветов. Карта означает привычные источники помощи и ресурсов.",
+    "page": 80,
+    "classic": false,
+    "dungeonDeck": "features",
+    "image": "https://raw.githubusercontent.com/5etools-mirror-3/5etools-img/main/decks/DMTCRG/Deck%20of%20Many%20More%20Things/66-well.webp",
+    "artist": "Ivan Shavrin",
+    "upright": {
+      "person": {
+        "text": "Знакомый человек, надёжно помогающий советом и делом.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Знакомое существо с хорошо известными способностями.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Колодец, знакомая лавка или источник пресной воды.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Надёжная ценность вроде золота; графин бесконечной воды или алхимический кувшин, дающие воду либо пищу.",
+        "referenceIds": [
+          "item:decanter of endless water:DMG",
+          "item:alchemy jug:DMG"
+        ]
+      },
+      "situation": {
+        "text": "Знакомая ситуация с предсказуемым исходом.",
+        "referenceIds": []
+      }
+    },
+    "reversed": {
+      "person": {
+        "text": "Знакомый отказывает в ожидаемой помощи.",
+        "referenceIds": []
+      },
+      "creature": {
+        "text": "Знакомый вид существа с неожиданными способностями или поведением.",
+        "referenceIds": []
+      },
+      "place": {
+        "text": "Высохший колодец или привычное место, утратившее былые удобства.",
+        "referenceIds": []
+      },
+      "treasure": {
+        "text": "Сокровище с тайником, скрытым свойством или магической причудой.",
+        "referenceIds": []
+      },
+      "situation": {
+        "text": "Привычная ситуация неожиданно оборачивается иначе.",
+        "referenceIds": []
+      }
+    },
+    "referenceIds": []
+  }
+]

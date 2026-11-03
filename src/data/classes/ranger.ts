@@ -63,7 +63,7 @@ export const ranger: Class = {
     {
       level: 1,
       profBonus: '+2',
-      features: ['Использование заклинаний', 'Избранный Враг', 'Оружейные приёмы'],
+      features: ['Использование заклинаний', 'Избранный враг', 'Оружейные приёмы'],
       favoredEnemy: 2,
       preparedSpells: 2,
       spellSlots: {
@@ -77,7 +77,7 @@ export const ranger: Class = {
     {
       level: 2,
       profBonus: '+2',
-      features: ['Искусный исследователь', 'Боевой стиль'],
+      features: ['Искусный исследователь', 'Боевой cтиль'],
       favoredEnemy: 2,
       preparedSpells: 3,
       spellSlots: {

@@ -2,6 +2,7 @@
 import { ruleCategories, ruleAudienceOptions, settlements, magicItemPoolPrices, dragonStages, validateRuleCatalog, serializeCatalogForPage } from '../../utils/masterRules';
 import sourceRules from '../../data/masterRules.json';
 import '../../styles/masterWorkspace.css';
+import TarotGenerator from './TarotGenerator.astro';
 
 const catalog = validateRuleCatalog(sourceRules);
 const rewardStudySteps = [
@@ -147,6 +148,7 @@ const rewardStudySteps = [
             <iframe id="mw-map-generator" title="Генератор изометрических карт" data-src="/tools/dungeon-generator.html" allow="clipboard-write" loading="lazy"></iframe>
           </div>
         </article>
+        <TarotGenerator />
         <p class="mw-tools-note">Тарифы взяты из исходных правил. При изменении статей проверьте их перед расчётом: цены и лимиты можно указать вручную.</p>
         <div class="mw-tool-grid">
           <article class="mw-tool-card">

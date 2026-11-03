@@ -1,0 +1,1122 @@
+[
+  {
+    "id": "creature:cultist:MM",
+    "name": "Культист",
+    "nameEn": "Cultist",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 345,
+    "cr": "1/8",
+    "url": "https://5e.tools/bestiary.html#cultist_mm"
+  },
+  {
+    "id": "creature:warlock of the great old one:MPMM",
+    "name": "Колдун Великого Древнего",
+    "nameEn": "Warlock of the Great Old One",
+    "kind": "Существо",
+    "source": "MPMM",
+    "page": 256,
+    "cr": "6",
+    "url": "https://5e.tools/bestiary.html#warlock%20of%20the%20great%20old%20one_mpmm"
+  },
+  {
+    "id": "creature:druid:MM",
+    "name": "Друид",
+    "nameEn": "Druid",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 346,
+    "cr": "2",
+    "url": "https://5e.tools/bestiary.html#druid_mm"
+  },
+  {
+    "id": "item:ring of mind shielding:DMG",
+    "name": "Кольцо защиты разума",
+    "nameEn": "Ring of Mind Shielding",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 191,
+    "url": "https://5e.tools/items.html#ring%20of%20mind%20shielding_dmg"
+  },
+  {
+    "id": "item:cloak of the bat:DMG",
+    "name": "Плащ летучей мыши",
+    "nameEn": "Cloak of the Bat",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 159,
+    "url": "https://5e.tools/items.html#cloak%20of%20the%20bat_dmg"
+  },
+  {
+    "id": "item:staff of the python:DMG",
+    "name": "Посох питона",
+    "nameEn": "Staff of the Python",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 204,
+    "url": "https://5e.tools/items.html#staff%20of%20the%20python_dmg"
+  },
+  {
+    "id": "item:potion of animal friendship:DMG",
+    "name": "Зелье дружбы с животными",
+    "nameEn": "Potion of Animal Friendship",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 187,
+    "url": "https://5e.tools/items.html#potion%20of%20animal%20friendship_dmg"
+  },
+  {
+    "id": "item:nolzur's marvelous pigments:DMG",
+    "name": "Чудесные пигменты Нолзура",
+    "nameEn": "Nolzur's Marvelous Pigments",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 183,
+    "url": "https://5e.tools/items.html#nolzur's%20marvelous%20pigments_dmg"
+  },
+  {
+    "id": "spell:glyph of warding:PHB",
+    "name": "Охранная руна",
+    "nameEn": "Glyph of Warding",
+    "kind": "Заклинание",
+    "source": "PHB",
+    "page": 245,
+    "url": "https://5e.tools/spells.html#glyph%20of%20warding_phb"
+  },
+  {
+    "id": "spell:symbol:PHB",
+    "name": "Символ",
+    "nameEn": "Symbol",
+    "kind": "Заклинание",
+    "source": "PHB",
+    "page": 280,
+    "url": "https://5e.tools/spells.html#symbol_phb"
+  },
+  {
+    "id": "creature:mind flayer:MM",
+    "name": "Иллитид",
+    "nameEn": "Mind Flayer",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 222,
+    "cr": "7",
+    "url": "https://5e.tools/bestiary.html#mind%20flayer_mm"
+  },
+  {
+    "id": "creature:grimlock:MM",
+    "name": "Гримлок",
+    "nameEn": "Grimlock",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 175,
+    "cr": "1/4",
+    "url": "https://5e.tools/bestiary.html#grimlock_mm"
+  },
+  {
+    "id": "creature:troll:MM",
+    "name": "Тролль",
+    "nameEn": "Troll",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 291,
+    "cr": "5",
+    "url": "https://5e.tools/bestiary.html#troll_mm"
+  },
+  {
+    "id": "item:boots of striding and springing:DMG",
+    "name": "Сапоги ходьбы и прыжков",
+    "nameEn": "Boots of Striding and Springing",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 156,
+    "url": "https://5e.tools/items.html#boots%20of%20striding%20and%20springing_dmg"
+  },
+  {
+    "id": "item:cube of force:DMG",
+    "name": "Куб силового поля",
+    "nameEn": "Cube of Force",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 159,
+    "url": "https://5e.tools/items.html#cube%20of%20force_dmg"
+  },
+  {
+    "id": "item:rod of security:DMG",
+    "name": "Жезл безопасности",
+    "nameEn": "Rod of Security",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 197,
+    "url": "https://5e.tools/items.html#rod%20of%20security_dmg"
+  },
+  {
+    "id": "item:sentinel shield:DMG",
+    "name": "Щит часового",
+    "nameEn": "Sentinel Shield",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 199,
+    "url": "https://5e.tools/items.html#sentinel%20shield_dmg"
+  },
+  {
+    "id": "creature:piercer:MM",
+    "name": "Пронзатель",
+    "nameEn": "Piercer",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 252,
+    "cr": "1/2",
+    "url": "https://5e.tools/bestiary.html#piercer_mm"
+  },
+  {
+    "id": "creature:roper:MM",
+    "name": "Верёвочник",
+    "nameEn": "Roper",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 261,
+    "cr": "5",
+    "url": "https://5e.tools/bestiary.html#roper_mm"
+  },
+  {
+    "id": "item:goggles of night:DMG",
+    "name": "Очки ночного зрения",
+    "nameEn": "Goggles of Night",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 172,
+    "url": "https://5e.tools/items.html#goggles%20of%20night_dmg"
+  },
+  {
+    "id": "creature:animated broom:CM",
+    "name": "Оживлённая метла",
+    "nameEn": "Animated Broom",
+    "kind": "Существо",
+    "source": "CM",
+    "page": 20,
+    "cr": "1/4",
+    "url": "https://5e.tools/bestiary.html#animated%20broom_cm"
+  },
+  {
+    "id": "creature:rug of smothering:MM",
+    "name": "Ковёр удушения",
+    "nameEn": "Rug of Smothering",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 20,
+    "cr": "2",
+    "url": "https://5e.tools/bestiary.html#rug%20of%20smothering_mm"
+  },
+  {
+    "id": "item:mace of smiting:DMG",
+    "name": "Булава сокрушения",
+    "nameEn": "Mace of Smiting",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 179,
+    "url": "https://5e.tools/items.html#mace%20of%20smiting_dmg"
+  },
+  {
+    "id": "item:staff of withering:DMG",
+    "name": "Посох увядания",
+    "nameEn": "Staff of Withering",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 205,
+    "url": "https://5e.tools/items.html#staff%20of%20withering_dmg"
+  },
+  {
+    "id": "creature:umber hulk:MM",
+    "name": "Умбер-халк",
+    "nameEn": "Umber Hulk",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 292,
+    "cr": "5",
+    "url": "https://5e.tools/bestiary.html#umber%20hulk_mm"
+  },
+  {
+    "id": "creature:ghoul:MM",
+    "name": "Вурдалак",
+    "nameEn": "Ghoul",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 148,
+    "cr": "1",
+    "url": "https://5e.tools/bestiary.html#ghoul_mm"
+  },
+  {
+    "id": "item:efreeti bottle:DMG",
+    "name": "Бутылка ифрита",
+    "nameEn": "Efreeti Bottle",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 167,
+    "url": "https://5e.tools/items.html#efreeti%20bottle_dmg"
+  },
+  {
+    "id": "item:iron flask:DMG",
+    "name": "Железная фляга",
+    "nameEn": "Iron Flask",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 178,
+    "url": "https://5e.tools/items.html#iron%20flask_dmg"
+  },
+  {
+    "id": "item:amulet of the planes:DMG",
+    "name": "Амулет планов",
+    "nameEn": "Amulet of the Planes",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 150,
+    "url": "https://5e.tools/items.html#amulet%20of%20the%20planes_dmg"
+  },
+  {
+    "id": "item:immovable rod:DMG",
+    "name": "Неподвижный жезл",
+    "nameEn": "Immovable Rod",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 175,
+    "url": "https://5e.tools/items.html#immovable%20rod_dmg"
+  },
+  {
+    "id": "item:dragon slayer:DMG",
+    "name": "Убийца драконов",
+    "nameEn": "Dragon Slayer",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 166,
+    "url": "https://5e.tools/items.html#dragon%20slayer_dmg"
+  },
+  {
+    "id": "item:ring of elemental command:DMG",
+    "name": "Кольцо власти над элементалями",
+    "nameEn": "Ring of Elemental Command",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 190,
+    "url": "https://5e.tools/items.html#ring%20of%20elemental%20command_dmg"
+  },
+  {
+    "id": "creature:medusa:MM",
+    "name": "Медуза",
+    "nameEn": "Medusa",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 214,
+    "cr": "6",
+    "url": "https://5e.tools/bestiary.html#medusa_mm"
+  },
+  {
+    "id": "item:figurine of wondrous power:DMG",
+    "name": "Статуэтка чудесной силы",
+    "nameEn": "Figurine of Wondrous Power",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 169,
+    "url": "https://5e.tools/items.html#figurine%20of%20wondrous%20power_dmg"
+  },
+  {
+    "id": "creature:warlock of the archfey:MPMM",
+    "name": "Колдун Архифеи",
+    "nameEn": "Warlock of the Archfey",
+    "kind": "Существо",
+    "source": "MPMM",
+    "page": 255,
+    "cr": "4",
+    "url": "https://5e.tools/bestiary.html#warlock%20of%20the%20archfey_mpmm"
+  },
+  {
+    "id": "creature:warlock of the fiend:MPMM",
+    "name": "Колдун Исчадия",
+    "nameEn": "Warlock of the Fiend",
+    "kind": "Существо",
+    "source": "MPMM",
+    "page": 255,
+    "cr": "7",
+    "url": "https://5e.tools/bestiary.html#warlock%20of%20the%20fiend_mpmm"
+  },
+  {
+    "id": "creature:ghost:MM",
+    "name": "Привидение",
+    "nameEn": "Ghost",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 147,
+    "cr": "4",
+    "url": "https://5e.tools/bestiary.html#ghost_mm"
+  },
+  {
+    "id": "creature:revenant:MM",
+    "name": "Ревенант",
+    "nameEn": "Revenant",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 259,
+    "cr": "5",
+    "url": "https://5e.tools/bestiary.html#revenant_mm"
+  },
+  {
+    "id": "creature:invisible stalker:MM",
+    "name": "Невидимый охотник",
+    "nameEn": "Invisible Stalker",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 192,
+    "cr": "6",
+    "url": "https://5e.tools/bestiary.html#invisible%20stalker_mm"
+  },
+  {
+    "id": "item:rod of rulership:DMG",
+    "name": "Жезл правления",
+    "nameEn": "Rod of Rulership",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 197,
+    "url": "https://5e.tools/items.html#rod%20of%20rulership_dmg"
+  },
+  {
+    "id": "item:hat of disguise:DMG",
+    "name": "Шляпа маскировки",
+    "nameEn": "Hat of Disguise",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 173,
+    "url": "https://5e.tools/items.html#hat%20of%20disguise_dmg"
+  },
+  {
+    "id": "creature:xorn:MM",
+    "name": "Ксорн",
+    "nameEn": "Xorn",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 304,
+    "cr": "5",
+    "url": "https://5e.tools/bestiary.html#xorn_mm"
+  },
+  {
+    "id": "creature:mimic:MM",
+    "name": "Мимик",
+    "nameEn": "Mimic",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 220,
+    "cr": "2",
+    "url": "https://5e.tools/bestiary.html#mimic_mm"
+  },
+  {
+    "id": "item:giant slayer:DMG",
+    "name": "Убийца великанов",
+    "nameEn": "Giant Slayer",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 172,
+    "url": "https://5e.tools/items.html#giant%20slayer_dmg"
+  },
+  {
+    "id": "creature:flumph:MM",
+    "name": "Фламф",
+    "nameEn": "Flumph",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 135,
+    "cr": "1/8",
+    "url": "https://5e.tools/bestiary.html#flumph_mm"
+  },
+  {
+    "id": "creature:owlbear:MM",
+    "name": "Совомед",
+    "nameEn": "Owlbear",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 249,
+    "cr": "3",
+    "url": "https://5e.tools/bestiary.html#owlbear_mm"
+  },
+  {
+    "id": "creature:gelatinous cube:MM",
+    "name": "Студенистый куб",
+    "nameEn": "Gelatinous Cube",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 242,
+    "cr": "2",
+    "url": "https://5e.tools/bestiary.html#gelatinous%20cube_mm"
+  },
+  {
+    "id": "item:wand of wonder:DMG",
+    "name": "Волшебная палочка чудес",
+    "nameEn": "Wand of Wonder",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 212,
+    "url": "https://5e.tools/items.html#wand%20of%20wonder_dmg"
+  },
+  {
+    "id": "creature:gnoll:MM",
+    "name": "Гнолл",
+    "nameEn": "Gnoll",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 163,
+    "cr": "1/2",
+    "url": "https://5e.tools/bestiary.html#gnoll_mm"
+  },
+  {
+    "id": "creature:hyena:MM",
+    "name": "Гиена",
+    "nameEn": "Hyena",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 331,
+    "cr": "0",
+    "url": "https://5e.tools/bestiary.html#hyena_mm"
+  },
+  {
+    "id": "item:sword of wounding:DMG",
+    "name": "Меч ранения",
+    "nameEn": "Sword of Wounding",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 207,
+    "url": "https://5e.tools/items.html#sword%20of%20wounding_dmg"
+  },
+  {
+    "id": "item:chime of opening:DMG",
+    "name": "Колокольчик открывания",
+    "nameEn": "Chime of Opening",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 158,
+    "url": "https://5e.tools/items.html#chime%20of%20opening_dmg"
+  },
+  {
+    "id": "creature:death knight:MM",
+    "name": "Рыцарь смерти",
+    "nameEn": "Death Knight",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 47,
+    "cr": "17",
+    "url": "https://5e.tools/bestiary.html#death%20knight_mm"
+  },
+  {
+    "id": "spell:antimagic field:PHB",
+    "name": "Антимагическое поле",
+    "nameEn": "Antimagic Field",
+    "kind": "Заклинание",
+    "source": "PHB",
+    "page": 213,
+    "url": "https://5e.tools/spells.html#antimagic%20field_phb"
+  },
+  {
+    "id": "table:wild magic surge:PHB",
+    "name": "Всплеск дикой магии",
+    "nameEn": "Wild Magic Surge",
+    "kind": "Таблица",
+    "source": "PHB",
+    "page": 104,
+    "url": "https://5e.tools/tables.html#wild%20magic%20surge_phb"
+  },
+  {
+    "id": "creature:will-o'-wisp:MM",
+    "name": "Блуждающий огонёк",
+    "nameEn": "Will-o'-Wisp",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 301,
+    "cr": "2",
+    "url": "https://5e.tools/bestiary.html#will-o'-wisp_mm"
+  },
+  {
+    "id": "item:portable hole:DMG",
+    "name": "Переносная дыра",
+    "nameEn": "Portable Hole",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 185,
+    "url": "https://5e.tools/items.html#portable%20hole_dmg"
+  },
+  {
+    "id": "creature:giant weasel:MM",
+    "name": "Гигантская ласка",
+    "nameEn": "Giant Weasel",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 329,
+    "cr": "1/8",
+    "url": "https://5e.tools/bestiary.html#giant%20weasel_mm"
+  },
+  {
+    "id": "creature:ankheg:MM",
+    "name": "Анкхег",
+    "nameEn": "Ankheg",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 21,
+    "cr": "2",
+    "url": "https://5e.tools/bestiary.html#ankheg_mm"
+  },
+  {
+    "id": "creature:bulette:MM",
+    "name": "Булей",
+    "nameEn": "Bulette",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 34,
+    "cr": "5",
+    "url": "https://5e.tools/bestiary.html#bulette_mm"
+  },
+  {
+    "id": "creature:displacer beast:MM",
+    "name": "Ускользающий зверь",
+    "nameEn": "Displacer Beast",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 81,
+    "cr": "3",
+    "url": "https://5e.tools/bestiary.html#displacer%20beast_mm"
+  },
+  {
+    "id": "creature:doppelganger:MM",
+    "name": "Двойник",
+    "nameEn": "Doppelganger",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 82,
+    "cr": "3",
+    "url": "https://5e.tools/bestiary.html#doppelganger_mm"
+  },
+  {
+    "id": "creature:hippogriff:MM",
+    "name": "Гиппогриф",
+    "nameEn": "Hippogriff",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 184,
+    "cr": "1",
+    "url": "https://5e.tools/bestiary.html#hippogriff_mm"
+  },
+  {
+    "id": "creature:gargoyle:MM",
+    "name": "Горгулья",
+    "nameEn": "Gargoyle",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 140,
+    "cr": "2",
+    "url": "https://5e.tools/bestiary.html#gargoyle_mm"
+  },
+  {
+    "id": "item:ring of acid resistance:DMG",
+    "name": "Кольцо сопротивления кислоте",
+    "nameEn": "Ring of Acid Resistance",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 192,
+    "url": "https://5e.tools/items.html#ring%20of%20acid%20resistance_dmg"
+  },
+  {
+    "id": "item:crystal ball:DMG",
+    "name": "Хрустальный шар",
+    "nameEn": "Crystal Ball",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 159,
+    "url": "https://5e.tools/items.html#crystal%20ball_dmg"
+  },
+  {
+    "id": "item:spell scroll (6th level):DMG",
+    "name": "Свиток заклинания 6-го уровня",
+    "nameEn": "Spell Scroll (6th Level)",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 205,
+    "url": "https://5e.tools/items.html#spell%20scroll%20(6th%20level)_dmg"
+  },
+  {
+    "id": "spell:find the path:PHB",
+    "name": "Поиск пути",
+    "nameEn": "Find the Path",
+    "kind": "Заклинание",
+    "source": "PHB",
+    "page": 240,
+    "url": "https://5e.tools/spells.html#find%20the%20path_phb"
+  },
+  {
+    "id": "item:amulet of proof against detection and location:DMG",
+    "name": "Амулет защиты от обнаружения и поиска",
+    "nameEn": "Amulet of Proof against Detection and Location",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 150,
+    "url": "https://5e.tools/items.html#amulet%20of%20proof%20against%20detection%20and%20location_dmg"
+  },
+  {
+    "id": "item:ring of feather falling:DMG",
+    "name": "Кольцо падения пёрышком",
+    "nameEn": "Ring of Feather Falling",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 191,
+    "url": "https://5e.tools/items.html#ring%20of%20feather%20falling_dmg"
+  },
+  {
+    "id": "item:winged boots:DMG",
+    "name": "Крылатые сапоги",
+    "nameEn": "Winged Boots",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 214,
+    "url": "https://5e.tools/items.html#winged%20boots_dmg"
+  },
+  {
+    "id": "item:bag of beans:DMG",
+    "name": "Мешок бобов",
+    "nameEn": "Bag of Beans",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 152,
+    "url": "https://5e.tools/items.html#bag%20of%20beans_dmg"
+  },
+  {
+    "id": "creature:awakened tree:MM",
+    "name": "Пробуждённое дерево",
+    "nameEn": "Awakened Tree",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 317,
+    "cr": "2",
+    "url": "https://5e.tools/bestiary.html#awakened%20tree_mm"
+  },
+  {
+    "id": "creature:awakened shrub:MM",
+    "name": "Пробуждённый куст",
+    "nameEn": "Awakened Shrub",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 317,
+    "cr": "0",
+    "url": "https://5e.tools/bestiary.html#awakened%20shrub_mm"
+  },
+  {
+    "id": "item:staff of the woodlands:DMG",
+    "name": "Посох леса",
+    "nameEn": "Staff of the Woodlands",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 204,
+    "url": "https://5e.tools/items.html#staff%20of%20the%20woodlands_dmg"
+  },
+  {
+    "id": "item:staff of healing:DMG",
+    "name": "Посох лечения",
+    "nameEn": "Staff of Healing",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 202,
+    "url": "https://5e.tools/items.html#staff%20of%20healing_dmg"
+  },
+  {
+    "id": "item:holy avenger:DMG",
+    "name": "Святой мститель",
+    "nameEn": "Holy Avenger",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 174,
+    "url": "https://5e.tools/items.html#holy%20avenger_dmg"
+  },
+  {
+    "id": "item:elemental gem:DMG",
+    "name": "Камень элементаля",
+    "nameEn": "Elemental Gem",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 167,
+    "url": "https://5e.tools/items.html#elemental%20gem_dmg"
+  },
+  {
+    "id": "item:dagger of venom:DMG",
+    "name": "Кинжал яда",
+    "nameEn": "Dagger of Venom",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 161,
+    "url": "https://5e.tools/items.html#dagger%20of%20venom_dmg"
+  },
+  {
+    "id": "creature:rust monster:MM",
+    "name": "Ржавник",
+    "nameEn": "Rust Monster",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 262,
+    "cr": "1/2",
+    "url": "https://5e.tools/bestiary.html#rust%20monster_mm"
+  },
+  {
+    "id": "creature:black pudding:MM",
+    "name": "Чёрная слизь",
+    "nameEn": "Black Pudding",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 241,
+    "cr": "4",
+    "url": "https://5e.tools/bestiary.html#black%20pudding_mm"
+  },
+  {
+    "id": "creature:shield guardian:MM",
+    "name": "Щитовой страж",
+    "nameEn": "Shield Guardian",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 271,
+    "cr": "7",
+    "url": "https://5e.tools/bestiary.html#shield%20guardian_mm"
+  },
+  {
+    "id": "item:folding boat:DMG",
+    "name": "Складная лодка",
+    "nameEn": "Folding Boat",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 170,
+    "url": "https://5e.tools/items.html#folding%20boat_dmg"
+  },
+  {
+    "id": "item:dimensional shackles:DMG",
+    "name": "Пространственные кандалы",
+    "nameEn": "Dimensional Shackles",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 165,
+    "url": "https://5e.tools/items.html#dimensional%20shackles_dmg"
+  },
+  {
+    "id": "item:periapt of wound closure:DMG",
+    "name": "Амулет затягивания ран",
+    "nameEn": "Periapt of Wound Closure",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 184,
+    "url": "https://5e.tools/items.html#periapt%20of%20wound%20closure_dmg"
+  },
+  {
+    "id": "item:scarab of protection:DMG",
+    "name": "Скарабей защиты",
+    "nameEn": "Scarab of Protection",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 199,
+    "url": "https://5e.tools/items.html#scarab%20of%20protection_dmg"
+  },
+  {
+    "id": "creature:hydra:MM",
+    "name": "Гидра",
+    "nameEn": "Hydra",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 190,
+    "cr": "8",
+    "url": "https://5e.tools/bestiary.html#hydra_mm"
+  },
+  {
+    "id": "item:ioun stone, mastery:DMG",
+    "name": "Камень Йоун мастерства",
+    "nameEn": "Ioun Stone, Mastery",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 176,
+    "url": "https://5e.tools/items.html#ioun%20stone%2C%20mastery_dmg"
+  },
+  {
+    "id": "creature:storm giant:MM",
+    "name": "Штормовой великан",
+    "nameEn": "Storm Giant",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 156,
+    "cr": "13",
+    "url": "https://5e.tools/bestiary.html#storm%20giant_mm"
+  },
+  {
+    "id": "item:deck of many things:DMG",
+    "name": "Колода многих вещей",
+    "nameEn": "Deck of Many Things",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 162,
+    "url": "https://5e.tools/items.html#deck%20of%20many%20things_dmg"
+  },
+  {
+    "id": "creature:pixie:MM",
+    "name": "Пикси",
+    "nameEn": "Pixie",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 253,
+    "cr": "1/4",
+    "url": "https://5e.tools/bestiary.html#pixie_mm"
+  },
+  {
+    "id": "creature:vampire:MM",
+    "name": "Вампир",
+    "nameEn": "Vampire",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 297,
+    "cr": "13",
+    "url": "https://5e.tools/bestiary.html#vampire_mm"
+  },
+  {
+    "id": "creature:guardian naga:MM",
+    "name": "Нага-страж",
+    "nameEn": "Guardian Naga",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 234,
+    "cr": "10",
+    "url": "https://5e.tools/bestiary.html#guardian%20naga_mm"
+  },
+  {
+    "id": "item:candle of invocation:DMG",
+    "name": "Свеча призыва",
+    "nameEn": "Candle of Invocation",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 157,
+    "url": "https://5e.tools/items.html#candle%20of%20invocation_dmg"
+  },
+  {
+    "id": "creature:fomorian:MM",
+    "name": "Фомор",
+    "nameEn": "Fomorian",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 136,
+    "cr": "8",
+    "url": "https://5e.tools/bestiary.html#fomorian_mm"
+  },
+  {
+    "id": "creature:rakshasa:MM",
+    "name": "Ракшас",
+    "nameEn": "Rakshasa",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 257,
+    "cr": "13",
+    "url": "https://5e.tools/bestiary.html#rakshasa_mm"
+  },
+  {
+    "id": "creature:mummy:MM",
+    "name": "Мумия",
+    "nameEn": "Mummy",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 228,
+    "cr": "3",
+    "url": "https://5e.tools/bestiary.html#mummy_mm"
+  },
+  {
+    "id": "item:ring of free action:DMG",
+    "name": "Кольцо свободы действий",
+    "nameEn": "Ring of Free Action",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 191,
+    "url": "https://5e.tools/items.html#ring%20of%20free%20action_dmg"
+  },
+  {
+    "id": "creature:wight:MM",
+    "name": "Умертвие",
+    "nameEn": "Wight",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 300,
+    "cr": "3",
+    "url": "https://5e.tools/bestiary.html#wight_mm"
+  },
+  {
+    "id": "creature:wraith:MM",
+    "name": "Призрак",
+    "nameEn": "Wraith",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 302,
+    "cr": "5",
+    "url": "https://5e.tools/bestiary.html#wraith_mm"
+  },
+  {
+    "id": "creature:specter:MM",
+    "name": "Спектр",
+    "nameEn": "Specter",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 279,
+    "cr": "1",
+    "url": "https://5e.tools/bestiary.html#specter_mm"
+  },
+  {
+    "id": "item:daern's instant fortress:DMG",
+    "name": "Мгновенная крепость Даэрна",
+    "nameEn": "Daern's Instant Fortress",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 160,
+    "url": "https://5e.tools/items.html#daern's%20instant%20fortress_dmg"
+  },
+  {
+    "id": "item:amulet of health:DMG",
+    "name": "Амулет здоровья",
+    "nameEn": "Amulet of Health",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 150,
+    "url": "https://5e.tools/items.html#amulet%20of%20health_dmg"
+  },
+  {
+    "id": "item:mace of disruption:DMG",
+    "name": "Булава разрушения",
+    "nameEn": "Mace of Disruption",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 179,
+    "url": "https://5e.tools/items.html#mace%20of%20disruption_dmg"
+  },
+  {
+    "id": "item:sphere of annihilation:DMG",
+    "name": "Сфера аннигиляции",
+    "nameEn": "Sphere of Annihilation",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 201,
+    "url": "https://5e.tools/items.html#sphere%20of%20annihilation_dmg"
+  },
+  {
+    "id": "creature:skeleton:MM",
+    "name": "Скелет",
+    "nameEn": "Skeleton",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 272,
+    "cr": "1/4",
+    "url": "https://5e.tools/bestiary.html#skeleton_mm"
+  },
+  {
+    "id": "creature:zombie:MM",
+    "name": "Зомби",
+    "nameEn": "Zombie",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 316,
+    "cr": "1/4",
+    "url": "https://5e.tools/bestiary.html#zombie_mm"
+  },
+  {
+    "id": "item:decanter of endless water:DMG",
+    "name": "Графин бесконечной воды",
+    "nameEn": "Decanter of Endless Water",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 161,
+    "url": "https://5e.tools/items.html#decanter%20of%20endless%20water_dmg"
+  },
+  {
+    "id": "item:alchemy jug:DMG",
+    "name": "Алхимический кувшин",
+    "nameEn": "Alchemy Jug",
+    "kind": "Магический предмет",
+    "source": "DMG",
+    "page": 150,
+    "url": "https://5e.tools/items.html#alchemy%20jug_dmg"
+  },
+  {
+    "id": "creature:goblin:MM",
+    "name": "Гоблин",
+    "nameEn": "Goblin",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 166,
+    "cr": "1/4",
+    "url": "https://5e.tools/bestiary.html#goblin_mm"
+  },
+  {
+    "id": "creature:bard:MPMM",
+    "name": "Бард",
+    "nameEn": "Bard",
+    "kind": "Существо",
+    "source": "MPMM",
+    "page": 59,
+    "cr": "2",
+    "url": "https://5e.tools/bestiary.html#bard_mpmm"
+  },
+  {
+    "id": "spell:charm person:PHB",
+    "name": "Очарование личности",
+    "nameEn": "Charm Person",
+    "kind": "Заклинание",
+    "source": "PHB",
+    "page": 221,
+    "url": "https://5e.tools/spells.html#charm%20person_phb"
+  },
+  {
+    "id": "spell:sleep:PHB",
+    "name": "Сон",
+    "nameEn": "Sleep",
+    "kind": "Заклинание",
+    "source": "PHB",
+    "page": 276,
+    "url": "https://5e.tools/spells.html#sleep_phb"
+  },
+  {
+    "id": "creature:worg:MM",
+    "name": "Ворг",
+    "nameEn": "Worg",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 341,
+    "cr": "1/2",
+    "url": "https://5e.tools/bestiary.html#worg_mm"
+  },
+  {
+    "id": "creature:green hag:MM",
+    "name": "Зелёная карга",
+    "nameEn": "Green Hag",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 177,
+    "cr": "3",
+    "url": "https://5e.tools/bestiary.html#green%20hag_mm"
+  },
+  {
+    "id": "creature:goblin boss:MM",
+    "name": "Предводитель гоблинов",
+    "nameEn": "Goblin Boss",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 166,
+    "cr": "1",
+    "url": "https://5e.tools/bestiary.html#goblin%20boss_mm"
+  },
+  {
+    "id": "item:spell gem:OotA",
+    "name": "Камень заклинаний",
+    "nameEn": "Spell Gem",
+    "kind": "Магический предмет",
+    "source": "OotA",
+    "page": 223,
+    "url": "https://5e.tools/items.html#spell%20gem_oota"
+  },
+  {
+    "id": "creature:helmed horror:MM",
+    "name": "Шлемовой ужас",
+    "nameEn": "Helmed Horror",
+    "kind": "Существо",
+    "source": "MM",
+    "page": 183,
+    "cr": "4",
+    "url": "https://5e.tools/bestiary.html#helmed%20horror_mm"
+  }
+]

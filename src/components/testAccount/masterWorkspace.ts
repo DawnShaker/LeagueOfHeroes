@@ -1,4 +1,5 @@
 import { isLocalAuthBypassEnabled, localAccountPreviewProfile, testAccountSupabase, type AccountRole } from '../../utils/testAccount';
+import { initializeTarotGenerator } from './tarotGenerator';
 import {
   ruleCategories, settlements, magicItemPoolPrices, dragonStages, dragonQuirks,
   escapeRuleText as esc, renderRuleMarkdown, calculateRewardBudget, calculateTrade,
@@ -19,6 +20,7 @@ export async function initializeMasterWorkspace(userId: string, role: AccountRol
   const localPreview = isLocalAuthBypassEnabled && userId === localAccountPreviewProfile.id;
   if (!root || (!client && !localPreview) || root.dataset.initialized) return;
   if (role === 'player') return;
+  initializeTarotGenerator(userId);
   const officialView = new URL(window.location.href).searchParams.get('official') === '1';
   const editable = canEditMasterRules(role) && !officialView;
   const canWriteNotes = role === 'master' || role === 'admin';
