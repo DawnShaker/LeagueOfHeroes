@@ -34,7 +34,6 @@ const { speciesOptions } = Astro.props;
           data-search-text={item.name + ' ' + item.nameEn}
         >
           <img src={item.portrait} alt="" loading="lazy" />
-          <span class="species-card-shade"></span>
           <span class="species-card-copy">
             <strong>{item.name}</strong>
           </span>
@@ -212,16 +211,6 @@ const { speciesOptions } = Astro.props;
     transform: scale(1.035);
   }
 
-  .species-card-shade {
-    position: absolute;
-    inset: 72px 0 38px;
-    pointer-events: none;
-    background: linear-gradient(
-      transparent,
-      color-mix(in srgb, var(--card-bg) 82%, transparent)
-    );
-  }
-
   .species-card-copy {
     position: static;
     z-index: 1;
@@ -232,7 +221,10 @@ const { speciesOptions } = Astro.props;
     padding: 0.48rem 0.4rem 0.52rem;
     border-top: 1px solid
       color-mix(in srgb, var(--choice-accent) 24%, var(--card-border));
-    background: color-mix(in srgb, var(--card-bg) 94%, var(--background));
+    background: linear-gradient(
+      color-mix(in srgb, var(--card-bg) 94%, var(--background)),
+      var(--card-bg)
+    );
     text-align: center;
   }
 
